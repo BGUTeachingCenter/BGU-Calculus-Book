@@ -116,11 +116,13 @@ process = function(blocks, in_optional)
         if box then
           local text
           if in_optional then
-            text = box.word .. "."                       -- unnumbered
+            text = box.word                              -- unnumbered
           else
             item = item + 1
-            text = box.word .. " " .. chap .. "." .. section .. "." .. item .. "."
+            text = box.word .. " " .. chap .. "." .. section .. "." .. item
           end
+          local t = b.attributes and b.attributes.title  -- optional title, e.g. "סדרת פיבונאצ׳י"
+          text = (t and t ~= "") and (text .. " (" .. t .. ").") or (text .. ".")
           table.insert(b.content, 1, label_para(text))
           b.content = process(b.content, in_optional)
           b.classes = { "thmbox", "thmbox-" .. box.css }
