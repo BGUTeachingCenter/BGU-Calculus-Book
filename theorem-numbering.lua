@@ -52,8 +52,24 @@ local function box_for(classes)
   return nil
 end
 
-local function label_para(text)
-  return pandoc.Para({ pandoc.Strong({ pandoc.Str(text) }) })
+-- Build the bold label paragraph: "<text> — <title>." (the title part is optional).
+-- A title= attribute is a PLAIN STRING — pandoc never parses attribute values as
+-- markdown — so injecting it as a Str would emit math verbatim ("$\pi$"). Parse it
+-- as markdown here, so titles may contain math like "קירוב המספר $\pi$".
+local function title_inlines(title)
+  return pandoc.utils.blocks_to_inlines(pandoc.read(title, "markdown").blocks)
+end
+
+local function label_para(text, title)
+  local inlines = { pandoc.Str(text) }
+  if title and title ~= "" then
+    inlines[#inlines + 1] = pandoc.Space()
+    inlines[#inlines + 1] = pandoc.Str("—")
+    inlines[#inlines + 1] = pandoc.Space()
+    for _, il in ipairs(title_inlines(title)) do inlines[#inlines + 1] = il end
+  end
+  inlines[#inlines + 1] = pandoc.Str(".")
+  return pandoc.Para({ pandoc.Strong(inlines) })
 end
 
 local chap, section, item, is_html
@@ -73,7 +89,7 @@ process = function(blocks, in_optional)
       local is_remark   = has_class(orig, "thmrem")
 
       if is_proof then
-        table.insert(b.content, 1, label_para("הוכחה."))
+        table.insert(b.content, 1, label_para("הוכחה"))   -- label_para adds the "."
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-proof" }
       elseif is_remark then
@@ -88,8 +104,7 @@ process = function(blocks, in_optional)
           text = word .. " " .. chap .. "." .. section .. "." .. item
         end
         local t = b.attributes and b.attributes.title
-        text = (t and t ~= "") and (text .. " (" .. t .. ").") or (text .. ".")
-        table.insert(b.content, 1, label_para(text))
+        table.insert(b.content, 1, label_para(text, t))
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-remark" }
       elseif has_class(orig, "extra") then
@@ -100,7 +115,7 @@ process = function(blocks, in_optional)
         local t = b.attributes and b.attributes.title
         if t and t ~= "" and not (b.content[1] and b.content[1].t == "Header") then
           table.insert(b.content, 1,
-            pandoc.Div({ pandoc.Plain({ pandoc.Str(t) }) }, pandoc.Attr("", { "extra-title" })))
+            pandoc.Div({ pandoc.Plain(title_inlines(t)) }, pandoc.Attr("", { "extra-title" })))
         end
         b.content = process(b.content, false)
         -- keep the .extra class for HTML/CSS
@@ -122,8 +137,7 @@ process = function(blocks, in_optional)
             text = box.word .. " " .. chap .. "." .. section .. "." .. item
           end
           local t = b.attributes and b.attributes.title  -- optional title, e.g. "סדרת פיבונאצ׳י"
-          text = (t and t ~= "") and (text .. " (" .. t .. ").") or (text .. ".")
-          table.insert(b.content, 1, label_para(text))
+          table.insert(b.content, 1, label_para(text, t))
           b.content = process(b.content, in_optional)
           b.classes = { "thmbox", "thmbox-" .. box.css }
         else

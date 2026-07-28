@@ -23,7 +23,7 @@
 
 הדרך השנייה: ביטוי המחשב את $a_n$ **ישירות** מתוך $n$, בלי תלות באיברים הקודמים. יתרונה הגדול הוא הגישה הישירה — אפשר ״לקפוץ״ מיד לכל איבר שנרצה, גם ל-$a_{100}$, בלי לחשב את קודמיו. כך, את סדרת המספרים האי-זוגיים נתאר בפשטות על ידי $a_n = 2n - 1$.
 
-::: {#box-exm-closed-form .thmexm}
+::: {#box-exm-closed-form .thmexm title="סדרות בנוסחה סגורה"}
 כמה סדרות המוגדרות בנוסחה סגורה:
 
 - $a_n = n$ נותנת $1, 2, 3, 4, \dots$;
@@ -38,15 +38,15 @@
 
 שתי הסדרות המוכרות ביותר מבית הספר — ה**חשבונית** וה**הנדסית** — מוגדרות באופן טבעי ברקורסיה.
 
-::: {#box-exm-arithmetic .thmexm}
+::: {#box-exm-arithmetic .thmexm title="סדרה חשבונית"}
 **סדרה חשבונית:** מתחילים באיבר $a_1$, ובכל צעד מוסיפים **הפרש** קבוע $d$, כלומר $a_{n+1} = a_n + d$. למשל, $a_1 = 3$ ו-$d = 2$ נותנות $3, 5, 7, 9, \dots$. (יש לה גם נוסחה סגורה: $a_n = a_1 + (n-1)\,d$.)
 :::
 
-::: {#box-exm-geometric .thmexm}
+::: {#box-exm-geometric .thmexm title="סדרה הנדסית"}
 **סדרה הנדסית:** מתחילים באיבר $a_1$, ובכל צעד מכפילים ב**מנה** קבועה $q$, כלומר $a_{n+1} = q\,a_n$. למשל, $a_1 = 1$ ו-$q = 2$ נותנות $1, 2, 4, 8, \dots$. (וגם לה נוסחה סגורה: $a_n = a_1\,q^{\,n-1}$.)
 :::
 
-::: {#box-exm-factorial .thmexm}
+::: {#box-exm-factorial .thmexm title="העצרת"}
 ה**עצרת** $n!$. אין ״פעולה חשבונית״ יחידה שמשמעותה ״מכפלת כל המספרים מ-$1$ עד $n$״; העצרת מוגדרת מלכתחילה ברקורסיה: $$,a_1 = 1 \qquad a_{n+1} = (n+1)\,a_n$$ ומתקבלת $1, 2, 6, 24, 120, \dots$, כלומר $a_n = n!$.
 :::
 
@@ -113,6 +113,82 @@
 
 ## גבול של סדרה
 
+כשאנו חוקרים סדרה אינסופית, אחת השאלות הטבעיות שנולדות היא מה קורה לסדרה **בטווח הרחוק**: האם ערכי הסדרה הולכים ומתקרבים לאיזשהו ערך? השאלה הזו עולה ממספר סיבות:
+
+- **קירוב.** לפעמים אנחנו מעוניינים ל**קרב** מספר שאיננו יודעים לרשום במדויק — למשל מספר אי-רציונלי כמו $\sqrt{2}$, שאת הצגתו העשרונית איננו יכולים לרשום במלואה. במקרה כזה אנחנו **בונים** בעצמנו סדרה שאת איבריה כן קל לחשב, והם הולכים ומתקרבים אל אותו מספר; מחשבים איברים עד שאנחנו ״מספיק קרובים״, ועוצרים.
+- **תהליך שמתייצב.** ולפעמים הסדרה אינה נבנית על ידינו כלל, אלא **מתארת תהליך**: $a_n$ הוא התוצאה המתקבלת כאשר הפרמטר הוא $n$. כך, למשל, אם $a_n$ הוא הזמן הדרוש לבניית בית על ידי $n$ פועלים, אז ככל שנוסיף פועלים הזמן יילך ויקטן — אך לא לאפס, שכן יש חלק מהעבודה שאי אפשר לחלק ביניהם. הזמן מתייצב על ערך מסוים: הזמן המהיר ביותר שבו אפשר לבנות את הבית בכלל. הידיעה הזו מעשית מאוד — מרגע שאנחנו ״מספיק קרובים״ לערך הזה, כבר אין טעם להוסיף פועלים.
+
+נתן דוגמא מפורטט
+
+:::::: {#box-exm-pi .thmexm title="קירוב המספר $\\pi$ בעזרת מצולעים משוכללים"}
+נתבונן במצולע משוכלל בעל $n$ צלעות החסום במעגל שרדיוסו $1$. שטחו הוא $$,a_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$ וככל ש-$n$ גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-$\pi$.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="pi-demo">
+<div class="pi-demo-row">
+<label class="pi-demo-key" for="pi-demo-slider">מספר הצלעות:</label>
+<input class="pi-demo-slider" id="pi-demo-slider" type="range" min="0" max="6" value="1" step="1">
+<span class="pi-demo-badge" dir="ltr">n = <span class="pi-demo-n">6</span></span>
+</div>
+<svg class="pi-demo-svg" viewBox="-1.15 -1.15 2.3 2.3" role="img" aria-label="מצולע משוכלל חסום במעגל היחידה">
+<circle class="pi-demo-circle" cx="0" cy="0" r="1"></circle>
+<polygon class="pi-demo-poly" points=""></polygon>
+</svg>
+<div class="pi-demo-readout">
+<div><span class="pi-demo-key">שטח המצולע:</span> <span class="pi-demo-val pi-demo-area" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">שטח העיגול:</span> <span class="pi-demo-val" dir="ltr">3.141593</span></div>
+<div><span class="pi-demo-key">ההפרש:</span> <span class="pi-demo-val pi-demo-diff" dir="ltr">—</span></div>
+</div>
+</div>
+```
+:::
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+ns = [3, 6, 12]
+t = np.linspace(0, 2 * np.pi, 400)
+
+fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.4))
+for ax, n in zip(axes, ns):
+    ax.fill(np.cos(t), np.sin(t), color="#dbeafe", zorder=1)
+    ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.4, zorder=3)
+    k = np.arange(n + 1)
+    a = -np.pi / 2 + 2 * np.pi * k / n
+    ax.fill(np.cos(a), np.sin(a), color="#c0392b", alpha=0.5, zorder=2)
+    ax.plot(np.cos(a), np.sin(a), color="#c0392b", lw=1.4, zorder=4)
+    ax.set_title(r"$n=%d$,   $a_n=%.4f$" % (n, (n / 2) * np.sin(2 * np.pi / n)),
+                 fontsize=11)
+    ax.set_xlim(-1.15, 1.15)
+    ax.set_ylim(-1.15, 1.15)
+    ax.set_aspect("equal")
+    ax.axis("off")
+fig.tight_layout()
+fig.savefig("figures/c07_fig05.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig05.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: מצולעים משוכללים חסומים במעגל היחידה — ככל ש-$n$ גדל, שטח המצולע מתקרב ל-$\pi$
+:::
+
+גרסה **אינטראקטיבית**, שבה אפשר לשנות את מספר הצלעות ולעקוב אחר ההתכנסות, זמינה בגרסה המקוונת של הספר.
+
+<!-- TODO: להוסיף כאן קישור ישיר לגרסה המקוונת (כתובת ה-GitHub Pages של הספר). -->
+::::
+::::::
+
 מהו הערך שסדרה **מתקרבת** אליו? הרעיון: איברי הסדרה נעשים קרובים לערך $L$ כרצוננו — קרובים ככל שנדרוש — החל ממקום מסוים והלאה.
 
 ::: {#box-def-convergence .thmdef}
@@ -171,11 +247,11 @@ plt.close(fig)
 
 נציג שלוש דוגמאות בסיסיות: סדרה קבועה (התכנסות מיידית), סדרה מתחלפת (התבדרות), וסדרה שמתכנסת ״באמת״ אך אינה קבועה.
 
-::: {#box-exm-constant-seq .thmexm}
+::: {#box-exm-constant-seq .thmexm title="סדרה קבועה"}
 הסדרה הקבועה $a_n = 1$ (כלומר $1, 1, 1, \dots$) מתכנסת, וגבולה — באופן לא מפתיע — הוא $1$: לכל $\varepsilon>0$ ולכל $n$ מתקיים $|a_n - 1| = |1-1| = 0 < \varepsilon$, כך שאותו $N$ מתאים לכל $\varepsilon$. זהו מקרה **חריג**: כאשר הסדרה אינה קבועה, בדרך כלל $N$ תלוי ב-$\varepsilon$.
 :::
 
-::: {#box-exm-pm-one .thmexm}
+::: {#box-exm-pm-one .thmexm title="סדרה מתחלפת שאינה מתכנסת"}
 הסדרה $a_n = (-1)^n$, כלומר $-1, 1, -1, 1, \dots$, **מתבדרת**. נניח בשלילה שיש לה גבול $L$. אז לכל $\varepsilon>0$ קיים $N$ כך שלכל $n>N$ מתקיים $|a_n - L| < \varepsilon$. ניקח $\varepsilon = 1$. לכל $n>N$ **זוגי** מתקיים $a_n = 1$, ולכן $|1 - L| < 1$; לכל $n>N$ **אי-זוגי** מתקיים $a_n = -1$, ולכן $|L - (-1)| < 1$. לפי אי-שוויון המשולש, $$2 = |1 - (-1)| \le |1 - L| + |L - (-1)| < 1 + 1 = 2,$$ כלומר $2 < 2$ — סתירה. לכן הסדרה מתבדרת.
 :::
 
@@ -219,7 +295,7 @@ plt.close(fig)
 ![הסדרה $a_n = (-1)^n$](figures/c07_fig02.png){#fig-seq-pm-one width="80%" fig-align="center"}
 :::
 
-::: {#box-exm-one-frac-n .thmexm}
+::: {#box-exm-one-frac-n .thmexm title="סדרה מתכנסת שאינה מונוטונית"}
 הסדרה $a_n = 1 + \dfrac{\sin(n)}{n}$ (עבור $n \ge 1$) מתכנסת, וגבולה $1$. יהי $\varepsilon>0$. קיים $N$ כך ש-$N \ge \dfrac{1}{\varepsilon}$, ולכן לכל $n>N$ מתקיים $\dfrac{1}{n} < \dfrac{1}{N} \le \varepsilon$. לכן $$|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} < \varepsilon,$$ כנדרש.
 :::
 
@@ -273,11 +349,11 @@ plt.close(fig)
 
 ### דוגמאות נוספות
 
-::: {#box-exm-one-over-n .thmexm}
+::: {#box-exm-one-over-n .thmexm title="שאיפה לאפס"}
 עבור $a_n = \dfrac{1}{n}$ מתקיים $\lim\limits_{n\to\infty} a_n = 0$. יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $n > \dfrac{1}{\varepsilon}$, ולכן $\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} < \varepsilon$.
 :::
 
-::: {#box-exm-seq-3n-4 .thmexm}
+::: {#box-exm-seq-3n-4 .thmexm title="מנה של ביטויים לינאריים"}
 עבור $a_n = \dfrac{3n-4}{n+2}$ מתקיים $\lim\limits_{n\to\infty} a_n = 3$. נפשט: $$\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} < \frac{10}{n}.$$ יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $\dfrac{10}{n} < \varepsilon$, ולכן $\left|a_n - 3\right| < \varepsilon$.
 :::
 
@@ -298,7 +374,7 @@ plt.close(fig)
 נניח $a>0$ (המקרים $a<0$ ו-$a=0$ דומים). לפי בניית הספרות, לכל $n$ מתקיים $t_n < a \le t_n + \frac{1}{10^n}$, ולכן $|t_n - a| \le \frac{1}{10^n}$. יהי $\varepsilon>0$. לפי [**תכונת ארכימדס**](03-number-systems.qmd#box-thm-archimedes) (לכל ממשי חיובי קיים מספר טבעי הגדול ממנו) קיים $N$ כך ש-$10^N > \frac{1}{\varepsilon}$, כלומר $\frac{1}{10^N} < \varepsilon$. לכן לכל $n>N$ מתקיים $|t_n - a| \le \frac{1}{10^n} \le \frac{1}{10^N} < \varepsilon$, כנדרש.
 :::
 
-::: {#box-exm-expansion-25 .thmexm}
+::: {#box-exm-expansion-25 .thmexm title="הפיתוח העשרוני של 2.5"}
 הפיתוח העשרוני של $2.5$ הוא $2.4999\dots$, וסדרת הקירובים שלו היא $2,\ 2.4,\ 2.49,\ 2.499,\ \dots$ — המתכנסת ל-$2.5$.
 :::
 

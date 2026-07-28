@@ -95,6 +95,24 @@ format:
         % and clickable box across the whole line. Turn link coloring off in the PDF
         % (links still work/navigate; they just render as normal black text).
         \AtBeginDocument{\hypersetup{hidelinks}}
+        % Math inside an UNNUMBERED heading: Quarto emits a bare \addcontentsline
+        % carrying the raw math (no \texorpdfstring), and hyperref then tries to turn
+        % it into a PDF-bookmark string. Under unicode-math \pi is \mitpi — a
+        % \Umathchardef token — which errors with "Improper alphabetic constant".
+        % Give hyperref plain-text stand-ins for the math that can show up there.
+        \AtBeginDocument{%
+          \pdfstringdefDisableCommands{%
+            \def\({}\def\){}%
+            \def\,{}\def\;{}\def\!{}\def\quad{ }\def\qquad{ }%
+            \def\pi{π}\def\varepsilon{ε}\def\epsilon{ε}\def\delta{δ}%
+            \def\alpha{α}\def\beta{β}\def\gamma{γ}\def\lambda{λ}%
+            \def\theta{θ}\def\sigma{σ}\def\varphi{φ}\def\infty{∞}%
+            \def\to{→}\def\leq{≤}\def\geq{≥}\def\neq{≠}%
+            \def\mathbb#1{#1}\def\mathrm#1{#1}\def\mathbf#1{#1}\def\text#1{#1}%
+            \def\frac#1#2{#1/#2}\def\dfrac#1#2{#1/#2}%
+            \def\sqrt#1{√(#1)}%
+          }%
+        }
         % optional-reading blocks: a coloured label, deliberately NOT a framed box
         % (framed/tcolorbox environments re-trigger the RTL breakage above).
         \definecolor{optionalaccent}{HTML}{9A7B1F}
