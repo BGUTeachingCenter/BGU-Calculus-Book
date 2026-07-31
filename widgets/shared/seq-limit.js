@@ -11,7 +11,18 @@
      divergent   — cfg.candidates given instead. The reader picks a candidate
                    limit; there is no N that works, so that control is absent.
 
-   cfg = { f, L, candidates:[...], eps:{min,max,def}, scanMax }
+   cfg = { f, L, candidates:[...], eps:{min,max,def|list}, scanMax, n0 }
+
+   Per-widget opt-ins. Every default reproduces the behaviour these knobs had
+   before they existed, so adding one changes that widget and nothing else:
+     range      — pin the value axis to [lo, hi] instead of letting it follow ε
+     zoomOn:"N" — derive the value axis from |f(N) - L|, making N the zoom.
+                  Only meaningful when the error falls by a constant factor per
+                  step, as in a decimal expansion; pointless otherwise.
+     nFloor     — smallest index range to draw (default 20 graph / 120 line)
+     minBandPx  — below this the ε band is not drawn at all, since a sub-pixel
+                  strip composites into something that reads as a line of some
+                  width. Set to 0 to draw it regardless.
 */
 "use strict";
 (function (global) {
@@ -35,8 +46,12 @@
 
   function mount(cfg) {
     var ec = cfg.eps || {};
-    var EPS = ladder(ec.min != null ? ec.min : 0.01, ec.max != null ? ec.max : 1);
+    /* eps.list overrides the generated ladder, for a widget that needs
+       particular stops (the divergent one needs an ε above 2). Descending. */
+    var EPS = ec.list ? ec.list.slice()
+                      : ladder(ec.min != null ? ec.min : 0.01, ec.max != null ? ec.max : 1);
     var SCAN = cfg.scanMax || 3000;
+    var n0 = cfg.n0 != null ? cfg.n0 : 1;   /* first index; the decimal example starts at 0 */
     var divergent = !!cfg.candidates;
 
     var ei = 0;
@@ -45,7 +60,8 @@
         if (Math.abs(v - ec.def) < Math.abs(EPS[ei] - ec.def)) ei = i;
       });
     }
-    var st = { ei: ei, N: 1, L: cfg.L, view: "plot" };
+    /* no gate in divergent mode, so every term is judged purely by the band */
+    var st = { ei: ei, N: divergent ? n0 - 1 : n0, L: cfg.L, view: "plot" };
 
     /* ---------- markup ---------- */
     var cands = divergent
@@ -61,7 +77,7 @@
     var nRow = divergent ? "" :
       '<div class="row">' +
         '<span class="key mathlbl">N</span>' +
-        '<input type="range" id="nSl" min="1" step="1">' +
+        '<input type="range" id="nSl" step="1">' +
         '<span class="badge" id="nBadge"></span>' +
         '<button type="button" class="btn" id="nMinBtn">קפוץ ל‑N המינימלי</button>' +
       '</div>';
@@ -90,15 +106,18 @@
 
     /* ---------- the two numbers the widget has to know ---------- */
     function scan(e, L) {
-      var last = 0, count = 0;
-      for (var n = 1; n <= SCAN; n++) {
+      var last = n0 - 1, count = 0;
+      for (var n = n0; n <= SCAN; n++) {
         if (Math.abs(cfg.f(n) - L) >= e) { last = n; count++; }
       }
-      return { Nmin: last, count: count, endless: last > SCAN * 0.5 };
+      /* The definition reads "for every n >= N", so the smallest gate that works
+         is one past the last term that misses the band — not that term itself.
+         With nothing outside, last is n0-1 and Nmin correctly comes out n0. */
+      return { Nmin: last + 1, count: count, endless: last > SCAN * 0.5 };
     }
 
     function decimals(half) {
-      return Math.min(6, Math.max(2, Math.ceil(-Math.log10(Math.max(half, 1e-12))) + 2));
+      return Math.min(9, Math.max(2, Math.ceil(-Math.log10(Math.max(half, 1e-12))) + 2));
     }
 
     /* ---------- geometry shared by both views ---------- */
@@ -108,49 +127,103 @@
       /* the view has to reach past both the chosen gate and the minimal one,
          otherwise picking a small N would hide the part of the tail that matters */
       var ref = s.endless ? st.N : Math.max(st.N, s.Nmin);
-      var nMax = Math.max(60, Math.ceil((ref + 1) * 1.7));
+      /* The graph keeps a low floor so that a small N gives a short axis with
+         every index tickable and every term individually visible. The number
+         line has no index axis and lives on the pile-up near L, so it needs a
+         far denser sample to say anything at all. */
+      var floorN = cfg.nFloor != null ? cfg.nFloor : (st.view === "plot" ? 20 : 120);
+      var nMax = Math.max(floorN, Math.ceil((ref + 1) * 1.7));
       var stride = Math.max(1, Math.ceil(nMax / 320));
       var idx = [];
-      for (var n = 1; n <= nMax; n += stride) idx.push(n);
-      if (st.N >= 1 && idx.indexOf(st.N) < 0) idx.push(st.N);
+      for (var n = n0; n <= nMax; n += stride) idx.push(n);
+      if (st.N >= n0 && idx.indexOf(st.N) < 0) idx.push(st.N);
       idx.sort(function (a, b) { return a - b; });
 
-      /* keep the band a legible fraction of the view at every ε, without
-         leaving a huge empty margin when the whole sequence is already close in */
-      var dev = 0;
-      idx.forEach(function (n) { dev = Math.max(dev, Math.abs(cfg.f(n) - st.L)); });
-      var half = Math.max(e * 1.25, Math.min(e * 2.5, dev * 1.15));
+      /* cfg.range pins the value axis. Needed when the point of the widget is
+         that the band grows past the terms rather than the terms closing in:
+         with a moving axis a huge ε just rescales and nothing looks different. */
+      var lo, hi;
+      if (cfg.range) {
+        lo = cfg.range[0];
+        hi = cfg.range[1];
+      } else if (cfg.zoomOn === "N") {
+        /* For a sequence whose distance to L falls by a constant factor each
+           step, one linear scale cannot hold two terms that are decades apart.
+           So the axis follows the gate instead of the whole sequence: N becomes
+           the zoom, and every notch shows the same picture one decade smaller.
+           Terms before the gate leave the view as edge markers, which is honest
+           — they really are off the scale. */
+        var dN = Math.abs(cfg.f(Math.max(st.N, n0)) - st.L);
+        var halfN = Math.max(e, dN) * 2.2;
+        lo = st.L - halfN;
+        hi = st.L + halfN;
+      } else {
+        /* keep the band a legible fraction of the view at every ε, without
+           leaving a huge empty margin when the sequence is already close in */
+        var dev = 0;
+        idx.forEach(function (n) { dev = Math.max(dev, Math.abs(cfg.f(n) - st.L)); });
+        var half = Math.max(e * 1.25, Math.min(e * 2.5, dev * 1.15));
+        lo = st.L - half;
+        hi = st.L + half;
+      }
 
-      return { s: s, e: e, idx: idx, nMax: nMax, half: half };
+      /* A band thinner than a few pixels renders as a line, not a strip — the
+         fill, its two edges and the limit line all land on top of each other and
+         the reader sees one thick line. Below the threshold it is not drawn at
+         all: sub-pixel is sub-pixel, and a hairline strip would misrepresent its
+         own width. The stray terms past the gate still show up in red.
+         PLOT_PH / LINE_PW are the drawable extents of the two viewBoxes. */
+      var PLOT_PH = 308, LINE_PW = 676;
+      var minBand = cfg.minBandPx != null ? cfg.minBandPx : 3;   /* 0 = always draw it */
+      var bandVisible = (2 * e / (hi - lo)) * (st.view === "plot" ? PLOT_PH : LINE_PW) >= minBand;
+
+      return { s: s, e: e, idx: idx, nMax: nMax, lo: lo, hi: hi, bandVisible: bandVisible };
     }
 
     /* grey = discarded by the gate; red = a term past the gate that still
        misses the band, so pressing "minimal N" visibly clears every red one */
     function colour(n, v, e) {
-      if (n <= st.N) return GRAY;
+      if (n < st.N) return GRAY;
       return Math.abs(v - st.L) >= e ? RED : BLUE;
     }
 
     /* ---------- view 1: n against a_n ---------- */
     function drawPlot(f) {
-      var L = st.L, e = f.e, half = f.half, nMax = f.nMax;
+      var L = st.L, e = f.e, lo = f.lo, hi = f.hi, nMax = f.nMax;
       var W = 720, H = 360, mL = 74, mR = 14, mT = 16, mB = 36;
       var pw = W - mL - mR, ph = H - mT - mB;
       var X = function (n) { return mL + (n / nMax) * pw; };
-      var Y = function (v) { return mT + (1 - (v - (L - half)) / (2 * half)) * ph; };
-      var d = decimals(half);
+      var Y = function (v) { return mT + (1 - (v - lo) / (hi - lo)) * ph; };
+      var inY = function (v) { return v >= lo && v <= hi; };
+      var d = decimals((hi - lo) / 2);
       var p = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="איברי הסדרה מול הרצועה סביב הגבול">'];
 
-      p.push('<rect x="' + mL + '" y="' + Y(L + e) + '" width="' + pw +
-             '" height="' + (Y(L - e) - Y(L + e)) + '" fill="' + BAND + '"/>');
-      p.push('<line x1="' + mL + '" y1="' + Y(L) + '" x2="' + (mL + pw) + '" y2="' + Y(L) +
-             '" stroke="' + BLUE + '" stroke-width="1.4" stroke-dasharray="7 4"/>');
-      [L + e, L - e].forEach(function (v) {
+      /* the band may run past the top or bottom of a pinned axis */
+      var yTop = Math.max(Y(L + e), mT), yBot = Math.min(Y(L - e), mT + ph);
+      if (f.bandVisible && yBot > yTop) {
+        p.push('<rect x="' + mL + '" y="' + yTop + '" width="' + pw +
+               '" height="' + (yBot - yTop) + '" fill="' + BAND + '"/>');
+      }
+      if (inY(L)) {
+        p.push('<line x1="' + mL + '" y1="' + Y(L) + '" x2="' + (mL + pw) + '" y2="' + Y(L) +
+               '" stroke="' + BLUE + '" stroke-width="1.4" stroke-dasharray="7 4"/>');
+      }
+      (f.bandVisible ? [L + e, L - e] : []).forEach(function (v) {
+        if (!inY(v)) return;
         p.push('<line x1="' + mL + '" y1="' + Y(v) + '" x2="' + (mL + pw) + '" y2="' + Y(v) +
                '" stroke="' + BLUE + '" stroke-width="1" stroke-dasharray="2 3"/>');
       });
+      /* with a pinned axis, keep its own end values labelled so the scale is
+         readable even when L±ε has slid off the top */
+      if (cfg.range) {
+        [lo, (lo + hi) / 2, hi].forEach(function (v) {
+          p.push('<text x="' + (mL - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="11" fill="#b0b8c4">' +
+                 (+v.toFixed(2)) + '</text>');
+        });
+      }
       /* numeric value on the axis, symbolic name inside the plot */
-      [[L + e, "L+ε"], [L, "L"], [L - e, "L−ε"]].forEach(function (a) {
+      (f.bandVisible ? [[L + e, "L+ε"], [L, "L"], [L - e, "L−ε"]] : [[L, "L"]]).forEach(function (a) {
+        if (!inY(a[0])) return;
         var y = Y(a[0]);
         p.push('<text x="' + (mL - 8) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11.5" fill="#64748b">' +
                a[0].toFixed(d) + '</text>');
@@ -158,21 +231,30 @@
                '" text-anchor="end" font-size="12.5" fill="' + BLUE + '">' + a[1] + '</text>');
       });
 
-      if (!divergent && st.N >= 1 && st.N <= nMax) {
-        p.push('<line x1="' + X(st.N) + '" y1="' + mT + '" x2="' + X(st.N) + '" y2="' + (mT + ph) +
+      if (!divergent && st.N >= n0 && st.N <= nMax) {
+        var gx = X(st.N - 0.5);   /* a_N is kept, so the gate sits just before it */
+        p.push('<line x1="' + gx + '" y1="' + mT + '" x2="' + gx + '" y2="' + (mT + ph) +
                '" stroke="' + GRAY + '" stroke-width="1.2" stroke-dasharray="5 4"/>');
-        p.push('<text class="mathlbl" x="' + X(st.N) + '" y="' + (mT + 12) +
+        p.push('<text class="mathlbl" x="' + gx + '" y="' + (mT + 12) +
                '" text-anchor="middle" font-size="13" fill="#64748b">N</text>');
       }
 
       p.push('<line x1="' + mL + '" y1="' + (mT + ph) + '" x2="' + (mL + pw) + '" y2="' + (mT + ph) +
              '" stroke="' + SOFT + '"/>');
-      var raw = nMax / 6;
-      var mag = Math.pow(10, Math.floor(Math.log10(raw)));
-      var step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; })
-                  .filter(function (s) { return s >= raw; })[0] || 10 * mag;
-      step = Math.max(1, Math.round(step));
-      for (var t = step; t <= nMax; t += step) {
+      /* a short axis gets every index; only longer ones fall back to round steps */
+      var step;
+      if (nMax <= 25) {
+        step = 1;
+      } else if (nMax <= 50) {
+        step = 2;
+      } else {
+        var raw = nMax / 6;
+        var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+        step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; })
+                .filter(function (s) { return s >= raw; })[0] || 10 * mag;
+        step = Math.max(1, Math.round(step));
+      }
+      for (var t = (step === 1 ? n0 : step); t <= nMax; t += step) {
         p.push('<line x1="' + X(t) + '" y1="' + (mT + ph) + '" x2="' + X(t) + '" y2="' + (mT + ph + 4) +
                '" stroke="' + SOFT + '"/>');
         p.push('<text x="' + X(t) + '" y="' + (mT + ph + 18) + '" text-anchor="middle" font-size="11.5" fill="#64748b">' + t + '</text>');
@@ -202,21 +284,26 @@
 
     /* ---------- view 2: the same terms as points on a number line ----------
        There is no n-axis here, so N cannot be a position. It splits the dots
-       by colour instead, and the term sitting at the gate is ringed and named
-       with its actual index, so the cut point stays locatable. */
+       by colour instead, and a_N — the FIRST term of the tail, since the
+       definition keeps n >= N — is ringed and named with its actual index, so
+       the cut point stays locatable. */
     function drawLine(f) {
-      var L = st.L, e = f.e, half = f.half;
+      var L = st.L, e = f.e, lo = f.lo, hi = f.hi;
       var W = 720, H = 150, mL = 22, mR = 22, y0 = 66;
       var pw = W - mL - mR;
-      var X = function (v) { return mL + ((v - (L - half)) / (2 * half)) * pw; };
-      var d = decimals(half);
+      var X = function (v) { return mL + ((v - lo) / (hi - lo)) * pw; };
+      var d = decimals((hi - lo) / 2);
       var p = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="איברי הסדרה כנקודות על ציר המספרים">'];
 
-      p.push('<rect x="' + X(L - e) + '" y="' + (y0 - 22) + '" width="' + (X(L + e) - X(L - e)) +
-             '" height="44" fill="' + BAND + '"/>');
+      var bl = Math.max(X(L - e), mL), br = Math.min(X(L + e), mL + pw);
+      if (f.bandVisible && br > bl) {
+        p.push('<rect x="' + bl + '" y="' + (y0 - 22) + '" width="' + (br - bl) +
+               '" height="44" fill="' + BAND + '"/>');
+      }
       p.push('<line x1="' + mL + '" y1="' + y0 + '" x2="' + (mL + pw) + '" y2="' + y0 +
              '" stroke="#334155" stroke-width="1.1"/>');
-      [[L - e, "L−ε"], [L, "L"], [L + e, "L+ε"]].forEach(function (a) {
+      (f.bandVisible ? [[L - e, "L−ε"], [L, "L"], [L + e, "L+ε"]] : [[L, "L"]]).forEach(function (a) {
+        if (a[0] < lo || a[0] > hi) return;
         var x = X(a[0]), big = a[1] === "L";
         p.push('<line x1="' + x + '" y1="' + (y0 - (big ? 13 : 9)) + '" x2="' + x + '" y2="' + (y0 + (big ? 13 : 9)) +
                '" stroke="' + BLUE + '" stroke-width="' + (big ? 1.6 : 1.1) + '"/>');
@@ -227,7 +314,7 @@
       /* grey first, so the surviving tail sits on top of it */
       [0, 1].forEach(function (pass) {
         f.idx.forEach(function (n) {
-          var after = n > st.N;
+          var after = n >= st.N;
           if ((pass === 1) !== after) return;
           var v = cfg.f(n), x = X(v), c = colour(n, v, e);
           if (x < mL - 6 || x > mL + pw + 6) {
@@ -244,7 +331,7 @@
         });
       });
 
-      if (!divergent && st.N >= 1) {
+      if (!divergent && st.N >= n0) {
         var xN = X(cfg.f(st.N));
         if (xN >= mL - 2 && xN <= mL + pw + 2) {
           p.push('<circle cx="' + xN + '" cy="' + y0 + '" r="7" fill="none" stroke="#334155" stroke-width="1.4"/>');
@@ -267,6 +354,9 @@
         out = '<div><span class="key mathlbl">N</span><span class="key"> המינימלי:</span> <span class="val">' +
               f.s.Nmin + '</span></div>' + out;
       }
+      if (!f.bandVisible) {
+        out += '<div><span class="key">הרצועה צרה מכדי להיראות בקנה המידה הזה.</span></div>';
+      }
       $("readout").innerHTML = out;
 
       $("eBadge").textContent = f.e;
@@ -288,9 +378,10 @@
       var s = scan(eps(), st.L);
       var top = Math.max(40, Math.ceil((s.endless ? st.N : s.Nmin) * 1.6));
       var sl = $("nSl");
+      sl.min = n0;
       sl.max = top;
       if (st.N > top) st.N = top;
-      if (st.N < 1) st.N = 1;
+      if (st.N < n0) st.N = n0;
       sl.value = st.N;
     }
     function refresh() { syncN(); draw(); }
@@ -308,7 +399,7 @@
       $("nSl").addEventListener("input", function (ev) { st.N = +ev.target.value; draw(); });
       $("nMinBtn").addEventListener("click", function () {
         var s = scan(eps(), st.L);
-        st.N = Math.max(1, s.Nmin);
+        st.N = Math.max(n0, s.Nmin);
         refresh();
       });
     }
@@ -331,7 +422,7 @@
     global.addEventListener("resize", draw);
 
     /* open on the minimal N for the default ε */
-    if (!divergent) st.N = Math.max(1, scan(eps(), st.L).Nmin);
+    if (!divergent) st.N = Math.max(n0, scan(eps(), st.L).Nmin);
     refresh();
   }
 

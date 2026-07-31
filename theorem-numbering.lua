@@ -12,7 +12,18 @@ the styling classes (.thmbox / .thmbox-<type>, defined in _styles.html for HTML)
 The chapter number is read from the input filename NN-slug.qmd.
 
 Extensions:
+  * .thmsim   — interactive simulation. Numbered on the SAME running counter as
+                everything else, which is why the box must exist in both formats:
+                if it appeared only in HTML, every box after it in the section
+                would carry a different number in the PDF. So the box itself is
+                format-agnostic and only its contents are conditional — the
+                iframe in HTML, a pointer to the online edition in print.
   * .thmproof — proof box: label "הוכחה." but UNNUMBERED; styled .thmbox-proof.
+  * .thmsol   — solution to a .thmqst, and the same shape as .thmproof is to a
+                theorem: label "פתרון." but UNNUMBERED, and a separate box that
+                FOLLOWS the question rather than nesting inside it. Add .foldable
+                to hide it behind a click; like a proof it is exempt from the
+                "אפשר לדלג" print wrapper, since a solution is not skippable.
   * .optional — "רשות" wrapper: its inner boxes are labelled but UNNUMBERED
                 (\newtheorem* style). Tinted via _styles.html (HTML) / the
                 'optionalbox' LaTeX environment (PDF).
@@ -29,6 +40,8 @@ local BOX = {
   thmthm = { word = "משפט",  css = "theorem"     },
   thmprp = { word = "טענה",  css = "proposition" },
   thmexm = { word = "דוגמה", css = "example"     },
+  thmqst = { word = "שאלה",  css = "question"   },
+  thmsim = { word = "סימולציה", css = "simulation" },
   thmlem = { word = "למה",   css = "lemma"       },
   thmcor = { word = "מסקנה", css = "corollary"   },
 }
@@ -98,12 +111,17 @@ process = function(blocks, in_optional)
       local orig       = b.classes
       local do_collapse = has_class(orig, "foldable") or has_class(orig, "optional")   -- NB: not "collapse" (Bootstrap owns that; it sets display:none)
       local is_proof    = has_class(orig, "thmproof")
+      local is_solution = has_class(orig, "thmsol")
       local is_remark   = has_class(orig, "thmrem")
 
       if is_proof then
         table.insert(b.content, 1, label_para("הוכחה"))   -- label_para adds the "."
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-proof" }
+      elseif is_solution then
+        table.insert(b.content, 1, label_para("פתרון"))
+        b.content = process(b.content, in_optional)
+        b.classes = { "thmbox", "thmbox-solution" }
       elseif is_remark then
         -- Remark box: NUMBERED (chapter.section.item) like the other boxes; an optional
         -- title= is folded into the label. Change `word` to rename the label everywhere.
@@ -166,6 +184,9 @@ process = function(blocks, in_optional)
         if is_proof then
           summary = "הוכחה"
           attrs = ' class="thmcollapse"'
+        elseif is_solution then
+          summary = "פתרון"
+          attrs = ' class="thmcollapse"'
         elseif has_class(orig, "optional") then
           summary = (t and t ~= "") and t or "קריאת רשות"
           attrs = ' class="thmcollapse thmoptional"'   -- collapsed by default (no "open")
@@ -176,7 +197,7 @@ process = function(blocks, in_optional)
       else
         -- PDF can't fold. Show .foldable content, but flag it as skippable so the print
         -- reader sees it is an aside. (.optional already got its own optionalbox above.)
-        if do_collapse and not has_class(orig, "optional") and not is_proof then
+        if do_collapse and not has_class(orig, "optional") and not is_proof and not is_solution then
           local t = b.attributes and b.attributes.title
           local label = (t and t ~= "") and t or "פירוט"
           table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{foldablebox}{" .. label .. "}"))
