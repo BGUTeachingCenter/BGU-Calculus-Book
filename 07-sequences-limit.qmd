@@ -1091,16 +1091,38 @@ plt.close(fig)
 
 נציג חמש דוגמאות: סדרה קבועה (התכנסות מיידית), סדרה השואפת לאפס, סדרה מתחלפת (התבדרות), סדרה שמתכנסת ״באמת״ אך אינה קבועה, ומנה של ביטויים לינאריים.
 
+::: {.content-visible when-format="pdf"}
+לכל אחת מחמש הדוגמאות שלהלן נלווית סימולציה אינטראקטיבית — בוחרים בה $\varepsilon$, מוצאים את ה-$N$ המינימלי, ורואים את הרצועה ואת האיברים החורגים. הסימולציות זמינות רק בגרסה המקוונת של הספר, בכתובת {{< var book.url >}}/07-sequences-limit.html
+:::
+
 ::: {#box-exm-constant-seq .thmexm title="סדרה קבועה"}
 הסדרה הקבועה $a_n = 1$ (כלומר $1, 1, 1, \dots$) מתכנסת, וגבולה — באופן לא מפתיע — הוא $1$: לכל $\varepsilon>0$ ולכל $n$ מתקיים $|a_n - 1| = |1-1| = 0 < \varepsilon$, כך שאותו $N$ מתאים לכל $\varepsilon$. זהו מקרה **חריג**: כאשר הסדרה אינה קבועה, בדרך כלל $N$ תלוי ב-$\varepsilon$.
+:::
+
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/seq-const.html" loading="lazy" title="סימולציה: הסדרה הקבועה a_n = 1"></iframe>
+```
 :::
 
 ::: {#box-exm-one-over-n .thmexm title="שאיפה לאפס"}
 עבור $a_n = \dfrac{1}{n}$ מתקיים $\lim\limits_{n\to\infty} a_n = 0$. יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $n > \dfrac{1}{\varepsilon}$, ולכן $\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} < \varepsilon$.
 :::
 
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/seq-inv-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1/n"></iframe>
+```
+:::
+
 ::: {#box-exm-pm-one .thmexm title="סדרה מתחלפת שאינה מתכנסת"}
 הסדרה $a_n = (-1)^n$, כלומר $-1, 1, -1, 1, \dots$, **מתבדרת**. נניח בשלילה שיש לה גבול $L$. אז לכל $\varepsilon>0$ קיים $N$ כך שלכל $n>N$ מתקיים $|a_n - L| < \varepsilon$. ניקח $\varepsilon = 1$. לכל $n>N$ **זוגי** מתקיים $a_n = 1$, ולכן $|1 - L| < 1$; לכל $n>N$ **אי-זוגי** מתקיים $a_n = -1$, ולכן $|L - (-1)| < 1$. לפי אי-שוויון המשולש, $$2 = |1 - (-1)| \le |1 - L| + |L - (-1)| < 1 + 1 = 2,$$ כלומר $2 < 2$ — סתירה. לכן הסדרה מתבדרת.
+:::
+
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^n"></iframe>
+```
 :::
 
 ```{python}
@@ -1193,8 +1215,20 @@ plt.close(fig)
 ![התכנסות הסדרה $a_n = 1 + \frac{\sin(n)}{n}$](figures/c07_fig11.png){#fig-seq-sin-n width="80%" fig-align="center"}
 :::
 
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/seq-sin-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1 + sin(n)/n"></iframe>
+```
+:::
+
 ::: {#box-exm-seq-3n-4 .thmexm title="מנה של ביטויים לינאריים"}
 עבור $a_n = \dfrac{3n-4}{n+2}$ מתקיים $\lim\limits_{n\to\infty} a_n = 3$. נפשט: $$\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} < \frac{10}{n}.$$ יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $\dfrac{10}{n} < \varepsilon$, ולכן $\left|a_n - 3\right| < \varepsilon$.
+:::
+
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/seq-rational.html" loading="lazy" title="סימולציה: הסדרה a_n = (3n-4)/(n+2)"></iframe>
+```
 :::
 
 נשים לב: הגדרת ההתכנסות בודקת רק את **קיום** הגבול, לא את **מהירות** ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.

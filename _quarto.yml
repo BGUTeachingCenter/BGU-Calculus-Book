@@ -1,9 +1,15 @@
 project:
   type: book
   output-dir: _book
+  # Interactive widgets are standalone HTML pages under widgets/<chapter>/ and are
+  # pulled into the book with an <iframe>. Quarto only copies files it knows about,
+  # so the folder has to be declared here or the iframes 404 in _book/.
+  resources:
+    - widgets/**
 
 book:
   title: "חשבון דיפרנציאלי ואינטגרלי 1 להנדסה"
+  site-url: "https://yuval-khachatryan.github.io/BGU-Calculus-Book"
   subtitle: "טיוטה — מבוססת על מחברת ההרצאות, כתיב גולמי לעריכה"
   author: "יובל חצ׳טריאן-רזיאל"
   output-file: "Book_Draft"

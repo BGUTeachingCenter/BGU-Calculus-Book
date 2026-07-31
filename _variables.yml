@@ -1,0 +1,5 @@
+# Values reusable from any .qmd via the {{< var ... >}} shortcode.
+# Kept here so the published address is written once: when the book moves,
+# this file is the only place that changes.
+book:
+  url: "https://yuval-khachatryan.github.io/BGU-Calculus-Book"
