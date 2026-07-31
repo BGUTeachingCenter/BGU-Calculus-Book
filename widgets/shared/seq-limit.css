@@ -39,6 +39,12 @@ input[type=range]{flex:1 1 11rem;max-width:17rem;direction:ltr;accent-color:var(
 .seg button+button{border-inline-start:1px solid var(--soft)}
 .seg button[aria-pressed="true"]{background:var(--blue);color:#fff}
 .seg button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.btn{
+  border:1px solid var(--soft);border-radius:4px;background:#fff;color:var(--key);
+  font:inherit;padding:.22rem .7rem;cursor:pointer;white-space:nowrap;
+}
+.btn:hover{background:#f8fafc}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 
 /* ---------- plot ---------- */
 svg{display:block;width:100%;max-width:40rem;height:auto;margin:.7rem auto .2rem}

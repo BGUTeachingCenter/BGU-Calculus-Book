@@ -1157,13 +1157,11 @@ plt.close(fig)
 \medskip
 ```
 
+:::: {.content-visible when-format="pdf"}
 ::: {style="text-align:center"}
 תרשים: הסדרה $a_n = (-1)^n$ — איבריה קופצים בין שני קווים, ולכן אינם מתקרבים לקו אחד
 :::
-
-::: {.content-visible when-format="html"}
-![הסדרה $a_n = (-1)^n$](figures/c07_fig10.png){#fig-seq-pm-one width="80%" fig-align="center"}
-:::
+::::
 
 ::: {#box-exm-one-frac-n .thmexm title="סדרה מתכנסת שאינה מונוטונית"}
 הסדרה $a_n = 1 + \dfrac{\sin(n)}{n}$ (עבור $n \ge 1$) מתכנסת, וגבולה $1$. יהי $\varepsilon>0$. קיים $N$ כך ש-$N \ge \dfrac{1}{\varepsilon}$, ולכן לכל $n>N$ מתקיים $\dfrac{1}{n} < \dfrac{1}{N} \le \varepsilon$. לכן $$|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} < \varepsilon,$$ כנדרש.
@@ -1207,13 +1205,11 @@ plt.close(fig)
 \medskip
 ```
 
+:::: {.content-visible when-format="pdf"}
 ::: {style="text-align:center"}
 תרשים: התכנסות הסדרה $a_n = 1 + \frac{\sin(n)}{n}$ אל $1$ — הנקודות נעשות צפופות סביב קו הגבול
 :::
-
-::: {.content-visible when-format="html"}
-![התכנסות הסדרה $a_n = 1 + \frac{\sin(n)}{n}$](figures/c07_fig11.png){#fig-seq-sin-n width="80%" fig-align="center"}
-:::
+::::
 
 ::: {.content-visible when-format="html"}
 ```{=html}
