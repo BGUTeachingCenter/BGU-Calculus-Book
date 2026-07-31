@@ -1,0 +1,59 @@
+/* Styling for the sequence-limit widgets.
+   Deliberately follows the book's existing .pi-demo look (thin grey frame,
+   slate keys, monospace badges) and the palette of the chapter's matplotlib
+   figures, so a widget sitting under c07_fig09 reads as the same artwork.
+   Each widget is its own document inside an <iframe>, so bare element
+   selectors here cannot leak into the book page. */
+:root{
+  --ink:#1f2937;
+  --key:#475569;
+  --frame:#9ca3af;
+  --soft:#cbd5e1;
+  --blue:#1f4e79;   /* same blue as the static figures */
+  --red:#c0392b;    /* same red  */
+  --gray:#94a3b8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:transparent}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:15px;line-height:1.5;color:var(--ink);
+}
+.demo{border:1px solid var(--frame);background:#fff;padding:.8rem .9rem 1rem}
+
+/* ---------- controls ---------- */
+.row{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .7rem;justify-content:center}
+.row+.row{margin-top:.5rem}
+.key{color:var(--key);white-space:nowrap}
+.badge{
+  font-weight:700;background:#f1f5f9;border:1px solid var(--soft);border-radius:4px;
+  padding:.1rem .5rem;min-width:4.2rem;text-align:center;
+  font-family:ui-monospace,"Courier New",monospace;direction:ltr;
+}
+input[type=range]{flex:1 1 11rem;max-width:17rem;direction:ltr;accent-color:var(--blue)}
+.seg{display:inline-flex;border:1px solid var(--soft);border-radius:4px;overflow:hidden}
+.seg button{
+  border:0;background:#fff;color:var(--key);font:inherit;
+  padding:.22rem .8rem;cursor:pointer;
+}
+.seg button+button{border-inline-start:1px solid var(--soft)}
+.seg button[aria-pressed="true"]{background:var(--blue);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.btn{
+  border:1px solid var(--soft);border-radius:4px;background:#fff;color:var(--key);
+  font:inherit;padding:.22rem .7rem;cursor:pointer;white-space:nowrap;
+}
+.btn:hover{background:#f8fafc}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+
+/* ---------- plot ---------- */
+svg{display:block;width:100%;max-width:40rem;height:auto;margin:.7rem auto .2rem}
+/* axis labels are set in serif italic so they match the mathtext in the
+   chapter's static figures rather than clashing with the page's KaTeX */
+.mathlbl{font-family:"Times New Roman",Times,serif;font-style:italic}
+
+/* ---------- readout ---------- */
+.readout{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.4rem;margin-top:.5rem}
+.readout>div{white-space:nowrap}
+.val{font-weight:700;font-family:ui-monospace,"Courier New",monospace;direction:ltr;
+     unicode-bidi:isolate}

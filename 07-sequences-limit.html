@@ -184,6 +184,81 @@ ul.task-list li input[type="checkbox"] {
 }
 .seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover { background: #ececec; }
 .seq-quiz .seq-feedback, .formula-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
+/* Interactive π-approximation demo (HTML only) */
+.pi-demo {
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  padding: 0.8rem 0.9rem 1rem;
+  margin: 1.2rem 0;
+}
+/* Inside a theorem box the demo shouldn't draw a second frame. */
+.thmbox .pi-demo { border: 0; background: transparent; padding: 0; margin: 0.4rem 0; }
+.pi-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+.pi-demo-slider { flex: 1 1 14rem; max-width: 22rem; direction: ltr; }
+.pi-demo-badge {
+  font-weight: 700;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  min-width: 4.5rem;
+  text-align: center;
+}
+.pi-demo-svg {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  margin: 0.9rem auto 0.5rem;
+}
+.pi-demo-circle { fill: #dbeafe; stroke: #1f4e79; stroke-width: 0.014; }
+/* drawn BEFORE the circle, so only the ring outside the circle shows through */
+.pi-demo-poly-out {
+  fill: #f6c445;
+  stroke: #7f1d1d;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-poly {
+  fill: #c0392b;
+  fill-opacity: 0.5;
+  stroke: #c0392b;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-readout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1.4rem;
+  margin-top: 0.5rem;
+}
+.pi-demo-readout > div { white-space: nowrap; }
+.pi-demo-key { color: #475569; }
+.pi-demo-val { font-weight: 700; font-family: ui-monospace, "Courier New", monospace; }
+/* Interactive widgets embedded from widgets/<chapter>/*.html.
+   They live in an iframe so their CSS (which styles body/table/button
+   unscoped) cannot leak into the book page, and so several copies on one
+   page do not collide on element ids. The height below is a first guess;
+   each widget posts its real height and the listener at the bottom of this
+   file applies it. */
+iframe.widget-frame {
+  display: block;
+  width: 100%;
+  height: 440px;      /* replaced by the widget's own reported height */
+  border: 0;          /* the widget draws its own frame, like .pi-demo */
+  background: transparent;
+  margin: 1.2rem 0 0;
+}
+/* Inside a .thmsim box the frame sits flush; the box supplies the padding. */
+.thmbox-simulation iframe.widget-frame { margin: 0.5rem 0 0.2rem; }
 .thmbox {
   border-inline-start: 4px solid #9ca3af;
   background: #fafafa;
@@ -199,6 +274,13 @@ ul.task-list li input[type="checkbox"] {
 .thmbox-lemma       { border-color: #0d9488; background: #f0fdfa; }
 .thmbox-corollary   { border-color: #16a34a; background: #f0fdf4; }
 .thmbox-example     { border-color: #d97706; background: #fffbeb; }
+/* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
+   solution reuses the proof's slate — a solution is to a question what a proof
+   is to a theorem, and the reader already reads that grey as "the working". */
+.thmbox-question    { border-color: #b45309; background: #fef6e7; }
+.thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
+.thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
+.thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
 .thmbox-proof       { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-proof > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-remark      { border-color: #cbd5e1; background: #f8fafc; }
@@ -223,6 +305,19 @@ details.thmoptional[open] > summary { border-bottom: 1px solid #9ca3af; }
 details.thmoptional > .optional { padding: 0.7rem 0.9rem; }
 details.thmoptional > .optional > :first-child { margin-top: 0; }
 details.thmoptional > .optional > :last-child { margin-bottom: 0; }
+/* .foldable: hidden calculations / derivations. Distinct from .optional (which is a
+   whole gray-boxed aside) — this is a light inline disclosure inside the running text. */
+details.thmfoldable {
+  margin: 1rem 0;
+  border-inline-start: 3px solid #cbd5e1;
+  padding-inline-start: 0.8rem;
+}
+details.thmfoldable > summary {
+  cursor: pointer;
+  color: #475569;
+  font-weight: 600;
+}
+details.thmfoldable[open] > summary { margin-bottom: 0.5rem; }
 details.thmcollapse { margin: 1rem 0; }
 details.thmcollapse > summary {
   cursor: pointer;
@@ -348,7 +443,59 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Build n -> value from a formula in n (whitelisted: digits, n, + - * / ^ ( ) . )
+  // Inscribed regular n-gon in the unit circle: area a_n = (n/2)*sin(2*pi/n) -> pi
+  document.querySelectorAll(".pi-demo").forEach(function (demo) {
+    var slider = demo.querySelector(".pi-demo-slider");
+    var poly = demo.querySelector(".pi-demo-poly");
+    var polyOut = demo.querySelector(".pi-demo-poly-out");
+    // Two instances of this widget appear in the chapter: the first shows only the
+    // inscribed polygon (the circumscribed one has not been motivated yet), the second
+    // shows both. Which one is decided by data-show-out, not by a control — a checkbox
+    // there would give away the second half of the argument.
+    var showOutward = demo.getAttribute("data-show-out") === "1";
+    var outRow = demo.querySelector(".pi-demo-out-row");
+    var bandRow = demo.querySelector(".pi-demo-band-row");
+    var kOut = demo.querySelector(".pi-demo-k");
+    var nOut = demo.querySelector(".pi-demo-n");
+    var aOut = demo.querySelector(".pi-demo-area");
+    var aOutC = demo.querySelector(".pi-demo-area-out");
+    var bOut = demo.querySelector(".pi-demo-band");
+    var dOut = demo.querySelector(".pi-demo-diff");
+    if (slider && poly) {
+      var update = function () {
+        var kIdx = parseInt(slider.value, 10);                 // the slider value IS k (1..10)
+        var n = 6 * Math.pow(2, kIdx - 1);                     // n_k = 6,12,24,...,3072
+        var R = 1 / Math.cos(Math.PI / n);   // circumradius of the circumscribed n-gon (apothem 1)
+        var pts = [], ptsOut = [];
+        for (var k = 0; k < n; k++) {
+          var t = -Math.PI / 2 + 2 * Math.PI * k / n;   // start at the top
+          pts.push(Math.cos(t).toFixed(5) + "," + Math.sin(t).toFixed(5));
+          // the circumscribed polygon is tangent at the inscribed polygon's vertices,
+          // so its own vertices sit half a step further round, at radius R
+          var u = t + Math.PI / n;
+          ptsOut.push((R * Math.cos(u)).toFixed(5) + "," + (R * Math.sin(u)).toFixed(5));
+        }
+        poly.setAttribute("points", pts.join(" "));
+        if (polyOut) polyOut.setAttribute("points", ptsOut.join(" "));
+        var area = (n / 2) * Math.sin(2 * Math.PI / n);
+        var areaOut = n * Math.tan(Math.PI / n);
+        if (polyOut) polyOut.style.display = showOutward ? "" : "none";
+        if (outRow) outRow.style.display = showOutward ? "" : "none";
+        if (bandRow) bandRow.style.display = showOutward ? "" : "none";
+        if (kOut) kOut.textContent = kIdx;
+        if (nOut) nOut.textContent = n;
+        if (aOut) aOut.textContent = area.toFixed(6);
+        if (aOutC) aOutC.textContent = areaOut.toFixed(6);
+        // the gaps shrink by ~4 per step, so they need more digits than the areas
+        if (bOut) bOut.textContent = (areaOut - area).toFixed(8);
+        if (dOut) dOut.textContent = (Math.PI - area).toFixed(8);
+      };
+      slider.addEventListener("input", update);
+      update();
+    }
+  });
+
+  // Build n -> value from a formula in n (whitelisted: digits, n, + - * / ^ ! ( ) . )
   function makeFormula(s) {
     s = String(s || "").trim();
     if (!s || !/^[0-9n+\-*/^!().\s]+$/.test(s)) return null;
@@ -393,6 +540,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn) btn.addEventListener("click", check);
     if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
   });
+});
+</script>
+<script>
+// Widgets embedded from widgets/<chapter>/ report their own height, so the
+// iframe does not need a hard-coded one (which breaks on narrow screens,
+// where the control panel stacks above the plot).
+window.addEventListener("message", function (e) {
+  var d = e.data;
+  if (!d || d.type !== "widget-height" || typeof d.height !== "number") return;
+  var frames = document.querySelectorAll("iframe.widget-frame");
+  for (var i = 0; i < frames.length; i++) {
+    if (frames[i].contentWindow === e.source) {
+      frames[i].style.height = Math.max(320, Math.min(2000, d.height)) + "px";
+      return;
+    }
+  }
 });
 </script>
 
@@ -727,16 +890,28 @@ window.Quarto = {
    
   <ul>
   <li><a href="#הגדרה-ודרכי-תיאור" id="toc-הגדרה-ודרכי-תיאור" class="nav-link active" data-scroll-target="#הגדרה-ודרכי-תיאור"><span class="header-section-number">7.1</span> הגדרה ודרכי תיאור</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#הדרך-הנאיבית" id="toc-הדרך-הנאיבית" class="nav-link" data-scroll-target="#הדרך-הנאיבית">הדרך ה״נאיבית״</a></li>
   <li><a href="#נוסחה-סגורה" id="toc-נוסחה-סגורה" class="nav-link" data-scroll-target="#נוסחה-סגורה">נוסחה סגורה</a></li>
   <li><a href="#רקורסיה" id="toc-רקורסיה" class="nav-link" data-scroll-target="#רקורסיה">רקורסיה</a></li>
   <li><a href="#תרגילים" id="toc-תרגילים" class="nav-link" data-scroll-target="#תרגילים">תרגילים</a></li>
   </ul></li>
-  <li><a href="#גבול-של-סדרה" id="toc-גבול-של-סדרה" class="nav-link" data-scroll-target="#גבול-של-סדרה"><span class="header-section-number">7.2</span> גבול של סדרה</a></li>
-  <li><a href="#דוגמאות" id="toc-דוגמאות" class="nav-link" data-scroll-target="#דוגמאות"><span class="header-section-number">7.3</span> דוגמאות</a>
+  <li><a href="#גבול-של-סדרה-מוטיבציה-ואינטואיציה" id="toc-גבול-של-סדרה-מוטיבציה-ואינטואיציה" class="nav-link" data-scroll-target="#גבול-של-סדרה-מוטיבציה-ואינטואיציה"><span class="header-section-number">7.2</span> גבול של סדרה: מוטיבציה ואינטואיציה</a>
+  <ul>
+  <li><a href="#קירוב-המספר-pi" id="toc-קירוב-המספר-pi" class="nav-link" data-scroll-target="#קירוב-המספר-pi">קירוב המספר <span class="math inline">\(\pi\)</span></a>
   <ul class="collapse">
-  <li><a href="#דוגמאות-נוספות" id="toc-דוגמאות-נוספות" class="nav-link" data-scroll-target="#דוגמאות-נוספות">דוגמאות נוספות</a></li>
+  <li><a href="#הרעיון-מצולע-עם-הרבה-צלעות-דומה-למעגל" id="toc-הרעיון-מצולע-עם-הרבה-צלעות-דומה-למעגל" class="nav-link" data-scroll-target="#הרעיון-מצולע-עם-הרבה-צלעות-דומה-למעגל">הרעיון: מצולע עם הרבה צלעות דומה למעגל</a></li>
+  <li><a href="#התהליך-הכפלת-מספר-הצלעות" id="toc-התהליך-הכפלת-מספר-הצלעות" class="nav-link" data-scroll-target="#התהליך-הכפלת-מספר-הצלעות">התהליך: הכפלת מספר הצלעות</a></li>
+  <li><a href="#שתי-שאלות" id="toc-שתי-שאלות" class="nav-link" data-scroll-target="#שתי-שאלות">שתי שאלות</a></li>
+  <li><a href="#האיברים-הראשונים" id="toc-האיברים-הראשונים" class="nav-link" data-scroll-target="#האיברים-הראשונים">האיברים הראשונים</a></li>
+  <li><a href="#מנראה-נכון-להוכחה-מצולעים-חוסמים" id="toc-מנראה-נכון-להוכחה-מצולעים-חוסמים" class="nav-link" data-scroll-target="#מנראה-נכון-להוכחה-מצולעים-חוסמים">מ״נראה נכון״ להוכחה: מצולעים חוסמים</a></li>
+  <li><a href="#חסימת-השגיאה" id="toc-חסימת-השגיאה" class="nav-link" data-scroll-target="#חסימת-השגיאה">חסימת השגיאה</a></li>
+  </ul></li>
+  <li><a href="#מה-למדנו" id="toc-מה-למדנו" class="nav-link" data-scroll-target="#מה-למדנו">מה למדנו</a></li>
+  </ul></li>
+  <li><a href="#גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" id="toc-גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" class="nav-link" data-scroll-target="#גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות"><span class="header-section-number">7.3</span> גבול של סדרה: הגדרה פורמלית ודוגמאות</a>
+  <ul>
+  <li><a href="#דוגמאות-ושאלות-פתורות" id="toc-דוגמאות-ושאלות-פתורות" class="nav-link" data-scroll-target="#דוגמאות-ושאלות-פתורות">דוגמאות ושאלות פתורות</a></li>
   </ul></li>
   <li><a href="#פיתוח-עשרוני-כסדרה-העשרה" id="toc-פיתוח-עשרוני-כסדרה-העשרה" class="nav-link" data-scroll-target="#פיתוח-עשרוני-כסדרה-העשרה"><span class="header-section-number">7.4</span> פיתוח עשרוני כסדרה (העשרה)</a></li>
   </ul>
@@ -771,7 +946,7 @@ window.Quarto = {
 <p><strong>סדרה (ממשית)</strong> היא אוסף <strong>אינסופי</strong> של מספרים ממשיים, שבו יש <strong>חשיבות לסדר</strong> ו<strong>חזרות מותרות</strong> (ראו את הדיון על ההבדל בין סדרה לקבוצה <a href="./06-sequences-intro.html">בפרק המבוא</a>): <span class="math display">\[a_1, a_2, a_3, \dots, a_n, \dots\]</span> <span class="math inline">\(a_n\)</span> הוא ה<strong>איבר</strong> שבמקום <span class="math inline">\(n\)</span>, ו-<span class="math inline">\(n\)</span> הוא ה<strong>אינדקס</strong> הרץ על המספרים הטבעיים. את הסדרה כולה נסמן בקיצור <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span>.</p>
 </div>
 <div class="thmbox thmbox-remark" title="ההגדרה הפורמלית: סדרה כפונקציה">
-<p><strong>הערה 7.1.2 (ההגדרה הפורמלית: סדרה כפונקציה).</strong></p>
+<p><strong>הערה 7.1.2 — ההגדרה הפורמלית: סדרה כפונקציה.</strong></p>
 <p>פורמלית, סדרה ממשית <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> היא <strong>פונקציה</strong> <span class="math inline">\(a:\mathbb{N}\to\mathbb{R}\)</span> — לכל מספר טבעי <span class="math inline">\(n\)</span> מותאם ערך ממשי יחיד <span class="math inline">\(a_n = a(n)\)</span>. הצגה זו הופכת את ״הסדר״ ואת ״האינסופיות״ למדויקים. האינדקס רץ על המספרים הטבעיים <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \dots\}\)</span>, ולכן סדרה מתחילה כברירת מחדל מ-<span class="math inline">\(a_1\)</span>; רק כאשר יצוין במפורש נתחיל את האינדקס במקום אחר (למשל <span class="math inline">\(a_0\)</span>).</p>
 </div>
 <p>איך מתארים סדרה? עלינו לתאר במדויק איזה איבר נמצא במקום ה-<span class="math inline">\(n\)</span>, לכל <span class="math inline">\(n\in\mathbb{N}\)</span>. לכתוב את כל האיברים לפי הסדר — בלתי אפשרי, שכן יש אינסוף מהם. לכן נעזרים בכמה <strong>דרכים לתיאור סדרה</strong>; נציג שלוש דרכים נפוצות.</p>
@@ -786,8 +961,8 @@ window.Quarto = {
 <section id="נוסחה-סגורה" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="נוסחה-סגורה">נוסחה סגורה</h3>
 <p>הדרך השנייה: ביטוי המחשב את <span class="math inline">\(a_n\)</span> <strong>ישירות</strong> מתוך <span class="math inline">\(n\)</span>, בלי תלות באיברים הקודמים. יתרונה הגדול הוא הגישה הישירה — אפשר ״לקפוץ״ מיד לכל איבר שנרצה, גם ל-<span class="math inline">\(a_{100}\)</span>, בלי לחשב את קודמיו. כך, את סדרת המספרים האי-זוגיים נתאר בפשטות על ידי <span class="math inline">\(a_n = 2n - 1\)</span>.</p>
-<div id="box-exm-closed-form" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.1.3.</strong></p>
+<div id="box-exm-closed-form" class="thmbox thmbox-example" title="סדרות בנוסחה סגורה">
+<p><strong>דוגמה 7.1.3 — סדרות בנוסחה סגורה.</strong></p>
 <p>כמה סדרות המוגדרות בנוסחה סגורה:</p>
 <ul>
 <li><span class="math inline">\(a_n = n\)</span> נותנת <span class="math inline">\(1, 2, 3, 4, \dots\)</span>;</li>
@@ -801,21 +976,21 @@ window.Quarto = {
 <h3 class="unnumbered anchored" data-anchor-id="רקורסיה">רקורסיה</h3>
 <p>לא לכל סדרה קל — ולעיתים אף לא ידוע — למצוא נוסחה סגורה. דרך טבעית אחרת היא <strong>רקורסיה</strong>: מגדירים במפורש כמה מן האיברים הראשונים, ונותנים <strong>כלל</strong> המחשב כל איבר חדש מתוך קודמיו. (בקורס נסתפק בכללים התלויים במספר <strong>סופי</strong> של איברים קודמים.) לרקורסיה יש חיסרון — כדי להגיע ל-<span class="math inline">\(a_{100}\)</span> יש לחשב תחילה את כל קודמיו — אך לעיתים היא הדרך הטבעית, ואף היחידה הפשוטה, לתאר סדרה. על מנת להתגבר על הבעיה של חישוב האיבר הכללי, מנסים להמיר את הנוסחה הרקורסיבית לנוסחה סגורה. באופן כללי, זו בעיה קשה ולא נתייחס למקרה הכללי בקורס. יחד עם זאת, לעיתים ניתן ל״נחש״ את הנוסחה ולהוכיח אותה בשיטות כמו אינדוקציה.</p>
 <p>שתי הסדרות המוכרות ביותר מבית הספר — ה<strong>חשבונית</strong> וה<strong>הנדסית</strong> — מוגדרות באופן טבעי ברקורסיה.</p>
-<div id="box-exm-arithmetic" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.1.4.</strong></p>
+<div id="box-exm-arithmetic" class="thmbox thmbox-example" title="סדרה חשבונית">
+<p><strong>דוגמה 7.1.4 — סדרה חשבונית.</strong></p>
 <p><strong>סדרה חשבונית:</strong> מתחילים באיבר <span class="math inline">\(a_1\)</span>, ובכל צעד מוסיפים <strong>הפרש</strong> קבוע <span class="math inline">\(d\)</span>, כלומר <span class="math inline">\(a_{n+1} = a_n + d\)</span>. למשל, <span class="math inline">\(a_1 = 3\)</span> ו-<span class="math inline">\(d = 2\)</span> נותנות <span class="math inline">\(3, 5, 7, 9, \dots\)</span>. (יש לה גם נוסחה סגורה: <span class="math inline">\(a_n = a_1 + (n-1)\,d\)</span>.)</p>
 </div>
-<div id="box-exm-geometric" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.1.5.</strong></p>
+<div id="box-exm-geometric" class="thmbox thmbox-example" title="סדרה הנדסית">
+<p><strong>דוגמה 7.1.5 — סדרה הנדסית.</strong></p>
 <p><strong>סדרה הנדסית:</strong> מתחילים באיבר <span class="math inline">\(a_1\)</span>, ובכל צעד מכפילים ב<strong>מנה</strong> קבועה <span class="math inline">\(q\)</span>, כלומר <span class="math inline">\(a_{n+1} = q\,a_n\)</span>. למשל, <span class="math inline">\(a_1 = 1\)</span> ו-<span class="math inline">\(q = 2\)</span> נותנות <span class="math inline">\(1, 2, 4, 8, \dots\)</span>. (וגם לה נוסחה סגורה: <span class="math inline">\(a_n = a_1\,q^{\,n-1}\)</span>.)</p>
 </div>
-<div id="box-exm-factorial" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.1.6.</strong></p>
+<div id="box-exm-factorial" class="thmbox thmbox-example" title="העצרת">
+<p><strong>דוגמה 7.1.6 — העצרת.</strong></p>
 <p>ה<strong>עצרת</strong> <span class="math inline">\(n!\)</span>. אין ״פעולה חשבונית״ יחידה שמשמעותה ״מכפלת כל המספרים מ-<span class="math inline">\(1\)</span> עד <span class="math inline">\(n\)</span>״; העצרת מוגדרת מלכתחילה ברקורסיה: <span class="math display">\[,a_1 = 1 \qquad a_{n+1} = (n+1)\,a_n\]</span> ומתקבלת <span class="math inline">\(1, 2, 6, 24, 120, \dots\)</span>, כלומר <span class="math inline">\(a_n = n!\)</span>.</p>
 </div>
-<div id="box-exm-fibonacci" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.1.7.</strong></p>
-<p>סדרת <strong>פיבונאצ׳י</strong>, שבה כל איבר הוא סכום שני קודמיו: <span class="math display">\[,a_1 = a_2 = 1 \qquad a_{n+1} = a_n + a_{n-1}\]</span> ומתקבלת <span class="math inline">\(1, 1, 2, 3, 5, 8, 13, 21, \dots\)</span>. זוהי אולי הסדרה הרקורסיבית המפורסמת ביותר, והיא צצה במקומות מפתיעים במתמטיקה ובטבע.</p>
+<div id="box-exm-fibonacci" class="thmbox thmbox-example" title="סדרת פיבונאצ׳י">
+<p><strong>דוגמה 7.1.7 — סדרת פיבונאצ׳י.</strong></p>
+<p>כל איבר הוא סכום שני קודמיו: <span class="math display">\[a_n = \begin{cases} 1 &amp; n = 1, 2 \\ a_{n-1} + a_{n-2} &amp; n \geq 3 \end{cases}\]</span> ומתקבלת הסדרה <span class="math inline">\(1, 1, 2, 3, 5, 8, 13, 21, \dots\)</span>. זוהי אולי הסדרה הרקורסיבית המפורסמת ביותר, והיא צצה במקומות מפתיעים במתמטיקה ובטבע.</p>
 </div>
 <div class="extra" title="העשרה: פיבונאצ׳י, ארנבים ויחס הזהב">
 <div class="extra-title">
@@ -853,86 +1028,391 @@ window.Quarto = {
 <div class="formula-quiz" data-answer="2, 8, 48, 384, 3840, 46080"><span class="seq-label">(ג) \(a_1 = 2,\ a_n = 2n\,a_{n-1}\) — רמז: אפשר להיעזר בעצרת \(n!\)</span><input class="seq-input" type="text" placeholder="3*n^2+1 :למשל"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
 </section>
 </section>
-<section id="גבול-של-סדרה" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="גבול-של-סדרה"><span class="header-section-number">7.2</span> גבול של סדרה</h2>
-<p>מהו הערך שסדרה <strong>מתקרבת</strong> אליו? הרעיון: איברי הסדרה נעשים קרובים לערך <span class="math inline">\(L\)</span> כרצוננו — קרובים ככל שנדרוש — החל ממקום מסוים והלאה.</p>
-<div id="box-def-convergence" class="thmbox thmbox-definition">
-<p><strong>הגדרה 7.2.1.</strong></p>
-<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה. נאמר שהסדרה <strong>מתכנסת</strong>, או שיש לה <strong>גבול</strong>, אם קיים <span class="math inline">\(L\in\mathbb{R}\)</span> כך שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n &gt; N\)</span> מתקיים <span class="math display">\[|a_n - L| &lt; \varepsilon\]</span> במקרה זה נאמר שהסדרה <strong>שואפת</strong> (או <strong>מתכנסת</strong>) ל-<span class="math inline">\(L\)</span>, ונסמן <span class="math inline">\(\lim\limits_{n\to\infty}a_n=L\)</span> או <span class="math inline">\(a_n \to L\)</span>. אם אין לסדרה גבול, נאמר שהיא <strong>מתבדרת</strong>.</p>
-</div>
-<p>שימו לב למספר פרטים בהגדרה:</p>
-<ol type="1">
-<li>התנאי מתקיים <strong>לכל</strong> מספר חיובי <span class="math inline">\(\varepsilon&gt;0\)</span>.</li>
-<li>האינדקס <span class="math inline">\(N\)</span> תלוי ב-<span class="math inline">\(\varepsilon\)</span>, אך תמיד קיים — ככל שנדרוש דיוק רב יותר (כלומר <span class="math inline">\(\varepsilon\)</span> קטן יותר), ייתכן שנצטרך להתקדם רחוק יותר בסדרה.</li>
-<li>לכל <span class="math inline">\(\varepsilon&gt;0\)</span>, מספר האיברים המקיימים <span class="math inline">\(|a_n - L| \geq \varepsilon\)</span> הוא <strong>סופי</strong>.</li>
-<li>ההתכנסות אינה תלויה באיברים הראשונים של הסדרה — ״חשוב מה שקורה בסוף״.</li>
-</ol>
-<div style="text-align:center">
-<p>תרשים: ציר מספרים עם הקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span> סביב הגבול <span class="math inline">\(L\)</span> — כל איברי הסדרה נמצאים בקטע החל ממקום מסוים</p>
-</div>
-<div id="fig-seq-eps-band" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<section id="גבול-של-סדרה-מוטיבציה-ואינטואיציה" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="גבול-של-סדרה-מוטיבציה-ואינטואיציה"><span class="header-section-number">7.2</span> גבול של סדרה: מוטיבציה ואינטואיציה</h2>
+<p>בפועל, כשאנחנו עובדים עם מספרים, לעיתים קרובות איננו עובדים עם הערך המדויק אלא עם ערך ש״קרוב מספיק״ אליו. הדוגמה הפשוטה ביותר היא כתיבת <span class="math inline">\(0.3333\)</span> במקום <span class="math inline">\(\frac{1}{3}\)</span>: אלה אינם אותו מספר, אבל לרוב הצרכים ההבדל ביניהם אינו משנה. כך גם כשכותבים <span class="math inline">\(1.41\)</span> במקום <span class="math inline">\(\sqrt{2}\)</span>.</p>
+<p>אבל מה פירוש ״קרוב״? כל עוד לא צירפנו לביטוי הזה מספר, אין בו טענה מתמטית. לכן קובעים <strong>מראש</strong> את השגיאה שאנחנו מוכנים לסבול, ומסמנים אותה <span class="math inline">\(\varepsilon&gt;0\)</span> (״אפסילון״). נאמר ש-<span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> <strong>ברמת דיוק</strong> <span class="math inline">\(\varepsilon\)</span> אם המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L\)</span> קטן מ-<span class="math inline">\(\varepsilon\)</span>.</p>
+<p>והמרחק בין שני מספרים על הישר כבר מוכר לנו: הוא הערך המוחלט של ההפרש ביניהם. כלומר, התנאי הוא <span class="math display">\[|x - L| &lt; \varepsilon\]</span> ושימו לב שהמרחק <strong>אינו תלוי בסדר</strong>, שכן <span class="math inline">\(|x - L| = |L - x|\)</span>. וזה הגיוני: לא מעניין אותנו אם <span class="math inline">\(x\)</span> גדול מ-<span class="math inline">\(L\)</span> או קטן ממנו, אלא רק כמה הוא רחוק ממנו. למשל, <span class="math inline">\(0.3333\)</span> קטן מ-<span class="math inline">\(\frac{1}{3}\)</span> ואילו <span class="math inline">\(0.3334\)</span> גדול ממנו — ושניהם מקרבים אותו ברמת דיוק <span class="math inline">\(0.001\)</span>.</p>
+<p>את אותו תנאי אפשר לרשום גם בלי ערך מוחלט, ואז מתקבלת תמונה גאומטרית: <span class="math display">\[|x - L| &lt; \varepsilon \iff -\varepsilon &lt; x - L &lt; \varepsilon \iff L - \varepsilon &lt; x &lt; L + \varepsilon\]</span> כלומר <span class="math inline">\(x\)</span> נמצא בקטע הפתוח <span class="math inline">\((L-\varepsilon,\ L+\varepsilon)\)</span> — קטע שמרכזו <span class="math inline">\(L\)</span> ורוחבו <span class="math inline">\(2\varepsilon\)</span>. זוהי בדיוק <strong>סביבת ה-</strong><span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span> שראינו בפרק על הערך המוחלט. שתי הצורות שקולות לחלוטין, ונעבור ביניהן בחופשיות: הראשונה היא טענה על ה<strong>שגיאה</strong> — גודל אחד, המרחק, החסום על ידי מספר אחד; השנייה היא טענה על <strong>מקומו</strong> של <span class="math inline">\(x\)</span> על הישר.</p>
+<div id="fig-eps-approx" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+<div aria-describedby="fig-eps-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig13.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.1: ציר מספרים עם הקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span> סביב הגבול <span class="math inline">\(L\)</span> — כל איברי הסדרה נמצאים בקטע החל ממקום מסוים
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eps-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.1: <span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span> — המרחק ביניהם קטן מ-<span class="math inline">\(\varepsilon\)</span>, כלומר <span class="math inline">\(x\)</span> נמצא בקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>
+</figcaption>
+</figure>
+</div>
+<p>ועכשיו לנקודה שממנה מתחיל הפרק: רמת הדיוק אינה נתונה לנו מראש — היא נקבעת על ידי מי שדורש את הקירוב, ומספר בודד אינו יכול לעמוד ב<strong>כל</strong> דרישה. <span class="math inline">\(0.3333\)</span> אמנם מקרב את <span class="math inline">\(\frac{1}{3}\)</span> ברמת דיוק <span class="math inline">\(0.0001\)</span>, אך ברמת דיוק <span class="math inline">\(0.00001\)</span> הוא כבר אינו מספיק ובמקומו נדרש <span class="math inline">\(0.33333\)</span>; ברמת דיוק קטנה עוד יותר יידרש מספר אחר, וכך הלאה. שום שבר עשרוני סופי אינו עונה על כל הדרישות. היחיד שהיה עונה עליהן הוא <span class="math inline">\(\frac{1}{3}\)</span> עצמו — ואותו איננו יודעים לרשום כשבר עשרוני סופי, וזו כל הסיבה שאנחנו מקרבים מלכתחילה.</p>
+<p>לכן, בהינתן מספר שאיננו יודעים לרשום או לחשב במדויק, מה שדרוש לנו אינו מספר בודד אלא <strong>שיטה</strong>: דרך אמינה לייצר קירוב לכל רמת דיוק שתידרש. אחת השיטות היא לבנות <strong>סדרה</strong> שאיבריה קלים לחישוב, המקיימת את התכונה הבאה: ל<strong>כל</strong> רמת דיוק <span class="math inline">\(\varepsilon&gt;0\)</span>, קטנה ככל שתהיה, קיים אינדקס שהחל ממנו ואילך <strong>כל</strong> איברי הסדרה מקרבים את המספר ברמת דיוק <span class="math inline">\(\varepsilon\)</span>.</p>
+<p>שימו לב לשני דברים. ראשית, אין כאן דרישה שהסדרה תתקרב בהתמדה: מותר לאיברים לעלות ולרדת ואף להתרחק לפרקים — הנדרש <strong>הוא רק שבסופו של דבר</strong> כולם ייכנסו לתחום ויישארו בו. שנית, זו הסיבה שאנחנו דורשים ש<strong>כל</strong> האיברים מן האינדקס והלאה יהיו קרובים ולא רק אחד מהם: איבר בודד שיצא קרוב במקרה אינו מועיל, שכן ייתכן שמיד אחריו הסדרה מתרחקת שוב. כשכל האיברים מן האינדקס והלאה קרובים מספיק, אפשר לעצור בכל אחד מהם ולקחת אותו כקירוב.</p>
+<p>עד כאן הלכנו בכיוון אחד: המספר היה הנתון, והסדרה הייתה הכלי שבנינו כדי להגיע אליו.</p>
+<p>אבל אפשר לקרוא את הקשר הזה גם בכיוון ההפוך, ואז מתקבלת שאלה חדשה: הסדרה היא הנתון, והשאלה היא מה היא מקרבת — אם בכלל. האם קיים מספר שהסדרה מתקרבת אליו במובן שתיארנו? האם היא <strong>מתייצבת</strong>?</p>
+<p>המקרה הברור ביותר הוא זה שכבר עמדנו בו. רצינו לקרב מספר, הגדרנו סדרה שלכאורה עושה את העבודה — ומניין לנו שאכן כך? אין די בכך שהסדרה ״נראית מתקרבת״: כדי שהקירוב יהיה לגיטימי עלינו לדעת שהיא באמת מקיימת את שדרשנו, כלומר שלכל רמת דיוק אכן קיים אינדקס שהחל ממנו כל האיברים מקרבים את המספר ברמת הדיוק הזו. זו בדיוק העבודה שנעשה בהמשך הסעיף עבור <span class="math inline">\(\pi\)</span>.</p>
+<p>ולעיתים הסדרה אינה נבנית על ידינו כלל, אלא <strong>יוצאת מתוך תהליך</strong>: <span class="math inline">\(a_n\)</span> הוא התוצאה המתקבלת כאשר הפרמטר הוא <span class="math inline">\(n\)</span>, ודווקא המספר הוא מה שאין לנו. למשל, נניח ש-<span class="math inline">\(a_n\)</span> הוא הזמן הדרוש לבניית בית על ידי <span class="math inline">\(n\)</span> פועלים. ככל שנוסיף פועלים הזמן יילך ויקטן — אך לא לאפס, שכן יש חלק מהעבודה שאי אפשר לחלק ביניהם. הזמן מתייצב על ערך מסוים: הזמן המהיר ביותר שבו אפשר לבנות את הבית בכלל. את הערך הזה איננו יודעים מראש, אבל עצם הידיעה שהוא קיים מעשית מאוד — מרגע שאנחנו ״מספיק קרובים״ אליו, כבר אין טעם להוסיף פועלים.</p>
+<p>דוגמה עדכנית יותר היא אימון של מודל בלמידת מכונה. למודל יש פרמטרים, ויש להם ערך שבו הוא מתפקד בצורה הטובה ביותר; תהליך האימון מייצר סדרה של ערכים — אחד לכל שלב אימון. האם הסדרה הזו מתקרבת אל הערך האופטימלי? והאם היא בכלל מתייצבת על משהו? אלו שאלות אמיתיות, ולא כל אימון עונה עליהן בחיוב.</p>
+<p>שכן לא כל תהליך מתייצב, וכדאי לראות זאת מיד. קחו סדרה שמתנהגת כך: <span class="math display">\[1,\ 2,\ 3,\ 1,\ 2,\ 1,\ 2,\ 3,\ 1,\ 2,\ \dots\]</span> היא אינה בורחת לאינסוף — כל איבריה בין <span class="math inline">\(1\)</span> ל-<span class="math inline">\(3\)</span> — וגם אינה מתקרבת לשום מספר. היא פשוט רודפת אחר זנבה: חוזרת שוב ושוב על אותם ערכים, ולעולם אינה מתיישבת על אחד מהם.</p>
+<p>דוגמה יומיומית לאותו כשל: מרצה כותב על הלוח באותיות קטנות מדי. מבקשים ממנו לכתוב גדול יותר — והוא מצייר אותיות בגובה חצי לוח. מבקשים קטן יותר — ושוב זעיר. הגודל קופץ מקצה לקצה ואינו מתקרב לשום גודל, ולעולם לא נגיע לגודל הרצוי ולא נוכל לעצור. שימו לב מדוע: הבקשה ״גדול יותר״ אינה נושאת עמה שום <strong>רמת דיוק</strong>. כל עוד צורת הבקשה אינה משתנה, אין לנו כלל קריטריון שיאמר לנו מתי הגענו — וזו בדיוק הסיבה שקבענו מראש את <span class="math inline">\(\varepsilon\)</span>.</p>
+<div class="thmbox thmbox-remark" title="אותו רעיון, בהקשרים רבים">
+<p><strong>הערה 7.2.1 — אותו רעיון, בהקשרים רבים.</strong></p>
+<p>השאלה שבכיוון השני — ״האם הסדרה מתייצבת?״ — היא למעשה השאלה שתעסיק אותנו בכל הפרק: האם הסדרה <strong>מתכנסת</strong>. המצבים שבהם היא עולה אינם ניתנים למניין, והם מופיעים כמעט בכל תחום שבו מופיעות סדרות של מספרים — בשאלות מעשיות ובשאלות תאורטיות כאחד.</p>
+<p>מה שמשותף לכולם הוא הגרעין: האם קיים מספר שהסדרה מתקרבת אליו באופן שתיארנו? את השאלה הזו, ואת ההגדרה המדויקת שמאחוריה, ננסח בסעיף הבא.</p>
+</div>
+<!-- TODO: rewrite the pi example — it is currently too long and cumbersome. Split it in two.
+     Part 1 (stays here, motivation only): define the inscribed-polygon sequence, explain why
+     it works (no need to compute sines, no need to know the value of pi), show the first few
+     terms, confirm empirically that they approach pi, and keep the interactive simulation.
+     Part 2 (later in the chapter, after the limit is defined): the actual convergence proof —
+     the circumscribed polygons, the error bound, and the choice of K. It belongs there because
+     it illustrates a useful technique: bounding the error from above by something we do know
+     how to compute. -->
+<section id="קירוב-המספר-pi" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="קירוב-המספר-pi">קירוב המספר <span class="math inline">\(\pi\)</span></h3>
+<p>על מנת להמחיש ולהעמיק את הרעיון הקודם, ניתן דוגמה מפורטת יותר.</p>
+<p>המספר <span class="math inline">\(\pi\)</span> הוא היחס בין היקף המעגל לקוטר שלו. כמו כן, ידועה לנו הנוסחה מהתיכון <span class="math inline">\(A=\pi r^2\)</span>, כאשר <span class="math inline">\(A\)</span> הוא שטח העיגול ו-<span class="math inline">\(r\)</span> הוא רדיוס המעגל. מפני שהמעגל הוא אחת הצורות הגאומטריות הנפוצות, <span class="math inline">\(\pi\)</span> מופיע באופן טבעי בהרבה מקומות, והיינו רוצים לדעת את הערך שלו. אנחנו ננסה לפתח שיטה לחשב אותו.</p>
+<p>הדוגמה שבחרנו בה אינה מלאכותית. המעגל הוא אחת הצורות הנפוצות ביותר, ולכן <span class="math inline">\(\pi\)</span> נדרש כמעט בכל חישוב הנדסי שבו מופיע עיגול, גליל או כדור — ובמשך רוב ההיסטוריה לא הייתה שום דרך פשוטה להשיג אותו. מי שנזקק לערכו היה תלוי בשיטת קירוב, בעצמו או דרך טבלאות שחיברו אחרים; השאלה ״כיצד מקרבים את <span class="math inline">\(\pi\)</span>?״ הייתה שאלה מעשית, לא תרגיל.</p>
+<p>היום המצב הפוך, ודווקא בזכות זה הדוגמה נוחה: כל מחשבון נותן את <span class="math inline">\(\pi\)</span> בדיוק של עשרות ספרות בשבריר שנייה. כלומר את התשובה אנחנו כבר יודעים — ולכן נוכל לבדוק בכל שלב אם השיטה שאנחנו בונים אכן עובדת.</p>
+<div id="fig-pi-definition" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-definition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-definition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.2: <span class="math inline">\(\pi\)</span> הוא היחס בין היקף המעגל <span class="math inline">\(C\)</span> לקוטרו <span class="math inline">\(d\)</span>
+</figcaption>
+</figure>
+</div>
+<p>שימו לב ש-<span class="math inline">\(\pi\)</span> הוא <strong>יחס</strong>, ולכן אינו תלוי בגודל המעגל: מעגל גדול ומעגל קטן נותנים בדיוק את אותו מספר. לכן מותר לנו לבחור לחישוב את המעגל הנוח ביותר, ונבחר את זה שרדיוסו <span class="math inline">\(1\)</span>. הבחירה משתלמת במיוחד: לפי <span class="math inline">\(A = \pi r^2\)</span>, שטח העיגול שרדיוסו <span class="math inline">\(1\)</span> הוא בדיוק <span class="math inline">\(\pi\)</span>. כלומר, במקום למדוד את היחס בין ההיקף לקוטר, די לנו לחשב את ה<strong>שטח</strong> של עיגול היחידה.</p>
+<p>אלא שמהגדרת המספר לא ברור כלל כיצד לחשב את ערכו: ההגדרה אומרת לנו מהו <span class="math inline">\(\pi\)</span>, אך אינה נותנת שום דרך למצוא אותו. שימו לב שאין זו בעיה של <strong>ייצוג</strong> בלבד — גם אילו היה <span class="math inline">\(\pi\)</span> מספר רציונלי, עדיין לא היה ברור מן ההגדרה כיצד למצוא את השבר המתאים. (למעשה <span class="math inline">\(\pi\)</span> הוא אי-רציונלי, ולכן ממילא אי אפשר לכתוב אותו כשבר — אך עובדה זו לא תוכח כאן, ואיננו זקוקים לה.) לכן נתחיל מהמקום היחיד שאפשר להתחיל ממנו: ננסה לפתח שיטה שתאפשר לנו ל<strong>קרב</strong> אותו, בדיוק טוב כרצוננו.</p>
+<section id="הרעיון-מצולע-עם-הרבה-צלעות-דומה-למעגל" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="הרעיון-מצולע-עם-הרבה-צלעות-דומה-למעגל">הרעיון: מצולע עם הרבה צלעות דומה למעגל</h4>
+<p>איך נעשה את זה? נשים לב, שמצולע משוכלל עם מספיק צלעות הוא ״כמעט״ מעגל ומצד שני את השטח שלו יחסית קל לחשב.</p>
+<p>התרשים הבא מראה עד כמה זה עובד. במשושה עוד רואים בבירור שש צלעות; במצולע בעל <span class="math inline">\(24\)</span> צלעות ההבדל מן המעגל כבר קשה לאיתור, ובבעל <span class="math inline">\(96\)</span> צלעות העין אינה מבחינה ביניהם כלל.</p>
+<div id="fig-pi-lookalike" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-lookalike-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-lookalike-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.3: ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל
+</figcaption>
+</figure>
+</div>
+<p>ומצד שני — וזה מה שהופך את הרעיון לשימושי — את שטח המצולע אנחנו יודעים לחשב במדויק בכל שלב, גם כאשר הוא כבר ״נראה כמו מעגל״, ובנוסחה פשוטה: שטחו <span class="math inline">\(S_n\)</span> של מצולע משוכלל בעל <span class="math inline">\(n\)</span> צלעות החסום במעגל שרדיוסו <span class="math inline">\(1\)</span> הוא <span class="math display">\[.S_n = \frac{n}{2}\,\sin\frac{2\pi}{n}\]</span> ולכן הוא מועמד טוב לקירוב שטחו של העיגול, שהוא <span class="math inline">\(\pi\)</span>.</p>
+<details class="thmcollapse thmfoldable"><summary>פירוט: חישוב שטח המצולע</summary>
+<div class="foldable" title="פירוט: חישוב שטח המצולע">
+<p>נתבונן במצולע משוכלל בעל <span class="math inline">\(n\)</span> צלעות החסום במעגל שרדיוסו <span class="math inline">\(1\)</span>, ונחשב את שטחו. לשם כך נחבר את מרכז המעגל לכל אחד מקודקודי המצולע: המצולע מתחלק ל-<span class="math inline">\(n\)</span> משולשים <strong>חופפים</strong>, ולכל אחד מהם שתי צלעות שאורכן <span class="math inline">\(1\)</span> (שני רדיוסים) — כלומר הם משולשים <strong>שווי שוקיים</strong> — וזווית הראש שלהם היא <span class="math inline">\(\frac{2\pi}{n}\)</span>.</p>
+<div id="fig-pi-triangulation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-triangulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-triangulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.4: חלוקת המצולע ל-<span class="math inline">\(n\)</span> משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו
+</figcaption>
+</figure>
+</div>
+<p>נחשב את שטחו של משולש כזה לפי בסיס כפול גובה חלקי שתיים. מן התרשים: הגובה מן המרכז אל הבסיס הוא <span class="math inline">\(\cos\frac{\pi}{n}\)</span>, מחצית הבסיס היא <span class="math inline">\(\sin\frac{\pi}{n}\)</span>, ולכן הבסיס כולו הוא <span class="math inline">\(2\sin\frac{\pi}{n}\)</span>. נסמן ב-<span class="math inline">\(T_n\)</span> את שטחו של משולש כזה. מכאן <span class="math display">\[T_n = \frac{1}{2}\cdot 2\sin\frac{\pi}{n}\cdot\cos\frac{\pi}{n} = \sin\frac{\pi}{n}\,\cos\frac{\pi}{n}\]</span> ולפי <strong>נוסחת הזווית הכפולה</strong>, <span class="math inline">\(\sin 2\alpha = 2\sin\alpha\cos\alpha\)</span>, נציב <span class="math inline">\(\alpha = \frac{\pi}{n}\)</span> ונקבל <span class="math display">\[.T_n = \frac{1}{2}\sin\frac{2\pi}{n}\]</span> יש <span class="math inline">\(n\)</span> משולשים חופפים כאלה, ולכן <span class="math display">\[.S_n = n\,T_n = \frac{n}{2}\,\sin\frac{2\pi}{n}\]</span></p>
+<p>נבדוק את הנוסחה על המקרה הפשוט ביותר, המשושה. כאשר <span class="math inline">\(n = 6\)</span> אורך הצלע שווה בדיוק לרדיוס, ולכן ששת המשולשים הם דווקא <strong>שווי צלעות</strong> בעלי צלע <span class="math inline">\(1\)</span>; שטחו של משולש כזה הוא <span class="math inline">\(\frac{\sqrt{3}}{4}\)</span>, ובסך הכול <span class="math inline">\(6\cdot\frac{\sqrt{3}}{4} = \frac{3\sqrt{3}}{2}\)</span>. ואכן, הצבה בנוסחה נותנת <span class="math inline">\(\frac{6}{2}\sin\frac{\pi}{3} = \frac{3\sqrt{3}}{2} \approx 2.598\)</span> — אותו ערך בדיוק.</p>
+</div>
+</details>
+</section>
+<section id="התהליך-הכפלת-מספר-הצלעות" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="התהליך-הכפלת-מספר-הצלעות">התהליך: הכפלת מספר הצלעות</h4>
+<p>לכאורה לא הרווחנו הרבה: במקום לחשב את <span class="math inline">\(\pi\)</span> עלינו כעת לחשב את <span class="math inline">\(\sin\frac{2\pi}{n}\)</span>, וגם זו אינה בעיה קלה יותר. אלא שכאן נכנס רעיון יפה. נניח שכבר חישבנו את המצולע בעל <span class="math inline">\(n\)</span> הצלעות, ונסמן את <strong>אמצע כל קשת</strong> שבין שני קודקודים סמוכים. הנקודות החדשות הללו, יחד עם הקודקודים הישנים, הן קודקודיו של מצולע משוכלל בעל <span class="math inline">\(2n\)</span> צלעות — שזווית הראש שלו היא בדיוק <strong>מחצית</strong> מזו של קודמו.</p>
+<div id="fig-pi-doubling" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-doubling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:92.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-doubling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.5: הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל <span class="math inline">\(2n\)</span> צלעות
+</figcaption>
+</figure>
+</div>
+<p>וככל ש-<span class="math inline">\(n\)</span> גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-<span class="math inline">\(\pi\)</span>.</p>
+<p>שימו לב שהמצולע החדש <strong>מכיל</strong> את קודמו: כל צלע של המצולע הישן מוחלפת בשתי צלעות שנפגשות בנקודה שעל המעגל, מחוץ לאותה צלע. במילים אחרות, כל הכפלה מוסיפה לשטח ואינה גורעת ממנו, ומה שנוסף הוא בדיוק חלק מן השטח שנותר בין המצולע הקודם למעגל. כך התהליך ״ממלא״ את העיגול צעד אחר צעד, ובפרט השטחים שנקבל יהיו סדרה <strong>עולה</strong>.</p>
+<p>נתחיל מן המשושה ובכל צעד נכפיל את מספר הצלעות, כלומר <span class="math inline">\(n_k = 3\cdot 2^{k}\)</span> (וזה נותן <span class="math inline">\(6, 12, 24, 48, \dots\)</span>). <strong>זוהי הסדרה שלנו</strong>: האיבר <span class="math inline">\(a_k\)</span> הוא שטח המצולע המשוכלל בעל <span class="math inline">\(n_k\)</span> הצלעות, כלומר <span class="math display">\[.a_k = \frac{n_k}{2}\,\sin\frac{2\pi}{n_k}=3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot2^{k-1}}\]</span> שימו לב שהאינדקס הרץ הוא <span class="math inline">\(k\)</span> — מספר ההכפלות — ולא מספר הצלעות עצמו.</p>
+<p>כעת אפשר לחזור לשאלת הסינוס, וכאן ההכפלה משתלמת שוב. אנחנו מתחילים מזווית שהסינוס שלה <strong>ידוע</strong>: במשושה <span class="math inline">\(\alpha_1 = \frac{2\pi}{6} = \frac{\pi}{3}\)</span>, ו-<span class="math inline">\(\sin\alpha_1 = \frac{\sqrt{3}}{2}\)</span>. בכל צעד מספר הצלעות מוכפל, ולכן הזווית פשוט <strong>נחצית</strong> — ולזווית נחצית יש נוסחה מוכרת, <strong>נוסחת חצי הזווית</strong>: <span class="math display">\[.\sin\frac{\alpha}{2} = \sqrt{\frac{1-\cos\alpha}{2}}\]</span></p>
+<div class="thmbox thmbox-remark" title="חילוץ שורש ריבועי">
+<p><strong>הערה 7.2.2 — חילוץ שורש ריבועי.</strong></p>
+<p>בהמשך נשתמש בשורשים ריבועיים בלי לדון בהם. ההנחה הזו סבירה: קירוב של שורש ריבועי הוא בעיה קלה בהרבה מחישוב <span class="math inline">\(\pi\)</span> — יש לה שיטות פשוטות ומהירות מאוד, וכבר בעת העתיקה ידעו לבצע אותה ידנית, <strong>בקולמוס ופפירוס</strong> (לא היה להם נייר ועפרונות אז…). לכן נרשה לעצמנו להתייחס אליה כאל פעולה זמינה, בדיוק כמו חיבור או כפל.</p>
+</div>
+<p>מכאן מתקבלת נוסחה <strong>רקורסיבית</strong> לסינוס. נסמן <span class="math inline">\(s_k = \sin\frac{\pi}{3\cdot 2^{k-1}}\)</span>, ואז <span class="math display">\[s_{k+1} = \sqrt{\frac{1-\sqrt{1-s_k^{2}}}{2}}\ ,\qquad s_1 = \frac{\sqrt{3}}{2}\]</span></p>
+<details class="thmcollapse thmfoldable"><summary>פירוט: גזירת הרקורסיה</summary>
+<div class="foldable" title="פירוט: גזירת הרקורסיה">
+<p>נסמן <span class="math inline">\(\alpha_k = \frac{2\pi}{n_k}\)</span>, כך ש-<span class="math inline">\(s_k = \sin\alpha_k\)</span> ו-<span class="math inline">\(\alpha_{k+1} = \frac{\alpha_k}{2}\)</span>.</p>
+<p>בנוסחת חצי הזווית מופיע הקוסינוס, ואילו אנחנו עוקבים אחרי הסינוס בלבד — אבל אפשר לשחזר אותו: כל הזוויות שלנו חדות (הגדולה שבהן היא <span class="math inline">\(\alpha_1 = \frac{\pi}{3}\)</span>), ולכן הקוסינוס חיובי ומתקיים <span class="math inline">\(\cos\alpha_k = \sqrt{1-s_k^{2}}\)</span>.</p>
+<p>נציב זאת בנוסחת חצי הזווית ונקבל <span class="math display">\[s_{k+1} = \sqrt{\frac{1-\cos\alpha_k}{2}} = \sqrt{\frac{1-\sqrt{1-s_k^{2}}}{2}}\]</span> וזו בדיוק הרקורסיה שרשמנו למעלה.</p>
+</div>
+</details>
+<p>מכאן נקבל גם נוסחה לשטח: <span class="math display">\[.a_k = 3\cdot 2^{\,k-1}\,s_k\]</span></p>
+<p>זהו העיקר: כל איבר מתקבל מקודמו בעזרת ארבע פעולות החשבון ושורש ריבועי בלבד — בלי לדעת מהו <span class="math inline">\(\pi\)</span>, ובלי טבלת סינוסים.</p>
+</section>
+<section id="שתי-שאלות" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="שתי-שאלות">שתי שאלות</h4>
+<p>בנינו סדרה <span class="math inline">\(\{a_k\}\)</span> ואמרנו שהיא ״מתקרבת ל-<span class="math inline">\(\pi\)</span>״. אמירה כזו דורשת הצדקה, ולמעשה מסתתרות בה <strong>שתי</strong> שאלות נפרדות:</p>
+<ol type="1">
+<li>האם הסדרה בכלל מתקרבת לאיזשהו ערך, או שמא איבריה ״משוטטים״ בלי להתייצב?</li>
+<li>ואם היא אכן מתקרבת לערך — האם הערך הזה הוא באמת <span class="math inline">\(\pi\)</span>, ולא מספר אחר הקרוב אליו?</li>
+</ol>
+<p>אפשר לאחד את השתיים לשאלה אחת: <strong>האם ערכי הסדרה מתקרבים ל-</strong><span class="math inline">\(\pi\)</span>, וקרובים אליו ככל שנרצה?</p>
+<div class="thmbox thmbox-remark" title="מדוע אין כאן ערך מוחלט">
+<p><strong>הערה 7.2.3 — מדוע אין כאן ערך מוחלט.</strong></p>
+<p>לפי מה שראינו בתחילת הסעיף, ״<span class="math inline">\(a_k\)</span> קרוב ל-<span class="math inline">\(\pi\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>״ פירושו <span class="math inline">\(|\pi - a_k| &lt; \varepsilon\)</span> — עם ערך מוחלט, שכן בדרך כלל איננו יודעים מראש אם הקירוב גדול מן המספר או קטן ממנו.</p>
+<p>אלא שכאן אנחנו <strong>כן</strong> יודעים: המצולע החסום נמצא כולו בתוך העיגול, ולכן שטחו קטן משטחו של העיגול, כלומר <span class="math inline">\(a_k &lt; \pi\)</span>. מכאן ש-<span class="math inline">\(\pi - a_k\)</span> חיובי ממילא, והערך המוחלט מיותר. לכן נכתוב מכאן ואילך את השגיאה כ-<span class="math inline">\(\pi - a_k\)</span> בלבד.</p>
+<p>בהמשך נוסיף גם את המצולעים החוסמים, ואז נדע <span class="math inline">\(a_k &lt; \pi &lt; A_k\)</span> — כלומר <span class="math inline">\(\pi\)</span> כלוא בין שתי הסדרות, ואת סימנם של שני ההפרשים אנחנו יודעים.</p>
+</div>
+</section>
+<section id="האיברים-הראשונים" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="האיברים-הראשונים">האיברים הראשונים</h4>
+<p>מכאן והלאה נרשה לעצמנו ״לרמות״ שוב, בדיוק כפי שעשינו עם <span class="math inline">\(\pi\)</span> עצמו: גם את הסינוס יודעים היום לחשב בדיוק מפליג ובשבריר שנייה. לכן לא נריץ את הרקורסיה ביד, אלא פשוט נציב ערכי <span class="math inline">\(\sin\)</span> בנוסחה. זו נוחות בלבד — הרקורסיה שראינו היא ההוכחה שאפשר היה להסתדר גם בלעדיה.</p>
+<p>כך, <strong>בלי לדעת כלל מהו</strong> <span class="math inline">\(\pi\)</span>, אפשר לחשב כמה איברים שנרצה — כל אחד מקודמו, בעזרת ארבע פעולות חשבון ושורש ריבועי. הנה שבעת הראשונים, <span class="math inline">\(a_1\)</span> עד <span class="math inline">\(a_7\)</span>, <strong>מעוגלים לשש ספרות</strong> אחרי הנקודה העשרונית: <span class="math display">\[2.598076,\ \ 3.000000,\ \ 3.105829,\ \ 3.132629,\ \ 3.139350,\ \ 3.141032,\ \ 3.141452\]</span> אלה אינם הערכים המדויקים אלא קירובים שלהם — רובם אי-רציונליים. היוצא מן הכלל הוא <span class="math inline">\(a_2\)</span>, שהוא בדיוק <span class="math inline">\(3\)</span>: המצולע בעל <span class="math inline">\(12\)</span> הצלעות נותן <span class="math inline">\(\frac{12}{2}\sin\frac{\pi}{6} = 6\cdot\frac{1}{2} = 3\)</span>.</p>
+<p>נראה לעין שהתשובה חיובית, וזה מסתדר עם האינטואיציה הגאומטרית שלנו. שטח העיגול הוא בדיוק <span class="math inline">\(\pi\)</span>, והמצולע כולו חסום בתוכו; לכן ההפרש <span class="math inline">\(\pi - a_k\)</span> הוא בדיוק <strong>השטח שנותר</strong> בין המצולע למעגל — אוסף ה״פלחים״ הקטנים שבין כל צלע לקשת שמעליה (השטח הצהוב בתרשים). ככל שמספר הצלעות גדל כל פלח נעשה דק יותר, והשטח שנותר הולך וקטן: במשושה הוא בולט לעין, במצולע בעל <span class="math inline">\(24\)</span> צלעות הוא כבר צר מאוד, ובבעל <span class="math inline">\(96\)</span> צלעות קשה כבר להבחין בו. במילים אחרות, <span class="math inline">\(\pi - a_k\)</span> הולך וקטן — ולכן <span class="math inline">\(a_k\)</span> הולך ומתקרב ל-<span class="math inline">\(\pi\)</span>.</p>
+<div class="pi-demo" data-show-out="0">
+<div class="pi-demo-row">
+<label class="pi-demo-key">מספר הצלעות: <input class="pi-demo-slider" type="range" min="1" max="10" value="1" step="1"></label>
+<span class="pi-demo-badge" dir="ltr">k = <span class="pi-demo-k">1</span>, n = <span class="pi-demo-n">6</span></span>
+</div>
+<svg class="pi-demo-svg" viewbox="-1.32 -1.32 2.64 2.64" role="img" aria-label="מצולע משוכלל חסום במעגל היחידה">
+<circle class="pi-demo-circle" cx="0" cy="0" r="1"></circle>
+<polygon class="pi-demo-poly" points=""></polygon>
+</svg>
+<div class="pi-demo-readout">
+<div><span class="pi-demo-key">שטח המצולע:</span> <span class="pi-demo-val pi-demo-area" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">שטח העיגול:</span> <span class="pi-demo-val" dir="ltr">3.141593</span></div>
+<div><span class="pi-demo-key">ההפרש:</span> <span class="pi-demo-val pi-demo-diff" dir="ltr">—</span></div>
+</div>
+</div>
+</section>
+<section id="מנראה-נכון-להוכחה-מצולעים-חוסמים" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="מנראה-נכון-להוכחה-מצולעים-חוסמים">מ״נראה נכון״ להוכחה: מצולעים חוסמים</h4>
+<p>הטיעון הגאומטרי משכנע, אבל כדאי לשים לב מה בדיוק הוא נותן לנו. הוא מראה שהמרחק <span class="math inline">\(\pi - a_k\)</span> <strong>הולך וקטן</strong> — ולא שהוא נעשה קטן <strong>כרצוננו</strong>. אלה שתי טענות שונות: המרחק בין איברי הסדרה לערך מסוים יכול להפוך לקטן יותר בכל צעד ובכל זאת להיתקע מעל מספר חיובי כלשהו ולעולם לא לרדת מתחתיו. ואילו מה שאנחנו רוצים לומר על הקירוב הוא דווקא הטענה השנייה.</p>
+<p>והמכשול כאן מעשי לגמרי: כדי לדעת כמה גדולה השגיאה <span class="math inline">\(\pi - a_k\)</span> צריך לדעת מהו <span class="math inline">\(\pi\)</span> — וזה בדיוק מה שאנחנו מנסים למצוא. את הגודל שמעניין אותנו איננו יכולים לחשב.</p>
+<p>הרעיון הוא לעקוף את הגודל הזה. נבנה סדרה נוספת, <span class="math inline">\(A_k\)</span>, שגם היא מקרבת את <span class="math inline">\(\pi\)</span> — אבל מ<strong>מעל</strong>: כל <span class="math inline">\(A_k\)</span> יהיה גדול מ-<span class="math inline">\(\pi\)</span>, בעוד שכל <span class="math inline">\(a_k\)</span> קטן ממנו. לכן לכל <span class="math inline">\(k\)</span> מתקיים <span class="math display">\[\pi - a_k \le A_k - a_k\]</span> ואת אגף ימין אנחנו <strong>כן</strong> יודעים לחשב, שכן שתי הסדרות נתונות בנוסחאות מפורשות שאין בהן <span class="math inline">\(\pi\)</span> כלל.</p>
+<p>מכאן התוכנית ברורה: אם נראה שההפרש <span class="math inline">\(A_k - a_k\)</span> נעשה קטן ככל שנרצה, נדע את אותו הדבר גם על השגיאה <span class="math inline">\(\pi - a_k\)</span> — מבלי שנחשב אותה אי פעם.</p>
+<p>ומאיפה נשיג סדרה כזו? מאותו רעיון עצמו, הפוך. עד כה השתמשנו במצולע ה<strong>חסום</strong> במעגל — הוא כולו בתוך העיגול, ולכן שטחו קטן מ-<span class="math inline">\(\pi\)</span>. נתבונן עכשיו במצולע משוכלל <strong>חוסם</strong>: כזה שכל צלעותיו משיקות למעגל, כלומר המרחק מן המרכז אל כל צלע הוא בדיוק <span class="math inline">\(1\)</span>. הפעם העיגול הוא שנמצא בתוך המצולע, ולכן שטחו של המצולע <strong>גדול</strong> מ-<span class="math inline">\(\pi\)</span>.</p>
+<div id="fig-pi-squeeze" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-squeeze-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig06.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-squeeze-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.6: המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם
+</figcaption>
+</figure>
+</div>
+<p>שימו לב שאין כאן בנייה חדשה באמת: את המשיקים מעבירים דרך <strong>קודקודי המצולע החסום</strong>, ולכן אותה קבוצת נקודות על המעגל מולידה את שני המצולעים גם יחד — את החסום כמצולע שקודקודיו הן הנקודות, ואת החוסם כמצולע שצלעותיו הן המשיקים בהן.</p>
+<p>את השטח מחשבים בדיוק כמו קודם, ומתקבל <span class="math display">\[.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}}\]</span></p>
+<details class="thmcollapse thmfoldable"><summary>פירוט: חישוב שטח המצולע החוסם</summary>
+<div class="foldable" title="פירוט: חישוב שטח המצולע החוסם">
+<p>נחשב תחילה את שטחו של מצולע משוכלל <strong>חוסם</strong> בעל <span class="math inline">\(n\)</span> צלעות כלשהו, בדיוק כפי שעשינו עם החסום, ורק בסוף נציב את מספר הצלעות שלנו.</p>
+<p>מחברים את המרכז אל הקודקודים, והמצולע מתחלק ל-<span class="math inline">\(n\)</span> משולשים שווי שוקיים חופפים. זווית הראש של כל אחד מהם היא <span class="math inline">\(\frac{2\pi}{n}\)</span>, וכאן — בשונה מן המצולע החסום — דווקא ה<strong>גובה</strong> מן המרכז אל הצלע הוא הידוע: הוא שווה <span class="math inline">\(1\)</span>, שכן הצלע משיקה למעגל היחידה. זו בדיוק ההגדרה של מצולע חוסם.</p>
+<p>הגובה חוצה את המשולש לשני משולשים ישרי-זווית, ובכל אחד מהם הזווית שליד המרכז היא <span class="math inline">\(\frac{\pi}{n}\)</span> (מחצית מזווית הראש), הניצב הסמוך לה הוא הגובה <span class="math inline">\(1\)</span>, והניצב שמולה הוא מחצית הבסיס. לפי הגדרת הטנגנס, הניצב שמול הזווית שווה לניצב הסמוך כפול הטנגנס של הזווית; הניצב הסמוך כאן הוא <span class="math inline">\(1\)</span>, ולכן מחצית הבסיס היא <span class="math inline">\(1\cdot\tan\frac{\pi}{n}\)</span>, והבסיס כולו <span class="math inline">\(2\tan\frac{\pi}{n}\)</span>.</p>
+<p>נסמן ב-<span class="math inline">\(T_n\)</span> את שטחו של משולש כזה. לפי בסיס כפול גובה חלקי שתיים, <span class="math display">\[.T_n = \frac{1}{2}\cdot 2\tan\frac{\pi}{n}\cdot 1 = \tan\frac{\pi}{n}\]</span></p>
+<p>יש <span class="math inline">\(n\)</span> משולשים חופפים כאלה, ולכן שטחו של המצולע החוסם בעל <span class="math inline">\(n\)</span> הצלעות הוא <span class="math inline">\(n\,T_n = n\tan\frac{\pi}{n}\)</span>.</p>
+<p>נותר להציב את מספר הצלעות שלנו. בשלב ה-<span class="math inline">\(k\)</span> יש למצולע <span class="math inline">\(n_k = 3\cdot 2^{k}\)</span> צלעות, ולכן <span class="math display">\[.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}}\]</span></p>
+<div id="fig-pi-circum-triangle" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-circum-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig07.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:42.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-circum-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.7: משולש בודד של המצולע החוסם
+</figcaption>
+</figure>
+</div>
+</div>
+</details>
+<p>גם את ההכפלה עושים כאן באותו אופן, ואפשר לתאר אותה במדויק: בכל <strong>פינה</strong> של המצולע הנוכחי נתבונן בנקודה שבה הקרן מן המרכז דרך אותה פינה פוגשת את המעגל, ונעביר בה משיק. הנקודה הזו היא בדיוק אמצע הקשת שבין שתי נקודות ההשקה השכנות, והמשיק שמועבר בה <strong>חותך את הפינה</strong>.</p>
+<p>נעשה זאת בכל הפינות ונקבל את המצולע החוסם בעל <span class="math inline">\(n_{k+1}\)</span> הצלעות. מכאן ברור גם מדוע הסדרה <span class="math inline">\(A_k\)</span> <strong>יורדת</strong>: כל צעד רק מקצץ פינות, ולכן כל מצולע מוכל בקודמו.</p>
+<div id="fig-pi-corner-cut" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pi-corner-cut-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig08.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:92.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-corner-cut-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.8: הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="דוגמאות" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="דוגמאות"><span class="header-section-number">7.3</span> דוגמאות</h2>
-<p>נציג שלוש דוגמאות בסיסיות: סדרה קבועה (התכנסות מיידית), סדרה מתחלפת (התבדרות), וסדרה שמתכנסת ״באמת״ אך אינה קבועה.</p>
-<div id="box-exm-constant-seq" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.3.1.</strong></p>
-<p>הסדרה הקבועה <span class="math inline">\(a_n = 1\)</span> (כלומר <span class="math inline">\(1, 1, 1, \dots\)</span>) מתכנסת, וגבולה — באופן לא מפתיע — הוא <span class="math inline">\(1\)</span>: לכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(|a_n - 1| = |1-1| = 0 &lt; \varepsilon\)</span>, כך שאותו <span class="math inline">\(N\)</span> מתאים לכל <span class="math inline">\(\varepsilon\)</span>. זהו מקרה <strong>חריג</strong>: כאשר הסדרה אינה קבועה, בדרך כלל <span class="math inline">\(N\)</span> תלוי ב-<span class="math inline">\(\varepsilon\)</span>.</p>
+<section id="חסימת-השגיאה" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="חסימת-השגיאה">חסימת השגיאה</h4>
+<p>המעגל כלוא בין שני המצולעים, ולכן לכל <span class="math inline">\(k\)</span> מתקיים <span class="math display">\[a_k \le \pi \le A_k\]</span> ומכאן נובע הדבר שחיפשנו: השגיאה שלנו אינה גדולה מן ה<strong>הפרש בין שני המצולעים</strong>, <span class="math display">\[.0 \le \pi - a_k \le A_k - a_k\]</span> וההפרש הזה אינו מסתורי — לשני השטחים יש נוסחאות מפורשות, ולכן אנחנו יודעים לחשב אותו במדויק, בלי לדעת מהו <span class="math inline">\(\pi\)</span>.</p>
+<p>זו התמונה המשלימה לזו שראינו קודם: הכפלת הצלעות במצולע ה<strong>חסום</strong> מוסיפה לו פלחים ומגדילה את שטחו, ואילו במצולע ה<strong>חוסם</strong> היא מקצצת פינות ומקטינה אותו. שתי הסדרות נעות אפוא זו לקראת זו, ו-<span class="math inline">\(\pi\)</span> כלוא ביניהן: <span class="math display">\[a_1 \le a_2 \le a_3 \le \dots \le \pi \le \dots \le A_3 \le A_2 \le A_1\]</span></p>
+<p>כעת אפשר לחסום את ההפרש. השרשרת קצרה, וכל שלב בה עומד על נימוק אחד:</p>
+<p><span class="math display">\[\pi - a_k \ \le\ A_k - a_k \ =\ A_k\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{2} \ \le\ A_1\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{2} \ &lt;\ A_1\cdot\frac{\pi^2}{\left(3\cdot 2^{k}\right)^2}\]</span></p>
+<p>הנימוקים, משמאל לימין: המעגל כלוא בין שני המצולעים; זהות שנוכיח מיד; הסדרה <span class="math inline">\(A_k\)</span> יורדת, ולכן <span class="math inline">\(A_k \le A_1\)</span>; ולבסוף אי-השוויון <span class="math inline">\(\sin x &lt; x\)</span> (עבור <span class="math inline">\(x&gt;0\)</span>), שיוכח במקום אחר בקורס.</p>
+<details class="thmcollapse thmfoldable"><summary>פירוט: מניין מגיע הביטוי להפרש</summary>
+<div class="foldable" title="פירוט: מניין מגיע הביטוי להפרש">
+<p>נסמן <span class="math inline">\(r = \frac{\pi}{3\cdot 2^{k}}\)</span> — זו מחצית הזווית המרכזית. נכתוב את שני השטחים בלשונה. בנוסחת המצולע החוסם הזווית היא כבר <span class="math inline">\(r\)</span> עצמה: <span class="math display">\[.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}} = 3\cdot 2^{k}\,\tan r\]</span></p>
+<p>בנוסחת המצולע החסום הזווית היא <span class="math inline">\(\frac{\pi}{3\cdot 2^{k-1}}\)</span>, ומכיוון ש-<span class="math inline">\(3\cdot 2^{k-1} = \frac{3\cdot 2^{k}}{2}\)</span>, זוהי בדיוק <span class="math inline">\(\frac{2\pi}{3\cdot 2^{k}} = 2r\)</span>: <span class="math display">\[.a_k = 3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot 2^{k-1}} = 3\cdot 2^{k-1}\,\sin\frac{2\pi}{3\cdot 2^{k}} = 3\cdot 2^{k-1}\,\sin 2r\]</span></p>
+<p><strong>שימו לב לזווית.</strong> בנוסחת <span class="math inline">\(A_k\)</span> מופיעה <span class="math inline">\(r\)</span>, ובנוסחת <span class="math inline">\(a_k\)</span> מופיעה <span class="math inline">\(2r\)</span> — הזווית המרכזית המלאה. זו נקודה שקל להחליק עליה, ובלעדיה החישוב יוצא שגוי. כדי שבשתי הנוסחאות תופיע אותה זווית נשתמש בנוסחת הזווית הכפולה, <span class="math inline">\(\sin 2r = 2\sin r\cos r\)</span>: <span class="math display">\[.a_k = 3\cdot 2^{k-1}\cdot 2\sin r\cos r = 3\cdot 2^{k}\,\sin r\cos r\]</span></p>
+<p>כעת נחסר, ונוציא <span class="math inline">\(3\cdot 2^{k}\sin r\)</span> כגורם משותף: <span class="math display">\[A_k - a_k = 3\cdot 2^{k}\tan r - 3\cdot 2^{k}\sin r\cos r = 3\cdot 2^{k}\,\sin r\left(\frac{1}{\cos r} - \cos r\right)\]</span></p>
+<p>נאחד את הסוגריים למכנה משותף: <span class="math inline">\(\frac{1}{\cos r} - \cos r = \frac{1 - (\cos r)^2}{\cos r}\)</span>, ומכיוון ש-<span class="math inline">\(1 - (\cos r)^2 = (\sin r)^2\)</span> נקבל <span class="math display">\[A_k - a_k = 3\cdot 2^{k}\,\sin r\cdot\frac{(\sin r)^2}{\cos r} = 3\cdot 2^{k}\,\frac{\sin r}{\cos r}\,(\sin r)^2 = 3\cdot 2^{k}\,\tan r\,(\sin r)^2\]</span></p>
+<p>והגורם <span class="math inline">\(3\cdot 2^{k}\tan r\)</span> הוא בדיוק <span class="math inline">\(A_k\)</span>, ולכן <span class="math display">\[.A_k - a_k = A_k\,(\sin r)^2\]</span></p>
 </div>
-<div id="box-exm-pm-one" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.3.2.</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>, כלומר <span class="math inline">\(-1, 1, -1, 1, \dots\)</span>, <strong>מתבדרת</strong>. נניח בשלילה שיש לה גבול <span class="math inline">\(L\)</span>. אז לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span>. ניקח <span class="math inline">\(\varepsilon = 1\)</span>. לכל <span class="math inline">\(n&gt;N\)</span> <strong>זוגי</strong> מתקיים <span class="math inline">\(a_n = 1\)</span>, ולכן <span class="math inline">\(|1 - L| &lt; 1\)</span>; לכל <span class="math inline">\(n&gt;N\)</span> <strong>אי-זוגי</strong> מתקיים <span class="math inline">\(a_n = -1\)</span>, ולכן <span class="math inline">\(|L - (-1)| &lt; 1\)</span>. לפי אי-שוויון המשולש, <span class="math display">\[2 = |1 - (-1)| \le |1 - L| + |L - (-1)| &lt; 1 + 1 = 2,\]</span> כלומר <span class="math inline">\(2 &lt; 2\)</span> — סתירה. לכן הסדרה מתבדרת.</p>
+</details>
+<p>עכשיו נציב את המספרים. מתקיים <span class="math inline">\(A_1 = 2\sqrt{3}\)</span>, וכן <span class="math inline">\(\left(3\cdot 2^{k}\right)^2 = 9\cdot 4^{k}\)</span>. נקבל <span class="math display">\[\pi - a_k \ &lt;\ \frac{2\sqrt{3}\,\pi^2}{9}\cdot\frac{1}{4^{k}} \ &lt;\ \frac{4}{4^{k}} \ =\ \frac{1}{4^{\,k-1}}\]</span> שכן <span class="math inline">\(\frac{2\sqrt{3}\,\pi^2}{9} = 3.79\ldots &lt; 4\)</span>.</p>
+<p>זהו חסם פשוט במיוחד, והוא מספר לנו משהו חזק: בכל צעד השגיאה <strong>מתחלקת בארבע לפחות</strong>. לכן די במספר קטן מאוד של צעדים כדי להגיע לכל דיוק שנרצה. רוצים דיוק של <span class="math inline">\(0.001\)</span>? צריך <span class="math inline">\(\frac{1}{4^{\,k-1}} &lt; 0.001\)</span>, כלומר <span class="math inline">\(4^{\,k-1} &gt; 1000\)</span> — ומספיק <span class="math inline">\(k = 6\)</span>, כלומר חמש הכפלות בלבד מן המשושה.</p>
+<p>ומה אם תידרש רמת דיוק אחרת? נראה שאפשר לענות על <strong>כל</strong> דרישה, ואף להצביע על המקום המתאים מראש. תהי <span class="math inline">\(\varepsilon&gt;0\)</span> רמת הדיוק הנדרשת. נוח להחליף תחילה את החסם בחסם גס יותר: לכל <span class="math inline">\(k\ge 1\)</span> מתקיים <span class="math inline">\(4^{\,k-1}\ge k\)</span> (באינדוקציה — עבור <span class="math inline">\(k=1\)</span> זהו <span class="math inline">\(1\ge 1\)</span>; ואם <span class="math inline">\(4^{\,k-1}\ge k\)</span> אז <span class="math inline">\(4^{\,k} = 4\cdot 4^{\,k-1}\ge 4k\ge k+1\)</span>), ולכן <span class="math display">\[.\pi - a_k \ &lt;\ \frac{1}{4^{\,k-1}} \ \le\ \frac{1}{k}\]</span></p>
+<p>עכשיו נבחר <span class="math inline">\(K = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span>. לכל <span class="math inline">\(x\)</span> מתקיים <span class="math inline">\(\lfloor x\rfloor + 1 &gt; x\)</span>, ולכן <span class="math inline">\(K &gt; \frac{1}{\varepsilon}\)</span>; מכאן שלכל <span class="math inline">\(k &gt; K\)</span> מתקיים גם <span class="math inline">\(k &gt; \frac{1}{\varepsilon}\)</span>, כלומר <span class="math inline">\(\frac{1}{k} &lt; \varepsilon\)</span>. נצרף את שני החסמים ונקבל שלכל <span class="math inline">\(k &gt; K\)</span> <span class="math display">\[.\pi - a_k \ &lt;\ \frac{1}{k} \ &lt;\ \varepsilon\]</span></p>
+<p>שימו לב ש-<span class="math inline">\(K\)</span> זה בזבזני מאוד: עבור <span class="math inline">\(\varepsilon = 0.001\)</span> הוא נותן <span class="math inline">\(K = 1001\)</span>, בעוד שראינו זה עתה שדי ב-<span class="math inline">\(k=6\)</span>. אין בכך פגם — כל שנדרש הוא ש<strong>קיים</strong> מקום כזה ושנדע להצביע עליו, ולא שנמצא את המוקדם ביותר. החסם <span class="math inline">\(\frac{1}{k}\)</span> גס בהרבה מן החסם <span class="math inline">\(\frac{1}{4^{\,k-1}}\)</span>, אבל הוא נוח לחישוב וזה כל מה שהיה דרוש לנו כאן.</p>
+<p>כך זה נראה במספרים. השגיאה <span class="math inline">\(\pi - a_k\)</span> היא מה שמעניין אותנו, והחסם <span class="math inline">\(\frac{1}{4^{\,k-1}}\)</span> רודף אחריה:</p>
+<ul>
+<li><span class="math inline">\(k = 1\)</span> (משושה, <span class="math inline">\(n_1 = 6\)</span>): השגיאה <span class="math inline">\(0.5435\)</span>, והחסם <span class="math inline">\(1\)</span>;</li>
+<li><span class="math inline">\(k = 3\)</span> (<span class="math inline">\(n_3 = 24\)</span>): השגיאה <span class="math inline">\(0.0358\)</span>, והחסם <span class="math inline">\(0.0625\)</span>;</li>
+<li><span class="math inline">\(k = 5\)</span> (<span class="math inline">\(n_5 = 96\)</span>): השגיאה <span class="math inline">\(0.0022\)</span>, והחסם <span class="math inline">\(0.0039\)</span>;</li>
+<li><span class="math inline">\(k = 7\)</span> (<span class="math inline">\(n_7 = 384\)</span>): השגיאה <span class="math inline">\(0.00014\)</span>, והחסם <span class="math inline">\(0.00024\)</span>.</li>
+</ul>
+<p>השגיאה קטנה מן החסם בכל שורה, ושתיהן מצטמצמות באותו קצב — פי ארבעה בכל צעד. אחרי חמש הכפלות בלבד השגיאה כבר קטנה מ-<span class="math inline">\(0.001\)</span>, ואם נמשיך להכפיל היא תרד מתחת לכל מספר חיובי שנבחר.</p>
+<div class="pi-demo" data-show-out="1">
+<div class="pi-demo-row">
+<label class="pi-demo-key">מספר הצלעות: <input class="pi-demo-slider" type="range" min="1" max="10" value="1" step="1"></label>
+<span class="pi-demo-badge" dir="ltr">k = <span class="pi-demo-k">1</span>, n = <span class="pi-demo-n">6</span></span>
 </div>
-<div style="text-align:center">
-<p>תרשים: הסדרה <span class="math inline">\(a_n = (-1)^n\)</span> — איבריה קופצים בין שני קווים, ולכן אינם מתקרבים לקו אחד</p>
+<svg class="pi-demo-svg" viewbox="-1.32 -1.32 2.64 2.64" role="img" aria-label="מצולעים משוכללים חסום וחוסם ביחס למעגל היחידה">
+<polygon class="pi-demo-poly-out" points=""></polygon>
+<circle class="pi-demo-circle" cx="0" cy="0" r="1"></circle>
+<polygon class="pi-demo-poly" points=""></polygon>
+</svg>
+<div class="pi-demo-readout">
+<div><span class="pi-demo-key">שטח המצולע החסום:</span> <span class="pi-demo-val pi-demo-area" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">שטח העיגול:</span> <span class="pi-demo-val" dir="ltr">3.141593</span></div>
+<div class="pi-demo-out-row"><span class="pi-demo-key">שטח המצולע החוסם:</span> <span class="pi-demo-val pi-demo-area-out" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">ההפרש \(\pi - a_k\):</span> <span class="pi-demo-val pi-demo-diff" dir="ltr">—</span></div>
+<div class="pi-demo-band-row"><span class="pi-demo-key">הפרש המצולעים \(A_k - a_k\):</span> <span class="pi-demo-val pi-demo-band" dir="ltr">—</span></div>
 </div>
-<div id="fig-seq-pm-one" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+</div>
+<p>זוהי הנקודה החשובה, והיא זו שנהפוך מיד להגדרה: לא רק ש״ההפרש קטן״, אלא שאפשר להקטין אותו מתחת ל<strong>כל</strong> דיוק שיידרש מאיתנו מראש, ובלבד שנתקדם מספיק רחוק בסדרה. ״הולך וקטן״ ו״קשה להבחין בו״ אינם ביטויים מתמטיים; המשפט האחרון כבר כן — ועליו נשענת ההגדרה שנראה כעת.</p>
+</section>
+</section>
+<section id="מה-למדנו" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="מה-למדנו">מה למדנו</h3>
+<p>נסכם מה עשינו, כי חלק מהדברים יחזור שוב ושוב.</p>
+<p>היה לנו מספר <span class="math inline">\(\pi\)</span> נתון מראש, ובנינו <span class="math inline">\(\{a_k\}\)</span> סדרה (את זה דווקא לא נעשה הרבה, רוב הסדרות שתופיענה תהיינה נתונות הרבה) וניסינו לבדוק האם איבריה מתקרבים ל מספר <span class="math inline">\(\pi\)</span>.</p>
+<p>זאת שאלה שתחזור על עצמה המון פעמים בקורס.</p>
+<p>על מנת לענות לשאלה הזאת, הראנו שההפרש <span class="math inline">\(|a_k-\pi|\)</span> חסום על ידי <span class="math inline">\(\frac{1}{4^{k-1}}\)</span> מלמעלה ומכאן נבע שלמעשה לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים אינדקס <span class="math inline">\(K\)</span> שתלוי ב-<span class="math inline">\(\varepsilon\)</span> כך שלכל <span class="math inline">\(k&gt;K\)</span> המרחק <span class="math inline">\(|a_k-\pi|&lt;\varepsilon\)</span>. ה-<span class="math inline">\(K\)</span> שאפשר לבחור הוא <span class="math display">\[.K = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\]</span> בדיוק כפי שחישבנו בסוף הדוגמה.</p>
+<p>שני אלה יחד עונים על שתי השאלות שהצגנו. הסדרה אינה משוטטת אלא מתקרבת לערך אחד, והערך הזה הוא <span class="math inline">\(\pi\)</span> ולא מספר אחר — שכן כל מספר אחר היה נשאר, מאיזה שלב והלאה, רחוק מן הסדרה יותר מן החסם שמצאנו.</p>
+<p>אבל הדבר החשוב כאן אינו התוצאה, אלא <strong>צורת</strong> התשובה. לא אמרנו ״הסדרה מתקרבת ל-<span class="math inline">\(\pi\)</span>״ ועצרנו; אמרנו משהו חזק בהרבה: <strong>נקבע מראש</strong> כל רמת דיוק שנרצה — <span class="math inline">\(0.01\)</span>, <span class="math inline">\(0.001\)</span>, או כל מספר חיובי אחר — ואז אפשר להצביע על מקום בסדרה שממנו והלאה <strong>כל</strong> האיברים קרובים ל-<span class="math inline">\(\pi\)</span> יותר מרמת הדיוק הזו. בדוגמה שלנו אפילו ידענו להצביע עליו: די ש-<span class="math inline">\(\frac{1}{4^{\,k-1}}\)</span> יהיה קטן מן הדיוק הנדרש.</p>
+<p>זהו בדיוק הניסוח שהופיע בתחילת הסעיף, ואליו הגענו הפעם דרך גאומטריה. הוא גם הניסוח שאפשר להפוך להגדרה מדויקת — כזו שאינה נשענת על תרשימים, ושתעבוד לכל סדרה ולא רק למצולעים. נעשה זאת בסעיף הבא.</p>
+<p>מהו הערך שסדרה <strong>מתקרבת</strong> אליו? הרעיון: איברי הסדרה נעשים קרובים לערך <span class="math inline">\(L\)</span> כרצוננו — קרובים ככל שנדרוש — החל ממקום מסוים והלאה.</p>
+</section>
+</section>
+<section id="גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות"><span class="header-section-number">7.3</span> גבול של סדרה: הגדרה פורמלית ודוגמאות</h2>
+<p>בסעיף הקודם ראינו סדרות שערכיהן מתקרבים לערך מסוים. בסעיף הזה נגדיר באופן פורמלי את המושגים שדיברנו עליהם באופן אינטואיטיבי. אינטואיציה הרבה פעמים עוזרת להבין ולהרגיש את הדברים, אך חשוב לזכור — מבחינת קבילות הוכחה, הסברים אינטואיטיביים לא שווים כלום. בשפה המקצועית של מתמטיקאים יש להם אפילו שם — <strong>נפנופי ידיים</strong>. לכן, על מנת שנוכל להוכיח דברים בצורה מסודרת, עלינו לפרמל את המושגים.</p>
+<p>לתופעה של התקרבות לאיזשהו ערך יש שם מתמטי פורמלי — <strong>התכנסות</strong>. סדרה שמתקרבת לערך מסוים נקראת סדרה <strong>מתכנסת</strong>.</p>
+<p>כזכור, מה שדרשנו הוא זה:</p>
+<ol type="1">
+<li><strong>קיים מספר</strong> <span class="math inline">\(L\in\mathbb{R}\)</span> שאיברי הסדרה מתקרבים אליו.</li>
+<li><strong>״קרוב״ נמדד בערך מוחלט.</strong> האמירה ש-<span class="math inline">\(a_n\)</span> קרוב ל-<span class="math inline">\(L\)</span> יותר מ-<span class="math inline">\(\varepsilon\)</span> נרשמת <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span>.</li>
+<li><strong>הדרישה היא לכל</strong> <span class="math inline">\(\varepsilon&gt;0\)</span>, ולא עבור <span class="math inline">\(\varepsilon\)</span> אחד מסוים.</li>
+<li><strong>״בסופו של דבר״:</strong> קיים אינדקס <span class="math inline">\(N\in\mathbb{N}\)</span> כך ש<strong>כל איברי הסדרה שהאינדקס שלהם גדול מ-</strong><span class="math inline">\(N\)</span> <strong>קרובים ל-</strong><span class="math inline">\(L\)</span> <strong>יותר מ-</strong><span class="math inline">\(\varepsilon\)</span><strong>.</strong></li>
+<li><strong>לכל</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> משלו. ככל שאנו רוצים דיוק גדול יותר, כלומר <span class="math inline">\(\varepsilon\)</span> קטן יותר, כך צריך להתקדם רחוק יותר בסדרה — כלומר <span class="math inline">\(N\)</span> הולך וגדל.</li>
+</ol>
+<p>את הדרישות הללו אפשר לסכם בהגדרה הבאה.</p>
+<div id="box-def-convergence" class="thmbox thmbox-definition">
+<p><strong>הגדרה 7.3.1.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה. נאמר שהסדרה <strong>מתכנסת</strong>, או שיש לה <strong>גבול</strong>, אם קיים <span class="math inline">\(L\in\mathbb{R}\)</span> כך שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math display">\[|a_n - L| &lt; \varepsilon\]</span> במקרה זה נאמר שהסדרה <strong>שואפת</strong> (או <strong>מתכנסת</strong>) ל-<span class="math inline">\(L\)</span>, ונסמן <span class="math inline">\(\lim\limits_{n\to\infty}a_n=L\)</span> או <span class="math inline">\(a_n \to L\)</span>. אם אין לסדרה גבול, נאמר שהיא <strong>מתבדרת</strong>.</p>
+</div>
+<p>שימו לב לכמה נקודות נוספות, שאינן כתובות בהגדרה במפורש אך נובעות ממנה מיד:</p>
+<ol type="1">
+<li>הגבול <span class="math inline">\(L\)</span> אינו חייב להיות איבר של הסדרה, ובדרך כלל אינו כזה. אך גם אין בכך איסור: הסדרה הקבועה <span class="math inline">\(a_n = 5\)</span> מתכנסת ל-<span class="math inline">\(5\)</span>, שהוא כל אחד מאיבריה.</li>
+<li>לכל <span class="math inline">\(\varepsilon&gt;0\)</span>, מספר האיברים המקיימים <span class="math inline">\(|a_n - L| \geq \varepsilon\)</span> הוא <strong>סופי</strong>.</li>
+<li>ההתכנסות אינה תלויה באיברים הראשונים של הסדרה — ״חשוב מה שקורה בסוף״.</li>
+</ol>
+<div id="fig-seq-eps-band" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-seq-pm-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+<div aria-describedby="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig09.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-pm-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.2: הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.9: סדרה המתכנסת ל-<span class="math inline">\(L\)</span> — הרצועה מסמנת את התחום <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>, וכל האיברים שהאינדקס שלהם גדול מ-<span class="math inline">\(N\)</span> נמצאים בתוכה; מחוץ לרצועה נשארו רק האיברים המסומנים באדום
 </figcaption>
 </figure>
 </div>
-<div id="box-exm-one-frac-n" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.3.3.</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
-</div>
-<div style="text-align:center">
-<p>תרשים: התכנסות הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span> אל <span class="math inline">\(1\)</span> — הנקודות נעשות צפופות סביב קו הגבול</p>
-</div>
-<div id="fig-seq-sin-n" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<div id="fig-seq-number-line" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-seq-sin-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+<div aria-describedby="fig-seq-number-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig14.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-sin-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.3: התכנסות הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-number-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.10: אותה סדרה, כשאיבריה מסומנים כנקודות על ציר המספרים — הנקודות מצטופפות סביב <span class="math inline">\(L\)</span>, ורק מספר סופי מהן נמצא מחוץ לקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>
 </figcaption>
 </figure>
 </div>
-<p>נשים לב: הגדרת ההתכנסות בודקת רק את <strong>קיום</strong> הגבול, לא את <strong>מהירות</strong> ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.</p>
-<section id="דוגמאות-נוספות" class="level3">
-<h3 class="anchored" data-anchor-id="דוגמאות-נוספות">דוגמאות נוספות</h3>
-<div id="box-exm-one-over-n" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.3.4.</strong></p>
+<p>שימו לב שההגדרה תואמת במדויק את האינטואיציה שדיברנו עליה. מכאן ואילך, עם זאת, עלינו להוכיח מתוך <strong>ההגדרה, או ממשפטים אחרים שנלמד</strong> — ולא באופן אינטואיטיבי. אין בכך אמירה שהאינטואיציה אינה חשובה: היא זו שתעזור לנו לנחש מהו הגבול ולמצוא את כיוון הפתרון — <strong>אך אינה מהווה תחליף ללוגיקה או לחישוב.</strong></p>
+<section id="דוגמאות-ושאלות-פתורות" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="דוגמאות-ושאלות-פתורות">דוגמאות ושאלות פתורות</h3>
+<p>נפתור מספר שאלות על מנת לחדד את ההגדרה, ונציג כמה דרכים להוכיח שסדרה מתכנסת לגבול מסוים או שאינה מתכנסת.</p>
+<p>נשים לב מה בדיוק יש בידינו בשלב הזה: <strong>ההגדרה הפורמלית בלבד</strong>. ההגדרה היא כלי <strong>בדיקה</strong> ולא כלי <strong>חיפוש</strong> — היא מקבלת מספר <span class="math inline">\(L\)</span> שהוצע, ומאשרת או פוסלת אותו, אך אינה מייצרת אותו. לכן היא מאפשרת לענות על שני סוגים של שאלות: האם הסדרה מתכנסת לגבול נתון <span class="math inline">\(L\)</span>, והאם היא <strong>אינה</strong> מתכנסת אליו. יש מקרים שבהם ההגדרה לבדה מספיקה גם כדי להראות ששום <span class="math inline">\(L\)</span> אינו יכול להיות גבול של הסדרה — כלומר שהסדרה מתבדרת.</p>
+<p>מה שההגדרה אינה נותנת הוא את <span class="math inline">\(L\)</span> עצמו. אם ישאלו אותנו ״הוכיחו שהסדרה מתכנסת״ בלי לציין לאיזה גבול, או ״מהו הגבול של הסדרה?״, אין לנו בשלב הזה דרך לענות — פרט לניחוש הגבול ולהוכחת ההתכנסות אליו. בהמשך נכיר שיטות שיאפשרו להוכיח קיום של גבול, וגם לחשב אותו במקרים מסוימים.</p>
+<div id="box-q-constant-seq" class="thmbox thmbox-question" title="סדרה קבועה">
+<p><strong>שאלה 7.3.2 — סדרה קבועה.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> הסדרה הקבועה <span class="math inline">\(a_n = 1\)</span> (כלומר <span class="math inline">\(1, 1, 1, \dots\)</span>). הראו כי <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 1\)</span>.</p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>למרות שזאת שאלה מאוד פשוטה, נעשה אותה בפירוט, מפני שיש בה לא מעט מרכיבים שחוזרים על עצמם.</p>
+<p>נפתח את ההגדרה. היא אומרת שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right|&lt;\varepsilon\)</span>. במקרה שלנו <span class="math inline">\(L\)</span> הוא <span class="math inline">\(1\)</span>, והביטוי הופך להיות <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span>. למען האמת, בשלב זה יכולנו לסיים את ההוכחה — אם נפתח את הביטוי עוד קצת נקבל <span class="math inline">\(a_n=1\)</span>, ומכאן <span class="math inline">\(\left|1-1\right|=0&lt;\varepsilon\)</span> לכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(n\geq1\)</span>, ולמעשה סיימנו.</p>
+<p>אך נבחר בדרך ארוכה יותר בכוונה — על מנת להבחין בתבנית שתחזור על עצמה די הרבה.</p>
+<p>כאשר אנחנו מנסים להוכיח טענה מסוימת <strong>לכל איברי</strong> קבוצה מסוימת, הדרך היא לקחת איבר <strong>שרירותי</strong> בקבוצה, להסתמך על תכונות שנכונות לכל איברי הקבוצה, ולגזור מהן את הטענה המבוקשת עבור <strong>אותו</strong> איבר. מכיוון שאותו טיעון עצמו תקף לכל איבר בקבוצה, הטענה הופכת להיות נכונה לכל איבריה.</p>
+<p>כאן הקבוצה שלנו היא קבוצת כל ה-<span class="math inline">\(\varepsilon\)</span>-ים החיוביים, והטענה היא שקיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span>.</p>
+<p>הדרך הפורמלית הסטנדרטית לכתוב את זה היא:</p>
+<p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> <em>(בתרגום חופשי: ניקח <span class="math inline">\(\varepsilon&gt;0\)</span> כלשהו)</em>. <strong>נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong> <em>(זאת הטענה שאנחנו מבקשים להוכיח, אחרי שהצבנו <span class="math inline">\(1\)</span> במקום <span class="math inline">\(L\)</span>)</em>.</p>
+<p>עכשיו עלינו למצוא <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל איבר <span class="math inline">\(a_n\)</span> שהאינדקס שלו גדול או שווה ל-<span class="math inline">\(N\)</span> יתקיים <span class="math inline">\(|a_n - 1|&lt;\varepsilon\)</span>.</p>
+<p>הדרך ההגיונית היחידה בשלב הזה היא לפתוח את הביטוי <span class="math inline">\(|a_n - 1|\)</span>, ״לשחק איתו״, ולמצוא איזשהו אינדקס <span class="math inline">\(N\)</span> — שתלוי ב-<span class="math inline">\(\varepsilon\)</span> — שמקיים את הטענה. וזה מה שנעשה.</p>
+<p>נפתח את הביטוי <span class="math inline">\(\left|a_n - 1\right|\)</span> ונקבל</p>
+<p><span class="math display">\[.\left|a_n-1\right|=\left|1-1\right|=0&lt;\varepsilon\]</span></p>
+<p>זה נכון לכל <span class="math inline">\(n\in\mathbb{N}\)</span>, ובפרט לכל <span class="math inline">\(n\geq 14\)</span>. נבחר <span class="math inline">\(N=14\)</span>, וקיבלנו: לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו <span class="math inline">\(14\)</span>)</em> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
+<p>נשים לב לכמה דברים. <strong>ראשית</strong>, אתם בטח שואלים למה <span class="math inline">\(14\)</span> ולא <span class="math inline">\(1\)</span>? בגדול, אין סיבה טובה — חוץ מזה שרצינו להראות שמספיק למצוא מספר <span class="math inline">\(N\)</span> כלשהו, ולא דווקא את ה-<span class="math inline">\(N\)</span> המינימלי שמקיים את הדרישה. למעשה, כל מספר שגדול או שווה ל-<span class="math inline">\(N\)</span> יכול לשמש באותו תפקיד.</p>
+<p><strong>שנית</strong>, וזה מצב שלא יקרה הרבה: ה-<span class="math inline">\(N\)</span> שבחרנו אינו תלוי ב-<span class="math inline">\(\varepsilon\)</span> כלל. ברוב המקרים בהמשך תהיה תלות כזו, והמצב שלנו הוא <strong>חריג</strong>.</p>
+</div>
+<div id="box-sim-const" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1$">
+<p><strong>סימולציה 7.3.3 — הסדרה <span class="math inline">\(a_n = 1\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-const.html" loading="lazy" title="סימולציה: הסדרה הקבועה a_n = 1"></iframe>
+<p>גררו את <span class="math inline">\(\varepsilon\)</span> עד הקצה — ה-<span class="math inline">\(N\)</span> המינימלי נשאר קבוע. זה המקרה החריג שבו אותו שער מתאים לכל <span class="math inline">\(\varepsilon\)</span>.</p>
+</div>
+<div id="box-q-one-over-n" class="thmbox thmbox-question" title="שאיפה לאפס">
+<p><strong>שאלה 7.3.4 — שאיפה לאפס.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{1}{n}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 0\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(n &gt; \dfrac{1}{\varepsilon}\)</span>, ולכן <span class="math inline">\(\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} &lt; \varepsilon\)</span>.</p>
 </div>
-<div id="box-exm-seq-3n-4" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.3.5.</strong></p>
+<div id="box-sim-one-over-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{1}{n}$">
+<p><strong>סימולציה 7.3.5 — הסדרה <span class="math inline">\(a_n = \frac{1}{n}\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-inv-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1/n"></iframe>
+<p>הקטינו את <span class="math inline">\(\varepsilon\)</span> פי <span class="math inline">\(10\)</span> וראו את ה-<span class="math inline">\(N\)</span> המינימלי גדל פי <span class="math inline">\(10\)</span> — בדיוק החסם <span class="math inline">\(N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span> שהוכח בדוגמה.</p>
+</div>
+<div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת שאינה מתכנסת">
+<p><strong>שאלה 7.3.6 — סדרה מתחלפת שאינה מתכנסת.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>, כלומר <span class="math inline">\(-1, 1, -1, 1, \dots\)</span>, <strong>מתבדרת</strong>. נניח בשלילה שיש לה גבול <span class="math inline">\(L\)</span>. אז לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span>. ניקח <span class="math inline">\(\varepsilon = 1\)</span>. לכל <span class="math inline">\(n&gt;N\)</span> <strong>זוגי</strong> מתקיים <span class="math inline">\(a_n = 1\)</span>, ולכן <span class="math inline">\(|1 - L| &lt; 1\)</span>; לכל <span class="math inline">\(n&gt;N\)</span> <strong>אי-זוגי</strong> מתקיים <span class="math inline">\(a_n = -1\)</span>, ולכן <span class="math inline">\(|L - (-1)| &lt; 1\)</span>. לפי אי-שוויון המשולש, <span class="math display">\[2 = |1 - (-1)| \le |1 - L| + |L - (-1)| &lt; 1 + 1 = 2,\]</span> כלומר <span class="math inline">\(2 &lt; 2\)</span> — סתירה. לכן הסדרה מתבדרת.</p>
+</div>
+<div id="box-sim-pm-one" class="thmbox thmbox-simulation" title="הסדרה $a_n = (-1)^n$">
+<p><strong>סימולציה 7.3.7 — הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^n"></iframe>
+<p>בחרו מועמד לגבול וצמצמו את <span class="math inline">\(\varepsilon\)</span>: לכל מועמד נשארים אינסוף איברים מחוץ לרצועה. שימו לב שציר הערכים קבוע — הרצועה היא שגדלה, ולא הסדרה שמתקרבת.</p>
+</div>
+<div id="box-q-one-frac-n" class="thmbox thmbox-question" title="סדרה מתכנסת שאינה מונוטונית">
+<p><strong>שאלה 7.3.8 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
+</div>
+<div id="box-sim-sin-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1 + \frac{\sin(n)}{n}$">
+<p><strong>סימולציה 7.3.9 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-sin-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1 + sin(n)/n"></iframe>
+<p>ההתקרבות אינה מונוטונית: הסדרה חוצה את הגבול שוב ושוב, וה-<span class="math inline">\(N\)</span> המינימלי קופץ בצורה לא צפויה כשמקטינים את <span class="math inline">\(\varepsilon\)</span>.</p>
+</div>
+<div id="box-q-seq-3n-4" class="thmbox thmbox-question" title="מנה של ביטויים לינאריים">
+<p><strong>שאלה 7.3.10 — מנה של ביטויים לינאריים.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{3n-4}{n+2}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 3\)</span>. נפשט: <span class="math display">\[\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} &lt; \frac{10}{n}.\]</span> יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{10}{n} &lt; \varepsilon\)</span>, ולכן <span class="math inline">\(\left|a_n - 3\right| &lt; \varepsilon\)</span>.</p>
 </div>
+<div id="box-sim-3n-4" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{3n-4}{n+2}$">
+<p><strong>סימולציה 7.3.11 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-rational.html" loading="lazy" title="סימולציה: הסדרה a_n = (3n-4)/(n+2)"></iframe>
+<p>כאן הגבול אינו <span class="math inline">\(0\)</span> והסדרה מתקרבת אליו מלמטה בלבד, ולכן כל האיברים החורגים נמצאים בצד אחד של הרצועה.</p>
+</div>
+<p>נשים לב: הגדרת ההתכנסות בודקת רק את <strong>קיום</strong> הגבול, לא את <strong>מהירות</strong> ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.</p>
 </section>
 </section>
 <section id="פיתוח-עשרוני-כסדרה-העשרה" class="level2 extra" data-number="7.4">
@@ -940,7 +1420,7 @@ window.Quarto = {
 <p>בפרק המבוא ראינו את סדרת הקירובים העשרוניים של <span class="math inline">\(\sqrt{2}\)</span>. כעת, משהוגדרה ההתכנסות, נטפל בפיתוח העשרוני במדויק. כדוגמה, נענה על השאלה: האם <span class="math inline">\(0.999\dots = 1\)</span>? אחרי שראינו הגדרה של המושג גבול, התשובה היא ״כן״ — שני הסימונים מתארים את אותו מספר. הסיבה: <span class="math inline">\(0.999\dots\)</span> הוא קיצור לסדרת הקירובים <span class="math inline">\(0.9,\ 0.99,\ 0.999,\ \dots\)</span>, המתכנסת ל-<span class="math inline">\(1\)</span>.</p>
 <div id="box-def-decimal-expansion" class="thmbox thmbox-definition">
 <p><strong>הגדרה 7.4.1.</strong></p>
-<p>יהי <span class="math inline">\(a&gt;0\)</span> ממשי. נגדיר <a href="./05-induction.html#sec-recursive-definition"><strong>ברקורסיה</strong></a> סדרת ספרות <span class="math inline">\(\{a_n\}_{n=1}^\infty\)</span> (עם <span class="math inline">\(a_n \in \{0,1,\dots,9\}\)</span>, ו-<span class="math inline">\(a_0\)</span> שלם כלשהו): <span class="math inline">\(a_0\)</span> הוא <strong>המספר השלם הגדול ביותר הקטן ממש מ-</strong><span class="math inline">\(a\)</span>, ובהינתן <span class="math inline">\(a_0,\dots,a_n\)</span>, <span class="math display">\[a_{n+1} = \max\left\{k \in \{0,\dots,9\} \;\middle|\; a_0.a_1\dots a_n + \frac{k}{10^{n+1}} &lt; a\right\}.\]</span> הביטוי <span class="math inline">\(a_0.a_1a_2\dots\)</span> נקרא ה<strong>פיתוח העשרוני</strong> של <span class="math inline">\(a\)</span> (עבור <span class="math inline">\(a&lt;0\)</span> לוקחים את הפיתוח של <span class="math inline">\(-a\)</span> עם סימן מינוס, ועבור <span class="math inline">\(a=0\)</span> את הסדרה הקבועה <span class="math inline">\(0\)</span>). נסמן <span class="math inline">\(t_n = a_0.a_1\dots a_n\)</span>, ונקרא ל-<span class="math inline">\(\{t_n\}\)</span> <strong>סדרת הקירובים העשרוניים</strong> של <span class="math inline">\(a\)</span>.</p>
+<p>יהי <span class="math inline">\(a&gt;0\)</span> ממשי. נגדיר <a href="./05-induction.html#sec-recursive-definition"><strong>ברקורסיה</strong></a> סדרת ספרות <span class="math inline">\(\{a_n\}_{n=1}^\infty\)</span> (עם <span class="math inline">\(a_n \in \{0,1,\dots,9\}\)</span>, ו-<span class="math inline">\(a_0\)</span> שלם כלשהו): <span class="math inline">\(a_0\)</span> הוא <strong>המספר השלם הגדול ביותר הקטן ממש מ-</strong><span class="math inline">\(a\)</span>, ובהינתן <span class="math inline">\(a_0,\dots,a_n\)</span>, <span class="math display">\[a_{n+1} = \max\left\{k \in \{0,\dots,9\} \;\middle|\; a_0.a_1\dots a_n + \frac{k}{10^{n+1}} &lt; a\right\}.\]</span> הביטוי <span class="math inline">\(a_0.a_1a_2\dots\)</span> נקרא ה<strong>פיתוח העשרוני</strong> של <span class="math inline">\(a\)</span> (עבור <span class="math inline">\(a&lt;0\)</span> לוקחים את הפיתוח של <span class="math inline">\(-a\)</span> עם סימן מינוס, ועבור <span class="math inline">\(a=0\)</span> את הסדרה הקבועה <span class="math inline">\(0\)</span>). נסמן, לכל <span class="math inline">\(n\ge 1\)</span>, <span class="math inline">\(t_n = a_0.a_1\dots a_n\)</span>, ונקרא ל-<span class="math inline">\(\{t_n\}_{n=1}^{\infty}\)</span> <strong>סדרת הקירובים העשרוניים</strong> של <span class="math inline">\(a\)</span>.</p>
 </div>
 <div id="box-prp-decimal-convergence" class="thmbox thmbox-proposition">
 <p><strong>טענה 7.4.2.</strong></p>
@@ -950,24 +1430,16 @@ window.Quarto = {
 <p><strong>הוכחה.</strong></p>
 <p>נניח <span class="math inline">\(a&gt;0\)</span> (המקרים <span class="math inline">\(a&lt;0\)</span> ו-<span class="math inline">\(a=0\)</span> דומים). לפי בניית הספרות, לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(t_n &lt; a \le t_n + \frac{1}{10^n}\)</span>, ולכן <span class="math inline">\(|t_n - a| \le \frac{1}{10^n}\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. לפי <a href="./03-number-systems.html#box-thm-archimedes"><strong>תכונת ארכימדס</strong></a> (לכל ממשי חיובי קיים מספר טבעי הגדול ממנו) קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(10^N &gt; \frac{1}{\varepsilon}\)</span>, כלומר <span class="math inline">\(\frac{1}{10^N} &lt; \varepsilon\)</span>. לכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(|t_n - a| \le \frac{1}{10^n} \le \frac{1}{10^N} &lt; \varepsilon\)</span>, כנדרש.</p>
 </div>
-<div id="box-exm-expansion-25" class="thmbox thmbox-example">
-<p><strong>דוגמה 7.4.3.</strong></p>
-<p>הפיתוח העשרוני של <span class="math inline">\(2.5\)</span> הוא <span class="math inline">\(2.4999\dots\)</span>, וסדרת הקירובים שלו היא <span class="math inline">\(2,\ 2.4,\ 2.49,\ 2.499,\ \dots\)</span> — המתכנסת ל-<span class="math inline">\(2.5\)</span>.</p>
+<div id="box-exm-expansion-25" class="thmbox thmbox-example" title="הפיתוח העשרוני של 2.5">
+<p><strong>דוגמה 7.4.3 — הפיתוח העשרוני של 2.5.</strong></p>
+<p>הפיתוח העשרוני של <span class="math inline">\(2.5\)</span> הוא <span class="math inline">\(2.4999\dots\)</span>, וסדרת הקירובים שלו היא <span class="math inline">\(2.4,\ 2.49,\ 2.499,\ \dots\)</span> — המתכנסת ל-<span class="math inline">\(2.5\)</span>.</p>
 </div>
-<div style="text-align:center">
-<p>תרשים: התכנסות הקירובים העשרוניים הסופיים של <span class="math inline">\(2.5\)</span></p>
+<div id="box-sim-decimal" class="thmbox thmbox-simulation" title="הקירובים העשרוניים של $2.5$">
+<p><strong>סימולציה 7.4.4 — הקירובים העשרוניים של <span class="math inline">\(2.5\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-decimal.html" loading="lazy" title="סימולציה: הקירובים העשרוניים של 2.5"></iframe>
+<p>כל צעד מוסיף ספרה אחת, ולכן כל הקטנה של <span class="math inline">\(\varepsilon\)</span> פי <span class="math inline">\(10\)</span> מגדילה את <span class="math inline">\(N\)</span> ב-<span class="math inline">\(1\)</span> בלבד — התכנסות מהירה בהרבה מזו של <span class="math inline">\(\frac{1}{n}\)</span>.</p>
 </div>
-<div id="fig-seq-decimal" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-seq-decimal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-decimal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.4: התכנסות הקירובים העשרוניים הסופיים של <span class="math inline">\(2.5\)</span>
-</figcaption>
-</figure>
-</div>
-<p>כעת נשוב לשאלה שפתחנו בה. לפי הגדרת הפיתוח, הפיתוח של <span class="math inline">\(1\)</span> הוא <span class="math inline">\(0.999\dots\)</span>: המספר השלם הגדול ביותר הקטן ממש מ-<span class="math inline">\(1\)</span> הוא <span class="math inline">\(a_0 = 0\)</span>, ובכל שלב הספרה הגדולה ביותר ששומרת על הקירוב קטן ממש מ-<span class="math inline">\(1\)</span> היא <span class="math inline">\(9\)</span>. סדרת הקירובים <span class="math inline">\(0,\ 0.9,\ 0.99,\ \dots\)</span> מתכנסת ל-<span class="math inline">\(1\)</span>, ולכן <span class="math display">\[0.999\dots = \lim_{n\to\infty} t_n = 1.\]</span> שני הסימונים <span class="math inline">\(0.999\dots\)</span> ו-<span class="math inline">\(1.000\dots\)</span> מתארים אפוא את אותו מספר ממשי.</p>
+<p>כעת נשוב לשאלה שפתחנו בה. לפי הגדרת הפיתוח, הפיתוח של <span class="math inline">\(1\)</span> הוא <span class="math inline">\(0.999\dots\)</span>: המספר השלם הגדול ביותר הקטן ממש מ-<span class="math inline">\(1\)</span> הוא <span class="math inline">\(a_0 = 0\)</span>, ובכל שלב הספרה הגדולה ביותר ששומרת על הקירוב קטן ממש מ-<span class="math inline">\(1\)</span> היא <span class="math inline">\(9\)</span>. סדרת הקירובים <span class="math inline">\(0.9,\ 0.99,\ 0.999,\ \dots\)</span> מתכנסת ל-<span class="math inline">\(1\)</span>, ולכן <span class="math display">\[0.999\dots = \lim_{n\to\infty} t_n = 1.\]</span> שני הסימונים <span class="math inline">\(0.999\dots\)</span> ו-<span class="math inline">\(1.000\dots\)</span> מתארים אפוא את אותו מספר ממשי.</p>
 </section>
 
 
@@ -1046,7 +1518,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/yuval-khachatryan\.github\.io\/BGU-Calculus-Book");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

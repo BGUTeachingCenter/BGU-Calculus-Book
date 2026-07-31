@@ -184,6 +184,81 @@ ul.task-list li input[type="checkbox"] {
 }
 .seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover { background: #ececec; }
 .seq-quiz .seq-feedback, .formula-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
+/* Interactive π-approximation demo (HTML only) */
+.pi-demo {
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  padding: 0.8rem 0.9rem 1rem;
+  margin: 1.2rem 0;
+}
+/* Inside a theorem box the demo shouldn't draw a second frame. */
+.thmbox .pi-demo { border: 0; background: transparent; padding: 0; margin: 0.4rem 0; }
+.pi-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+.pi-demo-slider { flex: 1 1 14rem; max-width: 22rem; direction: ltr; }
+.pi-demo-badge {
+  font-weight: 700;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  min-width: 4.5rem;
+  text-align: center;
+}
+.pi-demo-svg {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  margin: 0.9rem auto 0.5rem;
+}
+.pi-demo-circle { fill: #dbeafe; stroke: #1f4e79; stroke-width: 0.014; }
+/* drawn BEFORE the circle, so only the ring outside the circle shows through */
+.pi-demo-poly-out {
+  fill: #f6c445;
+  stroke: #7f1d1d;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-poly {
+  fill: #c0392b;
+  fill-opacity: 0.5;
+  stroke: #c0392b;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-readout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1.4rem;
+  margin-top: 0.5rem;
+}
+.pi-demo-readout > div { white-space: nowrap; }
+.pi-demo-key { color: #475569; }
+.pi-demo-val { font-weight: 700; font-family: ui-monospace, "Courier New", monospace; }
+/* Interactive widgets embedded from widgets/<chapter>/*.html.
+   They live in an iframe so their CSS (which styles body/table/button
+   unscoped) cannot leak into the book page, and so several copies on one
+   page do not collide on element ids. The height below is a first guess;
+   each widget posts its real height and the listener at the bottom of this
+   file applies it. */
+iframe.widget-frame {
+  display: block;
+  width: 100%;
+  height: 440px;      /* replaced by the widget's own reported height */
+  border: 0;          /* the widget draws its own frame, like .pi-demo */
+  background: transparent;
+  margin: 1.2rem 0 0;
+}
+/* Inside a .thmsim box the frame sits flush; the box supplies the padding. */
+.thmbox-simulation iframe.widget-frame { margin: 0.5rem 0 0.2rem; }
 .thmbox {
   border-inline-start: 4px solid #9ca3af;
   background: #fafafa;
@@ -199,6 +274,13 @@ ul.task-list li input[type="checkbox"] {
 .thmbox-lemma       { border-color: #0d9488; background: #f0fdfa; }
 .thmbox-corollary   { border-color: #16a34a; background: #f0fdf4; }
 .thmbox-example     { border-color: #d97706; background: #fffbeb; }
+/* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
+   solution reuses the proof's slate — a solution is to a question what a proof
+   is to a theorem, and the reader already reads that grey as "the working". */
+.thmbox-question    { border-color: #b45309; background: #fef6e7; }
+.thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
+.thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
+.thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
 .thmbox-proof       { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-proof > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-remark      { border-color: #cbd5e1; background: #f8fafc; }
@@ -223,6 +305,19 @@ details.thmoptional[open] > summary { border-bottom: 1px solid #9ca3af; }
 details.thmoptional > .optional { padding: 0.7rem 0.9rem; }
 details.thmoptional > .optional > :first-child { margin-top: 0; }
 details.thmoptional > .optional > :last-child { margin-bottom: 0; }
+/* .foldable: hidden calculations / derivations. Distinct from .optional (which is a
+   whole gray-boxed aside) — this is a light inline disclosure inside the running text. */
+details.thmfoldable {
+  margin: 1rem 0;
+  border-inline-start: 3px solid #cbd5e1;
+  padding-inline-start: 0.8rem;
+}
+details.thmfoldable > summary {
+  cursor: pointer;
+  color: #475569;
+  font-weight: 600;
+}
+details.thmfoldable[open] > summary { margin-bottom: 0.5rem; }
 details.thmcollapse { margin: 1rem 0; }
 details.thmcollapse > summary {
   cursor: pointer;
@@ -348,15 +443,68 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Build n -> value from a formula in n (whitelisted: digits, n, + - * / ^ ( ) . )
+  // Inscribed regular n-gon in the unit circle: area a_n = (n/2)*sin(2*pi/n) -> pi
+  document.querySelectorAll(".pi-demo").forEach(function (demo) {
+    var slider = demo.querySelector(".pi-demo-slider");
+    var poly = demo.querySelector(".pi-demo-poly");
+    var polyOut = demo.querySelector(".pi-demo-poly-out");
+    // Two instances of this widget appear in the chapter: the first shows only the
+    // inscribed polygon (the circumscribed one has not been motivated yet), the second
+    // shows both. Which one is decided by data-show-out, not by a control — a checkbox
+    // there would give away the second half of the argument.
+    var showOutward = demo.getAttribute("data-show-out") === "1";
+    var outRow = demo.querySelector(".pi-demo-out-row");
+    var bandRow = demo.querySelector(".pi-demo-band-row");
+    var kOut = demo.querySelector(".pi-demo-k");
+    var nOut = demo.querySelector(".pi-demo-n");
+    var aOut = demo.querySelector(".pi-demo-area");
+    var aOutC = demo.querySelector(".pi-demo-area-out");
+    var bOut = demo.querySelector(".pi-demo-band");
+    var dOut = demo.querySelector(".pi-demo-diff");
+    if (slider && poly) {
+      var update = function () {
+        var kIdx = parseInt(slider.value, 10);                 // the slider value IS k (1..10)
+        var n = 6 * Math.pow(2, kIdx - 1);                     // n_k = 6,12,24,...,3072
+        var R = 1 / Math.cos(Math.PI / n);   // circumradius of the circumscribed n-gon (apothem 1)
+        var pts = [], ptsOut = [];
+        for (var k = 0; k < n; k++) {
+          var t = -Math.PI / 2 + 2 * Math.PI * k / n;   // start at the top
+          pts.push(Math.cos(t).toFixed(5) + "," + Math.sin(t).toFixed(5));
+          // the circumscribed polygon is tangent at the inscribed polygon's vertices,
+          // so its own vertices sit half a step further round, at radius R
+          var u = t + Math.PI / n;
+          ptsOut.push((R * Math.cos(u)).toFixed(5) + "," + (R * Math.sin(u)).toFixed(5));
+        }
+        poly.setAttribute("points", pts.join(" "));
+        if (polyOut) polyOut.setAttribute("points", ptsOut.join(" "));
+        var area = (n / 2) * Math.sin(2 * Math.PI / n);
+        var areaOut = n * Math.tan(Math.PI / n);
+        if (polyOut) polyOut.style.display = showOutward ? "" : "none";
+        if (outRow) outRow.style.display = showOutward ? "" : "none";
+        if (bandRow) bandRow.style.display = showOutward ? "" : "none";
+        if (kOut) kOut.textContent = kIdx;
+        if (nOut) nOut.textContent = n;
+        if (aOut) aOut.textContent = area.toFixed(6);
+        if (aOutC) aOutC.textContent = areaOut.toFixed(6);
+        // the gaps shrink by ~4 per step, so they need more digits than the areas
+        if (bOut) bOut.textContent = (areaOut - area).toFixed(8);
+        if (dOut) dOut.textContent = (Math.PI - area).toFixed(8);
+      };
+      slider.addEventListener("input", update);
+      update();
+    }
+  });
+
+  // Build n -> value from a formula in n (whitelisted: digits, n, + - * / ^ ! ( ) . )
   function makeFormula(s) {
     s = String(s || "").trim();
-    if (!s || !/^[0-9n+\-*/^().\s]+$/.test(s)) return null;
-    s = s.replace(/(\d)\s*([n(])/g, "$1*$2")     // 2n, 2(  -> 2*n, 2*(
-         .replace(/([n)])\s*([n(])/g, "$1*$2")   // )n, )(, n(  -> insert *
+    if (!s || !/^[0-9n+\-*/^!().\s]+$/.test(s)) return null;
+    s = s.replace(/(\d)\s*([n(])/g, "$1*$2")             // 2n, 2(  -> 2*n, 2*(
+         .replace(/([n)])\s*([n(])/g, "$1*$2")           // )n, )(, n(  -> insert *
+         .replace(/(\([^()]*\)|\d+|n)!/g, "fact($1)")    // n!, 5!, (n+1)!  -> fact(...)
          .replace(/\^/g, "**");
     try {
-      var f = Function("n", '"use strict"; return (' + s + ");");
+      var f = Function("n", '"use strict"; var fact=function(k){k=Math.round(k);var r=1;for(var i=2;i<=k;i++)r*=i;return r;}; return (' + s + ");");
       var t = f(1);
       return (typeof t === "number" && isFinite(t)) ? f : null;
     } catch (e) { return null; }
@@ -392,6 +540,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn) btn.addEventListener("click", check);
     if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
   });
+});
+</script>
+<script>
+// Widgets embedded from widgets/<chapter>/ report their own height, so the
+// iframe does not need a hard-coded one (which breaks on narrow screens,
+// where the control panel stacks above the plot).
+window.addEventListener("message", function (e) {
+  var d = e.data;
+  if (!d || d.type !== "widget-height" || typeof d.height !== "number") return;
+  var frames = document.querySelectorAll("iframe.widget-frame");
+  for (var i = 0; i < frames.length; i++) {
+    if (frames[i].contentWindow === e.source) {
+      frames[i].style.height = Math.max(320, Math.min(2000, d.height)) + "px";
+      return;
+    }
+  }
 });
 </script>
 
@@ -839,7 +1003,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/yuval-khachatryan\.github\.io\/BGU-Calculus-Book");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

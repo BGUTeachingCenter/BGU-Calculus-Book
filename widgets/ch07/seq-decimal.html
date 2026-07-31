@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>התכנסות: הקירובים העשרוניים של 2.5</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="../shared/seq-limit.js"></script>
+<script>
+/* t_n is the largest multiple of 10^-n that is strictly smaller than a, which
+   is exactly the definition in the book. Written as (ceil(a*10^n) - 1)/10^n so
+   that the case where a*10^n is already an integer — the case that makes the
+   expansion of 2.5 come out as 2.4999... rather than 2.5000... — falls out on
+   its own instead of needing a special branch.
+
+   Indices run from 1 like every other sequence in the book: t_1 = 2.4. The
+   integer part a_0 = 2 is not a term of {t_n}.
+
+   The ε stops deliberately avoid exact powers of ten. |t_n - a| is exactly
+   10^-n, so an ε of 10^-n lands precisely on the >= boundary, where binary
+   floating point decides the comparison arbitrarily: 2.5 - 2.49 evaluates to
+   0.00999...787, which is *below* 0.01. That made the minimal N come out
+   1, 1, 2, 4, 5 instead of 1, 2, 3, 4, 5. Mantissas of 5 and 2 sit far from
+   any term's distance, so every comparison is decided by real arithmetic.
+
+   Past n ≈ 15 the double no longer distinguishes t_n from a, but the smallest
+   ε offered has minimal N = 5, so the affected terms are never the ones being
+   judged. */
+SeqLimit.mount({
+  f: function (n) { var p = Math.pow(10, n); return (Math.ceil(2.5 * p) - 1) / p; },
+  L: 2.5,
+  /* Distances to the limit fall by a factor of 10 per step, so a fixed scale
+     collapses everything past the third term onto the limit line. The axis
+     tracks the gate instead, making N the zoom, and only a short stretch of
+     indices is drawn — beyond N + 3 every term is already indistinguishable
+     from 2.5 at any scale where the band is visible. */
+  zoomOn: "N",
+  nFloor: 8,
+  eps: { list: [0.05, 0.02, 0.005, 0.002, 0.0005, 0.0002, 0.00005, 0.00002, 0.000005],
+         def: 0.005 },
+  scanMax: 18
+});
+</script>
+</body>
+</html>
