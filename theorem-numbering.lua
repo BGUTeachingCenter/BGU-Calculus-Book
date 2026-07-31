@@ -78,7 +78,19 @@ local process
 process = function(blocks, in_optional)
   local out = {}
   for _, b in ipairs(blocks) do
-    if b.t == "Header" and b.level == 2 and not in_optional then
+    if b.t == "Header" and b.level == 1 and not in_optional then
+      -- Chapter boundary. A book renders to HTML one chapter per pandoc pass (so the
+      -- filename gives the number), but to PDF as ONE merged pass — where the filename
+      -- is no longer NN-slug.qmd. So each chapter's `#` heading carries chapter="N",
+      -- which works in both passes. Untagged H1s (parts, preface) leave `chap` alone.
+      local n = b.attributes and b.attributes.chapter
+      if n and n ~= "" then
+        chap = n
+        section = 0
+        item = 0
+      end
+      out[#out + 1] = b
+    elseif b.t == "Header" and b.level == 2 and not in_optional then
       section = section + 1
       item = 0
       out[#out + 1] = b
@@ -97,8 +109,8 @@ process = function(blocks, in_optional)
         -- title= is folded into the label. Change `word` to rename the label everywhere.
         local word = "הערה"
         local text
-        if in_optional then
-          text = word
+        if in_optional or not chap then
+          text = word                                    -- unnumbered fallback
         else
           item = item + 1
           text = word .. " " .. chap .. "." .. section .. "." .. item
@@ -130,7 +142,7 @@ process = function(blocks, in_optional)
         local box = box_for(orig)
         if box then
           local text
-          if in_optional then
+          if in_optional or not chap then
             text = box.word                              -- unnumbered
           else
             item = item + 1
@@ -146,18 +158,30 @@ process = function(blocks, in_optional)
       end
 
       if do_collapse and is_html then
-        local summary = "הצג/הסתר"
-        local attrs = ' class="thmcollapse"'
+        -- title= supplies the <summary> text for .foldable and .optional alike; plain
+        -- text only (a RawBlock is not re-parsed, so no markdown/math in there).
+        local t = b.attributes and b.attributes.title
+        local summary = (t and t ~= "") and t or "הצג/הסתר"
+        local attrs = ' class="thmcollapse thmfoldable"'
         if is_proof then
           summary = "הוכחה"
+          attrs = ' class="thmcollapse"'
         elseif has_class(orig, "optional") then
-          summary = (b.attributes and b.attributes.title) or "קריאת רשות"
+          summary = (t and t ~= "") and t or "קריאת רשות"
           attrs = ' class="thmcollapse thmoptional"'   -- collapsed by default (no "open")
         end
         out[#out + 1] = pandoc.RawBlock("html", '<details' .. attrs .. '><summary>' .. summary .. '</summary>')
         out[#out + 1] = b
         out[#out + 1] = pandoc.RawBlock("html", '</details>')
       else
+        -- PDF can't fold. Show .foldable content, but flag it as skippable so the print
+        -- reader sees it is an aside. (.optional already got its own optionalbox above.)
+        if do_collapse and not has_class(orig, "optional") and not is_proof then
+          local t = b.attributes and b.attributes.title
+          local label = (t and t ~= "") and t or "פירוט"
+          table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{foldablebox}{" .. label .. "}"))
+          table.insert(b.content, pandoc.RawBlock("latex", "\\end{foldablebox}"))
+        end
         out[#out + 1] = b
       end
     else
@@ -168,8 +192,10 @@ process = function(blocks, in_optional)
 end
 
 function Pandoc(doc)
+  -- Seed from the filename (the HTML-per-chapter pass); in the merged PDF pass this is
+  -- nil and each chapter's `#` heading sets it instead. Never bail out: a box met while
+  -- `chap` is unknown still gets its label, just without a number.
   chap = chapter_number()
-  if not chap then return doc end   -- unknown chapter: leave boxes as-is
   section, item = 0, 0
   if quarto and quarto.doc and quarto.doc.is_format then
     is_html = quarto.doc.is_format("html")

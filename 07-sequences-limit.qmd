@@ -1,4 +1,4 @@
-# גבול של סדרה
+# גבול של סדרה {chapter="7"}
 
 ## הגדרה ודרכי תיאור
 
@@ -111,27 +111,489 @@
 :::
 ::::
 
-## גבול של סדרה
+## גבול של סדרה: מוטיבציה ואינטואיציה
 
-כשאנו חוקרים סדרה אינסופית, אחת השאלות הטבעיות שנולדות היא מה קורה לסדרה **בטווח הרחוק**: האם ערכי הסדרה הולכים ומתקרבים לאיזשהו ערך? השאלה הזו עולה ממספר סיבות:
+בפועל, כשאנחנו עובדים עם מספרים, לעיתים קרובות איננו עובדים עם הערך המדויק אלא עם ערך ש״קרוב מספיק״ אליו. הדוגמה הפשוטה ביותר היא כתיבת $0.3333$ במקום $\frac{1}{3}$: אלה אינם אותו מספר, אבל לרוב הצרכים ההבדל ביניהם אינו משנה. כך גם כשכותבים $1.41$ במקום $\sqrt{2}$.
 
-- **קירוב.** לפעמים אנחנו מעוניינים ל**קרב** מספר שאיננו יודעים לרשום במדויק — למשל מספר אי-רציונלי כמו $\sqrt{2}$, שאת הצגתו העשרונית איננו יכולים לרשום במלואה. במקרה כזה אנחנו **בונים** בעצמנו סדרה שאת איבריה כן קל לחשב, והם הולכים ומתקרבים אל אותו מספר; מחשבים איברים עד שאנחנו ״מספיק קרובים״, ועוצרים.
-- **תהליך שמתייצב.** ולפעמים הסדרה אינה נבנית על ידינו כלל, אלא **מתארת תהליך**: $a_n$ הוא התוצאה המתקבלת כאשר הפרמטר הוא $n$. כך, למשל, אם $a_n$ הוא הזמן הדרוש לבניית בית על ידי $n$ פועלים, אז ככל שנוסיף פועלים הזמן יילך ויקטן — אך לא לאפס, שכן יש חלק מהעבודה שאי אפשר לחלק ביניהם. הזמן מתייצב על ערך מסוים: הזמן המהיר ביותר שבו אפשר לבנות את הבית בכלל. הידיעה הזו מעשית מאוד — מרגע שאנחנו ״מספיק קרובים״ לערך הזה, כבר אין טעם להוסיף פועלים.
+אבל מה פירוש ״קרוב״? כל עוד לא צירפנו לביטוי הזה מספר, אין בו טענה מתמטית. לכן קובעים **מראש** את השגיאה שאנחנו מוכנים לסבול, ומסמנים אותה $\varepsilon>0$ (״אפסילון״). נאמר ש-$x$ מקרב את $L$ **ברמת דיוק** $\varepsilon$ אם המרחק בין $x$ ל-$L$ קטן מ-$\varepsilon$.
 
-נתן דוגמא מפורטט
+והמרחק בין שני מספרים על הישר כבר מוכר לנו: הוא הערך המוחלט של ההפרש ביניהם. כלומר, התנאי הוא $$|x - L| < \varepsilon$$ ושימו לב שהמרחק **אינו תלוי בסדר**, שכן $|x - L| = |L - x|$. וזה הגיוני: לא מעניין אותנו אם $x$ גדול מ-$L$ או קטן ממנו, אלא רק כמה הוא רחוק ממנו. למשל, $0.3333$ קטן מ-$\frac{1}{3}$ ואילו $0.3334$ גדול ממנו — ושניהם מקרבים אותו ברמת דיוק $0.001$.
 
-:::::: {#box-exm-pi .thmexm title="קירוב המספר $\\pi$ בעזרת מצולעים משוכללים"}
-נתבונן במצולע משוכלל בעל $n$ צלעות החסום במעגל שרדיוסו $1$. שטחו הוא $$,a_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$ וככל ש-$n$ גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-$\pi$.
+את אותו תנאי אפשר לרשום גם בלי ערך מוחלט, ואז מתקבלת תמונה גאומטרית: $$|x - L| < \varepsilon \iff -\varepsilon < x - L < \varepsilon \iff L - \varepsilon < x < L + \varepsilon$$ כלומר $x$ נמצא בקטע הפתוח $(L-\varepsilon,\ L+\varepsilon)$ — קטע שמרכזו $L$ ורוחבו $2\varepsilon$. זוהי בדיוק **סביבת ה-**$\varepsilon$ של $L$ שראינו בפרק על הערך המוחלט. שתי הצורות שקולות לחלוטין, ונעבור ביניהן בחופשיות: הראשונה היא טענה על ה**שגיאה** — גודל אחד, המרחק, החסום על ידי מספר אחד; השנייה היא טענה על **מקומו** של $x$ על הישר.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 3.0))
+L, eps, x = 0.0, 1.0, 0.55
+
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+ax.plot([L - eps, L + eps], [0, 0], color="tab:blue", lw=3, alpha=0.5, zorder=2)
+for xx, s in [(L - eps, "("), (L + eps, ")")]:
+    ax.annotate(s, xy=(xx, 0), xytext=(xx, 0.02), ha="center", va="bottom",
+                fontsize=20, color="tab:blue")
+for xx, lab in [(L - eps, r"$L-\varepsilon$"), (L, r"$L$"), (L + eps, r"$L+\varepsilon$")]:
+    ax.plot([xx, xx], [-0.04, 0.04], color="black", lw=1.2, zorder=3)
+    ax.annotate(lab, xy=(xx, 0), xytext=(xx, -0.10), ha="center", va="top", fontsize=12)
+
+# the single approximating number, and the distance from it to L
+ax.plot([x], [0], "o", color="tab:green", ms=7, zorder=4)
+ax.annotate(r"$x$", xy=(x, 0), xytext=(x, -0.10), ha="center", va="top",
+            fontsize=12, color="tab:green")
+for xx in (L, x):
+    ax.plot([xx, xx], [0.05, 0.24], ls=":", color="0.6", lw=1.0, zorder=3)
+ax.annotate("", xy=(L, 0.24), xytext=(x, 0.24),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.4))
+ax.text((L + x) / 2, 0.28, r"$|x-L|<\varepsilon$", ha="center", va="bottom",
+        fontsize=12, color="tab:red")
+
+ax.set_xlim(L - 2, L + 2)
+ax.set_ylim(-0.35, 0.58)
+ax.axis("off")
+fig.savefig("figures/c07_fig13.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig13.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: $x$ מקרב את $L$ ברמת דיוק $\varepsilon$ — המרחק ביניהם קטן מ-$\varepsilon$, כלומר $x$ נמצא בקטע $(L-\varepsilon,\,L+\varepsilon)$
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![$x$ מקרב את $L$ ברמת דיוק $\varepsilon$ — המרחק ביניהם קטן מ-$\varepsilon$, כלומר $x$ נמצא בקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig13.png){#fig-eps-approx width="62%" fig-align="center"}
+:::
+
+ועכשיו לנקודה שממנה מתחיל הפרק: רמת הדיוק אינה נתונה לנו מראש — היא נקבעת על ידי מי שדורש את הקירוב, ומספר בודד אינו יכול לעמוד ב**כל** דרישה. $0.3333$ אמנם מקרב את $\frac{1}{3}$ ברמת דיוק $0.0001$, אך ברמת דיוק $0.00001$ הוא כבר אינו מספיק ובמקומו נדרש $0.33333$; ברמת דיוק קטנה עוד יותר יידרש מספר אחר, וכך הלאה. שום שבר עשרוני סופי אינו עונה על כל הדרישות. היחיד שהיה עונה עליהן הוא $\frac{1}{3}$ עצמו — ואותו איננו יודעים לרשום כשבר עשרוני סופי, וזו כל הסיבה שאנחנו מקרבים מלכתחילה.
+
+לכן, בהינתן מספר שאיננו יודעים לרשום או לחשב במדויק, מה שדרוש לנו אינו מספר בודד אלא **שיטה**: דרך אמינה לייצר קירוב לכל רמת דיוק שתידרש. אחת השיטות היא לבנות **סדרה** שאיבריה קלים לחישוב, המקיימת את התכונה הבאה: ל**כל** רמת דיוק $\varepsilon>0$, קטנה ככל שתהיה, קיים אינדקס שהחל ממנו ואילך **כל** איברי הסדרה מקרבים את המספר ברמת דיוק $\varepsilon$.
+
+שימו לב לשני דברים. ראשית, אין כאן דרישה שהסדרה תתקרב בהתמדה: מותר לאיברים לעלות ולרדת ואף להתרחק לפרקים — הנדרש **הוא רק שבסופו של דבר** כולם ייכנסו לתחום ויישארו בו. שנית, זו הסיבה שאנחנו דורשים ש**כל** האיברים מן האינדקס והלאה יהיו קרובים ולא רק אחד מהם: איבר בודד שיצא קרוב במקרה אינו מועיל, שכן ייתכן שמיד אחריו הסדרה מתרחקת שוב. כשכל האיברים מן האינדקס והלאה קרובים מספיק, אפשר לעצור בכל אחד מהם ולקחת אותו כקירוב.
+
+עד כאן הלכנו בכיוון אחד: המספר היה הנתון, והסדרה הייתה הכלי שבנינו כדי להגיע אליו.
+
+אבל אפשר לקרוא את הקשר הזה גם בכיוון ההפוך, ואז מתקבלת שאלה חדשה: הסדרה היא הנתון, והשאלה היא מה היא מקרבת — אם בכלל. האם קיים מספר שהסדרה מתקרבת אליו במובן שתיארנו? האם היא **מתייצבת**?
+
+המקרה הברור ביותר הוא זה שכבר עמדנו בו. רצינו לקרב מספר, הגדרנו סדרה שלכאורה עושה את העבודה — ומניין לנו שאכן כך? אין די בכך שהסדרה ״נראית מתקרבת״: כדי שהקירוב יהיה לגיטימי עלינו לדעת שהיא באמת מקיימת את שדרשנו, כלומר שלכל רמת דיוק אכן קיים אינדקס שהחל ממנו כל האיברים מקרבים את המספר ברמת הדיוק הזו. זו בדיוק העבודה שנעשה בהמשך הסעיף עבור $\pi$.
+
+ולעיתים הסדרה אינה נבנית על ידינו כלל, אלא **יוצאת מתוך תהליך**: $a_n$ הוא התוצאה המתקבלת כאשר הפרמטר הוא $n$, ודווקא המספר הוא מה שאין לנו. למשל, נניח ש-$a_n$ הוא הזמן הדרוש לבניית בית על ידי $n$ פועלים. ככל שנוסיף פועלים הזמן יילך ויקטן — אך לא לאפס, שכן יש חלק מהעבודה שאי אפשר לחלק ביניהם. הזמן מתייצב על ערך מסוים: הזמן המהיר ביותר שבו אפשר לבנות את הבית בכלל. את הערך הזה איננו יודעים מראש, אבל עצם הידיעה שהוא קיים מעשית מאוד — מרגע שאנחנו ״מספיק קרובים״ אליו, כבר אין טעם להוסיף פועלים.
+
+דוגמה עדכנית יותר היא אימון של מודל בלמידת מכונה. למודל יש פרמטרים, ויש להם ערך שבו הוא מתפקד בצורה הטובה ביותר; תהליך האימון מייצר סדרה של ערכים — אחד לכל שלב אימון. האם הסדרה הזו מתקרבת אל הערך האופטימלי? והאם היא בכלל מתייצבת על משהו? אלו שאלות אמיתיות, ולא כל אימון עונה עליהן בחיוב.
+
+שכן לא כל תהליך מתייצב, וכדאי לראות זאת מיד. קחו סדרה שמתנהגת כך: $$1,\ 2,\ 3,\ 1,\ 2,\ 1,\ 2,\ 3,\ 1,\ 2,\ \dots$$ היא אינה בורחת לאינסוף — כל איבריה בין $1$ ל-$3$ — וגם אינה מתקרבת לשום מספר. היא פשוט רודפת אחר זנבה: חוזרת שוב ושוב על אותם ערכים, ולעולם אינה מתיישבת על אחד מהם.
+
+דוגמה יומיומית לאותו כשל: מרצה כותב על הלוח באותיות קטנות מדי. מבקשים ממנו לכתוב גדול יותר — והוא מצייר אותיות בגובה חצי לוח. מבקשים קטן יותר — ושוב זעיר. הגודל קופץ מקצה לקצה ואינו מתקרב לשום גודל, ולעולם לא נגיע לגודל הרצוי ולא נוכל לעצור. שימו לב מדוע: הבקשה ״גדול יותר״ אינה נושאת עמה שום **רמת דיוק**. כל עוד צורת הבקשה אינה משתנה, אין לנו כלל קריטריון שיאמר לנו מתי הגענו — וזו בדיוק הסיבה שקבענו מראש את $\varepsilon$.
+
+::: {.thmrem title="אותו רעיון, בהקשרים רבים"}
+השאלה שבכיוון השני — ״האם הסדרה מתייצבת?״ — היא למעשה השאלה שתעסיק אותנו בכל הפרק: האם הסדרה **מתכנסת**. המצבים שבהם היא עולה אינם ניתנים למניין, והם מופיעים כמעט בכל תחום שבו מופיעות סדרות של מספרים — בשאלות מעשיות ובשאלות תאורטיות כאחד.
+
+מה שמשותף לכולם הוא הגרעין: האם קיים מספר שהסדרה מתקרבת אליו באופן שתיארנו? את השאלה הזו, ואת ההגדרה המדויקת שמאחוריה, ננסח בסעיף הבא.
+:::
+
+```{=html}
+<!-- TODO: rewrite the pi example — it is currently too long and cumbersome. Split it in two.
+     Part 1 (stays here, motivation only): define the inscribed-polygon sequence, explain why
+     it works (no need to compute sines, no need to know the value of pi), show the first few
+     terms, confirm empirically that they approach pi, and keep the interactive simulation.
+     Part 2 (later in the chapter, after the limit is defined): the actual convergence proof —
+     the circumscribed polygons, the error bound, and the choice of K. It belongs there because
+     it illustrates a useful technique: bounding the error from above by something we do know
+     how to compute. -->
+```
+
+### קירוב המספר $\pi$ {.unnumbered}
+
+על מנת להמחיש ולהעמיק את הרעיון הקודם, ניתן דוגמה מפורטת יותר.
+
+המספר $\pi$ הוא היחס בין היקף המעגל לקוטר שלו. כמו כן, ידועה לנו הנוסחה מהתיכון $A=\pi r^2$, כאשר $A$ הוא שטח העיגול ו-$r$ הוא רדיוס המעגל. מפני שהמעגל הוא אחת הצורות הגאומטריות הנפוצות, $\pi$ מופיע באופן טבעי בהרבה מקומות, והיינו רוצים לדעת את הערך שלו. אנחנו ננסה לפתח שיטה לחשב אותו.
+
+הדוגמה שבחרנו בה אינה מלאכותית. המעגל הוא אחת הצורות הנפוצות ביותר, ולכן $\pi$ נדרש כמעט בכל חישוב הנדסי שבו מופיע עיגול, גליל או כדור — ובמשך רוב ההיסטוריה לא הייתה שום דרך פשוטה להשיג אותו. מי שנזקק לערכו היה תלוי בשיטת קירוב, בעצמו או דרך טבלאות שחיברו אחרים; השאלה ״כיצד מקרבים את $\pi$?״ הייתה שאלה מעשית, לא תרגיל.
+
+היום המצב הפוך, ודווקא בזכות זה הדוגמה נוחה: כל מחשבון נותן את $\pi$ בדיוק של עשרות ספרות בשבריר שנייה. כלומר את התשובה אנחנו כבר יודעים — ולכן נוכל לבדוק בכל שלב אם השיטה שאנחנו בונים אכן עובדת.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(4.8, 4.4))
+
+# the circle, its diameter, its radius and its circumference
+t = np.linspace(0, 2 * np.pi, 400)
+ax.fill(np.cos(t), np.sin(t), color="#dbeafe", zorder=1)
+ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=2.4, zorder=3)
+ax.annotate("", xy=(-1, 0), xytext=(1, 0),
+            arrowprops=dict(arrowstyle="<->", color="#c0392b", lw=1.7))
+ax.text(0, -0.14, r"$d$", ha="center", va="top", fontsize=14, color="#c0392b")
+ax.annotate("", xy=(0, 1), xytext=(0, 0),
+            arrowprops=dict(arrowstyle="->", color="#7f1d1d", lw=1.4))
+ax.text(0.07, 0.55, r"$r$", ha="left", fontsize=13, color="#7f1d1d")
+ax.plot([0], [0], marker="o", color="#7f1d1d", ms=4, zorder=5)
+ax.text(1.03 * np.cos(0.9), 1.03 * np.sin(0.9), r"$C$",
+        ha="left", va="bottom", fontsize=14, color="#1f4e79")
+ax.text(0, -0.58, r"$A = \pi r^2$", ha="center", va="center", fontsize=15,
+        color="#1f4e79", zorder=5)
+ax.set_title(r"$\pi = C / d$", fontsize=13)
+ax.set_xlim(-1.35, 1.4)
+ax.set_ylim(-1.35, 1.35)
+ax.set_aspect("equal")
+ax.axis("off")
+
+fig.tight_layout()
+fig.savefig("figures/c07_fig01.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.45\linewidth]{figures/c07_fig01.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: $\pi$ הוא היחס בין היקף המעגל $C$ לקוטרו $d$
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![$\pi$ הוא היחס בין היקף המעגל $C$ לקוטרו $d$](figures/c07_fig01.png){#fig-pi-definition width="45%" fig-align="center"}
+:::
+
+שימו לב ש-$\pi$ הוא **יחס**, ולכן אינו תלוי בגודל המעגל: מעגל גדול ומעגל קטן נותנים בדיוק את אותו מספר. לכן מותר לנו לבחור לחישוב את המעגל הנוח ביותר, ונבחר את זה שרדיוסו $1$. הבחירה משתלמת במיוחד: לפי $A = \pi r^2$, שטח העיגול שרדיוסו $1$ הוא בדיוק $\pi$. כלומר, במקום למדוד את היחס בין ההיקף לקוטר, די לנו לחשב את ה**שטח** של עיגול היחידה.
+
+אלא שמהגדרת המספר לא ברור כלל כיצד לחשב את ערכו: ההגדרה אומרת לנו מהו $\pi$, אך אינה נותנת שום דרך למצוא אותו. שימו לב שאין זו בעיה של **ייצוג** בלבד — גם אילו היה $\pi$ מספר רציונלי, עדיין לא היה ברור מן ההגדרה כיצד למצוא את השבר המתאים. (למעשה $\pi$ הוא אי-רציונלי, ולכן ממילא אי אפשר לכתוב אותו כשבר — אך עובדה זו לא תוכח כאן, ואיננו זקוקים לה.) לכן נתחיל מהמקום היחיד שאפשר להתחיל ממנו: ננסה לפתח שיטה שתאפשר לנו ל**קרב** אותו, בדיוק טוב כרצוננו.
+
+#### הרעיון: מצולע עם הרבה צלעות דומה למעגל {.unnumbered}
+
+איך נעשה את זה? נשים לב, שמצולע משוכלל עם מספיק צלעות הוא ״כמעט״ מעגל ומצד שני את השטח שלו יחסית קל לחשב.
+
+התרשים הבא מראה עד כמה זה עובד. במשושה עוד רואים בבירור שש צלעות; במצולע בעל $24$ צלעות ההבדל מן המעגל כבר קשה לאיתור, ובבעל $96$ צלעות העין אינה מבחינה ביניהם כלל.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.patches import PathPatch
+
+
+def polygon_panels(ns, highlight, path):
+    """Regular n-gons inscribed in the unit circle, one panel per n.
+
+    highlight=False — plain: only "the polygon looks like the circle".
+    highlight=True  — fills the leftover region (disc minus polygon) and reports
+                      pi - a_k, i.e. the quantity the error argument is about.
+    Defined once and called twice so the two variants cannot drift apart.
+    """
+    t = np.linspace(0, 2 * np.pi, 400)
+    fig, axes = plt.subplots(1, len(ns), figsize=(3.2 * len(ns), 3.4))
+    for ax, n in zip(np.atleast_1d(axes), ns):
+        a = -np.pi / 2 + 2 * np.pi * np.arange(n + 1) / n
+        area = (n / 2) * np.sin(2 * np.pi / n)
+        if highlight:
+            # leftover region as a compound path: disc CCW, polygon CW -> hole
+            outer = np.column_stack([np.cos(t), np.sin(t)])
+            inner = np.column_stack([np.cos(a), np.sin(a)])[::-1]
+            verts = np.vstack([outer, outer[:1], inner, inner[:1]])
+            codes = ([Path.MOVETO] + [Path.LINETO] * (len(outer) - 1) + [Path.CLOSEPOLY]
+                     + [Path.MOVETO] + [Path.LINETO] * (len(inner) - 1) + [Path.CLOSEPOLY])
+            ax.add_patch(PathPatch(Path(verts, codes), facecolor="#f6c445",
+                                   edgecolor="none", zorder=2))
+            ax.set_title(r"$n = %d$,   $\pi-a_k=%.4f$" % (n, np.pi - area), fontsize=11)
+        else:
+            ax.set_title(r"$n = %d$" % n, fontsize=12)
+        ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.4, zorder=3)
+        ax.fill(np.cos(a), np.sin(a), color="#c0392b", alpha=0.5, zorder=1)
+        ax.plot(np.cos(a), np.sin(a), color="#c0392b", lw=1.4, zorder=4)
+        ax.set_xlim(-1.15, 1.15)
+        ax.set_ylim(-1.15, 1.15)
+        ax.set_aspect("equal")
+        ax.axis("off")
+    fig.tight_layout()
+    fig.savefig(path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
+polygon_panels([6, 24, 96], highlight=False, path="figures/c07_fig02.png")
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig02.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל](figures/c07_fig02.png){#fig-pi-lookalike width="95%" fig-align="center"}
+:::
+
+ומצד שני — וזה מה שהופך את הרעיון לשימושי — את שטח המצולע אנחנו יודעים לחשב במדויק בכל שלב, גם כאשר הוא כבר ״נראה כמו מעגל״, ובנוסחה פשוטה: שטחו $S_n$ של מצולע משוכלל בעל $n$ צלעות החסום במעגל שרדיוסו $1$ הוא $$.S_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$ ולכן הוא מועמד טוב לקירוב שטחו של העיגול, שהוא $\pi$.
+
+:::::: {.foldable title="פירוט: חישוב שטח המצולע"}
+נתבונן במצולע משוכלל בעל $n$ צלעות החסום במעגל שרדיוסו $1$, ונחשב את שטחו. לשם כך נחבר את מרכז המעגל לכל אחד מקודקודי המצולע: המצולע מתחלק ל-$n$ משולשים **חופפים**, ולכל אחד מהם שתי צלעות שאורכן $1$ (שני רדיוסים) — כלומר הם משולשים **שווי שוקיים** — וזווית הראש שלהם היא $\frac{2\pi}{n}$.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Arc
+
+fig, axes = plt.subplots(1, 2, figsize=(9.6, 4.2))
+
+# --- left: the polygon cut into n congruent triangles ---------------------
+ax = axes[0]
+n = 6
+t = np.linspace(0, 2 * np.pi, 400)
+ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.6, zorder=3)
+ang = -np.pi / 2 + 2 * np.pi * np.arange(n + 1) / n
+xs, ys = np.cos(ang), np.sin(ang)
+for k in range(n):
+    ax.fill([0, xs[k], xs[k + 1]], [0, ys[k], ys[k + 1]],
+            color=("#c0392b" if k % 2 == 0 else "#e9a79c"), alpha=0.55, zorder=2)
+    ax.plot([0, xs[k]], [0, ys[k]], color="#7f1d1d", lw=1.0, zorder=4)
+ax.plot(xs, ys, color="#c0392b", lw=1.9, zorder=5)
+ax.plot([0], [0], marker="o", color="#7f1d1d", ms=4, zorder=6)
+ax.set_title(r"$n = 6$", fontsize=13)
+ax.set_xlim(-1.25, 1.25)
+ax.set_ylim(-1.25, 1.25)
+ax.set_aspect("equal")
+ax.axis("off")
+
+# --- right: one triangle, labelled for a general n ------------------------
+ax = axes[1]
+half = np.pi / n                      # half of the apex angle
+P1 = (-np.sin(half), -np.cos(half))   # apex (the centre) at the top, base below
+P2 = (np.sin(half), -np.cos(half))
+M = (0.0, -np.cos(half))
+ax.fill([0, P1[0], P2[0]], [0, P1[1], P2[1]], color="#c0392b", alpha=0.45, zorder=1)
+ax.plot([0, P1[0]], [0, P1[1]], color="#7f1d1d", lw=1.8, zorder=3)
+ax.plot([0, P2[0]], [0, P2[1]], color="#7f1d1d", lw=1.8, zorder=3)
+ax.plot([P1[0], P2[0]], [P1[1], P2[1]], color="#c0392b", lw=2.2, zorder=3)
+ax.plot([0, M[0]], [0, M[1]], ls="--", color="#1f4e79", lw=1.4, zorder=4)
+ax.plot([0], [0], marker="o", color="#7f1d1d", ms=4, zorder=6)
+
+ax.add_patch(Arc((0, 0), 0.86, 0.86, angle=0,
+                 theta1=270 - np.degrees(half), theta2=270 + np.degrees(half),
+                 color="#7f1d1d", lw=1.3, zorder=5))
+ax.text(0, -0.27, r"$\frac{2\pi}{n}$", ha="center", va="center",
+        fontsize=13, color="#7f1d1d", zorder=6,
+        bbox=dict(facecolor="white", edgecolor="none", pad=1.5))
+ax.text(P1[0] / 2 - 0.06, P1[1] / 2, r"$1$", ha="right", va="center",
+        fontsize=13, color="#7f1d1d")
+ax.text(P2[0] / 2 + 0.06, P2[1] / 2, r"$1$", ha="left", va="center",
+        fontsize=13, color="#7f1d1d")
+ax.text(-0.07, -0.60, r"$1\cdot\cos\frac{\pi}{n}$", ha="right", va="center",
+        fontsize=12, color="#1f4e79")
+# the half-angle: this is the right triangle the sin/cos come from
+ax.add_patch(Arc((0, 0), 1.30, 1.30, angle=0, theta1=270,
+                 theta2=270 + np.degrees(half), color="#1f4e79", lw=1.1, zorder=5))
+ax.text(0.80 * np.cos(np.radians(270 + np.degrees(half) / 2)),
+        0.80 * np.sin(np.radians(270 + np.degrees(half) / 2)),
+        r"$\frac{\pi}{n}$", ha="center", va="center", fontsize=12,
+        color="#1f4e79", zorder=6,
+        bbox=dict(facecolor="white", edgecolor="none", pad=1.0))
+
+yb = M[1] - 0.15                       # half-base, measured below the base
+for x in (M[0], P2[0]):
+    ax.plot([x, x], [M[1], yb - 0.03], ls=":", color="0.55", lw=1.0)
+ax.annotate("", xy=(M[0], yb), xytext=(P2[0], yb),
+            arrowprops=dict(arrowstyle="<->", color="#c0392b", lw=1.2))
+ax.text((M[0] + P2[0]) / 2, yb - 0.08, r"$1\cdot\sin\frac{\pi}{n}$",
+        ha="center", va="top", fontsize=12, color="#c0392b")
+
+s = 0.075                              # right-angle marker at the foot
+ax.plot([0, s, s], [M[1] + s, M[1] + s, M[1]], color="#1f4e79", lw=1.1, zorder=5)
+
+ax.set_title(r"$T_n = \frac{1}{2}\sin\frac{2\pi}{n}$", fontsize=13)
+ax.set_xlim(-0.95, 0.95)
+ax.set_ylim(-1.42, 0.22)
+ax.set_aspect("equal")
+ax.axis("off")
+
+fig.tight_layout()
+fig.savefig("figures/c07_fig03.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig03.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: חלוקת המצולע ל-$n$ משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![חלוקת המצולע ל-$n$ משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו](figures/c07_fig03.png){#fig-pi-triangulation width="90%" fig-align="center"}
+:::
+
+נחשב את שטחו של משולש כזה לפי בסיס כפול גובה חלקי שתיים. מן התרשים: הגובה מן המרכז אל הבסיס הוא $\cos\frac{\pi}{n}$, מחצית הבסיס היא $\sin\frac{\pi}{n}$, ולכן הבסיס כולו הוא $2\sin\frac{\pi}{n}$. נסמן ב-$T_n$ את שטחו של משולש כזה. מכאן $$T_n = \frac{1}{2}\cdot 2\sin\frac{\pi}{n}\cdot\cos\frac{\pi}{n} = \sin\frac{\pi}{n}\,\cos\frac{\pi}{n}$$ ולפי **נוסחת הזווית הכפולה**, $\sin 2\alpha = 2\sin\alpha\cos\alpha$, נציב $\alpha = \frac{\pi}{n}$ ונקבל $$.T_n = \frac{1}{2}\sin\frac{2\pi}{n}$$ יש $n$ משולשים חופפים כאלה, ולכן $$.S_n = n\,T_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$
+
+נבדוק את הנוסחה על המקרה הפשוט ביותר, המשושה. כאשר $n = 6$ אורך הצלע שווה בדיוק לרדיוס, ולכן ששת המשולשים הם דווקא **שווי צלעות** בעלי צלע $1$; שטחו של משולש כזה הוא $\frac{\sqrt{3}}{4}$, ובסך הכול $6\cdot\frac{\sqrt{3}}{4} = \frac{3\sqrt{3}}{2}$. ואכן, הצבה בנוסחה נותנת $\frac{6}{2}\sin\frac{\pi}{3} = \frac{3\sqrt{3}}{2} \approx 2.598$ — אותו ערך בדיוק.
+::::::
+
+#### התהליך: הכפלת מספר הצלעות {.unnumbered}
+
+לכאורה לא הרווחנו הרבה: במקום לחשב את $\pi$ עלינו כעת לחשב את $\sin\frac{2\pi}{n}$, וגם זו אינה בעיה קלה יותר. אלא שכאן נכנס רעיון יפה. נניח שכבר חישבנו את המצולע בעל $n$ הצלעות, ונסמן את **אמצע כל קשת** שבין שני קודקודים סמוכים. הנקודות החדשות הללו, יחד עם הקודקודים הישנים, הן קודקודיו של מצולע משוכלל בעל $2n$ צלעות — שזווית הראש שלו היא בדיוק **מחצית** מזו של קודמו.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0, 2 * np.pi, 400)
+fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.5))
+
+def circle(ax):
+    ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.5, zorder=3)
+    ax.plot([0], [0], marker="o", color="#7f1d1d", ms=3.5, zorder=6)
+    ax.set_xlim(-1.2, 1.2)
+    ax.set_ylim(-1.2, 1.2)
+    ax.set_aspect("equal")
+    ax.axis("off")
+
+old = -np.pi / 2 + 2 * np.pi * np.arange(7) / 6          # hexagon vertices
+mid = old[:-1] + np.pi / 6                                # arc midpoints
+new = -np.pi / 2 + 2 * np.pi * np.arange(13) / 12         # 12-gon vertices
+
+# panel 1: the hexagon we already have
+ax = axes[0]
+circle(ax)
+ax.fill(np.cos(old), np.sin(old), color="#c0392b", alpha=0.35, zorder=1)
+ax.plot(np.cos(old), np.sin(old), color="#c0392b", lw=1.9, zorder=4)
+ax.plot(np.cos(old), np.sin(old), ls="none", marker="o", color="#c0392b",
+        ms=5, zorder=5)
+ax.set_title(r"$n = 6$", fontsize=12)
+
+# panel 2: mark the midpoint of every arc
+ax = axes[1]
+circle(ax)
+ax.fill(np.cos(old), np.sin(old), color="#c0392b", alpha=0.18, zorder=1)
+ax.plot(np.cos(old), np.sin(old), color="#c0392b", lw=1.3, alpha=0.6, zorder=4)
+ax.plot(np.cos(old), np.sin(old), ls="none", marker="o", color="#c0392b",
+        ms=5, zorder=5)
+for m in mid:
+    ax.plot([0, np.cos(m)], [0, np.sin(m)], ls=":", color="#d97706", lw=1.1,
+            zorder=4)
+ax.plot(np.cos(mid), np.sin(mid), ls="none", marker="o", color="#d97706",
+        ms=6, zorder=6)
+ax.set_title(r"$\frac{\alpha}{2}$", fontsize=12)
+
+# panel 3: the resulting 12-gon
+ax = axes[2]
+circle(ax)
+ax.fill(np.cos(new), np.sin(new), color="#c0392b", alpha=0.35, zorder=1)
+ax.plot(np.cos(new), np.sin(new), color="#c0392b", lw=1.9, zorder=4)
+ax.plot(np.cos(old), np.sin(old), ls="none", marker="o", color="#c0392b",
+        ms=5, zorder=5)
+ax.plot(np.cos(mid), np.sin(mid), ls="none", marker="o", color="#d97706",
+        ms=5, zorder=5)
+ax.set_title(r"$2n = 12$", fontsize=12)
+
+fig.tight_layout()
+fig.savefig("figures/c07_fig04.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig04.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל $2n$ צלעות
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל $2n$ צלעות](figures/c07_fig04.png){#fig-pi-doubling width="92%" fig-align="center"}
+:::
+
+וככל ש-$n$ גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-$\pi$.
+
+שימו לב שהמצולע החדש **מכיל** את קודמו: כל צלע של המצולע הישן מוחלפת בשתי צלעות שנפגשות בנקודה שעל המעגל, מחוץ לאותה צלע. במילים אחרות, כל הכפלה מוסיפה לשטח ואינה גורעת ממנו, ומה שנוסף הוא בדיוק חלק מן השטח שנותר בין המצולע הקודם למעגל. כך התהליך ״ממלא״ את העיגול צעד אחר צעד, ובפרט השטחים שנקבל יהיו סדרה **עולה**.
+
+נתחיל מן המשושה ובכל צעד נכפיל את מספר הצלעות, כלומר $n_k = 3\cdot 2^{k}$ (וזה נותן $6, 12, 24, 48, \dots$). **זוהי הסדרה שלנו**: האיבר $a_k$ הוא שטח המצולע המשוכלל בעל $n_k$ הצלעות, כלומר $$.a_k = \frac{n_k}{2}\,\sin\frac{2\pi}{n_k}=3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot2^{k-1}}$$ שימו לב שהאינדקס הרץ הוא $k$ — מספר ההכפלות — ולא מספר הצלעות עצמו.
+
+כעת אפשר לחזור לשאלת הסינוס, וכאן ההכפלה משתלמת שוב. אנחנו מתחילים מזווית שהסינוס שלה **ידוע**: במשושה $\alpha_1 = \frac{2\pi}{6} = \frac{\pi}{3}$, ו-$\sin\alpha_1 = \frac{\sqrt{3}}{2}$. בכל צעד מספר הצלעות מוכפל, ולכן הזווית פשוט **נחצית** — ולזווית נחצית יש נוסחה מוכרת, **נוסחת חצי הזווית**: $$.\sin\frac{\alpha}{2} = \sqrt{\frac{1-\cos\alpha}{2}}$$
+
+::: {.thmrem title="חילוץ שורש ריבועי"}
+בהמשך נשתמש בשורשים ריבועיים בלי לדון בהם. ההנחה הזו סבירה: קירוב של שורש ריבועי הוא בעיה קלה בהרבה מחישוב $\pi$ — יש לה שיטות פשוטות ומהירות מאוד, וכבר בעת העתיקה ידעו לבצע אותה ידנית, **בקולמוס ופפירוס** (לא היה להם נייר ועפרונות אז...). לכן נרשה לעצמנו להתייחס אליה כאל פעולה זמינה, בדיוק כמו חיבור או כפל.
+:::
+
+מכאן מתקבלת נוסחה **רקורסיבית** לסינוס. נסמן $s_k = \sin\frac{\pi}{3\cdot 2^{k-1}}$, ואז $$s_{k+1} = \sqrt{\frac{1-\sqrt{1-s_k^{2}}}{2}}\ ,\qquad s_1 = \frac{\sqrt{3}}{2}$$
+
+::: {.foldable title="פירוט: גזירת הרקורסיה"}
+נסמן $\alpha_k = \frac{2\pi}{n_k}$, כך ש-$s_k = \sin\alpha_k$ ו-$\alpha_{k+1} = \frac{\alpha_k}{2}$.
+
+בנוסחת חצי הזווית מופיע הקוסינוס, ואילו אנחנו עוקבים אחרי הסינוס בלבד — אבל אפשר לשחזר אותו: כל הזוויות שלנו חדות (הגדולה שבהן היא $\alpha_1 = \frac{\pi}{3}$), ולכן הקוסינוס חיובי ומתקיים $\cos\alpha_k = \sqrt{1-s_k^{2}}$.
+
+נציב זאת בנוסחת חצי הזווית ונקבל $$s_{k+1} = \sqrt{\frac{1-\cos\alpha_k}{2}} = \sqrt{\frac{1-\sqrt{1-s_k^{2}}}{2}}$$ וזו בדיוק הרקורסיה שרשמנו למעלה.
+:::
+
+מכאן נקבל גם נוסחה לשטח: $$.a_k = 3\cdot 2^{\,k-1}\,s_k$$
+
+זהו העיקר: כל איבר מתקבל מקודמו בעזרת ארבע פעולות החשבון ושורש ריבועי בלבד — בלי לדעת מהו $\pi$, ובלי טבלת סינוסים.
+
+#### שתי שאלות {.unnumbered}
+
+בנינו סדרה $\{a_k\}$ ואמרנו שהיא ״מתקרבת ל-$\pi$״. אמירה כזו דורשת הצדקה, ולמעשה מסתתרות בה **שתי** שאלות נפרדות:
+
+1.  האם הסדרה בכלל מתקרבת לאיזשהו ערך, או שמא איבריה ״משוטטים״ בלי להתייצב?
+2.  ואם היא אכן מתקרבת לערך — האם הערך הזה הוא באמת $\pi$, ולא מספר אחר הקרוב אליו?
+
+אפשר לאחד את השתיים לשאלה אחת: **האם ערכי הסדרה מתקרבים ל-**$\pi$, וקרובים אליו ככל שנרצה?
+
+::: {.thmrem title="מדוע אין כאן ערך מוחלט"}
+לפי מה שראינו בתחילת הסעיף, ״$a_k$ קרוב ל-$\pi$ ברמת דיוק $\varepsilon$״ פירושו $|\pi - a_k| < \varepsilon$ — עם ערך מוחלט, שכן בדרך כלל איננו יודעים מראש אם הקירוב גדול מן המספר או קטן ממנו.
+
+אלא שכאן אנחנו **כן** יודעים: המצולע החסום נמצא כולו בתוך העיגול, ולכן שטחו קטן משטחו של העיגול, כלומר $a_k < \pi$. מכאן ש-$\pi - a_k$ חיובי ממילא, והערך המוחלט מיותר. לכן נכתוב מכאן ואילך את השגיאה כ-$\pi - a_k$ בלבד.
+
+בהמשך נוסיף גם את המצולעים החוסמים, ואז נדע $a_k < \pi < A_k$ — כלומר $\pi$ כלוא בין שתי הסדרות, ואת סימנם של שני ההפרשים אנחנו יודעים.
+:::
+
+#### האיברים הראשונים {.unnumbered}
+
+מכאן והלאה נרשה לעצמנו ״לרמות״ שוב, בדיוק כפי שעשינו עם $\pi$ עצמו: גם את הסינוס יודעים היום לחשב בדיוק מפליג ובשבריר שנייה. לכן לא נריץ את הרקורסיה ביד, אלא פשוט נציב ערכי $\sin$ בנוסחה. זו נוחות בלבד — הרקורסיה שראינו היא ההוכחה שאפשר היה להסתדר גם בלעדיה.
+
+כך, **בלי לדעת כלל מהו** $\pi$, אפשר לחשב כמה איברים שנרצה — כל אחד מקודמו, בעזרת ארבע פעולות חשבון ושורש ריבועי. הנה שבעת הראשונים, $a_1$ עד $a_7$, **מעוגלים לשש ספרות** אחרי הנקודה העשרונית: $$2.598076,\ \ 3.000000,\ \ 3.105829,\ \ 3.132629,\ \ 3.139350,\ \ 3.141032,\ \ 3.141452$$ אלה אינם הערכים המדויקים אלא קירובים שלהם — רובם אי-רציונליים. היוצא מן הכלל הוא $a_2$, שהוא בדיוק $3$: המצולע בעל $12$ הצלעות נותן $\frac{12}{2}\sin\frac{\pi}{6} = 6\cdot\frac{1}{2} = 3$.
+
+נראה לעין שהתשובה חיובית, וזה מסתדר עם האינטואיציה הגאומטרית שלנו. שטח העיגול הוא בדיוק $\pi$, והמצולע כולו חסום בתוכו; לכן ההפרש $\pi - a_k$ הוא בדיוק **השטח שנותר** בין המצולע למעגל — אוסף ה״פלחים״ הקטנים שבין כל צלע לקשת שמעליה (השטח הצהוב בתרשים). ככל שמספר הצלעות גדל כל פלח נעשה דק יותר, והשטח שנותר הולך וקטן: במשושה הוא בולט לעין, במצולע בעל $24$ צלעות הוא כבר צר מאוד, ובבעל $96$ צלעות קשה כבר להבחין בו. במילים אחרות, $\pi - a_k$ הולך וקטן — ולכן $a_k$ הולך ומתקרב ל-$\pi$.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
-<div class="pi-demo">
+<div class="pi-demo" data-show-out="0">
 <div class="pi-demo-row">
-<label class="pi-demo-key" for="pi-demo-slider">מספר הצלעות:</label>
-<input class="pi-demo-slider" id="pi-demo-slider" type="range" min="0" max="6" value="1" step="1">
-<span class="pi-demo-badge" dir="ltr">n = <span class="pi-demo-n">6</span></span>
+<label class="pi-demo-key">מספר הצלעות: <input class="pi-demo-slider" type="range" min="1" max="10" value="1" step="1"></label>
+<span class="pi-demo-badge" dir="ltr">k = <span class="pi-demo-k">1</span>, n = <span class="pi-demo-n">6</span></span>
 </div>
-<svg class="pi-demo-svg" viewBox="-1.15 -1.15 2.3 2.3" role="img" aria-label="מצולע משוכלל חסום במעגל היחידה">
+<svg class="pi-demo-svg" viewBox="-1.32 -1.32 2.64 2.64" role="img" aria-label="מצולע משוכלל חסום במעגל היחידה">
 <circle class="pi-demo-circle" cx="0" cy="0" r="1"></circle>
 <polygon class="pi-demo-poly" points=""></polygon>
 </svg>
@@ -147,29 +609,7 @@
 ```{python}
 #| echo: false
 #| output: false
-import numpy as np
-import matplotlib.pyplot as plt
-
-ns = [3, 6, 12]
-t = np.linspace(0, 2 * np.pi, 400)
-
-fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.4))
-for ax, n in zip(axes, ns):
-    ax.fill(np.cos(t), np.sin(t), color="#dbeafe", zorder=1)
-    ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.4, zorder=3)
-    k = np.arange(n + 1)
-    a = -np.pi / 2 + 2 * np.pi * k / n
-    ax.fill(np.cos(a), np.sin(a), color="#c0392b", alpha=0.5, zorder=2)
-    ax.plot(np.cos(a), np.sin(a), color="#c0392b", lw=1.4, zorder=4)
-    ax.set_title(r"$n=%d$,   $a_n=%.4f$" % (n, (n / 2) * np.sin(2 * np.pi / n)),
-                 fontsize=11)
-    ax.set_xlim(-1.15, 1.15)
-    ax.set_ylim(-1.15, 1.15)
-    ax.set_aspect("equal")
-    ax.axis("off")
-fig.tight_layout()
-fig.savefig("figures/c07_fig05.png", dpi=150, bbox_inches="tight")
-plt.close(fig)
+polygon_panels([6, 24, 96], highlight=True, path="figures/c07_fig05.png")
 ```
 
 ```{=latex}
@@ -180,27 +620,369 @@ plt.close(fig)
 
 :::: {.content-visible when-format="pdf"}
 ::: {style="text-align:center"}
-תרשים: מצולעים משוכללים חסומים במעגל היחידה — ככל ש-$n$ גדל, שטח המצולע מתקרב ל-$\pi$
+תרשים: מצולעים משוכללים חסומים במעגל היחידה — השטח הצהוב הוא ההפרש $\pi - a_k$, והוא הולך וקטן
 :::
 
 גרסה **אינטראקטיבית**, שבה אפשר לשנות את מספר הצלעות ולעקוב אחר ההתכנסות, זמינה בגרסה המקוונת של הספר.
 
 <!-- TODO: להוסיף כאן קישור ישיר לגרסה המקוונת (כתובת ה-GitHub Pages של הספר). -->
 ::::
-::::::
+
+#### מ״נראה נכון״ להוכחה: מצולעים חוסמים {.unnumbered}
+
+הטיעון הגאומטרי משכנע, אבל כדאי לשים לב מה בדיוק הוא נותן לנו. הוא מראה שהמרחק $\pi - a_k$ **הולך וקטן** — ולא שהוא נעשה קטן **כרצוננו**. אלה שתי טענות שונות: המרחק בין איברי הסדרה לערך מסוים יכול להפוך לקטן יותר בכל צעד ובכל זאת להיתקע מעל מספר חיובי כלשהו ולעולם לא לרדת מתחתיו. ואילו מה שאנחנו רוצים לומר על הקירוב הוא דווקא הטענה השנייה.
+
+והמכשול כאן מעשי לגמרי: כדי לדעת כמה גדולה השגיאה $\pi - a_k$ צריך לדעת מהו $\pi$ — וזה בדיוק מה שאנחנו מנסים למצוא. את הגודל שמעניין אותנו איננו יכולים לחשב.
+
+הרעיון הוא לעקוף את הגודל הזה. נבנה סדרה נוספת, $A_k$, שגם היא מקרבת את $\pi$ — אבל מ**מעל**: כל $A_k$ יהיה גדול מ-$\pi$, בעוד שכל $a_k$ קטן ממנו. לכן לכל $k$ מתקיים $$\pi - a_k \le A_k - a_k$$ ואת אגף ימין אנחנו **כן** יודעים לחשב, שכן שתי הסדרות נתונות בנוסחאות מפורשות שאין בהן $\pi$ כלל.
+
+מכאן התוכנית ברורה: אם נראה שההפרש $A_k - a_k$ נעשה קטן ככל שנרצה, נדע את אותו הדבר גם על השגיאה $\pi - a_k$ — מבלי שנחשב אותה אי פעם.
+
+ומאיפה נשיג סדרה כזו? מאותו רעיון עצמו, הפוך. עד כה השתמשנו במצולע ה**חסום** במעגל — הוא כולו בתוך העיגול, ולכן שטחו קטן מ-$\pi$. נתבונן עכשיו במצולע משוכלל **חוסם**: כזה שכל צלעותיו משיקות למעגל, כלומר המרחק מן המרכז אל כל צלע הוא בדיוק $1$. הפעם העיגול הוא שנמצא בתוך המצולע, ולכן שטחו של המצולע **גדול** מ-$\pi$.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.patches import PathPatch
+
+t = np.linspace(0, 2 * np.pi, 400)
+fig, ax = plt.subplots(figsize=(4.8, 4.6))
+
+# the circle between the two polygons. The circumscribed polygon is tangent AT THE
+# INSCRIBED POLYGON'S VERTICES, so its own corners sit half a step further round —
+# same construction as the interactive demo.
+n = 8
+a = -np.pi / 2 + 2 * np.pi * np.arange(n + 1) / n
+inn = np.column_stack([np.cos(a), np.sin(a)])                 # inscribed
+u = a + np.pi / n                                             # tangency at inn's vertices
+out = np.column_stack([np.cos(u), np.sin(u)]) / np.cos(np.pi / n)
+verts = np.vstack([out, out[:1], inn[::-1], inn[:1]])
+codes = ([Path.MOVETO] + [Path.LINETO] * (len(out) - 1) + [Path.CLOSEPOLY]
+         + [Path.MOVETO] + [Path.LINETO] * (len(inn) - 1) + [Path.CLOSEPOLY])
+ax.add_patch(PathPatch(Path(verts, codes), facecolor="#f6c445",
+                       edgecolor="none", zorder=1))
+ax.fill(inn[:, 0], inn[:, 1], color="#c0392b", alpha=0.35, zorder=2)
+ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.8, zorder=4)
+ax.plot(inn[:, 0], inn[:, 1], color="#c0392b", lw=1.8, zorder=5)
+ax.plot(out[:, 0], out[:, 1], color="#7f1d1d", lw=1.8, zorder=5)
+ax.set_title(r"$a_k \leq \pi \leq A_k$", fontsize=13)
+ax.set_xlim(-1.35, 1.35)
+ax.set_ylim(-1.35, 1.35)
+ax.set_aspect("equal")
+ax.axis("off")
+
+fig.tight_layout()
+fig.savefig("figures/c07_fig06.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+
+# one triangle of the circumscribed polygon (goes with the folded derivation)
+fig2, ax = plt.subplots(figsize=(4.6, 4.4))
+half = np.pi / 6
+h = 1.0
+P1 = (-np.tan(half), -h)
+P2 = (np.tan(half), -h)
+M = (0.0, -h)
+ax.fill([0, P1[0], P2[0]], [0, P1[1], P2[1]], color="#f6c445", alpha=0.75,
+        zorder=1)
+ax.plot([0, P1[0]], [0, P1[1]], color="#7f1d1d", lw=1.8, zorder=3)
+ax.plot([0, P2[0]], [0, P2[1]], color="#7f1d1d", lw=1.8, zorder=3)
+ax.plot([P1[0], P2[0]], [P1[1], P2[1]], color="#7f1d1d", lw=2.2, zorder=3)
+ax.plot([0, M[0]], [0, M[1]], ls="--", color="#1f4e79", lw=1.4, zorder=4)
+arc = np.linspace(-np.pi / 2 - half, -np.pi / 2 + half, 80)
+ax.plot(np.cos(arc), np.sin(arc), color="#1f4e79", lw=1.8, zorder=5)
+ax.plot([0], [0], marker="o", color="#7f1d1d", ms=4, zorder=6)
+ax.text(-0.07, -0.55, r"$1$", ha="right", va="center", fontsize=13,
+        color="#1f4e79")
+from matplotlib.patches import Arc as _Arc
+ax.add_patch(_Arc((0, 0), 1.20, 1.20, angle=0, theta1=270,
+                  theta2=270 + np.degrees(half), color="#1f4e79", lw=1.1, zorder=5))
+ax.text(0.74 * np.cos(np.radians(270 + np.degrees(half) / 2)),
+        0.74 * np.sin(np.radians(270 + np.degrees(half) / 2)),
+        r"$\frac{\pi}{n}$", ha="center", va="center", fontsize=12,
+        color="#1f4e79", zorder=6,
+        bbox=dict(facecolor="white", edgecolor="none", pad=1.0))
+ax.text(0, -0.27, r"$\frac{2\pi}{n}$", ha="center", va="center", fontsize=13,
+        color="#7f1d1d", zorder=7,
+        bbox=dict(facecolor="white", edgecolor="none", pad=1.5))
+yb = -h - 0.15
+for x in (M[0], P2[0]):
+    ax.plot([x, x], [-h, yb - 0.03], ls=":", color="0.55", lw=1.0)
+ax.annotate("", xy=(M[0], yb), xytext=(P2[0], yb),
+            arrowprops=dict(arrowstyle="<->", color="#7f1d1d", lw=1.2))
+ax.text(P2[0] / 2, yb - 0.08, r"$1\cdot\tan\frac{\pi}{n}$", ha="center", va="top",
+        fontsize=12, color="#7f1d1d")
+s = 0.075
+ax.plot([0, s, s], [-h + s, -h + s, -h], color="#1f4e79", lw=1.1, zorder=5)
+ax.set_title(r"$T_n = \tan\frac{\pi}{n}$", fontsize=13)
+ax.set_xlim(-0.95, 0.95)
+ax.set_ylim(-1.55, 0.22)
+ax.set_aspect("equal")
+ax.axis("off")
+
+fig2.tight_layout()
+fig2.savefig("figures/c07_fig07.png", dpi=150, bbox_inches="tight")
+plt.close(fig2)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig06.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם](figures/c07_fig06.png){#fig-pi-squeeze width="90%" fig-align="center"}
+:::
+
+שימו לב שאין כאן בנייה חדשה באמת: את המשיקים מעבירים דרך **קודקודי המצולע החסום**, ולכן אותה קבוצת נקודות על המעגל מולידה את שני המצולעים גם יחד — את החסום כמצולע שקודקודיו הן הנקודות, ואת החוסם כמצולע שצלעותיו הן המשיקים בהן.
+
+את השטח מחשבים בדיוק כמו קודם, ומתקבל $$.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}}$$
+
+:::: {.foldable title="פירוט: חישוב שטח המצולע החוסם"}
+נחשב תחילה את שטחו של מצולע משוכלל **חוסם** בעל $n$ צלעות כלשהו, בדיוק כפי שעשינו עם החסום, ורק בסוף נציב את מספר הצלעות שלנו.
+
+מחברים את המרכז אל הקודקודים, והמצולע מתחלק ל-$n$ משולשים שווי שוקיים חופפים. זווית הראש של כל אחד מהם היא $\frac{2\pi}{n}$, וכאן — בשונה מן המצולע החסום — דווקא ה**גובה** מן המרכז אל הצלע הוא הידוע: הוא שווה $1$, שכן הצלע משיקה למעגל היחידה. זו בדיוק ההגדרה של מצולע חוסם.
+
+הגובה חוצה את המשולש לשני משולשים ישרי-זווית, ובכל אחד מהם הזווית שליד המרכז היא $\frac{\pi}{n}$ (מחצית מזווית הראש), הניצב הסמוך לה הוא הגובה $1$, והניצב שמולה הוא מחצית הבסיס. לפי הגדרת הטנגנס, הניצב שמול הזווית שווה לניצב הסמוך כפול הטנגנס של הזווית; הניצב הסמוך כאן הוא $1$, ולכן מחצית הבסיס היא $1\cdot\tan\frac{\pi}{n}$, והבסיס כולו $2\tan\frac{\pi}{n}$.
+
+נסמן ב-$T_n$ את שטחו של משולש כזה. לפי בסיס כפול גובה חלקי שתיים, $$.T_n = \frac{1}{2}\cdot 2\tan\frac{\pi}{n}\cdot 1 = \tan\frac{\pi}{n}$$
+
+יש $n$ משולשים חופפים כאלה, ולכן שטחו של המצולע החוסם בעל $n$ הצלעות הוא $n\,T_n = n\tan\frac{\pi}{n}$.
+
+נותר להציב את מספר הצלעות שלנו. בשלב ה-$k$ יש למצולע $n_k = 3\cdot 2^{k}$ צלעות, ולכן $$.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}}$$
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.42\linewidth]{figures/c07_fig07.png}\hss}\endL\par
+\medskip
+```
+
+::: {.content-visible when-format="html"}
+![משולש בודד של המצולע החוסם](figures/c07_fig07.png){#fig-pi-circum-triangle width="42%" fig-align="center"}
+:::
+::::
+
+גם את ההכפלה עושים כאן באותו אופן, ואפשר לתאר אותה במדויק: בכל **פינה** של המצולע הנוכחי נתבונן בנקודה שבה הקרן מן המרכז דרך אותה פינה פוגשת את המעגל, ונעביר בה משיק. הנקודה הזו היא בדיוק אמצע הקשת שבין שתי נקודות ההשקה השכנות, והמשיק שמועבר בה **חותך את הפינה**.
+
+נעשה זאת בכל הפינות ונקבל את המצולע החוסם בעל $n_{k+1}$ הצלעות. מכאן ברור גם מדוע הסדרה $A_k$ **יורדת**: כל צעד רק מקצץ פינות, ולכן כל מצולע מוכל בקודמו.
+
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.patches import PathPatch
+
+t = np.linspace(0, 2 * np.pi, 400)
+START = -np.pi / 2
+
+def circum(n):
+    """vertices of the regular n-gon circumscribing the unit circle (apothem 1)"""
+    R = 1 / np.cos(np.pi / n)
+    ang = START + np.pi / n + 2 * np.pi * np.arange(n + 1) / n
+    return R * np.cos(ang), R * np.sin(ang)
+
+x6, y6 = circum(6)
+x12, y12 = circum(12)
+new_ang = START + np.pi / 6 + np.pi * np.arange(6) / 3   # the added tangent points
+
+fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.5))
+
+def base(ax):
+    ax.fill(np.cos(t), np.sin(t), color="#dbeafe", zorder=2)
+    ax.plot(np.cos(t), np.sin(t), color="#1f4e79", lw=1.5, zorder=3)
+    ax.set_xlim(-1.4, 1.4)
+    ax.set_ylim(-1.4, 1.4)
+    ax.set_aspect("equal")
+    ax.axis("off")
+
+# panel 1: the circumscribed hexagon we already have
+ax = axes[0]
+ax.fill(x6, y6, color="#f6c445", zorder=1)
+base(ax)
+ax.plot(x6, y6, color="#7f1d1d", lw=1.9, zorder=5)
+ax.set_title(r"$n = 6$", fontsize=12)
+
+# panel 2: close-up of ONE corner, and the tangent that slices it off
+ax = axes[1]
+R = 1 / np.cos(np.pi / 6)
+V = np.array([0.0, R])                      # a corner of the hexagon
+half = np.tan(np.pi / 12)                   # where the new tangent meets the edges
+zt = np.linspace(np.pi / 6, 5 * np.pi / 6, 240)
+ax.fill_between(np.cos(zt), np.sin(zt), 0.4, color="#dbeafe", zorder=1)
+ax.plot(np.cos(zt), np.sin(zt), color="#1f4e79", lw=1.8, zorder=3)
+for sgn in (-1, 1):
+    ax.plot([V[0], sgn * R * np.cos(np.pi / 6)], [V[1], R * np.sin(np.pi / 6)],
+            color="#7f1d1d", lw=1.9, zorder=4)
+ax.fill([V[0], -half, half], [V[1], 1.0, 1.0], color="#d97706", alpha=0.9,
+        zorder=5)
+ax.plot([-0.8, 0.8], [1.0, 1.0], ls=":", color="#7f1d1d", lw=1.8, zorder=6)
+ax.plot([0], [1.0], marker="o", color="#d97706", ms=7, zorder=7)
+ax.set_xlim(-0.85, 0.85)
+ax.set_ylim(0.50, 1.30)
+ax.set_aspect("equal")
+ax.axis("off")
+ax.set_title(r"$A_{k+1} < A_k$", fontsize=12)
+
+# panel 3: the resulting circumscribed 12-gon
+ax = axes[2]
+ax.fill(x12, y12, color="#f6c445", zorder=1)
+base(ax)
+ax.plot(x12, y12, color="#7f1d1d", lw=1.9, zorder=5)
+ax.plot(np.cos(new_ang), np.sin(new_ang), ls="none", marker="o",
+        color="#d97706", ms=5, zorder=7)
+ax.set_title(r"$2n = 12$", fontsize=12)
+
+fig.tight_layout()
+fig.savefig("figures/c07_fig08.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig08.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד](figures/c07_fig08.png){#fig-pi-corner-cut width="92%" fig-align="center"}
+:::
+
+#### חסימת השגיאה {.unnumbered}
+
+המעגל כלוא בין שני המצולעים, ולכן לכל $k$ מתקיים $$a_k \le \pi \le A_k$$ ומכאן נובע הדבר שחיפשנו: השגיאה שלנו אינה גדולה מן ה**הפרש בין שני המצולעים**, $$.0 \le \pi - a_k \le A_k - a_k$$ וההפרש הזה אינו מסתורי — לשני השטחים יש נוסחאות מפורשות, ולכן אנחנו יודעים לחשב אותו במדויק, בלי לדעת מהו $\pi$.
+
+זו התמונה המשלימה לזו שראינו קודם: הכפלת הצלעות במצולע ה**חסום** מוסיפה לו פלחים ומגדילה את שטחו, ואילו במצולע ה**חוסם** היא מקצצת פינות ומקטינה אותו. שתי הסדרות נעות אפוא זו לקראת זו, ו-$\pi$ כלוא ביניהן: $$a_1 \le a_2 \le a_3 \le \dots \le \pi \le \dots \le A_3 \le A_2 \le A_1$$
+
+כעת אפשר לחסום את ההפרש. השרשרת קצרה, וכל שלב בה עומד על נימוק אחד:
+
+$$\pi - a_k \ \le\ A_k - a_k \ =\ A_k\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{2} \ \le\ A_1\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{2} \ <\ A_1\cdot\frac{\pi^2}{\left(3\cdot 2^{k}\right)^2}$$
+
+הנימוקים, משמאל לימין: המעגל כלוא בין שני המצולעים; זהות שנוכיח מיד; הסדרה $A_k$ יורדת, ולכן $A_k \le A_1$; ולבסוף אי-השוויון $\sin x < x$ (עבור $x>0$), שיוכח במקום אחר בקורס.
+
+::: {.foldable title="פירוט: מניין מגיע הביטוי להפרש"}
+נסמן $r = \frac{\pi}{3\cdot 2^{k}}$ — זו מחצית הזווית המרכזית. נכתוב את שני השטחים בלשונה. בנוסחת המצולע החוסם הזווית היא כבר $r$ עצמה: $$.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}} = 3\cdot 2^{k}\,\tan r$$
+
+בנוסחת המצולע החסום הזווית היא $\frac{\pi}{3\cdot 2^{k-1}}$, ומכיוון ש-$3\cdot 2^{k-1} = \frac{3\cdot 2^{k}}{2}$, זוהי בדיוק $\frac{2\pi}{3\cdot 2^{k}} = 2r$: $$.a_k = 3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot 2^{k-1}} = 3\cdot 2^{k-1}\,\sin\frac{2\pi}{3\cdot 2^{k}} = 3\cdot 2^{k-1}\,\sin 2r$$
+
+**שימו לב לזווית.** בנוסחת $A_k$ מופיעה $r$, ובנוסחת $a_k$ מופיעה $2r$ — הזווית המרכזית המלאה. זו נקודה שקל להחליק עליה, ובלעדיה החישוב יוצא שגוי. כדי שבשתי הנוסחאות תופיע אותה זווית נשתמש בנוסחת הזווית הכפולה, $\sin 2r = 2\sin r\cos r$: $$.a_k = 3\cdot 2^{k-1}\cdot 2\sin r\cos r = 3\cdot 2^{k}\,\sin r\cos r$$
+
+כעת נחסר, ונוציא $3\cdot 2^{k}\sin r$ כגורם משותף: $$A_k - a_k = 3\cdot 2^{k}\tan r - 3\cdot 2^{k}\sin r\cos r = 3\cdot 2^{k}\,\sin r\left(\frac{1}{\cos r} - \cos r\right)$$
+
+נאחד את הסוגריים למכנה משותף: $\frac{1}{\cos r} - \cos r = \frac{1 - (\cos r)^2}{\cos r}$, ומכיוון ש-$1 - (\cos r)^2 = (\sin r)^2$ נקבל $$A_k - a_k = 3\cdot 2^{k}\,\sin r\cdot\frac{(\sin r)^2}{\cos r} = 3\cdot 2^{k}\,\frac{\sin r}{\cos r}\,(\sin r)^2 = 3\cdot 2^{k}\,\tan r\,(\sin r)^2$$
+
+והגורם $3\cdot 2^{k}\tan r$ הוא בדיוק $A_k$, ולכן $$.A_k - a_k = A_k\,(\sin r)^2$$
+:::
+
+עכשיו נציב את המספרים. מתקיים $A_1 = 2\sqrt{3}$, וכן $\left(3\cdot 2^{k}\right)^2 = 9\cdot 4^{k}$. נקבל $$\pi - a_k \ <\ \frac{2\sqrt{3}\,\pi^2}{9}\cdot\frac{1}{4^{k}} \ <\ \frac{4}{4^{k}} \ =\ \frac{1}{4^{\,k-1}}$$ שכן $\frac{2\sqrt{3}\,\pi^2}{9} = 3.79\ldots < 4$.
+
+זהו חסם פשוט במיוחד, והוא מספר לנו משהו חזק: בכל צעד השגיאה **מתחלקת בארבע לפחות**. לכן די במספר קטן מאוד של צעדים כדי להגיע לכל דיוק שנרצה. רוצים דיוק של $0.001$? צריך $\frac{1}{4^{\,k-1}} < 0.001$, כלומר $4^{\,k-1} > 1000$ — ומספיק $k = 6$, כלומר חמש הכפלות בלבד מן המשושה.
+
+ומה אם תידרש רמת דיוק אחרת? נראה שאפשר לענות על **כל** דרישה, ואף להצביע על המקום המתאים מראש. תהי $\varepsilon>0$ רמת הדיוק הנדרשת. נוח להחליף תחילה את החסם בחסם גס יותר: לכל $k\ge 1$ מתקיים $4^{\,k-1}\ge k$ (באינדוקציה — עבור $k=1$ זהו $1\ge 1$; ואם $4^{\,k-1}\ge k$ אז $4^{\,k} = 4\cdot 4^{\,k-1}\ge 4k\ge k+1$), ולכן $$.\pi - a_k \ <\ \frac{1}{4^{\,k-1}} \ \le\ \frac{1}{k}$$
+
+עכשיו נבחר $K = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1$. לכל $x$ מתקיים $\lfloor x\rfloor + 1 > x$, ולכן $K > \frac{1}{\varepsilon}$; מכאן שלכל $k > K$ מתקיים גם $k > \frac{1}{\varepsilon}$, כלומר $\frac{1}{k} < \varepsilon$. נצרף את שני החסמים ונקבל שלכל $k > K$ $$.\pi - a_k \ <\ \frac{1}{k} \ <\ \varepsilon$$
+
+שימו לב ש-$K$ זה בזבזני מאוד: עבור $\varepsilon = 0.001$ הוא נותן $K = 1001$, בעוד שראינו זה עתה שדי ב-$k=6$. אין בכך פגם — כל שנדרש הוא ש**קיים** מקום כזה ושנדע להצביע עליו, ולא שנמצא את המוקדם ביותר. החסם $\frac{1}{k}$ גס בהרבה מן החסם $\frac{1}{4^{\,k-1}}$, אבל הוא נוח לחישוב וזה כל מה שהיה דרוש לנו כאן.
+
+כך זה נראה במספרים. השגיאה $\pi - a_k$ היא מה שמעניין אותנו, והחסם $\frac{1}{4^{\,k-1}}$ רודף אחריה:
+
+- $k = 1$ (משושה, $n_1 = 6$): השגיאה $0.5435$, והחסם $1$;
+- $k = 3$ ($n_3 = 24$): השגיאה $0.0358$, והחסם $0.0625$;
+- $k = 5$ ($n_5 = 96$): השגיאה $0.0022$, והחסם $0.0039$;
+- $k = 7$ ($n_7 = 384$): השגיאה $0.00014$, והחסם $0.00024$.
+
+השגיאה קטנה מן החסם בכל שורה, ושתיהן מצטמצמות באותו קצב — פי ארבעה בכל צעד. אחרי חמש הכפלות בלבד השגיאה כבר קטנה מ-$0.001$, ואם נמשיך להכפיל היא תרד מתחת לכל מספר חיובי שנבחר.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="pi-demo" data-show-out="1">
+<div class="pi-demo-row">
+<label class="pi-demo-key">מספר הצלעות: <input class="pi-demo-slider" type="range" min="1" max="10" value="1" step="1"></label>
+<span class="pi-demo-badge" dir="ltr">k = <span class="pi-demo-k">1</span>, n = <span class="pi-demo-n">6</span></span>
+</div>
+<svg class="pi-demo-svg" viewBox="-1.32 -1.32 2.64 2.64" role="img" aria-label="מצולעים משוכללים חסום וחוסם ביחס למעגל היחידה">
+<polygon class="pi-demo-poly-out" points=""></polygon>
+<circle class="pi-demo-circle" cx="0" cy="0" r="1"></circle>
+<polygon class="pi-demo-poly" points=""></polygon>
+</svg>
+<div class="pi-demo-readout">
+<div><span class="pi-demo-key">שטח המצולע החסום:</span> <span class="pi-demo-val pi-demo-area" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">שטח העיגול:</span> <span class="pi-demo-val" dir="ltr">3.141593</span></div>
+<div class="pi-demo-out-row"><span class="pi-demo-key">שטח המצולע החוסם:</span> <span class="pi-demo-val pi-demo-area-out" dir="ltr">—</span></div>
+<div><span class="pi-demo-key">ההפרש \(\pi - a_k\):</span> <span class="pi-demo-val pi-demo-diff" dir="ltr">—</span></div>
+<div class="pi-demo-band-row"><span class="pi-demo-key">הפרש המצולעים \(A_k - a_k\):</span> <span class="pi-demo-val pi-demo-band" dir="ltr">—</span></div>
+</div>
+</div>
+```
+:::
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+גרסה **אינטראקטיבית** עם שני המצולעים יחד זמינה בגרסה המקוונת של הספר.
+:::
+::::
+
+זוהי הנקודה החשובה, והיא זו שנהפוך מיד להגדרה: לא רק ש״ההפרש קטן״, אלא שאפשר להקטין אותו מתחת ל**כל** דיוק שיידרש מאיתנו מראש, ובלבד שנתקדם מספיק רחוק בסדרה. ״הולך וקטן״ ו״קשה להבחין בו״ אינם ביטויים מתמטיים; המשפט האחרון כבר כן — ועליו נשענת ההגדרה שנראה כעת.
+
+### מה למדנו {.unnumbered}
+
+נסכם מה עשינו, כי חלק מהדברים יחזור שוב ושוב.
+
+היה לנו מספר $\pi$ נתון מראש, ובנינו $\{a_k\}$ סדרה (את זה דווקא לא נעשה הרבה, רוב הסדרות שתופיענה תהיינה נתונות הרבה) וניסינו לבדוק האם איבריה מתקרבים ל מספר $\pi$.
+
+זאת שאלה שתחזור על עצמה המון פעמים בקורס.
+
+על מנת לענות לשאלה הזאת, הראנו שההפרש $|a_k-\pi|$ חסום על ידי $\frac{1}{4^{k-1}}$ מלמעלה ומכאן נבע שלמעשה לכל $\varepsilon>0$ קיים אינדקס $K$ שתלוי ב-$\varepsilon$ כך שלכל $k>K$ המרחק $|a_k-\pi|<\varepsilon$. ה-$K$ שאפשר לבחור הוא $$.K = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1$$ בדיוק כפי שחישבנו בסוף הדוגמה.
+
+שני אלה יחד עונים על שתי השאלות שהצגנו. הסדרה אינה משוטטת אלא מתקרבת לערך אחד, והערך הזה הוא $\pi$ ולא מספר אחר — שכן כל מספר אחר היה נשאר, מאיזה שלב והלאה, רחוק מן הסדרה יותר מן החסם שמצאנו.
+
+אבל הדבר החשוב כאן אינו התוצאה, אלא **צורת** התשובה. לא אמרנו ״הסדרה מתקרבת ל-$\pi$״ ועצרנו; אמרנו משהו חזק בהרבה: **נקבע מראש** כל רמת דיוק שנרצה — $0.01$, $0.001$, או כל מספר חיובי אחר — ואז אפשר להצביע על מקום בסדרה שממנו והלאה **כל** האיברים קרובים ל-$\pi$ יותר מרמת הדיוק הזו. בדוגמה שלנו אפילו ידענו להצביע עליו: די ש-$\frac{1}{4^{\,k-1}}$ יהיה קטן מן הדיוק הנדרש.
+
+זהו בדיוק הניסוח שהופיע בתחילת הסעיף, ואליו הגענו הפעם דרך גאומטריה. הוא גם הניסוח שאפשר להפוך להגדרה מדויקת — כזו שאינה נשענת על תרשימים, ושתעבוד לכל סדרה ולא רק למצולעים. נעשה זאת בסעיף הבא.
 
 מהו הערך שסדרה **מתקרבת** אליו? הרעיון: איברי הסדרה נעשים קרובים לערך $L$ כרצוננו — קרובים ככל שנדרוש — החל ממקום מסוים והלאה.
+
+## גבול של סדרה: הגדרה פורמלית ודוגמאות
+
+בסעיף הקודם ראינו סדרות שערכיהן מתקרבים לערך מסוים. בסעיף הזה נגדיר באופן פורמלי את המושגים שדיברנו עליהם באופן אינטואיטיבי. אינטואיציה הרבה פעמים עוזרת להבין ולהרגיש את הדברים, אך חשוב לזכור — מבחינת קבילות הוכחה, הסברים אינטואיטיביים לא שווים כלום. בשפה המקצועית של מתמטיקאים יש להם אפילו שם — **נפנופי ידיים**. לכן, על מנת שנוכל להוכיח דברים בצורה מסודרת, עלינו לפרמל את המושגים.
+
+לתופעה של התקרבות לאיזשהו ערך יש שם מתמטי פורמלי — **התכנסות**. סדרה שמתקרבת לערך מסוים נקראת סדרה **מתכנסת**.
+
+כזכור, מה שדרשנו הוא זה:
+
+1.  **קיים מספר** $L\in\mathbb{R}$ שאיברי הסדרה מתקרבים אליו.
+2.  **״קרוב״ נמדד בערך מוחלט.** האמירה ש-$a_n$ קרוב ל-$L$ יותר מ-$\varepsilon$ נרשמת $|a_n - L| < \varepsilon$.
+3.  **הדרישה היא לכל** $\varepsilon>0$, ולא עבור $\varepsilon$ אחד מסוים.
+4.  **״בסופו של דבר״:** קיים אינדקס $N\in\mathbb{N}$ כך ש**כל איברי הסדרה שהאינדקס שלהם גדול מ-**$N$ **קרובים ל-**$L$ **יותר מ-**$\varepsilon$**.**
+5.  **לכל** $\varepsilon>0$ קיים $N$ משלו. ככל שאנו רוצים דיוק גדול יותר, כלומר $\varepsilon$ קטן יותר, כך צריך להתקדם רחוק יותר בסדרה — כלומר $N$ הולך וגדל.
+
+את הדרישות הללו אפשר לסכם בהגדרה הבאה.
 
 ::: {#box-def-convergence .thmdef}
 תהי $\{a_n\}_{n=1}^{\infty}$ סדרה. נאמר שהסדרה **מתכנסת**, או שיש לה **גבול**, אם קיים $L\in\mathbb{R}$ כך שלכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n > N$ מתקיים $$|a_n - L| < \varepsilon$$ במקרה זה נאמר שהסדרה **שואפת** (או **מתכנסת**) ל-$L$, ונסמן $\lim\limits_{n\to\infty}a_n=L$ או $a_n \to L$. אם אין לסדרה גבול, נאמר שהיא **מתבדרת**.
 :::
 
-שימו לב למספר פרטים בהגדרה:
+שימו לב לכמה נקודות נוספות, שאינן כתובות בהגדרה במפורש אך נובעות ממנה מיד:
 
-1.  התנאי מתקיים **לכל** מספר חיובי $\varepsilon>0$.
-2.  האינדקס $N$ תלוי ב-$\varepsilon$, אך תמיד קיים — ככל שנדרוש דיוק רב יותר (כלומר $\varepsilon$ קטן יותר), ייתכן שנצטרך להתקדם רחוק יותר בסדרה.
-3.  לכל $\varepsilon>0$, מספר האיברים המקיימים $|a_n - L| \geq \varepsilon$ הוא **סופי**.
-4.  ההתכנסות אינה תלויה באיברים הראשונים של הסדרה — ״חשוב מה שקורה בסוף״.
+1.  הגבול $L$ אינו חייב להיות איבר של הסדרה, ובדרך כלל אינו כזה. אך גם אין בכך איסור: הסדרה הקבועה $a_n = 5$ מתכנסת ל-$5$, שהוא כל אחד מאיבריה.
+2.  לכל $\varepsilon>0$, מספר האיברים המקיימים $|a_n - L| \geq \varepsilon$ הוא **סופי**.
+3.  ההתכנסות אינה תלויה באיברים הראשונים של הסדרה — ״חשוב מה שקורה בסוף״.
 
 ```{python}
 #| echo: false
@@ -208,47 +990,113 @@ plt.close(fig)
 import numpy as np
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(6.4, 3.4))
-L = 0.0
-ax.axhline(0, color="black", lw=1.2, zorder=1)
-ax.plot([L-1, L+1], [0, 0], color="tab:blue", lw=3, alpha=0.5, zorder=2)
-for x, s in [(L-1, "("), (L+1, ")")]:
-    ax.annotate(s, xy=(x, 0), xytext=(x, 0.02), ha="center", va="bottom",
-                fontsize=20, color="tab:blue")
-for x, lab in [(L-1, r"$L-\varepsilon$"), (L, r"$L$"), (L+1, r"$L+\varepsilon$")]:
-    ax.plot([x, x], [-0.04, 0.04], color="black", lw=1.2, zorder=3)
-    ax.annotate(lab, xy=(x, 0), xytext=(x, -0.10), ha="center", va="top", fontsize=12)
-ax.annotate("", xy=(L, 0.04), xytext=(L, 0.45),
-            arrowprops=dict(arrowstyle="->", color="tab:red", lw=1.5))
-xs = [L-0.7, L-0.3, L+0.2, L+0.5, L+0.8]
-ax.plot(xs, [0]*len(xs), "o", color="tab:green", ms=6, zorder=4)
-ax.set_xlim(L-2, L+2)
-ax.set_ylim(-0.45, 0.6)
-ax.axis("off")
-fig.savefig("figures/c07_fig01.png", dpi=150, bbox_inches="tight")
+L_lim = 2.0
+EPS = 0.35
+M = 60
+idx = np.arange(1, M + 1)
+seq = L_lim + 3.2 * np.cos(3.57 * idx + 4.8) / idx
+out = np.abs(seq - L_lim) >= EPS
+N_idx = int(idx[out].max())
+
+RED, BLUE = "#c0392b", "#1f4e79"
+
+fig, ax = plt.subplots(figsize=(7.2, 4.2))
+ax.axhspan(L_lim - EPS, L_lim + EPS, color=BLUE, alpha=0.10, zorder=0)
+ax.axhline(L_lim, linestyle="--", color=BLUE, linewidth=1.4, zorder=2)
+ax.axhline(L_lim + EPS, linestyle=":", color=BLUE, linewidth=1.1, zorder=2)
+ax.axhline(L_lim - EPS, linestyle=":", color=BLUE, linewidth=1.1, zorder=2)
+ax.axvline(N_idx, linestyle="--", color="0.45", linewidth=1.1, zorder=1)
+ax.scatter(idx[~out], seq[~out], s=16, color=BLUE, zorder=3)
+ax.scatter(idx[out], seq[out], s=30, color=RED, zorder=4)
+hi = L_lim + 1.75
+ax.set_xlim(0, M + 1)
+ax.set_ylim(L_lim - 1.75, hi)
+ax.set_xlabel(r"$n$")
+ax.set_ylabel(r"$a_n$")
+ax.set_yticks([L_lim - EPS, L_lim, L_lim + EPS])
+ax.set_yticklabels([r"$L-\varepsilon$", r"$L$", r"$L+\varepsilon$"])
+ax.set_xticks(list(range(10, M + 1, 10)))
+ax.annotate(r"$N$", xy=(N_idx, hi), xytext=(N_idx, hi - 0.09), ha="center",
+            va="top", fontsize=12, color="0.30")
+ax.grid(True, axis="x", alpha=0.2)
+fig.tight_layout()
+fig.savefig("figures/c07_fig09.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig01.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig09.png}\hss}\endL\par
 \medskip
 ```
 
+:::: {.content-visible when-format="pdf"}
 ::: {style="text-align:center"}
-תרשים: ציר מספרים עם הקטע $(L-\varepsilon,\,L+\varepsilon)$ סביב הגבול $L$ — כל איברי הסדרה נמצאים בקטע החל ממקום מסוים
+תרשים: סדרה המתכנסת ל-$L$ — הרצועה מסמנת את התחום $(L-\varepsilon,\,L+\varepsilon)$, וכל האיברים שהאינדקס שלהם גדול מ-$N$ נמצאים בתוכה; מחוץ לרצועה נשארו רק האיברים המסומנים באדום
 :::
+::::
 
 ::: {.content-visible when-format="html"}
-![ציר מספרים עם הקטע $(L-\varepsilon,\,L+\varepsilon)$ סביב הגבול $L$ — כל איברי הסדרה נמצאים בקטע החל ממקום מסוים](figures/c07_fig01.png){#fig-seq-eps-band width="62%" fig-align="center"}
+![סדרה המתכנסת ל-$L$ — הרצועה מסמנת את התחום $(L-\varepsilon,\,L+\varepsilon)$, וכל האיברים שהאינדקס שלהם גדול מ-$N$ נמצאים בתוכה; מחוץ לרצועה נשארו רק האיברים המסומנים באדום](figures/c07_fig09.png){#fig-seq-eps-band width="80%" fig-align="center"}
 :::
 
-## דוגמאות
+```{python}
+#| echo: false
+#| output: false
+fig, ax = plt.subplots(figsize=(7.6, 2.4))
+ax.axvspan(L_lim - EPS, L_lim + EPS, ymin=0.30, ymax=0.56, color=BLUE,
+           alpha=0.12, zorder=0)
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+for x, s in [(L_lim - EPS, "("), (L_lim + EPS, ")")]:
+    ax.annotate(s, xy=(x, 0), xytext=(x, -0.005), ha="center", va="center",
+                fontsize=21, color=BLUE, zorder=6)
+for x, lab in [(L_lim - EPS, r"$L-\varepsilon$"), (L_lim, r"$L$"),
+               (L_lim + EPS, r"$L+\varepsilon$")]:
+    ax.plot([x, x], [-0.030, 0.030], color="black", lw=1.1, zorder=3)
+    ax.annotate(lab, xy=(x, 0), xytext=(x, -0.075), ha="center", va="top",
+                fontsize=11)
+ax.plot(seq[~out], np.zeros((~out).sum()), "o", color=BLUE, ms=4.5,
+        alpha=0.7, zorder=4)
+ax.plot(seq[out], np.zeros(out.sum()), "o", color=RED, ms=6, zorder=5)
+for i in np.where(out)[0]:
+    ax.annotate(rf"$a_{{{i+1}}}$", xy=(seq[i], 0.032), xytext=(seq[i], 0.15),
+                ha="center", va="bottom", fontsize=11, color=RED,
+                arrowprops=dict(arrowstyle="-", color=RED, lw=0.7,
+                                shrinkA=1, shrinkB=1))
+ax.set_xlim(L_lim - 1.85, L_lim + 1.85)
+ax.set_ylim(-0.26, 0.28)
+ax.axis("off")
+fig.tight_layout()
+fig.savefig("figures/c07_fig14.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
 
-נציג שלוש דוגמאות בסיסיות: סדרה קבועה (התכנסות מיידית), סדרה מתחלפת (התבדרות), וסדרה שמתכנסת ״באמת״ אך אינה קבועה.
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig14.png}\hss}\endL\par
+\medskip
+```
+
+:::: {.content-visible when-format="pdf"}
+::: {style="text-align:center"}
+תרשים: אותה סדרה, כשאיבריה מסומנים כנקודות על ציר המספרים — הנקודות מצטופפות סביב $L$, ורק מספר סופי מהן נמצא מחוץ לקטע $(L-\varepsilon,\,L+\varepsilon)$
+:::
+::::
+
+::: {.content-visible when-format="html"}
+![אותה סדרה, כשאיבריה מסומנים כנקודות על ציר המספרים — הנקודות מצטופפות סביב $L$, ורק מספר סופי מהן נמצא מחוץ לקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig14.png){#fig-seq-number-line width="85%" fig-align="center"}
+:::
+
+### דוגמאות {.unnumbered}
+
+נציג חמש דוגמאות: סדרה קבועה (התכנסות מיידית), סדרה השואפת לאפס, סדרה מתחלפת (התבדרות), סדרה שמתכנסת ״באמת״ אך אינה קבועה, ומנה של ביטויים לינאריים.
 
 ::: {#box-exm-constant-seq .thmexm title="סדרה קבועה"}
 הסדרה הקבועה $a_n = 1$ (כלומר $1, 1, 1, \dots$) מתכנסת, וגבולה — באופן לא מפתיע — הוא $1$: לכל $\varepsilon>0$ ולכל $n$ מתקיים $|a_n - 1| = |1-1| = 0 < \varepsilon$, כך שאותו $N$ מתאים לכל $\varepsilon$. זהו מקרה **חריג**: כאשר הסדרה אינה קבועה, בדרך כלל $N$ תלוי ב-$\varepsilon$.
+:::
+
+::: {#box-exm-one-over-n .thmexm title="שאיפה לאפס"}
+עבור $a_n = \dfrac{1}{n}$ מתקיים $\lim\limits_{n\to\infty} a_n = 0$. יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $n > \dfrac{1}{\varepsilon}$, ולכן $\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} < \varepsilon$.
 :::
 
 ::: {#box-exm-pm-one .thmexm title="סדרה מתחלפת שאינה מתכנסת"}
@@ -277,13 +1125,13 @@ ax.set_ylim(-1.4, 1.4)
 ax.grid(True, alpha=0.3)
 ax.legend(loc="upper right")
 fig.tight_layout()
-fig.savefig("figures/c07_fig02.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig10.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig02.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig10.png}\hss}\endL\par
 \medskip
 ```
 
@@ -292,7 +1140,7 @@ plt.close(fig)
 :::
 
 ::: {.content-visible when-format="html"}
-![הסדרה $a_n = (-1)^n$](figures/c07_fig02.png){#fig-seq-pm-one width="80%" fig-align="center"}
+![הסדרה $a_n = (-1)^n$](figures/c07_fig10.png){#fig-seq-pm-one width="80%" fig-align="center"}
 :::
 
 ::: {#box-exm-one-frac-n .thmexm title="סדרה מתכנסת שאינה מונוטונית"}
@@ -327,13 +1175,13 @@ ax.set_xticks(np.arange(5, N + 1, 5))
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
-fig.savefig("figures/c07_fig03.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig11.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig03.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig11.png}\hss}\endL\par
 \medskip
 ```
 
@@ -342,20 +1190,14 @@ plt.close(fig)
 :::
 
 ::: {.content-visible when-format="html"}
-![התכנסות הסדרה $a_n = 1 + \frac{\sin(n)}{n}$](figures/c07_fig03.png){#fig-seq-sin-n width="80%" fig-align="center"}
-:::
-
-נשים לב: הגדרת ההתכנסות בודקת רק את **קיום** הגבול, לא את **מהירות** ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.
-
-### דוגמאות נוספות
-
-::: {#box-exm-one-over-n .thmexm title="שאיפה לאפס"}
-עבור $a_n = \dfrac{1}{n}$ מתקיים $\lim\limits_{n\to\infty} a_n = 0$. יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $n > \dfrac{1}{\varepsilon}$, ולכן $\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} < \varepsilon$.
+![התכנסות הסדרה $a_n = 1 + \frac{\sin(n)}{n}$](figures/c07_fig11.png){#fig-seq-sin-n width="80%" fig-align="center"}
 :::
 
 ::: {#box-exm-seq-3n-4 .thmexm title="מנה של ביטויים לינאריים"}
 עבור $a_n = \dfrac{3n-4}{n+2}$ מתקיים $\lim\limits_{n\to\infty} a_n = 3$. נפשט: $$\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} < \frac{10}{n}.$$ יהי $\varepsilon>0$; נבחר $N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1$. אז לכל $n>N$ מתקיים $\dfrac{10}{n} < \varepsilon$, ולכן $\left|a_n - 3\right| < \varepsilon$.
 :::
+
+נשים לב: הגדרת ההתכנסות בודקת רק את **קיום** הגבול, לא את **מהירות** ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.
 
 ::::::::: extra
 ## פיתוח עשרוני כסדרה (העשרה)
@@ -401,13 +1243,13 @@ ax.set_ylim(1.95, 2.55)
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
-fig.savefig("figures/c07_fig04.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig12.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig04.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig12.png}\hss}\endL\par
 \medskip
 ```
 
@@ -416,7 +1258,7 @@ plt.close(fig)
 :::
 
 ::: {.content-visible when-format="html"}
-![התכנסות הקירובים העשרוניים הסופיים של $2.5$](figures/c07_fig04.png){#fig-seq-decimal width="80%" fig-align="center"}
+![התכנסות הקירובים העשרוניים הסופיים של $2.5$](figures/c07_fig12.png){#fig-seq-decimal width="80%" fig-align="center"}
 :::
 
 כעת נשוב לשאלה שפתחנו בה. לפי הגדרת הפיתוח, הפיתוח של $1$ הוא $0.999\dots$: המספר השלם הגדול ביותר הקטן ממש מ-$1$ הוא $a_0 = 0$, ובכל שלב הספרה הגדולה ביותר ששומרת על הקירוב קטן ממש מ-$1$ היא $9$. סדרת הקירובים $0,\ 0.9,\ 0.99,\ \dots$ מתכנסת ל-$1$, ולכן $$0.999\dots = \lim_{n\to\infty} t_n = 1.$$ שני הסימונים $0.999\dots$ ו-$1.000\dots$ מתארים אפוא את אותו מספר ממשי.

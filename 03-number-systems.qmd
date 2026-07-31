@@ -1,4 +1,4 @@
-# מערכות מספרים: $\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}$ {#sec-number-systems}
+# מערכות מספרים: $\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}$ {#sec-number-systems chapter="3"}
 
 בפרק זה נסקור את מערכות המספרים המרכזיות — הטבעיים $\mathbb{N}$, השלמים $\mathbb{Z}$, הרציונליים $\mathbb{Q}$ והממשיים $\mathbb{R}$ — הבנויות זו על גבי זו: $$.\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$$ כל מערכת מרחיבה את קודמתה כדי לאפשר פעולות שלא היו אפשריות קודם (חיסור, חילוק, פתרון משוואות). לא נבנה את המערכות מן היסוד, אלא נניח את האריתמטיקה המוכרת ונתמקד בתכונות המבניות החשובות.
 

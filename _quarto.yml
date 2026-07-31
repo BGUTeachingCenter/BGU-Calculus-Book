@@ -77,7 +77,7 @@ format:
   html:
     theme: cosmo
     toc: true
-    toc-depth: 3
+    toc-depth: 4
     toc-title: "תוכן העניינים"
     toc-expand: true
     code-fold: true
@@ -115,6 +115,10 @@ format:
         }
         % optional-reading blocks: a coloured label, deliberately NOT a framed box
         % (framed/tcolorbox environments re-trigger the RTL breakage above).
+        % .foldable blocks: collapsed in HTML, but print cannot fold — so show them and
+        % flag them as skippable. Rules, not a frame (framed envs break RTL, see above).
+        \definecolor{foldaccent}{HTML}{64748B}
+        \newenvironment{foldablebox}[1]{\par\medskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\smallskip\noindent{\bfseries\color{foldaccent}#1}\ {\color{foldaccent}(אפשר לדלג)}\par\smallskip}{\par\smallskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\medskip}
         \definecolor{optionalaccent}{HTML}{9A7B1F}
         \newenvironment{optionalbox}{\par\medskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent{\bfseries\color{optionalaccent}קריאת רשות}\par\smallskip}{\par\smallskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
     mainfont: Arial
