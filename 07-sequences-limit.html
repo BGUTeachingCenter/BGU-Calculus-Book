@@ -1359,56 +1359,128 @@ window.Quarto = {
 <p>למרות שזאת שאלה מאוד פשוטה, נעשה אותה בפירוט, מפני שיש בה לא מעט מרכיבים שחוזרים על עצמם.</p>
 <p>נפתח את ההגדרה. היא אומרת שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right|&lt;\varepsilon\)</span>. במקרה שלנו <span class="math inline">\(L\)</span> הוא <span class="math inline">\(1\)</span>, והביטוי הופך להיות <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span>. למען האמת, בשלב זה יכולנו לסיים את ההוכחה — אם נפתח את הביטוי עוד קצת נקבל <span class="math inline">\(a_n=1\)</span>, ומכאן <span class="math inline">\(\left|1-1\right|=0&lt;\varepsilon\)</span> לכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(n\geq1\)</span>, ולמעשה סיימנו.</p>
 <p>אך נבחר בדרך ארוכה יותר בכוונה — על מנת להבחין בתבנית שתחזור על עצמה די הרבה.</p>
-<p>כאשר אנחנו מנסים להוכיח טענה מסוימת <strong>לכל איברי</strong> קבוצה מסוימת, הדרך היא לקחת איבר <strong>שרירותי</strong> בקבוצה, להסתמך על תכונות שנכונות לכל איברי הקבוצה, ולגזור מהן את הטענה המבוקשת עבור <strong>אותו</strong> איבר. מכיוון שאותו טיעון עצמו תקף לכל איבר בקבוצה, הטענה הופכת להיות נכונה לכל איבריה.</p>
+<p>כאשר אנחנו מנסים להוכיח טענה מסוימת <em>לכל איברי</em> קבוצה מסוימת, הדרך היא לקחת איבר <em>שרירותי</em> בקבוצה, להסתמך על תכונות שנכונות לכל איברי הקבוצה, ולגזור מהן את הטענה המבוקשת עבור <em>אותו</em> איבר. מכיוון שאותו טיעון עצמו תקף לכל איבר בקבוצה, הטענה הופכת להיות נכונה לכל איבריה.</p>
 <p>כאן הקבוצה שלנו היא קבוצת כל ה-<span class="math inline">\(\varepsilon\)</span>-ים החיוביים, והטענה היא שקיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span>.</p>
-<p>הדרך הפורמלית הסטנדרטית לכתוב את זה היא:</p>
+<p>הדרך הפורמלית הסטנדרטית לכתוב את זה היא זו. שימו לב: מכאן ואילך <strong>מודגשים</strong> רק המשפטים שנכנסים להוכחה עצמה. כל מה שאינו מודגש — ההסברים, המוטיבציה, והדרך שבה הגענו לכל שלב — נועד רק להסביר את הניסוח ואת מהלך המחשבה, ואינו נחוץ בהוכחה עצמה; בהוכחה שתכתבו אין צורך בו כלל.</p>
 <p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> <em>(בתרגום חופשי: ניקח <span class="math inline">\(\varepsilon&gt;0\)</span> כלשהו)</em>. <strong>נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong> <em>(זאת הטענה שאנחנו מבקשים להוכיח, אחרי שהצבנו <span class="math inline">\(1\)</span> במקום <span class="math inline">\(L\)</span>)</em>.</p>
 <p>עכשיו עלינו למצוא <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל איבר <span class="math inline">\(a_n\)</span> שהאינדקס שלו גדול או שווה ל-<span class="math inline">\(N\)</span> יתקיים <span class="math inline">\(|a_n - 1|&lt;\varepsilon\)</span>.</p>
 <p>הדרך ההגיונית היחידה בשלב הזה היא לפתוח את הביטוי <span class="math inline">\(|a_n - 1|\)</span>, ״לשחק איתו״, ולמצוא איזשהו אינדקס <span class="math inline">\(N\)</span> — שתלוי ב-<span class="math inline">\(\varepsilon\)</span> — שמקיים את הטענה. וזה מה שנעשה.</p>
-<p>נפתח את הביטוי <span class="math inline">\(\left|a_n - 1\right|\)</span> ונקבל</p>
+<p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n - 1\right|\)</span> <strong>ונקבל</strong></p>
 <p><span class="math display">\[.\left|a_n-1\right|=\left|1-1\right|=0&lt;\varepsilon\]</span></p>
-<p>זה נכון לכל <span class="math inline">\(n\in\mathbb{N}\)</span>, ובפרט לכל <span class="math inline">\(n\geq 14\)</span>. נבחר <span class="math inline">\(N=14\)</span>, וקיבלנו: לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו <span class="math inline">\(14\)</span>)</em> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
-<p>נשים לב לכמה דברים. <strong>ראשית</strong>, אתם בטח שואלים למה <span class="math inline">\(14\)</span> ולא <span class="math inline">\(1\)</span>? בגדול, אין סיבה טובה — חוץ מזה שרצינו להראות שמספיק למצוא מספר <span class="math inline">\(N\)</span> כלשהו, ולא דווקא את ה-<span class="math inline">\(N\)</span> המינימלי שמקיים את הדרישה. למעשה, כל מספר שגדול או שווה ל-<span class="math inline">\(N\)</span> יכול לשמש באותו תפקיד.</p>
-<p><strong>שנית</strong>, וזה מצב שלא יקרה הרבה: ה-<span class="math inline">\(N\)</span> שבחרנו אינו תלוי ב-<span class="math inline">\(\varepsilon\)</span> כלל. ברוב המקרים בהמשך תהיה תלות כזו, והמצב שלנו הוא <strong>חריג</strong>.</p>
+<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> כלומר, הראינו שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו <span class="math inline">\(14\)</span>)</em> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
+<p>נשים לב לכמה דברים. <em>ראשית</em>, אתם בטח שואלים למה <span class="math inline">\(14\)</span> ולא <span class="math inline">\(1\)</span>? בגדול, אין סיבה טובה — חוץ מזה שרצינו להראות שמספיק למצוא מספר <span class="math inline">\(N\)</span> כלשהו, ולא דווקא את ה-<span class="math inline">\(N\)</span> המינימלי שמקיים את הדרישה. למעשה, כל מספר שגדול או שווה ל-<span class="math inline">\(N\)</span> יכול לשמש באותו תפקיד.</p>
+<p><em>שנית</em>, וזה מצב שלא יקרה הרבה: ה-<span class="math inline">\(N\)</span> שבחרנו אינו תלוי ב-<span class="math inline">\(\varepsilon\)</span> כלל. ברוב המקרים בהמשך תהיה תלות כזו, והמצב שלנו הוא <em>חריג</em>.</p>
+<p>כך נראית ההוכחה הסופית — רק החלקים המודגשים:</p>
+<p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span><strong>. נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong></p>
+<p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n-1\right|\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[.\left|a_n-1\right|=\left|1-1\right|=0&lt;\varepsilon\]</span></p>
+<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-sim-const" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1$">
 <p><strong>סימולציה 7.3.3 — הסדרה <span class="math inline">\(a_n = 1\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-const.html" loading="lazy" title="סימולציה: הסדרה הקבועה a_n = 1"></iframe>
 <p>גררו את <span class="math inline">\(\varepsilon\)</span> עד הקצה — ה-<span class="math inline">\(N\)</span> המינימלי נשאר קבוע. זה המקרה החריג שבו אותו שער מתאים לכל <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
-<div id="box-q-one-over-n" class="thmbox thmbox-question" title="שאיפה לאפס">
-<p><strong>שאלה 7.3.4 — שאיפה לאפס.</strong></p>
-<p>עבור <span class="math inline">\(a_n = \dfrac{1}{n}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 0\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{1}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(n &gt; \dfrac{1}{\varepsilon}\)</span>, ולכן <span class="math inline">\(\left|\dfrac{1}{n} - 0\right| = \dfrac{1}{n} &lt; \varepsilon\)</span>.</p>
+<div id="box-q-one-over-n" class="thmbox thmbox-question" title="הסדרה $a_n=\frac{1}{n}$">
+<p><strong>שאלה 7.3.4 — הסדרה <span class="math inline">\(a_n=\frac{1}{n}\)</span>.</strong></p>
+<p>תהי <span class="math inline">\(\left\{a_n\right\}_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n=\dfrac{1}{n}\)</span>. הראו כי <span class="math inline">\(\lim\limits_{n\to\infty}a_n=0\)</span>.</p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>כמו בשאלה הקודמת — נשתמש בתבנית דומה. ניקח <span class="math inline">\(\varepsilon&gt;0\)</span>, ונראה שעבור אותו <span class="math inline">\(\varepsilon\)</span> קיים אינדקס <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-0\right|&lt;\varepsilon\)</span>.</p>
+<p>כמו שהסברנו בשאלה הקודמת, ההוכחה נפתחת כך:</p>
+<p><strong>יהי</strong> <span class="math inline">\(\varepsilon &gt; 0\)</span><strong>. נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n - 0\right|&lt;\varepsilon\)</span><strong>.</strong></p>
+<p>כמו בשאלה הקודמת — הדרך הישירה כאן היא לפתוח את הביטוי שבערך המוחלט ולהתחיל ״לשחק איתו״; גם כך קשה לחשוב על משהו אחר. וזה מה שנעשה.</p>
+<p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n-0\right|\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[,\left|a_n-0\right|=\left|\frac{1}{n}-0\right|=\left|\frac{1}{n}\right|=\frac{1}{n}\]</span></p>
+<p><strong>כי</strong> <span class="math inline">\(\frac{1}{n}&gt;0\)</span> <strong>לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>.</strong></p>
+<p><strong>זאת אומרת, די להראות שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n}&lt;\varepsilon\)</span><strong>.</strong></p>
+<p>ובכן, אינטואיטיבית זה מאוד ברור — הביטוי <span class="math inline">\(\frac{1}{n}\)</span> הוא ההופכי של <span class="math inline">\(n\)</span>, וכיוון ש-<span class="math inline">\(n\)</span> אינו חסום מלמעלה, <span class="math inline">\(\frac{1}{n}\)</span> הולך ומתקרב ל-<span class="math inline">\(0\)</span>. ננסה לתרגם את האינטואיציה שלנו לטענה פורמלית. מכיוון ש-<span class="math inline">\(n&gt;0\)</span> וגם <span class="math inline">\(\varepsilon&gt;0\)</span>, מותר לכפול את שני האגפים ב-<span class="math inline">\(\dfrac{n}{\varepsilon}\)</span> מבלי לשנות את כיוון האי-שוויון, ולכן</p>
+<p><strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
+<p>איך נמצא אותו? לכל מספר ממשי <span class="math inline">\(m\)</span> מוגדר <em>ערך השלם</em> של <span class="math inline">\(m\)</span>, המסומן <span class="math inline">\(\lfloor m \rfloor\)</span>, כמספר השלם הגדול ביותר שקטן או שווה ל-<span class="math inline">\(m\)</span>. בפרט מתקיים אי-השוויון</p>
+<p><span class="math display">\[.\lfloor m \rfloor \leq m &lt; \lfloor m \rfloor + 1\]</span></p>
+<div id="fig-floor" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-floor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-floor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.11: ערך השלם. עבור <span class="math inline">\(m = 3.4\)</span> מתקיים <span class="math inline">\(\lfloor m \rfloor = 3\)</span>, ולכן <span class="math inline">\(3 \leq m &lt; 4\)</span> — מקרה פרטי של <span class="math inline">\(\lfloor m \rfloor \leq m &lt; \lfloor m \rfloor + 1\)</span>
+</figcaption>
+</figure>
+</div>
+<p>מכיוון ש-<span class="math inline">\(\varepsilon&gt;0\)</span> מתקיים <span class="math inline">\(\frac{1}{\varepsilon}&gt;0\)</span>, ולכן <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor \geq 0\)</span> — כלומר <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1\)</span> הוא מספר שלם וחיובי. לכן</p>
+<p><strong>נבחר</strong> <span class="math inline">\(N=\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 \in \mathbb{N}\)</span><strong>.</strong></p>
+<p>לפי אי-השוויון שלמעלה, עם <span class="math inline">\(m=\frac{1}{\varepsilon}\)</span>, מתקיים <span class="math inline">\(\frac{1}{\varepsilon} &lt; \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 = N\)</span>. לכן</p>
+<p><strong>לכל</strong> <span class="math inline">\(n \geq N\)</span> <strong>מתקיים</strong></p>
+<p><span class="math display">\[,\frac{1}{\varepsilon} &lt; \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 = N \leq n\]</span></p>
+<p><strong>ומכאן</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span><strong>, כלומר</strong> <span class="math inline">\(\left|a_n-0\right| &lt; \varepsilon\)</span><strong>, כנדרש.</strong></p>
+<p>שלושה דברים ראויים לתשומת לב לפני שנכתוב את ההוכחה במלואה.</p>
+<p><em>ראשית</em>, בניגוד לשאלה הקודמת, ה-<span class="math inline">\(N\)</span> שבחרנו כאן <em>כן</em> תלוי ב-<span class="math inline">\(\varepsilon\)</span>: ככל ש-<span class="math inline">\(\varepsilon\)</span> קטן יותר, <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1\)</span> גדול יותר. זה המצב הרגיל, והמקרה של הסדרה הקבועה הוא החריג.</p>
+<p><em>שנית</em>, ולמרות התלות הזו — כדי למצוא את <span class="math inline">\(N\)</span> השתמשנו רק בתכונות שיש <em>לכל</em> <span class="math inline">\(\varepsilon\)</span>: שהוא חיובי, ושקיים מספר טבעי הגדול מ-<span class="math inline">\(\frac{1}{\varepsilon}\)</span>. לא הנחנו על <span class="math inline">\(\varepsilon\)</span> דבר מעבר לכך, ולא בדקנו אף ערך מסוים שלו. זו בדיוק התבנית מהשאלה הקודמת: לקחנו <span class="math inline">\(\varepsilon\)</span> שרירותי, ולכן מה שהראינו עבורו נכון עבור כולם.</p>
+<p><em>שלישית</em>, התלות אינה חד-חד-ערכית: <span class="math inline">\(\varepsilon\)</span>-ים שונים יכולים להוביל לאותו <span class="math inline">\(N\)</span>. למשל, כל <span class="math inline">\(\varepsilon\)</span> בתחום <span class="math inline">\(\left(\frac{1}{3},\,\frac{1}{2}\right]\)</span> נותן <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon}\right\rfloor+1 = 3\)</span>. אין בכך שום פגם: ההגדרה דורשת שלכל <span class="math inline">\(\varepsilon\)</span> <em>יימצא</em> <span class="math inline">\(N\)</span> מתאים, ולא ש-<span class="math inline">\(N\)</span> יהיה שונה עבור כל <span class="math inline">\(\varepsilon\)</span>. בשאלה הקודמת ראינו את הקצה הקיצוני של אותו דבר עצמו — שם כל ה-<span class="math inline">\(\varepsilon\)</span>-ים הסתפקו באותו <span class="math inline">\(N\)</span>.</p>
+<p>כך נראית ההוכחה הסופית — רק החלקים המודגשים:</p>
+<p><strong>יהי</strong> <span class="math inline">\(\varepsilon &gt; 0\)</span><strong>. נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n - 0\right|&lt;\varepsilon\)</span><strong>.</strong></p>
+<p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n-0\right|\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[,\left|a_n-0\right|=\left|\frac{1}{n}-0\right|=\left|\frac{1}{n}\right|=\frac{1}{n}\]</span></p>
+<p><strong>כי</strong> <span class="math inline">\(\frac{1}{n}&gt;0\)</span> <strong>לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>.</strong></p>
+<p><strong>זאת אומרת, די להראות שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n}&lt;\varepsilon\)</span><strong>.</strong></p>
+<p><strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
+<p><strong>נבחר</strong> <span class="math inline">\(N=\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 \in \mathbb{N}\)</span><strong>.</strong></p>
+<p><strong>לכל</strong> <span class="math inline">\(n \geq N\)</span> <strong>מתקיים</strong></p>
+<p><span class="math display">\[,\frac{1}{\varepsilon} &lt; \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 = N \leq n\]</span></p>
+<p><strong>ומכאן</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span><strong>, כלומר</strong> <span class="math inline">\(\left|a_n-0\right| &lt; \varepsilon\)</span><strong>, כנדרש.</strong> <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-sim-one-over-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{1}{n}$">
 <p><strong>סימולציה 7.3.5 — הסדרה <span class="math inline">\(a_n = \frac{1}{n}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-inv-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1/n"></iframe>
 <p>הקטינו את <span class="math inline">\(\varepsilon\)</span> פי <span class="math inline">\(10\)</span> וראו את ה-<span class="math inline">\(N\)</span> המינימלי גדל פי <span class="math inline">\(10\)</span> — בדיוק החסם <span class="math inline">\(N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span> שהוכח בדוגמה.</p>
 </div>
+<p>נתעכב מעט על הדוגמה האחרונה. ראינו כאן סדרה ששואפת לאפס — מקרה נפוץ מאוד, ולעיתים קרובות גם קל יותר להוכחה: יש לא מעט טכניקות לחסימת סדרות, ובאחדות מהן נעסוק בהמשך הקורס. יתר על כן, את שאלת ההתכנסות עצמה אפשר לעיתים לתרגם לשאלה על שאיפה לאפס, כפי שמנוסח בטענת העזר הבאה.</p>
+<div id="box-lem-abs-to-zero" class="thmbox thmbox-lemma">
+<p><strong>למה 7.3.6.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(L\in\mathbb{R}\)</span>. אז הסדרה <span class="math inline">\(\{a_n\}\)</span> מתכנסת ל-<span class="math inline">\(L\)</span> אם ורק אם הסדרה <span class="math inline">\(\bigl\{\left|a_n-L\right|\bigr\}_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(0\)</span>.</p>
+</div>
+<details class="thmcollapse"><summary>הוכחה</summary>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>הטענה היא ״אם ורק אם״, ולכן עלינו להוכיח ששתי הטענות גוררות זו את זו: שאם הראשונה מתקיימת אז גם השנייה, ולהפך. נוכיח כל גרירה בנפרד.</p>
+<p><strong>כיוון ראשון.</strong> נניח ש-<span class="math inline">\(a_n\)</span> שואפת ל-<span class="math inline">\(L\)</span>. נראה ש-<span class="math inline">\(\left|a_n-L\right|\)</span> שואפת ל-<span class="math inline">\(0\)</span>.</p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. נראה שקיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\Bigl|\left|a_n-L\right|-0\Bigr|&lt;\varepsilon\)</span>.</p>
+<p>נשים לב שהביטוי <span class="math inline">\(\left|a_n-L\right|\)</span> אינו שלילי, ולכן הערך המוחלט החיצוני אינו משנה דבר: <span class="math display">\[.\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right|\]</span></p>
+<p>לפי ההנחה ש-<span class="math inline">\(a_n\)</span> שואפת ל-<span class="math inline">\(L\)</span>, כלומר לפי ההגדרה: לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right|&lt;\varepsilon\)</span>. בפרט הדבר נכון עבור ה-<span class="math inline">\(\varepsilon\)</span> שלקחנו, ולכן קיים <span class="math inline">\(N\)</span> כזה; נקבע אותו.</p>
+<p>אז לכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right| &lt; \varepsilon\)</span>. מצאנו <span class="math inline">\(N\)</span> כנדרש, ולכן <span class="math inline">\(\left|a_n-L\right|\)</span> שואפת ל-<span class="math inline">\(0\)</span>.</p>
+<p><strong>כיוון שני.</strong> נניח ש-<span class="math inline">\(\left|a_n-L\right|\)</span> שואפת ל-<span class="math inline">\(0\)</span>. נראה ש-<span class="math inline">\(a_n\)</span> שואפת ל-<span class="math inline">\(L\)</span>.</p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. נראה שקיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right|&lt;\varepsilon\)</span>.</p>
+<p>לפי ההנחה ש-<span class="math inline">\(\left|a_n-L\right|\)</span> שואפת ל-<span class="math inline">\(0\)</span>, כלומר לפי ההגדרה: לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\Bigl|\left|a_n-L\right|-0\Bigr|&lt;\varepsilon\)</span>. בפרט הדבר נכון עבור ה-<span class="math inline">\(\varepsilon\)</span> שלקחנו, ולכן קיים <span class="math inline">\(N\)</span> כזה; נקבע אותו.</p>
+<p>ושוב, מכיוון שהביטוי <span class="math inline">\(\left|a_n-L\right|\)</span> אינו שלילי, מתקיים <span class="math inline">\(\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right|\)</span>, ולכן לכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right|&lt;\varepsilon\)</span>. מצאנו <span class="math inline">\(N\)</span> כנדרש, ולכן <span class="math inline">\(a_n\)</span> שואפת ל-<span class="math inline">\(L\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</details>
+<p>הטענה הזו שימושית מפני שהיא מחליפה שאלה על התכנסות לגבול כלשהו בשאלה על שאיפה לאפס — ולשם כך די לחסום את <span class="math inline">\(\left|a_n-L\right|\)</span> מלמעלה בביטוי ששואף לאפס, בלי לעקוב אחרי הסדרה עצמה.</p>
 <div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת שאינה מתכנסת">
-<p><strong>שאלה 7.3.6 — סדרה מתחלפת שאינה מתכנסת.</strong></p>
+<p><strong>שאלה 7.3.7 — סדרה מתחלפת שאינה מתכנסת.</strong></p>
 <p>הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>, כלומר <span class="math inline">\(-1, 1, -1, 1, \dots\)</span>, <strong>מתבדרת</strong>. נניח בשלילה שיש לה גבול <span class="math inline">\(L\)</span>. אז לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span>. ניקח <span class="math inline">\(\varepsilon = 1\)</span>. לכל <span class="math inline">\(n&gt;N\)</span> <strong>זוגי</strong> מתקיים <span class="math inline">\(a_n = 1\)</span>, ולכן <span class="math inline">\(|1 - L| &lt; 1\)</span>; לכל <span class="math inline">\(n&gt;N\)</span> <strong>אי-זוגי</strong> מתקיים <span class="math inline">\(a_n = -1\)</span>, ולכן <span class="math inline">\(|L - (-1)| &lt; 1\)</span>. לפי אי-שוויון המשולש, <span class="math display">\[2 = |1 - (-1)| \le |1 - L| + |L - (-1)| &lt; 1 + 1 = 2,\]</span> כלומר <span class="math inline">\(2 &lt; 2\)</span> — סתירה. לכן הסדרה מתבדרת.</p>
 </div>
 <div id="box-sim-pm-one" class="thmbox thmbox-simulation" title="הסדרה $a_n = (-1)^n$">
-<p><strong>סימולציה 7.3.7 — הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.8 — הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^n"></iframe>
 <p>בחרו מועמד לגבול וצמצמו את <span class="math inline">\(\varepsilon\)</span>: לכל מועמד נשארים אינסוף איברים מחוץ לרצועה. שימו לב שציר הערכים קבוע — הרצועה היא שגדלה, ולא הסדרה שמתקרבת.</p>
 </div>
 <div id="box-q-one-frac-n" class="thmbox thmbox-question" title="סדרה מתכנסת שאינה מונוטונית">
-<p><strong>שאלה 7.3.8 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
+<p><strong>שאלה 7.3.9 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
 <p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
 </div>
 <div id="box-sim-sin-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1 + \frac{\sin(n)}{n}$">
-<p><strong>סימולציה 7.3.9 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.10 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-sin-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1 + sin(n)/n"></iframe>
 <p>ההתקרבות אינה מונוטונית: הסדרה חוצה את הגבול שוב ושוב, וה-<span class="math inline">\(N\)</span> המינימלי קופץ בצורה לא צפויה כשמקטינים את <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-seq-3n-4" class="thmbox thmbox-question" title="מנה של ביטויים לינאריים">
-<p><strong>שאלה 7.3.10 — מנה של ביטויים לינאריים.</strong></p>
+<p><strong>שאלה 7.3.11 — מנה של ביטויים לינאריים.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{3n-4}{n+2}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 3\)</span>. נפשט: <span class="math display">\[\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} &lt; \frac{10}{n}.\]</span> יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{10}{n} &lt; \varepsilon\)</span>, ולכן <span class="math inline">\(\left|a_n - 3\right| &lt; \varepsilon\)</span>.</p>
 </div>
 <div id="box-sim-3n-4" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{3n-4}{n+2}$">
-<p><strong>סימולציה 7.3.11 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.12 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-rational.html" loading="lazy" title="סימולציה: הסדרה a_n = (3n-4)/(n+2)"></iframe>
 <p>כאן הגבול אינו <span class="math inline">\(0\)</span> והסדרה מתקרבת אליו מלמטה בלבד, ולכן כל האיברים החורגים נמצאים בצד אחד של הרצועה.</p>
 </div>
