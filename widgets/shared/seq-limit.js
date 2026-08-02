@@ -196,7 +196,7 @@
       var Y = function (v) { return mT + (1 - (v - lo) / (hi - lo)) * ph; };
       var inY = function (v) { return v >= lo && v <= hi; };
       var d = decimals((hi - lo) / 2);
-      var p = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="איברי הסדרה מול הרצועה סביב הגבול">'];
+      var p = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="איברי הסדרה מול סביבת האפסילון של הגבול">'];
 
       /* the band may run past the top or bottom of a pinned axis */
       var yTop = Math.max(Y(L + e), mT), yBot = Math.min(Y(L - e), mT + ph);
@@ -348,14 +348,14 @@
       var f = frame();
       $("plot").innerHTML = st.view === "plot" ? drawPlot(f) : drawLine(f);
 
-      var out = '<div><span class="key">איברים מחוץ לרצועה:</span> <span class="val">' +
+      var out = '<div><span class="key">איברים מחוץ לסביבה:</span> <span class="val">' +
                 (f.s.endless ? "∞" : f.s.count) + '</span></div>';
       if (!divergent) {
         out = '<div><span class="key mathlbl">N</span><span class="key"> המינימלי:</span> <span class="val">' +
               f.s.Nmin + '</span></div>' + out;
       }
       if (!f.bandVisible) {
-        out += '<div><span class="key">הרצועה צרה מכדי להיראות בקנה המידה הזה.</span></div>';
+        out += '<div><span class="key">הסביבה צרה מכדי להיראות בקנה המידה הזה.</span></div>';
       }
       $("readout").innerHTML = out;
 
