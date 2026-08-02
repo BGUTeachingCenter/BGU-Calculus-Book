@@ -1330,7 +1330,7 @@ window.Quarto = {
 <img src="figures/c07_fig09.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.9: סדרה המתכנסת ל-<span class="math inline">\(L\)</span> — הרצועה מסמנת את התחום <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>, וכל האיברים שהאינדקס שלהם גדול מ-<span class="math inline">\(N\)</span> נמצאים בתוכה; מחוץ לרצועה נשארו רק האיברים המסומנים באדום
+תרשים&nbsp;7.9: סדרה המתכנסת ל-<span class="math inline">\(L\)</span> — האזור המוצלל הוא סביבת ה-<span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span>, כלומר הקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>; כל האיברים שהאינדקס שלהם גדול או שווה ל-<span class="math inline">\(N\)</span> נמצאים בתוכה, ומחוצה לה נשארו רק האיברים המסומנים באדום
 </figcaption>
 </figure>
 </div>
@@ -1362,12 +1362,12 @@ window.Quarto = {
 <p>כאשר אנחנו מנסים להוכיח טענה מסוימת <em>לכל איברי</em> קבוצה מסוימת, הדרך היא לקחת איבר <em>שרירותי</em> בקבוצה, להסתמך על תכונות שנכונות לכל איברי הקבוצה, ולגזור מהן את הטענה המבוקשת עבור <em>אותו</em> איבר. מכיוון שאותו טיעון עצמו תקף לכל איבר בקבוצה, הטענה הופכת להיות נכונה לכל איבריה.</p>
 <p>כאן הקבוצה שלנו היא קבוצת כל ה-<span class="math inline">\(\varepsilon\)</span>-ים החיוביים, והטענה היא שקיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span>.</p>
 <p>הדרך הפורמלית הסטנדרטית לכתוב את זה היא זו. שימו לב: מכאן ואילך <strong>מודגשים</strong> רק המשפטים שנכנסים להוכחה עצמה. כל מה שאינו מודגש — ההסברים, המוטיבציה, והדרך שבה הגענו לכל שלב — נועד רק להסביר את הניסוח ואת מהלך המחשבה, ואינו נחוץ בהוכחה עצמה; בהוכחה שתכתבו אין צורך בו כלל.</p>
-<p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> <em>(בתרגום חופשי: ניקח <span class="math inline">\(\varepsilon&gt;0\)</span> כלשהו)</em>. <strong>נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong> <em>(זאת הטענה שאנחנו מבקשים להוכיח, אחרי שהצבנו <span class="math inline">\(1\)</span> במקום <span class="math inline">\(L\)</span>)</em>.</p>
+<p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> <em>(בתרגום חופשי: ניקח</em> <span class="math inline">\(\varepsilon&gt;0\)</span> כלשהו). <strong>נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong> <em>(זאת הטענה שאנחנו מבקשים להוכיח, אחרי שהצבנו</em> <span class="math inline">\(1\)</span> במקום <span class="math inline">\(L\)</span>).</p>
 <p>עכשיו עלינו למצוא <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל איבר <span class="math inline">\(a_n\)</span> שהאינדקס שלו גדול או שווה ל-<span class="math inline">\(N\)</span> יתקיים <span class="math inline">\(|a_n - 1|&lt;\varepsilon\)</span>.</p>
 <p>הדרך ההגיונית היחידה בשלב הזה היא לפתוח את הביטוי <span class="math inline">\(|a_n - 1|\)</span>, ״לשחק איתו״, ולמצוא איזשהו אינדקס <span class="math inline">\(N\)</span> — שתלוי ב-<span class="math inline">\(\varepsilon\)</span> — שמקיים את הטענה. וזה מה שנעשה.</p>
 <p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n - 1\right|\)</span> <strong>ונקבל</strong></p>
 <p><span class="math display">\[.\left|a_n-1\right|=\left|1-1\right|=0&lt;\varepsilon\]</span></p>
-<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> כלומר, הראינו שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו <span class="math inline">\(14\)</span>)</em> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
+<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> כלומר, הראינו שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו</em> <span class="math inline">\(14\)</span>) כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
 <p>נשים לב לכמה דברים. <em>ראשית</em>, אתם בטח שואלים למה <span class="math inline">\(14\)</span> ולא <span class="math inline">\(1\)</span>? בגדול, אין סיבה טובה — חוץ מזה שרצינו להראות שמספיק למצוא מספר <span class="math inline">\(N\)</span> כלשהו, ולא דווקא את ה-<span class="math inline">\(N\)</span> המינימלי שמקיים את הדרישה. למעשה, כל מספר שגדול או שווה ל-<span class="math inline">\(N\)</span> יכול לשמש באותו תפקיד.</p>
 <p><em>שנית</em>, וזה מצב שלא יקרה הרבה: ה-<span class="math inline">\(N\)</span> שבחרנו אינו תלוי ב-<span class="math inline">\(\varepsilon\)</span> כלל. ברוב המקרים בהמשך תהיה תלות כזו, והמצב שלנו הוא <em>חריג</em>.</p>
 <p>כך נראית ההוכחה הסופית — רק החלקים המודגשים:</p>
@@ -1457,32 +1457,106 @@ window.Quarto = {
 </div>
 </details>
 <p>הטענה הזו שימושית מפני שהיא מחליפה שאלה על התכנסות לגבול כלשהו בשאלה על שאיפה לאפס — ולשם כך די לחסום את <span class="math inline">\(\left|a_n-L\right|\)</span> מלמעלה בביטוי ששואף לאפס, בלי לעקוב אחרי הסדרה עצמה.</p>
-<div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת שאינה מתכנסת">
-<p><strong>שאלה 7.3.7 — סדרה מתחלפת שאינה מתכנסת.</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>, כלומר <span class="math inline">\(-1, 1, -1, 1, \dots\)</span>, <strong>מתבדרת</strong>. נניח בשלילה שיש לה גבול <span class="math inline">\(L\)</span>. אז לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span>. ניקח <span class="math inline">\(\varepsilon = 1\)</span>. לכל <span class="math inline">\(n&gt;N\)</span> <strong>זוגי</strong> מתקיים <span class="math inline">\(a_n = 1\)</span>, ולכן <span class="math inline">\(|1 - L| &lt; 1\)</span>; לכל <span class="math inline">\(n&gt;N\)</span> <strong>אי-זוגי</strong> מתקיים <span class="math inline">\(a_n = -1\)</span>, ולכן <span class="math inline">\(|L - (-1)| &lt; 1\)</span>. לפי אי-שוויון המשולש, <span class="math display">\[2 = |1 - (-1)| \le |1 - L| + |L - (-1)| &lt; 1 + 1 = 2,\]</span> כלומר <span class="math inline">\(2 &lt; 2\)</span> — סתירה. לכן הסדרה מתבדרת.</p>
+<div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת">
+<p><strong>שאלה 7.3.7 — סדרה מתחלפת.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n = (-1)^{n-1}\)</span> (כלומר <span class="math inline">\(1, -1, 1, -1, \dots\)</span>). הוכיחו או הפריכו: הסדרה מתכנסת.</p>
 </div>
-<div id="box-sim-pm-one" class="thmbox thmbox-simulation" title="הסדרה $a_n = (-1)^n$">
-<p><strong>סימולציה 7.3.8 — הסדרה <span class="math inline">\(a_n = (-1)^n\)</span>.</strong></p>
-<iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^n"></iframe>
-<p>בחרו מועמד לגבול וצמצמו את <span class="math inline">\(\varepsilon\)</span>: לכל מועמד נשארים אינסוף איברים מחוץ לרצועה. שימו לב שציר הערכים קבוע — הרצועה היא שגדלה, ולא הסדרה שמתקרבת.</p>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>תחילה ננסה להוכיח את הטענה. נראה כמה דרכים שגויות, על מנת להראות טעויות נפוצות שמופיעות בהוכחת גבולות.</p>
+<p><em>ניסיון ראשון (שגוי).</em> <strong>הוכחה:</strong> ניקח <span class="math inline">\(L=0\)</span> ו-<span class="math inline">\(\varepsilon=2\)</span>. לכל <span class="math inline">\(n\geq 1\)</span> מתקיים</p>
+<p><span class="math display">\[,\left|a_n-0\right| = \left|(-1)^{n-1}\right| = 1 &lt; 2 = \varepsilon\]</span></p>
+<p>ולכן <span class="math inline">\(N=1\)</span> מתאים, ומכאן ש-<span class="math inline">\(\lim\limits_{n\to\infty} a_n = 0\)</span>.</p>
+<p><em>היכן הטעות?</em> ההגדרה דורשת שהתנאי יתקיים לכל <span class="math inline">\(\varepsilon&gt;0\)</span>, ולא עבור <span class="math inline">\(\varepsilon\)</span> אחד שנוח לנו. כל מה שהראינו נכון — אבל הוא מראה רק ש-<span class="math inline">\(\varepsilon=2\)</span> ״עובד״, וזו טענה חלשה בהרבה מן הנדרש.</p>
+<p>וכדי לראות שאין זו קפדנות ריקה, נבדוק את אותו <span class="math inline">\(L=0\)</span> מול <span class="math inline">\(\varepsilon\)</span> קטן יותר. ניקח <span class="math inline">\(\varepsilon=\frac{1}{2}\)</span>. לכל <span class="math inline">\(n\geq 1\)</span> מתקיים</p>
+<p><span class="math display">\[,\left|a_n-0\right| = 1 \geq \frac{1}{2}\]</span></p>
+<p>כלומר אף איבר של הסדרה אינו מקיים <span class="math inline">\(\left|a_n-0\right| &lt; \frac{1}{2}\)</span>. לכן לא קיים <span class="math inline">\(N\)</span> המתאים ל-<span class="math inline">\(\varepsilon=\frac{1}{2}\)</span>, ומכאן ש-<span class="math inline">\(0\)</span> בוודאי אינו הגבול.</p>
+<p><em>ניסיון שני (שגוי).</em> אולי פשוט בחרנו מועמד לא נכון? <strong>הוכחה:</strong> ננסה <span class="math inline">\(L=1\)</span>. לכל <span class="math inline">\(n\)</span> אי-זוגי מתקיים <span class="math inline">\(a_n=1\)</span>, ולכן <span class="math inline">\(\left|a_n-1\right| = 0\)</span>. מכאן שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים אינסוף אינדקסים <span class="math inline">\(n\geq N\)</span> שעבורם</p>
+<p><span class="math display">\[,\left|a_n-1\right| = 0 &lt; \varepsilon\]</span></p>
+<p>ולכן <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 1\)</span>.</p>
+<p><em>היכן הטעות?</em> ההגדרה דורשת שקיים <span class="math inline">\(N\)</span> כך שכל האיברים מן האינדקס הזה והלאה קרובים ל-<span class="math inline">\(L\)</span> — ולא שיש אינסוף איברים כאלה. אלו שתי דרישות שונות לגמרי. כאן, לצד אינסוף האינדקסים ה״טובים״ (האי-זוגיים), יש גם אינסוף אינדקסים ״רעים״: לכל <span class="math inline">\(n\)</span> זוגי מתקיים <span class="math inline">\(a_n=-1\)</span>, ולכן <span class="math inline">\(\left|a_n-1\right| = 2\)</span>. שום <span class="math inline">\(N\)</span> לא ישאיר מאחוריו את כל האינדקסים הזוגיים.</p>
+<p>אותו ניסיון ייכשל באותו אופן בדיוק גם עבור <span class="math inline">\(L=-1\)</span>: שם האינדקסים הזוגיים נותנים <span class="math inline">\(\left|a_n-(-1)\right| = 0\)</span>, אך לכל <span class="math inline">\(n\)</span> אי-זוגי מתקיים <span class="math inline">\(\left|a_n-(-1)\right| = 2\)</span>, ולכן לכל <span class="math inline">\(\varepsilon\leq 2\)</span> קיימים אינסוף אינדקסים <span class="math inline">\(n\)</span> שעבורם <span class="math inline">\(\left|a_n-(-1)\right| \geq \varepsilon\)</span>.</p>
+<p>בשלב הזה אפשר היה להמשיך ולפסול מועמד אחרי מועמד — אבל יש אינסוף מועמדים, ולא נוכל לעבור על כולם אחד-אחד. במקום זאת נוכיח טענה אחת שפוסלת את כולם בבת אחת.</p>
+<p><strong>הפרכה: נניח בשלילה שהסדרה מתכנסת, כלומר שקיים</strong> <span class="math inline">\(L\in\mathbb{R}\)</span> <strong>כך ש-</strong><span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span><strong>.</strong></p>
+<p><strong>ניקח</strong> <span class="math inline">\(\varepsilon=1\)</span><strong>. לפי ההגדרה קיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-L\right| &lt; 1\)</span><strong>.</strong></p>
+<p><strong>גם מעבר ל-</strong><span class="math inline">\(N\)</span> <strong>יש אינדקסים אי-זוגיים וגם זוגיים, ולכן נוכל לבחור</strong> <span class="math inline">\(n_1\geq N\)</span> <strong>אי-זוגי ו-</strong><span class="math inline">\(n_2\geq N\)</span> <strong>זוגי. עבורם</strong> <span class="math inline">\(a_{n_1}=1\)</span> <strong>ו-</strong><span class="math inline">\(a_{n_2}=-1\)</span><strong>, ולכן</strong> <span class="math inline">\(\left|1-L\right| &lt; 1\)</span> <strong>וגם</strong> <span class="math inline">\(\left|-1-L\right| &lt; 1\)</span><strong>.</strong></p>
+<p><strong>לפי אי-שוויון המשולש,</strong></p>
+<p><span class="math display">\[,2 = \left|1-(-1)\right| = \left|(1-L)+(L+1)\right| \leq \left|1-L\right| + \left|L+1\right| &lt; 1+1 = 2\]</span></p>
+<p><strong>כלומר</strong> <span class="math inline">\(2&lt;2\)</span> <strong>— סתירה. לכן ההנחה שגויה, והסדרה אינה מתכנסת.</strong></p>
+<p>נסיים בתובנה כללית. מה שהפעיל את ההפרכה אינו משהו מיוחד לסדרה <span class="math inline">\((-1)^{n-1}\)</span>, אלא עובדה אחת בלבד: מצאנו מספר <strong>חיובי</strong> — נסמן אותו <span class="math inline">\(d\)</span> — כך שלכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים <span class="math inline">\(n,m\geq N\)</span> שעבורם</p>
+<p><span class="math display">\[.\left|a_n-a_m\right| \geq d\]</span></p>
+<p>במקרה שלנו <span class="math inline">\(d=2\)</span>: לכל <span class="math inline">\(N\)</span> נבחר <span class="math inline">\(n\geq N\)</span> אי-זוגי ו-<span class="math inline">\(m\geq N\)</span> זוגי, ואז <span class="math inline">\(\left|a_n-a_m\right| = \left|1-(-1)\right| = 2\)</span>. בפרט יש <strong>אינסוף</strong> זוגות כאלה — והחשוב מכך, הם אינם מתרכזים בתחילת הסדרה אלא מופיעים מעבר לכל אינדקס.</p>
+<p>כאשר זה קורה, <strong>שום</strong> <span class="math inline">\(L\)</span> ממשי אינו יכול להיות הגבול, וההוכחה היא בדיוק זו שראינו — עם <span class="math inline">\(\varepsilon = \frac{d}{2}\)</span>. אכן, אילו התכנסה הסדרה ל-<span class="math inline">\(L\)</span>, היה קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right| &lt; \frac{d}{2}\)</span>; אך אז, עבור <span class="math inline">\(n,m\geq N\)</span> כמו למעלה,</p>
+<p><span class="math display">\[,d \leq \left|a_n-a_m\right| = \left|(a_n-L)+(L-a_m)\right| \leq \left|a_n-L\right| + \left|a_m-L\right| &lt; \frac{d}{2}+\frac{d}{2} = d\]</span></p>
+<p>כלומר <span class="math inline">\(d&lt;d\)</span> — סתירה. שימו לב שה-<span class="math inline">\(\varepsilon\)</span> שבחרנו בהוכחה למעלה, <span class="math inline">\(\varepsilon=1\)</span>, הוא בדיוק <span class="math inline">\(\frac{d}{2}\)</span> עבור <span class="math inline">\(d=2\)</span>.</p>
+<p>כך נראית ההפרכה הסופית — רק החלקים המודגשים:</p>
+<p><strong>הפרכה: נניח בשלילה שהסדרה מתכנסת, כלומר שקיים</strong> <span class="math inline">\(L\in\mathbb{R}\)</span> <strong>כך ש-</strong><span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span><strong>.</strong></p>
+<p><strong>ניקח</strong> <span class="math inline">\(\varepsilon=1\)</span><strong>. לפי ההגדרה קיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-L\right| &lt; 1\)</span><strong>.</strong></p>
+<p><strong>גם מעבר ל-</strong><span class="math inline">\(N\)</span> <strong>יש אינדקסים אי-זוגיים וגם זוגיים, ולכן נוכל לבחור</strong> <span class="math inline">\(n_1\geq N\)</span> <strong>אי-זוגי ו-</strong><span class="math inline">\(n_2\geq N\)</span> <strong>זוגי. עבורם</strong> <span class="math inline">\(a_{n_1}=1\)</span> <strong>ו-</strong><span class="math inline">\(a_{n_2}=-1\)</span><strong>, ולכן</strong> <span class="math inline">\(\left|1-L\right| &lt; 1\)</span> <strong>וגם</strong> <span class="math inline">\(\left|-1-L\right| &lt; 1\)</span><strong>.</strong></p>
+<p><strong>לפי אי-שוויון המשולש,</strong></p>
+<p><span class="math display">\[,2 = \left|1-(-1)\right| = \left|(1-L)+(L+1)\right| \leq \left|1-L\right| + \left|L+1\right| &lt; 1+1 = 2\]</span></p>
+<p><strong>כלומר</strong> <span class="math inline">\(2&lt;2\)</span> <strong>— סתירה. לכן ההנחה שגויה, והסדרה אינה מתכנסת.</strong> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+<div id="box-sim-pm-one" class="thmbox thmbox-simulation" title="הסדרה $a_n = (-1)^{n-1}$">
+<p><strong>סימולציה 7.3.8 — הסדרה <span class="math inline">\(a_n = (-1)^{n-1}\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^(n-1)"></iframe>
+<p>בחרו מועמד לגבול וצמצמו את <span class="math inline">\(\varepsilon\)</span>: לכל מועמד נשארים אינסוף איברים מחוץ לסביבת ה-<span class="math inline">\(\varepsilon\)</span>. שימו לב שציר הערכים קבוע — הסביבה היא שגדלה, ולא הסדרה שמתקרבת.</p>
+</div>
+<div id="box-rem-cauchy" class="thmbox thmbox-remark">
+<p><strong>הערה 7.3.9.</strong></p>
+<p>התנאי שהופיע בתובנה שבסוף השאלה האחרונה חשוב דיו כדי לקבל שם משלו. שימו לב שהוא אינו מזכיר גבול כלל — הוא מדבר רק על המרחקים בין איברי הסדרה <strong>לבין עצמם</strong>. אפשר לבדוק אותו בלי לדעת מהו <span class="math inline">\(L\)</span>, ואפילו בלי לדעת אם קיים כזה.</p>
+</div>
+<div id="box-def-cauchy" class="thmbox thmbox-definition">
+<p><strong>הגדרה 7.3.10.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה ממשית. נאמר שהיא <strong>סדרת קושי</strong> אם לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n,m\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-a_m\right|&lt;\varepsilon\)</span>.</p>
+</div>
+<div id="box-lem-cauchy-test" class="thmbox thmbox-lemma" title="מבחן קושי להתכנסות">
+<p><strong>למה 7.3.11 — מבחן קושי להתכנסות.</strong></p>
+<p>כל סדרה מתכנסת היא סדרת קושי.</p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>זהו בדיוק הטיעון שראינו בתובנה שבסוף השאלה הקודמת; נחזור עליו כאן לשם שלמות.</p>
+<p>נניח בשלילה שהסדרה <span class="math inline">\(\{a_n\}\)</span> מתכנסת אך <strong>אינה</strong> סדרת קושי, ונסמן <span class="math inline">\(L=\lim\limits_{n\to\infty}a_n\)</span>.</p>
+<p>נשלול את התנאי שבהגדרה: קיים <span class="math inline">\(\varepsilon&gt;0\)</span> כך שלכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים <span class="math inline">\(n,m\geq N\)</span> שעבורם <span class="math display">\[.\left|a_n-a_m\right| \geq \varepsilon\]</span></p>
+<p>כעת נשתמש בהנחה שהסדרה מתכנסת. לפי הגדרת הגבול, לכל <span class="math inline">\(d&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math display">\[.\left|a_n-L\right| &lt; d\]</span></p>
+<p><em>מדוע <span class="math inline">\(d\)</span>, ולא <span class="math inline">\(\varepsilon\)</span> כפי שכתבנו עד כה?</em> מפני שהאות <span class="math inline">\(\varepsilon\)</span> כבר תפוסה: היא מסמנת את המספר שקיבלנו מן השלילה, והוא מודד מרחק <strong>בין שני איברי הסדרה</strong>. המספר שבהגדרת הגבול הוא מספר אחר, שאותו אנחנו בוחרים, והוא מודד מרחק <strong>מן הגבול</strong>. אלו שני דברים שונים, ולכן הם זקוקים לשני סימונים שונים.</p>
+<p>נבחר עכשיו <span class="math inline">\(d=\frac{\varepsilon}{2}\)</span>. מכיוון ש-<span class="math inline">\(\varepsilon&gt;0\)</span> גם <span class="math inline">\(d&gt;0\)</span>, ולכן קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right| &lt; \frac{\varepsilon}{2}\)</span>.</p>
+<p>עבור אותו <span class="math inline">\(N\)</span> קיימים, לפי השלילה, אינדקסים <span class="math inline">\(n,m\geq N\)</span> שעבורם <span class="math inline">\(\left|a_n-a_m\right|\geq\varepsilon\)</span>. אך <span class="math display">\[,\varepsilon \leq \left|a_n-a_m\right| = \left|(a_n-L)+(L-a_m)\right| \leq \left|a_n-L\right|+\left|a_m-L\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span> כלומר <span class="math inline">\(\varepsilon&lt;\varepsilon\)</span> — סתירה. לכן כל סדרה מתכנסת היא אכן סדרת קושי. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+<div id="box-rem-two-symbols" class="thmbox thmbox-remark">
+<p><strong>הערה 7.3.12.</strong></p>
+<p>כפי שראינו בהוכחה, כאשר יש צורך לסמן <strong>שני</strong> דברים שונים — שני מספרים, שני אינדקסים, שתי סדרות — חובה להשתמש <strong>בשני סימונים שונים</strong>. שימוש באותה אות לשני תפקידים אינו קיצור נוח אלא שגיאה חמורה: הוא מזהה בין שני עצמים שונים, ומוביל להוכחות שנראות תקינות אך אינן. זו אחת הטעויות הנפוצות ביותר, וכדאי להקפיד על כך כבר עכשיו.</p>
+</div>
+<p>הכיוון ההפוך נכון גם הוא: <strong>כל סדרת קושי מתכנסת</strong>. יחד, שני הכיוונים נותנים את האפיון המלא — סדרה מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי. הוכחת הכיוון ההפוך קשה יותר ודורשת כלים שטרם פיתחנו, ולכן נדחה אותה להמשך.</p>
+<!-- Route for the converse (Cauchy => convergent), for when this gets written:
+     take b_n = sup of the tail from n, a_n = inf of the tail from n; then a_n <= x_n <= b_n,
+     b_n is non-increasing and a_n non-decreasing, both bounded because a Cauchy sequence is
+     bounded, so both converge; Cauchy gives b_n - a_n -> 0, so the two limits coincide, and
+     the sandwich theorem carries x_n to that common limit. Needs: bounded+monotone converges,
+     and the sandwich theorem — neither is stated yet, so this cannot be placed before both
+     exist. (This is also the only place where completeness of R is actually doing work; the
+     text does not develop that notion, so it is deliberately not named above.) -->
+<div class="todo">
+<p>הוכחת הכיוון ההפוך — כל סדרת קושי מתכנסת — להשלמה בהמשך.</p>
 </div>
 <div id="box-q-one-frac-n" class="thmbox thmbox-question" title="סדרה מתכנסת שאינה מונוטונית">
-<p><strong>שאלה 7.3.9 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
+<p><strong>שאלה 7.3.13 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
 <p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
 </div>
 <div id="box-sim-sin-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1 + \frac{\sin(n)}{n}$">
-<p><strong>סימולציה 7.3.10 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.14 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-sin-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1 + sin(n)/n"></iframe>
 <p>ההתקרבות אינה מונוטונית: הסדרה חוצה את הגבול שוב ושוב, וה-<span class="math inline">\(N\)</span> המינימלי קופץ בצורה לא צפויה כשמקטינים את <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-seq-3n-4" class="thmbox thmbox-question" title="מנה של ביטויים לינאריים">
-<p><strong>שאלה 7.3.11 — מנה של ביטויים לינאריים.</strong></p>
+<p><strong>שאלה 7.3.15 — מנה של ביטויים לינאריים.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{3n-4}{n+2}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 3\)</span>. נפשט: <span class="math display">\[\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} &lt; \frac{10}{n}.\]</span> יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{10}{n} &lt; \varepsilon\)</span>, ולכן <span class="math inline">\(\left|a_n - 3\right| &lt; \varepsilon\)</span>.</p>
 </div>
 <div id="box-sim-3n-4" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{3n-4}{n+2}$">
-<p><strong>סימולציה 7.3.12 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.16 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-rational.html" loading="lazy" title="סימולציה: הסדרה a_n = (3n-4)/(n+2)"></iframe>
-<p>כאן הגבול אינו <span class="math inline">\(0\)</span> והסדרה מתקרבת אליו מלמטה בלבד, ולכן כל האיברים החורגים נמצאים בצד אחד של הרצועה.</p>
+<p>כאן הגבול אינו <span class="math inline">\(0\)</span> והסדרה מתקרבת אליו מלמטה בלבד, ולכן כל האיברים החורגים נמצאים בצד אחד של הסביבה.</p>
 </div>
 <p>נשים לב: הגדרת ההתכנסות בודקת רק את <strong>קיום</strong> הגבול, לא את <strong>מהירות</strong> ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.</p>
 </section>
