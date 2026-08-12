@@ -1627,33 +1627,33 @@ window.Quarto = {
 </section>
 <section id="תרגילים-1" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="תרגילים-1">תרגילים</h3>
-<p>התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״אמת״ או על ״שקר״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.</p>
+<p>התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״נכון״ או על ״לא נכון״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.</p>
 <!-- הפתרונות המתקפלים כאן חייבים להישאר בלי מזהה (#id): צירוף של מזהה עם
      .thmsol .foldable מפיל את הפילטר של Quarto עצמו. הקישור בין שאלת האמת/שקר
      לפתרון נעשה לפי סדר המסמך, דרך התכונה data-reveal — ראו _styles.html. -->
-<p><strong>אמת או שקר.</strong> בארבעת התרגילים הבאים <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> ו-<span class="math inline">\(\{b_n\}_{n=1}^{\infty}\)</span> הן סדרות ממשיות כלשהן.</p>
+<p><strong>נכון או לא נכון.</strong> בארבעת התרגילים הבאים <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> ו-<span class="math inline">\(\{b_n\}_{n=1}^{\infty}\)</span> הן סדרות ממשיות כלשהן.</p>
 <p><strong>תרגיל 1.</strong> אם <span class="math inline">\(\{a_n\}\)</span> אינה מתכנסת וגם <span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת, אז <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת.</p>
 <div class="tf-quiz" data-correct="false" data-reveal="">
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>שקר.</strong> ניקח <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span>. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(a_n + b_n = 0\)</span>, ולכן הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת ל-<span class="math inline">\(0\)</span>.</p>
+<p><strong>לא נכון.</strong> ניקח <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span>. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(a_n + b_n = 0\)</span>, ולכן הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת ל-<span class="math inline">\(0\)</span>.</p>
 </div>
 </details>
 <p><strong>תרגיל 2.</strong> אם <span class="math inline">\(\{a_n\}\)</span> מתכנסת ו-<span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת, אז <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת.</p>
 <div class="tf-quiz" data-correct="true" data-reveal="">
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>אמת.</strong> נניח בשלילה שגם <span class="math inline">\(\{a_n+b_n\}\)</span> מתכנסת, ונסמן <span class="math inline">\(a_n \to A\)</span> וכן <span class="math inline">\(a_n+b_n \to S\)</span>. נראה שאז <span class="math inline">\(b_n \to S-A\)</span>, בסתירה להנחה ש-<span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת.</p>
+<p><strong>נכון.</strong> נניח בשלילה שגם <span class="math inline">\(\{a_n+b_n\}\)</span> מתכנסת, ונסמן <span class="math inline">\(a_n \to A\)</span> וכן <span class="math inline">\(a_n+b_n \to S\)</span>. נראה שאז <span class="math inline">\(b_n \to S-A\)</span>, בסתירה להנחה ש-<span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת.</p>
 <p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. לפי ההגדרה קיים <span class="math inline">\(N_1\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(\left|a_n-A\right| &lt; \frac{\varepsilon}{2}\)</span>, וקיים <span class="math inline">\(N_2\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(\left|\left(a_n+b_n\right)-S\right| &lt; \frac{\varepsilon}{2}\)</span>. נבחר <span class="math inline">\(N = \max\left\{N_1,N_2\right\}\)</span>.</p>
 <p>לכל <span class="math inline">\(n \geq N\)</span> נכתוב</p>
 <p><span class="math display">\[,b_n - \left(S-A\right) = \left(a_n+b_n-S\right) - \left(a_n-A\right)\]</span></p>
@@ -1664,26 +1664,26 @@ window.Quarto = {
 </details>
 <p><strong>תרגיל 3.</strong> אם <span class="math inline">\(\{a_n+b_n\}\)</span> מתכנסת, אז לפחות אחת מן הסדרות <span class="math inline">\(\{a_n\}\)</span> , <span class="math inline">\(\{b_n\}\)</span> מתכנסת.</p>
 <div class="tf-quiz" data-correct="false" data-reveal="">
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>שקר.</strong> אותה דוגמה נגדית שבתרגיל הראשון: עבור <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span> הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.</p>
+<p><strong>לא נכון.</strong> אותה דוגמה נגדית שבתרגיל הראשון: עבור <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span> הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.</p>
 </div>
 </details>
 <p><strong>תרגיל 4.</strong> אם <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת, אז לפחות אחת מן הסדרות <span class="math inline">\(\{a_n\}\)</span> , <span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת.</p>
 <div class="tf-quiz" data-correct="true" data-reveal="">
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>אמת.</strong> נוכיח את הטענה השקולה: אם שתי הסדרות מתכנסות, אז גם הסכום מתכנס.</p>
+<p><strong>נכון.</strong> נוכיח את הטענה השקולה: אם שתי הסדרות מתכנסות, אז גם הסכום מתכנס.</p>
 <p>נניח <span class="math inline">\(a_n \to A\)</span> וכן <span class="math inline">\(b_n \to B\)</span>, ויהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N_1\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(\left|a_n-A\right| &lt; \frac{\varepsilon}{2}\)</span>, וקיים <span class="math inline">\(N_2\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(\left|b_n-B\right| &lt; \frac{\varepsilon}{2}\)</span>. נבחר <span class="math inline">\(N = \max\left\{N_1,N_2\right\}\)</span>, ואז לכל <span class="math inline">\(n \geq N\)</span>, לפי אי-שוויון המשולש,</p>
 <p><span class="math display">\[.\left|\left(a_n+b_n\right)-\left(A+B\right)\right| \leq \left|a_n-A\right| + \left|b_n-B\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span></p>
 <p>לכן <span class="math inline">\(a_n+b_n \to A+B\)</span>. מכאן שאם הסכום אינו מתכנס, לא ייתכן ששתי הסדרות מתכנסות.</p>
