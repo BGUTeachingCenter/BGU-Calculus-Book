@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="he" xml:lang="he" dir="rtl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,6 +76,20 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>
+/* Math inside an RTL page. The document is <html dir="rtl">, so both Quarto's
+   .math wrapper and MathJax's own container inherit direction:rtl, and math with
+   more than one token comes out mirrored: (L-ε, L+ε) renders as )L+ε, L-ε(, and
+   ⌊m⌋ ≤ m < ⌊m⌋+1 reverses too. Give every math run its own LTR bidi context.
+   Single-symbol math ($L$, $\varepsilon$) cannot show the fault, which is why it
+   surfaces in figure captions — that is where the intervals and the chained
+   inequalities are. The PDF is unaffected; xelatex already boxes math LTR. */
+.math.inline, .math.display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+mjx-container, mjx-container * {
+  direction: ltr;
+}
 .todo {
   color: #8a8a8a;
   font-style: italic;
@@ -363,6 +380,23 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.classList.add("incorrect");
           if (feedback) feedback.textContent = "✗ לא מדויק — נסו שוב, או פתחו את הפתרון.";
         }
+        /* Opt-in via a bare data-reveal attribute: answering opens the solution that
+           follows, so the reasoning appears once the reader has committed. Quizzes
+           without the attribute (chapter 1) are untouched.
+           Located by document order, NOT by id: a Div carrying an identifier together
+           with .thmsol .foldable crashes Quarto's own main.lua ("attempt to index a
+           nil value (field 'attr')"). Either attribute alone is fine; only the
+           combination breaks, so the solution boxes deliberately have no id. */
+        if (quiz.hasAttribute("data-reveal")) {
+          var box = null;
+          for (var node = quiz; node && node.tagName !== "MAIN" && !box; node = node.parentElement) {
+            for (var sib = node.nextElementSibling; sib && !box; sib = sib.nextElementSibling) {
+              box = sib.tagName === "DETAILS" ? sib
+                  : (sib.querySelector ? sib.querySelector("details") : null);
+            }
+          }
+          if (box) box.open = true;
+        }
       });
     });
   });
@@ -560,7 +594,7 @@ window.addEventListener("message", function (e) {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -912,6 +946,7 @@ window.Quarto = {
   <li><a href="#גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" id="toc-גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" class="nav-link" data-scroll-target="#גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות"><span class="header-section-number">7.3</span> גבול של סדרה: הגדרה פורמלית ודוגמאות</a>
   <ul>
   <li><a href="#דוגמאות-ושאלות-פתורות" id="toc-דוגמאות-ושאלות-פתורות" class="nav-link" data-scroll-target="#דוגמאות-ושאלות-פתורות">דוגמאות ושאלות פתורות</a></li>
+  <li><a href="#תרגילים-1" id="toc-תרגילים-1" class="nav-link" data-scroll-target="#תרגילים-1">תרגילים</a></li>
   </ul></li>
   <li><a href="#פיתוח-עשרוני-כסדרה-העשרה" id="toc-פיתוח-עשרוני-כסדרה-העשרה" class="nav-link" data-scroll-target="#פיתוח-עשרוני-כסדרה-העשרה"><span class="header-section-number">7.4</span> פיתוח עשרוני כסדרה (העשרה)</a></li>
   </ul>
@@ -947,7 +982,7 @@ window.Quarto = {
 </div>
 <div class="thmbox thmbox-remark" title="ההגדרה הפורמלית: סדרה כפונקציה">
 <p><strong>הערה 7.1.2 — ההגדרה הפורמלית: סדרה כפונקציה.</strong></p>
-<p>פורמלית, סדרה ממשית <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> היא <strong>פונקציה</strong> <span class="math inline">\(a:\mathbb{N}\to\mathbb{R}\)</span> — לכל מספר טבעי <span class="math inline">\(n\)</span> מותאם ערך ממשי יחיד <span class="math inline">\(a_n = a(n)\)</span>. הצגה זו הופכת את ״הסדר״ ואת ״האינסופיות״ למדויקים. האינדקס רץ על המספרים הטבעיים <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \dots\}\)</span>, ולכן סדרה מתחילה כברירת מחדל מ-<span class="math inline">\(a_1\)</span>; רק כאשר יצוין במפורש נתחיל את האינדקס במקום אחר (למשל <span class="math inline">\(a_0\)</span>).</p>
+<p>פורמלית, סדרה ממשית <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> היא <strong>פונקציה</strong> <span class="math inline">\(a:\mathbb{N}\to\mathbb{R}\)</span>, כלומר לכל מספר טבעי <span class="math inline">\(n\)</span> מותאם ערך ממשי יחיד <span class="math inline">\(a_n = a(n)\)</span>. הצגה זו הופכת את ״הסדר״ ואת ״האינסופיות״ למדויקים. האינדקס רץ על המספרים הטבעיים <span class="math inline">\(\mathbb{N} = \{1, 2, 3, \dots\}\)</span>, ולכן סדרה מתחילה כברירת מחדל מ-<span class="math inline">\(a_1\)</span>; רק כאשר יצוין במפורש נתחיל את האינדקס במקום אחר (למשל <span class="math inline">\(a_0\)</span>).</p>
 </div>
 <p>איך מתארים סדרה? עלינו לתאר במדויק איזה איבר נמצא במקום ה-<span class="math inline">\(n\)</span>, לכל <span class="math inline">\(n\in\mathbb{N}\)</span>. לכתוב את כל האיברים לפי הסדר — בלתי אפשרי, שכן יש אינסוף מהם. לכן נעזרים בכמה <strong>דרכים לתיאור סדרה</strong>; נציג שלוש דרכים נפוצות.</p>
 <section id="הדרך-הנאיבית" class="level3 unnumbered">
@@ -966,8 +1001,8 @@ window.Quarto = {
 <p>כמה סדרות המוגדרות בנוסחה סגורה:</p>
 <ul>
 <li><span class="math inline">\(a_n = n\)</span> נותנת <span class="math inline">\(1, 2, 3, 4, \dots\)</span>;</li>
-<li><span class="math inline">\(a_n = (-1)^n\)</span> נותנת <span class="math inline">\(-1, 1, -1, 1, \dots\)</span> — סדרה <strong>מתחלפת</strong>;</li>
-<li><span class="math inline">\(a_n = 2^n\)</span> נותנת <span class="math inline">\(2, 4, 8, 16, \dots\)</span> — <strong>חזקות</strong> של <span class="math inline">\(2\)</span>;</li>
+<li><span class="math inline">\(a_n = (-1)^n\)</span> נותנת <span class="math inline">\(-1, 1, -1, 1, \dots\)</span>, והיא סדרה <strong>מתחלפת</strong>;</li>
+<li><span class="math inline">\(a_n = 2^n\)</span> נותנת <span class="math inline">\(2, 4, 8, 16, \dots\)</span>, שהם <strong>חזקות</strong> של <span class="math inline">\(2\)</span>;</li>
 <li>הסדרה הקבועה <span class="math inline">\(a_n = 8\)</span> נותנת <span class="math inline">\(8, 8, 8, \dots\)</span>.</li>
 </ul>
 </div>
@@ -1004,7 +1039,14 @@ window.Quarto = {
 <div class="extra-title">
 העשרה: רקורסיה מתקדמת
 </div>
-<p>הכלל הרקורסיבי גמיש: הוא יכול להישען על איברים רחוקים מן האחרון, ואף להשתנות לפי צורת האינדקס. נגדיר, למשל, סדרה שכל איבר בה נשען על האיבר שבמקום <span class="math inline">\(\left\lfloor n/2 \right\rfloor\)</span>, בהתאם לזוגיות של <span class="math inline">\(n\)</span>: <span class="math display">\[a_n = \begin{cases} a_{n/2} &amp; \text{יגוז}\ n \\ a_{(n-1)/2} + 1 &amp; \text{יגוז-יא}\ n \end{cases}\]</span> (עם <span class="math inline">\(a_1 = 1\)</span>). מתקבלת הסדרה <span class="math inline">\(1, 1, 2, 1, 2, 2, 3, 1, \dots\)</span>, ומסתבר ש-<span class="math inline">\(a_n\)</span> הוא בדיוק מספר הספרות <span class="math inline">\(1\)</span> בייצוג הבינארי של <span class="math inline">\(n\)</span>.</p>
+<p><strong>מספרים בינאריים.</strong> בבסיס עשר, הכתיב <span class="math inline">\(4703\)</span> פירושו</p>
+<p><span class="math display">\[,4\cdot 1000 + 7\cdot 100 + 0\cdot 10 + 3\cdot 1\]</span></p>
+<p>כלומר סכום של חזקות של <span class="math inline">\(10\)</span>. הכתיב <strong>הבינארי</strong> בנוי בדיוק כך, אלא שבמקום חזקות של <span class="math inline">\(10\)</span> הוא משתמש ב<strong>חזקות של</strong> <span class="math inline">\(2\)</span>, ולכן די בו בשתי ספרות, <span class="math inline">\(0\)</span> ו-<span class="math inline">\(1\)</span>. כך הכתיב <span class="math inline">\(10110\)</span> פירושו</p>
+<p><span class="math display">\[1\cdot 2^4 + 0\cdot 2^3 + 1\cdot 2^2 + 1\cdot 2^1 + 0\cdot 2^0 =\]</span></p>
+<p><span class="math display">\[.16 + 0 + 4 + 2 + 0 = 22\]</span></p>
+<iframe class="widget-frame" src="widgets/ch07/binary-counter.html" loading="lazy" title="ממיר אינטראקטיבי: מספרים בינאריים"></iframe>
+<p>שני דברים שיהיו שימושיים מיד. ראשית, <span class="math inline">\(n\)</span> זוגי בדיוק כאשר הספרה הבינארית האחרונה שלו היא <span class="math inline">\(0\)</span>. שנית, המעבר מ-<span class="math inline">\(n\)</span> ל-<span class="math inline">\(\left\lfloor n/2 \right\rfloor\)</span> הוא בדיוק מחיקת אותה ספרה אחרונה.</p>
+<p><strong>הסדרה.</strong> הכלל הרקורסיבי גמיש: הוא יכול להישען על איברים רחוקים מן האחרון, ואף להשתנות לפי צורת האינדקס. נגדיר, למשל, סדרה שכל איבר בה נשען על האיבר שבמקום <span class="math inline">\(\left\lfloor n/2 \right\rfloor\)</span>, בהתאם לזוגיות של <span class="math inline">\(n\)</span>: <span class="math display">\[a_n = \begin{cases} a_{n/2} &amp; \text{יגוז}\ n \\ a_{(n-1)/2} + 1 &amp; \text{יגוז-יא}\ n \end{cases}\]</span> (עם <span class="math inline">\(a_1 = 1\)</span>). מתקבלת הסדרה <span class="math inline">\(1, 1, 2, 1, 2, 2, 3, 1, \dots\)</span>, ומסתבר ש-<span class="math inline">\(a_n\)</span> הוא בדיוק מספר הספרות <span class="math inline">\(1\)</span> בייצוג הבינארי של <span class="math inline">\(n\)</span>.</p>
 </div>
 </section>
 <section id="תרגילים" class="level3 unnumbered">
@@ -1033,14 +1075,14 @@ window.Quarto = {
 <p>בפועל, כשאנחנו עובדים עם מספרים, לעיתים קרובות איננו עובדים עם הערך המדויק אלא עם ערך ש״קרוב מספיק״ אליו. הדוגמה הפשוטה ביותר היא כתיבת <span class="math inline">\(0.3333\)</span> במקום <span class="math inline">\(\frac{1}{3}\)</span>: אלה אינם אותו מספר, אבל לרוב הצרכים ההבדל ביניהם אינו משנה. כך גם כשכותבים <span class="math inline">\(1.41\)</span> במקום <span class="math inline">\(\sqrt{2}\)</span>.</p>
 <p>אבל מה פירוש ״קרוב״? כל עוד לא צירפנו לביטוי הזה מספר, אין בו טענה מתמטית. לכן קובעים <strong>מראש</strong> את השגיאה שאנחנו מוכנים לסבול, ומסמנים אותה <span class="math inline">\(\varepsilon&gt;0\)</span> (״אפסילון״). נאמר ש-<span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> <strong>ברמת דיוק</strong> <span class="math inline">\(\varepsilon\)</span> אם המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L\)</span> קטן מ-<span class="math inline">\(\varepsilon\)</span>.</p>
 <p>והמרחק בין שני מספרים על הישר כבר מוכר לנו: הוא הערך המוחלט של ההפרש ביניהם. כלומר, התנאי הוא <span class="math display">\[|x - L| &lt; \varepsilon\]</span> ושימו לב שהמרחק <strong>אינו תלוי בסדר</strong>, שכן <span class="math inline">\(|x - L| = |L - x|\)</span>. וזה הגיוני: לא מעניין אותנו אם <span class="math inline">\(x\)</span> גדול מ-<span class="math inline">\(L\)</span> או קטן ממנו, אלא רק כמה הוא רחוק ממנו. למשל, <span class="math inline">\(0.3333\)</span> קטן מ-<span class="math inline">\(\frac{1}{3}\)</span> ואילו <span class="math inline">\(0.3334\)</span> גדול ממנו — ושניהם מקרבים אותו ברמת דיוק <span class="math inline">\(0.001\)</span>.</p>
-<p>את אותו תנאי אפשר לרשום גם בלי ערך מוחלט, ואז מתקבלת תמונה גאומטרית: <span class="math display">\[|x - L| &lt; \varepsilon \iff -\varepsilon &lt; x - L &lt; \varepsilon \iff L - \varepsilon &lt; x &lt; L + \varepsilon\]</span> כלומר <span class="math inline">\(x\)</span> נמצא בקטע הפתוח <span class="math inline">\((L-\varepsilon,\ L+\varepsilon)\)</span> — קטע שמרכזו <span class="math inline">\(L\)</span> ורוחבו <span class="math inline">\(2\varepsilon\)</span>. זוהי בדיוק <strong>סביבת ה-</strong><span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span> שראינו בפרק על הערך המוחלט. שתי הצורות שקולות לחלוטין, ונעבור ביניהן בחופשיות: הראשונה היא טענה על ה<strong>שגיאה</strong> — גודל אחד, המרחק, החסום על ידי מספר אחד; השנייה היא טענה על <strong>מקומו</strong> של <span class="math inline">\(x\)</span> על הישר.</p>
+<p>את אותו תנאי אפשר לרשום גם בלי ערך מוחלט, ואז מתקבלת תמונה גאומטרית: <span class="math display">\[|x - L| &lt; \varepsilon \iff -\varepsilon &lt; x - L &lt; \varepsilon \iff L - \varepsilon &lt; x &lt; L + \varepsilon\]</span> כלומר <span class="math inline">\(x\)</span> נמצא בקטע הפתוח <span class="math inline">\((L-\varepsilon,\ L+\varepsilon)\)</span>, קטע שמרכזו <span class="math inline">\(L\)</span> ורוחבו <span class="math inline">\(2\varepsilon\)</span>. זוהי בדיוק <strong>סביבת ה-</strong><span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span> שראינו בפרק על הערך המוחלט. שתי הצורות שקולות לחלוטין, ונעבור ביניהן בחופשיות: הראשונה היא טענה על ה<strong>שגיאה</strong> — גודל אחד, המרחק, החסום על ידי מספר אחד; השנייה היא טענה על <strong>מקומו</strong> של <span class="math inline">\(x\)</span> על הישר.</p>
 <div id="fig-eps-approx" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eps-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c07_fig13.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eps-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.1: <span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span> — המרחק ביניהם קטן מ-<span class="math inline">\(\varepsilon\)</span>, כלומר <span class="math inline">\(x\)</span> נמצא בקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>
+תרשים&nbsp;7.1: <span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>; המרחק ביניהם קטן מ-<span class="math inline">\(\varepsilon\)</span>, כלומר <span class="math inline">\(x\)</span> נמצא בקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>
 </figcaption>
 </figure>
 </div>
@@ -1052,7 +1094,7 @@ window.Quarto = {
 <p>המקרה הברור ביותר הוא זה שכבר עמדנו בו. רצינו לקרב מספר, הגדרנו סדרה שלכאורה עושה את העבודה — ומניין לנו שאכן כך? אין די בכך שהסדרה ״נראית מתקרבת״: כדי שהקירוב יהיה לגיטימי עלינו לדעת שהיא באמת מקיימת את שדרשנו, כלומר שלכל רמת דיוק אכן קיים אינדקס שהחל ממנו כל האיברים מקרבים את המספר ברמת הדיוק הזו. זו בדיוק העבודה שנעשה בהמשך הסעיף עבור <span class="math inline">\(\pi\)</span>.</p>
 <p>ולעיתים הסדרה אינה נבנית על ידינו כלל, אלא <strong>יוצאת מתוך תהליך</strong>: <span class="math inline">\(a_n\)</span> הוא התוצאה המתקבלת כאשר הפרמטר הוא <span class="math inline">\(n\)</span>, ודווקא המספר הוא מה שאין לנו. למשל, נניח ש-<span class="math inline">\(a_n\)</span> הוא הזמן הדרוש לבניית בית על ידי <span class="math inline">\(n\)</span> פועלים. ככל שנוסיף פועלים הזמן יילך ויקטן — אך לא לאפס, שכן יש חלק מהעבודה שאי אפשר לחלק ביניהם. הזמן מתייצב על ערך מסוים: הזמן המהיר ביותר שבו אפשר לבנות את הבית בכלל. את הערך הזה איננו יודעים מראש, אבל עצם הידיעה שהוא קיים מעשית מאוד — מרגע שאנחנו ״מספיק קרובים״ אליו, כבר אין טעם להוסיף פועלים.</p>
 <p>דוגמה עדכנית יותר היא אימון של מודל בלמידת מכונה. למודל יש פרמטרים, ויש להם ערך שבו הוא מתפקד בצורה הטובה ביותר; תהליך האימון מייצר סדרה של ערכים — אחד לכל שלב אימון. האם הסדרה הזו מתקרבת אל הערך האופטימלי? והאם היא בכלל מתייצבת על משהו? אלו שאלות אמיתיות, ולא כל אימון עונה עליהן בחיוב.</p>
-<p>שכן לא כל תהליך מתייצב, וכדאי לראות זאת מיד. קחו סדרה שמתנהגת כך: <span class="math display">\[1,\ 2,\ 3,\ 1,\ 2,\ 1,\ 2,\ 3,\ 1,\ 2,\ \dots\]</span> היא אינה בורחת לאינסוף — כל איבריה בין <span class="math inline">\(1\)</span> ל-<span class="math inline">\(3\)</span> — וגם אינה מתקרבת לשום מספר. היא פשוט רודפת אחר זנבה: חוזרת שוב ושוב על אותם ערכים, ולעולם אינה מתיישבת על אחד מהם.</p>
+<p>שכן לא כל תהליך מתייצב, וכדאי לראות זאת מיד. קחו סדרה שמתנהגת כך: <span class="math display">\[1,\ 2,\ 3,\ 1,\ 2,\ 1,\ 2,\ 3,\ 1,\ 2,\ \dots\]</span> היא אינה בורחת לאינסוף — כל איבריה בין <span class="math inline">\(1\)</span> ל-<span class="math inline">\(3\)</span>, וגם אינה מתקרבת לשום מספר. היא פשוט רודפת אחר זנבה: חוזרת שוב ושוב על אותם ערכים, ולעולם אינה מתיישבת על אחד מהם.</p>
 <p>דוגמה יומיומית לאותו כשל: מרצה כותב על הלוח באותיות קטנות מדי. מבקשים ממנו לכתוב גדול יותר — והוא מצייר אותיות בגובה חצי לוח. מבקשים קטן יותר — ושוב זעיר. הגודל קופץ מקצה לקצה ואינו מתקרב לשום גודל, ולעולם לא נגיע לגודל הרצוי ולא נוכל לעצור. שימו לב מדוע: הבקשה ״גדול יותר״ אינה נושאת עמה שום <strong>רמת דיוק</strong>. כל עוד צורת הבקשה אינה משתנה, אין לנו כלל קריטריון שיאמר לנו מתי הגענו — וזו בדיוק הסיבה שקבענו מראש את <span class="math inline">\(\varepsilon\)</span>.</p>
 <div class="thmbox thmbox-remark" title="אותו רעיון, בהקשרים רבים">
 <p><strong>הערה 7.2.1 — אותו רעיון, בהקשרים רבים.</strong></p>
@@ -1114,7 +1156,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>נחשב את שטחו של משולש כזה לפי בסיס כפול גובה חלקי שתיים. מן התרשים: הגובה מן המרכז אל הבסיס הוא <span class="math inline">\(\cos\frac{\pi}{n}\)</span>, מחצית הבסיס היא <span class="math inline">\(\sin\frac{\pi}{n}\)</span>, ולכן הבסיס כולו הוא <span class="math inline">\(2\sin\frac{\pi}{n}\)</span>. נסמן ב-<span class="math inline">\(T_n\)</span> את שטחו של משולש כזה. מכאן <span class="math display">\[T_n = \frac{1}{2}\cdot 2\sin\frac{\pi}{n}\cdot\cos\frac{\pi}{n} = \sin\frac{\pi}{n}\,\cos\frac{\pi}{n}\]</span> ולפי <strong>נוסחת הזווית הכפולה</strong>, <span class="math inline">\(\sin 2\alpha = 2\sin\alpha\cos\alpha\)</span>, נציב <span class="math inline">\(\alpha = \frac{\pi}{n}\)</span> ונקבל <span class="math display">\[.T_n = \frac{1}{2}\sin\frac{2\pi}{n}\]</span> יש <span class="math inline">\(n\)</span> משולשים חופפים כאלה, ולכן <span class="math display">\[.S_n = n\,T_n = \frac{n}{2}\,\sin\frac{2\pi}{n}\]</span></p>
-<p>נבדוק את הנוסחה על המקרה הפשוט ביותר, המשושה. כאשר <span class="math inline">\(n = 6\)</span> אורך הצלע שווה בדיוק לרדיוס, ולכן ששת המשולשים הם דווקא <strong>שווי צלעות</strong> בעלי צלע <span class="math inline">\(1\)</span>; שטחו של משולש כזה הוא <span class="math inline">\(\frac{\sqrt{3}}{4}\)</span>, ובסך הכול <span class="math inline">\(6\cdot\frac{\sqrt{3}}{4} = \frac{3\sqrt{3}}{2}\)</span>. ואכן, הצבה בנוסחה נותנת <span class="math inline">\(\frac{6}{2}\sin\frac{\pi}{3} = \frac{3\sqrt{3}}{2} \approx 2.598\)</span> — אותו ערך בדיוק.</p>
+<p>נבדוק את הנוסחה על המקרה הפשוט ביותר, המשושה. כאשר <span class="math inline">\(n = 6\)</span> אורך הצלע שווה בדיוק לרדיוס, ולכן ששת המשולשים הם דווקא <strong>שווי צלעות</strong> בעלי צלע <span class="math inline">\(1\)</span>; שטחו של משולש כזה הוא <span class="math inline">\(\frac{\sqrt{3}}{4}\)</span>, ובסך הכול <span class="math inline">\(6\cdot\frac{\sqrt{3}}{4} = \frac{3\sqrt{3}}{2}\)</span>. ואכן, הצבה בנוסחה נותנת <span class="math inline">\(\frac{6}{2}\sin\frac{\pi}{3} = \frac{3\sqrt{3}}{2} \approx 2.598\)</span>, אותו ערך בדיוק.</p>
 </div>
 </details>
 </section>
@@ -1133,11 +1175,11 @@ window.Quarto = {
 </div>
 <p>וככל ש-<span class="math inline">\(n\)</span> גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-<span class="math inline">\(\pi\)</span>.</p>
 <p>שימו לב שהמצולע החדש <strong>מכיל</strong> את קודמו: כל צלע של המצולע הישן מוחלפת בשתי צלעות שנפגשות בנקודה שעל המעגל, מחוץ לאותה צלע. במילים אחרות, כל הכפלה מוסיפה לשטח ואינה גורעת ממנו, ומה שנוסף הוא בדיוק חלק מן השטח שנותר בין המצולע הקודם למעגל. כך התהליך ״ממלא״ את העיגול צעד אחר צעד, ובפרט השטחים שנקבל יהיו סדרה <strong>עולה</strong>.</p>
-<p>נתחיל מן המשושה ובכל צעד נכפיל את מספר הצלעות, כלומר <span class="math inline">\(n_k = 3\cdot 2^{k}\)</span> (וזה נותן <span class="math inline">\(6, 12, 24, 48, \dots\)</span>). <strong>זוהי הסדרה שלנו</strong>: האיבר <span class="math inline">\(a_k\)</span> הוא שטח המצולע המשוכלל בעל <span class="math inline">\(n_k\)</span> הצלעות, כלומר <span class="math display">\[.a_k = \frac{n_k}{2}\,\sin\frac{2\pi}{n_k}=3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot2^{k-1}}\]</span> שימו לב שהאינדקס הרץ הוא <span class="math inline">\(k\)</span> — מספר ההכפלות — ולא מספר הצלעות עצמו.</p>
+<p>נתחיל מן המשושה ובכל צעד נכפיל את מספר הצלעות, כלומר <span class="math inline">\(n_k = 3\cdot 2^{k}\)</span> (וזה נותן <span class="math inline">\(6, 12, 24, 48, \dots\)</span>). <strong>זוהי הסדרה שלנו</strong>: האיבר <span class="math inline">\(a_k\)</span> הוא שטח המצולע המשוכלל בעל <span class="math inline">\(n_k\)</span> הצלעות, כלומר <span class="math display">\[.a_k = \frac{n_k}{2}\,\sin\frac{2\pi}{n_k}=3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot2^{k-1}}\]</span> שימו לב שהאינדקס הרץ הוא <span class="math inline">\(k\)</span>, מספר ההכפלות, ולא מספר הצלעות עצמו.</p>
 <p>כעת אפשר לחזור לשאלת הסינוס, וכאן ההכפלה משתלמת שוב. אנחנו מתחילים מזווית שהסינוס שלה <strong>ידוע</strong>: במשושה <span class="math inline">\(\alpha_1 = \frac{2\pi}{6} = \frac{\pi}{3}\)</span>, ו-<span class="math inline">\(\sin\alpha_1 = \frac{\sqrt{3}}{2}\)</span>. בכל צעד מספר הצלעות מוכפל, ולכן הזווית פשוט <strong>נחצית</strong> — ולזווית נחצית יש נוסחה מוכרת, <strong>נוסחת חצי הזווית</strong>: <span class="math display">\[.\sin\frac{\alpha}{2} = \sqrt{\frac{1-\cos\alpha}{2}}\]</span></p>
 <div class="thmbox thmbox-remark" title="חילוץ שורש ריבועי">
 <p><strong>הערה 7.2.2 — חילוץ שורש ריבועי.</strong></p>
-<p>בהמשך נשתמש בשורשים ריבועיים בלי לדון בהם. ההנחה הזו סבירה: קירוב של שורש ריבועי הוא בעיה קלה בהרבה מחישוב <span class="math inline">\(\pi\)</span> — יש לה שיטות פשוטות ומהירות מאוד, וכבר בעת העתיקה ידעו לבצע אותה ידנית, <strong>בקולמוס ופפירוס</strong> (לא היה להם נייר ועפרונות אז…). לכן נרשה לעצמנו להתייחס אליה כאל פעולה זמינה, בדיוק כמו חיבור או כפל.</p>
+<p>בהמשך נשתמש בשורשים ריבועיים בלי לדון בהם. ההנחה הזו סבירה: קירוב של שורש ריבועי הוא בעיה קלה בהרבה מחישוב <span class="math inline">\(\pi\)</span>; יש לה שיטות פשוטות ומהירות מאוד, וכבר בעת העתיקה ידעו לבצע אותה ידנית, <strong>בקולמוס ופפירוס</strong> (לא היה להם נייר ועפרונות אז…). לכן נרשה לעצמנו להתייחס אליה כאל פעולה זמינה, בדיוק כמו חיבור או כפל.</p>
 </div>
 <p>מכאן מתקבלת נוסחה <strong>רקורסיבית</strong> לסינוס. נסמן <span class="math inline">\(s_k = \sin\frac{\pi}{3\cdot 2^{k-1}}\)</span>, ואז <span class="math display">\[s_{k+1} = \sqrt{\frac{1-\sqrt{1-s_k^{2}}}{2}}\ ,\qquad s_1 = \frac{\sqrt{3}}{2}\]</span></p>
 <details class="thmcollapse thmfoldable"><summary>פירוט: גזירת הרקורסיה</summary>
@@ -1160,9 +1202,9 @@ window.Quarto = {
 <p>אפשר לאחד את השתיים לשאלה אחת: <strong>האם ערכי הסדרה מתקרבים ל-</strong><span class="math inline">\(\pi\)</span>, וקרובים אליו ככל שנרצה?</p>
 <div class="thmbox thmbox-remark" title="מדוע אין כאן ערך מוחלט">
 <p><strong>הערה 7.2.3 — מדוע אין כאן ערך מוחלט.</strong></p>
-<p>לפי מה שראינו בתחילת הסעיף, ״<span class="math inline">\(a_k\)</span> קרוב ל-<span class="math inline">\(\pi\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>״ פירושו <span class="math inline">\(|\pi - a_k| &lt; \varepsilon\)</span> — עם ערך מוחלט, שכן בדרך כלל איננו יודעים מראש אם הקירוב גדול מן המספר או קטן ממנו.</p>
+<p>לפי מה שראינו בתחילת הסעיף, ״<span class="math inline">\(a_k\)</span> קרוב ל-<span class="math inline">\(\pi\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>״ פירושו <span class="math inline">\(|\pi - a_k| &lt; \varepsilon\)</span>, עם ערך מוחלט, שכן בדרך כלל איננו יודעים מראש אם הקירוב גדול מן המספר או קטן ממנו.</p>
 <p>אלא שכאן אנחנו <strong>כן</strong> יודעים: המצולע החסום נמצא כולו בתוך העיגול, ולכן שטחו קטן משטחו של העיגול, כלומר <span class="math inline">\(a_k &lt; \pi\)</span>. מכאן ש-<span class="math inline">\(\pi - a_k\)</span> חיובי ממילא, והערך המוחלט מיותר. לכן נכתוב מכאן ואילך את השגיאה כ-<span class="math inline">\(\pi - a_k\)</span> בלבד.</p>
-<p>בהמשך נוסיף גם את המצולעים החוסמים, ואז נדע <span class="math inline">\(a_k &lt; \pi &lt; A_k\)</span> — כלומר <span class="math inline">\(\pi\)</span> כלוא בין שתי הסדרות, ואת סימנם של שני ההפרשים אנחנו יודעים.</p>
+<p>בהמשך נוסיף גם את המצולעים החוסמים, ואז נדע <span class="math inline">\(a_k &lt; \pi &lt; A_k\)</span>, כלומר <span class="math inline">\(\pi\)</span> כלוא בין שתי הסדרות, ואת סימנם של שני ההפרשים אנחנו יודעים.</p>
 </div>
 </section>
 <section id="האיברים-הראשונים" class="level4 unnumbered">
@@ -1189,9 +1231,9 @@ window.Quarto = {
 <section id="מנראה-נכון-להוכחה-מצולעים-חוסמים" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="מנראה-נכון-להוכחה-מצולעים-חוסמים">מ״נראה נכון״ להוכחה: מצולעים חוסמים</h4>
 <p>הטיעון הגאומטרי משכנע, אבל כדאי לשים לב מה בדיוק הוא נותן לנו. הוא מראה שהמרחק <span class="math inline">\(\pi - a_k\)</span> <strong>הולך וקטן</strong> — ולא שהוא נעשה קטן <strong>כרצוננו</strong>. אלה שתי טענות שונות: המרחק בין איברי הסדרה לערך מסוים יכול להפוך לקטן יותר בכל צעד ובכל זאת להיתקע מעל מספר חיובי כלשהו ולעולם לא לרדת מתחתיו. ואילו מה שאנחנו רוצים לומר על הקירוב הוא דווקא הטענה השנייה.</p>
-<p>והמכשול כאן מעשי לגמרי: כדי לדעת כמה גדולה השגיאה <span class="math inline">\(\pi - a_k\)</span> צריך לדעת מהו <span class="math inline">\(\pi\)</span> — וזה בדיוק מה שאנחנו מנסים למצוא. את הגודל שמעניין אותנו איננו יכולים לחשב.</p>
-<p>הרעיון הוא לעקוף את הגודל הזה. נבנה סדרה נוספת, <span class="math inline">\(A_k\)</span>, שגם היא מקרבת את <span class="math inline">\(\pi\)</span> — אבל מ<strong>מעל</strong>: כל <span class="math inline">\(A_k\)</span> יהיה גדול מ-<span class="math inline">\(\pi\)</span>, בעוד שכל <span class="math inline">\(a_k\)</span> קטן ממנו. לכן לכל <span class="math inline">\(k\)</span> מתקיים <span class="math display">\[\pi - a_k \le A_k - a_k\]</span> ואת אגף ימין אנחנו <strong>כן</strong> יודעים לחשב, שכן שתי הסדרות נתונות בנוסחאות מפורשות שאין בהן <span class="math inline">\(\pi\)</span> כלל.</p>
-<p>מכאן התוכנית ברורה: אם נראה שההפרש <span class="math inline">\(A_k - a_k\)</span> נעשה קטן ככל שנרצה, נדע את אותו הדבר גם על השגיאה <span class="math inline">\(\pi - a_k\)</span> — מבלי שנחשב אותה אי פעם.</p>
+<p>והמכשול כאן מעשי לגמרי: כדי לדעת כמה גדולה השגיאה <span class="math inline">\(\pi - a_k\)</span> צריך לדעת מהו <span class="math inline">\(\pi\)</span>, וזה בדיוק מה שאנחנו מנסים למצוא. את הגודל שמעניין אותנו איננו יכולים לחשב.</p>
+<p>הרעיון הוא לעקוף את הגודל הזה. נבנה סדרה נוספת, <span class="math inline">\(A_k\)</span>, שגם היא מקרבת את <span class="math inline">\(\pi\)</span>, אבל מ<strong>מעל</strong>: כל <span class="math inline">\(A_k\)</span> יהיה גדול מ-<span class="math inline">\(\pi\)</span>, בעוד שכל <span class="math inline">\(a_k\)</span> קטן ממנו. לכן לכל <span class="math inline">\(k\)</span> מתקיים <span class="math display">\[\pi - a_k \le A_k - a_k\]</span> ואת אגף ימין אנחנו <strong>כן</strong> יודעים לחשב, שכן שתי הסדרות נתונות בנוסחאות מפורשות שאין בהן <span class="math inline">\(\pi\)</span> כלל.</p>
+<p>מכאן התוכנית ברורה: אם נראה שההפרש <span class="math inline">\(A_k - a_k\)</span> נעשה קטן ככל שנרצה, נדע את אותו הדבר גם על השגיאה <span class="math inline">\(\pi - a_k\)</span>, מבלי שנחשב אותה אי פעם.</p>
 <p>ומאיפה נשיג סדרה כזו? מאותו רעיון עצמו, הפוך. עד כה השתמשנו במצולע ה<strong>חסום</strong> במעגל — הוא כולו בתוך העיגול, ולכן שטחו קטן מ-<span class="math inline">\(\pi\)</span>. נתבונן עכשיו במצולע משוכלל <strong>חוסם</strong>: כזה שכל צלעותיו משיקות למעגל, כלומר המרחק מן המרכז אל כל צלע הוא בדיוק <span class="math inline">\(1\)</span>. הפעם העיגול הוא שנמצא בתוך המצולע, ולכן שטחו של המצולע <strong>גדול</strong> מ-<span class="math inline">\(\pi\)</span>.</p>
 <div id="fig-pi-squeeze" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1247,16 +1289,16 @@ window.Quarto = {
 <p>הנימוקים, משמאל לימין: המעגל כלוא בין שני המצולעים; זהות שנוכיח מיד; הסדרה <span class="math inline">\(A_k\)</span> יורדת, ולכן <span class="math inline">\(A_k \le A_1\)</span>; ולבסוף אי-השוויון <span class="math inline">\(\sin x &lt; x\)</span> (עבור <span class="math inline">\(x&gt;0\)</span>), שיוכח במקום אחר בקורס.</p>
 <details class="thmcollapse thmfoldable"><summary>פירוט: מניין מגיע הביטוי להפרש</summary>
 <div class="foldable" title="פירוט: מניין מגיע הביטוי להפרש">
-<p>נסמן <span class="math inline">\(r = \frac{\pi}{3\cdot 2^{k}}\)</span> — זו מחצית הזווית המרכזית. נכתוב את שני השטחים בלשונה. בנוסחת המצולע החוסם הזווית היא כבר <span class="math inline">\(r\)</span> עצמה: <span class="math display">\[.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}} = 3\cdot 2^{k}\,\tan r\]</span></p>
+<p>נסמן <span class="math inline">\(r = \frac{\pi}{3\cdot 2^{k}}\)</span>, שהיא מחצית הזווית המרכזית. נכתוב את שני השטחים בלשונה. בנוסחת המצולע החוסם הזווית היא כבר <span class="math inline">\(r\)</span> עצמה: <span class="math display">\[.A_k = 3\cdot 2^{k}\,\tan\frac{\pi}{3\cdot 2^{k}} = 3\cdot 2^{k}\,\tan r\]</span></p>
 <p>בנוסחת המצולע החסום הזווית היא <span class="math inline">\(\frac{\pi}{3\cdot 2^{k-1}}\)</span>, ומכיוון ש-<span class="math inline">\(3\cdot 2^{k-1} = \frac{3\cdot 2^{k}}{2}\)</span>, זוהי בדיוק <span class="math inline">\(\frac{2\pi}{3\cdot 2^{k}} = 2r\)</span>: <span class="math display">\[.a_k = 3\cdot 2^{k-1}\,\sin\frac{\pi}{3\cdot 2^{k-1}} = 3\cdot 2^{k-1}\,\sin\frac{2\pi}{3\cdot 2^{k}} = 3\cdot 2^{k-1}\,\sin 2r\]</span></p>
-<p><strong>שימו לב לזווית.</strong> בנוסחת <span class="math inline">\(A_k\)</span> מופיעה <span class="math inline">\(r\)</span>, ובנוסחת <span class="math inline">\(a_k\)</span> מופיעה <span class="math inline">\(2r\)</span> — הזווית המרכזית המלאה. זו נקודה שקל להחליק עליה, ובלעדיה החישוב יוצא שגוי. כדי שבשתי הנוסחאות תופיע אותה זווית נשתמש בנוסחת הזווית הכפולה, <span class="math inline">\(\sin 2r = 2\sin r\cos r\)</span>: <span class="math display">\[.a_k = 3\cdot 2^{k-1}\cdot 2\sin r\cos r = 3\cdot 2^{k}\,\sin r\cos r\]</span></p>
+<p><strong>שימו לב לזווית.</strong> בנוסחת <span class="math inline">\(A_k\)</span> מופיעה <span class="math inline">\(r\)</span>, ובנוסחת <span class="math inline">\(a_k\)</span> מופיעה <span class="math inline">\(2r\)</span>, הזווית המרכזית המלאה. זו נקודה שקל להחליק עליה, ובלעדיה החישוב יוצא שגוי. כדי שבשתי הנוסחאות תופיע אותה זווית נשתמש בנוסחת הזווית הכפולה, <span class="math inline">\(\sin 2r = 2\sin r\cos r\)</span>: <span class="math display">\[.a_k = 3\cdot 2^{k-1}\cdot 2\sin r\cos r = 3\cdot 2^{k}\,\sin r\cos r\]</span></p>
 <p>כעת נחסר, ונוציא <span class="math inline">\(3\cdot 2^{k}\sin r\)</span> כגורם משותף: <span class="math display">\[A_k - a_k = 3\cdot 2^{k}\tan r - 3\cdot 2^{k}\sin r\cos r = 3\cdot 2^{k}\,\sin r\left(\frac{1}{\cos r} - \cos r\right)\]</span></p>
 <p>נאחד את הסוגריים למכנה משותף: <span class="math inline">\(\frac{1}{\cos r} - \cos r = \frac{1 - (\cos r)^2}{\cos r}\)</span>, ומכיוון ש-<span class="math inline">\(1 - (\cos r)^2 = (\sin r)^2\)</span> נקבל <span class="math display">\[A_k - a_k = 3\cdot 2^{k}\,\sin r\cdot\frac{(\sin r)^2}{\cos r} = 3\cdot 2^{k}\,\frac{\sin r}{\cos r}\,(\sin r)^2 = 3\cdot 2^{k}\,\tan r\,(\sin r)^2\]</span></p>
 <p>והגורם <span class="math inline">\(3\cdot 2^{k}\tan r\)</span> הוא בדיוק <span class="math inline">\(A_k\)</span>, ולכן <span class="math display">\[.A_k - a_k = A_k\,(\sin r)^2\]</span></p>
 </div>
 </details>
 <p>עכשיו נציב את המספרים. מתקיים <span class="math inline">\(A_1 = 2\sqrt{3}\)</span>, וכן <span class="math inline">\(\left(3\cdot 2^{k}\right)^2 = 9\cdot 4^{k}\)</span>. נקבל <span class="math display">\[\pi - a_k \ &lt;\ \frac{2\sqrt{3}\,\pi^2}{9}\cdot\frac{1}{4^{k}} \ &lt;\ \frac{4}{4^{k}} \ =\ \frac{1}{4^{\,k-1}}\]</span> שכן <span class="math inline">\(\frac{2\sqrt{3}\,\pi^2}{9} = 3.79\ldots &lt; 4\)</span>.</p>
-<p>זהו חסם פשוט במיוחד, והוא מספר לנו משהו חזק: בכל צעד השגיאה <strong>מתחלקת בארבע לפחות</strong>. לכן די במספר קטן מאוד של צעדים כדי להגיע לכל דיוק שנרצה. רוצים דיוק של <span class="math inline">\(0.001\)</span>? צריך <span class="math inline">\(\frac{1}{4^{\,k-1}} &lt; 0.001\)</span>, כלומר <span class="math inline">\(4^{\,k-1} &gt; 1000\)</span> — ומספיק <span class="math inline">\(k = 6\)</span>, כלומר חמש הכפלות בלבד מן המשושה.</p>
+<p>זהו חסם פשוט במיוחד, והוא מספר לנו משהו חזק: בכל צעד השגיאה <strong>מתחלקת בארבע לפחות</strong>. לכן די במספר קטן מאוד של צעדים כדי להגיע לכל דיוק שנרצה. רוצים דיוק של <span class="math inline">\(0.001\)</span>? צריך <span class="math inline">\(\frac{1}{4^{\,k-1}} &lt; 0.001\)</span>, כלומר <span class="math inline">\(4^{\,k-1} &gt; 1000\)</span>, ומספיק <span class="math inline">\(k = 6\)</span>, כלומר חמש הכפלות בלבד מן המשושה.</p>
 <p>ומה אם תידרש רמת דיוק אחרת? נראה שאפשר לענות על <strong>כל</strong> דרישה, ואף להצביע על המקום המתאים מראש. תהי <span class="math inline">\(\varepsilon&gt;0\)</span> רמת הדיוק הנדרשת. נוח להחליף תחילה את החסם בחסם גס יותר: לכל <span class="math inline">\(k\ge 1\)</span> מתקיים <span class="math inline">\(4^{\,k-1}\ge k\)</span> (באינדוקציה — עבור <span class="math inline">\(k=1\)</span> זהו <span class="math inline">\(1\ge 1\)</span>; ואם <span class="math inline">\(4^{\,k-1}\ge k\)</span> אז <span class="math inline">\(4^{\,k} = 4\cdot 4^{\,k-1}\ge 4k\ge k+1\)</span>), ולכן <span class="math display">\[.\pi - a_k \ &lt;\ \frac{1}{4^{\,k-1}} \ \le\ \frac{1}{k}\]</span></p>
 <p>עכשיו נבחר <span class="math inline">\(K = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span>. לכל <span class="math inline">\(x\)</span> מתקיים <span class="math inline">\(\lfloor x\rfloor + 1 &gt; x\)</span>, ולכן <span class="math inline">\(K &gt; \frac{1}{\varepsilon}\)</span>; מכאן שלכל <span class="math inline">\(k &gt; K\)</span> מתקיים גם <span class="math inline">\(k &gt; \frac{1}{\varepsilon}\)</span>, כלומר <span class="math inline">\(\frac{1}{k} &lt; \varepsilon\)</span>. נצרף את שני החסמים ונקבל שלכל <span class="math inline">\(k &gt; K\)</span> <span class="math display">\[.\pi - a_k \ &lt;\ \frac{1}{k} \ &lt;\ \varepsilon\]</span></p>
 <p>שימו לב ש-<span class="math inline">\(K\)</span> זה בזבזני מאוד: עבור <span class="math inline">\(\varepsilon = 0.001\)</span> הוא נותן <span class="math inline">\(K = 1001\)</span>, בעוד שראינו זה עתה שדי ב-<span class="math inline">\(k=6\)</span>. אין בכך פגם — כל שנדרש הוא ש<strong>קיים</strong> מקום כזה ושנדע להצביע עליו, ולא שנמצא את המוקדם ביותר. החסם <span class="math inline">\(\frac{1}{k}\)</span> גס בהרבה מן החסם <span class="math inline">\(\frac{1}{4^{\,k-1}}\)</span>, אבל הוא נוח לחישוב וזה כל מה שהיה דרוש לנו כאן.</p>
@@ -1303,7 +1345,8 @@ window.Quarto = {
 </section>
 <section id="גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="גבול-של-סדרה-הגדרה-פורמלית-ודוגמאות"><span class="header-section-number">7.3</span> גבול של סדרה: הגדרה פורמלית ודוגמאות</h2>
-<p>בסעיף הקודם ראינו סדרות שערכיהן מתקרבים לערך מסוים. בסעיף הזה נגדיר באופן פורמלי את המושגים שדיברנו עליהם באופן אינטואיטיבי. אינטואיציה הרבה פעמים עוזרת להבין ולהרגיש את הדברים, אך חשוב לזכור — מבחינת קבילות הוכחה, הסברים אינטואיטיביים לא שווים כלום. בשפה המקצועית של מתמטיקאים יש להם אפילו שם — <strong>נפנופי ידיים</strong>. לכן, על מנת שנוכל להוכיח דברים בצורה מסודרת, עלינו לפרמל את המושגים.</p>
+<p>בסעיף הקודם ראינו סדרות שערכיהן מתקרבים לערך מסוים. בסעיף הזה נגדיר באופן פורמלי את המושגים שדיברנו עליהם באופן אינטואיטיבי.</p>
+<p>אינטואיציה הרבה פעמים עוזרת להבין ולהרגיש את הדברים, אך חשוב לזכור — הסבר אינטואיטיבי אינו קביל בכתיבה מתמטית פורמלית. בשפה המתמטית המקצועית יש להסברים כאלה אפילו שם — <strong>נפנופי ידיים</strong>. שימו לב — אין הכוונה לומר שאינטואיציה אינה חשובה, אלא שהיא אינה מתקבלת כטיעון מתמטי <strong>פורמלי</strong>. זאת מפני שהאינטואיציה ברוב המקרים אינה ״מדויקת״, ולעיתים אף אינה מוגדרת כלל, ואילו במתמטיקה אנחנו שואפים לדיוק מרבי; וגם מפני שלעיתים האינטואיציה שלנו פשוט אינה נכונה. במובן מסוים אפשר לומר שההגדרות באות לתת מסגרת לאינטואיציה, וההוכחות באות לבדוק שהתחושה האינטואיטיבית אכן נכונה. לכן, על מנת שנוכל לנסח ולהוכיח דברים בצורה מסודרת, עלינו לפרמל את המושגים.</p>
 <p>לתופעה של התקרבות לאיזשהו ערך יש שם מתמטי פורמלי — <strong>התכנסות</strong>. סדרה שמתקרבת לערך מסוים נקראת סדרה <strong>מתכנסת</strong>.</p>
 <p>כזכור, מה שדרשנו הוא זה:</p>
 <ol type="1">
@@ -1316,7 +1359,17 @@ window.Quarto = {
 <p>את הדרישות הללו אפשר לסכם בהגדרה הבאה.</p>
 <div id="box-def-convergence" class="thmbox thmbox-definition">
 <p><strong>הגדרה 7.3.1.</strong></p>
-<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה. נאמר שהסדרה <strong>מתכנסת</strong>, או שיש לה <strong>גבול</strong>, אם קיים <span class="math inline">\(L\in\mathbb{R}\)</span> כך שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math display">\[|a_n - L| &lt; \varepsilon\]</span> במקרה זה נאמר שהסדרה <strong>שואפת</strong> (או <strong>מתכנסת</strong>) ל-<span class="math inline">\(L\)</span>, ונסמן <span class="math inline">\(\lim\limits_{n\to\infty}a_n=L\)</span> או <span class="math inline">\(a_n \to L\)</span>. אם אין לסדרה גבול, נאמר שהיא <strong>מתבדרת</strong>.</p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה. נאמר שהסדרה <strong>מתכנסת</strong>, או שיש לה <strong>גבול</strong>, אם קיים <span class="math inline">\(L\in\mathbb{R}\)</span> כך שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math display">\[.|a_n - L| &lt; \varepsilon\]</span> במקרה זה נאמר שהסדרה <strong>שואפת</strong> (או <strong>מתכנסת</strong>) ל-<span class="math inline">\(L\)</span>, ונסמן <span class="math display">\[\lim_{n\to\infty}a_n=L\]</span> או <span class="math display">\[.a_n \to L\]</span> אם אין לסדרה גבול, נאמר שהיא <strong>מתבדרת</strong>.</p>
+</div>
+<p>לעיתים מופיעה ההגדרה עם אי-שוויון חד, כלומר <span class="math inline">\(n &gt; N\)</span> במקום <span class="math inline">\(n \geq N\)</span>. מתקבלת הגדרה שקולה.</p>
+<div id="box-def-convergence-strict" class="thmbox thmbox-definition">
+<p><strong>הגדרה 7.3.2.</strong></p>
+<p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה. נאמר שהסדרה <strong>מתכנסת</strong>, או שיש לה <strong>גבול</strong>, אם קיים <span class="math inline">\(L\in\mathbb{R}\)</span> כך שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n &gt; N\)</span> מתקיים <span class="math display">\[.|a_n - L| &lt; \varepsilon\]</span> במקרה זה נאמר שהסדרה <strong>שואפת</strong> (או <strong>מתכנסת</strong>) ל-<span class="math inline">\(L\)</span>, ונסמן <span class="math display">\[\lim_{n\to\infty}a_n=L\]</span> או <span class="math display">\[.a_n \to L\]</span> אם אין לסדרה גבול, נאמר שהיא <strong>מתבדרת</strong>.</p>
+</div>
+<div id="box-rem-strict-vs-weak" class="thmbox thmbox-remark">
+<p><strong>הערה 7.3.3.</strong></p>
+<p>המעבר בין שתי ההגדרות הוא הזזה של <span class="math inline">\(1\)</span> באינדקס. אם מתקיימת ההגדרה הראשונה עם <span class="math inline">\(N\)</span> מסוים, אז כל <span class="math inline">\(n &gt; N\)</span> מקיים בפרט <span class="math inline">\(n \geq N\)</span>, ולכן אותו <span class="math inline">\(N\)</span> עצמו מתאים גם לשנייה. ובכיוון ההפוך, אם מתקיימת ההגדרה השנייה עם <span class="math inline">\(N\)</span> מסוים, נבחר <span class="math inline">\(N' = N+1\)</span>: כל <span class="math inline">\(n \geq N'\)</span> מקיים <span class="math inline">\(n \geq N+1 &gt; N\)</span>, כלומר <span class="math inline">\(n &gt; N\)</span>, ולכן <span class="math inline">\(N'\)</span> מתאים לראשונה.</p>
+<p>אין כאן הפסד, מפני שההגדרה דורשת רק ש<strong>קיים</strong> אינדקס שממנו והלאה כל האיברים קרובים ל-<span class="math inline">\(L\)</span>, והזזה של האינדקס הזה ב-<span class="math inline">\(1\)</span> אינה משנה זאת.</p>
 </div>
 <p>שימו לב לכמה נקודות נוספות, שאינן כתובות בהגדרה במפורש אך נובעות ממנה מיד:</p>
 <ol type="1">
@@ -1330,7 +1383,7 @@ window.Quarto = {
 <img src="figures/c07_fig09.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq-eps-band-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.9: סדרה המתכנסת ל-<span class="math inline">\(L\)</span> — האזור המוצלל הוא סביבת ה-<span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span>, כלומר הקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>; כל האיברים שהאינדקס שלהם גדול או שווה ל-<span class="math inline">\(N\)</span> נמצאים בתוכה, ומחוצה לה נשארו רק האיברים המסומנים באדום
+תרשים&nbsp;7.9: סדרה המתכנסת ל-<span class="math inline">\(L\)</span>, והאזור המוצלל הוא סביבת ה-<span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(L\)</span>, כלומר הקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>; כל האיברים שהאינדקס שלהם גדול או שווה ל-<span class="math inline">\(N\)</span> נמצאים בתוכה, ומחוצה לה נשארו רק האיברים המסומנים באדום
 </figcaption>
 </figure>
 </div>
@@ -1351,7 +1404,7 @@ window.Quarto = {
 <p>נשים לב מה בדיוק יש בידינו בשלב הזה: <strong>ההגדרה הפורמלית בלבד</strong>. ההגדרה היא כלי <strong>בדיקה</strong> ולא כלי <strong>חיפוש</strong> — היא מקבלת מספר <span class="math inline">\(L\)</span> שהוצע, ומאשרת או פוסלת אותו, אך אינה מייצרת אותו. לכן היא מאפשרת לענות על שני סוגים של שאלות: האם הסדרה מתכנסת לגבול נתון <span class="math inline">\(L\)</span>, והאם היא <strong>אינה</strong> מתכנסת אליו. יש מקרים שבהם ההגדרה לבדה מספיקה גם כדי להראות ששום <span class="math inline">\(L\)</span> אינו יכול להיות גבול של הסדרה — כלומר שהסדרה מתבדרת.</p>
 <p>מה שההגדרה אינה נותנת הוא את <span class="math inline">\(L\)</span> עצמו. אם ישאלו אותנו ״הוכיחו שהסדרה מתכנסת״ בלי לציין לאיזה גבול, או ״מהו הגבול של הסדרה?״, אין לנו בשלב הזה דרך לענות — פרט לניחוש הגבול ולהוכחת ההתכנסות אליו. בהמשך נכיר שיטות שיאפשרו להוכיח קיום של גבול, וגם לחשב אותו במקרים מסוימים.</p>
 <div id="box-q-constant-seq" class="thmbox thmbox-question" title="סדרה קבועה">
-<p><strong>שאלה 7.3.2 — סדרה קבועה.</strong></p>
+<p><strong>שאלה 7.3.4 — סדרה קבועה.</strong></p>
 <p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> הסדרה הקבועה <span class="math inline">\(a_n = 1\)</span> (כלומר <span class="math inline">\(1, 1, 1, \dots\)</span>). הראו כי <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 1\)</span>.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1364,10 +1417,10 @@ window.Quarto = {
 <p>הדרך הפורמלית הסטנדרטית לכתוב את זה היא זו. שימו לב: מכאן ואילך <strong>מודגשים</strong> רק המשפטים שנכנסים להוכחה עצמה. כל מה שאינו מודגש — ההסברים, המוטיבציה, והדרך שבה הגענו לכל שלב — נועד רק להסביר את הניסוח ואת מהלך המחשבה, ואינו נחוץ בהוכחה עצמה; בהוכחה שתכתבו אין צורך בו כלל.</p>
 <p><strong>יהי</strong> <span class="math inline">\(\varepsilon&gt;0\)</span> <em>(בתרגום חופשי: ניקח</em> <span class="math inline">\(\varepsilon&gt;0\)</span> כלשהו). <strong>נראה שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-1\right|&lt;\varepsilon\)</span><strong>.</strong> <em>(זאת הטענה שאנחנו מבקשים להוכיח, אחרי שהצבנו</em> <span class="math inline">\(1\)</span> במקום <span class="math inline">\(L\)</span>).</p>
 <p>עכשיו עלינו למצוא <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל איבר <span class="math inline">\(a_n\)</span> שהאינדקס שלו גדול או שווה ל-<span class="math inline">\(N\)</span> יתקיים <span class="math inline">\(|a_n - 1|&lt;\varepsilon\)</span>.</p>
-<p>הדרך ההגיונית היחידה בשלב הזה היא לפתוח את הביטוי <span class="math inline">\(|a_n - 1|\)</span>, ״לשחק איתו״, ולמצוא איזשהו אינדקס <span class="math inline">\(N\)</span> — שתלוי ב-<span class="math inline">\(\varepsilon\)</span> — שמקיים את הטענה. וזה מה שנעשה.</p>
+<p>הדרך ההגיונית היחידה בשלב הזה היא לפתוח את הביטוי <span class="math inline">\(|a_n - 1|\)</span>, ״לשחק איתו״, ולמצוא איזשהו אינדקס <span class="math inline">\(N\)</span>, התלוי ב-<span class="math inline">\(\varepsilon\)</span>, שמקיים את הטענה. וזה מה שנעשה.</p>
 <p><strong>נפתח את הביטוי</strong> <span class="math inline">\(\left|a_n - 1\right|\)</span> <strong>ונקבל</strong></p>
 <p><span class="math display">\[.\left|a_n-1\right|=\left|1-1\right|=0&lt;\varepsilon\]</span></p>
-<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> כלומר, הראינו שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו</em> <span class="math inline">\(14\)</span>) כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span> — כמו שרצינו להוכיח.</p>
+<p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> כלומר, הראינו שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\)</span> <em>(במקרה שלנו</em> <span class="math inline">\(14\)</span>) כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(|a_n - 1| &lt; \varepsilon\)</span>, כמו שרצינו להוכיח.</p>
 <p>נשים לב לכמה דברים. <em>ראשית</em>, אתם בטח שואלים למה <span class="math inline">\(14\)</span> ולא <span class="math inline">\(1\)</span>? בגדול, אין סיבה טובה — חוץ מזה שרצינו להראות שמספיק למצוא מספר <span class="math inline">\(N\)</span> כלשהו, ולא דווקא את ה-<span class="math inline">\(N\)</span> המינימלי שמקיים את הדרישה. למעשה, כל מספר שגדול או שווה ל-<span class="math inline">\(N\)</span> יכול לשמש באותו תפקיד.</p>
 <p><em>שנית</em>, וזה מצב שלא יקרה הרבה: ה-<span class="math inline">\(N\)</span> שבחרנו אינו תלוי ב-<span class="math inline">\(\varepsilon\)</span> כלל. ברוב המקרים בהמשך תהיה תלות כזו, והמצב שלנו הוא <em>חריג</em>.</p>
 <p>כך נראית ההוכחה הסופית — רק החלקים המודגשים:</p>
@@ -1377,12 +1430,12 @@ window.Quarto = {
 <p><strong>זה נכון לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>, ובפרט לכל</strong> <span class="math inline">\(n\geq 14\)</span><strong>. נבחר</strong> <span class="math inline">\(N=14\)</span> <strong>וסיימנו.</strong> <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-sim-const" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1$">
-<p><strong>סימולציה 7.3.3 — הסדרה <span class="math inline">\(a_n = 1\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.5 — הסדרה <span class="math inline">\(a_n = 1\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-const.html" loading="lazy" title="סימולציה: הסדרה הקבועה a_n = 1"></iframe>
 <p>גררו את <span class="math inline">\(\varepsilon\)</span> עד הקצה — ה-<span class="math inline">\(N\)</span> המינימלי נשאר קבוע. זה המקרה החריג שבו אותו שער מתאים לכל <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-one-over-n" class="thmbox thmbox-question" title="הסדרה $a_n=\frac{1}{n}$">
-<p><strong>שאלה 7.3.4 — הסדרה <span class="math inline">\(a_n=\frac{1}{n}\)</span>.</strong></p>
+<p><strong>שאלה 7.3.6 — הסדרה <span class="math inline">\(a_n=\frac{1}{n}\)</span>.</strong></p>
 <p>תהי <span class="math inline">\(\left\{a_n\right\}_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n=\dfrac{1}{n}\)</span>. הראו כי <span class="math inline">\(\lim\limits_{n\to\infty}a_n=0\)</span>.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1395,8 +1448,12 @@ window.Quarto = {
 <p><span class="math display">\[,\left|a_n-0\right|=\left|\frac{1}{n}-0\right|=\left|\frac{1}{n}\right|=\frac{1}{n}\]</span></p>
 <p><strong>כי</strong> <span class="math inline">\(\frac{1}{n}&gt;0\)</span> <strong>לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>.</strong></p>
 <p><strong>זאת אומרת, די להראות שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n}&lt;\varepsilon\)</span><strong>.</strong></p>
-<p>ובכן, אינטואיטיבית זה מאוד ברור — הביטוי <span class="math inline">\(\frac{1}{n}\)</span> הוא ההופכי של <span class="math inline">\(n\)</span>, וכיוון ש-<span class="math inline">\(n\)</span> אינו חסום מלמעלה, <span class="math inline">\(\frac{1}{n}\)</span> הולך ומתקרב ל-<span class="math inline">\(0\)</span>. ננסה לתרגם את האינטואיציה שלנו לטענה פורמלית. מכיוון ש-<span class="math inline">\(n&gt;0\)</span> וגם <span class="math inline">\(\varepsilon&gt;0\)</span>, מותר לכפול את שני האגפים ב-<span class="math inline">\(\dfrac{n}{\varepsilon}\)</span> מבלי לשנות את כיוון האי-שוויון, ולכן</p>
-<p><strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
+<p>ובכן, אינטואיטיבית זה מאוד ברור — הביטוי <span class="math inline">\(\frac{1}{n}\)</span> הוא ההופכי של <span class="math inline">\(n\)</span>, וכיוון ש-<span class="math inline">\(n\)</span> אינו חסום מלמעלה, <span class="math inline">\(\frac{1}{n}\)</span> הולך ומתקרב ל-<span class="math inline">\(0\)</span>. ננסה לתרגם את האינטואיציה שלנו לטענה פורמלית. מכיוון ש-<span class="math inline">\(n&gt;0\)</span> וגם <span class="math inline">\(\varepsilon&gt;0\)</span>, מותר לכפול ולחלק בהם מבלי לשנות את כיוון האי-שוויון. נעשה זאת בשני שלבים: תחילה נכפול ב-<span class="math inline">\(n\)</span>, ואחר כך נחלק ב-<span class="math inline">\(\varepsilon\)</span>. שני הצעדים יחד הם בדיוק כפל ב-<span class="math inline">\(\dfrac{n}{\varepsilon}\)</span>.</p>
+<p><strong>נכפול את שני האגפים של</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>ב-</strong><span class="math inline">\(n\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[,1 &lt; \varepsilon n\]</span></p>
+<p><strong>ונחלק את שני האגפים ב-</strong><span class="math inline">\(\varepsilon\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[.\frac{1}{\varepsilon} &lt; n\]</span></p>
+<p><strong>כלומר</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
 <p>איך נמצא אותו? לכל מספר ממשי <span class="math inline">\(m\)</span> מוגדר <em>ערך השלם</em> של <span class="math inline">\(m\)</span>, המסומן <span class="math inline">\(\lfloor m \rfloor\)</span>, כמספר השלם הגדול ביותר שקטן או שווה ל-<span class="math inline">\(m\)</span>. בפרט מתקיים אי-השוויון</p>
 <p><span class="math display">\[.\lfloor m \rfloor \leq m &lt; \lfloor m \rfloor + 1\]</span></p>
 <div id="fig-floor" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1405,11 +1462,11 @@ window.Quarto = {
 <img src="figures/c07_fig15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-floor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.11: ערך השלם. עבור <span class="math inline">\(m = 3.4\)</span> מתקיים <span class="math inline">\(\lfloor m \rfloor = 3\)</span>, ולכן <span class="math inline">\(3 \leq m &lt; 4\)</span> — מקרה פרטי של <span class="math inline">\(\lfloor m \rfloor \leq m &lt; \lfloor m \rfloor + 1\)</span>
+תרשים&nbsp;7.11: ערך השלם. עבור <span class="math inline">\(m = 3.4\)</span> מתקיים <span class="math inline">\(\lfloor m \rfloor = 3\)</span>, ולכן <span class="math inline">\(3 \leq m &lt; 4\)</span>, מקרה פרטי של <span class="math inline">\(\lfloor m \rfloor \leq m &lt; \lfloor m \rfloor + 1\)</span>
 </figcaption>
 </figure>
 </div>
-<p>מכיוון ש-<span class="math inline">\(\varepsilon&gt;0\)</span> מתקיים <span class="math inline">\(\frac{1}{\varepsilon}&gt;0\)</span>, ולכן <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor \geq 0\)</span> — כלומר <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1\)</span> הוא מספר שלם וחיובי. לכן</p>
+<p>מכיוון ש-<span class="math inline">\(\varepsilon&gt;0\)</span> מתקיים <span class="math inline">\(\frac{1}{\varepsilon}&gt;0\)</span>, ולכן <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor \geq 0\)</span>, כלומר <span class="math inline">\(\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1\)</span> הוא מספר שלם וחיובי. לכן</p>
 <p><strong>נבחר</strong> <span class="math inline">\(N=\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 \in \mathbb{N}\)</span><strong>.</strong></p>
 <p>לפי אי-השוויון שלמעלה, עם <span class="math inline">\(m=\frac{1}{\varepsilon}\)</span>, מתקיים <span class="math inline">\(\frac{1}{\varepsilon} &lt; \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 = N\)</span>. לכן</p>
 <p><strong>לכל</strong> <span class="math inline">\(n \geq N\)</span> <strong>מתקיים</strong></p>
@@ -1425,22 +1482,30 @@ window.Quarto = {
 <p><span class="math display">\[,\left|a_n-0\right|=\left|\frac{1}{n}-0\right|=\left|\frac{1}{n}\right|=\frac{1}{n}\]</span></p>
 <p><strong>כי</strong> <span class="math inline">\(\frac{1}{n}&gt;0\)</span> <strong>לכל</strong> <span class="math inline">\(n\in\mathbb{N}\)</span><strong>.</strong></p>
 <p><strong>זאת אומרת, די להראות שקיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n}&lt;\varepsilon\)</span><strong>.</strong></p>
-<p><strong>מתקיים</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
+<p><strong>נכפול את שני האגפים של</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>ב-</strong><span class="math inline">\(n\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[,1 &lt; \varepsilon n\]</span></p>
+<p><strong>ונחלק את שני האגפים ב-</strong><span class="math inline">\(\varepsilon\)</span> <strong>ונקבל</strong></p>
+<p><span class="math display">\[.\frac{1}{\varepsilon} &lt; n\]</span></p>
+<p><strong>כלומר</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(\frac{1}{\varepsilon} &lt; n\)</span><strong>, ולכן די למצוא</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>יתקיים</strong> <span class="math inline">\(\frac{1}{\varepsilon}&lt;n\)</span><strong>.</strong></p>
 <p><strong>נבחר</strong> <span class="math inline">\(N=\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 \in \mathbb{N}\)</span><strong>.</strong></p>
 <p><strong>לכל</strong> <span class="math inline">\(n \geq N\)</span> <strong>מתקיים</strong></p>
 <p><span class="math display">\[,\frac{1}{\varepsilon} &lt; \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 = N \leq n\]</span></p>
 <p><strong>ומכאן</strong> <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span><strong>, כלומר</strong> <span class="math inline">\(\left|a_n-0\right| &lt; \varepsilon\)</span><strong>, כנדרש.</strong> <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-sim-one-over-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{1}{n}$">
-<p><strong>סימולציה 7.3.5 — הסדרה <span class="math inline">\(a_n = \frac{1}{n}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.7 — הסדרה <span class="math inline">\(a_n = \frac{1}{n}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-inv-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1/n"></iframe>
-<p>הקטינו את <span class="math inline">\(\varepsilon\)</span> פי <span class="math inline">\(10\)</span> וראו את ה-<span class="math inline">\(N\)</span> המינימלי גדל פי <span class="math inline">\(10\)</span> — בדיוק החסם <span class="math inline">\(N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span> שהוכח בדוגמה.</p>
+<p>הקטינו את <span class="math inline">\(\varepsilon\)</span> פי <span class="math inline">\(10\)</span> וראו את ה-<span class="math inline">\(N\)</span> המינימלי גדל פי <span class="math inline">\(10\)</span>, בדיוק החסם <span class="math inline">\(N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span> שהוכח בדוגמה.</p>
 </div>
 <p>נתעכב מעט על הדוגמה האחרונה. ראינו כאן סדרה ששואפת לאפס — מקרה נפוץ מאוד, ולעיתים קרובות גם קל יותר להוכחה: יש לא מעט טכניקות לחסימת סדרות, ובאחדות מהן נעסוק בהמשך הקורס. יתר על כן, את שאלת ההתכנסות עצמה אפשר לעיתים לתרגם לשאלה על שאיפה לאפס, כפי שמנוסח בטענת העזר הבאה.</p>
 <div id="box-lem-abs-to-zero" class="thmbox thmbox-lemma">
-<p><strong>למה 7.3.6.</strong></p>
+<p><strong>למה 7.3.8.</strong></p>
 <p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(L\in\mathbb{R}\)</span>. אז הסדרה <span class="math inline">\(\{a_n\}\)</span> מתכנסת ל-<span class="math inline">\(L\)</span> אם ורק אם הסדרה <span class="math inline">\(\bigl\{\left|a_n-L\right|\bigr\}_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(0\)</span>.</p>
 </div>
+<p><strong>הרעיון בקצרה.</strong> בהגדרת השאיפה של <span class="math inline">\(\{a_n\}\)</span> ל-<span class="math inline">\(L\)</span> מופיע הביטוי <span class="math inline">\(\left|a_n-L\right|\)</span>, ואילו בהגדרת השאיפה של <span class="math inline">\(\bigl\{\left|a_n-L\right|\bigr\}_{n=1}^{\infty}\)</span> ל-<span class="math inline">\(0\)</span> מופיע הביטוי <span class="math inline">\(\Bigl|\left|a_n-L\right|-0\Bigr|\)</span>. מכיוון ש-<span class="math inline">\(\left|a_n-L\right|\)</span> אינו שלילי, הערך המוחלט החיצוני אינו משנה דבר:</p>
+<p><span class="math display">\[.\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right|\]</span></p>
+<p>זהו אפוא אותו ביטוי בדיוק, ולכן שני התנאים שעלינו להשוות הם אותו אי-שוויון עצמו. מכאן שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(N\in\mathbb{N}\)</span>, התנאי מתקיים לכל <span class="math inline">\(n \geq N\)</span> בטענה הראשונה אם ורק אם הוא מתקיים לכל <span class="math inline">\(n \geq N\)</span> בטענה השנייה; בפרט <span class="math inline">\(N\)</span> המתאים לטענה אחת מתאים גם לשנייה, ולכן שתי הטענות שקולות.</p>
+<p>ההוכחה המלאה, הכתובה בשני הכיוונים כמקובל, מובאת להלן.</p>
 <details class="thmcollapse"><summary>הוכחה</summary>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
@@ -1458,7 +1523,7 @@ window.Quarto = {
 </details>
 <p>הטענה הזו שימושית מפני שהיא מחליפה שאלה על התכנסות לגבול כלשהו בשאלה על שאיפה לאפס — ולשם כך די לחסום את <span class="math inline">\(\left|a_n-L\right|\)</span> מלמעלה בביטוי ששואף לאפס, בלי לעקוב אחרי הסדרה עצמה.</p>
 <div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת">
-<p><strong>שאלה 7.3.7 — סדרה מתחלפת.</strong></p>
+<p><strong>שאלה 7.3.9 — סדרה מתחלפת.</strong></p>
 <p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n = (-1)^{n-1}\)</span> (כלומר <span class="math inline">\(1, -1, 1, -1, \dots\)</span>). הוכיחו או הפריכו: הסדרה מתכנסת.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1474,7 +1539,7 @@ window.Quarto = {
 <p><em>ניסיון שני (שגוי).</em> אולי פשוט בחרנו מועמד לא נכון? <strong>הוכחה:</strong> ננסה <span class="math inline">\(L=1\)</span>. לכל <span class="math inline">\(n\)</span> אי-זוגי מתקיים <span class="math inline">\(a_n=1\)</span>, ולכן <span class="math inline">\(\left|a_n-1\right| = 0\)</span>. מכאן שלכל <span class="math inline">\(\varepsilon&gt;0\)</span> ולכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים אינסוף אינדקסים <span class="math inline">\(n\geq N\)</span> שעבורם</p>
 <p><span class="math display">\[,\left|a_n-1\right| = 0 &lt; \varepsilon\]</span></p>
 <p>ולכן <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 1\)</span>.</p>
-<p><em>היכן הטעות?</em> ההגדרה דורשת שקיים <span class="math inline">\(N\)</span> כך שכל האיברים מן האינדקס הזה והלאה קרובים ל-<span class="math inline">\(L\)</span> — ולא שיש אינסוף איברים כאלה. אלו שתי דרישות שונות לגמרי. כאן, לצד אינסוף האינדקסים ה״טובים״ (האי-זוגיים), יש גם אינסוף אינדקסים ״רעים״: לכל <span class="math inline">\(n\)</span> זוגי מתקיים <span class="math inline">\(a_n=-1\)</span>, ולכן <span class="math inline">\(\left|a_n-1\right| = 2\)</span>. שום <span class="math inline">\(N\)</span> לא ישאיר מאחוריו את כל האינדקסים הזוגיים.</p>
+<p><em>היכן הטעות?</em> ההגדרה דורשת שקיים <span class="math inline">\(N\)</span> כך שכל האיברים מן האינדקס הזה והלאה קרובים ל-<span class="math inline">\(L\)</span>, ולא שיש אינסוף איברים כאלה. אלו שתי דרישות שונות לגמרי. כאן, לצד אינסוף האינדקסים ה״טובים״ (האי-זוגיים), יש גם אינסוף אינדקסים ״רעים״: לכל <span class="math inline">\(n\)</span> זוגי מתקיים <span class="math inline">\(a_n=-1\)</span>, ולכן <span class="math inline">\(\left|a_n-1\right| = 2\)</span>. שום <span class="math inline">\(N\)</span> לא ישאיר מאחוריו את כל האינדקסים הזוגיים.</p>
 <p>אותו ניסיון ייכשל באותו אופן בדיוק גם עבור <span class="math inline">\(L=-1\)</span>: שם האינדקסים הזוגיים נותנים <span class="math inline">\(\left|a_n-(-1)\right| = 0\)</span>, אך לכל <span class="math inline">\(n\)</span> אי-זוגי מתקיים <span class="math inline">\(\left|a_n-(-1)\right| = 2\)</span>, ולכן לכל <span class="math inline">\(\varepsilon\leq 2\)</span> קיימים אינסוף אינדקסים <span class="math inline">\(n\)</span> שעבורם <span class="math inline">\(\left|a_n-(-1)\right| \geq \varepsilon\)</span>.</p>
 <p>בשלב הזה אפשר היה להמשיך ולפסול מועמד אחרי מועמד — אבל יש אינסוף מועמדים, ולא נוכל לעבור על כולם אחד-אחד. במקום זאת נוכיח טענה אחת שפוסלת את כולם בבת אחת.</p>
 <p><strong>הפרכה: נניח בשלילה שהסדרה מתכנסת, כלומר שקיים</strong> <span class="math inline">\(L\in\mathbb{R}\)</span> <strong>כך ש-</strong><span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span><strong>.</strong></p>
@@ -1483,12 +1548,12 @@ window.Quarto = {
 <p><strong>לפי אי-שוויון המשולש,</strong></p>
 <p><span class="math display">\[,2 = \left|1-(-1)\right| = \left|(1-L)+(L+1)\right| \leq \left|1-L\right| + \left|L+1\right| &lt; 1+1 = 2\]</span></p>
 <p><strong>כלומר</strong> <span class="math inline">\(2&lt;2\)</span> <strong>— סתירה. לכן ההנחה שגויה, והסדרה אינה מתכנסת.</strong></p>
-<p>נסיים בתובנה כללית. מה שהפעיל את ההפרכה אינו משהו מיוחד לסדרה <span class="math inline">\((-1)^{n-1}\)</span>, אלא עובדה אחת בלבד: מצאנו מספר <strong>חיובי</strong> — נסמן אותו <span class="math inline">\(d\)</span> — כך שלכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים <span class="math inline">\(n,m\geq N\)</span> שעבורם</p>
+<p>נסיים בתובנה כללית. מה שהפעיל את ההפרכה אינו משהו מיוחד לסדרה <span class="math inline">\((-1)^{n-1}\)</span>, אלא עובדה אחת בלבד: מצאנו מספר <strong>חיובי</strong> — נסמן אותו <span class="math inline">\(d\)</span>, כך שלכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים <span class="math inline">\(n,m\geq N\)</span> שעבורם</p>
 <p><span class="math display">\[.\left|a_n-a_m\right| \geq d\]</span></p>
 <p>במקרה שלנו <span class="math inline">\(d=2\)</span>: לכל <span class="math inline">\(N\)</span> נבחר <span class="math inline">\(n\geq N\)</span> אי-זוגי ו-<span class="math inline">\(m\geq N\)</span> זוגי, ואז <span class="math inline">\(\left|a_n-a_m\right| = \left|1-(-1)\right| = 2\)</span>. בפרט יש <strong>אינסוף</strong> זוגות כאלה — והחשוב מכך, הם אינם מתרכזים בתחילת הסדרה אלא מופיעים מעבר לכל אינדקס.</p>
 <p>כאשר זה קורה, <strong>שום</strong> <span class="math inline">\(L\)</span> ממשי אינו יכול להיות הגבול, וההוכחה היא בדיוק זו שראינו — עם <span class="math inline">\(\varepsilon = \frac{d}{2}\)</span>. אכן, אילו התכנסה הסדרה ל-<span class="math inline">\(L\)</span>, היה קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right| &lt; \frac{d}{2}\)</span>; אך אז, עבור <span class="math inline">\(n,m\geq N\)</span> כמו למעלה,</p>
 <p><span class="math display">\[,d \leq \left|a_n-a_m\right| = \left|(a_n-L)+(L-a_m)\right| \leq \left|a_n-L\right| + \left|a_m-L\right| &lt; \frac{d}{2}+\frac{d}{2} = d\]</span></p>
-<p>כלומר <span class="math inline">\(d&lt;d\)</span> — סתירה. שימו לב שה-<span class="math inline">\(\varepsilon\)</span> שבחרנו בהוכחה למעלה, <span class="math inline">\(\varepsilon=1\)</span>, הוא בדיוק <span class="math inline">\(\frac{d}{2}\)</span> עבור <span class="math inline">\(d=2\)</span>.</p>
+<p>כלומר <span class="math inline">\(d&lt;d\)</span>, סתירה. שימו לב שה-<span class="math inline">\(\varepsilon\)</span> שבחרנו בהוכחה למעלה, <span class="math inline">\(\varepsilon=1\)</span>, הוא בדיוק <span class="math inline">\(\frac{d}{2}\)</span> עבור <span class="math inline">\(d=2\)</span>.</p>
 <p>כך נראית ההפרכה הסופית — רק החלקים המודגשים:</p>
 <p><strong>הפרכה: נניח בשלילה שהסדרה מתכנסת, כלומר שקיים</strong> <span class="math inline">\(L\in\mathbb{R}\)</span> <strong>כך ש-</strong><span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span><strong>.</strong></p>
 <p><strong>ניקח</strong> <span class="math inline">\(\varepsilon=1\)</span><strong>. לפי ההגדרה קיים</strong> <span class="math inline">\(N\in\mathbb{N}\)</span> <strong>כך שלכל</strong> <span class="math inline">\(n\geq N\)</span> <strong>מתקיים</strong> <span class="math inline">\(\left|a_n-L\right| &lt; 1\)</span><strong>.</strong></p>
@@ -1498,20 +1563,20 @@ window.Quarto = {
 <p><strong>כלומר</strong> <span class="math inline">\(2&lt;2\)</span> <strong>— סתירה. לכן ההנחה שגויה, והסדרה אינה מתכנסת.</strong> <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-sim-pm-one" class="thmbox thmbox-simulation" title="הסדרה $a_n = (-1)^{n-1}$">
-<p><strong>סימולציה 7.3.8 — הסדרה <span class="math inline">\(a_n = (-1)^{n-1}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.10 — הסדרה <span class="math inline">\(a_n = (-1)^{n-1}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-alt-pm1.html" loading="lazy" title="סימולציה: הסדרה a_n = (-1)^(n-1)"></iframe>
 <p>בחרו מועמד לגבול וצמצמו את <span class="math inline">\(\varepsilon\)</span>: לכל מועמד נשארים אינסוף איברים מחוץ לסביבת ה-<span class="math inline">\(\varepsilon\)</span>. שימו לב שציר הערכים קבוע — הסביבה היא שגדלה, ולא הסדרה שמתקרבת.</p>
 </div>
 <div id="box-rem-cauchy" class="thmbox thmbox-remark">
-<p><strong>הערה 7.3.9.</strong></p>
+<p><strong>הערה 7.3.11.</strong></p>
 <p>התנאי שהופיע בתובנה שבסוף השאלה האחרונה חשוב דיו כדי לקבל שם משלו. שימו לב שהוא אינו מזכיר גבול כלל — הוא מדבר רק על המרחקים בין איברי הסדרה <strong>לבין עצמם</strong>. אפשר לבדוק אותו בלי לדעת מהו <span class="math inline">\(L\)</span>, ואפילו בלי לדעת אם קיים כזה.</p>
 </div>
 <div id="box-def-cauchy" class="thmbox thmbox-definition">
-<p><strong>הגדרה 7.3.10.</strong></p>
+<p><strong>הגדרה 7.3.12.</strong></p>
 <p>תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה ממשית. נאמר שהיא <strong>סדרת קושי</strong> אם לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n,m\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-a_m\right|&lt;\varepsilon\)</span>.</p>
 </div>
 <div id="box-lem-cauchy-test" class="thmbox thmbox-lemma" title="מבחן קושי להתכנסות">
-<p><strong>למה 7.3.11 — מבחן קושי להתכנסות.</strong></p>
+<p><strong>למה 7.3.13 — מבחן קושי להתכנסות.</strong></p>
 <p>כל סדרה מתכנסת היא סדרת קושי.</p>
 </div>
 <div class="thmbox thmbox-proof">
@@ -1520,12 +1585,12 @@ window.Quarto = {
 <p>נניח בשלילה שהסדרה <span class="math inline">\(\{a_n\}\)</span> מתכנסת אך <strong>אינה</strong> סדרת קושי, ונסמן <span class="math inline">\(L=\lim\limits_{n\to\infty}a_n\)</span>.</p>
 <p>נשלול את התנאי שבהגדרה: קיים <span class="math inline">\(\varepsilon&gt;0\)</span> כך שלכל <span class="math inline">\(N\in\mathbb{N}\)</span> קיימים <span class="math inline">\(n,m\geq N\)</span> שעבורם <span class="math display">\[.\left|a_n-a_m\right| \geq \varepsilon\]</span></p>
 <p>כעת נשתמש בהנחה שהסדרה מתכנסת. לפי הגדרת הגבול, לכל <span class="math inline">\(d&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math display">\[.\left|a_n-L\right| &lt; d\]</span></p>
-<p><em>מדוע <span class="math inline">\(d\)</span>, ולא <span class="math inline">\(\varepsilon\)</span> כפי שכתבנו עד כה?</em> מפני שהאות <span class="math inline">\(\varepsilon\)</span> כבר תפוסה: היא מסמנת את המספר שקיבלנו מן השלילה, והוא מודד מרחק <strong>בין שני איברי הסדרה</strong>. המספר שבהגדרת הגבול הוא מספר אחר, שאותו אנחנו בוחרים, והוא מודד מרחק <strong>מן הגבול</strong>. אלו שני דברים שונים, ולכן הם זקוקים לשני סימונים שונים.</p>
+<p><em>מדוע</em> <span class="math inline">\(d\)</span>, ולא <span class="math inline">\(\varepsilon\)</span> כפי שכתבנו עד כה? מפני שהאות <span class="math inline">\(\varepsilon\)</span> כבר תפוסה: היא מסמנת את המספר שקיבלנו מן השלילה, והוא מודד מרחק <strong>בין שני איברי הסדרה</strong>. המספר שבהגדרת הגבול הוא מספר אחר, שאותו אנחנו בוחרים, והוא מודד מרחק <strong>מן הגבול</strong>. אלו שני דברים שונים, ולכן הם זקוקים לשני סימונים שונים.</p>
 <p>נבחר עכשיו <span class="math inline">\(d=\frac{\varepsilon}{2}\)</span>. מכיוון ש-<span class="math inline">\(\varepsilon&gt;0\)</span> גם <span class="math inline">\(d&gt;0\)</span>, ולכן קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n\geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right| &lt; \frac{\varepsilon}{2}\)</span>.</p>
-<p>עבור אותו <span class="math inline">\(N\)</span> קיימים, לפי השלילה, אינדקסים <span class="math inline">\(n,m\geq N\)</span> שעבורם <span class="math inline">\(\left|a_n-a_m\right|\geq\varepsilon\)</span>. אך <span class="math display">\[,\varepsilon \leq \left|a_n-a_m\right| = \left|(a_n-L)+(L-a_m)\right| \leq \left|a_n-L\right|+\left|a_m-L\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span> כלומר <span class="math inline">\(\varepsilon&lt;\varepsilon\)</span> — סתירה. לכן כל סדרה מתכנסת היא אכן סדרת קושי. <span class="math inline">\(\blacksquare\)</span></p>
+<p>עבור אותו <span class="math inline">\(N\)</span> קיימים, לפי השלילה, אינדקסים <span class="math inline">\(n,m\geq N\)</span> שעבורם <span class="math inline">\(\left|a_n-a_m\right|\geq\varepsilon\)</span>. אך <span class="math display">\[,\varepsilon \leq \left|a_n-a_m\right| = \left|(a_n-L)+(L-a_m)\right| \leq \left|a_n-L\right|+\left|a_m-L\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span> כלומר <span class="math inline">\(\varepsilon&lt;\varepsilon\)</span>, סתירה. לכן כל סדרה מתכנסת היא אכן סדרת קושי. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="box-rem-two-symbols" class="thmbox thmbox-remark">
-<p><strong>הערה 7.3.12.</strong></p>
+<p><strong>הערה 7.3.14.</strong></p>
 <p>כפי שראינו בהוכחה, כאשר יש צורך לסמן <strong>שני</strong> דברים שונים — שני מספרים, שני אינדקסים, שתי סדרות — חובה להשתמש <strong>בשני סימונים שונים</strong>. שימוש באותה אות לשני תפקידים אינו קיצור נוח אלא שגיאה חמורה: הוא מזהה בין שני עצמים שונים, ומוביל להוכחות שנראות תקינות אך אינן. זו אחת הטעויות הנפוצות ביותר, וכדאי להקפיד על כך כבר עכשיו.</p>
 </div>
 <p>הכיוון ההפוך נכון גם הוא: <strong>כל סדרת קושי מתכנסת</strong>. יחד, שני הכיוונים נותנים את האפיון המלא — סדרה מתכנסת <strong>אם ורק אם</strong> היא סדרת קושי. הוכחת הכיוון ההפוך קשה יותר ודורשת כלים שטרם פיתחנו, ולכן נדחה אותה להמשך.</p>
@@ -1541,24 +1606,154 @@ window.Quarto = {
 <p>הוכחת הכיוון ההפוך — כל סדרת קושי מתכנסת — להשלמה בהמשך.</p>
 </div>
 <div id="box-q-one-frac-n" class="thmbox thmbox-question" title="סדרה מתכנסת שאינה מונוטונית">
-<p><strong>שאלה 7.3.13 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
+<p><strong>שאלה 7.3.15 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
 <p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
 </div>
 <div id="box-sim-sin-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1 + \frac{\sin(n)}{n}$">
-<p><strong>סימולציה 7.3.14 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.16 — הסדרה <span class="math inline">\(a_n = 1 + \frac{\sin(n)}{n}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-sin-n.html" loading="lazy" title="סימולציה: הסדרה a_n = 1 + sin(n)/n"></iframe>
 <p>ההתקרבות אינה מונוטונית: הסדרה חוצה את הגבול שוב ושוב, וה-<span class="math inline">\(N\)</span> המינימלי קופץ בצורה לא צפויה כשמקטינים את <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-seq-3n-4" class="thmbox thmbox-question" title="מנה של ביטויים לינאריים">
-<p><strong>שאלה 7.3.15 — מנה של ביטויים לינאריים.</strong></p>
+<p><strong>שאלה 7.3.17 — מנה של ביטויים לינאריים.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{3n-4}{n+2}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 3\)</span>. נפשט: <span class="math display">\[\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} &lt; \frac{10}{n}.\]</span> יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{10}{n} &lt; \varepsilon\)</span>, ולכן <span class="math inline">\(\left|a_n - 3\right| &lt; \varepsilon\)</span>.</p>
 </div>
 <div id="box-sim-3n-4" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{3n-4}{n+2}$">
-<p><strong>סימולציה 7.3.16 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
+<p><strong>סימולציה 7.3.18 — הסדרה <span class="math inline">\(a_n = \frac{3n-4}{n+2}\)</span>.</strong></p>
 <iframe class="widget-frame" src="widgets/ch07/seq-rational.html" loading="lazy" title="סימולציה: הסדרה a_n = (3n-4)/(n+2)"></iframe>
 <p>כאן הגבול אינו <span class="math inline">\(0\)</span> והסדרה מתקרבת אליו מלמטה בלבד, ולכן כל האיברים החורגים נמצאים בצד אחד של הסביבה.</p>
 </div>
 <p>נשים לב: הגדרת ההתכנסות בודקת רק את <strong>קיום</strong> הגבול, לא את <strong>מהירות</strong> ההתקרבות אליו. שתי סדרות יכולות להתכנס לאותו גבול בקצבים שונים מאוד.</p>
+</section>
+<section id="תרגילים-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="תרגילים-1">תרגילים</h3>
+<p>התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״אמת״ או על ״שקר״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.</p>
+<!-- הפתרונות המתקפלים כאן חייבים להישאר בלי מזהה (#id): צירוף של מזהה עם
+     .thmsol .foldable מפיל את הפילטר של Quarto עצמו. הקישור בין שאלת האמת/שקר
+     לפתרון נעשה לפי סדר המסמך, דרך התכונה data-reveal — ראו _styles.html. -->
+<p><strong>אמת או שקר.</strong> בארבעת התרגילים הבאים <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> ו-<span class="math inline">\(\{b_n\}_{n=1}^{\infty}\)</span> הן סדרות ממשיות כלשהן.</p>
+<p><strong>תרגיל 1.</strong> אם <span class="math inline">\(\{a_n\}\)</span> אינה מתכנסת וגם <span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת, אז <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת.</p>
+<div class="tf-quiz" data-correct="false" data-reveal="">
+<button class="tf-opt" data-val="true">אמת</button>
+<button class="tf-opt" data-val="false">שקר</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>שקר.</strong> ניקח <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span>. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(a_n + b_n = 0\)</span>, ולכן הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת ל-<span class="math inline">\(0\)</span>.</p>
+</div>
+</details>
+<p><strong>תרגיל 2.</strong> אם <span class="math inline">\(\{a_n\}\)</span> מתכנסת ו-<span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת, אז <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת.</p>
+<div class="tf-quiz" data-correct="true" data-reveal="">
+<button class="tf-opt" data-val="true">אמת</button>
+<button class="tf-opt" data-val="false">שקר</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>אמת.</strong> נניח בשלילה שגם <span class="math inline">\(\{a_n+b_n\}\)</span> מתכנסת, ונסמן <span class="math inline">\(a_n \to A\)</span> וכן <span class="math inline">\(a_n+b_n \to S\)</span>. נראה שאז <span class="math inline">\(b_n \to S-A\)</span>, בסתירה להנחה ש-<span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת.</p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. לפי ההגדרה קיים <span class="math inline">\(N_1\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(\left|a_n-A\right| &lt; \frac{\varepsilon}{2}\)</span>, וקיים <span class="math inline">\(N_2\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(\left|\left(a_n+b_n\right)-S\right| &lt; \frac{\varepsilon}{2}\)</span>. נבחר <span class="math inline">\(N = \max\left\{N_1,N_2\right\}\)</span>.</p>
+<p>לכל <span class="math inline">\(n \geq N\)</span> נכתוב</p>
+<p><span class="math display">\[,b_n - \left(S-A\right) = \left(a_n+b_n-S\right) - \left(a_n-A\right)\]</span></p>
+<p>ולפי אי-שוויון המשולש</p>
+<p><span class="math display">\[.\left|b_n-\left(S-A\right)\right| \leq \left|a_n+b_n-S\right| + \left|a_n-A\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span></p>
+<p>מצאנו <span class="math inline">\(N\)</span> כנדרש, ולכן <span class="math inline">\(b_n \to S-A\)</span>, בסתירה להנחה.</p>
+</div>
+</details>
+<p><strong>תרגיל 3.</strong> אם <span class="math inline">\(\{a_n+b_n\}\)</span> מתכנסת, אז לפחות אחת מן הסדרות <span class="math inline">\(\{a_n\}\)</span> , <span class="math inline">\(\{b_n\}\)</span> מתכנסת.</p>
+<div class="tf-quiz" data-correct="false" data-reveal="">
+<button class="tf-opt" data-val="true">אמת</button>
+<button class="tf-opt" data-val="false">שקר</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>שקר.</strong> אותה דוגמה נגדית שבתרגיל הראשון: עבור <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(b_n = -\left(-1\right)^{n}\)</span> הסכום הוא הסדרה הקבועה <span class="math inline">\(0\)</span>, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.</p>
+</div>
+</details>
+<p><strong>תרגיל 4.</strong> אם <span class="math inline">\(\{a_n+b_n\}\)</span> אינה מתכנסת, אז לפחות אחת מן הסדרות <span class="math inline">\(\{a_n\}\)</span> , <span class="math inline">\(\{b_n\}\)</span> אינה מתכנסת.</p>
+<div class="tf-quiz" data-correct="true" data-reveal="">
+<button class="tf-opt" data-val="true">אמת</button>
+<button class="tf-opt" data-val="false">שקר</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>אמת.</strong> נוכיח את הטענה השקולה: אם שתי הסדרות מתכנסות, אז גם הסכום מתכנס.</p>
+<p>נניח <span class="math inline">\(a_n \to A\)</span> וכן <span class="math inline">\(b_n \to B\)</span>, ויהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N_1\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(\left|a_n-A\right| &lt; \frac{\varepsilon}{2}\)</span>, וקיים <span class="math inline">\(N_2\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(\left|b_n-B\right| &lt; \frac{\varepsilon}{2}\)</span>. נבחר <span class="math inline">\(N = \max\left\{N_1,N_2\right\}\)</span>, ואז לכל <span class="math inline">\(n \geq N\)</span>, לפי אי-שוויון המשולש,</p>
+<p><span class="math display">\[.\left|\left(a_n+b_n\right)-\left(A+B\right)\right| \leq \left|a_n-A\right| + \left|b_n-B\right| &lt; \frac{\varepsilon}{2}+\frac{\varepsilon}{2} = \varepsilon\]</span></p>
+<p>לכן <span class="math inline">\(a_n+b_n \to A+B\)</span>. מכאן שאם הסכום אינו מתכנס, לא ייתכן ששתי הסדרות מתכנסות.</p>
+</div>
+</details>
+<p><strong>הוכחות.</strong> בתרגילים הבאים הוכיחו ישירות מתוך ההגדרה.</p>
+<p><strong>תרגיל 5.</strong> הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{2n+1}{n-2} = 2\)</span>.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. לכל <span class="math inline">\(n \geq 3\)</span> מתקיים <span class="math inline">\(n-2&gt;0\)</span>, ולכן</p>
+<p><span class="math display">\[.\left|\frac{2n+1}{n-2}-2\right| = \left|\frac{2n+1-2\left(n-2\right)}{n-2}\right| = \left|\frac{5}{n-2}\right| = \frac{5}{n-2}\]</span></p>
+<p>די אפוא להראות שמתקיים <span class="math inline">\(\frac{5}{n-2} &lt; \varepsilon\)</span> החל ממקום מסוים. נכפול את שני האגפים ב-<span class="math inline">\(n-2&gt;0\)</span> ונחלק אותם ב-<span class="math inline">\(\varepsilon&gt;0\)</span>; אי-השוויון שקול ל-<span class="math inline">\(\frac{5}{\varepsilon} &lt; n-2\)</span>, כלומר ל-<span class="math inline">\(n &gt; \frac{5}{\varepsilon}+2\)</span>.</p>
+<p>נבחר <span class="math inline">\(N = \left\lfloor \frac{5}{\varepsilon}\right\rfloor + 3\)</span>. זהו מספר טבעי הגדול או שווה ל-<span class="math inline">\(3\)</span>, ומתקיים</p>
+<p><span class="math display">\[,N = \left(\left\lfloor \frac{5}{\varepsilon}\right\rfloor + 1\right) + 2 &gt; \frac{5}{\varepsilon}+2\]</span></p>
+<p>ולכן לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(n &gt; \frac{5}{\varepsilon}+2\)</span>, ומכאן <span class="math inline">\(\left|\frac{2n+1}{n-2}-2\right| &lt; \varepsilon\)</span>, כנדרש.</p>
+</div>
+</details>
+<p><strong>תרגיל 6.</strong> הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{n+\sin\left(n\right)}{n^2+3n} = 0\)</span>.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. נחסום את המרחק מלמעלה בביטוי פשוט יותר. לכל <span class="math inline">\(n \geq 1\)</span> מתקיים <span class="math inline">\(-1 \leq \sin\left(n\right) \leq 1\)</span>, ולכן</p>
+<p><span class="math display">\[,0 &lt; n + \sin\left(n\right) \leq n+1 \leq 2n\]</span></p>
+<p>וכן <span class="math inline">\(n^2+3n &gt; n^2 &gt; 0\)</span>. מכאן</p>
+<p><span class="math display">\[.\left|\frac{n+\sin\left(n\right)}{n^2+3n}-0\right| = \frac{n+\sin\left(n\right)}{n^2+3n} \leq \frac{2n}{n^2} = \frac{2}{n}\]</span></p>
+<p>די אפוא שיתקיים <span class="math inline">\(\frac{2}{n} &lt; \varepsilon\)</span>, כלומר <span class="math inline">\(n &gt; \frac{2}{\varepsilon}\)</span>. נבחר <span class="math inline">\(N = \left\lfloor \frac{2}{\varepsilon}\right\rfloor + 1 &gt; \frac{2}{\varepsilon}\)</span>, ואז לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(\frac{2}{n} &lt; \varepsilon\)</span>, ולכן גם המרחק קטן מ-<span class="math inline">\(\varepsilon\)</span>, כנדרש.</p>
+</div>
+</details>
+<p><strong>תרגיל 7.</strong> הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{5n-12}{2n+3} \neq \dfrac{3}{2}\)</span>.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>עלינו להראות שקיים <span class="math inline">\(\varepsilon&gt;0\)</span> שעבורו <strong>אין</strong> <span class="math inline">\(N\)</span> מתאים. ניקח <span class="math inline">\(\varepsilon = \frac{1}{2}\)</span>.</p>
+<p>תחילה נחשב את המרחק. לכל <span class="math inline">\(n \geq 1\)</span> מתקיים <span class="math inline">\(2n+3&gt;0\)</span>, ולכן</p>
+<p><span class="math display">\[.\left|\frac{5n-12}{2n+3}-\frac{3}{2}\right| = \left|\frac{2\left(5n-12\right)-3\left(2n+3\right)}{2\left(2n+3\right)}\right| = \left|\frac{10n-24-6n-9}{2\left(2n+3\right)}\right| = \frac{\left|4n-33\right|}{2\left(2n+3\right)}\]</span></p>
+<p>לכל <span class="math inline">\(n \geq 18\)</span> מתקיים <span class="math inline">\(4n-33&gt;0\)</span>, ואי-השוויון <span class="math inline">\(\frac{4n-33}{2\left(2n+3\right)} \geq \frac{1}{2}\)</span> שקול ל-<span class="math inline">\(4n-33 \geq 2n+3\)</span>, כלומר ל-<span class="math inline">\(n \geq 18\)</span>. לכן לכל <span class="math inline">\(n \geq 18\)</span> המרחק הוא לפחות <span class="math inline">\(\frac{1}{2}\)</span>.</p>
+<p>עכשיו יהי <span class="math inline">\(N\in\mathbb{N}\)</span> כלשהו, ונבחר <span class="math inline">\(n = \max\left\{N,18\right\}\)</span>. אז <span class="math inline">\(n \geq N\)</span>, ובכל זאת</p>
+<p><span class="math display">\[,\left|\frac{5n-12}{2n+3}-\frac{3}{2}\right| \geq \frac{1}{2} = \varepsilon\]</span></p>
+<p>כלומר אין <span class="math inline">\(N\)</span> המתאים ל-<span class="math inline">\(\varepsilon = \frac{1}{2}\)</span>. מכאן שהגבול אינו <span class="math inline">\(\frac{3}{2}\)</span>.</p>
+</div>
+</details>
+<p><strong>תרגיל 8.</strong> ידוע כי <span class="math inline">\(2^{n} \geq n\)</span> לכל <span class="math inline">\(n\in\mathbb{N}\)</span> (טענה שמוכיחים <a href="./05-induction.html">באינדוקציה</a>). הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{1}{2^{n}} = 0\)</span>.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. לכל <span class="math inline">\(n\in\mathbb{N}\)</span> מתקיים <span class="math inline">\(2^{n} \geq n &gt; 0\)</span>, ולכן <span class="math inline">\(\frac{1}{2^{n}} \leq \frac{1}{n}\)</span>, ומכאן</p>
+<p><span class="math display">\[.\left|\frac{1}{2^{n}}-0\right| = \frac{1}{2^{n}} \leq \frac{1}{n}\]</span></p>
+<p>נבחר <span class="math inline">\(N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1\)</span>, בדיוק כפי שעשינו בשאלה על הסדרה <span class="math inline">\(\frac{1}{n}\)</span>. אז לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(\frac{1}{n} &lt; \varepsilon\)</span>, ולכן גם <span class="math inline">\(\left|\frac{1}{2^{n}}-0\right| &lt; \varepsilon\)</span>, כנדרש.</p>
+</div>
+</details>
+<p><strong>תרגיל 9.</strong> תהי <span class="math inline">\(\{a_n\}_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(L\in\mathbb{R}\)</span>. הוכיחו כי אם <span class="math inline">\(a_n \to L\)</span> אז <span class="math inline">\(\left|a_n\right| \to \left|L\right|\)</span>. (היעזרו באי-שוויון המשולש ההפוך, <span class="math inline">\(\bigl|\left|x\right|-\left|y\right|\bigr| \leq \left|x-y\right|\)</span>.)</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. מכיוון ש-<span class="math inline">\(a_n \to L\)</span>, קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(\left|a_n-L\right| &lt; \varepsilon\)</span>.</p>
+<p>נציב <span class="math inline">\(x=a_n\)</span> ו-<span class="math inline">\(y=L\)</span> באי-שוויון המשולש ההפוך ונקבל</p>
+<p><span class="math display">\[,\Bigl|\left|a_n\right|-\left|L\right|\Bigr| \leq \left|a_n-L\right|\]</span></p>
+<p>ולכן לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(\Bigl|\left|a_n\right|-\left|L\right|\Bigr| &lt; \varepsilon\)</span>. זהו בדיוק התנאי שבהגדרה עבור הסדרה <span class="math inline">\(\left\{\left|a_n\right|\right\}\)</span> והגבול <span class="math inline">\(\left|L\right|\)</span>, ולכן <span class="math inline">\(\left|a_n\right| \to \left|L\right|\)</span>.</p>
+</div>
+</details>
+<p><strong>תרגיל 10.</strong> הראו שהכיוון ההפוך של התרגיל הקודם אינו נכון: מצאו סדרה <span class="math inline">\(\{a_n\}\)</span> ומספר <span class="math inline">\(L\)</span> שעבורם <span class="math inline">\(\left|a_n\right| \to \left|L\right|\)</span> ואילו <span class="math inline">\(\{a_n\}\)</span> אינה שואפת ל-<span class="math inline">\(L\)</span>.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>ניקח <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> ו-<span class="math inline">\(L=1\)</span>.</p>
+<p>לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(\left|a_n\right| = 1\)</span>, ולכן <span class="math inline">\(\left\{\left|a_n\right|\right\}\)</span> היא הסדרה הקבועה <span class="math inline">\(1\)</span>, שמתכנסת ל-<span class="math inline">\(1\)</span>, שהוא בדיוק <span class="math inline">\(\left|L\right|\)</span>.</p>
+<p>מצד שני, <span class="math inline">\(\{a_n\}\)</span> כלל אינה מתכנסת, לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת, ובפרט היא אינה שואפת ל-<span class="math inline">\(L=1\)</span>.</p>
+</div>
+</details>
 </section>
 </section>
 <section id="פיתוח-עשרוני-כסדרה-העשרה" class="level2 extra" data-number="7.4">
@@ -1578,7 +1773,7 @@ window.Quarto = {
 </div>
 <div id="box-exm-expansion-25" class="thmbox thmbox-example" title="הפיתוח העשרוני של 2.5">
 <p><strong>דוגמה 7.4.3 — הפיתוח העשרוני של 2.5.</strong></p>
-<p>הפיתוח העשרוני של <span class="math inline">\(2.5\)</span> הוא <span class="math inline">\(2.4999\dots\)</span>, וסדרת הקירובים שלו היא <span class="math inline">\(2.4,\ 2.49,\ 2.499,\ \dots\)</span> — המתכנסת ל-<span class="math inline">\(2.5\)</span>.</p>
+<p>הפיתוח העשרוני של <span class="math inline">\(2.5\)</span> הוא <span class="math inline">\(2.4999\dots\)</span>, וסדרת הקירובים שלו היא <span class="math inline">\(2.4,\ 2.49,\ 2.499,\ \dots\)</span>, והיא מתכנסת ל-<span class="math inline">\(2.5\)</span>.</p>
 </div>
 <div id="box-sim-decimal" class="thmbox thmbox-simulation" title="הקירובים העשרוניים של $2.5$">
 <p><strong>סימולציה 7.4.4 — הקירובים העשרוניים של <span class="math inline">\(2.5\)</span>.</strong></p>

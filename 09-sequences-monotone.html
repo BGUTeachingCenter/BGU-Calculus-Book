@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="he" xml:lang="he" dir="rtl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,6 +76,20 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>
+/* Math inside an RTL page. The document is <html dir="rtl">, so both Quarto's
+   .math wrapper and MathJax's own container inherit direction:rtl, and math with
+   more than one token comes out mirrored: (L-ε, L+ε) renders as )L+ε, L-ε(, and
+   ⌊m⌋ ≤ m < ⌊m⌋+1 reverses too. Give every math run its own LTR bidi context.
+   Single-symbol math ($L$, $\varepsilon$) cannot show the fault, which is why it
+   surfaces in figure captions — that is where the intervals and the chained
+   inequalities are. The PDF is unaffected; xelatex already boxes math LTR. */
+.math.inline, .math.display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+mjx-container, mjx-container * {
+  direction: ltr;
+}
 .todo {
   color: #8a8a8a;
   font-style: italic;
@@ -363,6 +380,23 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.classList.add("incorrect");
           if (feedback) feedback.textContent = "✗ לא מדויק — נסו שוב, או פתחו את הפתרון.";
         }
+        /* Opt-in via a bare data-reveal attribute: answering opens the solution that
+           follows, so the reasoning appears once the reader has committed. Quizzes
+           without the attribute (chapter 1) are untouched.
+           Located by document order, NOT by id: a Div carrying an identifier together
+           with .thmsol .foldable crashes Quarto's own main.lua ("attempt to index a
+           nil value (field 'attr')"). Either attribute alone is fine; only the
+           combination breaks, so the solution boxes deliberately have no id. */
+        if (quiz.hasAttribute("data-reveal")) {
+          var box = null;
+          for (var node = quiz; node && node.tagName !== "MAIN" && !box; node = node.parentElement) {
+            for (var sib = node.nextElementSibling; sib && !box; sib = sib.nextElementSibling) {
+              box = sib.tagName === "DETAILS" ? sib
+                  : (sib.querySelector ? sib.querySelector("details") : null);
+            }
+          }
+          if (box) box.open = true;
+        }
       });
     });
   });
@@ -560,7 +594,7 @@ window.addEventListener("message", function (e) {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -919,13 +953,19 @@ window.Quarto = {
 
 <section id="מונוטוניות-של-סדרות-דוגמה" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="מונוטוניות-של-סדרות-דוגמה"><span class="header-section-number">9.1</span> מונוטוניות של סדרות; דוגמה</h2>
-<p>סדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> תיקרא:</p>
-<p><strong>מונוטונית עולה</strong>, אם <span class="math inline">\(a_n \le a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p><strong>מונוטונית יורדת</strong>, אם <span class="math inline">\(a_n \ge a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p><strong>מונוטונית עולה ממש</strong>, אם <span class="math inline">\(a_n &lt; a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p><strong>מונוטונית יורדת ממש</strong>, אם <span class="math inline">\(a_n &gt; a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p>סדרה היא מונוטונית, אם היא מונוטונית עולה או יורדת.</p>
-<p><strong>דוגמאות:</strong></p>
+<div id="box-def-monotone-sequence" class="thmbox thmbox-definition">
+<p><strong>הגדרה 9.1.1.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. נאמר כי היא:</p>
+<ul>
+<li><strong>מונוטונית עולה</strong>, אם <span class="math inline">\(a_n \le a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</li>
+<li><strong>מונוטונית יורדת</strong>, אם <span class="math inline">\(a_n \ge a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</li>
+<li><strong>מונוטונית עולה ממש</strong>, אם <span class="math inline">\(a_n &lt; a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</li>
+<li><strong>מונוטונית יורדת ממש</strong>, אם <span class="math inline">\(a_n &gt; a_{n+1}\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</li>
+</ul>
+<p>הסדרה תיקרא <strong>מונוטונית</strong> אם היא מונוטונית עולה או מונוטונית יורדת.</p>
+</div>
+<div id="box-exm-monotone-examples" class="thmbox thmbox-example" title="בדיקת מונוטוניות">
+<p><strong>דוגמה 9.1.2 — בדיקת מונוטוניות.</strong></p>
 <p><span class="math inline">\(a_n = n\)</span> מונוטונית עולה ממש</p>
 <p>כי לכל <span class="math inline">\(n \ge 1\)</span>: <span class="math inline">\(a_n = n &lt; n+1 = a_{n+1}\)</span></p>
 <p><span class="math inline">\(c_n = \dfrac{1}{n}\)</span> מונוטונית יורדת</p>
@@ -933,21 +973,36 @@ window.Quarto = {
 <p><span class="math inline">\(d_n = (-1)^n\)</span> אינה מונוטונית</p>
 <p><span class="math inline">\(d_1 = -1\)</span> , <span class="math inline">\(d_2 = 1\)</span> , <span class="math inline">\(d_3 = -1\)</span></p>
 <p><span class="math inline">\(d_1 &lt; d_2 , d_3 &lt; d_2\)</span></p>
+</div>
 </section>
 <section id="סדרה-חסומה-ומונוטונית-מתכנסת-ללא-הוכחה" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="סדרה-חסומה-ומונוטונית-מתכנסת-ללא-הוכחה"><span class="header-section-number">9.2</span> סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</h2>
+<div id="box-rem-monotone-vs-convergent" class="thmbox thmbox-remark" title="מונוטוניות והתכנסות אינן גוררות זו את זו">
+<p><strong>הערה 9.2.1 — מונוטוניות והתכנסות אינן גוררות זו את זו.</strong></p>
 <p><span class="math inline">\(a_n\)</span> מונוטונית <span class="math inline">\(\not\Leftarrow\)</span> <span class="math inline">\(a_n\)</span> מתכנסת</p>
 <p>דוגמא: <span class="math display">\[a_n = n\]</span></p>
 <p><span class="math inline">\(a_n\)</span> מתכנסת <span class="math inline">\(\not\Leftarrow\)</span> <span class="math inline">\(a_n\)</span> מונוטונית</p>
 <p>דוגמא: <span class="math inline">\(a_n = \dfrac{(-1)^n}{n}\)</span> (<span class="math inline">\(a_n \to 0\)</span>)</p>
-<p>אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית וחסומה, אז היא מתכנסת.</p>
+</div>
+<div id="box-thm-monotone-bounded-converges" class="thmbox thmbox-theorem">
+<p><strong>משפט 9.2.2.</strong></p>
+<p>אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית <strong>וגם</strong> חסומה, אז היא מתכנסת.</p>
+</div>
+<!-- בהרצאה של דניס המשפט מופיע בשם ״משפט בולצאנו״. כאן הוא נשאר ללא שם, כדי שלא
+     יתנגש עם ״משפט התכנסות הסדרות המונוטוניות״ שבפרק 11. -->
+<div id="box-rem-monotone-limit-is-sup" class="thmbox thmbox-remark" title="מהו הגבול בהוכחה">
+<p><strong>הערה 9.2.3 — מהו הגבול בהוכחה.</strong></p>
 <p>בהוכחה מראים כי <span class="math inline">\(a_n\)</span> עולה ומתכנסת ל-<span class="math inline">\(M\)</span>, כאשר הוא לא סתם חסם שלה מלמעלה, אלא הוא החסם הכי קטן.</p>
-<p><strong>דוגמא:</strong></p>
+</div>
+<div id="box-q-recursive-sequence" class="thmbox thmbox-question" title="סדרה רקורסיבית">
+<p><strong>שאלה 9.2.4 — סדרה רקורסיבית.</strong></p>
 <p>נתונה סדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> <a href="./05-induction.html#sec-recursive-definition">באופן הרקורסיבי</a> הבא:</p>
 <p><span class="math display">\[a_1 = 1\]</span></p>
 <p><span class="math display">\[a_{n+1} = \dfrac{a_n + 2}{2}\]</span></p>
 <p>הראו כי הסדרה מתכנסת ומצאו את הגבול שלה.</p>
-<p><strong>פתרון:</strong></p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
 <p>ננסה להראות שהיא חסומה ומונוטונית, ולכן תתכנס.</p>
 <p>חושדים שהיא עולה, כי <span class="math inline">\(a_3 &gt; a_2 &gt; a_1\)</span> אז ננסה להראות ש <span class="math inline">\(a_n \le a_{n+1}\)</span> , לכל <span class="math inline">\(n \ge 1\)</span></p>
 <p>ננסה בעזרת אינדוקציה:</p>
@@ -975,14 +1030,28 @@ window.Quarto = {
 <!-- הערה: מסומן "כל ארתמטיקה" ליד הביטוי -->
 <p>מצד שני, מתקיים <span class="math inline">\(a_n \to L\)</span> כי <span class="math inline">\(a_{n+1} \to L\)</span> אבל <span class="math inline">\(a_{n+1} = \dfrac{a_n + 2}{2}\)</span></p>
 <p>לכן מיחידות הגבול: <span class="math inline">\(L = \dfrac{L + 2}{L} \Rightarrow \boxed{L = 2}\)</span></p>
+</div>
 <!-- בדיקה: בכתב היד נראה L = (L+2)/L אך מהמשוואה הרקורסיבית מצופה L = (L+2)/2; נשמר כפי שנכתב -->
-<p><strong>דוגמא שימושית:</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = \left(1 + \dfrac{1}{n}\right)^n\)</span> מונוטונית עולה וגם חסומה (בין 2 ל-3), ולכן היא מתכנסת.</p>
-<p>נסמן את הגבול של הסדרה ע”י <span class="math inline">\(e\)</span>, מספר כלשהוא בין 2 ל-3. כלומר:</p>
-<p><span class="math display">\[\boxed{\left(1 + \dfrac{1}{n}\right)^n \to e}\]</span></p>
 </section>
 <section id="המספר-e-והסדרה-המתאימה" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="המספר-e-והסדרה-המתאימה"><span class="header-section-number">9.3</span> המספר <span class="math inline">\(e\)</span> והסדרה המתאימה</h2>
+<div id="box-lem-bernoulli" class="thmbox thmbox-lemma" title="אי-שוויון ברנולי">
+<p><strong>למה 9.3.1 — אי-שוויון ברנולי.</strong></p>
+<p>לכל <span class="math inline">\(n \in \mathbb{N}\)</span> ולכל <span class="math inline">\(x &gt; -1\)</span> מתקיים</p>
+<p><span class="math inline">\(.\left(1+x\right)^{n} \geq 1 + nx\)</span></p>
+</div>
+<!-- מקומו הטבעי של אי-שוויון ברנולי הוא פרק 5 (אינדוקציה), שאינו בתחום העדכון הזה.
+     הוא מובא כאן משום שהוא הכלי המרכזי בהוכחת המונוטוניות של הסדרה שמגדירה את e. -->
+<div id="box-thm-e-sequence-monotone-bounded" class="thmbox thmbox-theorem">
+<p><strong>משפט 9.3.2.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = \left(1 + \dfrac{1}{n}\right)^{n}\)</span> מונוטונית עולה, ומתקיים <span class="math inline">\(2 \le a_n \le 3\)</span> לכל <span class="math inline">\(n \ge 1\)</span>. בפרט היא מונוטונית וחסומה, ולכן היא מתכנסת.</p>
+</div>
+<div id="box-def-number-e" class="thmbox thmbox-definition">
+<p><strong>הגדרה 9.3.3.</strong></p>
+<p><strong>המספר <span class="math inline">\(e\)</span></strong> מוגדר כגבול של הסדרה שבמשפט הקודם:</p>
+<p><span class="math inline">\(.e = \lim_{n\to\infty} \left(1 + \frac{1}{n}\right)^{n}\)</span></p>
+<p>מן החסמים שבמשפט נובע <span class="math inline">\(2 &lt; e &lt; 3\)</span>.</p>
+</div>
 <div class="todo">
 <p>המספר <span class="math inline">\(e\)</span> והסדרה <span class="math inline">\((1+\tfrac1n)^n\)</span> נדונים יחד עם המשפט על התכנסות סדרה חסומה ומונוטונית (לעיל) ובסעיף ״משפטי התכנסות״. יש לרכז ולהרחיב כאן.</p>
 </div>

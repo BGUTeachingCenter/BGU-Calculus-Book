@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="he" xml:lang="he" dir="rtl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,6 +76,20 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>
+/* Math inside an RTL page. The document is <html dir="rtl">, so both Quarto's
+   .math wrapper and MathJax's own container inherit direction:rtl, and math with
+   more than one token comes out mirrored: (L-ε, L+ε) renders as )L+ε, L-ε(, and
+   ⌊m⌋ ≤ m < ⌊m⌋+1 reverses too. Give every math run its own LTR bidi context.
+   Single-symbol math ($L$, $\varepsilon$) cannot show the fault, which is why it
+   surfaces in figure captions — that is where the intervals and the chained
+   inequalities are. The PDF is unaffected; xelatex already boxes math LTR. */
+.math.inline, .math.display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+mjx-container, mjx-container * {
+  direction: ltr;
+}
 .todo {
   color: #8a8a8a;
   font-style: italic;
@@ -363,6 +380,23 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.classList.add("incorrect");
           if (feedback) feedback.textContent = "✗ לא מדויק — נסו שוב, או פתחו את הפתרון.";
         }
+        /* Opt-in via a bare data-reveal attribute: answering opens the solution that
+           follows, so the reasoning appears once the reader has committed. Quizzes
+           without the attribute (chapter 1) are untouched.
+           Located by document order, NOT by id: a Div carrying an identifier together
+           with .thmsol .foldable crashes Quarto's own main.lua ("attempt to index a
+           nil value (field 'attr')"). Either attribute alone is fine; only the
+           combination breaks, so the solution boxes deliberately have no id. */
+        if (quiz.hasAttribute("data-reveal")) {
+          var box = null;
+          for (var node = quiz; node && node.tagName !== "MAIN" && !box; node = node.parentElement) {
+            for (var sib = node.nextElementSibling; sib && !box; sib = sib.nextElementSibling) {
+              box = sib.tagName === "DETAILS" ? sib
+                  : (sib.querySelector ? sib.querySelector("details") : null);
+            }
+          }
+          if (box) box.open = true;
+        }
       });
     });
   });
@@ -560,7 +594,7 @@ window.addEventListener("message", function (e) {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -920,34 +954,53 @@ window.Quarto = {
 
 <section id="תת-סדרות" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="תת-סדרות"><span class="header-section-number">11.1</span> תת-סדרות</h2>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה.</p>
-<p>תת סדרה שלה היא אוסף אינסופי של איברי הסדרה, ושומרים על הסדר.</p>
-<p>דוגמאות:</p>
+<div id="box-def-subsequence" class="thmbox thmbox-definition">
+<p><strong>הגדרה 11.1.1.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה, ותהי <span class="math inline">\(n_1 &lt; n_2 &lt; n_3 &lt; \cdots\)</span> סדרה עולה ממש של אינדקסים טבעיים. הסדרה</p>
+<p><span class="math inline">\(,\left(a_{n_k}\right)_{k=1}^{\infty} = a_{n_1}, a_{n_2}, a_{n_3}, \ldots\)</span></p>
+<p>נקראת <strong>תת-סדרה</strong> של <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span>.</p>
+<p>במילים אחרות, תת-סדרה מתקבלת מן הסדרה המקורית על ידי מחיקת איברים, תוך שמירה על הסדר ועל כך שנותרים אינסוף איברים.</p>
+</div>
+<div id="box-exm-subsequences" class="thmbox thmbox-example" title="תת-סדרות של סדרה נתונה">
+<p><strong>דוגמה 11.1.2 — תת-סדרות של סדרה נתונה.</strong></p>
 <p><span class="math display">\[a_n=a_1,a_2,a_3,a_4,\dots\]</span></p>
 <ul>
 <li><p><span class="math inline">\((a_{2n-1})_{n=1}^{\infty}:a_1,a_3,a_5,\dots\)</span> <!-- בדיקה: הערה בכתב יד — תת סדרה של איברים האי-זוגיים --></p></li>
 <li><p><span class="math inline">\((a_{2n})_{n=1}^{\infty}:a_2,a_4,a_6,\dots\)</span> <!-- בדיקה: הערה בכתב יד — תת סדרה של איברים הזוגיים --></p></li>
 <li><p><span class="math inline">\((a_{2^n})_{n=1}^{\infty}:a_2,a_4,a_8,\dots\)</span></p></li>
 </ul>
+</div>
 <div id="box-def-partial-limit" class="thmbox thmbox-definition">
-<p><strong>הגדרה 11.1.1.</strong></p>
+<p><strong>הגדרה 11.1.3.</strong></p>
 <p>אם <span class="math inline">\((a_{n_k})_{k=1}^{\infty}\)</span> תת סדרה של <span class="math inline">\(a_n\)</span> , ואם היא מתכנסת ל-<span class="math inline">\(L\)</span>, אז נקרא ל-<span class="math inline">\(L\)</span> גבול חלקי של <span class="math inline">\(a_n\)</span> .</p>
 <p><span class="math display">\[a_{n_k}=a_{n_1},a_{n_2},a_{n_3},\dots \qquad a_{n_k}\xrightarrow[k\to\infty]{}L\]</span></p>
 </div>
-<div id="box-exm-minus-one-power-n" class="thmbox thmbox-example">
-<p><strong>דוגמה 11.1.2.</strong></p>
-<p>דוגמא:</p>
+<div id="box-exm-minus-one-power-n" class="thmbox thmbox-example" title="הגבולות החלקיים של $(-1)^n$">
+<p><strong>דוגמה 11.1.4 — הגבולות החלקיים של <span class="math inline">\((-1)^n\)</span>.</strong></p>
 <p>לסדרה <span class="math inline">\(a_n=(-1)^n\)</span> יש שני גבולות חלקיים: <span class="math inline">\(1\)</span> , <span class="math inline">\(-1\)</span></p>
 <p><span class="math display">\[a_n=-1,1,-1,1,-1,1,\dots \qquad a_{2n}\to\boxed{1} \quad,\quad a_{2n-1}\to\boxed{-1}\]</span></p>
 </div>
-<p>הסדרה <span class="math inline">\(a_n\)</span> מתכנסת ל-<span class="math inline">\(L\)</span>, אם ורק אם כל הגבולות החלקיים שלה שווים ל-<span class="math inline">\(L\)</span>, וכל תת סדרה שלה תתכנס ל-<span class="math inline">\(L\)</span>.</p>
-<p>כלומר, אם מצאנו שתי תת סדרות של <span class="math inline">\(a_n\)</span> שמתכנסות לגבולות שונים, אז <span class="math inline">\(a_n\)</span> לא מתכנסת.</p>
+<div id="box-thm-subsequences-same-limit" class="thmbox thmbox-theorem">
+<p><strong>משפט 11.1.5.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(L \in \mathbb{R}\)</span>. אז <span class="math inline">\(a_n \to L\)</span> אם ורק אם כל תת-סדרה של <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(L\)</span>.</p>
+<p>בפרט, אם הסדרה מתכנסת ל-<span class="math inline">\(L\)</span>, אז <span class="math inline">\(L\)</span> הוא הגבול החלקי היחיד שלה.</p>
+</div>
+<div id="box-cor-two-partial-limits-diverge" class="thmbox thmbox-corollary">
+<p><strong>מסקנה 11.1.6.</strong></p>
+<p>אם לסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> יש שתי תת-סדרות המתכנסות לגבולות שונים, אז הסדרה אינה מתכנסת.</p>
+</div>
 <!-- מקור: הרצאה 9 -->
-<p>אם מצאנו כי יש מספר של תתי סדרות של <span class="math inline">\(a_n\)</span>, שהן <u>מכסות את הסדרה כולה</u>, וידוע לנו לאן הן מתכנסות, אז אלו כל הגבולות החלקיים של <span class="math inline">\(a_n\)</span>.</p>
-<div id="box-exm-gvulot-chelkiim" class="thmbox thmbox-example">
-<p><strong>דוגמה 11.1.3.</strong></p>
+<div id="box-prp-covering-subsequences" class="thmbox thmbox-proposition">
+<p><strong>טענה 11.1.7.</strong></p>
+<p>נניח כי הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתפרקת למספר <strong>סופי</strong> של תת-סדרות מתכנסות, המכסות יחד את כל אינדקסי הסדרה. אז אוסף הגבולות של תת-סדרות אלו הוא בדיוק אוסף הגבולות החלקיים של <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span>.</p>
+</div>
+<div id="box-exm-gvulot-chelkiim" class="thmbox thmbox-question" title="מציאת כל הגבולות החלקיים">
+<p><strong>שאלה 11.1.8 — מציאת כל הגבולות החלקיים.</strong></p>
 <p>מצאו את כל הגבולות החלקיים של הסדרה:</p>
 <p><span class="math display">\[a_n = (\frac{\cos(\frac{\pi}{2} \cdot n) \cdot 2n}{3n + 4} + \frac{\sin(\frac{\pi}{2} \cdot n) \cdot (2n^2 + n - 3)}{3n^2 + 5n})^2\]</span></p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
 <p>תזכורת:</p>
 <p><span class="math display">\[\cos(\frac{\pi}{2}) = \cos(\frac{3\pi}{2}) = 0 \qquad \sin(\frac{\pi}{2}) = \sin(\frac{5\pi}{2}) = 1\]</span></p>
 <p><span class="math display">\[\cos(\frac{2\pi}{2}) = -1 \qquad \sin(\pi) = \sin(\frac{4\pi}{2}) = 0\]</span></p>
@@ -972,52 +1025,64 @@ window.Quarto = {
 </section>
 <section id="משפט-בולצאנוויירשטראס-ללא-הוכחה" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="משפט-בולצאנוויירשטראס-ללא-הוכחה"><span class="header-section-number">11.2</span> משפט בולצאנו–ויירשטראס (ללא הוכחה)</h2>
-<div id="box-thm-chsuma-monotonit" class="thmbox thmbox-theorem">
-<p><strong>משפט 11.2.1.</strong></p>
-<p><strong>משפט החסומה והמונוטונית</strong></p>
+<div id="box-thm-chsuma-monotonit" class="thmbox thmbox-theorem" title="משפט החסומה והמונוטונית">
+<p><strong>משפט 11.2.1 — משפט החסומה והמונוטונית.</strong></p>
 <p>אם <span class="math inline">\(a_n\)</span> סדרה חסומה, אז קיימת לה תת סדרה שמתכנסת למספר במובן הרחב.</p>
 </div>
-<div id="box-thm-hitkansut-monotoniot" class="thmbox thmbox-theorem">
-<p><strong>משפט 11.2.2.</strong></p>
-<p><strong>משפט התכנסות הסדרות המונוטוניות</strong></p>
+<div id="box-thm-hitkansut-monotoniot" class="thmbox thmbox-theorem" title="משפט התכנסות הסדרות המונוטוניות">
+<p><strong>משפט 11.2.2 — משפט התכנסות הסדרות המונוטוניות.</strong></p>
 <p>אם <span class="math inline">\(a_n\)</span> סדרה מונוטונית, אז היא מתכנסת במובן הרחב.</p>
 <p>כלומר, אם <span class="math inline">\(a_n\)</span> חסומה, אז היא מתכנסת למספר.</p>
 <p>אבל אם <span class="math inline">\(a_n\)</span> לא חסומה, אז <span class="math inline">\(a_n \to \infty\)</span> עולה, או <span class="math inline">\(a_n \to -\infty\)</span> יורדת.</p>
 </div>
-<div id="box-thm-sandvich" class="thmbox thmbox-theorem">
-<p><strong>משפט 11.2.3.</strong></p>
-<p><strong>משפט הסנדוויץ’ החזק</strong></p>
+<div id="box-thm-sandvich" class="thmbox thmbox-theorem" title="משפט הסנדוויץ' החזק">
+<p><strong>משפט 11.2.3 — משפט הסנדוויץ’ החזק.</strong></p>
 <p>אם <span class="math inline">\(a_n\)</span> סדרה מתכנסת ל-<span class="math inline">\(L\)</span> ו-<span class="math inline">\(m \le a_n \le M\)</span> אזי <span class="math inline">\(m \le L \le M\)</span>.</p>
 </div>
-<div id="box-thm-gvul-e" class="thmbox thmbox-theorem">
-<p><strong>משפט 11.2.4.</strong></p>
-<p><strong>הגבול</strong> <span class="math inline">\(e\)</span></p>
-<p>אם <span class="math inline">\(a_n \to 0\)</span> אזי <span class="math inline">\((1 + a_n)^{\frac{1}{a_n}} \to e\)</span> או <span class="math inline">\((1 + \frac{1}{n})^n \to e\)</span></p>
-</div>
-<div id="box-exm-gvul-e" class="thmbox thmbox-example">
-<p><strong>דוגמה 11.2.5.</strong></p>
-<p>לאן מתכנסת הסדרה <span class="math inline">\((1 - \frac{1}{n})^n\)</span></p>
-<p><span class="math display">\[(1 - \frac{1}{n})^n \to \frac{1}{e}\]</span></p>
-<p>ולכן <span class="math inline">\(\frac{1}{(1 - \frac{1}{n})^n}\)</span> ונקבל: <span class="math inline">\((1 - \frac{1}{n})^{-n} \to e\)</span> כי: נציב את <span class="math inline">\(a_n = -\frac{1}{n}\)</span></p>
-</div>
-<div id="box-thm-gvul-shoresh" class="thmbox thmbox-theorem">
-<p><strong>משפט 11.2.6.</strong></p>
-<p><strong>משפט גבול שורש</strong></p>
+<div id="box-thm-gvul-shoresh" class="thmbox thmbox-theorem" title="משפט גבול שורש">
+<p><strong>משפט 11.2.4 — משפט גבול שורש.</strong></p>
 <p><span class="math display">\[\sqrt[n]{q} \to 1\]</span> לכל קבוע <span class="math inline">\(0 &lt; q\)</span></p>
 </div>
-<div id="box-exm-gvul-shoresh" class="thmbox thmbox-example">
-<p><strong>דוגמה 11.2.7.</strong></p>
+<div id="box-exm-gvul-shoresh" class="thmbox thmbox-example" title="שורש מסדר $n$ של $2$">
+<p><strong>דוגמה 11.2.5 — שורש מסדר <span class="math inline">\(n\)</span> של <span class="math inline">\(2\)</span>.</strong></p>
 <p><span class="math display">\[\sqrt[n]{2} = 2^{\frac{1}{n}} \to 2^0 = 1\]</span></p>
 </div>
 </section>
 <section id="הגבול-העליון-והגבול-התחתון-ללא-הוכחות" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="הגבול-העליון-והגבול-התחתון-ללא-הוכחות"><span class="header-section-number">11.3</span> הגבול העליון והגבול התחתון (ללא הוכחות)</h2>
+<div id="box-def-limsup-liminf" class="thmbox thmbox-definition">
+<p><strong>הגדרה 11.3.1.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה שיש לה גבולות חלקיים.</p>
+<p><strong>הגבול העליון</strong> של הסדרה הוא הגדול שבגבולותיה החלקיים, ומסומן <span class="math inline">\(\limsup\limits_{n\to\infty} a_n\)</span> , ואילו <strong>הגבול התחתון</strong> שלה הוא הקטן שבגבולותיה החלקיים, ומסומן <span class="math inline">\(\liminf\limits_{n\to\infty} a_n\)</span>.</p>
+<p>נהוג לסמן אותם גם <span class="math inline">\(\overline{\lim}\)</span> ו-<span class="math inline">\(\underline{\lim}\)</span> בהתאמה.</p>
+</div>
+<div id="box-thm-limsup-eq-liminf" class="thmbox thmbox-theorem">
+<p><strong>משפט 11.3.2.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. הגבול <span class="math inline">\(\lim\limits_{n\to\infty} a_n\)</span> קיים אם ורק אם</p>
+<p><span class="math inline">\(,\limsup_{n\to\infty} a_n = \liminf_{n\to\infty} a_n\)</span></p>
+<p>ובמקרה זה שלושת הגבולות שווים זה לזה.</p>
+</div>
 <div class="todo">
 <p>תוכן בהכנה — להשלמה.</p>
 </div>
 </section>
 <section id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0"><span class="header-section-number">11.4</span> סדרות מהצורה <span class="math inline">\((1+a_n)^{1/a_n}\)</span> כאשר <span class="math inline">\(a_n\to 0\)</span></h2>
+<div id="box-thm-e-general-form" class="thmbox thmbox-theorem">
+<p><strong>משפט 11.4.1.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המקיימת <span class="math inline">\(a_n \to 0\)</span> , וכן <span class="math inline">\(a_n \neq 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>. אז</p>
+<p><span class="math inline">\(.\left(1 + a_n\right)^{\frac{1}{a_n}} \to e\)</span></p>
+<p>הבחירה <span class="math inline">\(a_n = \dfrac{1}{n}\)</span> מחזירה את הגבול המוכר <span class="math inline">\(\left(1 + \dfrac{1}{n}\right)^{n} \to e\)</span>.</p>
+</div>
+<div id="box-exm-gvul-e" class="thmbox thmbox-question" title="הסדרה $(1-1/n)^n$">
+<p><strong>שאלה 11.4.2 — הסדרה <span class="math inline">\((1-1/n)^n\)</span>.</strong></p>
+<p>לאן מתכנסת הסדרה <span class="math inline">\((1 - \frac{1}{n})^n\)</span></p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><span class="math display">\[(1 - \frac{1}{n})^n \to \frac{1}{e}\]</span></p>
+<p>ולכן <span class="math inline">\(\frac{1}{(1 - \frac{1}{n})^n}\)</span> ונקבל: <span class="math inline">\((1 - \frac{1}{n})^{-n} \to e\)</span> כי: נציב את <span class="math inline">\(a_n = -\frac{1}{n}\)</span></p>
+</div>
 <div class="todo">
 <p>הצורה הכללית <span class="math inline">\((1+a_n)^{1/a_n}\)</span> מבוססת על הגבול <span class="math inline">\((1+\tfrac1n)^n\to e\)</span> שנדון לעיל. להשלמה.</p>
 </div>
