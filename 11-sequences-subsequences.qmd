@@ -2,12 +2,17 @@
 
 ## תת-סדרות
 
-תהי $(a_n)_{n=1}^{\infty}$ סדרה.
+::: {#box-def-subsequence .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה, ותהי $n_1 < n_2 < n_3 < \cdots$ סדרה עולה ממש של אינדקסים טבעיים. הסדרה
 
-תת סדרה שלה היא אוסף אינסופי של איברי הסדרה, ושומרים על הסדר.
+$,\left(a_{n_k}\right)_{k=1}^{\infty} = a_{n_1}, a_{n_2}, a_{n_3}, \ldots$
 
-דוגמאות:
+נקראת **תת-סדרה** של $(a_n)_{n=1}^{\infty}$.
 
+במילים אחרות, תת-סדרה מתקבלת מן הסדרה המקורית על ידי מחיקת איברים, תוך שמירה על הסדר ועל כך שנותרים אינסוף איברים.
+:::
+
+::: {#box-exm-subsequences .thmexm title="תת-סדרות של סדרה נתונה"}
 $$a_n=a_1,a_2,a_3,a_4,\dots$$
 
 - $(a_{2n-1})_{n=1}^{\infty}:a_1,a_3,a_5,\dots$ <!-- בדיקה: הערה בכתב יד — תת סדרה של איברים האי-זוגיים -->
@@ -15,6 +20,7 @@ $$a_n=a_1,a_2,a_3,a_4,\dots$$
 - $(a_{2n})_{n=1}^{\infty}:a_2,a_4,a_6,\dots$ <!-- בדיקה: הערה בכתב יד — תת סדרה של איברים הזוגיים -->
 
 - $(a_{2^n})_{n=1}^{\infty}:a_2,a_4,a_8,\dots$
+:::
 
 ::: {#box-def-partial-limit .thmdef}
 אם $(a_{n_k})_{k=1}^{\infty}$ תת סדרה של $a_n$ , ואם היא מתכנסת ל-$L$, אז נקרא ל-$L$ גבול חלקי של $a_n$ .
@@ -22,27 +28,35 @@ $$a_n=a_1,a_2,a_3,a_4,\dots$$
 $$a_{n_k}=a_{n_1},a_{n_2},a_{n_3},\dots \qquad a_{n_k}\xrightarrow[k\to\infty]{}L$$
 :::
 
-::: {#box-exm-minus-one-power-n .thmexm}
-דוגמא:
-
+::: {#box-exm-minus-one-power-n .thmexm title="הגבולות החלקיים של $(-1)^n$"}
 לסדרה $a_n=(-1)^n$ יש שני גבולות חלקיים: $1$ , $-1$
 
 $$a_n=-1,1,-1,1,-1,1,\dots \qquad a_{2n}\to\boxed{1} \quad,\quad a_{2n-1}\to\boxed{-1}$$
 :::
 
-הסדרה $a_n$ מתכנסת ל-$L$, אם ורק אם כל הגבולות החלקיים שלה שווים ל-$L$, וכל תת סדרה שלה תתכנס ל-$L$.
+::: {#box-thm-subsequences-same-limit .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $L \in \mathbb{R}$. אז $a_n \to L$ אם ורק אם כל תת-סדרה של $(a_n)_{n=1}^{\infty}$ מתכנסת ל-$L$.
 
-כלומר, אם מצאנו שתי תת סדרות של $a_n$ שמתכנסות לגבולות שונים, אז $a_n$ לא מתכנסת.
+בפרט, אם הסדרה מתכנסת ל-$L$, אז $L$ הוא הגבול החלקי היחיד שלה.
+:::
+
+::: {#box-cor-two-partial-limits-diverge .thmcor}
+אם לסדרה $(a_n)_{n=1}^{\infty}$ יש שתי תת-סדרות המתכנסות לגבולות שונים, אז הסדרה אינה מתכנסת.
+:::
 
 <!-- מקור: הרצאה 9 -->
 
-אם מצאנו כי יש מספר של תתי סדרות של $a_n$, שהן <u>מכסות את הסדרה כולה</u>, וידוע לנו לאן הן מתכנסות, אז אלו כל הגבולות החלקיים של $a_n$.
+::: {#box-prp-covering-subsequences .thmprp}
+נניח כי הסדרה $(a_n)_{n=1}^{\infty}$ מתפרקת למספר **סופי** של תת-סדרות מתכנסות, המכסות יחד את כל אינדקסי הסדרה. אז אוסף הגבולות של תת-סדרות אלו הוא בדיוק אוסף הגבולות החלקיים של $(a_n)_{n=1}^{\infty}$.
+:::
 
-::: {#box-exm-gvulot-chelkiim .thmexm}
+::: {#box-exm-gvulot-chelkiim .thmqst title="מציאת כל הגבולות החלקיים"}
 מצאו את כל הגבולות החלקיים של הסדרה:
 
 $$a_n = (\frac{\cos(\frac{\pi}{2} \cdot n) \cdot 2n}{3n + 4} + \frac{\sin(\frac{\pi}{2} \cdot n) \cdot (2n^2 + n - 3)}{3n^2 + 5n})^2$$
+:::
 
+::: thmsol
 תזכורת:
 
 $$\cos(\frac{\pi}{2}) = \cos(\frac{3\pi}{2}) = 0 \qquad \sin(\frac{\pi}{2}) = \sin(\frac{5\pi}{2}) = 1$$
@@ -86,15 +100,11 @@ $$a_{4n+3} = (\frac{1 \cdot 2n}{3n + 4} + \frac{0 \cdot (2n^2 + n - 3)}{3n^2 + 5
 
 ## משפט בולצאנו–ויירשטראס (ללא הוכחה)
 
-::: {#box-thm-chsuma-monotonit .thmthm}
-**משפט החסומה והמונוטונית**
-
+::: {#box-thm-chsuma-monotonit .thmthm title="משפט החסומה והמונוטונית"}
 אם $a_n$ סדרה חסומה, אז קיימת לה תת סדרה שמתכנסת למספר במובן הרחב.
 :::
 
-::: {#box-thm-hitkansut-monotoniot .thmthm}
-**משפט התכנסות הסדרות המונוטוניות**
-
+::: {#box-thm-hitkansut-monotoniot .thmthm title="משפט התכנסות הסדרות המונוטוניות"}
 אם $a_n$ סדרה מונוטונית, אז היא מתכנסת במובן הרחב.
 
 כלומר, אם $a_n$ חסומה, אז היא מתכנסת למספר.
@@ -102,43 +112,59 @@ $$a_{4n+3} = (\frac{1 \cdot 2n}{3n + 4} + \frac{0 \cdot (2n^2 + n - 3)}{3n^2 + 5
 אבל אם $a_n$ לא חסומה, אז $a_n \to \infty$ עולה, או $a_n \to -\infty$ יורדת.
 :::
 
-::: {#box-thm-sandvich .thmthm}
-**משפט הסנדוויץ' החזק**
-
+::: {#box-thm-sandvich .thmthm title="משפט הסנדוויץ' החזק"}
 אם $a_n$ סדרה מתכנסת ל-$L$ ו-$m \le a_n \le M$ אזי $m \le L \le M$.
 :::
 
-::: {#box-thm-gvul-e .thmthm}
-**הגבול** $e$
-
-אם $a_n \to 0$ אזי $(1 + a_n)^{\frac{1}{a_n}} \to e$ או $(1 + \frac{1}{n})^n \to e$
-:::
-
-::: {#box-exm-gvul-e .thmexm}
-לאן מתכנסת הסדרה $(1 - \frac{1}{n})^n$
-
-$$(1 - \frac{1}{n})^n \to \frac{1}{e}$$
-
-ולכן $\frac{1}{(1 - \frac{1}{n})^n}$ ונקבל: $(1 - \frac{1}{n})^{-n} \to e$ כי: נציב את $a_n = -\frac{1}{n}$
-:::
-
-::: {#box-thm-gvul-shoresh .thmthm}
-**משפט גבול שורש**
-
+::: {#box-thm-gvul-shoresh .thmthm title="משפט גבול שורש"}
 $$\sqrt[n]{q} \to 1$$ לכל קבוע $0 < q$
 :::
 
-::: {#box-exm-gvul-shoresh .thmexm}
+::: {#box-exm-gvul-shoresh .thmexm title="שורש מסדר $n$ של $2$"}
 $$\sqrt[n]{2} = 2^{\frac{1}{n}} \to 2^0 = 1$$
 :::
 
 ## הגבול העליון והגבול התחתון (ללא הוכחות)
+
+::: {#box-def-limsup-liminf .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה שיש לה גבולות חלקיים.
+
+**הגבול העליון** של הסדרה הוא הגדול שבגבולותיה החלקיים, ומסומן $\limsup\limits_{n\to\infty} a_n$ , ואילו **הגבול התחתון** שלה הוא הקטן שבגבולותיה החלקיים, ומסומן $\liminf\limits_{n\to\infty} a_n$.
+
+נהוג לסמן אותם גם $\overline{\lim}$ ו-$\underline{\lim}$ בהתאמה.
+:::
+
+::: {#box-thm-limsup-eq-liminf .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. הגבול $\lim\limits_{n\to\infty} a_n$ קיים אם ורק אם
+
+$,\limsup_{n\to\infty} a_n = \liminf_{n\to\infty} a_n$
+
+ובמקרה זה שלושת הגבולות שווים זה לזה.
+:::
 
 ::: {.todo}
 תוכן בהכנה — להשלמה.
 :::
 
 ## סדרות מהצורה $(1+a_n)^{1/a_n}$ כאשר $a_n\to 0$
+
+::: {#box-thm-e-general-form .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה המקיימת $a_n \to 0$ , וכן $a_n \neq 0$ לכל $n \ge 1$. אז
+
+$.\left(1 + a_n\right)^{\frac{1}{a_n}} \to e$
+
+הבחירה $a_n = \dfrac{1}{n}$ מחזירה את הגבול המוכר $\left(1 + \dfrac{1}{n}\right)^{n} \to e$.
+:::
+
+::: {#box-exm-gvul-e .thmqst title="הסדרה $(1-1/n)^n$"}
+לאן מתכנסת הסדרה $(1 - \frac{1}{n})^n$
+:::
+
+::: thmsol
+$$(1 - \frac{1}{n})^n \to \frac{1}{e}$$
+
+ולכן $\frac{1}{(1 - \frac{1}{n})^n}$ ונקבל: $(1 - \frac{1}{n})^{-n} \to e$ כי: נציב את $a_n = -\frac{1}{n}$
+:::
 
 ::: {.todo}
 הצורה הכללית $(1+a_n)^{1/a_n}$ מבוססת על הגבול $(1+\tfrac1n)^n\to e$ שנדון לעיל. להשלמה.

@@ -10,8 +10,7 @@
 כלומר, אם סדרה מתכנסת אז <u>הגבול</u> שלה הוא יחיד.
 :::
 
-**הוכחה:**
-
+::: thmproof
 נניח בשלילה: $L_1 \ne L_2$
 
 נסמן את המרחק: $d = |L_1 - L_2| > 0$
@@ -19,6 +18,7 @@
 נבחר: $\varepsilon = \dfrac{d}{4}$
 
 $a_n$ עבור $n > max\{N_1, N_2\}$ $\leftarrow$ סתירה
+:::
 
 ```{python}
 #| echo: false
@@ -86,8 +86,7 @@ plt.close(fig)
 תהי $(a_n)_{n=1}^{\infty}$ סדרה, נגיד כי $a_n$ חסומה, אם קיימים $m,M \in R$ כך שלכל $n$: $$m \le a_n \le M$$
 :::
 
-דוגמאות:
-
+::: {#box-exm-bounded-sequences .thmexm title="סדרות חסומות ושאינן חסומות"}
 - $a_n = \dfrac{1}{n}$ סדרה חסומה, כי: $0 \le a_n \le 1$ לכל ח.
 
 - $a_n = (-1)^n$ סדרה חסומה, כי: $-1 \le (-1)^n \le 1$ לכל ח.
@@ -95,12 +94,15 @@ plt.close(fig)
 - $a_n = n$ <u>לא</u> סדרה חסומה, כי: לכל $M$, יהיה $a_n > M$
 
   למשל, ניקח את $n = \lfloor M \rfloor + 1$ עבורו $a_n = n > M$
+:::
 
 ### הקשר בין התכנסות לחסימות של סדרה
 
-- סדרה חסומה לא גורר שהיא מתכנסת.
+::: {#box-rem-bounded-not-convergent .thmrem title="חסימות אינה גוררת התכנסות"}
+סדרה חסומה לא גוררת שהיא מתכנסת.
 
-  לדוגמא: $a_n = (-1)^n$
+לדוגמא: $a_n = (-1)^n$
+:::
 
 ```{python}
 #| echo: false
@@ -154,19 +156,21 @@ plt.close(fig)
 ![סדרה מתכנסת גוררת חסומה, אך סדרה חסומה אינה גוררת מתכנסת (אין גרירה הדדית)](figures/c08_fig02.png){#fig-c02_fig03 width="62%" fig-align="center"}
 :::
 
-- אם $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת, אז היא חסומה.
+::: {#box-thm-convergent-bounded .thmthm}
+אם $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת, אז היא חסומה.
+:::
 
-  $\downarrow$ הוכחת הטענה
+::: thmproof
+נסמן $a_n \to L$. מהגדרת הגבול, נבחר $\varepsilon = 1$, אז קיים $N$ כך שלכל $n>N$ מתקיים: $$|a_n - L| < 1 \ \leftarrow \ L-1 < a_n < L+1$$
 
-  נסמן $a_n \to L$. מהגדרת הגבול, נבחר $\varepsilon = 1$, אז קיים $N$ כך שלכל $n>N$ מתקיים: $$|a_n - L| < 1 \ \leftarrow \ L-1 < a_n < L+1$$
+כלומר, בשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמעלה</u>, ניקח: $M = max\{L+1, a_1, \ldots, a_N\}$
 
-  כלומר, בשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמעלה</u>, ניקח: $M = max\{L+1, a_1, \ldots, a_N\}$
+ואז בוודאות <u>לכל ח</u>: $a_n \le M$
 
-  ואז בוודאות <u>לכל ח</u>: $a_n \le M$
+ובשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמטה</u>, ניקח: $m = min\{L-1, a_1, \ldots, a_N\}$
 
-  ובשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמטה</u>, ניקח: $m = min\{L-1, a_1, \ldots, a_N\}$
-
-  ואז בוודאות <u>לכל ח</u>: $m \le a_n$
+ואז בוודאות <u>לכל ח</u>: $m \le a_n$
+:::
 
 ```{python}
 #| echo: false
@@ -221,7 +225,9 @@ plt.close(fig)
 ![הזנב $a_n$ (עבור $n>N$) בקטע $(L-1,L+1)$, והאיברים הראשונים שמחוץ לו — כל הסדרה חסומה בין $m$ ל-$M$](figures/c08_fig03.png){#fig-c02_fig04 width="62%" fig-align="center"}
 :::
 
-- סדרה <u>שאינה חסומה</u>, אז היא אינה מתכנסת.
+::: {#box-cor-unbounded-diverges .thmcor}
+אם $(a_n)_{n=1}^{\infty}$ סדרה שאינה חסומה, אז היא אינה מתכנסת.
+:::
 
 ## אריתמטיקה של גבולות
 
@@ -243,9 +249,11 @@ plt.close(fig)
 
 ### דוגמאות
 
-::: {#box-exm-seq-rational-1 .thmexm}
+::: {#box-exm-seq-rational-1 .thmqst title="מנת פולינומים מאותה דרגה"}
 נראה כי הסדרה $\dfrac{3n-4}{n+2}$ מתכנסת, ונמצא לאן.
+:::
 
+::: thmsol
 הסדרה $b_n = n+2$ לא מתכנסת, כי היא לא חסומה.
 
 נפשט את $a_n$ לפי החזקה הכי גדולה. כלומר, נחלק ב-ח את המונה ואת המכנה: $$a_n = \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}} = \frac{\rightarrow 3}{\rightarrow 1} \to 3$$
@@ -253,9 +261,11 @@ plt.close(fig)
 $\dfrac{4}{n} \to 4 \cdot \dfrac{1}{n} \to 0$ , $\quad$ $\dfrac{2}{n} \to 2 \cdot \dfrac{1}{n} \to 0$
 :::
 
-::: {#box-exm-seq-rational-2 .thmexm}
+::: {#box-exm-seq-rational-2 .thmqst title="מנת פולינומים מדרגות שונות"}
 מצאו את הגבול של הסדרה $$a_n = \frac{8n+3}{n^2+1}$$
+:::
 
+::: thmsol
 נפשט ע"י חילוק בחזקה הכי גדולה במכנה: $$a_n = \frac{\dfrac{8}{n} + \dfrac{3}{n^2}}{1 + \dfrac{1}{n^2}} = \frac{\rightarrow 0}{\rightarrow 1} \to 0$$
 
 $\dfrac{1}{n^2} = \dfrac{1}{n} \cdot \dfrac{1}{n} \to 0$ , $\quad$ $\dfrac{8}{n} \to 8 \cdot \dfrac{1}{n} \to 0$ , $\quad$ $\dfrac{3}{n^2} = 3 \cdot \dfrac{1}{n} \cdot \dfrac{1}{n} \to 0$
@@ -265,41 +275,59 @@ $\dfrac{1}{n^2} = \dfrac{1}{n} \cdot \dfrac{1}{n} \to 0$ , $\quad$ $\dfrac{8}{n}
 
 ## משפט הסנדוויץ׳; כפל אפסית בחסומה
 
-::: {#box-thm-piza-rachav .thmthm}
-משפט הפיצה
+::: {#box-def-null-sequence .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **סדרה אפסית** אם היא מתכנסת ל-$0$, כלומר אם $\lim\limits_{n\to\infty} a_n = 0$.
+:::
 
+::: {#box-thm-squeeze-sequences .thmthm title="כלל הסנדוויץ׳"}
+יהיו $(a_n)_{n=1}^{\infty}$ , $(b_n)_{n=1}^{\infty}$ , $(c_n)_{n=1}^{\infty}$ שלוש סדרות, ונניח כי קיים $N_0 \in \mathbb{N}$ כך שלכל $n \geq N_0$ מתקיים
+
+$.a_n \leq b_n \leq c_n$
+
+אם בנוסף שתי הסדרות החיצוניות מתכנסות לאותו גבול, כלומר
+
+$,\lim_{n\to\infty} a_n = \lim_{n\to\infty} c_n = L$
+
+אז גם $(b_n)_{n=1}^{\infty}$ מתכנסת, ומתקיים $\lim\limits_{n\to\infty} b_n = L$.
+:::
+
+::: {#box-thm-null-times-bounded .thmthm title="אפסית כפול חסומה"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה אפסית, ותהי $(b_n)_{n=1}^{\infty}$ סדרה חסומה. אז גם הסדרה $(a_n \cdot b_n)_{n=1}^{\infty}$ אפסית, כלומר
+
+$.\lim_{n\to\infty} a_n \cdot b_n = 0$
+
+שימו לב כי $(b_n)_{n=1}^{\infty}$ אינה נדרשת להתכנס, אלא רק להיות חסומה.
+:::
+
+::: {#box-thm-piza-rachav .thmthm title="משפט הפיצה"}
 אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $a_n \to \infty$, אז $$\lim_{n\to\infty} b_n = \infty$$
 :::
 
-::: {#box-exm-piza-1 .thmexm}
-דוגמא:
-
+::: {#box-exm-piza-1 .thmqst title="הסדרה $n+(-1)^n$"}
 האם הסדרה $b_n = n + (-1)^n$ מתכנסת במובן הרחב?
+:::
 
-**פתרון:**
-
+::: thmsol
 נראה כי $b_n \to \infty$ מתקיים $b_n \geq n - 1$ אם נסתכל על $n - 1 \xrightarrow[\to\infty]{} \infty$
 
 אז מכלל הפיצה $$b_n \to \infty$$
 :::
 
-::: {#box-exm-piza-2 .thmexm}
-דוגמא:
-
+::: {#box-exm-piza-2 .thmqst title="הסדרה $n^2/n!$"}
 האם הסדרה $b_n = \dfrac{n^2}{n!}$ מתכנסת במובן הרחב?
+:::
 
-**פתרון:**
-
+::: thmsol
 $$b_n = \frac{n^2}{n!} = \frac{n \cdots n}{1 \cdot 2 \cdots n} = \frac{n}{1} \cdot \underbrace{\frac{n}{2}}_{\geq 1} \cdots \cdots \underbrace{\frac{n}{n}}_{\geq 1} \geq n \geq n \cdot 1 \cdots \cdots 1$$
 
 לכן מכלל הפיצה $$b_n \to \infty$$
 :::
 
-::: {#box-exm-piza-3 .thmexm}
-דוגמא:
-
+::: {#box-exm-piza-3 .thmqst title="הסדרה $(1+1/n)^{n^2}$"}
 האם הסדרה $b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}$ מתכנסת במובן הרחב?
+:::
 
+::: thmsol
 $$\left(1 + \frac{1}{n}\right)^{n^2} = \left(1 + \frac{1}{n}\right)^{n \cdot n} = \left(\left(1 + \frac{1}{n}\right)^n\right)^n$$
 
 $$\left(1 + \frac{1}{n}\right)^n \to e$$ כאשר $\left(1 + \frac{1}{n}\right)^n > 2$ באשר הם מספר מאוחרים מסוים
@@ -309,8 +337,6 @@ $$a_n = \left(\left(1 + \frac{1}{n}\right)^n\right)^n > 2$$ לבן הם מספר
 הרי $2^n \to \infty$ לכן מכלל הפיצה: $$\boxed{a_n \to \infty}$$
 :::
 
-::: {#box-thm-piza-minf .thmthm}
-כלל הפיצה ההפוכה
-
+::: {#box-thm-piza-minf .thmthm title="כלל הפיצה ההפוכה"}
 אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $b_n \to -\infty$, אז $$\lim_{n\to n} a_n = -\infty$$
 :::
