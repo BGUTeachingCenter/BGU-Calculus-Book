@@ -1667,28 +1667,28 @@ plt.close(fig)
 
 ### תרגילים {.unnumbered}
 
-התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״אמת״ או על ״שקר״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.
+התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״נכון״ או על ״לא נכון״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.
 
 <!-- הפתרונות המתקפלים כאן חייבים להישאר בלי מזהה (#id): צירוף של מזהה עם
      .thmsol .foldable מפיל את הפילטר של Quarto עצמו. הקישור בין שאלת האמת/שקר
      לפתרון נעשה לפי סדר המסמך, דרך התכונה data-reveal — ראו _styles.html. -->
 
-**אמת או שקר.** בארבעת התרגילים הבאים $\{a_n\}_{n=1}^{\infty}$ ו-$\{b_n\}_{n=1}^{\infty}$ הן סדרות ממשיות כלשהן.
+**נכון או לא נכון.** בארבעת התרגילים הבאים $\{a_n\}_{n=1}^{\infty}$ ו-$\{b_n\}_{n=1}^{\infty}$ הן סדרות ממשיות כלשהן.
 
 **תרגיל 1.** אם $\{a_n\}$ אינה מתכנסת וגם $\{b_n\}$ אינה מתכנסת, אז $\{a_n+b_n\}$ אינה מתכנסת.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
 <div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 ```
 :::
 
 ::: {.thmsol .foldable}
-**שקר.** ניקח $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל $n$ מתקיים $a_n + b_n = 0$, ולכן הסכום הוא הסדרה הקבועה $0$, שמתכנסת ל-$0$.
+**לא נכון.** ניקח $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל $n$ מתקיים $a_n + b_n = 0$, ולכן הסכום הוא הסדרה הקבועה $0$, שמתכנסת ל-$0$.
 :::
 
 **תרגיל 2.** אם $\{a_n\}$ מתכנסת ו-$\{b_n\}$ אינה מתכנסת, אז $\{a_n+b_n\}$ אינה מתכנסת.
@@ -1696,15 +1696,15 @@ plt.close(fig)
 ::: {.content-visible when-format="html"}
 ```{=html}
 <div class="tf-quiz" data-correct="true" data-reveal>
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 ```
 :::
 
 ::: {.thmsol .foldable}
-**אמת.** נניח בשלילה שגם $\{a_n+b_n\}$ מתכנסת, ונסמן $a_n \to A$ וכן $a_n+b_n \to S$. נראה שאז $b_n \to S-A$, בסתירה להנחה ש-$\{b_n\}$ אינה מתכנסת.
+**נכון.** נניח בשלילה שגם $\{a_n+b_n\}$ מתכנסת, ונסמן $a_n \to A$ וכן $a_n+b_n \to S$. נראה שאז $b_n \to S-A$, בסתירה להנחה ש-$\{b_n\}$ אינה מתכנסת.
 
 יהי $\varepsilon>0$. לפי ההגדרה קיים $N_1\in\mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $\left|a_n-A\right| < \frac{\varepsilon}{2}$, וקיים $N_2\in\mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $\left|\left(a_n+b_n\right)-S\right| < \frac{\varepsilon}{2}$. נבחר $N = \max\left\{N_1,N_2\right\}$.
 
@@ -1724,15 +1724,15 @@ $$.\left|b_n-\left(S-A\right)\right| \leq \left|a_n+b_n-S\right| + \left|a_n-A\r
 ::: {.content-visible when-format="html"}
 ```{=html}
 <div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 ```
 :::
 
 ::: {.thmsol .foldable}
-**שקר.** אותה דוגמה נגדית שבתרגיל הראשון: עבור $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$ הסכום הוא הסדרה הקבועה $0$, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.
+**לא נכון.** אותה דוגמה נגדית שבתרגיל הראשון: עבור $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$ הסכום הוא הסדרה הקבועה $0$, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.
 :::
 
 **תרגיל 4.** אם $\{a_n+b_n\}$ אינה מתכנסת, אז לפחות אחת מן הסדרות $\{a_n\}$ , $\{b_n\}$ אינה מתכנסת.
@@ -1740,15 +1740,15 @@ $$.\left|b_n-\left(S-A\right)\right| \leq \left|a_n+b_n-S\right| + \left|a_n-A\r
 ::: {.content-visible when-format="html"}
 ```{=html}
 <div class="tf-quiz" data-correct="true" data-reveal>
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
 <div class="tf-feedback"></div>
 </div>
 ```
 :::
 
 ::: {.thmsol .foldable}
-**אמת.** נוכיח את הטענה השקולה: אם שתי הסדרות מתכנסות, אז גם הסכום מתכנס.
+**נכון.** נוכיח את הטענה השקולה: אם שתי הסדרות מתכנסות, אז גם הסכום מתכנס.
 
 נניח $a_n \to A$ וכן $b_n \to B$, ויהי $\varepsilon>0$. קיים $N_1\in\mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $\left|a_n-A\right| < \frac{\varepsilon}{2}$, וקיים $N_2\in\mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $\left|b_n-B\right| < \frac{\varepsilon}{2}$. נבחר $N = \max\left\{N_1,N_2\right\}$, ואז לכל $n \geq N$, לפי אי-שוויון המשולש,
 
