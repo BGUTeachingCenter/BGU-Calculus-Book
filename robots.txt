@@ -1,1 +1,1 @@
-Sitemap: https://yuval-khachatryan.github.io/BGU-Calculus-Book/sitemap.xml
+Sitemap: https://bguteachingcenter.github.io/BGU-Calculus-Book/sitemap.xml
