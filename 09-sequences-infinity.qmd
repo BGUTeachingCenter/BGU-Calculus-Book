@@ -1,4 +1,4 @@
-# גבולות אינסופיים וסדרי גודל {chapter="10"}
+# גבולות אינסופיים וסדרי גודל {chapter="9"}
 
 ## אינסוף כגבול
 
@@ -109,6 +109,50 @@ $\star$
 נראה כי $\frac{1}{a_n} = \frac{n}{(-1)^n} = (-1)^n \cdot n$
 
 $$(-1, 2, -3, 4, -5, \ldots)$$
+:::
+
+### כלל הפיצה
+
+::: {#box-thm-piza-rachav .thmthm title="משפט הפיצה"}
+אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $a_n \to \infty$, אז $$\lim_{n\to\infty} b_n = \infty$$
+:::
+
+::: {#box-exm-piza-1 .thmqst title="הסדרה $n+(-1)^n$"}
+האם הסדרה $b_n = n + (-1)^n$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+נראה כי $b_n \to \infty$ מתקיים $b_n \geq n - 1$ אם נסתכל על $n - 1 \xrightarrow[\to\infty]{} \infty$
+
+אז מכלל הפיצה $$b_n \to \infty$$
+:::
+
+::: {#box-exm-piza-2 .thmqst title="הסדרה $n^2/n!$"}
+האם הסדרה $b_n = \dfrac{n^2}{n!}$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+$$b_n = \frac{n^2}{n!} = \frac{n \cdots n}{1 \cdot 2 \cdots n} = \frac{n}{1} \cdot \underbrace{\frac{n}{2}}_{\geq 1} \cdots \cdots \underbrace{\frac{n}{n}}_{\geq 1} \geq n \geq n \cdot 1 \cdots \cdots 1$$
+
+לכן מכלל הפיצה $$b_n \to \infty$$
+:::
+
+::: {#box-exm-piza-3 .thmqst title="הסדרה $(1+1/n)^{n^2}$"}
+האם הסדרה $b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+$$\left(1 + \frac{1}{n}\right)^{n^2} = \left(1 + \frac{1}{n}\right)^{n \cdot n} = \left(\left(1 + \frac{1}{n}\right)^n\right)^n$$
+
+$$\left(1 + \frac{1}{n}\right)^n \to e$$ כאשר $\left(1 + \frac{1}{n}\right)^n > 2$ באשר הם מספר מאוחרים מסוים
+
+$$a_n = \left(\left(1 + \frac{1}{n}\right)^n\right)^n > 2$$ לבן הם מספר מאוחרים מסוים
+
+הרי $2^n \to \infty$ לכן מכלל הפיצה: $$\boxed{a_n \to \infty}$$
+:::
+
+::: {#box-thm-piza-minf .thmthm title="כלל הפיצה ההפוכה"}
+אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $b_n \to -\infty$, אז $$\lim_{n\to n} a_n = -\infty$$
 :::
 
 <!-- מקור: הרצאה 7 -->

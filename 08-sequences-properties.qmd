@@ -1,4 +1,4 @@
-# תכונות של גבולות {chapter="8"}
+# כלים לחישוב גבולות ולהוכחת התכנסות {chapter="8"}
 
 ## הקדמה
 
@@ -7,6 +7,8 @@
 ## חסימוּת של סדרה מתכנסת (וההיפך השגוי)
 
 ### סדרה חסומה
+
+נתחיל את הדיון בסוג נוסף של סדרות — כאלה שכל איבריהן נמצאים בטווח מסוים.
 
 ::: {#box-def-bounded-sequence .thmdef}
 תהי $(a_n)_{n=1}^{\infty}$ סדרה, נגיד כי $a_n$ חסומה, אם קיימים $m,M \in R$ כך שלכל $n$: $$m \le a_n \le M$$
@@ -20,6 +22,137 @@
 - $a_n = n$ <u>לא</u> סדרה חסומה, כי: לכל $M$, יהיה $a_n > M$
 
   למשל, ניקח את $n = \lfloor M \rfloor + 1$ עבורו $a_n = n > M$
+:::
+
+את החסימוּת אפשר לנסח גם בעזרת ערך מוחלט, ואז די באי-שוויון אחד במקום שניים.
+
+::: {#box-thm-bounded-iff .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. הסדרה חסומה אם ורק אם לכל $L \in \mathbb{R}$ קיים $M > 0$ כך שלכל $n$ מתקיים $$.\left|a_n - L\right| \leq M$$
+:::
+
+::: thmproof
+נניח תחילה שהתנאי מתקיים, ונפעיל אותו עם $.L = 0$ אז קיים $M > 0$ כך שלכל $n$ מתקיים $,\left|a_n\right| \leq M$ כלומר $$.-M \leq a_n \leq M$$ זוהי בדיוק ההגדרה של סדרה חסומה, עם החסם התחתון $-M$ והחסם העליון $.M$
+
+בכיוון השני, נניח שהסדרה חסומה, כלומר קיימים $m, M_0 \in \mathbb{R}$ כך שלכל $n$ מתקיים $.m \leq a_n \leq M_0$ נסמן $k = m - 1$ ו-$,K = M_0 + 1$ ואז לכל $n$ מתקיים $,k < a_n < K$ ובפרט $.k < K$
+
+יהי $L \in \mathbb{R}$ כלשהו. נבחר $$.M = \max\left\{\left|L-k\right|,\ \left|L-K\right|\right\}$$ מכיוון ש-$,k < K$ אי אפשר ש-$L$ יהיה שווה גם ל-$k$ וגם ל-$,K$ ולכן לפחות אחד משני הביטויים חיובי, כלומר $.M > 0$
+
+נראה כעת שלכל $n$ מתקיים $.\left|a_n - L\right| \leq M$ מצד אחד, מ-$a_n < K$ נובע $$,a_n - L < K - L \leq \left|K - L\right| \leq M$$ ומצד שני, מ-$a_n > k$ נובע $$.a_n - L > k - L \geq -\left|k - L\right| \geq -M$$
+
+קיבלנו $,-M < a_n - L < M$ כלומר $,\left|a_n - L\right| < M$ ובפרט $.\left|a_n - L\right| \leq M$
+:::
+
+בבחירת $L = 0$ במשפט הקודם מתקבל תנאי שקול נוסף לחסימוּת, שנראה בהמשך שהוא שימושי מאוד.
+
+::: {#box-cor-bounded-abs .thmcor}
+הסדרה $(a_n)_{n=1}^{\infty}$ חסומה אם ורק אם קיים $M > 0$ כך שלכל $n$ מתקיים $$.\left|a_n\right| < M$$
+:::
+
+בתרגילים הבאים נשתמש בכך שלכל $x$ ממשי מתקיים $\left|\sin x\right| \leq 1$ וגם $.\left|\cos x\right| \leq 1$
+
+::: {#box-qst-bounded-examples .thmqst title="אילו מהסדרות חסומות?"}
+עבור כל אחת מהסדרות הבאות, קבעו אם היא חסומה, ונמקו.
+
+(א) $a_n = \dfrac{1}{n^2+1}$
+
+(ב) $a_n = \sin n$
+
+(ג) $a_n = \sin\left(n^2\right) + \cos\left(n!\right)$
+
+(ד) $a_n = \dfrac{n \sin n}{n^2+1}$
+
+(ה) $a_n = \left(-1\right)^n - n$
+
+(ו) $a_n = \sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor$
+:::
+
+::: {.thmsol .foldable}
+(א) לכל $n \geq 1$ מתקיים $,n^2 + 1 \geq 2$ ולכן $,0 < a_n \leq \dfrac{1}{2}$ ובפרט $.\left|a_n\right| \leq 1$ הסדרה חסומה.
+
+(ב) לכל $n$ מתקיים $,\left|\sin n\right| \leq 1$ ולכן הסדרה חסומה.
+
+(ג) לפי אי-שוויון המשולש, $$.\left|\sin\left(n^2\right) + \cos\left(n!\right)\right| \leq \left|\sin\left(n^2\right)\right| + \left|\cos\left(n!\right)\right| \leq 1 + 1 = 2$$ שימו לב שלא השתמשנו בשום מידע על $n^2$ או על $,n!$ אלא רק בתחום הערכים של הסינוס והקוסינוס.
+
+(ד) מ-$\left(n-1\right)^2 \geq 0$ נובע $,n^2 + 1 \geq 2n$ ולכן $$.\left|\frac{n \sin n}{n^2+1}\right| = \frac{n \left|\sin n\right|}{n^2+1} \leq \frac{n}{n^2+1} \leq \frac{n}{2n} = \frac{1}{2}$$ הסדרה חסומה.
+
+(ה) הסדרה **אינה** חסומה. לכל $n$ מתקיים $,a_n \leq 1 - n$ ולכן לכל $n \geq 2$ מתקיים $.\left|a_n\right| \geq n - 1$ בהינתן $M > 0$ נבחר $,n > M + 1$ ואז $,\left|a_n\right| \geq n - 1 > M$ כלומר אף $M$ אינו חוסם את כל האיברים.
+
+(ו) לפי הגדרת הערך השלם, לכל $x$ ממשי מתקיים $,\left\lfloor x \right\rfloor \leq x < \left\lfloor x \right\rfloor + 1$ ולכן $.0 \leq \sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor < 1$ הסדרה חסומה.
+:::
+
+**תרגיל 1.** איזו מהסדרות הבאות **אינה** חסומה?
+
+(א) $a_n = \dfrac{\sin n}{n}$
+
+(ב) $a_n = \dfrac{n^2}{n^2+1}$
+
+(ג) $a_n = \dfrac{n^2+1}{n}$
+
+(ד) $a_n = \cos\left(n!\right)$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c" data-reveal>
+<button class="tf-opt" data-val="a">(א)</button>
+<button class="tf-opt" data-val="b">(ב)</button>
+<button class="tf-opt" data-val="c">(ג)</button>
+<button class="tf-opt" data-val="d">(ד)</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**התשובה היא (ג).** מתקיים $,\dfrac{n^2+1}{n} = n + \dfrac{1}{n} > n$ ולכן בהינתן $M > 0$ כל $n > M$ נותן $,a_n > M$ והסדרה אינה חסומה.
+
+שאר הסדרות חסומות: $\left|\dfrac{\sin n}{n}\right| \leq \dfrac{1}{n} \leq 1$ לכל $,n$ מתקיים $0 < \dfrac{n^2}{n^2+1} < 1$ לכל $,n$ וכן $\left|\cos\left(n!\right)\right| \leq 1$ לכל $.n$
+:::
+
+**תרגיל 2.** נתונה הסדרה $.a_n = 17 + \dfrac{\left(-1\right)^n}{n}$ מצאו את המספר הקטן ביותר $M$ שעבורו $a_n \leq M$ לכל $,n$ ואת המספר הגדול ביותר $m$ שעבורו $m \leq a_n$ לכל $.n$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="35/2"><span class="seq-label">\(M = \)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="seq-quiz" data-answer="16"><span class="seq-label">\(m = \)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+::: {.thmsol .foldable}
+נפריד לפי זוגיות $.n$ עבור $n$ זוגי מתקיים $,a_n = 17 + \dfrac{1}{n}$ וזהו ביטוי יורד ב-$,n$ ולכן הגדול ביותר מתקבל ב-$n = 2$ ושווה $.\dfrac{35}{2}$ עבור $n$ אי-זוגי מתקיים $,a_n = 17 - \dfrac{1}{n}$ וזהו ביטוי עולה ב-$,n$ ולכן הקטן ביותר מתקבל ב-$n = 1$ ושווה $.16$
+
+לכן לכל $n$ מתקיים $,16 \leq a_n \leq \dfrac{35}{2}$ ושני החסמים מתקבלים בפועל כערכים של הסדרה, ולכן אי אפשר להקטין את $M$ או להגדיל את $.m$
+:::
+
+**תרגיל 3.** אם $(a_n)$ ו-$(b_n)$ חסומות, אז גם $(a_n \cdot b_n)$ חסומה.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**נכון.** לפי המסקנה שלמעלה קיימים $M_1 > 0$ ו-$M_2 > 0$ כך שלכל $n$ מתקיים $\left|a_n\right| < M_1$ וגם $.\left|b_n\right| < M_2$ מכפליות הערך המוחלט נובע $$,\left|a_n \cdot b_n\right| = \left|a_n\right| \cdot \left|b_n\right| < M_1 M_2$$ ולכן $M_1 M_2$ הוא חסם למכפלה.
+:::
+
+**תרגיל 4.** אם $(a_n + b_n)$ חסומה, אז $(a_n)$ חסומה.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** ניקח $a_n = n$ ו-$.b_n = -n$ לכל $n$ מתקיים $,a_n + b_n = 0$ כלומר הסכום הוא הסדרה הקבועה $,0$ שהיא חסומה. אבל $a_n = n$ אינה חסומה, כפי שראינו בדוגמה שלמעלה.
 :::
 
 ### הקשר בין התכנסות לחסימות של סדרה
@@ -202,7 +335,7 @@ $\dfrac{1}{n^2} = \dfrac{1}{n} \cdot \dfrac{1}{n} \to 0$ , $\quad$ $\dfrac{8}{n}
 ## משפט הסנדוויץ׳; כפל אפסה בחסומה
 
 ::: {#box-def-null-sequence .thmdef}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **סדרה אפסית** אם היא מתכנסת ל-$0$, כלומר אם $\lim\limits_{n\to\infty} a_n = 0$.
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **סדרה אפסה** אם היא מתכנסת ל-$0$, כלומר אם $\lim\limits_{n\to\infty} a_n = 0$.
 :::
 
 ::: {#box-thm-squeeze-sequences .thmthm title="כלל הסנדוויץ׳"}
@@ -217,52 +350,161 @@ $,\lim_{n\to\infty} a_n = \lim_{n\to\infty} c_n = L$
 אז גם $(b_n)_{n=1}^{\infty}$ מתכנסת, ומתקיים $\lim\limits_{n\to\infty} b_n = L$.
 :::
 
-::: {#box-thm-null-times-bounded .thmthm title="אפסית כפול חסומה"}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה אפסית, ותהי $(b_n)_{n=1}^{\infty}$ סדרה חסומה. אז גם הסדרה $(a_n \cdot b_n)_{n=1}^{\infty}$ אפסית, כלומר
+::: {#box-thm-null-times-bounded .thmthm title="אפסה כפול חסומה"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה אפסה, ותהי $(b_n)_{n=1}^{\infty}$ סדרה חסומה. אז גם הסדרה $(a_n \cdot b_n)_{n=1}^{\infty}$ אפסה, כלומר
 
 $.\lim_{n\to\infty} a_n \cdot b_n = 0$
 
 שימו לב כי $(b_n)_{n=1}^{\infty}$ אינה נדרשת להתכנס, אלא רק להיות חסומה.
 :::
 
-::: {#box-thm-piza-rachav .thmthm title="משפט הפיצה"}
-אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $a_n \to \infty$, אז $$\lim_{n\to\infty} b_n = \infty$$
+## מונוטוניות של סדרות; דוגמה
+
+::: {#box-def-monotone-sequence .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא:
+
+- **מונוטונית עולה**, אם $a_n \le a_{n+1}$ לכל $n \ge 1$.
+- **מונוטונית יורדת**, אם $a_n \ge a_{n+1}$ לכל $n \ge 1$.
+- **מונוטונית עולה ממש**, אם $a_n < a_{n+1}$ לכל $n \ge 1$.
+- **מונוטונית יורדת ממש**, אם $a_n > a_{n+1}$ לכל $n \ge 1$.
+
+הסדרה תיקרא **מונוטונית** אם היא מונוטונית עולה או מונוטונית יורדת.
 :::
 
-::: {#box-exm-piza-1 .thmqst title="הסדרה $n+(-1)^n$"}
-האם הסדרה $b_n = n + (-1)^n$ מתכנסת במובן הרחב?
+::: {#box-exm-monotone-examples .thmexm title="בדיקת מונוטוניות"}
+$a_n = n$ מונוטונית עולה ממש
+
+כי לכל $n \ge 1$: $a_n = n < n+1 = a_{n+1}$
+
+$c_n = \dfrac{1}{n}$ מונוטונית יורדת
+
+כי לכל $n \ge 1$: $c_n = \dfrac{1}{n} > \dfrac{1}{n+1} = c_{n+1}$
+
+$d_n = (-1)^n$ אינה מונוטונית
+
+$d_1 = -1$ , $d_2 = 1$ , $d_3 = -1$
+
+$d_1 < d_2 , d_3 < d_2$
+:::
+
+## סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)
+
+::: {#box-rem-monotone-vs-convergent .thmrem title="מונוטוניות והתכנסות אינן גוררות זו את זו"}
+$a_n$ מונוטונית $\not\Leftarrow$ $a_n$ מתכנסת
+
+דוגמא: $$a_n = n$$
+
+$a_n$ מתכנסת $\not\Leftarrow$ $a_n$ מונוטונית
+
+דוגמא: $a_n = \dfrac{(-1)^n}{n}$ ($a_n \to 0$)
+:::
+
+::: {#box-thm-monotone-bounded-converges .thmthm}
+אם $(a_n)_{n=1}^{\infty}$ סדרה מונוטונית **וגם** חסומה, אז היא מתכנסת.
+:::
+
+```{=html}
+<!-- בהרצאה של דניס המשפט מופיע בשם ״משפט בולצאנו״. כאן הוא נשאר ללא שם, כדי שלא
+     יתנגש עם ״משפט התכנסות הסדרות המונוטוניות״ שבפרק 11. -->
+```
+
+::: {#box-rem-monotone-limit-is-sup .thmrem title="מהו הגבול בהוכחה"}
+בהוכחה מראים כי $a_n$ עולה ומתכנסת ל-$M$, כאשר הוא לא סתם חסם שלה מלמעלה, אלא הוא החסם הכי קטן.
+:::
+
+::: {#box-q-recursive-sequence .thmqst title="סדרה רקורסיבית"}
+נתונה סדרה $(a_n)_{n=1}^{\infty}$ [באופן הרקורסיבי](05-induction.qmd#sec-recursive-definition) הבא:
+
+$$a_1 = 1$$
+
+$$a_{n+1} = \dfrac{a_n + 2}{2}$$
+
+הראו כי הסדרה מתכנסת ומצאו את הגבול שלה.
 :::
 
 ::: thmsol
-נראה כי $b_n \to \infty$ מתקיים $b_n \geq n - 1$ אם נסתכל על $n - 1 \xrightarrow[\to\infty]{} \infty$
+ננסה להראות שהיא חסומה ומונוטונית, ולכן תתכנס.
 
-אז מכלל הפיצה $$b_n \to \infty$$
+חושדים שהיא עולה, כי $a_3 > a_2 > a_1$ אז ננסה להראות ש $a_n \le a_{n+1}$ , לכל $n \ge 1$
+
+ננסה בעזרת אינדוקציה:
+
+בסיס: נציב $n=1$ ונבדוק: $a_1 = 1 \le a_2 = \dfrac{3}{2}$
+
+כעת נניח כי $a_n \le a_{n+1}$ , ונראה כי $a_{n+1} \le a_{n+2}$ :
+
+$$a_{n+1} = \dfrac{a_n + 2}{2} \le \dfrac{a_{n+1} + 2}{2} = a_{n+2}$$
+
+<!-- הערה: חץ המצביע על אי-השוויון, מסומן "מהנחת האינדוקציה" -->
+
+ולכן $a_n$ עולה.
+
+מכך שהיא עולה: $1 = a_1 \le a_n$ , לכל $n \ge 1$.
+
+אבל עדיין חסר: $a_n \le M$
+
+נקבע מהו M בהמשך, אבל בינתיים ננסה להראות באינדוקציה כי: $a_n \le M$ לכל $n \ge 1$.
+
+בסיס: עבור n=1: $a_1 = 1 \le M$
+
+$$\downarrow$$
+
+נדרוש $M \ge 1$
+
+נניח כי $a_n \le M$ , ונראה כי $a_{n+1} \le M$ : $a_{n+1} = \dfrac{a_n + 2}{2} \le \dfrac{M + 2}{2}$
+
+<!-- הערה: חץ המצביע על אי-השוויון, מסומן "מהנחת האינדוקציה" -->
+
+לכן נדרוש ש: $\dfrac{M + 2}{2} \le M$
+
+$$M + 2 \le 2M$$
+
+$$2 \le M$$
+
+$$\downarrow$$
+
+$$a_{n+1} \le \dfrac{M + 2}{2} \le M$$
+
+הראנו כי $a_n$ עולה וחסומה, ולכן מתכנסת.
+
+נסמן: $a_n \to L$
+
+ואז: $\dfrac{a_n + 2}{2} \to \dfrac{L + 2}{2}$
+
+<!-- הערה: מסומן "כל ארתמטיקה" ליד הביטוי -->
+
+מצד שני, מתקיים $a_n \to L$ כי $a_{n+1} \to L$ אבל $a_{n+1} = \dfrac{a_n + 2}{2}$
+
+לכן מיחידות הגבול: $L = \dfrac{L + 2}{L} \Rightarrow \boxed{L = 2}$
 :::
 
-::: {#box-exm-piza-2 .thmqst title="הסדרה $n^2/n!$"}
-האם הסדרה $b_n = \dfrac{n^2}{n!}$ מתכנסת במובן הרחב?
+<!-- בדיקה: בכתב היד נראה L = (L+2)/L אך מהמשוואה הרקורסיבית מצופה L = (L+2)/2; נשמר כפי שנכתב -->
+
+## המספר $e$ והסדרה המתאימה
+
+::: {#box-lem-bernoulli .thmlem title="אי-שוויון ברנולי"}
+לכל $n \in \mathbb{N}$ ולכל $x > -1$ מתקיים
+
+$.\left(1+x\right)^{n} \geq 1 + nx$
 :::
 
-::: thmsol
-$$b_n = \frac{n^2}{n!} = \frac{n \cdots n}{1 \cdot 2 \cdots n} = \frac{n}{1} \cdot \underbrace{\frac{n}{2}}_{\geq 1} \cdots \cdots \underbrace{\frac{n}{n}}_{\geq 1} \geq n \geq n \cdot 1 \cdots \cdots 1$$
+```{=html}
+<!-- מקומו הטבעי של אי-שוויון ברנולי הוא פרק 5 (אינדוקציה), שאינו בתחום העדכון הזה.
+     הוא מובא כאן משום שהוא הכלי המרכזי בהוכחת המונוטוניות של הסדרה שמגדירה את e. -->
+```
 
-לכן מכלל הפיצה $$b_n \to \infty$$
+::: {#box-thm-e-sequence-monotone-bounded .thmthm}
+הסדרה $a_n = \left(1 + \dfrac{1}{n}\right)^{n}$ מונוטונית עולה, ומתקיים $2 \le a_n \le 3$ לכל $n \ge 1$. בפרט היא מונוטונית וחסומה, ולכן היא מתכנסת.
 :::
 
-::: {#box-exm-piza-3 .thmqst title="הסדרה $(1+1/n)^{n^2}$"}
-האם הסדרה $b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}$ מתכנסת במובן הרחב?
+::: {#box-def-number-e .thmdef}
+**המספר** $e$ מוגדר כגבול של הסדרה שבמשפט הקודם:
+
+$.e = \lim_{n\to\infty} \left(1 + \frac{1}{n}\right)^{n}$
+
+מן החסמים שבמשפט נובע $2 < e < 3$.
 :::
 
-::: thmsol
-$$\left(1 + \frac{1}{n}\right)^{n^2} = \left(1 + \frac{1}{n}\right)^{n \cdot n} = \left(\left(1 + \frac{1}{n}\right)^n\right)^n$$
-
-$$\left(1 + \frac{1}{n}\right)^n \to e$$ כאשר $\left(1 + \frac{1}{n}\right)^n > 2$ באשר הם מספר מאוחרים מסוים
-
-$$a_n = \left(\left(1 + \frac{1}{n}\right)^n\right)^n > 2$$ לבן הם מספר מאוחרים מסוים
-
-הרי $2^n \to \infty$ לכן מכלל הפיצה: $$\boxed{a_n \to \infty}$$
-:::
-
-::: {#box-thm-piza-minf .thmthm title="כלל הפיצה ההפוכה"}
-אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $b_n \to -\infty$, אז $$\lim_{n\to n} a_n = -\infty$$
+::: todo
+המספר $e$ והסדרה $(1+\tfrac1n)^n$ נדונים יחד עם המשפט על התכנסות סדרה חסומה ומונוטונית (לעיל) ובסעיף ״משפטי התכנסות״. יש לרכז ולהרחיב כאן.
 :::
