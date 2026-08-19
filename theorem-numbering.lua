@@ -44,6 +44,10 @@ local BOX = {
   thmsim = { word = "סימולציה", css = "simulation" },
   thmlem = { word = "למה",   css = "lemma"       },
   thmcor = { word = "מסקנה", css = "corollary"   },
+  -- .thmexpl — the idea behind a proof/definition, stated before the formal object.
+  -- Distinct from .thmrem: a remark is an aside, an explanation is load-bearing.
+  -- NB the class is "thmexpl", not "thmexp", to keep it clear of .thmexm (דוגמה).
+  thmexpl = { word = "הסבר", css = "explanation" },
 }
 
 local function chapter_number()

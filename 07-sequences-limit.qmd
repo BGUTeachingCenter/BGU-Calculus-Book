@@ -3,11 +3,11 @@
 ## הגדרה ודרכי תיאור
 
 ::: {#box-def-sequence .thmdef}
-**סדרה (ממשית)** היא אוסף **אינסופי** של מספרים ממשיים, שבו יש **חשיבות לסדר** ו**חזרות מותרות** (ראו את הדיון על ההבדל בין סדרה לקבוצה [בפרק המבוא](06-sequences-intro.qmd)): $$a_1, a_2, a_3, \dots, a_n, \dots$$ $a_n$ הוא ה**איבר** שבמקום $n$, ו-$n$ הוא ה**אינדקס** הרץ על המספרים הטבעיים. את הסדרה כולה נסמן בקיצור $\{a_n\}_{n=1}^{\infty}$.
+**סדרה (ממשית)** היא אוסף **אינסופי** של מספרים ממשיים, שבו יש **חשיבות לסדר** ו**חזרות מותרות** (ראו את הדיון על ההבדל בין סדרה לקבוצה [בפרק המבוא](06-sequences-intro.qmd)): $$a_1, a_2, a_3, \dots, a_n, \dots$$ $a_n$ הוא ה**איבר** שבמקום $n$, ו-$n$ הוא ה**אינדקס** הרץ על המספרים הטבעיים. את הסדרה כולה נסמן בקיצור $(a_n)_{n=1}^{\infty}$.
 :::
 
 ::: {.thmrem title="ההגדרה הפורמלית: סדרה כפונקציה"}
-פורמלית, סדרה ממשית $\{a_n\}_{n=1}^{\infty}$ היא **פונקציה** $a:\mathbb{N}\to\mathbb{R}$, כלומר לכל מספר טבעי $n$ מותאם ערך ממשי יחיד $a_n = a(n)$. הצגה זו הופכת את ״הסדר״ ואת ״האינסופיות״ למדויקים. האינדקס רץ על המספרים הטבעיים $\mathbb{N} = \{1, 2, 3, \dots\}$, ולכן סדרה מתחילה כברירת מחדל מ-$a_1$; רק כאשר יצוין במפורש נתחיל את האינדקס במקום אחר (למשל $a_0$).
+פורמלית, סדרה ממשית $(a_n)_{n=1}^{\infty}$ היא **פונקציה** $a:\mathbb{N}\to\mathbb{R}$, כלומר לכל מספר טבעי $n$ מותאם ערך ממשי יחיד $a_n = a(n)$. הצגה זו הופכת את ״הסדר״ ואת ״האינסופיות״ למדויקים. האינדקס רץ על המספרים הטבעיים $\mathbb{N} = \{1, 2, 3, \dots\}$, ולכן סדרה מתחילה כברירת מחדל מ-$a_1$; רק כאשר יצוין במפורש נתחיל את האינדקס במקום אחר (למשל $a_0$).
 :::
 
 איך מתארים סדרה? עלינו לתאר במדויק איזה איבר נמצא במקום ה-$n$, לכל $n\in\mathbb{N}$. לכתוב את כל האיברים לפי הסדר — בלתי אפשרי, שכן יש אינסוף מהם. לכן נעזרים בכמה **דרכים לתיאור סדרה**; נציג שלוש דרכים נפוצות.
@@ -62,7 +62,7 @@
 זו תופעה כללית: סדרות רבות שצצות בפועל — במדעי המחשב, ביולוגיה, פיסיקה, כלכלה ובתחומים רבים נוספים — מוגדרות באופן טבעי ברקורסיה, מפני שהן מתארות תהליכים שבהם המצב הבא תלוי במצב הנוכחי (או בכמה מצבים קודמים) ולאו דווקא במספר הצעד בתהליך. למשל, בחידת הארנבים מספר הזוגות בחודש הנוכחי הוא סכום הזוגות שכבר היו בחודש הקודם והזוגות החדשים שנולדו; ומספר הנולדים שווה למספר הזוגות הבוגרים — אלה שהיו כבר לפני חודשיים. כך כל איבר נקבע משני קודמיו, ללא תלות ישירה במספר החודש.
 :::
 
-:::: {.extra title="העשרה: רקורסיה מתקדמת"}
+::::: {.extra title="העשרה: רקורסיה מתקדמת"}
 **מספרים בינאריים.** בבסיס עשר, הכתיב $4703$ פירושו
 
 $$,4\cdot 1000 + 7\cdot 100 + 0\cdot 10 + 3\cdot 1$$
@@ -80,13 +80,13 @@ $$.16 + 0 + 4 + 2 + 0 = 22$$
 :::
 
 ::: {.content-visible when-format="pdf"}
-*ממיר בינארי אינטראקטיבי, שבו אפשר לגרור את $n$ ולהדליק ולכבות ספרות, זמין בגרסה המקוונת של הספר.*
+*ממיר בינארי אינטראקטיבי, שבו אפשר לגרור את* $n$ ולהדליק ולכבות ספרות, זמין בגרסה המקוונת של הספר.
 :::
 
 שני דברים שיהיו שימושיים מיד. ראשית, $n$ זוגי בדיוק כאשר הספרה הבינארית האחרונה שלו היא $0$. שנית, המעבר מ-$n$ ל-$\left\lfloor n/2 \right\rfloor$ הוא בדיוק מחיקת אותה ספרה אחרונה.
 
 **הסדרה.** הכלל הרקורסיבי גמיש: הוא יכול להישען על איברים רחוקים מן האחרון, ואף להשתנות לפי צורת האינדקס. נגדיר, למשל, סדרה שכל איבר בה נשען על האיבר שבמקום $\left\lfloor n/2 \right\rfloor$, בהתאם לזוגיות של $n$: $$a_n = \begin{cases} a_{n/2} & \text{יגוז}\ n \\ a_{(n-1)/2} + 1 & \text{יגוז-יא}\ n \end{cases}$$ (עם $a_1 = 1$). מתקבלת הסדרה $1, 1, 2, 1, 2, 2, 3, 1, \dots$, ומסתבר ש-$a_n$ הוא בדיוק מספר הספרות $1$ בייצוג הבינארי של $n$.
-::::
+:::::
 
 ### תרגילים {.unnumbered}
 
@@ -175,13 +175,13 @@ ax.text((L + x) / 2, 0.28, r"$|x-L|<\varepsilon$", ha="center", va="bottom",
 ax.set_xlim(L - 2, L + 2)
 ax.set_ylim(-0.35, 0.58)
 ax.axis("off")
-fig.savefig("figures/c07_fig13.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig01.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig13.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig01.png}\hss}\endL\par
 \medskip
 ```
 
@@ -192,7 +192,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![$x$ מקרב את $L$ ברמת דיוק $\varepsilon$; המרחק ביניהם קטן מ-$\varepsilon$, כלומר $x$ נמצא בקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig13.png){#fig-eps-approx width="62%" fig-align="center"}
+![$x$ מקרב את $L$ ברמת דיוק $\varepsilon$; המרחק ביניהם קטן מ-$\varepsilon$, כלומר $x$ נמצא בקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig01.png){#fig-eps-approx width="62%" fig-align="center"}
 :::
 
 ועכשיו לנקודה שממנה מתחיל הפרק: רמת הדיוק אינה נתונה לנו מראש — היא נקבעת על ידי מי שדורש את הקירוב, ומספר בודד אינו יכול לעמוד ב**כל** דרישה. $0.3333$ אמנם מקרב את $\frac{1}{3}$ ברמת דיוק $0.0001$, אך ברמת דיוק $0.00001$ הוא כבר אינו מספיק ובמקומו נדרש $0.33333$; ברמת דיוק קטנה עוד יותר יידרש מספר אחר, וכך הלאה. שום שבר עשרוני סופי אינו עונה על כל הדרישות. היחיד שהיה עונה עליהן הוא $\frac{1}{3}$ עצמו — ואותו איננו יודעים לרשום כשבר עשרוני סופי, וזו כל הסיבה שאנחנו מקרבים מלכתחילה.
@@ -272,13 +272,13 @@ ax.set_aspect("equal")
 ax.axis("off")
 
 fig.tight_layout()
-fig.savefig("figures/c07_fig01.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig02.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.45\linewidth]{figures/c07_fig01.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.45\linewidth]{figures/c07_fig02.png}\hss}\endL\par
 \medskip
 ```
 
@@ -289,7 +289,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![$\pi$ הוא היחס בין היקף המעגל $C$ לקוטרו $d$](figures/c07_fig01.png){#fig-pi-definition width="45%" fig-align="center"}
+![$\pi$ הוא היחס בין היקף המעגל $C$ לקוטרו $d$](figures/c07_fig02.png){#fig-pi-definition width="45%" fig-align="center"}
 :::
 
 שימו לב ש-$\pi$ הוא **יחס**, ולכן אינו תלוי בגודל המעגל: מעגל גדול ומעגל קטן נותנים בדיוק את אותו מספר. לכן מותר לנו לבחור לחישוב את המעגל הנוח ביותר, ונבחר את זה שרדיוסו $1$. הבחירה משתלמת במיוחד: לפי $A = \pi r^2$, שטח העיגול שרדיוסו $1$ הוא בדיוק $\pi$. כלומר, במקום למדוד את היחס בין ההיקף לקוטר, די לנו לחשב את ה**שטח** של עיגול היחידה.
@@ -348,12 +348,12 @@ def polygon_panels(ns, highlight, path):
     plt.close(fig)
 
 
-polygon_panels([6, 24, 96], highlight=False, path="figures/c07_fig02.png")
+polygon_panels([6, 24, 96], highlight=False, path="figures/c07_fig03.png")
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig02.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig03.png}\hss}\endL\par
 \medskip
 ```
 
@@ -364,7 +364,7 @@ polygon_panels([6, 24, 96], highlight=False, path="figures/c07_fig02.png")
 ::::
 
 ::: {.content-visible when-format="html"}
-![ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל](figures/c07_fig02.png){#fig-pi-lookalike width="95%" fig-align="center"}
+![ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל](figures/c07_fig03.png){#fig-pi-lookalike width="95%" fig-align="center"}
 :::
 
 ומצד שני — וזה מה שהופך את הרעיון לשימושי — את שטח המצולע אנחנו יודעים לחשב במדויק בכל שלב, גם כאשר הוא כבר ״נראה כמו מעגל״, ובנוסחה פשוטה: שטחו $S_n$ של מצולע משוכלל בעל $n$ צלעות החסום במעגל שרדיוסו $1$ הוא $$.S_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$ ולכן הוא מועמד טוב לקירוב שטחו של העיגול, שהוא $\pi$.
@@ -452,13 +452,13 @@ ax.set_aspect("equal")
 ax.axis("off")
 
 fig.tight_layout()
-fig.savefig("figures/c07_fig03.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig04.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig03.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig04.png}\hss}\endL\par
 \medskip
 ```
 
@@ -469,7 +469,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![חלוקת המצולע ל-$n$ משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו](figures/c07_fig03.png){#fig-pi-triangulation width="90%" fig-align="center"}
+![חלוקת המצולע ל-$n$ משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו](figures/c07_fig04.png){#fig-pi-triangulation width="90%" fig-align="center"}
 :::
 
 נחשב את שטחו של משולש כזה לפי בסיס כפול גובה חלקי שתיים. מן התרשים: הגובה מן המרכז אל הבסיס הוא $\cos\frac{\pi}{n}$, מחצית הבסיס היא $\sin\frac{\pi}{n}$, ולכן הבסיס כולו הוא $2\sin\frac{\pi}{n}$. נסמן ב-$T_n$ את שטחו של משולש כזה. מכאן $$T_n = \frac{1}{2}\cdot 2\sin\frac{\pi}{n}\cdot\cos\frac{\pi}{n} = \sin\frac{\pi}{n}\,\cos\frac{\pi}{n}$$ ולפי **נוסחת הזווית הכפולה**, $\sin 2\alpha = 2\sin\alpha\cos\alpha$, נציב $\alpha = \frac{\pi}{n}$ ונקבל $$.T_n = \frac{1}{2}\sin\frac{2\pi}{n}$$ יש $n$ משולשים חופפים כאלה, ולכן $$.S_n = n\,T_n = \frac{n}{2}\,\sin\frac{2\pi}{n}$$
@@ -537,13 +537,13 @@ ax.plot(np.cos(mid), np.sin(mid), ls="none", marker="o", color="#d97706",
 ax.set_title(r"$2n = 12$", fontsize=12)
 
 fig.tight_layout()
-fig.savefig("figures/c07_fig04.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig05.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig04.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig05.png}\hss}\endL\par
 \medskip
 ```
 
@@ -554,7 +554,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל $2n$ צלעות](figures/c07_fig04.png){#fig-pi-doubling width="92%" fig-align="center"}
+![הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל $2n$ צלעות](figures/c07_fig05.png){#fig-pi-doubling width="92%" fig-align="center"}
 :::
 
 וככל ש-$n$ גדל, השטח שנותר בין המצולע למעגל הולך וקטן, ושטח המצולע מתקרב לשטח העיגול — כלומר ל-$\pi$.
@@ -585,7 +585,7 @@ plt.close(fig)
 
 #### שתי שאלות {.unnumbered}
 
-בנינו סדרה $\{a_k\}$ ואמרנו שהיא ״מתקרבת ל-$\pi$״. אמירה כזו דורשת הצדקה, ולמעשה מסתתרות בה **שתי** שאלות נפרדות:
+בנינו סדרה $(a_k)$ ואמרנו שהיא ״מתקרבת ל-$\pi$״. אמירה כזו דורשת הצדקה, ולמעשה מסתתרות בה **שתי** שאלות נפרדות:
 
 1.  האם הסדרה בכלל מתקרבת לאיזשהו ערך, או שמא איבריה ״משוטטים״ בלי להתייצב?
 2.  ואם היא אכן מתקרבת לערך — האם הערך הזה הוא באמת $\pi$, ולא מספר אחר הקרוב אליו?
@@ -631,12 +631,12 @@ plt.close(fig)
 ```{python}
 #| echo: false
 #| output: false
-polygon_panels([6, 24, 96], highlight=True, path="figures/c07_fig05.png")
+polygon_panels([6, 24, 96], highlight=True, path="figures/c07_fig06.png")
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig05.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.95\linewidth]{figures/c07_fig06.png}\hss}\endL\par
 \medskip
 ```
 
@@ -697,7 +697,7 @@ ax.set_aspect("equal")
 ax.axis("off")
 
 fig.tight_layout()
-fig.savefig("figures/c07_fig06.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig07.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
 # one triangle of the circumscribed polygon (goes with the folded derivation)
@@ -745,13 +745,13 @@ ax.set_aspect("equal")
 ax.axis("off")
 
 fig2.tight_layout()
-fig2.savefig("figures/c07_fig07.png", dpi=150, bbox_inches="tight")
+fig2.savefig("figures/c07_fig08.png", dpi=150, bbox_inches="tight")
 plt.close(fig2)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig06.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig07.png}\hss}\endL\par
 \medskip
 ```
 
@@ -762,7 +762,7 @@ plt.close(fig2)
 ::::
 
 ::: {.content-visible when-format="html"}
-![המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם](figures/c07_fig06.png){#fig-pi-squeeze width="90%" fig-align="center"}
+![המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם](figures/c07_fig07.png){#fig-pi-squeeze width="90%" fig-align="center"}
 :::
 
 שימו לב שאין כאן בנייה חדשה באמת: את המשיקים מעבירים דרך **קודקודי המצולע החסום**, ולכן אותה קבוצת נקודות על המעגל מולידה את שני המצולעים גם יחד — את החסום כמצולע שקודקודיו הן הנקודות, ואת החוסם כמצולע שצלעותיו הן המשיקים בהן.
@@ -784,12 +784,12 @@ plt.close(fig2)
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.42\linewidth]{figures/c07_fig07.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.42\linewidth]{figures/c07_fig08.png}\hss}\endL\par
 \medskip
 ```
 
 ::: {.content-visible when-format="html"}
-![משולש בודד של המצולע החוסם](figures/c07_fig07.png){#fig-pi-circum-triangle width="42%" fig-align="center"}
+![משולש בודד של המצולע החוסם](figures/c07_fig08.png){#fig-pi-circum-triangle width="42%" fig-align="center"}
 :::
 ::::
 
@@ -866,13 +866,13 @@ ax.plot(np.cos(new_ang), np.sin(new_ang), ls="none", marker="o",
 ax.set_title(r"$2n = 12$", fontsize=12)
 
 fig.tight_layout()
-fig.savefig("figures/c07_fig08.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig09.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig08.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c07_fig09.png}\hss}\endL\par
 \medskip
 ```
 
@@ -883,7 +883,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד](figures/c07_fig08.png){#fig-pi-corner-cut width="92%" fig-align="center"}
+![הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד](figures/c07_fig09.png){#fig-pi-corner-cut width="92%" fig-align="center"}
 :::
 
 #### חסימת השגיאה {.unnumbered}
@@ -966,7 +966,7 @@ $$\pi - a_k \ \le\ A_k - a_k \ =\ A_k\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{
 
 נסכם מה עשינו, כי חלק מהדברים יחזור שוב ושוב.
 
-היה לנו מספר $\pi$ נתון מראש, ובנינו $\{a_k\}$ סדרה (את זה דווקא לא נעשה הרבה, רוב הסדרות שתופיענה תהיינה נתונות הרבה) וניסינו לבדוק האם איבריה מתקרבים ל מספר $\pi$.
+היה לנו מספר $\pi$ נתון מראש, ובנינו $(a_k)$ סדרה (את זה דווקא לא נעשה הרבה, רוב הסדרות שתופיענה תהיינה נתונות הרבה) וניסינו לבדוק האם איבריה מתקרבים ל מספר $\pi$.
 
 זאת שאלה שתחזור על עצמה המון פעמים בקורס.
 
@@ -999,13 +999,13 @@ $$\pi - a_k \ \le\ A_k - a_k \ =\ A_k\left(\sin\frac{\pi}{3\cdot 2^{k}}\right)^{
 את הדרישות הללו אפשר לסכם בהגדרה הבאה.
 
 ::: {#box-def-convergence .thmdef}
-תהי $\{a_n\}_{n=1}^{\infty}$ סדרה. נאמר שהסדרה **מתכנסת**, או שיש לה **גבול**, אם קיים $L\in\mathbb{R}$ כך שלכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n \geq N$ מתקיים $$.|a_n - L| < \varepsilon$$ במקרה זה נאמר שהסדרה **שואפת** (או **מתכנסת**) ל-$L$, ונסמן $$\lim_{n\to\infty}a_n=L$$ או $$.a_n \to L$$ אם אין לסדרה גבול, נאמר שהיא **מתבדרת**.
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר שהסדרה **מתכנסת**, או שיש לה **גבול**, אם קיים $L\in\mathbb{R}$ כך שלכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n \geq N$ מתקיים $$.|a_n - L| < \varepsilon$$ במקרה זה נאמר שהסדרה **שואפת** (או **מתכנסת**) ל-$L$, ונסמן $$\lim_{n\to\infty}a_n=L$$ או $$.a_n \to L$$ אם אין לסדרה גבול, נאמר שהיא **מתבדרת**.
 :::
 
 לעיתים מופיעה ההגדרה עם אי-שוויון חד, כלומר $n > N$ במקום $n \geq N$. מתקבלת הגדרה שקולה.
 
 ::: {#box-def-convergence-strict .thmdef}
-תהי $\{a_n\}_{n=1}^{\infty}$ סדרה. נאמר שהסדרה **מתכנסת**, או שיש לה **גבול**, אם קיים $L\in\mathbb{R}$ כך שלכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n > N$ מתקיים $$.|a_n - L| < \varepsilon$$ במקרה זה נאמר שהסדרה **שואפת** (או **מתכנסת**) ל-$L$, ונסמן $$\lim_{n\to\infty}a_n=L$$ או $$.a_n \to L$$ אם אין לסדרה גבול, נאמר שהיא **מתבדרת**.
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר שהסדרה **מתכנסת**, או שיש לה **גבול**, אם קיים $L\in\mathbb{R}$ כך שלכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n > N$ מתקיים $$.|a_n - L| < \varepsilon$$ במקרה זה נאמר שהסדרה **שואפת** (או **מתכנסת**) ל-$L$, ונסמן $$\lim_{n\to\infty}a_n=L$$ או $$.a_n \to L$$ אם אין לסדרה גבול, נאמר שהיא **מתבדרת**.
 :::
 
 ::: {#box-rem-strict-vs-weak .thmrem}
@@ -1057,13 +1057,13 @@ ax.annotate(r"$N$", xy=(N_idx - 0.5, hi), xytext=(N_idx - 0.5, hi - 0.09), ha="c
             va="top", fontsize=12, color="0.30")
 ax.grid(True, axis="x", alpha=0.12, linewidth=0.5)
 fig.tight_layout()
-fig.savefig("figures/c07_fig09.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig10.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig09.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig10.png}\hss}\endL\par
 \medskip
 ```
 
@@ -1074,7 +1074,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![סדרה המתכנסת ל-$L$, והאזור המוצלל הוא סביבת ה-$\varepsilon$ של $L$, כלומר הקטע $(L-\varepsilon,\,L+\varepsilon)$; כל האיברים שהאינדקס שלהם גדול או שווה ל-$N$ נמצאים בתוכה, ומחוצה לה נשארו רק האיברים המסומנים באדום](figures/c07_fig09.png){#fig-seq-eps-band width="80%" fig-align="center"}
+![סדרה המתכנסת ל-$L$, והאזור המוצלל הוא סביבת ה-$\varepsilon$ של $L$, כלומר הקטע $(L-\varepsilon,\,L+\varepsilon)$; כל האיברים שהאינדקס שלהם גדול או שווה ל-$N$ נמצאים בתוכה, ומחוצה לה נשארו רק האיברים המסומנים באדום](figures/c07_fig10.png){#fig-seq-eps-band width="80%" fig-align="center"}
 :::
 
 ```{python}
@@ -1115,13 +1115,13 @@ ax.set_xlim(L_lim - 1.85, L_lim + 1.85)
 ax.set_ylim(-0.26, 0.28)
 ax.axis("off")
 fig.tight_layout()
-fig.savefig("figures/c07_fig14.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig11.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig14.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig11.png}\hss}\endL\par
 \medskip
 ```
 
@@ -1132,7 +1132,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![אותה סדרה, כשאיבריה מסומנים כנקודות על ציר המספרים — הנקודות מצטופפות סביב $L$, ורק מספר סופי מהן נמצא מחוץ לקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig14.png){#fig-seq-number-line width="85%" fig-align="center"}
+![אותה סדרה, כשאיבריה מסומנים כנקודות על ציר המספרים — הנקודות מצטופפות סביב $L$, ורק מספר סופי מהן נמצא מחוץ לקטע $(L-\varepsilon,\,L+\varepsilon)$](figures/c07_fig11.png){#fig-seq-number-line width="85%" fig-align="center"}
 :::
 
 שימו לב שההגדרה תואמת במדויק את האינטואיציה שדיברנו עליה. מכאן ואילך, עם זאת, עלינו להוכיח מתוך **ההגדרה, או ממשפטים אחרים שנלמד** — ולא באופן אינטואיטיבי. אין בכך אמירה שהאינטואיציה אינה חשובה: היא זו שתעזור לנו לנחש מהו הגבול ולמצוא את כיוון הפתרון — **אך אינה מהווה תחליף ללוגיקה או לחישוב.**
@@ -1150,7 +1150,7 @@ plt.close(fig)
 :::
 
 ::: {#box-q-constant-seq .thmqst title="סדרה קבועה"}
-תהי $\{a_n\}_{n=1}^{\infty}$ הסדרה הקבועה $a_n = 1$ (כלומר $1, 1, 1, \dots$). הראו כי $\lim\limits_{n\to\infty} a_n = 1$.
+תהי $(a_n)_{n=1}^{\infty}$ הסדרה הקבועה $a_n = 1$ (כלומר $1, 1, 1, \dots$). הראו כי $\lim\limits_{n\to\infty} a_n = 1$.
 :::
 
 ::: thmsol
@@ -1208,7 +1208,7 @@ $$.\left|a_n-1\right|=\left|1-1\right|=0<\varepsilon$$
 :::::
 
 ::: {#box-q-one-over-n .thmqst title="הסדרה $a_n=\\frac{1}{n}$"}
-תהי $\left\{a_n\right\}_{n=1}^{\infty}$ הסדרה המוגדרת על ידי $a_n=\dfrac{1}{n}$. הראו כי $\lim\limits_{n\to\infty}a_n=0$.
+תהי $(a_n)_{n=1}^{\infty}$ הסדרה המוגדרת על ידי $a_n=\dfrac{1}{n}$. הראו כי $\lim\limits_{n\to\infty}a_n=0$.
 :::
 
 :::::: thmsol
@@ -1287,13 +1287,13 @@ ax.set_xlim(0.4, 6.6)
 ax.set_ylim(-1.35, 1.15)
 ax.axis("off")
 fig.tight_layout()
-fig.savefig("figures/c07_fig15.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig12.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig15.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.9\linewidth]{figures/c07_fig12.png}\hss}\endL\par
 \medskip
 ```
 
@@ -1304,7 +1304,7 @@ plt.close(fig)
 ::::
 
 ::: {.content-visible when-format="html"}
-![ערך השלם. עבור $m = 3.4$ מתקיים $\lfloor m \rfloor = 3$, ולכן $3 \leq m < 4$, מקרה פרטי של $\lfloor m \rfloor \leq m < \lfloor m \rfloor + 1$](figures/c07_fig15.png){#fig-floor width="85%" fig-align="center"}
+![ערך השלם. עבור $m = 3.4$ מתקיים $\lfloor m \rfloor = 3$, ולכן $3 \leq m < 4$, מקרה פרטי של $\lfloor m \rfloor \leq m < \lfloor m \rfloor + 1$](figures/c07_fig12.png){#fig-floor width="85%" fig-align="center"}
 :::
 
 מכיוון ש-$\varepsilon>0$ מתקיים $\frac{1}{\varepsilon}>0$, ולכן $\left\lfloor \frac{1}{\varepsilon} \right\rfloor \geq 0$, כלומר $\left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1$ הוא מספר שלם וחיובי. לכן
@@ -1375,18 +1375,17 @@ $$,\frac{1}{\varepsilon} < \left\lfloor \frac{1}{\varepsilon} \right\rfloor + 1 
 נתעכב מעט על הדוגמה האחרונה. ראינו כאן סדרה ששואפת לאפס — מקרה נפוץ מאוד, ולעיתים קרובות גם קל יותר להוכחה: יש לא מעט טכניקות לחסימת סדרות, ובאחדות מהן נעסוק בהמשך הקורס. יתר על כן, את שאלת ההתכנסות עצמה אפשר לעיתים לתרגם לשאלה על שאיפה לאפס, כפי שמנוסח בטענת העזר הבאה.
 
 ::: {#box-lem-abs-to-zero .thmlem}
-תהי $\{a_n\}_{n=1}^{\infty}$ סדרה ויהי $L\in\mathbb{R}$. אז הסדרה $\{a_n\}$ מתכנסת ל-$L$ אם ורק אם הסדרה $\bigl\{\left|a_n-L\right|\bigr\}_{n=1}^{\infty}$ מתכנסת ל-$0$.
+תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $L\in\mathbb{R}$. אז הסדרה $(a_n)$ מתכנסת ל-$L$ אם ורק אם הסדרה $\bigl(\left|a_n-L\right|\bigr)_{n=1}^{\infty}$ מתכנסת ל-$0$.
 :::
 
-**הרעיון בקצרה.** בהגדרת השאיפה של $\{a_n\}$ ל-$L$ מופיע הביטוי $\left|a_n-L\right|$, ואילו בהגדרת השאיפה של $\bigl\{\left|a_n-L\right|\bigr\}_{n=1}^{\infty}$ ל-$0$ מופיע הביטוי $\Bigl|\left|a_n-L\right|-0\Bigr|$. מכיוון ש-$\left|a_n-L\right|$ אינו שלילי, הערך המוחלט החיצוני אינו משנה דבר:
+::: {.thmproof .foldable}
+**הרעיון בקצרה.** בהגדרת השאיפה של $(a_n)$ ל-$L$ מופיע הביטוי $\left|a_n-L\right|$, ואילו בהגדרת השאיפה של $\bigl(\left|a_n-L\right|\bigr)_{n=1}^{\infty}$ ל-$0$ מופיע הביטוי $\Bigl|\left|a_n-L\right|-0\Bigr|$. מכיוון ש-$\left|a_n-L\right|$ אינו שלילי, הערך המוחלט החיצוני אינו משנה דבר:
 
 $$.\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right|$$
 
 זהו אפוא אותו ביטוי בדיוק, ולכן שני התנאים שעלינו להשוות הם אותו אי-שוויון עצמו. מכאן שלכל $\varepsilon>0$ ולכל $N\in\mathbb{N}$, התנאי מתקיים לכל $n \geq N$ בטענה הראשונה אם ורק אם הוא מתקיים לכל $n \geq N$ בטענה השנייה; בפרט $N$ המתאים לטענה אחת מתאים גם לשנייה, ולכן שתי הטענות שקולות.
 
-ההוכחה המלאה, הכתובה בשני הכיוונים כמקובל, מובאת להלן.
-
-::: {.thmproof .foldable}
+ההוכחה המלאה, הכתובה בשני הכיוונים כמקובל, מובאת להלן.\
 הטענה היא ״אם ורק אם״, ולכן עלינו להוכיח ששתי הטענות גוררות זו את זו: שאם הראשונה מתקיימת אז גם השנייה, ולהפך. נוכיח כל גרירה בנפרד.
 
 **כיוון ראשון.** נניח ש-$a_n$ שואפת ל-$L$. נראה ש-$\left|a_n-L\right|$ שואפת ל-$0$.
@@ -1411,7 +1410,7 @@ $$.\Bigl|\left|a_n-L\right|-0\Bigr| = \left|a_n-L\right|$$
 הטענה הזו שימושית מפני שהיא מחליפה שאלה על התכנסות לגבול כלשהו בשאלה על שאיפה לאפס — ולשם כך די לחסום את $\left|a_n-L\right|$ מלמעלה בביטוי ששואף לאפס, בלי לעקוב אחרי הסדרה עצמה.
 
 ::: {#box-q-pm-one .thmqst title="סדרה מתחלפת"}
-תהי $\{a_n\}_{n=1}^{\infty}$ הסדרה המוגדרת על ידי $a_n = (-1)^{n-1}$ (כלומר $1, -1, 1, -1, \dots$). הוכיחו או הפריכו: הסדרה מתכנסת.
+תהי $(a_n)_{n=1}^{\infty}$ הסדרה המוגדרת על ידי $a_n = (-1)^{n-1}$ (כלומר $1, -1, 1, -1, \dots$). הוכיחו או הפריכו: הסדרה מתכנסת.
 :::
 
 ::: thmsol
@@ -1518,13 +1517,13 @@ ax.set_ylim(-1.4, 1.4)
 ax.grid(True, alpha=0.3)
 ax.legend(loc="upper right")
 fig.tight_layout()
-fig.savefig("figures/c07_fig10.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig13.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig10.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig13.png}\hss}\endL\par
 \medskip
 ```
 
@@ -1534,6 +1533,7 @@ plt.close(fig)
 :::
 ::::
 
+```{=html}
 <!-- סדרות קושי הוסתרו לפי בקשה: ההערה המקדימה, ההגדרה, מבחן קושי, ההוכחה,
      ההערה על שני סימונים שונים, והפסקה על הכיוון ההפוך.
      להחזרה, מחקו את שורת הפתיחה הזו ואת שורת הסיום שמתחת לפסקה האחרונה.
@@ -1544,7 +1544,7 @@ plt.close(fig)
 :::
 
 ::: {#box-def-cauchy .thmdef}
-תהי $\{a_n\}_{n=1}^{\infty}$ סדרה ממשית. נאמר שהיא **סדרת קושי** אם לכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n,m\geq N$ מתקיים $\left|a_n-a_m\right|<\varepsilon$.
+תהי $(a_n)_{n=1}^{\infty}$ סדרה ממשית. נאמר שהיא **סדרת קושי** אם לכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n,m\geq N$ מתקיים $\left|a_n-a_m\right|<\varepsilon$.
 :::
 
 ::: {#box-lem-cauchy-test .thmlem title="מבחן קושי להתכנסות"}
@@ -1554,7 +1554,7 @@ plt.close(fig)
 ::: thmproof
 זהו בדיוק הטיעון שראינו בתובנה שבסוף השאלה הקודמת; נחזור עליו כאן לשם שלמות.
 
-נניח בשלילה שהסדרה $\{a_n\}$ מתכנסת אך **אינה** סדרת קושי, ונסמן $L=\lim\limits_{n\to\infty}a_n$.
+נניח בשלילה שהסדרה $(a_n)$ מתכנסת אך **אינה** סדרת קושי, ונסמן $L=\lim\limits_{n\to\infty}a_n$.
 
 נשלול את התנאי שבהגדרה: קיים $\varepsilon>0$ כך שלכל $N\in\mathbb{N}$ קיימים $n,m\geq N$ שעבורם $$.\left|a_n-a_m\right| \geq \varepsilon$$
 
@@ -1573,6 +1573,7 @@ plt.close(fig)
 
 הכיוון ההפוך נכון גם הוא: **כל סדרת קושי מתכנסת**. יחד, שני הכיוונים נותנים את האפיון המלא — סדרה מתכנסת **אם ורק אם** היא סדרת קושי. הוכחת הכיוון ההפוך קשה יותר ודורשת כלים שטרם פיתחנו, ולכן נדחה אותה להמשך.
 -->
+```
 
 ```{=html}
 <!-- Route for the converse (Cauchy => convergent), for when this gets written:
@@ -1585,11 +1586,13 @@ plt.close(fig)
      text does not develop that notion, so it is deliberately not named above.) -->
 ```
 
+```{=html}
 <!--
 ::: todo
 הוכחת הכיוון ההפוך — כל סדרת קושי מתכנסת — להשלמה בהמשך.
 :::
 -->
+```
 
 ::: {#box-q-one-frac-n .thmqst title="סדרה מתכנסת שאינה מונוטונית"}
 הסדרה $a_n = 1 + \dfrac{\sin(n)}{n}$ (עבור $n \ge 1$) מתכנסת, וגבולה $1$. יהי $\varepsilon>0$. קיים $N$ כך ש-$N \ge \dfrac{1}{\varepsilon}$, ולכן לכל $n>N$ מתקיים $\dfrac{1}{n} < \dfrac{1}{N} \le \varepsilon$. לכן $$|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} < \varepsilon,$$ כנדרש.
@@ -1623,13 +1626,13 @@ ax.set_xticks(np.arange(5, N + 1, 5))
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
-fig.savefig("figures/c07_fig11.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig14.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig11.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig14.png}\hss}\endL\par
 \medskip
 ```
 
@@ -1677,13 +1680,15 @@ plt.close(fig)
 
 התרגילים הבאים לקוחים מדפי התרגילים של הקורס, ואפשר לפתור את כולם בעזרת ההגדרה הפורמלית בלבד. בגרסה המקוונת, לחיצה על ״נכון״ או על ״לא נכון״ פותחת מיד את הפתרון; בכל שאר התרגילים אפשר לפתוח את הפתרון בלחיצה.
 
+```{=html}
 <!-- הפתרונות המתקפלים כאן חייבים להישאר בלי מזהה (#id): צירוף של מזהה עם
      .thmsol .foldable מפיל את הפילטר של Quarto עצמו. הקישור בין שאלת האמת/שקר
      לפתרון נעשה לפי סדר המסמך, דרך התכונה data-reveal — ראו _styles.html. -->
+```
 
-**נכון או לא נכון.** בארבעת התרגילים הבאים $\{a_n\}_{n=1}^{\infty}$ ו-$\{b_n\}_{n=1}^{\infty}$ הן סדרות ממשיות כלשהן.
+**נכון או לא נכון.** בארבעת התרגילים הבאים $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ הן סדרות ממשיות כלשהן.
 
-**תרגיל 1.** אם $\{a_n\}$ אינה מתכנסת וגם $\{b_n\}$ אינה מתכנסת, אז $\{a_n+b_n\}$ אינה מתכנסת.
+**תרגיל 1.** אם $(a_n)$ אינה מתכנסת וגם $(b_n)$ אינה מתכנסת, אז $(a_n+b_n)$ אינה מתכנסת.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -1699,7 +1704,7 @@ plt.close(fig)
 **לא נכון.** ניקח $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$. אף אחת מהן אינה מתכנסת, בדיוק לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת. אבל לכל $n$ מתקיים $a_n + b_n = 0$, ולכן הסכום הוא הסדרה הקבועה $0$, שמתכנסת ל-$0$.
 :::
 
-**תרגיל 2.** אם $\{a_n\}$ מתכנסת ו-$\{b_n\}$ אינה מתכנסת, אז $\{a_n+b_n\}$ אינה מתכנסת.
+**תרגיל 2.** אם $(a_n)$ מתכנסת ו-$(b_n)$ אינה מתכנסת, אז $(a_n+b_n)$ אינה מתכנסת.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -1712,7 +1717,7 @@ plt.close(fig)
 :::
 
 ::: {.thmsol .foldable}
-**נכון.** נניח בשלילה שגם $\{a_n+b_n\}$ מתכנסת, ונסמן $a_n \to A$ וכן $a_n+b_n \to S$. נראה שאז $b_n \to S-A$, בסתירה להנחה ש-$\{b_n\}$ אינה מתכנסת.
+**נכון.** נניח בשלילה שגם $(a_n+b_n)$ מתכנסת, ונסמן $a_n \to A$ וכן $a_n+b_n \to S$. נראה שאז $b_n \to S-A$, בסתירה להנחה ש-$(b_n)$ אינה מתכנסת.
 
 יהי $\varepsilon>0$. לפי ההגדרה קיים $N_1\in\mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $\left|a_n-A\right| < \frac{\varepsilon}{2}$, וקיים $N_2\in\mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $\left|\left(a_n+b_n\right)-S\right| < \frac{\varepsilon}{2}$. נבחר $N = \max\left\{N_1,N_2\right\}$.
 
@@ -1727,7 +1732,7 @@ $$.\left|b_n-\left(S-A\right)\right| \leq \left|a_n+b_n-S\right| + \left|a_n-A\r
 מצאנו $N$ כנדרש, ולכן $b_n \to S-A$, בסתירה להנחה.
 :::
 
-**תרגיל 3.** אם $\{a_n+b_n\}$ מתכנסת, אז לפחות אחת מן הסדרות $\{a_n\}$ , $\{b_n\}$ מתכנסת.
+**תרגיל 3.** אם $(a_n+b_n)$ מתכנסת, אז לפחות אחת מן הסדרות $(a_n)$ , $(b_n)$ מתכנסת.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -1743,7 +1748,7 @@ $$.\left|b_n-\left(S-A\right)\right| \leq \left|a_n+b_n-S\right| + \left|a_n-A\r
 **לא נכון.** אותה דוגמה נגדית שבתרגיל הראשון: עבור $a_n = \left(-1\right)^{n}$ ו-$b_n = -\left(-1\right)^{n}$ הסכום הוא הסדרה הקבועה $0$, שמתכנסת, ואילו אף אחת משתי הסדרות עצמן אינה מתכנסת.
 :::
 
-**תרגיל 4.** אם $\{a_n+b_n\}$ אינה מתכנסת, אז לפחות אחת מן הסדרות $\{a_n\}$ , $\{b_n\}$ אינה מתכנסת.
+**תרגיל 4.** אם $(a_n+b_n)$ אינה מתכנסת, אז לפחות אחת מן הסדרות $(a_n)$ , $(b_n)$ אינה מתכנסת.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -1825,7 +1830,7 @@ $$.\left|\frac{1}{2^{n}}-0\right| = \frac{1}{2^{n}} \leq \frac{1}{n}$$
 נבחר $N = \left\lfloor \frac{1}{\varepsilon}\right\rfloor + 1$, בדיוק כפי שעשינו בשאלה על הסדרה $\frac{1}{n}$. אז לכל $n \geq N$ מתקיים $\frac{1}{n} < \varepsilon$, ולכן גם $\left|\frac{1}{2^{n}}-0\right| < \varepsilon$, כנדרש.
 :::
 
-**תרגיל 9.** תהי $\{a_n\}_{n=1}^{\infty}$ סדרה ויהי $L\in\mathbb{R}$. הוכיחו כי אם $a_n \to L$ אז $\left|a_n\right| \to \left|L\right|$. (היעזרו באי-שוויון המשולש ההפוך, $\bigl|\left|x\right|-\left|y\right|\bigr| \leq \left|x-y\right|$.)
+**תרגיל 9.** תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $L\in\mathbb{R}$. הוכיחו כי אם $a_n \to L$ אז $\left|a_n\right| \to \left|L\right|$. (היעזרו באי-שוויון המשולש ההפוך, $\bigl|\left|x\right|-\left|y\right|\bigr| \leq \left|x-y\right|$.)
 
 ::: {.thmsol .foldable}
 יהי $\varepsilon>0$. מכיוון ש-$a_n \to L$, קיים $N\in\mathbb{N}$ כך שלכל $n \geq N$ מתקיים $\left|a_n-L\right| < \varepsilon$.
@@ -1834,17 +1839,330 @@ $$.\left|\frac{1}{2^{n}}-0\right| = \frac{1}{2^{n}} \leq \frac{1}{n}$$
 
 $$,\Bigl|\left|a_n\right|-\left|L\right|\Bigr| \leq \left|a_n-L\right|$$
 
-ולכן לכל $n \geq N$ מתקיים $\Bigl|\left|a_n\right|-\left|L\right|\Bigr| < \varepsilon$. זהו בדיוק התנאי שבהגדרה עבור הסדרה $\left\{\left|a_n\right|\right\}$ והגבול $\left|L\right|$, ולכן $\left|a_n\right| \to \left|L\right|$.
+ולכן לכל $n \geq N$ מתקיים $\Bigl|\left|a_n\right|-\left|L\right|\Bigr| < \varepsilon$. זהו בדיוק התנאי שבהגדרה עבור הסדרה $\left(\left|a_n\right|\right)$ והגבול $\left|L\right|$, ולכן $\left|a_n\right| \to \left|L\right|$.
 :::
 
-**תרגיל 10.** הראו שהכיוון ההפוך של התרגיל הקודם אינו נכון: מצאו סדרה $\{a_n\}$ ומספר $L$ שעבורם $\left|a_n\right| \to \left|L\right|$ ואילו $\{a_n\}$ אינה שואפת ל-$L$.
+**תרגיל 10.** הראו שהכיוון ההפוך של התרגיל הקודם אינו נכון: מצאו סדרה $(a_n)$ ומספר $L$ שעבורם $\left|a_n\right| \to \left|L\right|$ ואילו $(a_n)$ אינה שואפת ל-$L$.
 
 ::: {.thmsol .foldable}
 ניקח $a_n = \left(-1\right)^{n}$ ו-$L=1$.
 
-לכל $n$ מתקיים $\left|a_n\right| = 1$, ולכן $\left\{\left|a_n\right|\right\}$ היא הסדרה הקבועה $1$, שמתכנסת ל-$1$, שהוא בדיוק $\left|L\right|$.
+לכל $n$ מתקיים $\left|a_n\right| = 1$, ולכן $\left(\left|a_n\right|\right)$ היא הסדרה הקבועה $1$, שמתכנסת ל-$1$, שהוא בדיוק $\left|L\right|$.
 
-מצד שני, $\{a_n\}$ כלל אינה מתכנסת, לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת, ובפרט היא אינה שואפת ל-$L=1$.
+מצד שני, $(a_n)$ כלל אינה מתכנסת, לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת, ובפרט היא אינה שואפת ל-$L=1$.
+:::
+
+## יחידות הגבול
+
+אמרנו, שבאופן אינטואיטיבי, סדרה היא מתכנסת אם היא ״מקרבת״ מספר כלשהו. ברור שאם ״סדרה מקרבת״ מספר, היא צריכה לקרב מספר יחיד ולא כמה מספרים. כמו שאמרנו קודם, אחד התפקידים של ההגדרה הוא לתת מסגרת מוגדרת ומדויקת לאינטואיציה שלנו. עם זאת, ההגדרה הפורמלית של הגבול אינה דורשת יחידות: היא קובעת שהמספר $L$ הוא גבול של הסדרה אם לכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,|a_n - L| < \varepsilon$ ואין בה דבר שמונע ממספר אחר לקיים בדיוק את אותו תנאי.
+
+מִנַּיִן לנו שלא יכולים להיות כמה גבולות במקרים ״מוזרים״ מסוימים? (כפי שתראו בהמשך, במתמטיקה יש לא מעט כאלה.) לא היינו רוצים שתהיה אפשרות שהקירוב שלנו יקרב מספרים שונים.
+
+אפשר לנסות לפתור את הבעיה בהגדרה ופשוט לדרוש יחידות, אך זה לא באמת פותר אותה. קודם כל, איך להתייחס למקרי ביניים שבהם יש כמה מספרים שמקיימים את ההגדרה של הגבול? ודבר שני — איך אפשר בכלל להבטיח יחידות? ברגע שמצאנו מספר אחד, איך בודקים שאין אחרים? לכן, **לדרוש** יחידות כחלק מההגדרה אינו עוזר לנו בהרבה. על מנת לבדוק ״ייתכנות״ של ההגדרה, צריך לענות על השאלה: האם יכולים להיות לסדרה שני גבולות שונים?
+
+מסתבר, שמתוך ההגדרה נובע שלא יכול להיות יותר מגבול אחד — וזה מנוסח במשפט הבא.
+
+::: {#box-thm-limit-uniqueness .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. אם מתקיים $\lim_{n\to\infty}a_n = L_1$ וגם $\lim_{n \to \infty} a_n = L_2$ אז $.L_1 = L_2$
+
+כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.
+:::
+
+::::::::::: {#box-expl-uniqueness-idea .thmexpl title="הרעיון של ההוכחה"}
+נניח ש-$,L_1 \neq L_2$ ונסמן ב-$d$ את המרחק ביניהם, כלומר $.d = |L_1 - L_2| > 0$
+
+**הרעיון:** אם המרחק בין $x$ ל-$L_1$ קטן מ-$\frac{d}{2}$, אז המרחק בין $x$ ל-$L_2$ גדול מ-$\frac{d}{2}$; ובאותו אופן, אם המרחק בין $x$ ל-$L_2$ קטן מ-$\frac{d}{2}$, אז המרחק בין $x$ ל-$L_1$ גדול מ-$\frac{d}{2}$. במילים אחרות, **נקודה אחת אינה יכולה להיות קרובה מ-**$\frac{d}{2}$ גם ל-$L_1$ וגם ל-$L_2$.
+
+זוהי תוצאה מיידית של [אי-שוויון המשולש](04-abs-value.qmd): אילו היו שני המרחקים קטנים מ-$\frac{d}{2}$, היינו מקבלים $$.d = |L_1 - L_2| \leq |x-L_1| + |x-L_2| < \frac{d}{2} + \frac{d}{2} = d$$ כלומר $,d < d$ וזה כמובן בלתי אפשרי.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.6))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2 = -1.0, 1.0
+d = L2 - L1
+h = d / 2.0                 # the neighbourhood radius, d/2
+m = (L1 + L2) / 2.0
+
+# the two d/2 neighbourhoods: they meet exactly at the midpoint and do not overlap
+ax.plot([L1-h, L1+h], [0, 0], color="tab:blue", lw=7, alpha=0.30, zorder=2,
+        solid_capstyle="butt")
+ax.plot([L2-h, L2+h], [0, 0], color="tab:red", lw=7, alpha=0.30, zorder=2,
+        solid_capstyle="butt")
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=5)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.16), ha="center", va="top",
+                fontsize=13, color=col)
+
+# midpoint tick: the only place the two neighbourhoods touch
+ax.plot([m, m], [-0.10, 0.10], color="black", lw=1.4, zorder=5)
+
+# the radius of each neighbourhood, measured on the OUTER side: it keeps the middle
+# clear, where the two bands meeting at the midpoint is what should draw the eye
+ax.annotate("", xy=(L1, 0.36), xytext=(L1-h, 0.36),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.2))
+ax.annotate(r"$\frac{d}{2}$", xy=(L1-h/2, 0.36), xytext=(L1-h/2, 0.42),
+            ha="center", fontsize=12, color="tab:blue")
+ax.annotate("", xy=(L2, 0.36), xytext=(L2+h, 0.36),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.2))
+ax.annotate(r"$\frac{d}{2}$", xy=(L2+h/2, 0.36), xytext=(L2+h/2, 0.42),
+            ha="center", fontsize=12, color="tab:red")
+
+# d across the top, with dotted guides down to the points as in the case figures
+ax.annotate("", xy=(L1, 0.84), xytext=(L2, 0.84),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=(m, 0.84), xytext=(m, 0.90), ha="center", fontsize=12)
+for p in (L1, L2):
+    ax.plot([p, p], [0.10, 0.84], color="black", lw=0.7, ls=":")
+
+# one point in each neighbourhood, and one in neither
+for p, lab in [(-1.45, r"$x_1$"), (0.55, r"$x_2$"), (2.6, r"$x_3$")]:
+    ax.plot([p], [0], "o", color="tab:green", ms=6, zorder=6)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, 0.13), ha="center", fontsize=11,
+                color="tab:green")
+
+ax.set_xlim(-3.0, 3.2)
+ax.set_ylim(-0.5, 1.10)
+ax.axis("off")
+fig.savefig("figures/c07_fig15.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+:::::::: {#box-sim-two-neighbourhoods .thmsim title="שתי הסביבות ברדיוס $\\frac{d}{2}$"}
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe class="widget-frame" src="widgets/ch07/two-limits-neighbourhoods.html" loading="lazy" title="שתי סביבות ברדיוס d/2 סביב שני גבולות, ונקודה נעה ביניהן"></iframe>
+```
+:::
+
+הזיזו את $x$ לאורך הישר, ונסו למצוא מיקום שבו $x$ נמצאת בשתי הסביבות בו-זמנית. לא תמצאו: בכל מיקום, לפחות אחד משני המרחקים גדול מ-$\frac{d}{2}$. שימו לב גם לשוויון המוצג מעל, המשתנה לפי מיקומה של $x$, והוא בדיוק אחד משלושת המקרים שנראה מיד.
+
+:::: {.content-visible when-format="pdf"}
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig15.png}\hss}\endL\par
+\medskip
+```
+
+::: {style="text-align:center"}
+תרשים: הסביבות ברדיוס $\frac{d}{2}$ סביב $L_1$ ו-$L_2$ נפגשות בדיוק באמצע ואינן חופפות. הנקודה $x_1$ נמצאת בסביבה של $L_1$ בלבד, $x_2$ בסביבה של $L_2$ בלבד, ו-$x_3$ מחוץ לשתיהן
+:::
+::::
+::::::::
+
+**שימו לב לאי-השוויון החד.** הסביבות מוגדרות באמצעות אי-שוויון חד: הסביבה של $L_1$ היא אוסף הנקודות המקיימות $,|x - L_1| < \frac{d}{2}$ ולא $.|x - L_1| \leq \frac{d}{2}$ ההבדל מתגלה בדיוק באמצע הקטע: המרחק משם אל $L_1$ ואל $L_2$ שווה $\frac{d}{2}$ בשני המקרים, ולכן נקודת האמצע אינה שייכת לאף אחת משתי הסביבות. טעות נפוצה היא לחשוב שנקודת האמצע היא ״החיתוך״ שלהן, אך החיתוך **ריק**: אין ולו נקודה אחת השייכת לשתיהן.
+
+זה אינו פרט טכני בלבד. בהגדרת הגבול מופיע $|a_n - L| < \varepsilon$ עם אי-שוויון חד, ובזכותו הבחירה $\varepsilon = \frac{d}{2}$ מספיקה. אילו ההגדרה הייתה מסתפקת באי-שוויון לא חד, היינו מקבלים $,d \leq d$ וזו אינה סתירה, והיה עלינו לבחור $\varepsilon$ קטן יותר, למשל $.\frac{d}{3}$
+
+כדי לראות מדוע סכום שני המרחקים אינו קטן מ-$d$, נסתכל על שלושת המיקומים האפשריים של $x$ ביחס ל-$L_1$ ול-$L_2$.
+
+**המקרה הראשון:** $x$ נמצא בקטע המחבר את $L_1$ ו-$L_2$. אז סכום המרחקים בין $x$ ל-$L_1$ ובין $x$ ל-$L_2$ הוא בדיוק המרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_1|+|x-L_2| = |L_1 - L_2|
+$$
+
+כאן מתקיים שוויון, ולכן שני המרחקים משלימים זה את זה ל-$d$: אם $|x-L_1| < \frac{d}{2}$, אז $$.|x-L_2| = d - |x-L_1| > d - \frac{d}{2} = \frac{d}{2}$$ ובאותו אופן עם החלפת התפקידים של $L_1$ ו-$L_2$.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2, xp = -2.0, 2.0, 0.6
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
+
+# the two distances from x, just above the line
+ax.annotate("", xy=(L1, 0.30), xytext=(xp, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((L1+xp)/2, 0.30), xytext=((L1+xp)/2, 0.36),
+            ha="center", fontsize=11, color="tab:blue")
+
+ax.annotate("", xy=(xp, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((xp+L2)/2, 0.30), xytext=((xp+L2)/2, 0.36),
+            ha="center", fontsize=11, color="tab:red")
+
+# total distance d
+ax.annotate("", xy=(L1, 0.80), xytext=(L2, 0.80),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d=|L_1-L_2|$", xy=(0, 0.80), xytext=(0, 0.86), ha="center", fontsize=12)
+
+for p in (L1, L2):
+    ax.plot([p, p], [0.05, 0.80], color="black", lw=0.7, ls=":")
+ax.plot([xp, xp], [0.05, 0.30], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.2, 3.2)
+ax.set_ylim(-0.45, 1.08)
+ax.axis("off")
+fig.savefig("figures/c07_fig16.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig16.png}\hss}\endL\par
+\medskip
+```
+
+::: {style="text-align:center"}
+תרשים: כאשר $x$ נמצא בקטע שבין $L_1$ ל-$L_2$, סכום שני המרחקים שווה בדיוק ל-$d$
+:::
+
+::: {.content-visible when-format="html"}
+![כאשר $x$ נמצא בקטע שבין $L_1$ ל-$L_2$, סכום שני המרחקים שווה בדיוק ל-$d$](figures/c07_fig16.png){#fig-uniq-case-between width="62%" fig-align="center"}
+:::
+
+**המקרה השני:** $x$ נמצא מחוץ לקטע, מעברו השני של $L_1$. אז המרחק בין $x$ ל-$L_2$ הוא סכום המרחק בין $x$ ל-$L_1$ והמרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_1|+|L_1-L_2| = |x - L_2|
+$$
+
+כאן המרחק אל $L_2$ אינו קטן מ-$d$ באף מצב, שכן $,|x-L_2| = |x-L_1| + d \geq d$ ובפרט הוא גדול מ-$\frac{d}{2}$. כלומר, גם אם $x$ קרוב מאוד ל-$L_1$, הוא רחוק מ-$L_2$ יותר מ-$\frac{d}{2}$.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2, xp = -0.8, 2.2, -2.8
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
+
+# |x - L1|, then d, laid end to end on the lower level
+ax.annotate("", xy=(xp, 0.30), xytext=(L1, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:green", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((xp+L1)/2, 0.30), xytext=((xp+L1)/2, 0.36),
+            ha="center", fontsize=11, color="tab:green")
+
+ax.annotate("", xy=(L1, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=((L1+L2)/2, 0.30), xytext=((L1+L2)/2, 0.36),
+            ha="center", fontsize=12)
+
+# their sum is the distance from x to L2
+ax.annotate("", xy=(xp, 0.82), xytext=(L2, 0.82),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((xp+L2)/2, 0.82), xytext=((xp+L2)/2, 0.88),
+            ha="center", fontsize=11, color="tab:red")
+
+for p in (xp, L1, L2):
+    ax.plot([p, p], [0.05, 0.30], color="black", lw=0.7, ls=":")
+for p in (xp, L2):
+    ax.plot([p, p], [0.30, 0.82], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.6, 3.2)
+ax.set_ylim(-0.45, 1.10)
+ax.axis("off")
+fig.savefig("figures/c07_fig17.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig17.png}\hss}\endL\par
+\medskip
+```
+
+::: {style="text-align:center"}
+תרשים: כאשר $x$ נמצא מעברו השני של $L_1$, המרחק אל $L_2$ הוא סכום המרחק אל $L_1$ ואורך הקטע $d$
+:::
+
+::: {.content-visible when-format="html"}
+![כאשר $x$ נמצא מעברו השני של $L_1$, המרחק אל $L_2$ הוא סכום המרחק אל $L_1$ ואורך הקטע $d$](figures/c07_fig17.png){#fig-uniq-case-left width="62%" fig-align="center"}
+:::
+
+**המקרה השלישי:** $x$ נמצא מחוץ לקטע, מעברו השני של $L_2$. אז המרחק בין $x$ ל-$L_1$ הוא סכום המרחק בין $x$ ל-$L_2$ והמרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_2| + |L_1 - L_2| = |x - L_1|
+$$
+
+כאן, באופן סימטרי, $,|x-L_1| = |x-L_2| + d \geq d$ ולכן המרחק אל $L_1$ גדול מ-$\frac{d}{2}$, יהיה $x$ קרוב ל-$L_2$ ככל שיהיה.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2, xp = -2.2, 0.8, 2.8
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
+
+# d, then |x - L2|, laid end to end on the lower level
+ax.annotate("", xy=(L1, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=((L1+L2)/2, 0.30), xytext=((L1+L2)/2, 0.36),
+            ha="center", fontsize=12)
+
+ax.annotate("", xy=(L2, 0.30), xytext=(xp, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:green", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((L2+xp)/2, 0.30), xytext=((L2+xp)/2, 0.36),
+            ha="center", fontsize=11, color="tab:green")
+
+# their sum is the distance from x to L1
+ax.annotate("", xy=(L1, 0.82), xytext=(xp, 0.82),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((L1+xp)/2, 0.82), xytext=((L1+xp)/2, 0.88),
+            ha="center", fontsize=11, color="tab:blue")
+
+for p in (L1, L2, xp):
+    ax.plot([p, p], [0.05, 0.30], color="black", lw=0.7, ls=":")
+for p in (L1, xp):
+    ax.plot([p, p], [0.30, 0.82], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.2, 3.6)
+ax.set_ylim(-0.45, 1.10)
+ax.axis("off")
+fig.savefig("figures/c07_fig18.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig18.png}\hss}\endL\par
+\medskip
+```
+
+::: {style="text-align:center"}
+תרשים: כאשר $x$ נמצא מעברו השני של $L_2$, המרחק אל $L_1$ הוא סכום המרחק אל $L_2$ ואורך הקטע $d$
+:::
+
+::: {.content-visible when-format="html"}
+![כאשר $x$ נמצא מעברו השני של $L_2$, המרחק אל $L_1$ הוא סכום המרחק אל $L_2$ ואורך הקטע $d$](figures/c07_fig18.png){#fig-uniq-case-right width="62%" fig-align="center"}
+:::
+
+**בשלושת המקרים** סכום המרחקים מ-$x$ אל $L_1$ ואל $L_2$ אינו קטן מן המרחק שבין $L_1$ ל-$L_2$: במקרה הראשון הוא שווה לו בדיוק, ובשני האחרים הוא גדול ממנו. זהו בדיוק אי-שוויון המשולש: $$.|x-L_1| + |x-L_2| \geq |L_1 - L_2| = d$$
+
+**ההוכחה שלהלן היא בדיוק הרעיון הזה בכתיב פורמלי:** אם הסדרה מתכנסת לשני הגבולות, אז החל ממקום מסוים איבריה חייבים להיות קרובים לשניהם בו-זמנית, וזה בלתי אפשרי.
+:::::::::::
+
+::: thmproof
+נניח בשלילה ש-$,L_1 \neq L_2$ ונסמן $.d = |L_1 - L_2| > 0$ נבחר $.\varepsilon = \frac{d}{2} > 0$
+
+מכיוון ש-$,a_n \to L_1$ קיים $N_1\in\mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.\left|a_n - L_1\right| < \varepsilon$
+
+מכיוון ש-$,a_n \to L_2$ קיים $N_2\in\mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|a_n - L_2\right| < \varepsilon$
+
+נבחר $,N = \max\left\{N_1,N_2\right\}$ ואז לכל $n \geq N$ שני אי-השוויונות מתקיימים בו-זמנית, ולפי אי-שוויון המשולש $$.d = |L_1 - L_2| \leq \left|a_n - L_1\right| + \left|a_n - L_2\right| < \varepsilon + \varepsilon = d$$
+
+קיבלנו $,d < d$ וזו סתירה. לכן ההנחה $L_1 \neq L_2$ אינה יכולה להתקיים, ומכאן $.L_1 = L_2$
 :::
 
 :::::::::::: extra
@@ -1853,11 +2171,11 @@ $$,\Bigl|\left|a_n\right|-\left|L\right|\Bigr| \leq \left|a_n-L\right|$$
 בפרק המבוא ראינו את סדרת הקירובים העשרוניים של $\sqrt{2}$. כעת, משהוגדרה ההתכנסות, נטפל בפיתוח העשרוני במדויק. כדוגמה, נענה על השאלה: האם $0.999\dots = 1$? אחרי שראינו הגדרה של המושג גבול, התשובה היא ״כן״ — שני הסימונים מתארים את אותו מספר. הסיבה: $0.999\dots$ הוא קיצור לסדרת הקירובים $0.9,\ 0.99,\ 0.999,\ \dots$, המתכנסת ל-$1$.
 
 ::: {#box-def-decimal-expansion .thmdef}
-יהי $a>0$ ממשי. נגדיר [**ברקורסיה**](05-induction.qmd#sec-recursive-definition) סדרת ספרות $\{a_n\}_{n=1}^\infty$ (עם $a_n \in \{0,1,\dots,9\}$, ו-$a_0$ שלם כלשהו): $a_0$ הוא **המספר השלם הגדול ביותר הקטן ממש מ-**$a$, ובהינתן $a_0,\dots,a_n$, $$a_{n+1} = \max\left\{k \in \{0,\dots,9\} \;\middle|\; a_0.a_1\dots a_n + \frac{k}{10^{n+1}} < a\right\}.$$ הביטוי $a_0.a_1a_2\dots$ נקרא ה**פיתוח העשרוני** של $a$ (עבור $a<0$ לוקחים את הפיתוח של $-a$ עם סימן מינוס, ועבור $a=0$ את הסדרה הקבועה $0$). נסמן, לכל $n\ge 1$, $t_n = a_0.a_1\dots a_n$, ונקרא ל-$\{t_n\}_{n=1}^{\infty}$ **סדרת הקירובים העשרוניים** של $a$.
+יהי $a>0$ ממשי. נגדיר [**ברקורסיה**](05-induction.qmd#sec-recursive-definition) סדרת ספרות $(a_n)_{n=1}^\infty$ (עם $a_n \in \{0,1,\dots,9\}$, ו-$a_0$ שלם כלשהו): $a_0$ הוא **המספר השלם הגדול ביותר הקטן ממש מ-**$a$, ובהינתן $a_0,\dots,a_n$, $$a_{n+1} = \max\left\{k \in \{0,\dots,9\} \;\middle|\; a_0.a_1\dots a_n + \frac{k}{10^{n+1}} < a\right\}.$$ הביטוי $a_0.a_1a_2\dots$ נקרא ה**פיתוח העשרוני** של $a$ (עבור $a<0$ לוקחים את הפיתוח של $-a$ עם סימן מינוס, ועבור $a=0$ את הסדרה הקבועה $0$). נסמן, לכל $n\ge 1$, $t_n = a_0.a_1\dots a_n$, ונקרא ל-$(t_n)_{n=1}^{\infty}$ **סדרת הקירובים העשרוניים** של $a$.
 :::
 
 ::: {#box-prp-decimal-convergence .thmprp}
-יהי $a\in\mathbb{R}$, ותהי $\{t_n\}$ סדרת הקירובים העשרוניים שלו. אז $\lim\limits_{n\to\infty} t_n = a$; במילים אחרות, $a = a_0.a_1a_2\dots$.
+יהי $a\in\mathbb{R}$, ותהי $(t_n)$ סדרת הקירובים העשרוניים שלו. אז $\lim\limits_{n\to\infty} t_n = a$; במילים אחרות, $a = a_0.a_1a_2\dots$.
 :::
 
 ::: thmproof
@@ -1891,13 +2209,13 @@ ax.set_ylim(2.35, 2.55)
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
-fig.savefig("figures/c07_fig12.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig19.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig12.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig19.png}\hss}\endL\par
 \medskip
 ```
 
