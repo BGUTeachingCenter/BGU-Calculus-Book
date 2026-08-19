@@ -20,6 +20,10 @@ book:
   output-file: "Book_Draft"
   search: true
   reader-mode: true
+  # Puts a download button in the sidebar tools of every page, pointing at
+  # _book/Book_Draft.pdf. The file only exists after a PDF render — an
+  # HTML-only render leaves whatever PDF is already there, so it can go stale.
+  downloads: [pdf]
   chapters:
     - index.qmd
     - part: part-1-foundations.qmd
