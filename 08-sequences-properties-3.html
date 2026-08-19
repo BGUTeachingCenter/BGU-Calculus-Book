@@ -980,7 +980,7 @@ window.Quarto = {
 </div>
 <div class="thmbox thmbox-proof" title="סעיף (ד) — חילוק">
 <p><strong>הוכחה — סעיף (ד) — חילוק.</strong></p>
-<p>נוכיח תחילה את המקרה הפרטי <span class="math inline">\(,\frac{1}{b_n} \to \frac{1}{L_2}\)</span> ואז נסיים בכפל: <span class="math inline">\(\frac{a_n}{b_n} = a_n \cdot \frac{1}{b_n}\)</span> לפי סעיף (ג).</p>
+<p>נוכיח תחילה את המקרה הפרטי <span class="math inline">\(,\lim\limits_{n\to\infty} \dfrac{1}{b_n} = \dfrac{1}{L_2}\)</span> ואז נסיים בכפל: <span class="math inline">\(\dfrac{a_n}{b_n} = a_n \cdot \dfrac{1}{b_n}\)</span> לפי סעיף (ג).</p>
 <p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> נאחד למכנה משותף:</p>
 <p><span class="math display">\[.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \left|\frac{L_2 - b_n}{b_n L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|}\]</span></p>
 <p>במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: <span class="math inline">\(\left|b_n\right|\)</span> עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא <strong>חסם מלרע</strong> על <span class="math inline">\(,\left|b_n\right|\)</span> וזהו בדיוק החישוב שכבר עשינו ב<a href="#box-rem-denominator-nonzero">הערה 8.3.2</a>, הפעם עד הסוף: שם הסתפקנו במסקנה <span class="math inline">\(,b_n \neq 0\)</span> וכאן נחלץ ממנו חסם מספרי. מכיוון ש-<span class="math inline">\(,L_2 \neq 0\)</span> מתקיים <span class="math inline">\(,\frac{\left|L_2\right|}{2} &gt; 0\)</span> ולכן קיים <span class="math inline">\(N_0\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים <span class="math inline">\(.\left|b_n - L_2\right| &lt; \frac{\left|L_2\right|}{2}\)</span> לפי אי-שוויון המשולש</p>
@@ -993,7 +993,7 @@ window.Quarto = {
 <p><span class="math display">\[.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| &lt; \frac{2}{\left|L_2\right|^{2}} \cdot \frac{\left|L_2\right|^{2}}{2}\varepsilon = \varepsilon\]</span></p>
 <p>שימו לב לתפקידים השונים של שני האינדקסים: <span class="math inline">\(N_0\)</span> אינו מטפל ב-<span class="math inline">\(\varepsilon\)</span> כלל — הוא רק מבטיח שהמכנה לא ייעשה קטן מדי; ורק <span class="math inline">\(N_1\)</span> הוא זה שמכווץ את הביטוי אל מתחת ל-<span class="math inline">\(.\varepsilon\)</span></p>
 <p>לסיום, לפי סעיף (ג),</p>
-<p><span class="math display">\[.\frac{a_n}{b_n} = a_n \cdot \frac{1}{b_n} \to L_1 \cdot \frac{1}{L_2} = \frac{L_1}{L_2}\]</span></p>
+<p><span class="math display">\[.\lim_{n\to\infty} \frac{a_n}{b_n} = \lim_{n\to\infty} \left(a_n \cdot \frac{1}{b_n}\right) = \lim_{n\to\infty} a_n \cdot \lim_{n\to\infty} \frac{1}{b_n} = L_1 \cdot \frac{1}{L_2} = \frac{L_1}{L_2}\]</span></p>
 </div>
 <section id="דוגמאות" class="level3">
 <h3 class="anchored" data-anchor-id="דוגמאות">דוגמאות</h3>
@@ -1008,9 +1008,14 @@ window.Quarto = {
 <p><strong>מדוע אי אפשר להפעיל את המשפט ישירות.</strong> הסדרה שבמונה, <span class="math inline">\(,3n-4\)</span> והסדרה שבמכנה, <span class="math inline">\(,n+2\)</span> אינן חסומות, ולכן לפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">מסקנה 8.2.8</a> אינן מתכנסות. סעיף (ד) של המשפט מניח ששתי הסדרות מתכנסות, ולכן אינו חל כאן.</p>
 <p><strong>המניפולציה.</strong> נחלק את המונה ואת המכנה בחזקה הגבוהה ביותר, <span class="math inline">\(.n\)</span> לכל <span class="math inline">\(n \geq 1\)</span> מתקיים <span class="math inline">\(,n \neq 0\)</span> ולכן זהו צמצום חוקי של השבר, והסדרה לא השתנתה:</p>
 <p><span class="math display">\[.a_n = \frac{3n-4}{n+2} = \frac{\dfrac{3n-4}{n}}{\dfrac{n+2}{n}} = \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}}\]</span></p>
-<p><strong>גבולות המונה והמכנה.</strong> הסדרה הקבועה <span class="math inline">\(4\)</span> מתכנסת ל-<span class="math inline">\(,4\)</span> ולכן לפי סעיף (ג) <span class="math display">\[.\frac{4}{n} = 4 \cdot \frac{1}{n} \longrightarrow 4 \cdot 0 = 0\]</span> מכאן, לפי סעיף (ב), <span class="math inline">\(.3 - \dfrac{4}{n} \to 3 - 0 = 3\)</span> באותו אופן <span class="math inline">\(,\dfrac{2}{n} \to 0\)</span> ולפי סעיף (א) <span class="math inline">\(.1 + \dfrac{2}{n} \to 1 + 0 = 1\)</span></p>
+<p><strong>גבולות המונה והמכנה.</strong> הסדרה הקבועה <span class="math inline">\(4\)</span> מתכנסת ל-<span class="math inline">\(,4\)</span> ולכן לפי סעיף (ג)</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \frac{4}{n} = \lim_{n\to\infty} 4 \cdot \lim_{n\to\infty} \frac{1}{n} = 4 \cdot 0 = 0\]</span></p>
+<p>מכאן, לפי סעיף (ב),</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \left(3 - \frac{4}{n}\right) = \lim_{n\to\infty} 3 - \lim_{n\to\infty} \frac{4}{n} = 3 - 0 = 3\]</span></p>
+<p>באותו אופן <span class="math inline">\(,\lim\limits_{n\to\infty} \dfrac{2}{n} = 0\)</span> ולפי סעיף (א)</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \left(1 + \frac{2}{n}\right) = \lim_{n\to\infty} 1 + \lim_{n\to\infty} \frac{2}{n} = 1 + 0 = 1\]</span></p>
 <p><strong>הפעלת המשפט.</strong> גבול המכנה הוא <span class="math inline">\(,1 \neq 0\)</span> ובנוסף <span class="math inline">\(1 + \dfrac{2}{n} \neq 0\)</span> לכל <span class="math inline">\(,n \geq 1\)</span> ולכן מתקיימים שני התנאים של סעיף (ד):</p>
-<p><span class="math display">\[.\lim_{n\to\infty} \frac{3n-4}{n+2} = \lim_{n\to\infty} \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}} = \frac{3}{1} = 3\]</span></p>
+<p><span class="math display">\[.\lim_{n\to\infty} \frac{3n-4}{n+2} = \lim_{n\to\infty} \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}} = \frac{\lim\limits_{n\to\infty} \left(3 - \dfrac{4}{n}\right)}{\lim\limits_{n\to\infty} \left(1 + \dfrac{2}{n}\right)} = \frac{3}{1} = 3\]</span></p>
 </div>
 <div id="box-exm-seq-rational-2" class="thmbox thmbox-question" title="מנת פולינומים מדרגות שונות">
 <p><strong>שאלה 8.3.5 — מנת פולינומים מדרגות שונות.</strong></p>
@@ -1021,9 +1026,12 @@ window.Quarto = {
 <p><strong>מדוע אי אפשר להפעיל את המשפט ישירות.</strong> גם כאן המונה והמכנה אינם חסומים, ולכן אינם מתכנסים.</p>
 <p><strong>המניפולציה.</strong> נחלק את המונה ואת המכנה ב-<span class="math inline">\(,n^2\)</span> החזקה הגבוהה ביותר <strong>במכנה</strong>:</p>
 <p><span class="math display">\[.a_n = \frac{8n+3}{n^2+1} = \frac{\dfrac{8}{n} + \dfrac{3}{n^2}}{1 + \dfrac{1}{n^2}}\]</span></p>
-<p><strong>גבולות המונה והמכנה.</strong> לפי סעיף (ג), <span class="math display">\[,\frac{1}{n^2} = \frac{1}{n} \cdot \frac{1}{n} \longrightarrow 0 \cdot 0 = 0\]</span> ומכאן גם <span class="math inline">\(\dfrac{8}{n} \to 0\)</span> וגם <span class="math inline">\(.\dfrac{3}{n^2} \to 0\)</span> לפי סעיף (א) המונה שואף ל-<span class="math inline">\(,0 + 0 = 0\)</span> והמכנה ל-<span class="math inline">\(.1 + 0 = 1\)</span></p>
+<p><strong>גבולות המונה והמכנה.</strong> לפי סעיף (ג),</p>
+<p><span class="math display">\[,\lim_{n\to\infty} \frac{1}{n^2} = \lim_{n\to\infty} \frac{1}{n} \cdot \lim_{n\to\infty} \frac{1}{n} = 0 \cdot 0 = 0\]</span></p>
+<p>ובאותו אופן <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{8}{n} = 0\)</span> וגם <span class="math inline">\(.\lim\limits_{n\to\infty} \dfrac{3}{n^2} = 0\)</span> מכאן, לפי סעיף (א),</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \left(\frac{8}{n} + \frac{3}{n^2}\right) = 0 + 0 = 0 \qquad\text{,}\qquad \lim_{n\to\infty} \left(1 + \frac{1}{n^2}\right) = 1 + 0 = 1\]</span></p>
 <p><strong>הפעלת המשפט.</strong> שוב גבול המכנה שונה מאפס והמכנה עצמו אינו מתאפס, ולכן לפי סעיף (ד)</p>
-<p><span class="math display">\[.\lim_{n\to\infty} \frac{8n+3}{n^2+1} = \frac{0}{1} = 0\]</span></p>
+<p><span class="math display">\[.\lim_{n\to\infty} \frac{8n+3}{n^2+1} = \lim_{n\to\infty} \frac{\dfrac{8}{n} + \dfrac{3}{n^2}}{1 + \dfrac{1}{n^2}} = \frac{\lim\limits_{n\to\infty} \left(\dfrac{8}{n} + \dfrac{3}{n^2}\right)}{\lim\limits_{n\to\infty} \left(1 + \dfrac{1}{n^2}\right)} = \frac{0}{1} = 0\]</span></p>
 </div>
 <!-- מקור: הרצאה 5 -->
 </section>
