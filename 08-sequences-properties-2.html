@@ -910,35 +910,102 @@ window.Quarto = {
 <p>נתחיל את הדיון בסוג נוסף של סדרות — כאלה שכל איבריהן נמצאים בטווח מסוים.</p>
 <div id="box-def-bounded-sequence" class="thmbox thmbox-definition">
 <p><strong>הגדרה 8.2.1.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה, נגיד כי <span class="math inline">\(a_n\)</span> חסומה, אם קיימים <span class="math inline">\(m,M \in R\)</span> כך שלכל <span class="math inline">\(n\)</span>: <span class="math display">\[m \le a_n \le M\]</span></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. נגיד כי הסדרה <strong>חסומה</strong> אם קיימים <span class="math inline">\(m, M \in \mathbb{R}\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math display">\[.m \leq a_n \leq M\]</span></p>
 </div>
 <div id="box-exm-bounded-sequences" class="thmbox thmbox-example" title="סדרות חסומות ושאינן חסומות">
 <p><strong>דוגמה 8.2.2 — סדרות חסומות ושאינן חסומות.</strong></p>
 <ul>
-<li><p><span class="math inline">\(a_n = \dfrac{1}{n}\)</span> סדרה חסומה, כי: <span class="math inline">\(0 \le a_n \le 1\)</span> לכל ח.</p></li>
-<li><p><span class="math inline">\(a_n = (-1)^n\)</span> סדרה חסומה, כי: <span class="math inline">\(-1 \le (-1)^n \le 1\)</span> לכל ח.</p></li>
-<li><p><span class="math inline">\(a_n = n\)</span> <u>לא</u> סדרה חסומה, כי: לכל <span class="math inline">\(M\)</span>, יהיה <span class="math inline">\(a_n &gt; M\)</span></p>
+<li><p><span class="math inline">\(a_n = \dfrac{1}{n}\)</span> סדרה חסומה, כי: <span class="math inline">\(0 \le a_n \le 1\)</span> לכל <span class="math inline">\(.n\)</span></p></li>
+<li><p><span class="math inline">\(a_n = (-1)^n\)</span> סדרה חסומה, כי: <span class="math inline">\(-1 \le (-1)^n \le 1\)</span> לכל <span class="math inline">\(.n\)</span></p></li>
+<li><p><span class="math inline">\(a_n = n\)</span> <strong>לא</strong> סדרה חסומה, כי: לכל <span class="math inline">\(M\)</span>, יהיה <span class="math inline">\(a_n &gt; M\)</span></p>
 <p>למשל, ניקח את <span class="math inline">\(n = \lfloor M \rfloor + 1\)</span> עבורו <span class="math inline">\(a_n = n &gt; M\)</span></p></li>
 </ul>
 </div>
-<p>את החסימוּת אפשר לנסח גם בעזרת ערך מוחלט, ואז די באי-שוויון אחד במקום שניים.</p>
-<div id="box-thm-bounded-iff" class="thmbox thmbox-theorem">
+<p>תנאי שקול ופשוט יותר, שלעיתים נלקח כהגדרה של סדרה חסומה, הוא שקיים מספר אחד החוסם את כל איברי הסדרה בערך מוחלט.</p>
+<div id="box-thm-bounded-abs" class="thmbox thmbox-theorem">
 <p><strong>משפט 8.2.3.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. הסדרה חסומה אם ורק אם לכל <span class="math inline">\(L \in \mathbb{R}\)</span> קיים <span class="math inline">\(M &gt; 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math display">\[.\left|a_n - L\right| \leq M\]</span></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. הסדרה חסומה אם ורק אם קיים <span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math display">\[.\left|a_n\right| \leq M\]</span></p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>נניח תחילה שהתנאי מתקיים, ונפעיל אותו עם <span class="math inline">\(.L = 0\)</span> אז קיים <span class="math inline">\(M &gt; 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,\left|a_n\right| \leq M\)</span> כלומר <span class="math display">\[.-M \leq a_n \leq M\]</span> זוהי בדיוק ההגדרה של סדרה חסומה, עם החסם התחתון <span class="math inline">\(-M\)</span> והחסם העליון <span class="math inline">\(.M\)</span></p>
-<p>בכיוון השני, נניח שהסדרה חסומה, כלומר קיימים <span class="math inline">\(m, M_0 \in \mathbb{R}\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.m \leq a_n \leq M_0\)</span> נסמן <span class="math inline">\(k = m - 1\)</span> ו-<span class="math inline">\(,K = M_0 + 1\)</span> ואז לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,k &lt; a_n &lt; K\)</span> ובפרט <span class="math inline">\(.k &lt; K\)</span></p>
-<p>יהי <span class="math inline">\(L \in \mathbb{R}\)</span> כלשהו. נבחר <span class="math display">\[.M = \max\left\{\left|L-k\right|,\ \left|L-K\right|\right\}\]</span> מכיוון ש-<span class="math inline">\(,k &lt; K\)</span> אי אפשר ש-<span class="math inline">\(L\)</span> יהיה שווה גם ל-<span class="math inline">\(k\)</span> וגם ל-<span class="math inline">\(,K\)</span> ולכן לפחות אחד משני הביטויים חיובי, כלומר <span class="math inline">\(.M &gt; 0\)</span></p>
-<p>נראה כעת שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| \leq M\)</span> מצד אחד, מ-<span class="math inline">\(a_n &lt; K\)</span> נובע <span class="math display">\[,a_n - L &lt; K - L \leq \left|K - L\right| \leq M\]</span> ומצד שני, מ-<span class="math inline">\(a_n &gt; k\)</span> נובע <span class="math display">\[.a_n - L &gt; k - L \geq -\left|k - L\right| \geq -M\]</span></p>
-<p>קיבלנו <span class="math inline">\(,-M &lt; a_n - L &lt; M\)</span> כלומר <span class="math inline">\(,\left|a_n - L\right| &lt; M\)</span> ובפרט <span class="math inline">\(.\left|a_n - L\right| \leq M\)</span></p>
+<p>נניח תחילה שקיים <span class="math inline">\(M \geq 0\)</span> כזה. אי-השוויון <span class="math inline">\(\left|a_n\right| \leq M\)</span> שקול ל-<span class="math inline">\(,-M \leq a_n \leq M\)</span> וזוהי בדיוק ההגדרה של סדרה חסומה, עם החסם מלרע <span class="math inline">\(-M\)</span> והחסם מלעיל <span class="math inline">\(.M\)</span></p>
+<p>בכיוון השני, נניח שהסדרה חסומה, כלומר קיימים <span class="math inline">\(k, K\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.k \leq a_n \leq K\)</span> נשאלת השאלה איזה <span class="math inline">\(M\)</span> לבחור, והתשובה תלויה במקומם של <span class="math inline">\(k\)</span> ו-<span class="math inline">\(K\)</span> ביחס לאפס.</p>
+<p><strong>המקרה הראשון:</strong> שניהם אינם שליליים, כלומר <span class="math inline">\(.0 \leq k \leq K\)</span> אז <span class="math inline">\(\left|k\right| = k\)</span> ו-<span class="math inline">\(,\left|K\right| = K\)</span> ולכן <span class="math inline">\(.\left|K\right| \geq \left|k\right|\)</span> נבחר <span class="math inline">\(,M = \left|K\right|\)</span> ואז לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.-M \leq 0 \leq k \leq a_n \leq K = M\)</span></p>
+<div style="text-align:center">
+<p>תרשים: כאשר <span class="math inline">\(0 \leq k \leq K\)</span>, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו <span class="math inline">\(\left|K\right|\)</span></p>
 </div>
-<p>בבחירת <span class="math inline">\(L = 0\)</span> במשפט הקודם מתקבל תנאי שקול נוסף לחסימוּת, שנראה בהמשך שהוא שימושי מאוד.</p>
-<div id="box-cor-bounded-abs" class="thmbox thmbox-corollary">
-<p><strong>מסקנה 8.2.4.</strong></p>
-<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> חסומה אם ורק אם קיים <span class="math inline">\(M &gt; 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math display">\[.\left|a_n\right| &lt; M\]</span></p>
+<div id="fig-bound-case-nonneg" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bound-case-nonneg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bound-case-nonneg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.1: כאשר <span class="math inline">\(0 \leq k \leq K\)</span>, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו <span class="math inline">\(\left|K\right|\)</span>
+</figcaption>
+</figure>
+</div>
+<p><strong>המקרה השני:</strong> שניהם אינם חיוביים, כלומר <span class="math inline">\(.k \leq K \leq 0\)</span> אז <span class="math inline">\(\left|k\right| = -k\)</span> ו-<span class="math inline">\(,\left|K\right| = -K\)</span> ולכן <span class="math inline">\(.\left|k\right| \geq \left|K\right|\)</span> נבחר <span class="math inline">\(,M = \left|k\right|\)</span> ואז לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.-M = k \leq a_n \leq K \leq 0 \leq M\)</span></p>
+<div style="text-align:center">
+<p>תרשים: כאשר <span class="math inline">\(k \leq K \leq 0\)</span>, הקצה הרחוק מאפס הוא <span class="math inline">\(,\left|k\right|\)</span> והוא הקובע את <span class="math inline">\(M\)</span></p>
+</div>
+<div id="fig-bound-case-nonpos" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bound-case-nonpos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bound-case-nonpos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.2: כאשר <span class="math inline">\(k \leq K \leq 0\)</span>, הקצה הרחוק מאפס הוא <span class="math inline">\(\left|k\right|\)</span>, והוא הקובע את <span class="math inline">\(M\)</span>
+</figcaption>
+</figure>
+</div>
+<p><strong>המקרה השלישי:</strong> הסימנים שונים, כלומר <span class="math inline">\(.k &lt; 0 &lt; K\)</span> כאן אף אחד משני הקצוות אינו בהכרח הרחוק יותר מאפס, ולכן נבחר את הגדול מביניהם: <span class="math inline">\(,M = \max\left\{\left|k\right|, \left|K\right|\right\}\)</span> ואז <span class="math inline">\(.-M \leq k \leq a_n \leq K \leq M\)</span></p>
+<div style="text-align:center">
+<p>תרשים: כאשר הסימנים שונים, <span class="math inline">\(M\)</span> נקבע לפי הקצה הרחוק יותר מאפס</p>
+</div>
+<div id="fig-bound-case-mixed" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bound-case-mixed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bound-case-mixed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.3: כאשר הסימנים שונים, <span class="math inline">\(M\)</span> נקבע לפי הקצה הרחוק יותר מאפס
+</figcaption>
+</figure>
+</div>
+<p>שימו לב שבשלושת המקרים הבחירה הייתה אותה בחירה עצמה, <span class="math inline">\(.M = \max\left\{\left|k\right|, \left|K\right|\right\}\)</span> במקרה הראשון המקסימום הוא <span class="math inline">\(,\left|K\right|\)</span> בשני הוא <span class="math inline">\(,\left|k\right|\)</span> ובשלישי הוא הגדול מביניהם. לכן אפשר לוותר על חלוקת המקרים ולכתוב את כל הטיעון בשורה אחת: בבחירה זו מתקיים <span class="math inline">\(\left|k\right| \leq M\)</span> וגם <span class="math inline">\(,\left|K\right| \leq M\)</span> ולכל מספר ממשי <span class="math inline">\(x\)</span> מתקיים <span class="math inline">\(,-\left|x\right| \leq x \leq \left|x\right|\)</span> ולכן <span class="math display">\[.-M \leq -\left|k\right| \leq k \leq a_n \leq K \leq \left|K\right| \leq M\]</span></p>
+<p>מכאן <span class="math inline">\(\left|a_n\right| \leq M\)</span> לכל <span class="math inline">\(,n\)</span> כנדרש.</p>
+</div>
+<p>היתרון של הניסוח הזה הוא שמעורבים בו שני סימנים בלבד, <span class="math inline">\(a_n\)</span> ו-<span class="math inline">\(,M\)</span> ואי-שוויון אחד במקום שניים: כדי להראות שסדרה חסומה די למצוא <span class="math inline">\(M\)</span> אחד, וכדי להשתמש בחסימוּת די לדעת ש-<span class="math inline">\(.\left|a_n\right| \leq M\)</span></p>
+<p>אפשר גם למדוד את המרחק מנקודה כלשהי ולא דווקא מאפס. למעשה, די למצוא נקודת ייחוס אחת שעובדת, ומיד נובע שכל נקודה אחרת עובדת אף היא.</p>
+<div id="box-thm-bounded-iff-L" class="thmbox thmbox-theorem">
+<p><strong>משפט 8.2.4.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. שלושת התנאים הבאים שקולים:</p>
+<p>(א) הסדרה חסומה.</p>
+<p>(ב) קיימים <span class="math inline">\(L \in \mathbb{R}\)</span> ו-<span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| \leq M\)</span></p>
+<p>(ג) לכל <span class="math inline">\(L \in \mathbb{R}\)</span> קיים <span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| \leq M\)</span></p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נוכיח את המעגל: (א) גורר (ג), (ג) גורר (ב), ו-(ב) גורר (א). מכאן ששלושת התנאים שקולים זה לזה.</p>
+<p><strong>(א) גורר (ג).</strong> נניח שהסדרה חסומה. לפי המשפט הקודם קיים <span class="math inline">\(K \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n\right| \leq K\)</span> יהי <span class="math inline">\(L \in \mathbb{R}\)</span> כלשהו. המרחק בין <span class="math inline">\(a_n\)</span> ל-<span class="math inline">\(L\)</span> אינו יכול להיות גדול מסכום המרחק בין <span class="math inline">\(a_n\)</span> לאפס והמרחק בין אפס ל-<span class="math inline">\(,L\)</span> וזהו בדיוק <a href="./04-abs-value.html">אי-שוויון המשולש</a>: <span class="math display">\[.\left|a_n - L\right| \leq \left|a_n\right| + \left|L\right| \leq K + \left|L\right|\]</span></p>
+<p>לכן הבחירה <span class="math inline">\(M = K + \left|L\right|\)</span> מתאימה, וזאת לכל <span class="math inline">\(L\)</span> שנבחר.</p>
+<div style="text-align:center">
+<p>תרשים: הבחירה <span class="math inline">\(M = K + \left|L\right|\)</span> שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב <span class="math inline">\(L\)</span> נופל בדיוק על <span class="math inline">\(,-K\)</span> שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע</p>
+</div>
+<div id="fig-shift-reference-point" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shift-reference-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shift-reference-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.4: הבחירה <span class="math inline">\(M = K + \left|L\right|\)</span> שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב <span class="math inline">\(L\)</span> נופל בדיוק על <span class="math inline">\(,-K\)</span> שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע
+</figcaption>
+</figure>
+</div>
+<p><strong>(ג) גורר (ב).</strong> מיידי: אם התנאי מתקיים לכל <span class="math inline">\(,L\)</span> הוא מתקיים בפרט עבור נקודת ייחוס אחת, למשל <span class="math inline">\(.L = 0\)</span></p>
+<p><strong>(ב) גורר (א).</strong> נניח שקיימים <span class="math inline">\(L\)</span> ו-<span class="math inline">\(M\)</span> כאלה. אי-השוויון <span class="math inline">\(\left|a_n - L\right| \leq M\)</span> שקול ל-<span class="math inline">\(,L - M \leq a_n \leq L + M\)</span> וזוהי בדיוק ההגדרה של סדרה חסומה, עם החסם מלרע <span class="math inline">\(L-M\)</span> והחסם מלעיל <span class="math inline">\(.L+M\)</span></p>
+</div>
+<p>שימו לב שהמעבר מ-(ג) ל-(ב) מיידי, ואילו הכיוון ההפוך, מנקודת ייחוס אחת לכל נקודת ייחוס, אינו ישיר והוא עובר דרך החסימוּת.</p>
 <p>בתרגילים הבאים נשתמש בכך שלכל <span class="math inline">\(x\)</span> ממשי מתקיים <span class="math inline">\(\left|\sin x\right| \leq 1\)</span> וגם <span class="math inline">\(.\left|\cos x\right| \leq 1\)</span></p>
 <div id="box-qst-bounded-examples" class="thmbox thmbox-question" title="אילו מהסדרות חסומות?">
 <p><strong>שאלה 8.2.5 — אילו מהסדרות חסומות?.</strong></p>
@@ -957,7 +1024,7 @@ window.Quarto = {
 <p>(ב) לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,\left|\sin n\right| \leq 1\)</span> ולכן הסדרה חסומה.</p>
 <p>(ג) לפי אי-שוויון המשולש, <span class="math display">\[.\left|\sin\left(n^2\right) + \cos\left(n!\right)\right| \leq \left|\sin\left(n^2\right)\right| + \left|\cos\left(n!\right)\right| \leq 1 + 1 = 2\]</span> שימו לב שלא השתמשנו בשום מידע על <span class="math inline">\(n^2\)</span> או על <span class="math inline">\(,n!\)</span> אלא רק בתחום הערכים של הסינוס והקוסינוס.</p>
 <p>(ד) מ-<span class="math inline">\(\left(n-1\right)^2 \geq 0\)</span> נובע <span class="math inline">\(,n^2 + 1 \geq 2n\)</span> ולכן <span class="math display">\[.\left|\frac{n \sin n}{n^2+1}\right| = \frac{n \left|\sin n\right|}{n^2+1} \leq \frac{n}{n^2+1} \leq \frac{n}{2n} = \frac{1}{2}\]</span> הסדרה חסומה.</p>
-<p>(ה) הסדרה <strong>אינה</strong> חסומה. לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n \leq 1 - n\)</span> ולכן לכל <span class="math inline">\(n \geq 2\)</span> מתקיים <span class="math inline">\(.\left|a_n\right| \geq n - 1\)</span> בהינתן <span class="math inline">\(M &gt; 0\)</span> נבחר <span class="math inline">\(,n &gt; M + 1\)</span> ואז <span class="math inline">\(,\left|a_n\right| \geq n - 1 &gt; M\)</span> כלומר אף <span class="math inline">\(M\)</span> אינו חוסם את כל האיברים.</p>
+<p>(ה) הסדרה <strong>אינה</strong> חסומה. לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n \leq 1 - n\)</span> ולכן לכל <span class="math inline">\(n \geq 2\)</span> מתקיים <span class="math inline">\(.\left|a_n\right| \geq n - 1\)</span> בהינתן <span class="math inline">\(M \geq 0\)</span> נבחר <span class="math inline">\(,n &gt; M + 1\)</span> ואז <span class="math inline">\(,\left|a_n\right| \geq n - 1 &gt; M\)</span> כלומר אף <span class="math inline">\(M\)</span> אינו חוסם את כל האיברים.</p>
 <p>(ו) לפי הגדרת הערך השלם, לכל <span class="math inline">\(x\)</span> ממשי מתקיים <span class="math inline">\(,\left\lfloor x \right\rfloor \leq x &lt; \left\lfloor x \right\rfloor + 1\)</span> ולכן <span class="math inline">\(.0 \leq \sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor &lt; 1\)</span> הסדרה חסומה.</p>
 </div>
 </details>
@@ -976,13 +1043,13 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>התשובה היא (ג).</strong> מתקיים <span class="math inline">\(,\dfrac{n^2+1}{n} = n + \dfrac{1}{n} &gt; n\)</span> ולכן בהינתן <span class="math inline">\(M &gt; 0\)</span> כל <span class="math inline">\(n &gt; M\)</span> נותן <span class="math inline">\(,a_n &gt; M\)</span> והסדרה אינה חסומה.</p>
+<p><strong>התשובה היא (ג).</strong> מתקיים <span class="math inline">\(,\dfrac{n^2+1}{n} = n + \dfrac{1}{n} &gt; n\)</span> ולכן בהינתן <span class="math inline">\(M \geq 0\)</span> כל <span class="math inline">\(n &gt; M\)</span> נותן <span class="math inline">\(,a_n &gt; M\)</span> והסדרה אינה חסומה.</p>
 <p>שאר הסדרות חסומות: <span class="math inline">\(\left|\dfrac{\sin n}{n}\right| \leq \dfrac{1}{n} \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> מתקיים <span class="math inline">\(0 &lt; \dfrac{n^2}{n^2+1} &lt; 1\)</span> לכל <span class="math inline">\(,n\)</span> וכן <span class="math inline">\(\left|\cos\left(n!\right)\right| \leq 1\)</span> לכל <span class="math inline">\(.n\)</span></p>
 </div>
 </details>
 <p><strong>תרגיל 2.</strong> נתונה הסדרה <span class="math inline">\(.a_n = 17 + \dfrac{\left(-1\right)^n}{n}\)</span> מצאו את המספר הקטן ביותר <span class="math inline">\(M\)</span> שעבורו <span class="math inline">\(a_n \leq M\)</span> לכל <span class="math inline">\(,n\)</span> ואת המספר הגדול ביותר <span class="math inline">\(m\)</span> שעבורו <span class="math inline">\(m \leq a_n\)</span> לכל <span class="math inline">\(.n\)</span></p>
-<div class="seq-quiz" data-answer="35/2"><span class="seq-label">\(M = \)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-<div class="seq-quiz" data-answer="16"><span class="seq-label">\(m = \)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="seq-quiz" data-answer="35/2"><span class="seq-label">(א) המספר הקטן ביותר \(M\)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="seq-quiz" data-answer="16"><span class="seq-label">(ב) המספר הגדול ביותר \(m\)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
@@ -999,7 +1066,7 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>נכון.</strong> לפי המסקנה שלמעלה קיימים <span class="math inline">\(M_1 &gt; 0\)</span> ו-<span class="math inline">\(M_2 &gt; 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(\left|a_n\right| &lt; M_1\)</span> וגם <span class="math inline">\(.\left|b_n\right| &lt; M_2\)</span> מכפליות הערך המוחלט נובע <span class="math display">\[,\left|a_n \cdot b_n\right| = \left|a_n\right| \cdot \left|b_n\right| &lt; M_1 M_2\]</span> ולכן <span class="math inline">\(M_1 M_2\)</span> הוא חסם למכפלה.</p>
+<p><strong>נכון.</strong> לפי המשפט שלמעלה קיימים <span class="math inline">\(M_1 \geq 0\)</span> ו-<span class="math inline">\(M_2 \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(\left|a_n\right| \leq M_1\)</span> וגם <span class="math inline">\(.\left|b_n\right| \leq M_2\)</span> מכפליות הערך המוחלט נובע <span class="math display">\[,\left|a_n \cdot b_n\right| = \left|a_n\right| \cdot \left|b_n\right| \leq M_1 M_2\]</span> ולכן <span class="math inline">\(M_1 M_2\)</span> הוא חסם למכפלה.</p>
 </div>
 </details>
 <p><strong>תרגיל 4.</strong> אם <span class="math inline">\((a_n + b_n)\)</span> חסומה, אז <span class="math inline">\((a_n)\)</span> חסומה.</p>
@@ -1017,49 +1084,55 @@ window.Quarto = {
 </section>
 <section id="הקשר-בין-התכנסות-לחסימות-של-סדרה" class="level3">
 <h3 class="anchored" data-anchor-id="הקשר-בין-התכנסות-לחסימות-של-סדרה">הקשר בין התכנסות לחסימות של סדרה</h3>
-<div id="box-rem-bounded-not-convergent" class="thmbox thmbox-remark" title="חסימות אינה גוררת התכנסות">
-<p><strong>הערה 8.2.6 — חסימות אינה גוררת התכנסות.</strong></p>
-<p>סדרה חסומה לא גוררת שהיא מתכנסת.</p>
-<p>לדוגמא: <span class="math inline">\(a_n = (-1)^n\)</span></p>
+<p>למדנו אפוא תכונה נוספת של סדרות — חסימוּת. במבט ראשון היא נראית דרישה חלשה מהתכנסות: היא מבקשת רק שהאיברים לא יברחו לאינסוף, ואינה מבקשת מהם להתקרב לשום מספר מסוים.</p>
+<p>ואכן, כבר ראינו סדרה חסומה שאינה מתכנסת: <a href="./07-sequences-limit-3.html#box-q-pm-one">הסדרה המתחלפת</a> <span class="math inline">\(,a_n = \left(-1\right)^n\)</span> שאיבריה הם <span class="math inline">\(1, -1, 1, -1, \dots\)</span> וכולם כלואים בין <span class="math inline">\(-1\)</span> ל-<span class="math inline">\(,1\)</span> אך אינם מתקרבים לשום מספר. את אי-ההתכנסות שלה הוכחנו בפרק הקודם, ולא נחזור על ההוכחה כאן.</p>
+<p>זוהי עובדה חשובה, ולכן ננסח אותה כטענה.</p>
+<div id="box-prp-bounded-not-convergent" class="thmbox thmbox-proposition">
+<p><strong>טענה 8.2.6.</strong></p>
+<p>סדרה חסומה לא בהכרח מתכנסת.</p>
 </div>
-<div style="text-align:center">
-<p>תרשים: סדרה מתכנסת גוררת חסומה, אך סדרה חסומה אינה גוררת מתכנסת (אין גרירה הדדית)</p>
-</div>
-<div id="fig-bounded-not-convergent" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-bounded-not-convergent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c08_fig01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bounded-not-convergent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;8.1: סדרה מתכנסת גוררת חסומה, אך סדרה חסומה אינה גוררת מתכנסת (אין גרירה הדדית)
-</figcaption>
-</figure>
-</div>
+<p>נשאלת השאלה אם בכל זאת יש קשר כלשהו בין שתי התכונות.</p>
 <div id="box-thm-convergent-bounded" class="thmbox thmbox-theorem">
 <p><strong>משפט 8.2.7.</strong></p>
 <p>אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מתכנסת, אז היא חסומה.</p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>נסמן <span class="math inline">\(a_n \to L\)</span>. מהגדרת הגבול, נבחר <span class="math inline">\(\varepsilon = 1\)</span>, אז קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n&gt;N\)</span> מתקיים: <span class="math display">\[|a_n - L| &lt; 1 \ \leftarrow \ L-1 &lt; a_n &lt; L+1\]</span></p>
-<p>כלומר, בשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמעלה</u>, ניקח: <span class="math inline">\(M = max\{L+1, a_1, \ldots, a_N\}\)</span></p>
-<p>ואז בוודאות <u>לכל ח</u>: <span class="math inline">\(a_n \le M\)</span></p>
-<p>ובשביל לחסום את <u>כל</u> איברי הסדרה <u>מלמטה</u>, ניקח: <span class="math inline">\(m = min\{L-1, a_1, \ldots, a_N\}\)</span></p>
-<p>ואז בוודאות <u>לכל ח</u>: <span class="math inline">\(m \le a_n\)</span></p>
-</div>
+<p>נניח שהסדרה מתכנסת. אז יש לה גבול, ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
+<p>נפעיל את הגדרת הגבול עם <span class="math inline">\(:\varepsilon = 1\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| &lt; 1\)</span></p>
+<p>התנאי הזה מטפל בכל האיברים החל מ-<span class="math inline">\(,N\)</span> ומחוצה לו נשארו רק האיברים <span class="math inline">\(a_1, \dots, a_N\)</span> שהם מספר סופי של איברים. לכן אפשר לבחור <span class="math display">\[.M = \max\left\{\left|a_1 - L\right|,\ \dots,\ \left|a_N - L\right|,\ 1\right\}\]</span></p>
+<p>הבחירה אפשרית משום שמדובר בקבוצה סופית של מספרים, ולקבוצה סופית יש מקסימום.</p>
+<p>נראה שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| \leq M\)</span> אם <span class="math inline">\(,n \geq N\)</span> אז <span class="math inline">\(,\left|a_n - L\right| &lt; 1 \leq M\)</span> שכן <span class="math inline">\(1\)</span> נכלל ברשימה שממנה נלקח המקסימום. ואם <span class="math inline">\(,n &lt; N\)</span> אז <span class="math inline">\(\left|a_n - L\right|\)</span> הוא בעצמו אחד מאיברי הרשימה, ולכן אינו גדול מן המקסימום שלה.</p>
 <div style="text-align:center">
-<p>תרשים: הזנב <span class="math inline">\(a_n\)</span> (עבור <span class="math inline">\(n&gt;N\)</span>) בקטע <span class="math inline">\((L-1,L+1)\)</span>, והאיברים הראשונים שמחוץ לו — כל הסדרה חסומה בין <span class="math inline">\(m\)</span> ל-<span class="math inline">\(M\)</span></p>
+<p>תרשים: החל מ-<span class="math inline">\(N\)</span> כל האיברים נמצאים בקטע <span class="math inline">\(,(L-1,\ L+1)\)</span> ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של <span class="math inline">\(M\)</span> לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין <span class="math inline">\(L-M\)</span> ל-<span class="math inline">\(L+M\)</span></p>
 </div>
 <div id="fig-convergent-is-bounded" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-convergent-is-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c08_fig02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+<img src="figures/c08_fig06.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convergent-is-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;8.2: הזנב <span class="math inline">\(a_n\)</span> (עבור <span class="math inline">\(n&gt;N\)</span>) בקטע <span class="math inline">\((L-1,L+1)\)</span>, והאיברים הראשונים שמחוץ לו — כל הסדרה חסומה בין <span class="math inline">\(m\)</span> ל-<span class="math inline">\(M\)</span>
+תרשים&nbsp;8.5: החל מ-<span class="math inline">\(N\)</span> כל האיברים נמצאים בקטע <span class="math inline">\((L-1,\ L+1)\)</span>, ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של <span class="math inline">\(M\)</span> לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין <span class="math inline">\(L-M\)</span> ל-<span class="math inline">\(L+M\)</span>
 </figcaption>
 </figure>
 </div>
+<p>מצאנו אפוא נקודת ייחוס <span class="math inline">\(L\)</span> ומספר <span class="math inline">\(M \geq 0\)</span> שעבורם <span class="math inline">\(\left|a_n - L\right| \leq M\)</span> לכל <span class="math inline">\(,n\)</span> וזהו בדיוק תנאי (ב) שבמשפט הקודם. לכן הסדרה חסומה.</p>
+</div>
+<p>לסיכום, התכנסות גוררת חסימוּת אך לא להיפך. אפשר להתרשם מכך בתרשים הבא.</p>
+<div style="text-align:center">
+<p>תרשים: הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה <span class="math inline">\(\frac{1}{n}\)</span> נמצאת בעיגול הפנימי, הסדרה <span class="math inline">\(\left(-1\right)^n\)</span> חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה <span class="math inline">\(a_n = n\)</span> אינה חסומה כלל</p>
+</div>
+<div id="fig-convergent-subset-bounded" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convergent-subset-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig05.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convergent-subset-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.6: הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה <span class="math inline">\(\frac{1}{n}\)</span> נמצאת בעיגול הפנימי, הסדרה <span class="math inline">\(\left(-1\right)^n\)</span> חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה <span class="math inline">\(a_n = n\)</span> אינה חסומה כלל
+</figcaption>
+</figure>
+</div>
+<p>מן המשפט מתקבל כלי שימושי להוכחת אי-התכנסות: אם ידוע שסדרה אינה חסומה, אין צורך לבדוק דבר נוסף, והיא בוודאי אינה מתכנסת.</p>
 <div id="box-cor-unbounded-diverges" class="thmbox thmbox-corollary">
 <p><strong>מסקנה 8.2.8.</strong></p>
 <p>אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה שאינה חסומה, אז היא אינה מתכנסת.</p>
