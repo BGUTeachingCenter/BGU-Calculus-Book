@@ -343,6 +343,12 @@ iframe.widget-frame {
    Indigo, kept clear of the definition blue and of the simulation violet. */
 .thmbox-explanation { border-color: #818cf8; background: #f5f6ff; }
 .thmbox-explanation > p:first-child > strong { font-weight: 600; color: #4f46e5; }
+/* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
+   thicker border, unlike the supporting boxes above — a warning marks something
+   students actually get wrong, so it should read louder than a remark.
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
+.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+.thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -751,7 +757,7 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">7.4 יחידות הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות; דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
@@ -883,7 +889,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#יחידות-הגבול" class="nav-link">7.4 יחידות הגבול</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מסקנות-מיידיות-מהגדרת-הגבול" class="nav-link">7.4 מסקנות מיידיות מהגדרת הגבול</a></li><li class="toc-indent"><a href="#חלון-סביב-הגבול" class="nav-link">חלון סביב הגבול</a></li><li class="toc-indent"><a href="#אי-שוויונות-עוברים-לגבול" class="nav-link">אי-שוויונות עוברים לגבול</a></li><li class="toc-indent"><a href="#יחידות-הגבול" class="nav-link">יחידות הגבול</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./07-sequences-limit.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></a></li></ol></nav>
@@ -904,92 +910,111 @@ window.Quarto = {
 
 </header>
 
-<section id="יחידות-הגבול" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="יחידות-הגבול"><span class="header-section-number">7.4</span> יחידות הגבול</h2>
-<p>אמרנו, שבאופן אינטואיטיבי, סדרה היא מתכנסת אם היא ״מקרבת״ מספר כלשהו. ברור שאם ״סדרה מקרבת״ מספר, היא צריכה לקרב מספר יחיד ולא כמה מספרים. כמו שאמרנו קודם, אחד התפקידים של ההגדרה הוא לתת מסגרת מוגדרת ומדויקת לאינטואיציה שלנו. עם זאת, ההגדרה הפורמלית של הגבול אינה דורשת יחידות: היא קובעת שהמספר <span class="math inline">\(L\)</span> הוא גבול של הסדרה אם לכל <span class="math inline">\(\varepsilon&gt;0\)</span> קיים <span class="math inline">\(N\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,|a_n - L| &lt; \varepsilon\)</span> ואין בה דבר שמונע ממספר אחר לקיים בדיוק את אותו תנאי.</p>
-<p>מִנַּיִן לנו שלא יכולים להיות כמה גבולות במקרים ״מוזרים״ מסוימים? (כפי שתראו בהמשך, במתמטיקה יש לא מעט כאלה.) לא היינו רוצים שתהיה אפשרות שהקירוב שלנו יקרב מספרים שונים.</p>
-<p>אפשר לנסות לפתור את הבעיה בהגדרה ופשוט לדרוש יחידות, אך זה לא באמת פותר אותה. קודם כל, איך להתייחס למקרי ביניים שבהם יש כמה מספרים שמקיימים את ההגדרה של הגבול? ודבר שני — איך אפשר בכלל להבטיח יחידות? ברגע שמצאנו מספר אחד, איך בודקים שאין אחרים? לכן, <strong>לדרוש</strong> יחידות כחלק מההגדרה אינו עוזר לנו בהרבה. על מנת לבדוק ״ייתכנות״ של ההגדרה, צריך לענות על השאלה: האם יכולים להיות לסדרה שני גבולות שונים?</p>
-<p>מסתבר, שמתוך ההגדרה נובע שלא יכול להיות יותר מגבול אחד — וזה מנוסח במשפט הבא.</p>
-<div id="box-thm-limit-uniqueness" class="thmbox thmbox-theorem">
+<section id="מסקנות-מיידיות-מהגדרת-הגבול" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="מסקנות-מיידיות-מהגדרת-הגבול"><span class="header-section-number">7.4</span> מסקנות מיידיות מהגדרת הגבול</h2>
+<p>בסעיף הזה נוציא מהגדרת הגבול כמה מסקנות קצרות. ההוכחות כולן בנות שורות אחדות, אך התוצאות עצמן ילוו אותנו לאורך כל הספר.</p>
+<section id="חלון-סביב-הגבול" class="level3">
+<h3 class="anchored" data-anchor-id="חלון-סביב-הגבול">חלון סביב הגבול</h3>
+<p>ההגדרה אומרת שהחל ממקום מסוים כל איברי הסדרה רחוקים מ-<span class="math inline">\(L\)</span> פחות מ-<span class="math inline">\(,\varepsilon\)</span> כלומר כלואים בקטע <span class="math inline">\(.\left(L-\varepsilon,\ L+\varepsilon\right)\)</span> זהו קטע <strong>סימטרי</strong> סביב <span class="math inline">\(.L\)</span> המשפט הבא אומר שאפשר לוותר על הסימטריה: אפשר לחסום את הסדרה מלמטה בכל מספר הקטן מ-<span class="math inline">\(,L\)</span> ומלמעלה בכל מספר הגדול ממנו.</p>
+<div id="box-thm-limit-window" class="thmbox thmbox-theorem">
 <p><strong>משפט 7.4.1.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המקיימת <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span> אז:</p>
+<p>(א) לכל <span class="math inline">\(m &lt; L\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n &gt; m\)</span></p>
+<p>(ב) לכל <span class="math inline">\(M &gt; L\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n &lt; M\)</span></p>
+</div>
+<div class="thmbox thmbox-proof" title="סעיף (א)">
+<p><strong>הוכחה — סעיף (א).</strong></p>
+<p>יהי <span class="math inline">\(.m &lt; L\)</span> המרחק בין <span class="math inline">\(m\)</span> ל-<span class="math inline">\(L\)</span> חיובי, ולכן מותר להפעיל את הגדרת הגבול עם <span class="math inline">\(:\varepsilon = L - m &gt; 0\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,\left|a_n - L\right| &lt; \varepsilon\)</span> ובפרט</p>
+<p><span class="math display">\[.a_n &gt; L - \varepsilon = L - \left(L - m\right) = m\]</span></p>
+</div>
+<div class="thmbox thmbox-proof" title="סעיף (ב)">
+<p><strong>הוכחה — סעיף (ב).</strong></p>
+<p>יהי <span class="math inline">\(.M &gt; L\)</span> הפעם ניקח <span class="math inline">\(,\varepsilon = M - L &gt; 0\)</span> ונקבל <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,\left|a_n - L\right| &lt; \varepsilon\)</span> ובפרט</p>
+<p><span class="math display">\[.a_n &lt; L + \varepsilon = L + \left(M - L\right) = M\]</span></p>
+</div>
+<div id="box-rem-limit-window" class="thmbox thmbox-remark" title="חלון כלשהו סביב הגבול">
+<p><strong>הערה 7.4.2 — חלון כלשהו סביב הגבול.</strong></p>
+<p>שני הסעיפים יחד אומרים דבר אחד: לכל <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> המקיימים <span class="math inline">\(,m &lt; L &lt; M\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים</p>
+<p><span class="math display">\[.m &lt; a_n &lt; M\]</span></p>
+<p>מפעילים כל סעיף בנפרד, מקבלים <span class="math inline">\(N_1\)</span> ו-<span class="math inline">\(,N_2\)</span> ולוקחים <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span></p>
+<p>במילים: <strong>הסדרה נכנסת בסופו של דבר לכל קטע שמכיל את <span class="math inline">\(L\)</span> בתוכו</strong>, ולא רק לקטעים הסימטריים <span class="math inline">\(\left(L-\varepsilon,\ L+\varepsilon\right)\)</span> שבהגדרה. הקטע אינו חייב להיות סימטרי, ו-<span class="math inline">\(L\)</span> אינו חייב לשבת באמצעו.</p>
+</div>
+<div id="box-sim-window" class="thmbox thmbox-simulation" title="חלון בין $m$ ל-$M$">
+<p><strong>סימולציה 7.4.3 — חלון בין <span class="math inline">\(m\)</span> ל-<span class="math inline">\(M\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/window-m-M.html" loading="lazy" title="איברי הסדרה, חלון בין m ל-M סביב הגבול, והאינדקס N שממנו והלאה כל האיברים בתוך החלון"></iframe>
+<p>הזיזו את <span class="math inline">\(m\)</span> ואת <span class="math inline">\(,M\)</span> וראו כיצד <span class="math inline">\(N\)</span> משתנה. שימו לב לשני דברים: <span class="math inline">\(N\)</span> מגיב לשני המחוונים ולא רק לצר שביניהם, והחלון אינו חייב להיות סימטרי — אפשר להצמיד את <span class="math inline">\(m\)</span> קרוב מאוד ל-<span class="math inline">\(L\)</span> ולהשאיר את <span class="math inline">\(M\)</span> רחוק, ועדיין יימצא <span class="math inline">\(N\)</span> מתאים.</p>
+</div>
+<div id="box-qst-window-equivalent" class="thmbox thmbox-question">
+<p><strong>שאלה 7.4.4.</strong></p>
+<p>הוכיחו את הכיוון ההפוך. תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(,L \in \mathbb{R}\)</span> ונניח שלכל <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> המקיימים <span class="math inline">\(m &lt; L &lt; M\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.m &lt; a_n &lt; M\)</span> הוכיחו כי <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
+<p>יחד עם ההערה שלמעלה נובע מכך שהתנאי הזה <strong>שקול</strong> להתכנסות ל-<span class="math inline">\(,L\)</span> ואפשר היה לקחת אותו כהגדרה.</p>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> נפעיל את ההנחה על <span class="math inline">\(m = L - \varepsilon\)</span> ועל <span class="math inline">\(,M = L + \varepsilon\)</span> שאכן מקיימים <span class="math inline">\(.m &lt; L &lt; M\)</span> נקבל <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים</p>
+<p><span class="math display">\[,L - \varepsilon &lt; a_n &lt; L + \varepsilon\]</span></p>
+<p>כלומר <span class="math inline">\(.\left|a_n - L\right| &lt; \varepsilon\)</span> זוהי בדיוק הגדרת הגבול, ולכן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
+</div>
+</details>
+</section>
+<section id="אי-שוויונות-עוברים-לגבול" class="level3">
+<h3 class="anchored" data-anchor-id="אי-שוויונות-עוברים-לגבול">אי-שוויונות עוברים לגבול</h3>
+<p>המסקנה הבאה נובעת מיד מן המשפט הקודם: אם כל איברי הסדרה נמצאים מעל מספר מסוים, גם הגבול נמצא מעליו.</p>
+<div id="box-thm-limit-preserves-order" class="thmbox thmbox-theorem">
+<p><strong>משפט 7.4.5.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מתכנסת, ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span> אז:</p>
+<p>(א) אם <span class="math inline">\(a_n \geq m\)</span> לכל <span class="math inline">\(,n\)</span> אז <span class="math inline">\(.L \geq m\)</span></p>
+<p>(ב) אם <span class="math inline">\(a_n \leq M\)</span> לכל <span class="math inline">\(,n\)</span> אז <span class="math inline">\(.L \leq M\)</span></p>
+</div>
+<div class="thmbox thmbox-proof" title="סעיף (א)">
+<p><strong>הוכחה — סעיף (א).</strong></p>
+<p>נניח בשלילה ש-<span class="math inline">\(.L &lt; m\)</span> אז <span class="math inline">\(m\)</span> הוא מספר הגדול מן הגבול, ולכן לפי סעיף (ב) של <a href="#box-thm-limit-window">משפט 7.4.1</a> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n &lt; m\)</span> בפרט <span class="math inline">\(,a_N &lt; m\)</span> בסתירה להנחה ש-<span class="math inline">\(a_n \geq m\)</span> לכל <span class="math inline">\(.n\)</span> לכן <span class="math inline">\(.L \geq m\)</span></p>
+</div>
+<div class="thmbox thmbox-proof" title="סעיף (ב)">
+<p><strong>הוכחה — סעיף (ב).</strong></p>
+<p>באותו אופן. אילו היה <span class="math inline">\(,L &gt; M\)</span> היה <span class="math inline">\(M\)</span> מספר הקטן מן הגבול, ולפי סעיף (א) של אותו משפט היה קיים <span class="math inline">\(N\)</span> שממנו והלאה <span class="math inline">\(,a_n &gt; M\)</span> בסתירה להנחה. לכן <span class="math inline">\(.L \leq M\)</span></p>
+</div>
+<div id="box-warn-strict-becomes-weak" class="thmbox thmbox-warning" title="אי-שוויון חד אינו נשמר בגבול">
+<p><strong>שימו לב — אי-שוויון חד אינו נשמר בגבול.</strong></p>
+<p>גם אם <strong>כל</strong> איברי הסדרה מקיימים אי-שוויון <strong>חד</strong>, על הגבול מובטח רק אי-שוויון <strong>חלש</strong>.</p>
+<p>הדוגמה הפשוטה ביותר היא <span class="math inline">\(:a_n = \dfrac{1}{n}\)</span> לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n &gt; 0\)</span> ובכל זאת ראינו ב<a href="./07-sequences-limit-3.html#box-q-one-over-n">שאלה 7.3.6</a> שהגבול הוא <span class="math inline">\(,0\)</span> ולא מספר חיובי כלשהו.</p>
+<p>לכן מ-<span class="math inline">\(a_n &gt; m\)</span> לכל <span class="math inline">\(n\)</span> אפשר להסיק רק <span class="math inline">\(,L \geq m\)</span> ולעולם לא <span class="math inline">\(.L &gt; m\)</span></p>
+</div>
+</section>
+<section id="יחידות-הגבול" class="level3">
+<h3 class="anchored" data-anchor-id="יחידות-הגבול">יחידות הגבול</h3>
+<p>אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.</p>
+<div id="box-thm-limit-uniqueness" class="thmbox thmbox-theorem">
+<p><strong>משפט 7.4.6.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. אם מתקיים <span class="math inline">\(\lim_{n\to\infty}a_n = L_1\)</span> וגם <span class="math inline">\(\lim_{n \to \infty} a_n = L_2\)</span> אז <span class="math inline">\(.L_1 = L_2\)</span></p>
 <p>כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.</p>
 </div>
-<div id="box-expl-uniqueness-idea" class="thmbox thmbox-explanation" title="הרעיון של ההוכחה">
-<p><strong>הסבר 7.4.2 — הרעיון של ההוכחה.</strong></p>
-<p>נניח ש-<span class="math inline">\(,L_1 \neq L_2\)</span> ונסמן ב-<span class="math inline">\(d\)</span> את המרחק ביניהם, כלומר <span class="math inline">\(.d = |L_1 - L_2| &gt; 0\)</span></p>
-<p><strong>הרעיון:</strong> אם המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_1\)</span> קטן מ-<span class="math inline">\(\frac{d}{2}\)</span>, אז המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_2\)</span> גדול מ-<span class="math inline">\(\frac{d}{2}\)</span>; ובאותו אופן, אם המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_2\)</span> קטן מ-<span class="math inline">\(\frac{d}{2}\)</span>, אז המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_1\)</span> גדול מ-<span class="math inline">\(\frac{d}{2}\)</span>. במילים אחרות, <strong>נקודה אחת אינה יכולה להיות קרובה מ-</strong><span class="math inline">\(\frac{d}{2}\)</span> גם ל-<span class="math inline">\(L_1\)</span> וגם ל-<span class="math inline">\(L_2\)</span>.</p>
-<p>זוהי תוצאה מיידית של <a href="./04-abs-value.html">אי-שוויון המשולש</a>: אילו היו שני המרחקים קטנים מ-<span class="math inline">\(\frac{d}{2}\)</span>, היינו מקבלים <span class="math display">\[.d = |L_1 - L_2| \leq |x-L_1| + |x-L_2| &lt; \frac{d}{2} + \frac{d}{2} = d\]</span> כלומר <span class="math inline">\(,d &lt; d\)</span> וזה כמובן בלתי אפשרי.</p>
-<div id="box-sim-two-neighbourhoods" class="thmbox thmbox-simulation" title="שתי הסביבות ברדיוס $\frac{d}{2}$">
-<p><strong>סימולציה 7.4.3 — שתי הסביבות ברדיוס <span class="math inline">\(\frac{d}{2}\)</span>.</strong></p>
-<iframe class="widget-frame" src="widgets/ch07/two-limits-neighbourhoods.html" loading="lazy" title="שתי סביבות ברדיוס d/2 סביב שני גבולות, ונקודה נעה ביניהן"></iframe>
-<p>הזיזו את <span class="math inline">\(x\)</span> לאורך הישר, ונסו למצוא מיקום שבו <span class="math inline">\(x\)</span> נמצאת בשתי הסביבות בו-זמנית. לא תמצאו: בכל מיקום, לפחות אחד משני המרחקים גדול מ-<span class="math inline">\(\frac{d}{2}\)</span>. שימו לב גם לשוויון המוצג מעל, המשתנה לפי מיקומה של <span class="math inline">\(x\)</span>, והוא בדיוק אחד משלושת המקרים שנראה מיד.</p>
-</div>
-<p><strong>שימו לב לאי-השוויון החד.</strong> הסביבות מוגדרות באמצעות אי-שוויון חד: הסביבה של <span class="math inline">\(L_1\)</span> היא אוסף הנקודות המקיימות <span class="math inline">\(,|x - L_1| &lt; \frac{d}{2}\)</span> ולא <span class="math inline">\(.|x - L_1| \leq \frac{d}{2}\)</span> ההבדל מתגלה בדיוק באמצע הקטע: המרחק משם אל <span class="math inline">\(L_1\)</span> ואל <span class="math inline">\(L_2\)</span> שווה <span class="math inline">\(\frac{d}{2}\)</span> בשני המקרים, ולכן נקודת האמצע אינה שייכת לאף אחת משתי הסביבות. טעות נפוצה היא לחשוב שנקודת האמצע היא ״החיתוך״ שלהן, אך החיתוך <strong>ריק</strong>: אין ולו נקודה אחת השייכת לשתיהן.</p>
-<p>זה אינו פרט טכני בלבד. בהגדרת הגבול מופיע <span class="math inline">\(|a_n - L| &lt; \varepsilon\)</span> עם אי-שוויון חד, ובזכותו הבחירה <span class="math inline">\(\varepsilon = \frac{d}{2}\)</span> מספיקה. אילו ההגדרה הייתה מסתפקת באי-שוויון לא חד, היינו מקבלים <span class="math inline">\(,d \leq d\)</span> וזו אינה סתירה, והיה עלינו לבחור <span class="math inline">\(\varepsilon\)</span> קטן יותר, למשל <span class="math inline">\(.\frac{d}{3}\)</span></p>
-<p>כדי לראות מדוע סכום שני המרחקים אינו קטן מ-<span class="math inline">\(d\)</span>, נסתכל על שלושת המיקומים האפשריים של <span class="math inline">\(x\)</span> ביחס ל-<span class="math inline">\(L_1\)</span> ול-<span class="math inline">\(L_2\)</span>.</p>
-<p><strong>המקרה הראשון:</strong> <span class="math inline">\(x\)</span> נמצא בקטע המחבר את <span class="math inline">\(L_1\)</span> ו-<span class="math inline">\(L_2\)</span>. אז סכום המרחקים בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_1\)</span> ובין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_2\)</span> הוא בדיוק המרחק בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>. כלומר: <span class="math display">\[
-.|x-L_1|+|x-L_2| = |L_1 - L_2|
-\]</span></p>
-<p>כאן מתקיים שוויון, ולכן שני המרחקים משלימים זה את זה ל-<span class="math inline">\(d\)</span>: אם <span class="math inline">\(|x-L_1| &lt; \frac{d}{2}\)</span>, אז <span class="math display">\[.|x-L_2| = d - |x-L_1| &gt; d - \frac{d}{2} = \frac{d}{2}\]</span> ובאותו אופן עם החלפת התפקידים של <span class="math inline">\(L_1\)</span> ו-<span class="math inline">\(L_2\)</span>.</p>
-<div style="text-align:center">
-<p>תרשים: כאשר <span class="math inline">\(x\)</span> נמצא בקטע שבין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>, סכום שני המרחקים שווה בדיוק ל-<span class="math inline">\(d\)</span></p>
-</div>
-<div id="fig-uniq-case-between" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-uniq-case-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig16.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniq-case-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.12: כאשר <span class="math inline">\(x\)</span> נמצא בקטע שבין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>, סכום שני המרחקים שווה בדיוק ל-<span class="math inline">\(d\)</span>
-</figcaption>
-</figure>
-</div>
-<p><strong>המקרה השני:</strong> <span class="math inline">\(x\)</span> נמצא מחוץ לקטע, מעברו השני של <span class="math inline">\(L_1\)</span>. אז המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_2\)</span> הוא סכום המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_1\)</span> והמרחק בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>. כלומר: <span class="math display">\[
-.|x-L_1|+|L_1-L_2| = |x - L_2|
-\]</span></p>
-<p>כאן המרחק אל <span class="math inline">\(L_2\)</span> אינו קטן מ-<span class="math inline">\(d\)</span> באף מצב, שכן <span class="math inline">\(,|x-L_2| = |x-L_1| + d \geq d\)</span> ובפרט הוא גדול מ-<span class="math inline">\(\frac{d}{2}\)</span>. כלומר, גם אם <span class="math inline">\(x\)</span> קרוב מאוד ל-<span class="math inline">\(L_1\)</span>, הוא רחוק מ-<span class="math inline">\(L_2\)</span> יותר מ-<span class="math inline">\(\frac{d}{2}\)</span>.</p>
-<div style="text-align:center">
-<p>תרשים: כאשר <span class="math inline">\(x\)</span> נמצא מעברו השני של <span class="math inline">\(L_1\)</span>, המרחק אל <span class="math inline">\(L_2\)</span> הוא סכום המרחק אל <span class="math inline">\(L_1\)</span> ואורך הקטע <span class="math inline">\(d\)</span></p>
-</div>
-<div id="fig-uniq-case-left" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-uniq-case-left-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig17.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniq-case-left-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.13: כאשר <span class="math inline">\(x\)</span> נמצא מעברו השני של <span class="math inline">\(L_1\)</span>, המרחק אל <span class="math inline">\(L_2\)</span> הוא סכום המרחק אל <span class="math inline">\(L_1\)</span> ואורך הקטע <span class="math inline">\(d\)</span>
-</figcaption>
-</figure>
-</div>
-<p><strong>המקרה השלישי:</strong> <span class="math inline">\(x\)</span> נמצא מחוץ לקטע, מעברו השני של <span class="math inline">\(L_2\)</span>. אז המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_1\)</span> הוא סכום המרחק בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(L_2\)</span> והמרחק בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>. כלומר: <span class="math display">\[
-.|x-L_2| + |L_1 - L_2| = |x - L_1|
-\]</span></p>
-<p>כאן, באופן סימטרי, <span class="math inline">\(,|x-L_1| = |x-L_2| + d \geq d\)</span> ולכן המרחק אל <span class="math inline">\(L_1\)</span> גדול מ-<span class="math inline">\(\frac{d}{2}\)</span>, יהיה <span class="math inline">\(x\)</span> קרוב ל-<span class="math inline">\(L_2\)</span> ככל שיהיה.</p>
-<div style="text-align:center">
-<p>תרשים: כאשר <span class="math inline">\(x\)</span> נמצא מעברו השני של <span class="math inline">\(L_2\)</span>, המרחק אל <span class="math inline">\(L_1\)</span> הוא סכום המרחק אל <span class="math inline">\(L_2\)</span> ואורך הקטע <span class="math inline">\(d\)</span></p>
-</div>
-<div id="fig-uniq-case-right" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-uniq-case-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig18.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniq-case-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.14: כאשר <span class="math inline">\(x\)</span> נמצא מעברו השני של <span class="math inline">\(L_2\)</span>, המרחק אל <span class="math inline">\(L_1\)</span> הוא סכום המרחק אל <span class="math inline">\(L_2\)</span> ואורך הקטע <span class="math inline">\(d\)</span>
-</figcaption>
-</figure>
-</div>
-<p><strong>בשלושת המקרים</strong> סכום המרחקים מ-<span class="math inline">\(x\)</span> אל <span class="math inline">\(L_1\)</span> ואל <span class="math inline">\(L_2\)</span> אינו קטן מן המרחק שבין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>: במקרה הראשון הוא שווה לו בדיוק, ובשני האחרים הוא גדול ממנו. זהו בדיוק אי-שוויון המשולש: <span class="math display">\[.|x-L_1| + |x-L_2| \geq |L_1 - L_2| = d\]</span></p>
-<p><strong>ההוכחה שלהלן היא בדיוק הרעיון הזה בכתיב פורמלי:</strong> אם הסדרה מתכנסת לשני הגבולות, אז החל ממקום מסוים איבריה חייבים להיות קרובים לשניהם בו-זמנית, וזה בלתי אפשרי.</p>
-</div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>נניח בשלילה ש-<span class="math inline">\(,L_1 \neq L_2\)</span> ונסמן <span class="math inline">\(.d = |L_1 - L_2| &gt; 0\)</span> נבחר <span class="math inline">\(.\varepsilon = \frac{d}{2} &gt; 0\)</span></p>
-<p>מכיוון ש-<span class="math inline">\(,a_n \to L_1\)</span> קיים <span class="math inline">\(N_1\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(.\left|a_n - L_1\right| &lt; \varepsilon\)</span></p>
-<p>מכיוון ש-<span class="math inline">\(,a_n \to L_2\)</span> קיים <span class="math inline">\(N_2\in\mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(.\left|a_n - L_2\right| &lt; \varepsilon\)</span></p>
-<p>נבחר <span class="math inline">\(,N = \max\left\{N_1,N_2\right\}\)</span> ואז לכל <span class="math inline">\(n \geq N\)</span> שני אי-השוויונות מתקיימים בו-זמנית, ולפי אי-שוויון המשולש <span class="math display">\[.d = |L_1 - L_2| \leq \left|a_n - L_1\right| + \left|a_n - L_2\right| &lt; \varepsilon + \varepsilon = d\]</span></p>
-<p>קיבלנו <span class="math inline">\(,d &lt; d\)</span> וזו סתירה. לכן ההנחה <span class="math inline">\(L_1 \neq L_2\)</span> אינה יכולה להתקיים, ומכאן <span class="math inline">\(.L_1 = L_2\)</span></p>
+<p>נניח בשלילה ש-<span class="math inline">\(.L_1 \neq L_2\)</span></p>
+<p><strong>בלי הגבלת הכלליות נניח ש-<span class="math inline">\(.L_1 &lt; L_2\)</span></strong> הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-<span class="math inline">\(L_1\)</span> וב-<span class="math inline">\(,L_2\)</span> ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם <span class="math inline">\(.L_1\)</span> המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.</p>
+<p>ניקח את נקודת האמצע שבין שני הגבולות:</p>
+<p><span class="math display">\[.M = \frac{L_1 + L_2}{2}\]</span></p>
+<p>מתקיים <span class="math inline">\(,L_1 &lt; M &lt; L_2\)</span> ולכן אפשר להפעיל את <a href="#box-thm-limit-window">משפט 7.4.1</a> פעמיים, פעם על כל גבול:</p>
+<ul>
+<li>הסדרה מתכנסת ל-<span class="math inline">\(L_1\)</span> ומתקיים <span class="math inline">\(,M &gt; L_1\)</span> ולכן לפי סעיף (ב) קיים <span class="math inline">\(N_1\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(;a_n &lt; M\)</span></li>
+<li>הסדרה מתכנסת ל-<span class="math inline">\(L_2\)</span> ומתקיים <span class="math inline">\(,M &lt; L_2\)</span> ולכן לפי סעיף (א) קיים <span class="math inline">\(N_2\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(.a_n &gt; M\)</span></li>
+</ul>
+<p>נבחר <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> שני התנאים מתקיימים עבור <span class="math inline">\(,n = N\)</span> כלומר <span class="math inline">\(a_N &lt; M\)</span> וגם <span class="math inline">\(,a_N &gt; M\)</span> וזו סתירה.</p>
+<p>לכן ההנחה <span class="math inline">\(L_1 \neq L_2\)</span> אינה יכולה להתקיים, ומכאן <span class="math inline">\(.L_1 = L_2\)</span></p>
+<div id="fig-uniqueness-midpoint" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig16.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.12: <span class="math inline">\(M\)</span> היא נקודת האמצע בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(L_2\)</span>. מצד אחד הסדרה חייבת להיכנס בסופו של דבר מתחת ל-<span class="math inline">\(M\)</span> (כי היא מתכנסת ל-<span class="math inline">\(L_1\)</span>), ומצד שני מעליו (כי היא מתכנסת ל-<span class="math inline">\(L_2\)</span>).
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

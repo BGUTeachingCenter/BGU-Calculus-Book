@@ -343,6 +343,12 @@ iframe.widget-frame {
    Indigo, kept clear of the definition blue and of the simulation violet. */
 .thmbox-explanation { border-color: #818cf8; background: #f5f6ff; }
 .thmbox-explanation > p:first-child > strong { font-weight: 600; color: #4f46e5; }
+/* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
+   thicker border, unlike the supporting boxes above — a warning marks something
+   students actually get wrong, so it should read louder than a remark.
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
+.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+.thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -751,7 +757,7 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 יחידות הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות; דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
@@ -911,16 +917,13 @@ window.Quarto = {
 <section id="הוכחת-המשפט" class="level3">
 <h3 class="anchored" data-anchor-id="הוכחת-המשפט">הוכחת המשפט</h3>
 <p>ניקח את <span class="math inline">\([0,1]\)</span> : היא מקיימת <span class="math inline">\(F'(x) = f(x)\)</span>.</p>
-<div style="text-align:center">
-<p>תרשים: חלוקה לתת-קטעים עם נקודות מדגם <span class="math inline">\(t_1,\dots,t_n\)</span> ומלבני סכום רימן מתחת ל-<span class="math inline">\(f\)</span></p>
-</div>
 <div id="fig-c10_fig06" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c18_fig09.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-c10_fig06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;18.9: חלוקה לתת-קטעים עם נקודות מדגם <span class="math inline">\(t_1,\dots,t_n\)</span> ומלבני סכום רימן מתחת ל-<span class="math inline">\(f\)</span>
+תרשים&nbsp;18.9: חלוקה לתת-קטעים עם נקודות מדגם <span class="math inline">\(t_1,\dots,t_n\)</span> ומלבני סכום רימן מתחת ל-<span class="math inline">\(f\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -936,9 +939,6 @@ window.Quarto = {
 <p><span class="proof-title"><em>הערה 18.1</em>. </span><strong>הגדרה 18.9.1.</strong></p>
 <p><strong>הערה:</strong></p>
 <p>האינטגרל המסוים מייצג “שטח נטו”, כלומר שטחים שנמצאים מעל ציר ה-x יתווספו בסימן חיובי, ושטחים שנמצאים מתחת לציר ה-x יוחסרו (סימן שלילי). זאת בניגוד לחישוב שטח גיאומטרי כולל, שבו היינו מחברים את הערכים המוחלטים של כל האזורים.</p>
-</div>
-<div style="text-align:center">
-<p>תרשים: שטח נטו — אזורים מעל הציר חיוביים ואזור מתחת לציר שלילי (<span class="math inline">\(-\tfrac{1}{2}\)</span>)</p>
 </div>
 <div id="fig-c10_fig07" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -959,30 +959,24 @@ window.Quarto = {
 <p><span class="math display">\[f(x) = \frac{x^3}{3}\]</span></p>
 <p>ולכן ממשפט ניוטון-לייבניץ, נחשב:</p>
 <p><span class="math display">\[\int_{-1}^2 x^2 dx = F(2) - F(-1) = \frac{2^3}{3} - \frac{(-1)^3}{3} = \frac{8}{3} + \frac{1}{3} = \boxed{3}\]</span></p>
-<div style="text-align:center">
-<p>תרשים: השטח מתחת ל-<span class="math inline">\(f(x)=x^2\)</span> בין <span class="math inline">\(x=-1\)</span> ל-<span class="math inline">\(x=2\)</span></p>
-</div>
 <div id="fig-c10_fig08" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c18_fig11.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-c10_fig08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;18.11: השטח מתחת ל-<span class="math inline">\(f(x)=x^2\)</span> בין <span class="math inline">\(x=-1\)</span> ל-<span class="math inline">\(x=2\)</span>
+תרשים&nbsp;18.11: השטח מתחת ל-<span class="math inline">\(f(x)=x^2\)</span> בין <span class="math inline">\(x=-1\)</span> ל-<span class="math inline">\(x=2\)</span>.
 </figcaption>
 </figure>
 </div>
 <p><strong>(2)</strong> בקטע <span class="math inline">\([a,c]\)</span> מתקיים <span class="math inline">\(f(x) \geq g(x)\)</span></p>
-<div style="text-align:center">
-<p>תרשים: השטחים <span class="math inline">\(1,2,3\)</span> הכלואים בין <span class="math inline">\(f\)</span> ל-<span class="math inline">\(g\)</span> בקטעים <span class="math inline">\([a,c],[c,d],[d,b]\)</span></p>
-</div>
 <div id="fig-c10_fig09" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig09-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c18_fig12.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-c10_fig09-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;18.12: השטחים <span class="math inline">\(1,2,3\)</span> הכלואים בין <span class="math inline">\(f\)</span> ל-<span class="math inline">\(g\)</span> בקטעים <span class="math inline">\([a,c],[c,d],[d,b]\)</span>
+תרשים&nbsp;18.12: השטחים <span class="math inline">\(1,2,3\)</span> הכלואים בין <span class="math inline">\(f\)</span> ל-<span class="math inline">\(g\)</span> בקטעים <span class="math inline">\([a,c],[c,d],[d,b]\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -991,16 +985,13 @@ window.Quarto = {
 <p>שטח 2 ב- <span class="math inline">\([d,b]\)</span> : <span class="math inline">\(\int_d^b (f(x) - g(x))dx\)</span></p>
 <p>סה”כ : <span class="math inline">\(\int_a^c f - g + \int_c^d g - f + \int_d^b f - g = \boxed{\int_a^b |f(x) - g(x)|dx}\)</span></p>
 <p><strong>(3)</strong> חשבו את השטח החסום בין הפונקציות <span class="math inline">\(g(x) = x^3\)</span> , <span class="math inline">\(f(x) = x\)</span></p>
-<div style="text-align:center">
-<p>תרשים: השטחים החסומים בין <span class="math inline">\(f(x)=x\)</span> ל-<span class="math inline">\(g(x)=x^3\)</span> בקטע <span class="math inline">\([-1,1]\)</span></p>
-</div>
 <div id="fig-c10_fig10" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c18_fig13.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-c10_fig10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;18.13: השטחים החסומים בין <span class="math inline">\(f(x)=x\)</span> ל-<span class="math inline">\(g(x)=x^3\)</span> בקטע <span class="math inline">\([-1,1]\)</span>
+תרשים&nbsp;18.13: השטחים החסומים בין <span class="math inline">\(f(x)=x\)</span> ל-<span class="math inline">\(g(x)=x^3\)</span> בקטע <span class="math inline">\([-1,1]\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -1022,9 +1013,6 @@ window.Quarto = {
 <div id="rem-zugiut" class="thmbox thmbox-definition proof remark">
 <p><span class="proof-title"><em>הערה 18.2</em>. </span><strong>הגדרה 18.9.2.</strong></p>
 <p><strong>הערה:</strong></p>
-<div style="text-align:center">
-<p>תרשים: פונקציה זוגית (סימטרית, השטחים מצטברים) מול פונקציה אי-זוגית (השטחים מתבטלים)</p>
-</div>
 <div id="fig-c10_fig11" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1043,16 +1031,13 @@ window.Quarto = {
 <p><span class="math inline">\(-a\)</span> , <span class="math inline">\(a\)</span> חייבים להיות שווים</p>
 </div>
 <p><strong>(5)</strong> חשבו את השטח של חצי מעגל סביב 0 עם רדיוס 1.</p>
-<div style="text-align:center">
-<p>תרשים: חצי העיגול העליון <span class="math inline">\(y=\sqrt{1-x^2}\)</span> עם מרכז בראשית ורדיוס <span class="math inline">\(1\)</span>, השטח צבוע</p>
-</div>
 <div id="fig-c10_fig12" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c10_fig12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/c18_fig15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-c10_fig12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;18.15: חצי העיגול העליון <span class="math inline">\(y=\sqrt{1-x^2}\)</span> עם מרכז בראשית ורדיוס <span class="math inline">\(1\)</span>, השטח צבוע
+תרשים&nbsp;18.15: חצי העיגול העליון <span class="math inline">\(y=\sqrt{1-x^2}\)</span> עם מרכז בראשית ורדיוס <span class="math inline">\(1\)</span>, השטח צבוע.
 </figcaption>
 </figure>
 </div>

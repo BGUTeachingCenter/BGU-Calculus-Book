@@ -343,6 +343,12 @@ iframe.widget-frame {
    Indigo, kept clear of the definition blue and of the simulation violet. */
 .thmbox-explanation { border-color: #818cf8; background: #f5f6ff; }
 .thmbox-explanation > p:first-child > strong { font-weight: 600; color: #4f46e5; }
+/* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
+   thicker border, unlike the supporting boxes above — a warning marks something
+   students actually get wrong, so it should read louder than a remark.
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
+.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+.thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -751,7 +757,7 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 יחידות הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות; דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
@@ -916,7 +922,7 @@ window.Quarto = {
 <img src="figures/c07_fig01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eps-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.1: <span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>; המרחק ביניהם קטן מ-<span class="math inline">\(\varepsilon\)</span>, כלומר <span class="math inline">\(x\)</span> נמצא בקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>
+תרשים&nbsp;7.1: <span class="math inline">\(x\)</span> מקרב את <span class="math inline">\(L\)</span> ברמת דיוק <span class="math inline">\(\varepsilon\)</span>; המרחק ביניהם קטן מ-<span class="math inline">\(\varepsilon\)</span>, כלומר <span class="math inline">\(x\)</span> נמצא בקטע <span class="math inline">\((L-\varepsilon,\,L+\varepsilon)\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -955,7 +961,7 @@ window.Quarto = {
 <img src="figures/c07_fig02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-definition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.2: <span class="math inline">\(\pi\)</span> הוא היחס בין היקף המעגל <span class="math inline">\(C\)</span> לקוטרו <span class="math inline">\(d\)</span>
+תרשים&nbsp;7.2: <span class="math inline">\(\pi\)</span> הוא היחס בין היקף המעגל <span class="math inline">\(C\)</span> לקוטרו <span class="math inline">\(d\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -971,7 +977,7 @@ window.Quarto = {
 <img src="figures/c07_fig03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-lookalike-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.3: ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל
+תרשים&nbsp;7.3: ככל שמספר הצלעות גדל, המצולע נעשה דומה יותר ויותר למעגל.
 </figcaption>
 </figure>
 </div>
@@ -985,7 +991,7 @@ window.Quarto = {
 <img src="figures/c07_fig04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-triangulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.4: חלוקת המצולע ל-<span class="math inline">\(n\)</span> משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו
+תרשים&nbsp;7.4: חלוקת המצולע ל-<span class="math inline">\(n\)</span> משולשים שווי שוקיים חופפים, ומשולש בודד עם נתוניו.
 </figcaption>
 </figure>
 </div>
@@ -1003,7 +1009,7 @@ window.Quarto = {
 <img src="figures/c07_fig05.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:92.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-doubling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.5: הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל <span class="math inline">\(2n\)</span> צלעות
+תרשים&nbsp;7.5: הכפלת מספר הצלעות — מסמנים את אמצע כל קשת, ומתקבל מצולע בעל <span class="math inline">\(2n\)</span> צלעות.
 </figcaption>
 </figure>
 </div>
@@ -1075,7 +1081,7 @@ window.Quarto = {
 <img src="figures/c07_fig07.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-squeeze-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.6: המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם
+תרשים&nbsp;7.6: המעגל כלוא בין המצולע החסום לחוסם; מימין — משולש בודד של המצולע החוסם.
 </figcaption>
 </figure>
 </div>
@@ -1095,7 +1101,7 @@ window.Quarto = {
 <img src="figures/c07_fig08.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:42.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-circum-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.7: משולש בודד של המצולע החוסם
+תרשים&nbsp;7.7: משולש בודד של המצולע החוסם.
 </figcaption>
 </figure>
 </div>
@@ -1109,7 +1115,7 @@ window.Quarto = {
 <img src="figures/c07_fig09.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:92.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pi-corner-cut-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.8: הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד
+תרשים&nbsp;7.8: הכפלת הצלעות במצולע החוסם — כל משיק חדש מקצץ פינה, והשטח הכתום הוא מה שיורד.
 </figcaption>
 </figure>
 </div>

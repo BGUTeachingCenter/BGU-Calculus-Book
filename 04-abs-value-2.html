@@ -343,6 +343,12 @@ iframe.widget-frame {
    Indigo, kept clear of the definition blue and of the simulation violet. */
 .thmbox-explanation { border-color: #818cf8; background: #f5f6ff; }
 .thmbox-explanation > p:first-child > strong { font-weight: 600; color: #4f46e5; }
+/* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
+   thicker border, unlike the supporting boxes above — a warning marks something
+   students actually get wrong, so it should read louder than a remark.
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
+.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+.thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -751,7 +757,7 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 יחידות הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות; דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
@@ -922,9 +928,6 @@ x &amp; : x \geq 0 \\
 <div id="box-exm-abs-distance" class="thmbox thmbox-example">
 <p><strong>דוגמה 4.2.3.</strong></p>
 <p><span class="math display">\[|-3| = |3| = 3\]</span></p>
-<div style="text-align:center">
-<p>תרשים: ציר מספרים עם הנקודות <span class="math inline">\(-3\)</span>, <span class="math inline">\(0\)</span>, <span class="math inline">\(3\)</span> וקשתות “מרחק 3” משני הצדדים.</p>
-</div>
 <div id="fig-c01_fig01" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c01_fig01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -944,9 +947,6 @@ x &amp; : x \geq 0 \\
 <div id="box-exm-abs-open-interval" class="thmbox thmbox-example">
 <p><strong>דוגמה 4.2.5.</strong></p>
 <p><span class="math display">\[|x| &lt; 1\]</span> הקטע הפתוח: <span class="math inline">\(\{x \mid -1 &lt; x &lt; 1\} = (-1,1)\)</span></p>
-<div style="text-align:center">
-<p>תרשים: ציר מספרים עם נקודות פתוחות ב-<span class="math inline">\(-1\)</span> וב-<span class="math inline">\(1\)</span>, והקטע הפתוח ביניהן.</p>
-</div>
 <div id="fig-c01_fig02" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c01_fig02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -961,9 +961,6 @@ x &amp; : x \geq 0 \\
 <div id="box-exm-abs-closed-interval" class="thmbox thmbox-example">
 <p><strong>דוגמה 4.2.6.</strong></p>
 <p><span class="math display">\[|x| \leq 1\]</span> הקטע הסגור: <span class="math inline">\(\{x \mid -1 \leq x \leq 1\} = [-1,1]\)</span></p>
-<div style="text-align:center">
-<p>תרשים: ציר מספרים עם נקודות סגורות ב-<span class="math inline">\(-1\)</span> וב-<span class="math inline">\(1\)</span>, והקטע הסגור ביניהן.</p>
-</div>
 <div id="fig-c01_fig03" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c01_fig03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -978,9 +975,6 @@ x &amp; : x \geq 0 \\
 <div id="box-exm-abs-greater" class="thmbox thmbox-example">
 <p><strong>דוגמה 4.2.7.</strong></p>
 <p><span class="math display">\[|x| &gt; 3\]</span> <span class="math display">\[\{x \mid x &gt; 3 \cup x &lt; -3\} = (3,\infty) \cup (-\infty,-3)\]</span></p>
-<div style="text-align:center">
-<p>תרשים: ציר מספרים עם נקודות פתוחות ב-<span class="math inline">\(-3\)</span> וב-<span class="math inline">\(3\)</span>, והקרניים החיצוניות מסומנות.</p>
-</div>
 <div id="fig-c01_fig04" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c01_fig04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -994,9 +988,6 @@ x &amp; : x \geq 0 \\
 </div>
 <section id="אי-שוויון-המשולש" class="level3">
 <h3 class="anchored" data-anchor-id="אי-שוויון-המשולש">אי שוויון המשולש</h3>
-<div style="text-align:center">
-<p>תרשים: סקיצת משולש וקטורים — וקטור <span class="math inline">\(x\)</span>, וקטור <span class="math inline">\(y\)</span> והווקטור <span class="math inline">\(x+y\)</span>, להמחשת אי-שוויון המשולש.</p>
-</div>
 <div id="fig-c01_fig05" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-c01_fig05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
