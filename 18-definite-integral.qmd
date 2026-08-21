@@ -38,12 +38,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטח הכלוא בין גרף $f$ לציר ה-$x$ בקטע $[a,b]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטח הכלוא בין גרף $f$ לציר ה-$x$ בקטע $[a,b]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטח הכלוא בין גרף $f$ לציר ה-$x$ בקטע $[a,b]$](figures/c18_fig01.png){#fig-c10_fig01 width="62%" fig-align="center"}
+![השטח הכלוא בין גרף $f$ לציר ה-$x$ בקטע $[a,b]$.](figures/c18_fig01.png){#fig-c10_fig01 width="62%" fig-align="center"}
 :::
 
 השטח שכלוא בין גרף הפונקציה של $f$, לציר ה-$x$, כאשר $a \le x \le b$.
@@ -86,12 +86,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטח הכלוא מתחת ל-$f(x)=x^2$ בקטע $[0,1]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטח הכלוא מתחת ל-$f(x)=x^2$ בקטע $[0,1]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטח הכלוא מתחת ל-$f(x)=x^2$ בקטע $[0,1]$](figures/c18_fig02.png){#fig-c10_fig02 width="62%" fig-align="center"}
+![השטח הכלוא מתחת ל-$f(x)=x^2$ בקטע $[0,1]$.](figures/c18_fig02.png){#fig-c10_fig02 width="62%" fig-align="center"}
 :::
 
 השטח הכלוא: $$\int_0^1 x^2\,dx = \left.\frac{x^3}{3}\right|_0^1 = \frac{1}{3}$$
@@ -134,12 +134,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: מלבן השטח מתחת לפונקציה הקבועה $f(x)=C$ בקטע $[a,b]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: מלבן השטח מתחת לפונקציה הקבועה $f(x)=C$ בקטע $[a,b]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![מלבן השטח מתחת לפונקציה הקבועה $f(x)=C$ בקטע $[a,b]$](figures/c18_fig03.png){#fig-c10_fig03 width="62%" fig-align="center"}
+![מלבן השטח מתחת לפונקציה הקבועה $f(x)=C$ בקטע $[a,b]$.](figures/c18_fig03.png){#fig-c10_fig03 width="62%" fig-align="center"}
 :::
 
 השטח הכלוא: $$(b-a) \cdot C$$
@@ -187,12 +187,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: קירוב השטח מתחת ל-$x^2$ ב-$n$ מלבנים (סכום רימן) בקטע $[0,1]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: קירוב השטח מתחת ל-$x^2$ ב-$n$ מלבנים (סכום רימן) בקטע $[0,1]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![קירוב השטח מתחת ל-$x^2$ ב-$n$ מלבנים (סכום רימן) בקטע $[0,1]$](figures/c18_fig04.png){#fig-c10_fig04 width="62%" fig-align="center"}
+![קירוב השטח מתחת ל-$x^2$ ב-$n$ מלבנים (סכום רימן) בקטע $[0,1]$.](figures/c18_fig04.png){#fig-c10_fig04 width="62%" fig-align="center"}
 :::
 
 נחשב את סכומי המלבנים: $$\frac{1}{n} \cdot \left(\frac{1}{n}\right)^2 + \frac{1}{n} \cdot \left(\frac{2}{n}\right)^2 + \dots + \frac{1}{n}\left(\frac{n}{n}\right)^2 =$$
@@ -250,12 +250,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציית דיריכלה בקטע $[0,2]$ — ערך $1$ ברציונליים וערך $0$ באי-רציונליים
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציית דיריכלה בקטע $:[0,2]$ ערך $1$ ברציונליים וערך $0$ באי-רציונליים.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציית דיריכלה בקטע $[0,2]$ — ערך $1$ ברציונליים וערך $0$ באי-רציונליים](figures/c18_fig05.png){#fig-c10_fig05 width="62%" fig-align="center"}
+![פונקציית דיריכלה בקטע $:[0,2]$ ערך $1$ ברציונליים וערך $0$ באי-רציונליים.](figures/c18_fig05.png){#fig-c10_fig05 width="62%" fig-align="center"}
 :::
 
 פונקציית דיריכלה: $$D(x) = \begin{cases} 1 & x \in \mathbb{Q} \\ 0 & x \notin \mathbb{Q} \end{cases}$$
@@ -313,12 +313,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטח המוצלל מתחת ל-$f$ בקטע $[a,b]$, המייצג את $\int_a^b f$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטח המוצלל מתחת ל-$f$ בקטע $[a,b]$, המייצג את $\int_a^b f$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטח המוצלל מתחת ל-$f$ בקטע $[a,b]$, המייצג את $\int_a^b f$](figures/c18_fig06.png){#fig-c10_fig14 width="62%" fig-align="center"}
+![השטח המוצלל מתחת ל-$f$ בקטע $[a,b]$, המייצג את $\int_a^b f$.](figures/c18_fig06.png){#fig-c10_fig14 width="62%" fig-align="center"}
 :::
 
 אם $f$ פונקציה רציפה ב-$[a,b]$, פרט למספר <u>סופי</u> כלשהוא של נקודות בהן יש קפיצה או סליקה ("חור"), אז $f$ אינטגרבילית ב-$[a,b]$.
@@ -359,12 +359,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הפונקציה $f(x)=|x|$ עם הנקודות $-2,-1,1,2,3$ והשטח המוצלל בקטע $[-2,3]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הפונקציה $f(x)=|x|$ עם הנקודות $-2,-1,1,2,3$ והשטח המוצלל בקטע $[-2,3]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![הפונקציה $f(x)=|x|$ עם הנקודות $-2,-1,1,2,3$ והשטח המוצלל בקטע $[-2,3]$](figures/c18_fig07.png){#fig-c10_fig15 width="62%" fig-align="center"}
+![הפונקציה $f(x)=|x|$ עם הנקודות $-2,-1,1,2,3$ והשטח המוצלל בקטע $[-2,3]$.](figures/c18_fig07.png){#fig-c10_fig15 width="62%" fig-align="center"}
 :::
 
 חשבו: $\int_{-2}^{3} |x|\,dx$
@@ -431,12 +431,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציית השטח הצבור $F(x)=\int_a^x f(t)\,dt$ — השטח מ-$a$ עד $x$ מתחת לפונקציה יורדת
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציית השטח הצבור $,F(x)=\int_a^x f(t)\,dt$ השטח מ-$a$ עד $x$ מתחת לפונקציה יורדת.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציית השטח הצבור $F(x)=\int_a^x f(t)\,dt$ — השטח מ-$a$ עד $x$ מתחת לפונקציה יורדת](figures/c18_fig08.png){#fig-c10_fig16 width="62%" fig-align="center"}
+![פונקציית השטח הצבור $,F(x)=\int_a^x f(t)\,dt$ השטח מ-$a$ עד $x$ מתחת לפונקציה יורדת.](figures/c18_fig08.png){#fig-c10_fig16 width="62%" fig-align="center"}
 :::
 
 דוגמאות:
@@ -522,12 +522,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: חלוקה לתת-קטעים עם נקודות מדגם $t_1,\dots,t_n$ ומלבני סכום רימן מתחת ל-$f$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: חלוקה לתת-קטעים עם נקודות מדגם $t_1,\dots,t_n$ ומלבני סכום רימן מתחת ל-$f$.
 :::
 
 ::: {.content-visible when-format="html"}
-![חלוקה לתת-קטעים עם נקודות מדגם $t_1,\dots,t_n$ ומלבני סכום רימן מתחת ל-$f$](figures/c18_fig09.png){#fig-c10_fig06 width="62%" fig-align="center"}
+![חלוקה לתת-קטעים עם נקודות מדגם $t_1,\dots,t_n$ ומלבני סכום רימן מתחת ל-$f$.](figures/c18_fig09.png){#fig-c10_fig06 width="62%" fig-align="center"}
 :::
 
 נפתח את אגף ימין:
@@ -588,7 +588,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: שטח נטו — אזורים מעל הציר חיוביים ואזור מתחת לציר שלילי ($-\tfrac{1}{2}$)
 :::
 
@@ -642,12 +642,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטח מתחת ל-$f(x)=x^2$ בין $x=-1$ ל-$x=2$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטח מתחת ל-$f(x)=x^2$ בין $x=-1$ ל-$x=2$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטח מתחת ל-$f(x)=x^2$ בין $x=-1$ ל-$x=2$](figures/c18_fig11.png){#fig-c10_fig08 width="62%" fig-align="center"}
+![השטח מתחת ל-$f(x)=x^2$ בין $x=-1$ ל-$x=2$.](figures/c18_fig11.png){#fig-c10_fig08 width="62%" fig-align="center"}
 :::
 
 **(2)** בקטע $[a,c]$ מתקיים $f(x) \geq g(x)$
@@ -697,12 +697,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטחים $1,2,3$ הכלואים בין $f$ ל-$g$ בקטעים $[a,c],[c,d],[d,b]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטחים $1,2,3$ הכלואים בין $f$ ל-$g$ בקטעים $[a,c],[c,d],[d,b]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטחים $1,2,3$ הכלואים בין $f$ ל-$g$ בקטעים $[a,c],[c,d],[d,b]$](figures/c18_fig12.png){#fig-c10_fig09 width="62%" fig-align="center"}
+![השטחים $1,2,3$ הכלואים בין $f$ ל-$g$ בקטעים $[a,c],[c,d],[d,b]$.](figures/c18_fig12.png){#fig-c10_fig09 width="62%" fig-align="center"}
 :::
 
 שטח 1 ב- $[a,c]$ : $\int_a^c (f(x) - g(x))dx$
@@ -753,12 +753,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: השטחים החסומים בין $f(x)=x$ ל-$g(x)=x^3$ בקטע $[-1,1]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: השטחים החסומים בין $f(x)=x$ ל-$g(x)=x^3$ בקטע $[-1,1]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![השטחים החסומים בין $f(x)=x$ ל-$g(x)=x^3$ בקטע $[-1,1]$](figures/c18_fig13.png){#fig-c10_fig10 width="62%" fig-align="center"}
+![השטחים החסומים בין $f(x)=x$ ל-$g(x)=x^3$ בקטע $[-1,1]$.](figures/c18_fig13.png){#fig-c10_fig10 width="62%" fig-align="center"}
 :::
 
 $$\int_{-1}^1 |x - x^3| dx = \int_{-1}^0 (x^3 - x)dx + \int_0^1 (x - x^3)dx =$$
@@ -845,7 +845,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: פונקציה זוגית (סימטרית, השטחים מצטברים) מול פונקציה אי-זוגית (השטחים מתבטלים)
 :::
 
@@ -903,12 +903,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: חצי העיגול העליון $y=\sqrt{1-x^2}$ עם מרכז בראשית ורדיוס $1$, השטח צבוע
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: חצי העיגול העליון $y=\sqrt{1-x^2}$ עם מרכז בראשית ורדיוס $1$, השטח צבוע.
 :::
 
 ::: {.content-visible when-format="html"}
-![חצי העיגול העליון $y=\sqrt{1-x^2}$ עם מרכז בראשית ורדיוס $1$, השטח צבוע](figures/c18_fig15.png){#fig-c10_fig12 width="62%" fig-align="center"}
+![חצי העיגול העליון $y=\sqrt{1-x^2}$ עם מרכז בראשית ורדיוס $1$, השטח צבוע.](figures/c18_fig15.png){#fig-c10_fig12 width="62%" fig-align="center"}
 :::
 
 $$x^2 + y^2 = R^2$$ $$R = 1$$ $$y^2 = 1 - x^2$$ $$y = \sqrt{1 - x^2}$$
@@ -975,12 +975,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: חצי מעגל ברדיוס $1$ ומרכז בראשית, הנקודות $0$ ו-$1$ מסומנות על הציר
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: חצי מעגל ברדיוס $1$ ומרכז בראשית, הנקודות $0$ ו-$1$ מסומנות על הציר.
 :::
 
 ::: {.content-visible when-format="html"}
-![חצי מעגל ברדיוס $1$ ומרכז בראשית, הנקודות $0$ ו-$1$ מסומנות על הציר](figures/c18_fig16.png){#fig-c10_fig13 width="62%" fig-align="center"}
+![חצי מעגל ברדיוס $1$ ומרכז בראשית, הנקודות $0$ ו-$1$ מסומנות על הציר.](figures/c18_fig16.png){#fig-c10_fig13 width="62%" fig-align="center"}
 :::
 
 $$x^2 + y^2 = R^2$$ $$R = 1$$ $$y^2 = 1 - x^2$$ $$y = \sqrt{1 - x^2}$$
@@ -1068,12 +1068,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$x$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$x$.
 :::
 
 ::: {.content-visible when-format="html"}
-![חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$x$](figures/c18_fig17.png){#fig-c10_fig17 width="62%" fig-align="center"}
+![חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$x$.](figures/c18_fig17.png){#fig-c10_fig17 width="62%" fig-align="center"}
 :::
 
 $$\pi \int_{a}^{b} f(x)^2\,dx$$
@@ -1117,12 +1117,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$y$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$y$.
 :::
 
 ::: {.content-visible when-format="html"}
-![חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$y$](figures/c18_fig18.png){#fig-c10_fig18 width="62%" fig-align="center"}
+![חרוט שנוצר מסיבוב הישר $f(x)=x$ סביב ציר ה-$y$.](figures/c18_fig18.png){#fig-c10_fig18 width="62%" fig-align="center"}
 :::
 
 $$\pi \int_{a}^{b} x \cdot f(x)\,dx$$
@@ -1165,12 +1165,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: אורך הקשת של העקומה $f$ בקטע $[a,b]$, עם קווים אנכיים בקצוות
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: אורך הקשת של העקומה $f$ בקטע $[a,b]$, עם קווים אנכיים בקצוות.
 :::
 
 ::: {.content-visible when-format="html"}
-![אורך הקשת של העקומה $f$ בקטע $[a,b]$, עם קווים אנכיים בקצוות](figures/c18_fig19.png){#fig-c10_fig19 width="62%" fig-align="center"}
+![אורך הקשת של העקומה $f$ בקטע $[a,b]$, עם קווים אנכיים בקצוות.](figures/c18_fig19.png){#fig-c10_fig19 width="62%" fig-align="center"}
 :::
 
 $$l = \int_{a}^{b} \sqrt{1 + (f'(x))^2}\,dx$$

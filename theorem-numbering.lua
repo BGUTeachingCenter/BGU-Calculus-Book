@@ -19,11 +19,15 @@ Extensions:
                 format-agnostic and only its contents are conditional — the
                 iframe in HTML, a pointer to the online edition in print.
   * .thmproof — proof box: label "הוכחה." but UNNUMBERED; styled .thmbox-proof.
+                An optional title= is folded into the label, as for .thmrem, so a
+                theorem with parts can be proved in one box per part instead of
+                one long box: title="סעיף (א) — חיבור" gives "הוכחה — סעיף (א) — חיבור."
   * .thmsol   — solution to a .thmqst, and the same shape as .thmproof is to a
                 theorem: label "פתרון." but UNNUMBERED, and a separate box that
                 FOLLOWS the question rather than nesting inside it. Add .foldable
                 to hide it behind a click; like a proof it is exempt from the
                 "אפשר לדלג" print wrapper, since a solution is not skippable.
+  * .thmexpl / .thmwarn — labelled, titled, but UNNUMBERED (see the UNNUMBERED table).
   * .optional — "רשות" wrapper: its inner boxes are labelled but UNNUMBERED
                 (\newtheorem* style). Tinted via _styles.html (HTML) / the
                 'optionalbox' LaTeX environment (PDF).
@@ -44,10 +48,19 @@ local BOX = {
   thmsim = { word = "סימולציה", css = "simulation" },
   thmlem = { word = "למה",   css = "lemma"       },
   thmcor = { word = "מסקנה", css = "corollary"   },
-  -- .thmexpl — the idea behind a proof/definition, stated before the formal object.
-  -- Distinct from .thmrem: a remark is an aside, an explanation is load-bearing.
-  -- NB the class is "thmexpl", not "thmexp", to keep it clear of .thmexm (דוגמה).
-  thmexpl = { word = "הסבר", css = "explanation" },
+}
+
+-- Labelled but UNNUMBERED, and they never advance the counter. These are not results
+-- you cite by number, so a number would be dead weight — and, more practically, adding
+-- one mid-section must not renumber every box after it and silently falsify the numbers
+-- written into link text. Both take an optional title=, folded into the label.
+--   .thmexpl — intuition/insight that makes a proof obvious. NB the class is "thmexpl",
+--              not "thmexp", to keep it clear of .thmexm (דוגמה).
+--   .thmwarn — a warning or a common mistake. Distinct from .thmrem: a remark is an
+--              aside you may skip, a warning is the thing students get wrong.
+local UNNUMBERED = {
+  thmexpl = { word = "הסבר",    css = "explanation" },
+  thmwarn = { word = "שימו לב", css = "warning"     },
 }
 
 local function chapter_number()
@@ -66,6 +79,11 @@ end
 
 local function box_for(classes)
   for _, c in ipairs(classes) do if BOX[c] then return BOX[c] end end
+  return nil
+end
+
+local function unnumbered_for(classes)
+  for _, c in ipairs(classes) do if UNNUMBERED[c] then return UNNUMBERED[c] end end
   return nil
 end
 
@@ -119,7 +137,8 @@ process = function(blocks, in_optional)
       local is_remark   = has_class(orig, "thmrem")
 
       if is_proof then
-        table.insert(b.content, 1, label_para("הוכחה"))   -- label_para adds the "."
+        -- label_para adds the "."; title= is optional and absent on ordinary proofs
+        table.insert(b.content, 1, label_para("הוכחה", b.attributes and b.attributes.title))
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-proof" }
       elseif is_solution then
@@ -160,6 +179,12 @@ process = function(blocks, in_optional)
           table.insert(b.content, pandoc.RawBlock("latex", "\\end{optionalbox}"))
         end
         -- keep the .optional class for HTML CSS
+      elseif unnumbered_for(orig) then
+        local u = unnumbered_for(orig)
+        local t = b.attributes and b.attributes.title
+        table.insert(b.content, 1, label_para(u.word, t))
+        b.content = process(b.content, in_optional)
+        b.classes = { "thmbox", "thmbox-" .. u.css }
       else
         local box = box_for(orig)
         if box then

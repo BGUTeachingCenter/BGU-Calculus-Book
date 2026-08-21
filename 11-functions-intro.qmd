@@ -118,12 +118,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף הפרבולה $f(x)=x^2$ עם נקודה $x$ על ציר $X$ והערך $f(x)$ המתאים
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף הפרבולה $f(x)=x^2$ עם נקודה $x$ על ציר $X$ והערך $f(x)$ המתאים.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף הפרבולה $f(x)=x^2$ עם נקודה $x$ על ציר $X$ והערך $f(x)$ המתאים](figures/c11_fig01.png){#fig-c03_fig01 width="62%" fig-align="center"}
+![גרף הפרבולה $f(x)=x^2$ עם נקודה $x$ על ציר $X$ והערך $f(x)$ המתאים.](figures/c11_fig01.png){#fig-c03_fig01 width="62%" fig-align="center"}
 :::
 
 דוגמא נוספת:
@@ -163,12 +163,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ (פונקציית מדרגות) עם הנקודות $x_1, x_2$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ (פונקציית מדרגות) עם הנקודות $x_1, x_2$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ (פונקציית מדרגות) עם הנקודות $x_1, x_2$](figures/c11_fig02.png){#fig-c03_fig02 width="62%" fig-align="center"}
+![גרף פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ (פונקציית מדרגות) עם הנקודות $x_1, x_2$.](figures/c11_fig02.png){#fig-c03_fig02 width="62%" fig-align="center"}
 :::
 
 הפונקציה מונוטונית עולה, אבל היא לא חד חד ערכית.
@@ -215,12 +215,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=x^2$ עם נקודה $x$ שלילית על ציר $X$ והערך $f(x)$ המתאים
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=x^2$ עם נקודה $x$ שלילית על ציר $X$ והערך $f(x)$ המתאים.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $f(x)=x^2$ עם נקודה $x$ שלילית על ציר $X$ והערך $f(x)$ המתאים](figures/c11_fig03.png){#fig-c03_fig03 width="62%" fig-align="center"}
+![גרף $f(x)=x^2$ עם נקודה $x$ שלילית על ציר $X$ והערך $f(x)$ המתאים.](figures/c11_fig03.png){#fig-c03_fig03 width="62%" fig-align="center"}
 :::
 
 $f(x) = x^2$ בתחום ב-$\mathbb{R}$ היא לא חד חד ערכית.
@@ -261,12 +261,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=x^2$ עם הנקודות $-x$ ו-$x$ בעלות אותו ערך $f(x)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=x^2$ עם הנקודות $-x$ ו-$x$ בעלות אותו ערך $f(x)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $f(x)=x^2$ עם הנקודות $-x$ ו-$x$ בעלות אותו ערך $f(x)$](figures/c11_fig04.png){#fig-c03_fig04 width="62%" fig-align="center"}
+![גרף $f(x)=x^2$ עם הנקודות $-x$ ו-$x$ בעלות אותו ערך $f(x)$.](figures/c11_fig04.png){#fig-c03_fig04 width="62%" fig-align="center"}
 :::
 
 ## פונקציות זוגיות ואי-זוגיות
@@ -311,12 +311,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף הפונקציה הזוגית $f(x)=x^2$ - הנקודות $-x$ ו-$x$ בעלות אותו גובה
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף הפונקציה הזוגית $f(x)=x^2$ - הנקודות $-x$ ו-$x$ בעלות אותו גובה.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף הפונקציה הזוגית $f(x)=x^2$ - הנקודות $-x$ ו-$x$ בעלות אותו גובה](figures/c11_fig05.png){#fig-c03_fig07 width="62%" fig-align="center"}
+![גרף הפונקציה הזוגית $f(x)=x^2$ - הנקודות $-x$ ו-$x$ בעלות אותו גובה.](figures/c11_fig05.png){#fig-c03_fig07 width="62%" fig-align="center"}
 :::
 
 פונקציה תיקרא אי זוגית, אם לכל $x \in A$ מתקיים $f(-x) = -f(x)$
@@ -362,12 +362,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף הפונקציה האי-זוגית $f(x)=x^3$ - הנקודות $-x$ ו-$x$ בעלות ערכים נגדיים
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף הפונקציה האי-זוגית $f(x)=x^3$ - הנקודות $-x$ ו-$x$ בעלות ערכים נגדיים.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף הפונקציה האי-זוגית $f(x)=x^3$ - הנקודות $-x$ ו-$x$ בעלות ערכים נגדיים](figures/c11_fig06.png){#fig-c03_fig08 width="62%" fig-align="center"}
+![גרף הפונקציה האי-זוגית $f(x)=x^3$ - הנקודות $-x$ ו-$x$ בעלות ערכים נגדיים.](figures/c11_fig06.png){#fig-c03_fig08 width="62%" fig-align="center"}
 :::
 
 \* דוגמא לפונקציה שהיא לא זוגית ולא אי זוגית: $f(x) = x + 1$
@@ -405,12 +405,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף הישר $f(x)=x+1$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף הישר $f(x)=x+1$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף הישר $f(x)=x+1$](figures/c11_fig07.png){#fig-c03_fig09 width="62%" fig-align="center"}
+![גרף הישר $f(x)=x+1$.](figures/c11_fig07.png){#fig-c03_fig09 width="62%" fig-align="center"}
 :::
 
 ## פונקציות מחזוריות
@@ -455,12 +455,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=\sin x$ עם נקודת מקסימום $(\frac{\pi}{2},1)$ ונקודת מינימום $(\frac{3\pi}{2},-1)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=\sin x$ עם נקודת מקסימום $(\frac{\pi}{2},1)$ ונקודת מינימום $(\frac{3\pi}{2},-1)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $f(x)=\sin x$ עם נקודת מקסימום $(\frac{\pi}{2},1)$ ונקודת מינימום $(\frac{3\pi}{2},-1)$](figures/c11_fig08.png){#fig-c03_fig05 width="62%" fig-align="center"}
+![גרף $f(x)=\sin x$ עם נקודת מקסימום $(\frac{\pi}{2},1)$ ונקודת מינימום $(\frac{3\pi}{2},-1)$.](figures/c11_fig08.png){#fig-c03_fig05 width="62%" fig-align="center"}
 :::
 
 הפונקציה $\sin(x)$ מונוטונית עולה וחד חד ערכית בתחום $[-\frac{\pi}{2}, \frac{\pi}{2}]$
@@ -506,12 +506,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=\cos x$ עם נקודת מקסימום $(0,1)$ ונקודת מינימום $(\pi,-1)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=\cos x$ עם נקודת מקסימום $(0,1)$ ונקודת מינימום $(\pi,-1)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $f(x)=\cos x$ עם נקודת מקסימום $(0,1)$ ונקודת מינימום $(\pi,-1)$](figures/c11_fig09.png){#fig-c03_fig06 width="62%" fig-align="center"}
+![גרף $f(x)=\cos x$ עם נקודת מקסימום $(0,1)$ ונקודת מינימום $(\pi,-1)$.](figures/c11_fig09.png){#fig-c03_fig06 width="62%" fig-align="center"}
 :::
 
 הפונקציה $\cos(x)$ מונוטונית יורדת וחד חד ערכית בתחום $[0, \pi]$
@@ -593,12 +593,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $\sin(x)$ על $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ והופכיתו $\arcsin(x)$ על $[-1,1]$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $\sin(x)$ על $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ והופכיתו $\arcsin(x)$ על $[-1,1]$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $\sin(x)$ על $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ והופכיתו $\arcsin(x)$ על $[-1,1]$](figures/c11_fig10.png){#fig-c05_fig03 width="62%" fig-align="center"}
+![גרף $\sin(x)$ על $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ והופכיתו $\arcsin(x)$ על $[-1,1]$.](figures/c11_fig10.png){#fig-c05_fig03 width="62%" fig-align="center"}
 :::
 
 3)  פונקציה $\tan(x) : \left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right) \to R$
@@ -651,12 +651,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $\tan(x)$ עם אסימפטוטות אנכיות, והופכיתו $\arctan(x)$ עם אסימפטוטות אופקיות ב-$\pm\frac{\pi}{2}$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $\tan(x)$ עם אסימפטוטות אנכיות, והופכיתו $\arctan(x)$ עם אסימפטוטות אופקיות ב-$\pm\frac{\pi}{2}$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף $\tan(x)$ עם אסימפטוטות אנכיות, והופכיתו $\arctan(x)$ עם אסימפטוטות אופקיות ב-$\pm\frac{\pi}{2}$](figures/c11_fig11.png){#fig-c05_fig04 width="62%" fig-align="center"}
+![גרף $\tan(x)$ עם אסימפטוטות אנכיות, והופכיתו $\arctan(x)$ עם אסימפטוטות אופקיות ב-$\pm\frac{\pi}{2}$.](figures/c11_fig11.png){#fig-c05_fig04 width="62%" fig-align="center"}
 :::
 
 4)  פונקציה $f(x) = e^x$

@@ -87,12 +87,12 @@ frame(1.0, 2.6, "figures/c08_fig01.png", r"$M=|K|$")
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: כאשר $0 \leq k \leq K$, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו $\left|K\right|$.
+::: {style="text-align:center"}
+תרשים: כאשר $0 \leq k \leq K$, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו $\left|K\right|$
 :::
 
 ::: {.content-visible when-format="html"}
-![כאשר $0 \leq k \leq K$, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו $\left|K\right|$.](figures/c08_fig01.png){#fig-bound-case-nonneg width="62%" fig-align="center"}
+![כאשר $0 \leq k \leq K$, הקטע שבו נמצאים האיברים כלוא בקטע הסימטרי שקצהו $\left|K\right|$](figures/c08_fig01.png){#fig-bound-case-nonneg width="62%" fig-align="center"}
 :::
 
 **המקרה השני:** שניהם אינם חיוביים, כלומר $.k \leq K \leq 0$ אז $\left|k\right| = -k$ ו-$,\left|K\right| = -K$ ולכן $.\left|k\right| \geq \left|K\right|$ נבחר $,M = \left|k\right|$ ואז לכל $n$ מתקיים $.-M = k \leq a_n \leq K \leq 0 \leq M$
@@ -109,12 +109,12 @@ frame(-2.6, -1.0, "figures/c08_fig02.png", r"$M=|k|$")
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: כאשר $k \leq K \leq 0$, הקצה הרחוק מאפס הוא $,\left|k\right|$ והוא הקובע את $M$.
+::: {style="text-align:center"}
+תרשים: כאשר $k \leq K \leq 0$, הקצה הרחוק מאפס הוא $,\left|k\right|$ והוא הקובע את $M$
 :::
 
 ::: {.content-visible when-format="html"}
-![כאשר $k \leq K \leq 0$, הקצה הרחוק מאפס הוא $\left|k\right|$, והוא הקובע את $M$.](figures/c08_fig02.png){#fig-bound-case-nonpos width="62%" fig-align="center"}
+![כאשר $k \leq K \leq 0$, הקצה הרחוק מאפס הוא $\left|k\right|$, והוא הקובע את $M$](figures/c08_fig02.png){#fig-bound-case-nonpos width="62%" fig-align="center"}
 :::
 
 **המקרה השלישי:** הסימנים שונים, כלומר $.k < 0 < K$ כאן אף אחד משני הקצוות אינו בהכרח הרחוק יותר מאפס, ולכן נבחר את הגדול מביניהם: $,M = \max\left\{\left|k\right|, \left|K\right|\right\}$ ואז $.-M \leq k \leq a_n \leq K \leq M$
@@ -131,12 +131,12 @@ frame(-1.5, 2.6, "figures/c08_fig03.png", r"$M=\max\{|k|,|K|\}$")
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: כאשר הסימנים שונים, $M$ נקבע לפי הקצה הרחוק יותר מאפס.
+::: {style="text-align:center"}
+תרשים: כאשר הסימנים שונים, $M$ נקבע לפי הקצה הרחוק יותר מאפס
 :::
 
 ::: {.content-visible when-format="html"}
-![כאשר הסימנים שונים, $M$ נקבע לפי הקצה הרחוק יותר מאפס.](figures/c08_fig03.png){#fig-bound-case-mixed width="62%" fig-align="center"}
+![כאשר הסימנים שונים, $M$ נקבע לפי הקצה הרחוק יותר מאפס](figures/c08_fig03.png){#fig-bound-case-mixed width="62%" fig-align="center"}
 :::
 
 שימו לב שבשלושת המקרים הבחירה הייתה אותה בחירה עצמה, $.M = \max\left\{\left|k\right|, \left|K\right|\right\}$ במקרה הראשון המקסימום הוא $,\left|K\right|$ בשני הוא $,\left|k\right|$ ובשלישי הוא הגדול מביניהם. לכן אפשר לוותר על חלוקת המקרים ולכתוב את כל הטיעון בשורה אחת: בבחירה זו מתקיים $\left|k\right| \leq M$ וגם $,\left|K\right| \leq M$ ולכל מספר ממשי $x$ מתקיים $,-\left|x\right| \leq x \leq \left|x\right|$ ולכן $$.-M \leq -\left|k\right| \leq k \leq a_n \leq K \leq \left|K\right| \leq M$$
@@ -215,12 +215,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: הבחירה $M = K + \left|L\right|$ שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב $L$ נופל בדיוק על $,-K$ שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע.
+::: {style="text-align:center"}
+תרשים: הבחירה $M = K + \left|L\right|$ שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב $L$ נופל בדיוק על $,-K$ שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע
 :::
 
 ::: {.content-visible when-format="html"}
-![הבחירה $M = K + \left|L\right|$ שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב $L$ נופל בדיוק על $,-K$ שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע.](figures/c08_fig04.png){#fig-shift-reference-point width="62%" fig-align="center"}
+![הבחירה $M = K + \left|L\right|$ שבהוכחה. שני הקטעים מכילים את כל איברי הסדרה, והקצה השמאלי של הקטע שסביב $L$ נופל בדיוק על $,-K$ שהיא הנקודה הרחוקה ביותר שאליה הסדרה עשויה להגיע](figures/c08_fig04.png){#fig-shift-reference-point width="62%" fig-align="center"}
 :::
 
 **(ג) גורר (ב).** מיידי: אם התנאי מתקיים לכל $,L$ הוא מתקיים בפרט עבור נקודת ייחוס אחת, למשל $.L = 0$
@@ -399,22 +399,22 @@ for sgn, lab in ((-1, r"$L-M$"), (1, r"$L+M$")):
 ax.set_xlim(-3.2, 3.2)
 ax.set_ylim(-0.45, 0.62)
 ax.axis("off")
-fig.savefig("figures/c08_fig05.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c08_fig06.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c08_fig05.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c08_fig06.png}\hss}\endL\par
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: החל מ-$N$ כל האיברים נמצאים בקטע $,(L-1,\ L+1)$ ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של $M$ לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין $L-M$ ל-$L+M$.
+::: {style="text-align:center"}
+תרשים: החל מ-$N$ כל האיברים נמצאים בקטע $,(L-1,\ L+1)$ ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של $M$ לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין $L-M$ ל-$L+M$
 :::
 
 ::: {.content-visible when-format="html"}
-![החל מ-$N$ כל האיברים נמצאים בקטע $(L-1,\ L+1)$, ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של $M$ לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין $L-M$ ל-$L+M$.](figures/c08_fig05.png){#fig-convergent-is-bounded width="62%" fig-align="center"}
+![החל מ-$N$ כל האיברים נמצאים בקטע $(L-1,\ L+1)$, ורק מספר סופי של איברים ראשונים עשוי לחרוג ממנו. הבחירה של $M$ לוקחת את הגדול שבמרחקים הללו, ולכן כל הסדרה כלואה בין $L-M$ ל-$L+M$](figures/c08_fig06.png){#fig-convergent-is-bounded width="62%" fig-align="center"}
 :::
 
 מצאנו אפוא נקודת ייחוס $L$ ומספר $M \geq 0$ שעבורם $\left|a_n - L\right| \leq M$ לכל $,n$ וזהו בדיוק תנאי (ב) שב[משפט 8.2.4](#box-thm-bounded-iff-L). לכן הסדרה חסומה.
@@ -465,22 +465,22 @@ ax.set_xlim(-2.5, 3.3)
 ax.set_ylim(-2.0, 1.8)
 ax.set_aspect("equal")
 ax.axis("off")
-fig.savefig("figures/c08_fig06.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c08_fig05.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c08_fig06.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c08_fig05.png}\hss}\endL\par
 \medskip
 ```
 
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה $\frac{1}{n}$ נמצאת בעיגול הפנימי, הסדרה $\left(-1\right)^n$ חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה $a_n = n$ אינה חסומה כלל.
+::: {style="text-align:center"}
+תרשים: הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה $\frac{1}{n}$ נמצאת בעיגול הפנימי, הסדרה $\left(-1\right)^n$ חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה $a_n = n$ אינה חסומה כלל
 :::
 
 ::: {.content-visible when-format="html"}
-![הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה $\frac{1}{n}$ נמצאת בעיגול הפנימי, הסדרה $\left(-1\right)^n$ חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה $a_n = n$ אינה חסומה כלל.](figures/c08_fig06.png){#fig-convergent-subset-bounded width="62%" fig-align="center"}
+![הסדרות המתכנסות הן תת-קבוצה של הסדרות החסומות. הסדרה $\frac{1}{n}$ נמצאת בעיגול הפנימי, הסדרה $\left(-1\right)^n$ חסומה אך אינה מתכנסת ולכן נמצאת בטבעת שביניהם, והסדרה $a_n = n$ אינה חסומה כלל](figures/c08_fig05.png){#fig-convergent-subset-bounded width="62%" fig-align="center"}
 :::
 
 מן המשפט מתקבל כלי שימושי להוכחת אי-התכנסות: אם ידוע שסדרה אינה חסומה, אין צורך לבדוק דבר נוסף, והיא בוודאי אינה מתכנסת.
@@ -530,9 +530,8 @@ $$.\left|\left(a_n + b_n\right) - \left(L_1 + L_2\right)\right| \leq \left|a_n -
 
 נפעיל אפוא את הגדרת הגבול פעמיים, עם $\frac{\varepsilon}{2}$ במקום $,\varepsilon$ וזה מותר שכן $:\frac{\varepsilon}{2} > 0$
 
-מכיוון ש-$,\lim\limits_{n\to\infty} a_n = L_1$ קיים $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.\left|a_n - L_1\right| < \frac{\varepsilon}{2}$
-
-מכיוון ש-$,\lim\limits_{n\to\infty} b_n = L_2$ קיים $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|b_n - L_2\right| < \frac{\varepsilon}{2}$
+- מכיוון ש-$,\lim\limits_{n\to\infty} a_n = L_1$ קיים $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.\left|a_n - L_1\right| < \frac{\varepsilon}{2}$
+- מכיוון ש-$,\lim\limits_{n\to\infty} b_n = L_2$ קיים $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|b_n - L_2\right| < \frac{\varepsilon}{2}$
 
 כל אחד משני התנאים מתקיים החל ממקום אחר, ואנחנו זקוקים לשניהם בו-זמנית. לכן נבחר את המאוחר מביניהם: $.N = \max\left\{N_1,\ N_2\right\}$ אז לכל $n \geq N$ מתקיים גם $n \geq N_1$ וגם $,n \geq N_2$ ולכן שני האי-שוויונות תקפים.
 
@@ -574,23 +573,14 @@ $$.\left|a_n b_n - L_1 L_2\right| \leq \left|a_n\right|\left|b_n - L_2\right| + 
 
 כאן נזדקק לתכונות החסימוּת שהוכחנו בסעיף הקודם, ודווקא לשתיהן:
 
-הסדרה $(a_n)_{n=1}^{\infty}$ מתכנסת, ולכן לפי [משפט 8.2.6](#box-thm-convergent-bounded) היא חסומה.
-
-ולפי [משפט 8.2.3](#box-thm-bounded-abs) חסימות פירושה שקיים $M \geq 0$ כך שלכל $n$ מתקיים $.\left|a_n\right| \leq M$
+- הסדרה $(a_n)_{n=1}^{\infty}$ מתכנסת, ולכן לפי [משפט 8.2.7](#box-thm-convergent-bounded) היא חסומה;
+- ולפי [משפט 8.2.3](#box-thm-bounded-abs) חסימות פירושה שקיים $M \geq 0$ כך שלכל $n$ מתקיים $.\left|a_n\right| \leq M$
 
 הצירוף הזה הוא בדיוק מה שדרוש כאן: המשפט הראשון נותן חסימות, והשני ממיר אותה לצורה של מספר אחד החוסם את כל האיברים בערך מוחלט — וזו הצורה שנכנסת ישירות לתוך אי-השוויון.
 
 **כעת החלק שדורש תשומת לב — בחירת ה-$\varepsilon$-ים.** אנחנו רוצים ששני המחוברים יהיו קטנים מ-$\frac{\varepsilon}{2}$ כל אחד, ונראה מה זה דורש מאיתנו.
 
-המחובר הראשון חסום על ידי $,M\left|b_n - L_2\right|$ ולכן די שיתקיים $,M\left|b_n - L_2\right| < \frac{\varepsilon}{2}$ כלומר
-
-$$.\left|b_n - L_2\right| < \frac{\varepsilon}{2M}$$
-
-באותו אופן, עבור המחובר השני די ש-
-
-$$.\left|a_n - L_1\right| < \frac{\varepsilon}{2\left|L_2\right|}$$
-
-זהו העיקרון הכללי, וכדאי לשים לב אליו: **קובעים תחילה מה רוצים לקבל בסוף, ומפעילים את הגדרת הגבול עם ה-$\varepsilon$ שמייצר בדיוק את זה** — לא $,\varepsilon$ ולא $,\frac{\varepsilon}{2}$ אלא הכמות שאחרי הכפל במקדם תיתן $.\frac{\varepsilon}{2}$
+המחובר הראשון חסום על ידי $,M\left|b_n - L_2\right|$ ולכן די שיתקיים $,M\left|b_n - L_2\right| < \frac{\varepsilon}{2}$ כלומר $.\left|b_n - L_2\right| < \frac{\varepsilon}{2M}$ באותו אופן, עבור המחובר השני די ש-$.\left|a_n - L_1\right| < \frac{\varepsilon}{2\left|L_2\right|}$ זהו העיקרון הכללי, וכדאי לשים לב אליו: **קובעים תחילה מה רוצים לקבל בסוף, ומפעילים את הגדרת הגבול עם ה-$\varepsilon$ שמייצר בדיוק את זה** — לא $,\varepsilon$ ולא $,\frac{\varepsilon}{2}$ אלא הכמות שאחרי הכפל במקדם תיתן $.\frac{\varepsilon}{2}$
 
 אלא שבשני הביטויים האלה חילקנו — ב-$M$ וב-$,\left|L_2\right|$ ואף אחד מהם אינו מובטח להיות שונה מאפס: $M = 0$ אפשרי, למשל כאשר כל איברי הסדרה הם $,0$ וגם $L_2 = 0$ הוא מקרה נפוץ לגמרי. הצעד כפי שהוא אינו חוקי, וצריך לתקן אותו.
 
@@ -602,9 +592,8 @@ $$.C = \max\left\{M,\ \left|L_2\right|\right\}$$
 
 מכיוון ש-$,\frac{\varepsilon}{2C} > 0$ מותר להפעיל את ההגדרה פעמיים:
 
-קיים $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.\left|a_n - L_1\right| < \frac{\varepsilon}{2C}$
-
-קיים $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|b_n - L_2\right| < \frac{\varepsilon}{2C}$
+- קיים $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $;\left|a_n - L_1\right| < \frac{\varepsilon}{2C}$
+- קיים $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|b_n - L_2\right| < \frac{\varepsilon}{2C}$
 
 נבחר $,N = \max\left\{N_1,\ N_2\right\}$ ואז לכל $n \geq N$
 
@@ -612,21 +601,13 @@ $$.\left|a_n b_n - L_1 L_2\right| \leq \left|a_n\right|\left|b_n - L_2\right| + 
 :::::
 
 ::::: {.thmproof title="סעיף (ד) — חילוק"}
-נוכיח תחילה את המקרה הפרטי
-
-$$,\lim_{n\to\infty} \frac{1}{b_n} = \frac{1}{L_2}$$
-
-ואז נסיים בכפל: $\dfrac{a_n}{b_n} = a_n \cdot \dfrac{1}{b_n}$ לפי סעיף (ג).
+נוכיח תחילה את המקרה הפרטי $,\lim\limits_{n\to\infty} \dfrac{1}{b_n} = \dfrac{1}{L_2}$ ואז נסיים בכפל: $\dfrac{a_n}{b_n} = a_n \cdot \dfrac{1}{b_n}$ לפי סעיף (ג).
 
 יהי $.\varepsilon > 0$ נאחד למכנה משותף:
 
 $$.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \left|\frac{L_2 - b_n}{b_n L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|}$$
 
-במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: $\left|b_n\right|$ עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא **חסם מלרע** על $,\left|b_n\right|$ וזהו בדיוק החישוב שכבר עשינו ב[הערה 8.3.2](#box-rem-denominator-nonzero), הפעם עד הסוף: שם הסתפקנו במסקנה $,b_n \neq 0$ וכאן נחלץ ממנו חסם מספרי. מכיוון ש-$,L_2 \neq 0$ מתקיים $,\frac{\left|L_2\right|}{2} > 0$ ולכן קיים $N_0$ כך שלכל $n \geq N_0$ מתקיים
-
-$$.\left|b_n - L_2\right| < \frac{\left|L_2\right|}{2}$$
-
-לפי אי-שוויון המשולש
+במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: $\left|b_n\right|$ עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא **חסם מלרע** על $,\left|b_n\right|$ וזהו בדיוק החישוב שכבר עשינו ב[הערה 8.3.2](#box-rem-denominator-nonzero), הפעם עד הסוף: שם הסתפקנו במסקנה $,b_n \neq 0$ וכאן נחלץ ממנו חסם מספרי. מכיוון ש-$,L_2 \neq 0$ מתקיים $,\frac{\left|L_2\right|}{2} > 0$ ולכן קיים $N_0$ כך שלכל $n \geq N_0$ מתקיים $.\left|b_n - L_2\right| < \frac{\left|L_2\right|}{2}$ לפי אי-שוויון המשולש
 
 $$,\left|L_2\right| = \left|\left(L_2 - b_n\right) + b_n\right| \leq \left|L_2 - b_n\right| + \left|b_n\right| < \frac{\left|L_2\right|}{2} + \left|b_n\right|$$
 
@@ -636,9 +617,7 @@ $$,\left|L_2\right| = \left|\left(L_2 - b_n\right) + b_n\right| \leq \left|L_2 -
 
 $$.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|} < \frac{\left|b_n - L_2\right|}{\frac{\left|L_2\right|}{2} \cdot \left|L_2\right|} = \frac{2}{\left|L_2\right|^{2}} \cdot \left|b_n - L_2\right|$$
 
-שוב אותו עיקרון: המקדם $\frac{2}{\left|L_2\right|^{2}}$ קבוע וידוע, ולכן נפעיל את ההגדרה עם $,\frac{\left|L_2\right|^{2}}{2}\varepsilon$ שהוא חיובי, ונקבל $N_1$ כך שלכל $n \geq N_1$ מתקיים
-
-$$.\left|b_n - L_2\right| < \frac{\left|L_2\right|^{2}}{2}\varepsilon$$
+שוב אותו עיקרון: המקדם $\frac{2}{\left|L_2\right|^{2}}$ קבוע וידוע, ולכן נפעיל את ההגדרה עם $,\frac{\left|L_2\right|^{2}}{2}\varepsilon$ שהוא חיובי, ונקבל $N_1$ כך שלכל $n \geq N_1$ מתקיים $.\left|b_n - L_2\right| < \frac{\left|L_2\right|^{2}}{2}\varepsilon$
 
 נבחר $,N = \max\left\{N_0,\ N_1\right\}$ ואז לכל $n \geq N$
 
@@ -662,7 +641,7 @@ $$.\lim_{n\to\infty} \frac{a_n}{b_n} = \lim_{n\to\infty} \left(a_n \cdot \frac{1
 :::
 
 ::: thmsol
-**מדוע אי אפשר להפעיל את המשפט ישירות.** הסדרה שבמונה, $,3n-4$ והסדרה שבמכנה, $,n+2$ אינן חסומות, ולכן לפי [מסקנה 8.2.7](#box-cor-unbounded-diverges) אינן מתכנסות. סעיף (ד) של המשפט מניח ששתי הסדרות מתכנסות, ולכן אינו חל כאן.
+**מדוע אי אפשר להפעיל את המשפט ישירות.** הסדרה שבמונה, $,3n-4$ והסדרה שבמכנה, $,n+2$ אינן חסומות, ולכן לפי [מסקנה 8.2.8](#box-cor-unbounded-diverges) אינן מתכנסות. סעיף (ד) של המשפט מניח ששתי הסדרות מתכנסות, ולכן אינו חל כאן.
 
 **המניפולציה.** נחלק את המונה ואת המכנה בחזקה הגבוהה ביותר, $.n$ לכל $n \geq 1$ מתקיים $,n \neq 0$ ולכן זהו צמצום חוקי של השבר, והסדרה לא השתנתה:
 

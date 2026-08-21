@@ -75,12 +75,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: המשיק כגבול של הישרים החותכים והשיפוע כנגזרת
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: המשיק כגבול של הישרים החותכים והשיפוע כנגזרת.
 :::
 
 ::: {.content-visible when-format="html"}
-![המשיק כגבול של הישרים החותכים והשיפוע כנגזרת](figures/c14_fig01.png){#fig-c06_fig03 width="62%" fig-align="center"}
+![המשיק כגבול של הישרים החותכים והשיפוע כנגזרת.](figures/c14_fig01.png){#fig-c06_fig03 width="62%" fig-align="center"}
 :::
 
 כלומר: $\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ הוא השיפוע של הישר המשיק לגרף הפונקציה ב- $(x_0, f(x_0))$.
@@ -205,12 +205,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גזירות גוררת רציפות, אך רציפות אינה גוררת גזירות
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גזירות גוררת רציפות, אך רציפות אינה גוררת גזירות.
 :::
 
 ::: {.content-visible when-format="html"}
-![גזירות גוררת רציפות, אך רציפות אינה גוררת גזירות](figures/c14_fig02.png){#fig-c06_fig01 width="62%" fig-align="center"}
+![גזירות גוררת רציפות, אך רציפות אינה גוררת גזירות.](figures/c14_fig02.png){#fig-c06_fig01 width="62%" fig-align="center"}
 :::
 
 **הוכחת הטענה:**
@@ -267,12 +267,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: קו מקווקו אלכסוני העובר דרך הראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: קו מקווקו אלכסוני העובר דרך הראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![קו מקווקו אלכסוני העובר דרך הראשית](figures/c14_fig03.png){#fig-c06_fig02 width="62%" fig-align="center"}
+![קו מקווקו אלכסוני העובר דרך הראשית.](figures/c14_fig03.png){#fig-c06_fig02 width="62%" fig-align="center"}
 :::
 
 נשים לב כי $f(x) = x \cdot D(x)$
@@ -428,8 +428,8 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: משולש ישר-זווית עבור $\arctan(y)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: משולש ישר-זווית עבור $\arctan(y)$.
 :::
 
 ::: {.content-visible when-format="html"}
@@ -488,12 +488,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=|x|$ בצורת V עם קודקוד בראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=|x|$ בצורת V עם קודקוד בראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף \|x\| בצורת V עם קודקוד בראשית](figures/c14_fig05.png){#fig-c06_fig05 width="62%" fig-align="center"}
+![גרף \|x\| בצורת V עם קודקוד בראשית.](figures/c14_fig05.png){#fig-c06_fig05 width="62%" fig-align="center"}
 :::
 
 מימין ל-0: $$\lim_{x \to 0^+} \frac{|x| - |0|}{x - 0} = \lim_{x \to 0^+} \frac{|x|}{x} = 1$$

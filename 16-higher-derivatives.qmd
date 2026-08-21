@@ -18,7 +18,7 @@ $((f')'\ldots)'$ גזירה ב- $x_0$ (ח-1 פעמים)
 
 $f$ גזירה מסדר שלישי $f,f',f''$ גזירות ב- $x_0$
 
-נסמן: $f^{(n)}(x) = (\ldots(f')'\ldots)'$ — ח נגזרות (הנגזרת ה-n-ית של $f$)
+נסמן: $,f^{(n)}(x) = (\ldots(f')'\ldots)'$ ח נגזרות (הנגזרת ה-n-ית של $f$)
 
 לפי המוסכמה:
 
@@ -476,12 +476,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: שני ענפי הפונקציה $f(x)=\frac{x^2+1}{x}$ — ענף ימני עם מינימום ב-$(1,2)$ וענף שמאלי עם מקסימום ב-$(-1,-2)$.
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: שני ענפי הפונקציה $,f(x)=\frac{x^2+1}{x}$ ענף ימני עם מינימום ב-$(1,2)$ וענף שמאלי עם מקסימום ב-$(-1,-2)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![שני ענפי הפונקציה $f(x)=\frac{x^2+1}{x}$ — ענף ימני עם מינימום ב-$(1,2)$ וענף שמאלי עם מקסימום ב-$(-1,-2)$.](figures/c16_fig01.png){#fig-c08_fig01 width="62%" fig-align="center"}
+![שני ענפי הפונקציה $,f(x)=\frac{x^2+1}{x}$ ענף ימני עם מינימום ב-$(1,2)$ וענף שמאלי עם מקסימום ב-$(-1,-2)$.](figures/c16_fig01.png){#fig-c08_fig01 width="62%" fig-align="center"}
 :::
 
 ## קמירות וקעירות של פונקציה
@@ -530,7 +530,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: עקומה גלית — החלק העליון (אדום) קמור כלפי מטה והחלק התחתון (כחול) קמור כלפי מעלה.
 :::
 
@@ -593,12 +593,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: שני ענפי $f(x)=\frac{x^2+1}{x}$ — הענף הימני ($x>0$) קמור כלפי מעלה והענף השמאלי ($x<0$) קמור כלפי מטה.
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: שני ענפי $,f(x)=\frac{x^2+1}{x}$ הענף הימני ($x>0$) קמור כלפי מעלה והענף השמאלי ($x<0$) קמור כלפי מטה.
 :::
 
 ::: {.content-visible when-format="html"}
-![שני ענפי $f(x)=\frac{x^2+1}{x}$ — הענף הימני ($x>0$) קמור כלפי מעלה והענף השמאלי ($x<0$) קמור כלפי מטה.](figures/c16_fig03.png){#fig-c08_fig03 width="62%" fig-align="center"}
+![שני ענפי $,f(x)=\frac{x^2+1}{x}$ הענף הימני ($x>0$) קמור כלפי מעלה והענף השמאלי ($x<0$) קמור כלפי מטה.](figures/c16_fig03.png){#fig-c08_fig03 width="62%" fig-align="center"}
 :::
 
 - הנקודה $x_0$ בה מתחלף סימן הקמירות, נקרא "נקודת פיתול".
@@ -642,7 +642,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: הפונקציה $f(x)=x^3$ עם נקודת פיתול בראשית $x=0$.
 :::
 
@@ -707,12 +707,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\frac{x^2+1}{x}$ עם אסימפטוטה אנכית מקווקוות ב-$x=0$ — הענף הימני נשאף ל-$+\infty$ והשמאלי ל-$-\infty$.
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $f(x)=\frac{x^2+1}{x}$ עם אסימפטוטה אנכית מקווקוות ב-$,x=0$ הענף הימני נשאף ל-$+\infty$ והשמאלי ל-$-\infty$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\frac{x^2+1}{x}$ עם אסימפטוטה אנכית מקווקוות ב-$x=0$ — הענף הימני נשאף ל-$+\infty$ והשמאלי ל-$-\infty$.](figures/c16_fig05.png){#fig-c08_fig05 width="62%" fig-align="center"}
+![$f(x)=\frac{x^2+1}{x}$ עם אסימפטוטה אנכית מקווקוות ב-$,x=0$ הענף הימני נשאף ל-$+\infty$ והשמאלי ל-$-\infty$.](figures/c16_fig05.png){#fig-c08_fig05 width="62%" fig-align="center"}
 :::
 
 ### אסימפטוטה משופעת
@@ -774,7 +774,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: שני ענפי $f(x)=\frac{x^2+1}{x}$ עם האסימפטוטה המשופעת $y=x$ (מקווקוות) ב-$\infty$ וב-$-\infty$.
 :::
 

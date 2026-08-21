@@ -65,7 +65,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: ציר מספרים עם הנקודות $-3$, $0$, $3$ וקשתות "מרחק 3" משני הצדדים.
 :::
 
@@ -120,7 +120,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: ציר מספרים עם נקודות פתוחות ב-$-1$ וב-$1$, והקטע הפתוח ביניהן.
 :::
 
@@ -169,7 +169,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: ציר מספרים עם נקודות סגורות ב-$-1$ וב-$1$, והקטע הסגור ביניהן.
 :::
 
@@ -225,7 +225,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: ציר מספרים עם נקודות פתוחות ב-$-3$ וב-$3$, והקרניים החיצוניות מסומנות.
 :::
 
@@ -280,7 +280,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: סקיצת משולש וקטורים — וקטור $x$, וקטור $y$ והווקטור $x+y$, להמחשת אי-שוויון המשולש.
 :::
 
@@ -353,7 +353,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: ציר מספרים עם הנקודות $x_0-\varepsilon$, $x_0$, $x_0+\varepsilon$ וקשתות באורך $\varepsilon$ משני צדי $x_0$.
 :::
 

@@ -46,12 +46,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה רציפה בקטע פתוח $(a,b)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה רציפה בקטע פתוח $(a,b)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה רציפה בקטע פתוח $(a,b)$](figures/c13_fig01.png){#fig-c04_fig15 width="62%" fig-align="center"}
+![פונקציה רציפה בקטע פתוח $(a,b)$.](figures/c13_fig01.png){#fig-c04_fig15 width="62%" fig-align="center"}
 :::
 
 פונקציה $f(x)$ היא רציפה ב- $(a,b)$ , אם לכל $x_0 \in (a, b)$ הפונקציה $f$ רציפה ב- $x_0$ .
@@ -94,12 +94,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה לינארית יורדת רציפה בקטע סגור $[a,b]$ עם נקודה $x_0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה לינארית יורדת רציפה בקטע סגור $[a,b]$ עם נקודה $x_0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה לינארית יורדת רציפה בקטע סגור $[a,b]$ עם נקודה $x_0$](figures/c13_fig02.png){#fig-c04_fig16 width="62%" fig-align="center"}
+![פונקציה לינארית יורדת רציפה בקטע סגור $[a,b]$ עם נקודה $x_0$.](figures/c13_fig02.png){#fig-c04_fig16 width="62%" fig-align="center"}
 :::
 
 פונקציה $f(x)$ היא רציפה ב- $[a,b]$ , אם לכל $a < x_0 < b$ הפונקציה $f$ רציפה ב- $x_0$ וגם
@@ -151,12 +151,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: אי-רציפות ב-$x=2$ — $\lim_{x\to 2}f(x)=3$ אך $f(2)=4$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: אי-רציפות ב-$:x=2$ מתקיים $\lim_{x\to 2}f(x)=3$ אך $f(2)=4$.
 :::
 
 ::: {.content-visible when-format="html"}
-![אי-רציפות ב-$x=2$ — $\lim_{x\to 2}f(x)=3$ אך $f(2)=4$](figures/c13_fig03.png){#fig-c04_fig17 width="62%" fig-align="center"}
+![אי-רציפות ב-$:x=2$ מתקיים $\lim_{x\to 2}f(x)=3$ אך $f(2)=4$.](figures/c13_fig03.png){#fig-c04_fig17 width="62%" fig-align="center"}
 :::
 
 $$\lim_{x \to 2} f(x) = 3$$
@@ -266,7 +266,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: גרף פונקציית דיריכלה, שתי שורות נקודות בגובה $1$ (רציונליים) ובגובה $0$ (אי רציונליים)
 :::
 
@@ -318,12 +318,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף פונקציית הערך השלם $f(x) = \lfloor x \rfloor$ עם נקודות מלאות וריקות בערכים השלמים
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף פונקציית הערך השלם $f(x) = \lfloor x \rfloor$ עם נקודות מלאות וריקות בערכים השלמים.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף פונקציית הערך השלם $f(x) = \lfloor x \rfloor$ עם נקודות מלאות וריקות בערכים השלמים](figures/c13_fig05.png){#fig-c05_fig01 width="62%" fig-align="center"}
+![גרף פונקציית הערך השלם $f(x) = \lfloor x \rfloor$ עם נקודות מלאות וריקות בערכים השלמים.](figures/c13_fig05.png){#fig-c05_fig01 width="62%" fig-align="center"}
 :::
 
 בכל נקודה $x_0 \notin \mathbb{Z}$ לא רציפה, כי לא קיים $\lim\limits_{x \to x_0} \lfloor x \rfloor$ אבל היא כן רציפה <u>מימין</u> בכל נקודה כזו $x_0$.
@@ -384,12 +384,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה רציפה גלית על $[a,b]$ המקבלת כל ערך ביניים $y$ שבין $f(a)$ ל-$f(b)$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה רציפה גלית על $[a,b]$ המקבלת כל ערך ביניים $y$ שבין $f(a)$ ל-$f(b)$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה רציפה גלית על $[a,b]$ המקבלת כל ערך ביניים $y$ שבין $f(a)$ ל-$f(b)$](figures/c13_fig06.png){#fig-c05_fig05 width="62%" fig-align="center"}
+![פונקציה רציפה גלית על $[a,b]$ המקבלת כל ערך ביניים $y$ שבין $f(a)$ ל-$f(b)$.](figures/c13_fig06.png){#fig-c05_fig05 width="62%" fig-align="center"}
 :::
 
 #### משפט ערך הביניים
@@ -442,12 +442,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הפונקציה $f(x)=x^3-5x-2$ על $[0,3]$ החותכת את ציר ה-$x$ בנקודה $c$, עם $f(0)=-2$ ו-$f(3)=10$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הפונקציה $f(x)=x^3-5x-2$ על $[0,3]$ החותכת את ציר ה-$x$ בנקודה $c$, עם $f(0)=-2$ ו-$f(3)=10$.
 :::
 
 ::: {.content-visible when-format="html"}
-![הפונקציה $f(x)=x^3-5x-2$ על $[0,3]$ החותכת את ציר ה-$x$ בנקודה $c$, עם $f(0)=-2$ ו-$f(3)=10$](figures/c13_fig07.png){#fig-c05_fig06 width="62%" fig-align="center"}
+![הפונקציה $f(x)=x^3-5x-2$ על $[0,3]$ החותכת את ציר ה-$x$ בנקודה $c$, עם $f(0)=-2$ ו-$f(3)=10$.](figures/c13_fig07.png){#fig-c05_fig06 width="62%" fig-align="center"}
 :::
 
 <!-- מקור: הרצאה 15 -->
@@ -486,12 +486,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה רציפה בעלת התנהגות גלית בין $a$ ל-$b$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה רציפה בעלת התנהגות גלית בין $a$ ל-$b$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה רציפה בעלת התנהגות גלית בין $a$ ל-$b$](figures/c13_fig08.png){#fig-c05_fig07 width="62%" fig-align="center"}
+![פונקציה רציפה בעלת התנהגות גלית בין $a$ ל-$b$.](figures/c13_fig08.png){#fig-c05_fig07 width="62%" fig-align="center"}
 :::
 
 ## פונקציות אלמנטריות
@@ -564,12 +564,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף עולה של $f(x)=x^3-5x-2$ החותך את ציר ה-$x$ בנקודה $c$, מ-$f(0)=-2$ עד $f(3)=10$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף עולה של $f(x)=x^3-5x-2$ החותך את ציר ה-$x$ בנקודה $c$, מ-$f(0)=-2$ עד $f(3)=10$.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף עולה של $f(x)=x^3-5x-2$ החותך את ציר ה-$x$ בנקודה $c$, מ-$f(0)=-2$ עד $f(3)=10$](figures/c13_fig09.png){#fig-c05_fig08 width="62%" fig-align="center"}
+![גרף עולה של $f(x)=x^3-5x-2$ החותך את ציר ה-$x$ בנקודה $c$, מ-$f(0)=-2$ עד $f(3)=10$.](figures/c13_fig09.png){#fig-c05_fig08 width="62%" fig-align="center"}
 :::
 
 ## דוגמה: חוסר רציפות בנקודה אחת הורס את המסקנה
@@ -642,7 +642,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: שתי דוגמאות לעקומות $f$ ו-$g$ על $[0,1]$ הנחתכות בנקודה $c$ (כאשר $f(0)<g(0)$ ו-$f(1)>g(1)$)
 :::
 
@@ -708,12 +708,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה רציפה השואפת ל-$5$ עם אסימפטוטה אופקית מקווקוות, החוצה את ציר ה-$x$, עם סימון $x_0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה רציפה השואפת ל-$5$ עם אסימפטוטה אופקית מקווקוות, החוצה את ציר ה-$x$, עם סימון $x_0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה רציפה השואפת ל-$5$ עם אסימפטוטה אופקית מקווקוות, החוצה את ציר ה-$x$, עם סימון $x_0$](figures/c13_fig11.png){#fig-c05_fig10 width="62%" fig-align="center"}
+![פונקציה רציפה השואפת ל-$5$ עם אסימפטוטה אופקית מקווקוות, החוצה את ציר ה-$x$, עם סימון $x_0$.](figures/c13_fig11.png){#fig-c05_fig10 width="62%" fig-align="center"}
 :::
 
 ## דוגמה: קיום מספר פתרונות של משוואה
@@ -792,12 +792,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: שלוש דוגמאות למשפט ויירשטראס. (A) פונקציה רציפה אך לא חסומה על הקטע הפתוח ליד $b$ — אי אפשר ליישם את המשפט. (B) פונקציה רציפה על $[a,b]$ עם מקסימום פנימי ומינימום בקצוות. (C) פונקציה רציפה עם כמה נקודות $x_{\max}$ ו-$x_{\min}$ — אפשר ליישם את המשפט.
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: שלוש דוגמאות למשפט ויירשטראס. (A) פונקציה רציפה אך לא חסומה על הקטע הפתוח ליד $,b$ ולכן אי אפשר ליישם את המשפט. (B) פונקציה רציפה על $[a,b]$ עם מקסימום פנימי ומינימום בקצוות. (C) פונקציה רציפה עם כמה נקודות $x_{\max}$ ו-$,x_{\min}$ וכאן אפשר ליישם את המשפט.
 :::
 
 ::: {.content-visible when-format="html"}
-![שלוש דוגמאות למשפט ויירשטראס: (A) רציפה אך לא חסומה — אי אפשר ליישם; (B) רציפה על $[a,b]$ עם מקסימום ומינימום; (C) רציפה עם כמה $x_{\max}$ ו-$x_{\min}$ — אפשר ליישם](figures/c13_fig12.png){#fig-c05_fig11 width="62%" fig-align="center"}
+![שלוש דוגמאות למשפט ויירשטראס: (A) רציפה אך לא חסומה — אי אפשר ליישם; (B) רציפה על $[a,b]$ עם מקסימום ומינימום; (C) רציפה עם כמה $x_{\max}$ ו-$,x_{\min}$ וכאן אפשר ליישם.](figures/c13_fig12.png){#fig-c05_fig11 width="62%" fig-align="center"}
 :::
 
 <!-- בדיקה: כותרות התרשימים נכתבו בכתב יד; ניסוח "אי אפשר/אפשר ליישם את משפט ויירשטראס" הוא קריאה משוערת -->

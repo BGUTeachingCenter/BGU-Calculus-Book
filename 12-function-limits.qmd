@@ -60,12 +60,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הגדרת הגבול לפי $\varepsilon$-$\delta$ — רצועה אופקית $L\pm\varepsilon$ ורצועה אנכית $x_0\pm\delta$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הגדרת הגבול לפי $\varepsilon$-$,\delta$ רצועה אופקית $L\pm\varepsilon$ ורצועה אנכית $x_0\pm\delta$.
 :::
 
 ::: {.content-visible when-format="html"}
-![הגדרת הגבול לפי $\varepsilon$-$\delta$ — רצועה אופקית $L\pm\varepsilon$ ורצועה אנכית $x_0\pm\delta$](figures/c12_fig01.png){#fig-c04_fig01 width="62%" fig-align="center"}
+![הגדרת הגבול לפי $\varepsilon$-$,\delta$ רצועה אופקית $L\pm\varepsilon$ ורצועה אנכית $x_0\pm\delta$.](figures/c12_fig01.png){#fig-c04_fig01 width="62%" fig-align="center"}
 :::
 
 אם $f(x)$ מוגדרת בסביבה נקובה של $x_0$, אז $0 < |x - x_0| < \delta$
@@ -106,12 +106,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גבול $L$ בנקודה $x_0$ שבה הפונקציה אינה מוגדרת — עיגול ריק על הגרף
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גבול $L$ בנקודה $x_0$ שבה הפונקציה אינה מוגדרת — עיגול ריק על הגרף.
 :::
 
 ::: {.content-visible when-format="html"}
-![גבול $L$ בנקודה $x_0$ שבה הפונקציה אינה מוגדרת — עיגול ריק על הגרף](figures/c12_fig02.png){#fig-c04_fig02 width="62%" fig-align="center"}
+![גבול $L$ בנקודה $x_0$ שבה הפונקציה אינה מוגדרת — עיגול ריק על הגרף.](figures/c12_fig02.png){#fig-c04_fig02 width="62%" fig-align="center"}
 :::
 
 גבול של $f(x)$ בנקודה $x_0$, אינם תלוי באם הפונקציה $f(x)$ מוגדרת ב-$x_0$ בכלל ואיך היא מוגדרת ב-$x_0$.
@@ -211,12 +211,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\sin\left(\frac{1}{x}\right)$ — תנודות צפופות בקרבת הראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=\sin\left(\frac{1}{x}\right)$ תנודות צפופות בקרבת הראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\sin\left(\frac{1}{x}\right)$ — תנודות צפופות בקרבת הראשית](figures/c12_fig03.png){#fig-c04_fig05 width="62%" fig-align="center"}
+![$,f(x)=\sin\left(\frac{1}{x}\right)$ תנודות צפופות בקרבת הראשית.](figures/c12_fig03.png){#fig-c04_fig05 width="62%" fig-align="center"}
 :::
 
 ### פתרון:
@@ -368,12 +368,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: כלל הסנדוויץ' — $h\le f\le g$ והקצוות נפגשים בנקודה $L$ מעל $x_0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: כלל הסנדוויץ' — $h\le f\le g$ והקצוות נפגשים בנקודה $L$ מעל $x_0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![כלל הסנדוויץ' — $h\le f\le g$ והקצוות נפגשים בנקודה $L$ מעל $x_0$](figures/c12_fig04.png){#fig-c04_fig03 width="62%" fig-align="center"}
+![כלל הסנדוויץ' — $h\le f\le g$ והקצוות נפגשים בנקודה $L$ מעל $x_0$.](figures/c12_fig04.png){#fig-c04_fig03 width="62%" fig-align="center"}
 :::
 
 
@@ -425,12 +425,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: כלל הסנדוויץ' — $h\le f\le g$ הכלואות זו בזו ונפגשות בנקודה $L$ מעל $x_0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: כלל הסנדוויץ' — $h\le f\le g$ הכלואות זו בזו ונפגשות בנקודה $L$ מעל $x_0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![כלל הסנדוויץ' — $h\le f\le g$ הכלואות זו בזו ונפגשות בנקודה $L$ מעל $x_0$](figures/c12_fig05.png){#fig-c04_fig04 width="62%" fig-align="center"}
+![כלל הסנדוויץ' — $h\le f\le g$ הכלואות זו בזו ונפגשות בנקודה $L$ מעל $x_0$.](figures/c12_fig05.png){#fig-c04_fig04 width="62%" fig-align="center"}
 :::
 
 מסקנה מכלל הסנדוויץ'
@@ -505,12 +505,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ — קפיצה בנקודה $x=1$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציית הערך השלם $,f(x)=\lfloor x \rfloor$ קפיצה בנקודה $x=1$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציית הערך השלם $f(x)=\lfloor x \rfloor$ — קפיצה בנקודה $x=1$](figures/c12_fig06.png){#fig-c04_fig06 width="62%" fig-align="center"}
+![פונקציית הערך השלם $,f(x)=\lfloor x \rfloor$ קפיצה בנקודה $x=1$.](figures/c12_fig06.png){#fig-c04_fig06 width="62%" fig-align="center"}
 :::
 
 ### פתרון:
@@ -551,12 +551,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הפונקציה $f(x)=\sqrt{x}$ והגבול החד-צדדי $\lim_{x\to 0^+}\sqrt{x}=0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הפונקציה $f(x)=\sqrt{x}$ והגבול החד-צדדי $\lim_{x\to 0^+}\sqrt{x}=0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![הפונקציה $f(x)=\sqrt{x}$ והגבול החד-צדדי $\lim_{x\to 0^+}\sqrt{x}=0$](figures/c12_fig07.png){#fig-c04_fig07 width="62%" fig-align="center"}
+![הפונקציה $f(x)=\sqrt{x}$ והגבול החד-צדדי $\lim_{x\to 0^+}\sqrt{x}=0$.](figures/c12_fig07.png){#fig-c04_fig07 width="62%" fig-align="center"}
 :::
 
 ::: {#box-prp-onesided-limit .thmprp}
@@ -615,12 +615,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה מוגדרת בקטעים — $3x$ משמאל ו-$x^2+2x$ מימין, עם נקודה ריקה ב-$x=1$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה מוגדרת בקטעים — $3x$ משמאל ו-$x^2+2x$ מימין, עם נקודה ריקה ב-$x=1$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה מוגדרת בקטעים — $3x$ משמאל ו-$x^2+2x$ מימין, עם נקודה ריקה ב-$x=1$](figures/c12_fig08.png){#fig-c04_fig08 width="62%" fig-align="center"}
+![פונקציה מוגדרת בקטעים — $3x$ משמאל ו-$x^2+2x$ מימין, עם נקודה ריקה ב-$x=1$.](figures/c12_fig08.png){#fig-c04_fig08 width="62%" fig-align="center"}
 :::
 
 ### פתרון:
@@ -763,12 +763,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\frac{1}{x^2}$ — שואפת לאינסוף בקרבת הראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=\frac{1}{x^2}$ שואפת לאינסוף בקרבת הראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\frac{1}{x^2}$ — שואפת לאינסוף בקרבת הראשית](figures/c12_fig09.png){#fig-c04_fig09 width="62%" fig-align="center"}
+![$,f(x)=\frac{1}{x^2}$ שואפת לאינסוף בקרבת הראשית.](figures/c12_fig09.png){#fig-c04_fig09 width="62%" fig-align="center"}
 :::
 
 $$\lim_{x \to x_0} f(x) = -\infty \qquad (2)$$
@@ -809,12 +809,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\arctan x$ — אסימפטוטה אופקית בגובה $\frac{\pi}{2}$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=\arctan x$ אסימפטוטה אופקית בגובה $\frac{\pi}{2}$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\arctan x$ — אסימפטוטה אופקית בגובה $\frac{\pi}{2}$](figures/c12_fig10.png){#fig-c04_fig10 width="62%" fig-align="center"}
+![$,f(x)=\arctan x$ אסימפטוטה אופקית בגובה $\frac{\pi}{2}$.](figures/c12_fig10.png){#fig-c04_fig10 width="62%" fig-align="center"}
 :::
 
 $$\lim_{x \to \infty} f(x) = \infty \qquad (4)$$
@@ -857,12 +857,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=x^2$ — שואפת לאינסוף, עם סימוני $M_1$, $M_2$ על ציר ה-$y$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=x^2$ שואפת לאינסוף, עם סימוני $M_1$, $M_2$ על ציר ה-$y$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=x^2$ — שואפת לאינסוף, עם סימוני $M_1$, $M_2$ על ציר ה-$y$](figures/c12_fig11.png){#fig-c04_fig11 width="62%" fig-align="center"}
+![$,f(x)=x^2$ שואפת לאינסוף, עם סימוני $M_1$, $M_2$ על ציר ה-$y$.](figures/c12_fig11.png){#fig-c04_fig11 width="62%" fig-align="center"}
 :::
 
 <!-- מקור: הרצאה 13 -->
@@ -901,12 +901,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\frac{1}{x^2}$ — אסימפטוטה אנכית ב-$x=0$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=\frac{1}{x^2}$ אסימפטוטה אנכית ב-$x=0$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\frac{1}{x^2}$ — אסימפטוטה אנכית ב-$x=0$](figures/c12_fig12.png){#fig-c04_fig12 width="62%" fig-align="center"}
+![$,f(x)=\frac{1}{x^2}$ אסימפטוטה אנכית ב-$x=0$.](figures/c12_fig12.png){#fig-c04_fig12 width="62%" fig-align="center"}
 :::
 
 לדוגמא: $f(x) = \frac{1}{x^2}$
@@ -947,12 +947,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=\arctan x$ — אסימפטוטה אופקית בגובה $\frac{\pi}{2}$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=\arctan x$ אסימפטוטה אופקית בגובה $\frac{\pi}{2}$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=\arctan x$ — אסימפטוטה אופקית בגובה $\frac{\pi}{2}$](figures/c12_fig13.png){#fig-c04_fig13 width="62%" fig-align="center"}
+![$,f(x)=\arctan x$ אסימפטוטה אופקית בגובה $\frac{\pi}{2}$.](figures/c12_fig13.png){#fig-c04_fig13 width="62%" fig-align="center"}
 :::
 
 לדוגמא: $f(x) = \arctan$
@@ -995,12 +995,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: $f(x)=x^2$ — שואפת לאינסוף, עם הסימונים $M_1$, $M_2$ על ציר ה-$y$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $,f(x)=x^2$ שואפת לאינסוף, עם הסימונים $M_1$, $M_2$ על ציר ה-$y$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$f(x)=x^2$ — שואפת לאינסוף, עם הסימונים $M_1$, $M_2$ על ציר ה-$y$](figures/c12_fig14.png){#fig-c04_fig14 width="62%" fig-align="center"}
+![$,f(x)=x^2$ שואפת לאינסוף, עם הסימונים $M_1$, $M_2$ על ציר ה-$y$.](figures/c12_fig14.png){#fig-c04_fig14 width="62%" fig-align="center"}
 :::
 
 לדוגמא: $f(x) = x^2$

@@ -1852,97 +1852,95 @@ $$,\Bigl|\left|a_n\right|-\left|L\right|\Bigr| \leq \left|a_n-L\right|$$
 מצד שני, $(a_n)$ כלל אינה מתכנסת, לפי הטיעון שראינו למעלה עבור הסדרה המתחלפת, ובפרט היא אינה שואפת ל-$L=1$.
 :::
 
-## מסקנות מיידיות מהגדרת הגבול
+## יחידות הגבול
 
-### מיקום איברים ביחס לגבול
+אמרנו, שבאופן אינטואיטיבי, סדרה היא מתכנסת אם היא ״מקרבת״ מספר כלשהו. ברור שאם ״סדרה מקרבת״ מספר, היא צריכה לקרב מספר יחיד ולא כמה מספרים. כמו שאמרנו קודם, אחד התפקידים של ההגדרה הוא לתת מסגרת מוגדרת ומדויקת לאינטואיציה שלנו. עם זאת, ההגדרה הפורמלית של הגבול אינה דורשת יחידות: היא קובעת שהמספר $L$ הוא גבול של הסדרה אם לכל $\varepsilon>0$ קיים $N\in\mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,|a_n - L| < \varepsilon$ ואין בה דבר שמונע ממספר אחר לקיים בדיוק את אותו תנאי.
 
-המסקנה המיידית של הגדרת התכנסות, שנובעת פשוט מפתיחת הערך המוחלט שבהגדרה, היא שכמעט כל איברי הסדרה לא יכולים להיות הרבה יותר גדולים או הרבה יותר קטנים מהגבול, כפי שמנוסח במשפט הבא.
+מִנַּיִן לנו שלא יכולים להיות כמה גבולות במקרים ״מוזרים״ מסוימים? (כפי שתראו בהמשך, במתמטיקה יש לא מעט כאלה.) לא היינו רוצים שתהיה אפשרות שהקירוב שלנו יקרב מספרים שונים.
 
-::: {#box-thm-limit-window .thmthm}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה המקיימת $.\lim\limits_{n\to\infty} a_n = L$ אז:
+אפשר לנסות לפתור את הבעיה בהגדרה ופשוט לדרוש יחידות, אך זה לא באמת פותר אותה. קודם כל, איך להתייחס למקרי ביניים שבהם יש כמה מספרים שמקיימים את ההגדרה של הגבול? ודבר שני — איך אפשר בכלל להבטיח יחידות? ברגע שמצאנו מספר אחד, איך בודקים שאין אחרים? לכן, **לדרוש** יחידות כחלק מההגדרה אינו עוזר לנו בהרבה. על מנת לבדוק ״ייתכנות״ של ההגדרה, צריך לענות על השאלה: האם יכולים להיות לסדרה שני גבולות שונים?
 
-(א) לכל $m < L$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.a_n > m$
+מסתבר, שמתוך ההגדרה נובע שלא יכול להיות יותר מגבול אחד — וזה מנוסח במשפט הבא.
 
-(ב) לכל $M > L$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.a_n < M$
+::: {#box-thm-limit-uniqueness .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. אם מתקיים $\lim_{n\to\infty}a_n = L_1$ וגם $\lim_{n \to \infty} a_n = L_2$ אז $.L_1 = L_2$
+
+כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.
 :::
 
-::: {.thmproof title="סעיף (א)"}
-יהי $.m < L$ המרחק בין $m$ ל-$L$ חיובי, ולכן מותר להפעיל את הגדרת הגבול עם $:\varepsilon = L - m > 0$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,\left|a_n - L\right| < \varepsilon$ ובפרט
+::::::::::: {#box-expl-uniqueness-idea .thmexpl title="הרעיון של ההוכחה"}
+נניח ש-$,L_1 \neq L_2$ ונסמן ב-$d$ את המרחק ביניהם, כלומר $.d = |L_1 - L_2| > 0$
 
-$$.a_n > L - \varepsilon = L - \left(L - m\right) = m$$
-:::
+**הרעיון:** אם המרחק בין $x$ ל-$L_1$ קטן מ-$\frac{d}{2}$, אז המרחק בין $x$ ל-$L_2$ גדול מ-$\frac{d}{2}$; ובאותו אופן, אם המרחק בין $x$ ל-$L_2$ קטן מ-$\frac{d}{2}$, אז המרחק בין $x$ ל-$L_1$ גדול מ-$\frac{d}{2}$. במילים אחרות, **נקודה אחת אינה יכולה להיות קרובה מ-**$\frac{d}{2}$ גם ל-$L_1$ וגם ל-$L_2$.
 
-::: {.thmproof title="סעיף (ב)"}
-יהי $.M > L$ הפעם ניקח $,\varepsilon = M - L > 0$ ונקבל $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,\left|a_n - L\right| < \varepsilon$ ובפרט
-
-$$.a_n < L + \varepsilon = L + \left(M - L\right) = M$$
-:::
-
-::: {.thmexpl title="מאיחוד שני הסעיפים אל קטע פתוח כלשהו"}
-אפשר לאחד את שני הסעיפים של המשפט לטענה אחת: לכל $m$ ו-$M$ המקיימים $,m < L < M$ מתקיים
-
-$$m < a_n < M$$
-
-עבור $n$ גדול מספיק.
-
-נשים לב עכשיו שהקבוצה $\left\{x \mid m < x < M\right\}$ אינה אלא הקטע הפתוח $,\left(m,\ M\right)$ והוא מכיל את $.L$ מצד שני, גם סביבת $\varepsilon$ של $,L$ כלומר $,\left(L-\varepsilon,\ L+\varepsilon\right)$ היא קטע פתוח המכיל את $.L$ מכאן המסקנה הבאה.
-:::
-
-::: {#box-cor-limit-open-interval .thmcor}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $.L \in \mathbb{R}$ אז $\lim\limits_{n\to\infty} a_n = L$ אם ורק אם לכל קטע פתוח $\left(t,\ s\right)$ המקיים $L \in \left(t,\ s\right)$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.a_n \in \left(t,\ s\right)$
-:::
+זוהי תוצאה מיידית של [אי-שוויון המשולש](04-abs-value.qmd): אילו היו שני המרחקים קטנים מ-$\frac{d}{2}$, היינו מקבלים $$.d = |L_1 - L_2| \leq |x-L_1| + |x-L_2| < \frac{d}{2} + \frac{d}{2} = d$$ כלומר $,d < d$ וזה כמובן בלתי אפשרי.
 
 ```{python}
 #| echo: false
 #| output: false
-import numpy as np
 import matplotlib.pyplot as plt
 
-# Static stand-in for the widget, in the print edition. Same sequence, same window,
-# and the same thing to notice: the terms that fall outside sit at the START.
-n = np.arange(1, 41)
-a = 1 + np.sin(n) / n
-m, M = 0.85, 1.15
-outside = (a <= m) | (a >= M)
-N = int(n[outside].max()) + 1
+fig, ax = plt.subplots(figsize=(6.4, 2.6))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
 
-fig, ax = plt.subplots(figsize=(6.4, 3.2))
-ax.axhspan(m, M, color="tab:green", alpha=0.10)
-# all three levels dashed: the interval is OPEN, so m and M are not attained and a
-# solid rule would suggest the terms may sit on them
-ax.axhline(1.0, color="0.35", lw=1.0, ls="--")
-ax.axhline(m, color="tab:blue", lw=1.3, ls="--")
-ax.axhline(M, color="tab:red", lw=1.3, ls="--")
-ax.axvline(N, color="0.2", lw=1.1, ls=":")
+L1, L2 = -1.0, 1.0
+d = L2 - L1
+h = d / 2.0                 # the neighbourhood radius, d/2
+m = (L1 + L2) / 2.0
 
-ax.plot(n[~outside], a[~outside], "o", ms=4.5, color="tab:green")
-ax.plot(n[outside], a[outside], "o", ms=4.5, color="tab:red")
+# the two d/2 neighbourhoods: they meet exactly at the midpoint and do not overlap
+ax.plot([L1-h, L1+h], [0, 0], color="tab:blue", lw=7, alpha=0.30, zorder=2,
+        solid_capstyle="butt")
+ax.plot([L2-h, L2+h], [0, 0], color="tab:red", lw=7, alpha=0.30, zorder=2,
+        solid_capstyle="butt")
 
-ax.annotate("$L$", xy=(41.2, 1.0), va="center", fontsize=12, color="0.25")
-ax.annotate("$m$", xy=(41.2, m), va="center", fontsize=12, color="tab:blue")
-ax.annotate("$M$", xy=(41.2, M), va="center", fontsize=12, color="tab:red")
-ax.annotate("$N = %d$" % N, xy=(N, 1.92), ha="center", fontsize=11, color="0.2")
-ax.annotate(r"$a_n = 1 + \frac{\sin n}{n}$", xy=(21, 1.75), fontsize=12, color="0.2")
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=5)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.16), ha="center", va="top",
+                fontsize=13, color=col)
 
-# only the three levels that matter get a number
-ax.set_yticks([m, 1.0, M])
-ax.set_yticklabels(["%.2f" % m, "1", "%.2f" % M])
-ax.set_xlim(0, 43)
-ax.set_ylim(0.62, 1.98)
-ax.set_xlabel("$n$")
-ax.spines[["top", "right"]].set_visible(False)
+# midpoint tick: the only place the two neighbourhoods touch
+ax.plot([m, m], [-0.10, 0.10], color="black", lw=1.4, zorder=5)
+
+# the radius of each neighbourhood, measured on the OUTER side: it keeps the middle
+# clear, where the two bands meeting at the midpoint is what should draw the eye
+ax.annotate("", xy=(L1, 0.36), xytext=(L1-h, 0.36),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.2))
+ax.annotate(r"$\frac{d}{2}$", xy=(L1-h/2, 0.36), xytext=(L1-h/2, 0.42),
+            ha="center", fontsize=12, color="tab:blue")
+ax.annotate("", xy=(L2, 0.36), xytext=(L2+h, 0.36),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.2))
+ax.annotate(r"$\frac{d}{2}$", xy=(L2+h/2, 0.36), xytext=(L2+h/2, 0.42),
+            ha="center", fontsize=12, color="tab:red")
+
+# d across the top, with dotted guides down to the points as in the case figures
+ax.annotate("", xy=(L1, 0.84), xytext=(L2, 0.84),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=(m, 0.84), xytext=(m, 0.90), ha="center", fontsize=12)
+for p in (L1, L2):
+    ax.plot([p, p], [0.10, 0.84], color="black", lw=0.7, ls=":")
+
+# one point in each neighbourhood, and one in neither
+for p, lab in [(-1.45, r"$x_1$"), (0.55, r"$x_2$"), (2.6, r"$x_3$")]:
+    ax.plot([p], [0], "o", color="tab:green", ms=6, zorder=6)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, 0.13), ha="center", fontsize=11,
+                color="tab:green")
+
+ax.set_xlim(-3.0, 3.2)
+ax.set_ylim(-0.5, 1.10)
+ax.axis("off")
 fig.savefig("figures/c07_fig15.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
-:::::: {#box-sim-window .thmsim title="הקטע הפתוח $(m,\\ M)$"}
+:::::::: {#box-sim-two-neighbourhoods .thmsim title="שתי הסביבות ברדיוס $\\frac{d}{2}$"}
 ::: {.content-visible when-format="html"}
 ```{=html}
-<iframe class="widget-frame" src="widgets/ch07/window-m-M.html" loading="lazy" title="איברי הסדרה, הקטע הפתוח שבין m ל-M סביב הגבול, והאינדקס N שממנו והלאה כל האיברים בתוך הקטע"></iframe>
+<iframe class="widget-frame" src="widgets/ch07/two-limits-neighbourhoods.html" loading="lazy" title="שתי סביבות ברדיוס d/2 סביב שני גבולות, ונקודה נעה ביניהן"></iframe>
 ```
 :::
 
-הזיזו את $m$ ואת $,M$ וראו כיצד $N$ משתנה. שימו לב לשני דברים: $N$ מגיב לשני המחוונים ולא רק לצר שביניהם, והקטע אינו חייב להיות סימטרי סביב $L$ — אפשר להצמיד את $m$ קרוב מאוד ל-$L$ ולהשאיר את $M$ רחוק, ועדיין יימצא $N$ מתאים.
+הזיזו את $x$ לאורך הישר, ונסו למצוא מיקום שבו $x$ נמצאת בשתי הסביבות בו-זמנית. לא תמצאו: בכל מיקום, לפחות אחד משני המרחקים גדול מ-$\frac{d}{2}$. שימו לב גם לשוויון המוצג מעל, המשתנה לפי מיקומה של $x$, והוא בדיוק אחד משלושת המקרים שנראה מיד.
 
 :::: {.content-visible when-format="pdf"}
 ```{=latex}
@@ -1952,141 +1950,63 @@ plt.close(fig)
 ```
 
 ::: {style="text-align:center"}
-תרשים: איברי הסדרה $a_n = 1 + \frac{\sin n}{n}$ והקטע הפתוח שבין $m$ ל-$.M$ האיברים האדומים חורגים ממנו, וכולם נמצאים בהתחלה; החל מ-$N$ כל האיברים בפנים.
+תרשים: הסביבות ברדיוס $\frac{d}{2}$ סביב $L_1$ ו-$L_2$ נפגשות בדיוק באמצע ואינן חופפות. הנקודה $x_1$ נמצאת בסביבה של $L_1$ בלבד, $x_2$ בסביבה של $L_2$ בלבד, ו-$x_3$ מחוץ לשתיהן.
 :::
 ::::
-::::::
+::::::::
 
-::: {#box-qst-window-equivalent .thmqst}
-השלימו את פרטי ההוכחה של המסקנה: הוכיחו כי $\lim\limits_{n\to\infty} a_n = L$ אם ורק אם לכל קטע פתוח $\left(t,\ s\right)$ המקיים $L \in \left(t,\ s\right)$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.a_n \in \left(t,\ s\right)$
-:::
+**שימו לב לאי-השוויון החד.** הסביבות מוגדרות באמצעות אי-שוויון חד: הסביבה של $L_1$ היא אוסף הנקודות המקיימות $,|x - L_1| < \frac{d}{2}$ ולא $.|x - L_1| \leq \frac{d}{2}$ ההבדל מתגלה בדיוק באמצע הקטע: המרחק משם אל $L_1$ ואל $L_2$ שווה $\frac{d}{2}$ בשני המקרים, ולכן נקודת האמצע אינה שייכת לאף אחת משתי הסביבות. טעות נפוצה היא לחשוב שנקודת האמצע היא ״החיתוך״ שלהן, אך החיתוך **ריק**: אין ולו נקודה אחת השייכת לשתיהן.
 
-::: {.thmsol .foldable}
-**הכיוון הראשון.** נניח $,\lim\limits_{n\to\infty} a_n = L$ ויהי $\left(t,\ s\right)$ קטע פתוח המקיים $.L \in \left(t,\ s\right)$
+זה אינו פרט טכני בלבד. בהגדרת הגבול מופיע $|a_n - L| < \varepsilon$ עם אי-שוויון חד, ובזכותו הבחירה $\varepsilon = \frac{d}{2}$ מספיקה. אילו ההגדרה הייתה מסתפקת באי-שוויון לא חד, היינו מקבלים $,d \leq d$ וזו אינה סתירה, והיה עלינו לבחור $\varepsilon$ קטן יותר, למשל $.\frac{d}{3}$
 
-מהגדרת הקטע הפתוח נובע $,t < L < s$ ולכן אפשר להפעיל את המשפט הקודם עם $m = t$ ועם $.M = s$
+כדי לראות מדוע סכום שני המרחקים אינו קטן מ-$d$, נסתכל על שלושת המיקומים האפשריים של $x$ ביחס ל-$L_1$ ול-$L_2$.
 
-סעיף (א) נותן $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.a_n > t$
+**המקרה הראשון:** $x$ נמצא בקטע המחבר את $L_1$ ו-$L_2$. אז סכום המרחקים בין $x$ ל-$L_1$ ובין $x$ ל-$L_2$ הוא בדיוק המרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_1|+|x-L_2| = |L_1 - L_2|
+$$
 
-סעיף (ב) נותן $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.a_n < s$
-
-נבחר $.N = \max\left\{N_1,\ N_2\right\}$ אז לכל $n \geq N$ שני האי-שוויונות מתקיימים, כלומר $.a_n \in \left(t,\ s\right)$
-
-**הכיוון השני.** נניח שהתנאי מתקיים לכל קטע פתוח המכיל את $,L$ ויהי $.\varepsilon > 0$
-
-הקטע $\left(L-\varepsilon,\ L+\varepsilon\right)$ הוא קטע פתוח המכיל את $,L$ ולכן ההנחה חלה עליו: קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,a_n \in \left(L-\varepsilon,\ L+\varepsilon\right)$ כלומר
-
-$$,L - \varepsilon < a_n < L + \varepsilon$$
-
-ובאופן שקול $.\left|a_n - L\right| < \varepsilon$
-
-זוהי בדיוק הגדרת הגבול, ולכן $.\lim\limits_{n\to\infty} a_n = L$
-:::
-
-### אי-שוויונות עוברים לגבול
-
-המסקנה הבאה נובעת מיד מן המשפט הקודם: אם כל איברי הסדרה נמצאים מעל מספר מסוים, גם הגבול נמצא מעליו.
-
-::: {#box-thm-limit-preserves-order .thmthm}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת, ונסמן $.\lim\limits_{n\to\infty} a_n = L$ אז:
-
-(א) אם $a_n \geq m$ לכל $,n$ אז $.L \geq m$
-
-(ב) אם $a_n \leq M$ לכל $,n$ אז $.L \leq M$
-:::
-
-::: {.thmproof title="סעיף (א)"}
-נניח בשלילה ש-$.L < m$ אז $m$ הוא מספר הגדול מן הגבול, ולכן לפי סעיף (ב) של [משפט 7.4.1](#box-thm-limit-window) קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.a_n < m$ בפרט $,a_N < m$ בסתירה להנחה ש-$a_n \geq m$ לכל $.n$ לכן $.L \geq m$
-:::
-
-::: {.thmproof title="סעיף (ב)"}
-באותו אופן. אילו היה $,L > M$ היה $M$ מספר הקטן מן הגבול, ולפי סעיף (א) של אותו משפט היה קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $,a_n > M$ בסתירה להנחה. לכן $.L \leq M$
-:::
-
-::: {#box-warn-strict-becomes-weak .thmwarn title="אי-שוויון חד אינו נשמר בגבול"}
-גם אם **כל** איברי הסדרה מקיימים אי-שוויון **חד**, על הגבול מובטח רק אי-שוויון **חלש**.
-
-הדוגמה הפשוטה ביותר היא $:a_n = \dfrac{1}{n}$ לכל $n$ מתקיים $,a_n > 0$ ובכל זאת ראינו ב[שאלה 7.3.6](#box-q-one-over-n) שהגבול הוא $,0$ ולא מספר חיובי כלשהו.
-
-לכן מ-$a_n > m$ לכל $n$ אפשר להסיק רק $,L \geq m$ ולעולם לא $.L > m$
-:::
-
-### יחידות הגבול
-
-אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.
-
-::: {#box-thm-limit-uniqueness .thmthm}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה. אם מתקיים $\lim_{n\to\infty}a_n = L_1$ וגם $\lim_{n \to \infty} a_n = L_2$ אז $.L_1 = L_2$
-
-כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.
-:::
+כאן מתקיים שוויון, ולכן שני המרחקים משלימים זה את זה ל-$d$: אם $|x-L_1| < \frac{d}{2}$, אז $$.|x-L_2| = d - |x-L_1| > d - \frac{d}{2} = \frac{d}{2}$$ ובאותו אופן עם החלפת התפקידים של $L_1$ ו-$L_2$.
 
 ```{python}
 #| echo: false
 #| output: false
 import matplotlib.pyplot as plt
 
-L1, L2 = -1.0, 1.0
-Mid = (L1 + L2) / 2
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
 
-fig, ax = plt.subplots(figsize=(6.4, 1.9))
-ax.axhline(0, color="0.2", lw=1.3)
+L1, L2, xp = -2.0, 2.0, 0.6
 
-for x, col, lab in [(L1, "tab:blue", "$L_1$"), (L2, "tab:red", "$L_2$")]:
-    ax.plot([x], [0], "o", ms=8, color=col, zorder=4)
-    ax.annotate(lab, xy=(x, -0.46), ha="center", fontsize=13, color=col)
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
 
-ax.plot([Mid, Mid], [-0.13, 0.13], color="0.15", lw=1.6, zorder=5)
-ax.annotate("$M$", xy=(Mid, -0.46), ha="center", fontsize=13, color="0.15")
+# the two distances from x, just above the line
+ax.annotate("", xy=(L1, 0.30), xytext=(xp, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((L1+xp)/2, 0.30), xytext=((L1+xp)/2, 0.36),
+            ha="center", fontsize=11, color="tab:blue")
 
-# the two halves, marked equal: M is the midpoint, and that is all the proof needs
-for x0, x1, y in [(L1, Mid, 0.34), (Mid, L2, 0.34)]:
-    ax.annotate("", xy=(x0, y), xytext=(x1, y),
-                arrowprops=dict(arrowstyle="<->", color="0.35", lw=1.1))
-ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((L1 + Mid) / 2, 0.44), ha="center", fontsize=11,
-            color="0.35")
-ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((Mid + L2) / 2, 0.44), ha="center", fontsize=11,
-            color="0.35")
+ax.annotate("", xy=(xp, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((xp+L2)/2, 0.30), xytext=((xp+L2)/2, 0.36),
+            ha="center", fontsize=11, color="tab:red")
 
-ax.annotate("", xy=(L1 - 0.9, 0.13), xytext=(Mid, 0.13),
-            arrowprops=dict(arrowstyle="-", color="tab:blue", lw=2.4, alpha=0.55))
-ax.annotate("$a_n < M$", xy=((L1 - 0.9 + Mid) / 2, 0.19), ha="center", fontsize=11,
-            color="tab:blue")
-ax.annotate("", xy=(Mid, -0.13), xytext=(L2 + 0.9, -0.13),
-            arrowprops=dict(arrowstyle="-", color="tab:red", lw=2.4, alpha=0.55))
-# to the right of L2, not above it: centred on the segment it would sit on the L2 label
-ax.annotate("$a_n > M$", xy=(L2 + 0.55, -0.26), ha="center", fontsize=11,
-            color="tab:red")
+# total distance d
+ax.annotate("", xy=(L1, 0.80), xytext=(L2, 0.80),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d=|L_1-L_2|$", xy=(0, 0.80), xytext=(0, 0.86), ha="center", fontsize=12)
 
-ax.set_xlim(-2.3, 2.3)
-ax.set_ylim(-0.62, 0.62)
+for p in (L1, L2):
+    ax.plot([p, p], [0.05, 0.80], color="black", lw=0.7, ls=":")
+ax.plot([xp, xp], [0.05, 0.30], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.2, 3.2)
+ax.set_ylim(-0.45, 1.08)
 ax.axis("off")
 fig.savefig("figures/c07_fig16.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
-
-:::::: thmproof
-נניח בשלילה ש-$.L_1 \neq L_2$
-
-**בלי הגבלת הכלליות נניח ש-**$.L_1 < L_2$
-
-::: {.thmexpl title="בלי הגבלת הכלליות"}
-הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-$L_1$ וב-$,L_2$ ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם $.L_1$ המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.
-:::
-
-ניקח את נקודת האמצע שבין שני הגבולות:
-
-$$.M = \frac{L_1 + L_2}{2}$$
-
-מתקיים $,L_1 < M < L_2$ ולכן אפשר להפעיל את [משפט 7.4.1](#box-thm-limit-window) פעמיים, פעם על כל גבול:
-
-הסדרה מתכנסת ל-$L_1$ ומתקיים $,M > L_1$ ולכן לפי סעיף (ב) קיים $N_1$ כך שלכל $n \geq N_1$ מתקיים $.a_n < M$
-
-הסדרה מתכנסת ל-$L_2$ ומתקיים $,M < L_2$ ולכן לפי סעיף (א) קיים $N_2$ כך שלכל $n \geq N_2$ מתקיים $.a_n > M$
-
-נבחר $.N = \max\left\{N_1,\ N_2\right\}$ שני התנאים מתקיימים עבור $,n = N$ כלומר $a_N < M$ וגם $,a_N > M$ וזו סתירה.
-
-לכן ההנחה $L_1 \neq L_2$ אינה יכולה להתקיים, ומכאן $.L_1 = L_2$
 
 ```{=latex}
 \par\medskip
@@ -2095,13 +2015,155 @@ $$.M = \frac{L_1 + L_2}{2}$$
 ```
 
 ::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: $M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$
+תרשים: כאשר $x$ נמצא בקטע שבין $L_1$ ל-$L_2$, סכום שני המרחקים שווה בדיוק ל-$d$.
 :::
 
 ::: {.content-visible when-format="html"}
-![$M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$](figures/c07_fig16.png){#fig-uniqueness-midpoint width="62%" fig-align="center"}
+![כאשר $x$ נמצא בקטע שבין $L_1$ ל-$L_2$, סכום שני המרחקים שווה בדיוק ל-$d$.](figures/c07_fig16.png){#fig-uniq-case-between width="62%" fig-align="center"}
 :::
-::::::
+
+**המקרה השני:** $x$ נמצא מחוץ לקטע, מעברו השני של $L_1$. אז המרחק בין $x$ ל-$L_2$ הוא סכום המרחק בין $x$ ל-$L_1$ והמרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_1|+|L_1-L_2| = |x - L_2|
+$$
+
+כאן המרחק אל $L_2$ אינו קטן מ-$d$ באף מצב, שכן $,|x-L_2| = |x-L_1| + d \geq d$ ובפרט הוא גדול מ-$\frac{d}{2}$. כלומר, גם אם $x$ קרוב מאוד ל-$L_1$, הוא רחוק מ-$L_2$ יותר מ-$\frac{d}{2}$.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2, xp = -0.8, 2.2, -2.8
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
+
+# |x - L1|, then d, laid end to end on the lower level
+ax.annotate("", xy=(xp, 0.30), xytext=(L1, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:green", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((xp+L1)/2, 0.30), xytext=((xp+L1)/2, 0.36),
+            ha="center", fontsize=11, color="tab:green")
+
+ax.annotate("", xy=(L1, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=((L1+L2)/2, 0.30), xytext=((L1+L2)/2, 0.36),
+            ha="center", fontsize=12)
+
+# their sum is the distance from x to L2
+ax.annotate("", xy=(xp, 0.82), xytext=(L2, 0.82),
+            arrowprops=dict(arrowstyle="<->", color="tab:red", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((xp+L2)/2, 0.82), xytext=((xp+L2)/2, 0.88),
+            ha="center", fontsize=11, color="tab:red")
+
+for p in (xp, L1, L2):
+    ax.plot([p, p], [0.05, 0.30], color="black", lw=0.7, ls=":")
+for p in (xp, L2):
+    ax.plot([p, p], [0.30, 0.82], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.6, 3.2)
+ax.set_ylim(-0.45, 1.10)
+ax.axis("off")
+fig.savefig("figures/c07_fig17.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig17.png}\hss}\endL\par
+\medskip
+```
+
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: כאשר $x$ נמצא מעברו השני של $L_1$, המרחק אל $L_2$ הוא סכום המרחק אל $L_1$ ואורך הקטע $d$.
+:::
+
+::: {.content-visible when-format="html"}
+![כאשר $x$ נמצא מעברו השני של $L_1$, המרחק אל $L_2$ הוא סכום המרחק אל $L_1$ ואורך הקטע $d$.](figures/c07_fig17.png){#fig-uniq-case-left width="62%" fig-align="center"}
+:::
+
+**המקרה השלישי:** $x$ נמצא מחוץ לקטע, מעברו השני של $L_2$. אז המרחק בין $x$ ל-$L_1$ הוא סכום המרחק בין $x$ ל-$L_2$ והמרחק בין $L_1$ ל-$L_2$. כלומר: $$
+.|x-L_2| + |L_1 - L_2| = |x - L_1|
+$$
+
+כאן, באופן סימטרי, $,|x-L_1| = |x-L_2| + d \geq d$ ולכן המרחק אל $L_1$ גדול מ-$\frac{d}{2}$, יהיה $x$ קרוב ל-$L_2$ ככל שיהיה.
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6.4, 2.4))
+ax.axhline(0, color="black", lw=1.2, zorder=1)
+
+L1, L2, xp = -2.2, 0.8, 2.8
+
+for p, lab, col in [(L1, r"$L_1$", "tab:blue"), (L2, r"$L_2$", "tab:red"), (xp, r"$x$", "tab:green")]:
+    ax.plot([p], [0], "o", color=col, ms=7, zorder=4)
+    ax.annotate(lab, xy=(p, 0), xytext=(p, -0.13), ha="center", va="top", fontsize=13, color=col)
+
+# d, then |x - L2|, laid end to end on the lower level
+ax.annotate("", xy=(L1, 0.30), xytext=(L2, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="black", lw=1.3))
+ax.annotate(r"$d$", xy=((L1+L2)/2, 0.30), xytext=((L1+L2)/2, 0.36),
+            ha="center", fontsize=12)
+
+ax.annotate("", xy=(L2, 0.30), xytext=(xp, 0.30),
+            arrowprops=dict(arrowstyle="<->", color="tab:green", lw=1.3))
+ax.annotate(r"$|x-L_2|$", xy=((L2+xp)/2, 0.30), xytext=((L2+xp)/2, 0.36),
+            ha="center", fontsize=11, color="tab:green")
+
+# their sum is the distance from x to L1
+ax.annotate("", xy=(L1, 0.82), xytext=(xp, 0.82),
+            arrowprops=dict(arrowstyle="<->", color="tab:blue", lw=1.3))
+ax.annotate(r"$|x-L_1|$", xy=((L1+xp)/2, 0.82), xytext=((L1+xp)/2, 0.88),
+            ha="center", fontsize=11, color="tab:blue")
+
+for p in (L1, L2, xp):
+    ax.plot([p, p], [0.05, 0.30], color="black", lw=0.7, ls=":")
+for p in (L1, xp):
+    ax.plot([p, p], [0.30, 0.82], color="black", lw=0.7, ls=":")
+
+ax.set_xlim(-3.2, 3.6)
+ax.set_ylim(-0.45, 1.10)
+ax.axis("off")
+fig.savefig("figures/c07_fig18.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig18.png}\hss}\endL\par
+\medskip
+```
+
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: כאשר $x$ נמצא מעברו השני של $L_2$, המרחק אל $L_1$ הוא סכום המרחק אל $L_2$ ואורך הקטע $d$.
+:::
+
+::: {.content-visible when-format="html"}
+![כאשר $x$ נמצא מעברו השני של $L_2$, המרחק אל $L_1$ הוא סכום המרחק אל $L_2$ ואורך הקטע $d$.](figures/c07_fig18.png){#fig-uniq-case-right width="62%" fig-align="center"}
+:::
+
+**בשלושת המקרים** סכום המרחקים מ-$x$ אל $L_1$ ואל $L_2$ אינו קטן מן המרחק שבין $L_1$ ל-$L_2$: במקרה הראשון הוא שווה לו בדיוק, ובשני האחרים הוא גדול ממנו. זהו בדיוק אי-שוויון המשולש: $$.|x-L_1| + |x-L_2| \geq |L_1 - L_2| = d$$
+
+**ההוכחה שלהלן היא בדיוק הרעיון הזה בכתיב פורמלי:** אם הסדרה מתכנסת לשני הגבולות, אז החל ממקום מסוים איבריה חייבים להיות קרובים לשניהם בו-זמנית, וזה בלתי אפשרי.
+:::::::::::
+
+::: thmproof
+נניח בשלילה ש-$,L_1 \neq L_2$ ונסמן $.d = |L_1 - L_2| > 0$ נבחר $.\varepsilon = \frac{d}{2} > 0$
+
+מכיוון ש-$,a_n \to L_1$ קיים $N_1\in\mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.\left|a_n - L_1\right| < \varepsilon$
+
+מכיוון ש-$,a_n \to L_2$ קיים $N_2\in\mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.\left|a_n - L_2\right| < \varepsilon$
+
+נבחר $,N = \max\left\{N_1,N_2\right\}$ ואז לכל $n \geq N$ שני אי-השוויונות מתקיימים בו-זמנית, ולפי אי-שוויון המשולש $$.d = |L_1 - L_2| \leq \left|a_n - L_1\right| + \left|a_n - L_2\right| < \varepsilon + \varepsilon = d$$
+
+קיבלנו $,d < d$ וזו סתירה. לכן ההנחה $L_1 \neq L_2$ אינה יכולה להתקיים, ומכאן $.L_1 = L_2$
+:::
 
 :::::::::::: extra
 ## פיתוח עשרוני כסדרה (העשרה)
@@ -2147,13 +2209,13 @@ ax.set_ylim(2.35, 2.55)
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
-fig.savefig("figures/c07_fig17.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/c07_fig19.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
 ```{=latex}
 \par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig17.png}\hss}\endL\par
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.85\linewidth]{figures/c07_fig19.png}\hss}\endL\par
 \medskip
 ```
 

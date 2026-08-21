@@ -61,12 +61,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: פונקציה גלית עם חמש נקודות קיצון מקומיות $x_1,\dots,x_5$
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: פונקציה גלית עם חמש נקודות קיצון מקומיות $x_1,\dots,x_5$.
 :::
 
 ::: {.content-visible when-format="html"}
-![פונקציה גלית עם חמש נקודות קיצון מקומיות](figures/c15_fig01.png){#fig-c06_fig06 width="62%" fig-align="center"}
+![פונקציה גלית עם חמש נקודות קיצון מקומיות.](figures/c15_fig01.png){#fig-c06_fig06 width="62%" fig-align="center"}
 :::
 
 דוגמאות:
@@ -105,12 +105,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הפרבולה $f(x)=x^2$ עם מינימום בראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הפרבולה $f(x)=x^2$ עם מינימום בראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![הפרבולה x\^2 עם מינימום בראשית](figures/c15_fig02.png){#fig-c06_fig07 width="62%" fig-align="center"}
+![הפרבולה x\^2 עם מינימום בראשית.](figures/c15_fig02.png){#fig-c06_fig07 width="62%" fig-align="center"}
 :::
 
 לפונקציה $f(x) = |x|$ יש <u>רק</u> את נקודת הקיצון המקומי: $x_0 = 0$
@@ -147,12 +147,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=|x|$ בצורת V, מינימום בראשית
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=|x|$ בצורת V, מינימום בראשית.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף \|x\| בצורת V, מינימום בראשית](figures/c15_fig03.png){#fig-c06_fig08 width="62%" fig-align="center"}
+![גרף \|x\| בצורת V, מינימום בראשית.](figures/c15_fig03.png){#fig-c06_fig08 width="62%" fig-align="center"}
 :::
 
 לפונקציה $f(x) = x^3$ אין נקודות קיצון מקומי.
@@ -189,12 +189,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: גרף $f(x)=x^3$ העולה דרך הראשית עם נקודת פיתול
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: גרף $f(x)=x^3$ העולה דרך הראשית עם נקודת פיתול.
 :::
 
 ::: {.content-visible when-format="html"}
-![גרף x\^3 העולה דרך הראשית עם נקודת פיתול](figures/c15_fig04.png){#fig-c06_fig09 width="62%" fig-align="center"}
+![גרף x\^3 העולה דרך הראשית עם נקודת פיתול.](figures/c15_fig04.png){#fig-c06_fig09 width="62%" fig-align="center"}
 :::
 
 ::: {#box-thm-fermat .thmthm}
@@ -313,7 +313,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: גרף הפונקציה $f(x)=x^3-3x$ בקטע $[-2,2]$ עם נקודות מקסימום (אדום) ומינימום (כחול)
 :::
 
@@ -365,7 +365,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: פונקציה קעורה כלפי מטה מעל $[a,b]$ עם $f(a)=f(b)$ ונקודת מקסימום ביניהן (משפט רול)
 :::
 
@@ -470,12 +470,12 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
-תרשים: הוכחת משפט לגראנג' — המיתר $g(x)$ בין הקצוות, העקומה $f(x)$ מתחתיו, ומשיק מקווקו ב-$c$ המקביל למיתר
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: הוכחת משפט לגראנג' — המיתר $g(x)$ בין הקצוות, העקומה $f(x)$ מתחתיו, ומשיק מקווקו ב-$c$ המקביל למיתר.
 :::
 
 ::: {.content-visible when-format="html"}
-![הוכחת משפט לגראנג' — המיתר $g(x)$ בין הקצוות, העקומה $f(x)$ מתחתיו, ומשיק מקווקו ב-$c$ המקביל למיתר](figures/c15_fig07.png){#fig-c07_fig03 width="62%" fig-align="center"}
+![הוכחת משפט לגראנג' — המיתר $g(x)$ בין הקצוות, העקומה $f(x)$ מתחתיו, ומשיק מקווקו ב-$c$ המקביל למיתר.](figures/c15_fig07.png){#fig-c07_fig03 width="62%" fig-align="center"}
 :::
 
 ## מסקנות ממשפט לגראנז' — מונוטוניות
@@ -569,7 +569,7 @@ plt.close(fig)
 \medskip
 ```
 
-::: {style="text-align:center"}
+::: {.content-visible when-format="pdf" style="text-align:center"}
 תרשים: עקומה מקווקוות (פרבולה הפוכה) מעל הקטע $\left[0,\frac{\pi}{2}\right]$ עם הנקודות $c$, $x_0$, $d$ (תרגיל היחידות)
 :::
 

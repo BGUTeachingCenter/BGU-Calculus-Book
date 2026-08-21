@@ -140,14 +140,20 @@ def rebuild_toc(page_html, frag):
 # ------------------------------------------------------------------- navigation
 
 TOGGLE = (
-    '<a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" '
-    'data-bs-target="#{sid}" role="navigation" aria-expanded="true" '
+    '<a class="sidebar-item-toggle text-start{collapsed}" data-bs-toggle="collapse" '
+    'data-bs-target="#{sid}" role="navigation" aria-expanded="{expanded}" '
     'aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a>'
 )
 
 
 def sidebar_with_sections(html, chapter_file, pages, current):
-    """Nest the section pages under their chapter's sidebar entry."""
+    """Nest the section pages under their chapter's sidebar entry.
+
+    Only the chapter being read starts expanded. Expanding all of them buries the
+    chapter list under a few hundred section links, and the sidebar stops being a
+    map of the book. Bootstrap drives the state from `show` on the <ul> and
+    aria-expanded on the toggle; the chevron rotation is aria-expanded alone.
+    """
     m = re.search(
         r'<li class="sidebar-item">\s*<div class="sidebar-item-container">\s*'
         r'<a href="\./%s"[^>]*>(.*?)</a>\s*</div>\s*</li>' % re.escape(chapter_file),
@@ -156,6 +162,10 @@ def sidebar_with_sections(html, chapter_file, pages, current):
         return html
     link, label = m.group(0), m.group(1)
     sid = "quarto-sidebar-sub-" + chapter_file[:-5]
+    here = any(p["file"] == current for p in pages)
+    toggle = TOGGLE.format(sid=sid,
+                           collapsed="" if here else " collapsed",
+                           expanded="true" if here else "false")
 
     chapter_link = re.sub(r'\sclass="sidebar-item-text sidebar-link[^"]*"',
                           ' class="sidebar-item-text sidebar-link"', label)
@@ -171,9 +181,10 @@ def sidebar_with_sections(html, chapter_file, pages, current):
         '<li class="sidebar-item sidebar-item-section">'
         '<div class="sidebar-item-container">'
         '<a href="./%s" class="sidebar-item-text sidebar-link">%s</a>%s</div>'
-        '<ul id="%s" class="collapse list-unstyled sidebar-section depth2 show">%s</ul>'
+        '<ul id="%s" class="collapse list-unstyled sidebar-section depth2%s">%s</ul>'
         '</li>'
-    ) % (pages[0]["file"], chapter_link, TOGGLE.format(sid=sid), sid, "".join(kids))
+    ) % (pages[0]["file"], chapter_link, toggle, sid,
+         " show" if here else "", "".join(kids))
     return html.replace(link, block)
 
 
