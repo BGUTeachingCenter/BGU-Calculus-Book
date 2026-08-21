@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>חלון m &lt; a_n &lt; M סביב הגבול</title>
+<title>הקטע הפתוח m &lt; a_n &lt; M סביב הגבול</title>
 <link rel="stylesheet" href="../shared/seq-limit.css">
 <style>
 /* Widget-specific bits only; the rest comes from seq-limit.css so this reads as the
@@ -17,13 +17,17 @@
 .expr{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:1.05rem;
       direction:ltr;unicode-bidi:isolate}
 .verdict{margin-top:.5rem;text-align:center;font-weight:700;color:var(--key)}
+.seqline{text-align:center;margin-bottom:.2rem}
+.ytick{font-family:"Times New Roman",Times,serif;font-size:12px;text-anchor:end}
 </style>
 </head>
 <body>
 <div class="demo">
 
+<div class="seqline"><span class="expr">a<sub>n</sub> = 1 + sin(n) / n</span></div>
+
 <svg id="plot" viewBox="0 0 640 300" role="img"
-     aria-label="איברי הסדרה על מישור, עם חלון בין m ל-M סביב הגבול, ואינדקס N שממנו והלאה כל האיברים בתוך החלון"></svg>
+     aria-label="איברי הסדרה על מישור, עם הקטע הפתוח בין m ל-M סביב הגבול, ואינדקס N שממנו והלאה כל האיברים בתוך הקטע"></svg>
 
 <div class="row">
   <span class="key">הגבול התחתון <span class="expr">m</span></span>
@@ -76,7 +80,9 @@
   var ULO = 1.05, UHI = 1.50, USTEPS = 45;    // M, above L
 
   var VX0 = 0.3, VX1 = NMAX + 0.7, VY0 = 0.62, VY1 = 1.95;
-  var PX0 = 52, PX1 = 622, PY0 = 26, PY1 = 244;
+  // PX1 stops short of the viewBox: the gutter to its right is where the m / L / M
+  // letters live, so they never overlap the data.
+  var PX0 = 52, PX1 = 596, PY0 = 26, PY1 = 244, GUT = 8;
   var SVGNS = "http://www.w3.org/2000/svg";
 
   function sx(v) { return PX0 + (v - VX0) * (PX1 - PX0) / (VX1 - VX0); }
@@ -104,10 +110,12 @@
   }
   make(svg, "text", { x: sx(NMAX / 2), y: sy(VY0) + 38, "class": "axlbl" }, "n");
 
-  // the limit itself: dashed, so the solid m and M lines read as the movable pair
+  // L sits on the y axis alongside m and M rather than being labelled off to the side,
+  // so the three levels read as one family. All three are dashed: the interval is OPEN,
+  // and a solid rule at m or M would suggest a term may sit exactly on it.
   make(svg, "line", { x1: PX0 - 12, y1: sy(L), x2: PX1, y2: sy(L), "class": "guide" });
-  make(svg, "text", { x: PX1 - 6, y: sy(L) - 6, fill: INK, "class": "lbl",
-                      "text-anchor": "end" }, "L = 1");
+  make(svg, "text", { x: PX1 + GUT, y: sy(L) + 5, fill: INK, "class": "lbl" }, "L");
+  make(svg, "text", { x: PX0 - 18, y: sy(L) + 4, fill: INK, "class": "ytick" }, "1.00");
 
   svg.appendChild(dyn);                              // dynamic layer sits on top
 
@@ -160,9 +168,12 @@
 
     [[m, "m", BLUE], [M, "M", RED]].forEach(function (row) {
       make(dyn, "line", { x1: PX0 - 12, y1: sy(row[0]), x2: PX1, y2: sy(row[0]),
-                          stroke: row[2], "stroke-width": 1.6 });
-      make(dyn, "text", { x: PX0 - 16, y: sy(row[0]) + 5, fill: row[2], "class": "lbl",
-                          "text-anchor": "end" }, row[1]);
+                          stroke: row[2], "stroke-width": 1.5,
+                          "stroke-dasharray": "6 4" });
+      make(dyn, "text", { x: PX1 + GUT, y: sy(row[0]) + 5, fill: row[2],
+                          "class": "lbl" }, row[1]);
+      make(dyn, "text", { x: PX0 - 18, y: sy(row[0]) + 4, fill: row[2],
+                          "class": "ytick" }, fmt(row[0]));
     });
 
     // N, and the terms themselves: red before N, green from N on
@@ -180,9 +191,11 @@
                             fill: inside ? GREEN : RED, "class": "pt" });
     }
 
-    winEl.textContent = fmt(m) + " < aₙ < " + fmt(M);
+    // innerHTML, not textContent: the subscript is a <sub>, since the U+2099 subscript
+    // character has no glyph in the serif face used here and rendered as a box.
+    winEl.innerHTML = fmt(m) + " &lt; a<sub>n</sub> &lt; " + fmt(M);
     nEl.textContent = "N = " + N;
-    verdict.textContent = "החל מ-" + N + " כל האיברים בתוך החלון; לפניו " +
+    verdict.textContent = "החל מ-" + N + " כל האיברים בתוך הקטע; לפניו " +
                           (N - 1) + " איברים, וחלקם בחוץ";
 
     reportHeight();

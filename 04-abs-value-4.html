@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; שפת המתמטיקה ולוגיקה – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
+<title>4&nbsp; ערך מוחלט וקטעים – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-sets.html" rel="next">
-<link href="./part-1-foundations.html" rel="prev">
+<link href="./05-induction.html" rel="next">
+<link href="./03-number-systems.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -681,7 +681,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./01-logic.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">שפת המתמטיקה ולוגיקה</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./04-abs-value.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="חפש" onclick="window.quartoOpenSearch();">
@@ -730,13 +730,13 @@ window.Quarto = {
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./01-logic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">שפת המתמטיקה ולוגיקה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-01-logic" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-01-logic" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.1 מבוא קצר ללוגיקה מתמטית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.2 פסוקים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-3.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">1.3 קשרים לוגיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.4 כמתים לוגיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.5 מונחים נפוצים.</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">שפת המתמטיקה ולוגיקה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-01-logic" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-01-logic" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.1 מבוא קצר ללוגיקה מתמטית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.2 פסוקים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.3 קשרים לוגיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.4 כמתים לוגיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./01-logic-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">1.5 מונחים נפוצים.</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./02-sets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">קבוצות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-02-sets" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-02-sets" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.1 איברים והכלה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.2 הכמתים בשפה של תורת הקבוצות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.3 הקבוצה הריקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.4 פעולות על קבוצות: איחוד, חיתוך והפרש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.5 עוצמה של קבוצה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.6 פונקציות</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./03-number-systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-03-number-systems" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-03-number-systems" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.1 המספרים הטבעיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.2 המספרים השלמים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.3 המספרים הרציונליים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.4 המספרים הממשיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.5 המספרים המרוכבים</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-04-abs-value" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-04-abs-value" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.1 קטעים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.2 ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.3 סביבת-\(\varepsilon\) של נקודה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.4 פתרון אי-שוויונות עם ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.5 קבוצות חסומות</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-04-abs-value" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-04-abs-value" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.1 קטעים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.2 ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.3 סביבת-\(\varepsilon\) של נקודה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">4.4 פתרון אי-שוויונות עם ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.5 קבוצות חסומות</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./05-induction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-05-induction" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-05-induction" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.1 עקרון האינדוקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.2 שלבי האינדוקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.3 הגדרה רקורסיבית</span></a></div></li></ul></li>
       </ul>
@@ -889,12 +889,12 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#sec-connectives" class="nav-link">1.3 קשרים לוגיים</a></li><li class="toc-indent"><a href="#sec-negation" class="nav-link">שלילה</a></li><li class="toc-indent"><a href="#sec-conjunction" class="nav-link">וגם</a></li><li class="toc-indent"><a href="#sec-disjunction" class="nav-link">או</a></li><li class="toc-indent"><a href="#גרירה" class="nav-link">גרירה</a></li><li class="toc-indent"><a href="#שקילות" class="nav-link">שקילות</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#פתרון-אי-שוויונות-עם-ערך-מוחלט" class="nav-link">4.4 פתרון אי-שוויונות עם ערך מוחלט</a></li></ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./01-logic.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">שפת המתמטיקה ולוגיקה</span></a></li></ol></nav>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./04-abs-value.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">שפת המתמטיקה ולוגיקה</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></h1>
 </div>
 
 
@@ -910,192 +910,28 @@ window.Quarto = {
 
 </header>
 
-<section id="sec-connectives" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="sec-connectives"><span class="header-section-number">1.3</span> קשרים לוגיים</h2>
-<p>עם פסוק בודד אין הרבה מה לעשות מלבד לקבוע אם הוא אמת או שקר. אם נחשוב על הלוגיקה כעל שפה, פסוק בודד מקביל למילה בודדת; וכדי לבנות מן המילים משפטים, דרושים לנו אמצעים לשנות את משמעותן ולחבר ביניהן. בלוגיקה, אמצעים אלה הם ה<strong>קשרים הלוגיים</strong>: בעזרתם אנו מרכיבים מפסוקים נתונים פסוקים מורכבים יותר. הפסוקים המרכיבים פסוק מורכב נקראים ה<strong>תת-פסוקים</strong> שלו. נציג את הקשרים החשובים בזה אחר זה, ונלווה כל אחד בדוגמאות. ערך האמת של פסוק מורכב נקבע באופן מלא מתוך ערכי האמת של תת-הפסוקים שלו.</p>
-<section id="sec-negation" class="level3">
-<h3 class="anchored" data-anchor-id="sec-negation">שלילה</h3>
-<p>הקשר הפשוט ביותר פועל על פסוק יחיד: ה<strong>שלילה</strong> של פסוק <span class="math inline">\(P\)</span>, המסומנת <span class="math inline">\(\neg P\)</span> ונקראת ״לא <span class="math inline">\(P\)</span>״, היא הפסוק שאמת בדיוק כאשר <span class="math inline">\(P\)</span> שקר (ושקר כאשר <span class="math inline">\(P\)</span> אמת).</p>
-<div id="box-exm-negation" class="thmbox thmbox-example">
-<p><strong>דוגמה 1.3.1.</strong></p>
-<ul>
-<li>אם <span class="math inline">\(P\)</span> הוא ״<span class="math inline">\(5\)</span> הוא מספר ראשוני״ (אמת), אז <span class="math inline">\(\neg P\)</span> הוא ״<span class="math inline">\(5\)</span> אינו מספר ראשוני״ (שקר).</li>
-<li>אם <span class="math inline">\(Q\)</span> הוא ״<span class="math inline">\(2 &gt; 3\)</span>״ (שקר), אז <span class="math inline">\(\neg Q\)</span> הוא ״<span class="math inline">\(2 \le 3\)</span>״ (אמת).</li>
-</ul>
+<section id="פתרון-אי-שוויונות-עם-ערך-מוחלט" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="פתרון-אי-שוויונות-עם-ערך-מוחלט"><span class="header-section-number">4.4</span> פתרון אי-שוויונות עם ערך מוחלט</h2>
+<p>כשבביטוי מופיע יותר מערך מוחלט אחד, אי אפשר ״לפתוח״ את כולם בבת אחת: לכל ערך מוחלט יש שני מקרים, והם תלויים בסימן של הביטוי שבתוכו. השיטה היא לחלק את ציר המספרים לקטעים לפי הנקודות שבהן מתאפסים הביטויים, ולפתור בכל קטע בנפרד.</p>
+<div id="box-qst-abs-sum-inequality" class="thmbox thmbox-question">
+<p><strong>שאלה 4.4.1.</strong></p>
+<p>פתרו את אי-השוויון <span class="math display">\[.\left|x-1\right| + \left|x-2\right| &lt; 2\]</span></p>
 </div>
-</section>
-<section id="sec-conjunction" class="level3">
-<h3 class="anchored" data-anchor-id="sec-conjunction">וגם</h3>
-<p>מכאן עוברים לקשרים הפועלים על שני פסוקים. הפסוק ״<span class="math inline">\(P\)</span> <strong>וגם</strong> <span class="math inline">\(Q\)</span>״, המסומן <span class="math inline">\(P \land Q\)</span>, אמת בדיוק כאשר <strong>שני</strong> הפסוקים אמת.</p>
-<div id="box-exm-conjunction" class="thmbox thmbox-example">
-<p><strong>דוגמה 1.3.2.</strong></p>
-<ul>
-<li>״<span class="math inline">\(2\)</span> זוגי <strong>וגם</strong> <span class="math inline">\(2\)</span> ראשוני״ — שני החלקים אמת, ולכן הפסוק כולו <strong>אמת</strong>.</li>
-<li>״<span class="math inline">\(2\)</span> זוגי <strong>וגם</strong> <span class="math inline">\(2 &gt; 3\)</span>״ — החלק השני שקר, ולכן הפסוק כולו <strong>שקר</strong>.</li>
-<li>בשפה היומיומית: ״ירד גשם וגם נשבה רוח״ אמת רק אם <strong>שני</strong> הדברים קרו.</li>
-</ul>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>הביטויים שבתוך הערכים המוחלטים מתאפסים ב-<span class="math inline">\(x = 1\)</span> וב-<span class="math inline">\(,x = 2\)</span> ולכן שתי הנקודות האלה מחלקות את הישר לשלושה קטעים. נטפל בכל אחד מהם בנפרד.</p>
+<p><strong>המקרה הראשון: <span class="math inline">\(.x &lt; 1\)</span></strong> כאן <span class="math inline">\(x - 1 &lt; 0\)</span> וגם <span class="math inline">\(,x - 2 &lt; 0\)</span> ולכן <span class="math inline">\(\left|x-1\right| = -(x-1)\)</span> ו-<span class="math inline">\(.\left|x-2\right| = -(x-2)\)</span> אי-השוויון נעשה</p>
+<p><span class="math display">\[,-(x-1) - (x-2) &lt; 2 \iff -2x + 3 &lt; 2 \iff 1 &lt; 2x \iff \frac{1}{2} &lt; x\]</span></p>
+<p>ויחד עם ההנחה <span class="math inline">\(x &lt; 1\)</span> מתקבל הקטע <span class="math inline">\(.\left(\frac{1}{2},\ 1\right)\)</span></p>
+<p><strong>המקרה השני: <span class="math inline">\(.1 \leq x \leq 2\)</span></strong> כאן <span class="math inline">\(x - 1 \geq 0\)</span> ואילו <span class="math inline">\(,x - 2 \leq 0\)</span> ולכן <span class="math inline">\(\left|x-1\right| = x-1\)</span> ו-<span class="math inline">\(.\left|x-2\right| = -(x-2)\)</span> אי-השוויון נעשה</p>
+<p><span class="math display">\[,(x-1) - (x-2) &lt; 2 \iff 1 &lt; 2\]</span></p>
+<p>וזה נכון תמיד. לכן כל הקטע <span class="math inline">\(\left[1,\ 2\right]\)</span> הוא פתרון.</p>
+<p><strong>המקרה השלישי: <span class="math inline">\(.x &gt; 2\)</span></strong> כאן שני הביטויים אי-שליליים, ולכן</p>
+<p><span class="math display">\[,(x-1) + (x-2) &lt; 2 \iff 2x - 3 &lt; 2 \iff x &lt; \frac{5}{2}\]</span></p>
+<p>ויחד עם ההנחה <span class="math inline">\(x &gt; 2\)</span> מתקבל הקטע <span class="math inline">\(.\left(2,\ \frac{5}{2}\right)\)</span></p>
+<p>קבוצת הפתרונות היא איחוד שלושת הקטעים:</p>
+<p><span class="math display">\[.\left(\frac{1}{2},\ 1\right) \cup \left[1,\ 2\right] \cup \left(2,\ \frac{5}{2}\right) = \left(\frac{1}{2},\ \frac{5}{2}\right)\]</span></p>
 </div>
-</section>
-<section id="sec-disjunction" class="level3">
-<h3 class="anchored" data-anchor-id="sec-disjunction">או</h3>
-<p>הפסוק ״<span class="math inline">\(P\)</span> <strong>או</strong> <span class="math inline">\(Q\)</span>״, המסומן <span class="math inline">\(P \lor Q\)</span>, אמת בדיוק כאשר <strong>לפחות אחד</strong> מן הפסוקים אמת — כולל המקרה שבו <strong>שניהם</strong> אמת. קשר זה הוא מקור נפוץ לבלבול, ולכן נתעכב עליו.</p>
-<p>הבלבול נובע מכך שבשפה היומיומית ״או״ הוא לרוב <strong>מפריד</strong>: אחד מן השניים, אך לא שניהם (״תה או קפה?״). ה״או״ הלוגי, לעומת זאת, הוא <strong>מכליל</strong> — הוא אמת גם כששני החלקים מתקיימים. לכן, מבחינה לוגית, ״<span class="math inline">\(P\)</span> או <span class="math inline">\(Q\)</span>?״ היא שאלת כן/לא, שהתשובה עליה ״כן״ אם מתקיים לפחות אחד מהם.</p>
-<div id="box-exm-or-jokes" class="thmbox thmbox-example">
-<p><strong>דוגמה 1.3.3.</strong></p>
-<p>ההבדל הזה הוא מקור לבדיחות:</p>
-<ul>
-<li>״ילדה אשתך בן <strong>או</strong> בת?״ — ״כן.״</li>
-<li>בקופה: ״תשלם במזומן <strong>או</strong> באשראי?״ — ״כן.״</li>
-<li>ומתוך שיר שטותי, שאולי מוכר לחלק מכם: ״איש אחד אמר לכלב שלו — אתה בא <strong>או</strong> לא? אז הוא בא <strong>או</strong> לא.״</li>
-</ul>
-<p>מבחינה לוגית התשובות נכונות לחלוטין: בכל אחד מן המקרים מתקיים לפחות אחד מן הצדדים, ולכן הפסוק ״<span class="math inline">\(P\)</span> או <span class="math inline">\(Q\)</span>״ אמת. אלא שבשפה היומיומית ציפינו ש״או״ ידרוש <strong>בחירה</strong> בין השתיים. הדוגמה האחרונה קיצונית במיוחד: ״בא או לא״ הוא פסוק מן הצורה ״<span class="math inline">\(P\)</span> או (לא <span class="math inline">\(P\)</span>)״, שהוא <strong>תמיד</strong> אמת — שהרי כל פסוק הוא אמת או שקר. לכן ״אתה בא או לא?״ היא שאלה שהתשובה הלוגית עליה ״כן״ באופן ריק, בלי שתימסר אף טיפת מידע.</p>
-</div>
-<p>הפעולה המתאימה ל״או״ המפריד של השפה היומיומית נקראת <strong>או מפריד</strong> (״או בלעדי״, XOR), ומסומנת <span class="math inline">\(P \oplus Q\)</span>. היא אמת בדיוק כאשר <strong>בדיוק אחד</strong> מן השניים אמת — ולא כששניהם אמת. ההבדל בין שתי הפעולות מתבטא רק בשורה הראשונה:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \lor Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \oplus Q\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="גרירה" class="level3">
-<h3 class="anchored" data-anchor-id="גרירה">גרירה</h3>
-<p>הקשר הבא, ה<strong>גרירה</strong>, הוא ככל הנראה המבלבל ביותר. הפסוק ״<strong>אם</strong> <span class="math inline">\(P\)</span> <strong>אז</strong> <span class="math inline">\(Q\)</span>״, המסומן <span class="math inline">\(P \to Q\)</span>, הוא <strong>שקר</strong> בדיוק במקרה אחד: כאשר <span class="math inline">\(P\)</span> אמת ו-<span class="math inline">\(Q\)</span> שקר; בכל מקרה אחר הוא <strong>אמת</strong>. הפסוק <span class="math inline">\(P\)</span> נקרא ה<strong>הנחה</strong>, ו-<span class="math inline">\(Q\)</span> נקרא ה<strong>מסקנה</strong>.</p>
-<p>יש להדגיש: הגרירה <strong>אינה</strong> קשר של סיבה ותוצאה, אלא אמירה על ערכי אמת בלבד. הדוגמה הבאה ממחישה זאת, ובהמשך — חידה קטנה.</p>
-<div id="box-exm-implication-smoke" class="thmbox thmbox-example">
-<p><strong>דוגמה 1.3.4.</strong></p>
-<p>הפתגם ״אין עשן בלי אש״ הוא בעצם הגרירה ״<strong>אם</strong> יש עשן, <strong>אז</strong> יש אש״ — כלומר הפסוק ׳יש עשן׳ <strong>גורר</strong> את הפסוק ׳יש אש׳. שימו לב לכיוון: מבחינת סיבה ותוצאה, ה<strong>אש</strong> היא הסיבה וה<strong>עשן</strong> הוא התוצאה; אך הגרירה פועלת <strong>מן העשן (התוצאה) אל האש (הסיבה)</strong>, שהרי מתוך תצפית בעשן אנו מסיקים שקיימת אש. הכיוון הלוגי הפוך, אם כן, לכיוון הסיבתי.</p>
-</div>
-<p>כדי להבין את ההגדרה לעומק, נחשוב על הגרירה <span class="math inline">\(P \to Q\)</span> כעל <strong>הבטחה</strong>: ״אם <span class="math inline">\(P\)</span> מתקיים, אז <span class="math inline">\(Q\)</span> מתקיים״. הבטחה כזו מופרת במקרה אחד בלבד — כש-<span class="math inline">\(P\)</span> אמת ובכל זאת <span class="math inline">\(Q\)</span> שקר; בכל מקרה אחר היא נשמרת, ולכן הגרירה אמת.</p>
-<p>מה קורה כאשר ההנחה <span class="math inline">\(P\)</span> <strong>שקרית</strong>? אז ההבטחה כלל לא ״הופעלה״: היא אינה אומרת דבר על מצב כזה, וממילא לא הופרה. לכן ערך האמת של המסקנה <span class="math inline">\(Q\)</span> פשוט <strong>לא משנה</strong> — גם <span class="math inline">\(F \to T\)</span> וגם <span class="math inline">\(F \to F\)</span> הן אמת. אלה הם מקרי ה״<strong>לא אכפת</strong>״ (<em>don’t care</em>) של הגרירה: כשההנחה שקרית, איננו בודקים כלל את המסקנה, והגרירה אמת תהא המסקנה אשר תהא.</p>
-<p>נמחיש בדוגמה מופרכת בכוונה. נניח שאני מצהיר: ״<strong>אם אני מלך אנגליה, אז כל הסטודנטים מקבלים 100 בקורס</strong>.״ מאחר שאינני מלך אנגליה, ההנחה שקרית — ולכן ההצהרה שלי אמת מבחינה לוגית, ללא כל תלות בציון שתקבלו בפועל. לא הבטחתי דבר ממשי: כל עוד איני מלך אנגליה, ייתכן שתקבלו 100 וייתכן שלא — ובשני המקרים לא שיקרתי. זהו בדיוק ה״לא אכפת״: כשההנחה שקרית, המסקנה חופשית להיות אמת או שקר, והגרירה נשארת אמת.</p>
-<p><strong>חידה.</strong> האם הגרירה <span class="math inline">\(2 \neq 2 \to 5 = 5\)</span> היא אמת או שקר?</p>
-<div class="tf-quiz" data-correct="true">
-<button class="tf-opt" data-val="true">אמת</button>
-<button class="tf-opt" data-val="false">שקר</button>
-<div class="tf-feedback"></div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="פתרון">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">עצה</span>פתרון
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>אמת!</strong> ההנחה ״<span class="math inline">\(2 \neq 2\)</span>״ שקרית — ומהנחה שקרית הגרירה אמת תמיד.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="שקילות" class="level3">
-<h3 class="anchored" data-anchor-id="שקילות">שקילות</h3>
-<p>לבסוף, הפסוק ״<span class="math inline">\(P\)</span> <strong>אם ורק אם</strong> <span class="math inline">\(Q\)</span>״, המסומן <span class="math inline">\(P \leftrightarrow Q\)</span> ונקרא <strong>שקילות</strong>, אמת בדיוק כאשר ל-<span class="math inline">\(P\)</span> ול-<span class="math inline">\(Q\)</span> <strong>אותו ערך אמת</strong> (שניהם אמת, או שניהם שקר). זוהי בדיוק קיומן של שתי הגרירות יחד: <span class="math inline">\(P \to Q\)</span> וגם <span class="math inline">\(Q \to P\)</span>.</p>
-<div id="box-exm-equivalence" class="thmbox thmbox-example">
-<p><strong>דוגמה 1.3.5.</strong></p>
-<ul>
-<li>עבור מספר שלם <span class="math inline">\(n\)</span>: ״<span class="math inline">\(n\)</span> זוגי״ <strong>אם ורק אם</strong> ״<span class="math inline">\(n+1\)</span> אי-זוגי״ — לשני הפסוקים תמיד אותו ערך אמת, ולכן השקילות <strong>אמת</strong>.</li>
-<li>״<span class="math inline">\(3 &gt; 5 \leftrightarrow 10 &lt; 0\)</span>״ — שני הצדדים שקריים, ולכן השקילות <strong>אמת</strong>.</li>
-<li>״<span class="math inline">\(2+2 = 4 \leftrightarrow 1 = 2\)</span>״ — צד אחד אמת והשני שקר, ולכן השקילות <strong>שקר</strong>.</li>
-</ul>
-</div>
-<p>לסיכום, ערכי האמת של חמשת הקשרים מרוכזים ב<strong>טבלת האמת</strong> הבאה:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(\neg P\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \land Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \lor Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \to Q\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(P \leftrightarrow Q\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
-</tr>
-</tbody>
-</table>
-<p><strong>הערה על סימונים.</strong> את הגרירה ואת השקילות סימנו כאן בחצים <span class="math inline">\(\to\)</span> ו-<span class="math inline">\(\leftrightarrow\)</span>. במקורות רבים נהוג לסמנם דווקא בחצים הכפולים, <span class="math inline">\(\implies\)</span> ו-<span class="math inline">\(\iff\)</span> (בהתאמה); מדובר באותם קשרים בדיוק, בסימון שונה.</p>
-</section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1497,7 +1333,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./01-logic-2.html" class="pagination-link" aria-label="1.2 פסוקים"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1.2 פסוקים</span></a></div><div class="nav-page nav-page-next"><a href="./01-logic-4.html" class="pagination-link" aria-label="1.4 כמתים לוגיים"><span class="nav-page-text">1.4 כמתים לוגיים</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./04-abs-value-3.html" class="pagination-link" aria-label="4.3 סביבת-\(\varepsilon\) של נקודה"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4.3 סביבת-\(\varepsilon\) של נקודה</span></a></div><div class="nav-page nav-page-next"><a href="./04-abs-value-5.html" class="pagination-link" aria-label="4.5 קבוצות חסומות"><span class="nav-page-text">4.5 קבוצות חסומות</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 
