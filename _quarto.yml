@@ -134,7 +134,7 @@ format:
         \definecolor{foldaccent}{HTML}{64748B}
         \newenvironment{foldablebox}[1]{\par\medskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\smallskip\noindent{\bfseries\color{foldaccent}#1}\ {\color{foldaccent}(אפשר לדלג)}\par\smallskip}{\par\smallskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\medskip}
         \definecolor{optionalaccent}{HTML}{9A7B1F}
-        \newenvironment{optionalbox}{\par\medskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent{\bfseries\color{optionalaccent}קריאת רשות}\par\smallskip}{\par\smallskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
+        \newenvironment{optionalbox}{\par\medskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent{\bfseries\color{optionalaccent}קריאה לא הכרחית — אפשר לדלג}\par\smallskip}{\par\smallskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
     mainfont: Arial
     sansfont: Arial
     monofont: "Courier New"

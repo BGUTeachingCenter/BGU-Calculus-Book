@@ -217,7 +217,11 @@ process = function(blocks, in_optional)
           summary = "פתרון"
           attrs = ' class="thmcollapse"'
         elseif has_class(orig, "optional") then
-          summary = (t and t ~= "") and t or "קריאת רשות"
+          -- The bar is always visible even while the box is collapsed, so it doubles as
+          -- the "you may skip this" banner. A title= is appended rather than replacing
+          -- the banner, so the skip marking never disappears behind a topic name.
+          summary = "קריאה לא הכרחית — אפשר לדלג"
+          if t and t ~= "" then summary = summary .. " · " .. t end
           attrs = ' class="thmcollapse thmoptional"'   -- collapsed by default (no "open")
         end
         out[#out + 1] = pandoc.RawBlock("html", '<details' .. attrs .. '><summary>' .. summary .. '</summary>')
