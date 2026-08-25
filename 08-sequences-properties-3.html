@@ -346,9 +346,20 @@ iframe.widget-frame {
 /* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
    thicker border, unlike the supporting boxes above — a warning marks something
    students actually get wrong, so it should read louder than a remark.
-   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
-.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label.
+   NB widen with border-inline-start-WIDTH, not the physical `border-width`
+   shorthand: that one overrides all four sides, and since .thmbox draws the edge
+   with `border-inline-start: 4px`, `border-width: 3px` made this box THINNER than
+   an ordinary one — the opposite of what the rule is for. */
+.thmbox-warning     { border-color: #ef4444; border-inline-start-width: 6px; background: #fef2f2; }
 .thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
+/* Key point (.thmkey): the warning's blue counterpart. A warning says "students get
+   this wrong"; this one says "carry this with you" — a convention, or a fact used
+   silently from here on. Same loud treatment so the pair reads as a pair. Sky rather
+   than the definition blue (#3b82f6) or the explanation indigo, and the coloured
+   full-weight label keeps it clear of a definition box at a glance. */
+.thmbox-key-point   { border-color: #0284c7; border-inline-start-width: 6px; background: #f0f9ff; }
+.thmbox-key-point > p:first-child > strong { font-weight: 700; color: #0369a1; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -965,8 +976,8 @@ window.Quarto = {
 <p><span class="math display">\[.\left|a_n b_n - L_1 L_2\right| \leq \left|a_n\right|\left|b_n - L_2\right| + \left|L_2\right|\left|a_n - L_1\right|\]</span></p>
 <p>הפעם לכל מחובר נלווה מקדם. <span class="math inline">\(\left|L_2\right|\)</span> הוא מספר קבוע ואינו מטריד. אבל <span class="math inline">\(\left|a_n\right|\)</span> משתנה עם <span class="math inline">\(,n\)</span> ואם הוא יגדל ללא גבול, הקטנת <span class="math inline">\(\left|b_n - L_2\right|\)</span> לא תציל אותנו — מכפלה של משהו קטן במשהו גדול מאוד אינה בהכרח קטנה.</p>
 <p>כאן נזדקק לתכונות החסימוּת שהוכחנו בסעיף הקודם, ודווקא לשתיהן:</p>
-<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת, ולכן לפי <a href="./08-sequences-properties-2.html#box-thm-convergent-bounded">משפט 8.2.5</a> היא חסומה.</p>
-<p>ולפי <a href="./08-sequences-properties-2.html#box-thm-bounded-abs">משפט 8.2.3</a> חסימות פירושה שקיים <span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n\right| \leq M\)</span></p>
+<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת, ולכן לפי <a href="./08-sequences-properties-2.html#box-thm-convergent-bounded">המשפט על התכנסות וחסימות</a> היא חסומה.</p>
+<p>ולפי <a href="./08-sequences-properties-2.html#box-thm-bounded-abs">המשפט על חסימות וערך מוחלט</a> חסימות פירושה שקיים <span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|a_n\right| \leq M\)</span></p>
 <p>הצירוף הזה הוא בדיוק מה שדרוש כאן: המשפט הראשון נותן חסימות, והשני ממיר אותה לצורה של מספר אחד החוסם את כל האיברים בערך מוחלט — וזו הצורה שנכנסת ישירות לתוך אי-השוויון.</p>
 <p><strong>כעת החלק שדורש תשומת לב — בחירת ה-<span class="math inline">\(\varepsilon\)</span>-ים.</strong> אנחנו רוצים ששני המחוברים יהיו קטנים מ-<span class="math inline">\(\frac{\varepsilon}{2}\)</span> כל אחד, ונראה מה זה דורש מאיתנו.</p>
 <p>המחובר הראשון חסום על ידי <span class="math inline">\(,M\left|b_n - L_2\right|\)</span> ולכן די שיתקיים <span class="math inline">\(,M\left|b_n - L_2\right| &lt; \frac{\varepsilon}{2}\)</span> כלומר</p>
@@ -991,7 +1002,7 @@ window.Quarto = {
 <p>ואז נסיים בכפל: <span class="math inline">\(\dfrac{a_n}{b_n} = a_n \cdot \dfrac{1}{b_n}\)</span> לפי סעיף (ג).</p>
 <p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> נאחד למכנה משותף:</p>
 <p><span class="math display">\[.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \left|\frac{L_2 - b_n}{b_n L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|}\]</span></p>
-<p>במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: <span class="math inline">\(\left|b_n\right|\)</span> עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא <strong>חסם מלרע</strong> על <span class="math inline">\(,\left|b_n\right|\)</span> וזהו בדיוק החישוב שכבר עשינו ב<a href="#box-rem-denominator-nonzero">הערה 8.3.2</a>, הפעם עד הסוף: שם הסתפקנו במסקנה <span class="math inline">\(,b_n \neq 0\)</span> וכאן נחלץ ממנו חסם מספרי. מכיוון ש-<span class="math inline">\(,L_2 \neq 0\)</span> מתקיים <span class="math inline">\(,\frac{\left|L_2\right|}{2} &gt; 0\)</span> ולכן קיים <span class="math inline">\(N_0\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים</p>
+<p>במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: <span class="math inline">\(\left|b_n\right|\)</span> עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא <strong>חסם מלרע</strong> על <span class="math inline">\(,\left|b_n\right|\)</span> וזהו בדיוק החישוב שכבר עשינו ב<a href="#box-rem-denominator-nonzero">הערה על המכנה שאינו מתאפס</a>, הפעם עד הסוף: שם הסתפקנו במסקנה <span class="math inline">\(,b_n \neq 0\)</span> וכאן נחלץ ממנו חסם מספרי. מכיוון ש-<span class="math inline">\(,L_2 \neq 0\)</span> מתקיים <span class="math inline">\(,\frac{\left|L_2\right|}{2} &gt; 0\)</span> ולכן קיים <span class="math inline">\(N_0\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים</p>
 <p><span class="math display">\[.\left|b_n - L_2\right| &lt; \frac{\left|L_2\right|}{2}\]</span></p>
 <p>לפי אי-שוויון המשולש</p>
 <p><span class="math display">\[,\left|L_2\right| = \left|\left(L_2 - b_n\right) + b_n\right| \leq \left|L_2 - b_n\right| + \left|b_n\right| &lt; \frac{\left|L_2\right|}{2} + \left|b_n\right|\]</span></p>
@@ -1008,15 +1019,15 @@ window.Quarto = {
 </div>
 <section id="דוגמאות" class="level3">
 <h3 class="anchored" data-anchor-id="דוגמאות">דוגמאות</h3>
-<p>נראה עכשיו כיצד מיישמים את אריתמטיקת הגבולות. מוטיב חוזר בדוגמאות הבאות הוא שאי אפשר להפעיל את <a href="#box-thm-sequence-arithmetic">משפט 8.3.1</a> ישירות, משום שהסדרות המרכיבות את הביטוי אינן מתכנסות כלל. אבל לאחר מניפולציה אלגברית פשוטה, אותו ביטוי עצמו נהיה מנה של סדרות שכן מתכנסות, ואז המשפט חל.</p>
-<p>בשני הפתרונות נשתמש שוב ושוב באותו גבול יסודי, <span class="math inline">\(,\lim\limits_{n\to\infty} \dfrac{1}{n} = 0\)</span> שהוכחנו ישירות מן ההגדרה ב<a href="./07-sequences-limit-3.html#box-q-one-over-n">שאלה 7.3.6</a>.</p>
+<p>נראה עכשיו כיצד מיישמים את אריתמטיקת הגבולות. מוטיב חוזר בדוגמאות הבאות הוא שאי אפשר להפעיל את <a href="#box-thm-sequence-arithmetic">משפט אריתמטיקת הגבולות</a> ישירות, משום שהסדרות המרכיבות את הביטוי אינן מתכנסות כלל. אבל לאחר מניפולציה אלגברית פשוטה, אותו ביטוי עצמו נהיה מנה של סדרות שכן מתכנסות, ואז המשפט חל.</p>
+<p>בשני הפתרונות נשתמש שוב ושוב באותו גבול יסודי, <span class="math inline">\(,\lim\limits_{n\to\infty} \dfrac{1}{n} = 0\)</span> שהוכחנו ישירות מן ההגדרה ב<a href="./07-sequences-limit-3.html#box-q-one-over-n">שאלה על הסדרה <span class="math inline">\(\frac{1}{n}\)</span></a>.</p>
 <div id="box-exm-seq-rational-1" class="thmbox thmbox-question" title="מנת פולינומים מאותה דרגה">
 <p><strong>שאלה 8.3.3 — מנת פולינומים מאותה דרגה.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math display">\[.a_n = \frac{3n-4}{n+2}\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>מדוע אי אפשר להפעיל את המשפט ישירות.</strong> הסדרה שבמונה, <span class="math inline">\(,3n-4\)</span> והסדרה שבמכנה, <span class="math inline">\(,n+2\)</span> אינן חסומות, ולכן לפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">מסקנה 8.2.6</a> אינן מתכנסות. סעיף (ד) של המשפט מניח ששתי הסדרות מתכנסות, ולכן אינו חל כאן.</p>
+<p><strong>מדוע אי אפשר להפעיל את המשפט ישירות.</strong> הסדרה שבמונה, <span class="math inline">\(,3n-4\)</span> והסדרה שבמכנה, <span class="math inline">\(,n+2\)</span> אינן חסומות, ולכן לפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">המסקנה על סדרות שאינן חסומות</a> אינן מתכנסות. סעיף (ד) של המשפט מניח ששתי הסדרות מתכנסות, ולכן אינו חל כאן.</p>
 <p><strong>המניפולציה.</strong> נחלק את המונה ואת המכנה בחזקה הגבוהה ביותר, <span class="math inline">\(.n\)</span> לכל <span class="math inline">\(n \geq 1\)</span> מתקיים <span class="math inline">\(,n \neq 0\)</span> ולכן זהו צמצום חוקי של השבר, והסדרה לא השתנתה:</p>
 <p><span class="math display">\[.a_n = \frac{3n-4}{n+2} = \frac{\dfrac{3n-4}{n}}{\dfrac{n+2}{n}} = \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}}\]</span></p>
 <p><strong>גבולות המונה והמכנה.</strong> הסדרה הקבועה <span class="math inline">\(4\)</span> מתכנסת ל-<span class="math inline">\(,4\)</span> ולכן לפי סעיף (ג)</p>

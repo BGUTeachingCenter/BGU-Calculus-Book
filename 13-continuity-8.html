@@ -346,9 +346,20 @@ iframe.widget-frame {
 /* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
    thicker border, unlike the supporting boxes above — a warning marks something
    students actually get wrong, so it should read louder than a remark.
-   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
-.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label.
+   NB widen with border-inline-start-WIDTH, not the physical `border-width`
+   shorthand: that one overrides all four sides, and since .thmbox draws the edge
+   with `border-inline-start: 4px`, `border-width: 3px` made this box THINNER than
+   an ordinary one — the opposite of what the rule is for. */
+.thmbox-warning     { border-color: #ef4444; border-inline-start-width: 6px; background: #fef2f2; }
 .thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
+/* Key point (.thmkey): the warning's blue counterpart. A warning says "students get
+   this wrong"; this one says "carry this with you" — a convention, or a fact used
+   silently from here on. Same loud treatment so the pair reads as a pair. Sky rather
+   than the definition blue (#3b82f6) or the explanation indigo, and the coloured
+   full-weight label keeps it clear of a definition box at a glance. */
+.thmbox-key-point   { border-color: #0284c7; border-inline-start-width: 6px; background: #f0f9ff; }
+.thmbox-key-point > p:first-child > strong { font-weight: 700; color: #0369a1; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {

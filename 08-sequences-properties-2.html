@@ -346,9 +346,20 @@ iframe.widget-frame {
 /* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
    thicker border, unlike the supporting boxes above — a warning marks something
    students actually get wrong, so it should read louder than a remark.
-   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label. */
-.thmbox-warning     { border-color: #ef4444; border-width: 3px; background: #fef2f2; }
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label.
+   NB widen with border-inline-start-WIDTH, not the physical `border-width`
+   shorthand: that one overrides all four sides, and since .thmbox draws the edge
+   with `border-inline-start: 4px`, `border-width: 3px` made this box THINNER than
+   an ordinary one — the opposite of what the rule is for. */
+.thmbox-warning     { border-color: #ef4444; border-inline-start-width: 6px; background: #fef2f2; }
 .thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
+/* Key point (.thmkey): the warning's blue counterpart. A warning says "students get
+   this wrong"; this one says "carry this with you" — a convention, or a fact used
+   silently from here on. Same loud treatment so the pair reads as a pair. Sky rather
+   than the definition blue (#3b82f6) or the explanation indigo, and the coloured
+   full-weight label keeps it clear of a definition box at a glance. */
+.thmbox-key-point   { border-color: #0284c7; border-inline-start-width: 6px; background: #f0f9ff; }
+.thmbox-key-point > p:first-child > strong { font-weight: 700; color: #0369a1; }
 /* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
    but the gray bar is the clickable <summary>. */
 details.thmoptional {
@@ -935,7 +946,7 @@ window.Quarto = {
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>קבוצת איברי הסדרה היא <span class="math inline">\(,A = \left\{a_n \mid n \in \mathbb{N}\right\}\)</span> והסדרה חסומה בדיוק כאשר <span class="math inline">\(A\)</span> קבוצה חסומה. הטענה היא אפוא <a href="./04-abs-value-5.html#box-cor-bounded-abs">מסקנה 4.5.4</a> בניסוח של סדרות.</p>
+<p>קבוצת איברי הסדרה היא <span class="math inline">\(,A = \left\{a_n \mid n \in \mathbb{N}\right\}\)</span> והסדרה חסומה בדיוק כאשר <span class="math inline">\(A\)</span> קבוצה חסומה. הטענה היא אפוא <a href="./04-abs-value-5.html#box-cor-bounded-abs">המסקנה על קבוצה חסומה וערך מוחלט</a> בניסוח של סדרות.</p>
 </div>
 <p>היתרון של הניסוח הזה הוא שמעורבים בו שני סימנים בלבד, <span class="math inline">\(a_n\)</span> ו-<span class="math inline">\(,M\)</span> ואי-שוויון אחד במקום שניים: כדי להראות שסדרה חסומה די למצוא <span class="math inline">\(M\)</span> אחד, וכדי להשתמש בחסימוּת די לדעת ש-<span class="math inline">\(.\left|a_n\right| \leq M\)</span></p>
 <p>בתרגילים הבאים נשתמש בכך שלכל <span class="math inline">\(x\)</span> ממשי מתקיים <span class="math inline">\(\left|\sin x\right| \leq 1\)</span> וגם <span class="math inline">\(.\left|\cos x\right| \leq 1\)</span></p>
@@ -998,7 +1009,7 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>נכון.</strong> לפי <a href="#box-thm-bounded-abs">משפט 8.2.3</a> קיימים <span class="math inline">\(M_1 \geq 0\)</span> ו-<span class="math inline">\(M_2 \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(\left|a_n\right| \leq M_1\)</span> וגם <span class="math inline">\(.\left|b_n\right| \leq M_2\)</span> מכפליות הערך המוחלט נובע <span class="math display">\[,\left|a_n \cdot b_n\right| = \left|a_n\right| \cdot \left|b_n\right| \leq M_1 M_2\]</span> ולכן <span class="math inline">\(M_1 M_2\)</span> הוא חסם למכפלה.</p>
+<p><strong>נכון.</strong> לפי <a href="#box-thm-bounded-abs">המשפט על חסימות וערך מוחלט</a> קיימים <span class="math inline">\(M_1 \geq 0\)</span> ו-<span class="math inline">\(M_2 \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(\left|a_n\right| \leq M_1\)</span> וגם <span class="math inline">\(.\left|b_n\right| \leq M_2\)</span> מכפליות הערך המוחלט נובע <span class="math display">\[,\left|a_n \cdot b_n\right| = \left|a_n\right| \cdot \left|b_n\right| \leq M_1 M_2\]</span> ולכן <span class="math inline">\(M_1 M_2\)</span> הוא חסם למכפלה.</p>
 </div>
 </details>
 <p><strong>תרגיל 4.</strong> אם <span class="math inline">\((a_n + b_n)\)</span> חסומה, אז <span class="math inline">\((a_n)\)</span> חסומה.</p>
@@ -1010,7 +1021,7 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>לא נכון.</strong> ניקח <span class="math inline">\(a_n = n\)</span> ו-<span class="math inline">\(.b_n = -n\)</span> לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n + b_n = 0\)</span> כלומר הסכום הוא הסדרה הקבועה <span class="math inline">\(,0\)</span> שהיא חסומה. אבל <span class="math inline">\(a_n = n\)</span> אינה חסומה, כפי שראינו ב<a href="#box-exm-bounded-sequences">דוגמה 8.2.2</a>.</p>
+<p><strong>לא נכון.</strong> ניקח <span class="math inline">\(a_n = n\)</span> ו-<span class="math inline">\(.b_n = -n\)</span> לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n + b_n = 0\)</span> כלומר הסכום הוא הסדרה הקבועה <span class="math inline">\(,0\)</span> שהיא חסומה. אבל <span class="math inline">\(a_n = n\)</span> אינה חסומה, כפי שראינו ב<a href="#box-exm-bounded-sequences">דוגמה על סדרות חסומות ושאינן חסומות</a>.</p>
 </div>
 </details>
 </section>
