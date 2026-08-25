@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מספרים בינאריים</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+<style>
+/* The digit row is a NUMERAL, so it has to run left-to-right inside the RTL
+   document: most significant place on the left, the ones place on the right.
+   Same reason the sum line and the badges are marked ltr. */
+.bits{display:flex;direction:ltr;justify-content:center;gap:.4rem;margin:.9rem 0 .2rem}
+.bit{display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.bit .place{
+  font-size:.78rem;color:var(--key);
+  font-family:ui-monospace,"Courier New",monospace;
+}
+.bit button{
+  width:2.3rem;height:2.3rem;border:1px solid var(--soft);border-radius:4px;
+  background:#fff;color:var(--ink);font-weight:700;font-size:1.1rem;
+  font-family:ui-monospace,"Courier New",monospace;cursor:pointer;
+}
+.bit button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.bit button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sum{
+  text-align:center;direction:ltr;unicode-bidi:isolate;margin-top:.5rem;
+  font-family:ui-monospace,"Courier New",monospace;font-size:1.05rem;color:var(--ink);
+}
+.hint{text-align:center;color:var(--key);font-size:.88rem;margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="demo">
+  <div class="row">
+    <span class="key mathlbl">n</span>
+    <input type="range" id="nSl" min="0" max="63" step="1" value="22">
+    <span class="badge" id="nBadge">22</span>
+  </div>
+
+  <div class="bits" id="bits"></div>
+  <div class="sum" id="sum"></div>
+
+  <div class="readout">
+    <div><span class="key">הכתיב הבינארי:</span> <span class="val" id="binOut"></span></div>
+    <div><span class="key">מספר הספרות 1:</span> <span class="val" id="onesOut"></span></div>
+  </div>
+
+  <div class="hint">גררו את הסרגל, או לחצו ישירות על ספרה כדי להדליק ולכבות אותה.</div>
+</div>
+
+<script>
+"use strict";
+(function () {
+  var WIDTH = 6;                                   /* six places: 32 16 8 4 2 1 */
+  var places = [];
+  for (var i = WIDTH - 1; i >= 0; i--) places.push(Math.pow(2, i));
+
+  var $ = function (id) { return document.getElementById(id); };
+  var sl = $("nSl"), bitsEl = $("bits");
+  var n = +sl.value;
+
+  /* one column per place: the place value above, the toggleable digit below */
+  places.forEach(function (p) {
+    var col = document.createElement("div");
+    col.className = "bit";
+    var lab = document.createElement("span");
+    lab.className = "place";
+    lab.textContent = p;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.addEventListener("click", function () {
+      n ^= p;                                      /* flip just this place */
+      sl.value = n;
+      draw();
+    });
+    col.appendChild(lab);
+    col.appendChild(btn);
+    bitsEl.appendChild(col);
+  });
+
+  function draw() {
+    var padded = "", ones = 0, parts = [];
+    places.forEach(function (p, i) {
+      var on = (n & p) !== 0;
+      padded += on ? "1" : "0";
+      if (on) { ones++; parts.push(String(p)); }
+      var btn = bitsEl.children[i].lastChild;
+      btn.textContent = on ? "1" : "0";
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    $("nBadge").textContent = n;
+    /* the boxes keep all six places so the place values line up; the readout
+       drops leading zeros, which is how the numeral is actually written */
+    $("binOut").textContent = padded.replace(/^0+(?=.)/, "");
+    $("onesOut").textContent = ones;
+    $("sum").textContent = parts.length ? n + " = " + parts.join(" + ") : "0 = 0";
+
+    requestAnimationFrame(function () {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: "widget-height",
+          height: Math.ceil(document.documentElement.scrollHeight)
+        }, "*");
+      }
+    });
+  }
+
+  sl.addEventListener("input", function (e) { n = +e.target.value; draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

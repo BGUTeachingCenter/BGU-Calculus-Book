@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>התכנסות: aₙ = 1/n</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="../shared/seq-limit.js"></script>
+<script>
+SeqLimit.mount({
+  f: function (n) { return 1 / n; },
+  L: 0,
+  eps: { min: 0.001, max: 1, def: 0.3 },
+  scanMax: 4000
+});
+</script>
+</body>
+</html>

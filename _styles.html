@@ -1,0 +1,575 @@
+<script>
+/* MathJax 4 breaks long INLINE math across lines by default (new in v4 — v3 only ever
+   broke display math). That is what splits $.M > 0$ into ".M" on one line and "> 0" on
+   the next. It cannot be fixed in CSS: MathJax inserts real break points into its own
+   DOM, so white-space:nowrap has nothing to collapse.
+
+   In this book it is worse than untidy. Each fragment becomes its own LTR bidi isolate
+   inside RTL prose, so the halves can surface in the wrong visual order, and the
+   book's convention of keeping the closing punctuation inside the math ($.M > 0$) can
+   leave that period stranded on a line of its own.
+
+   Display math still breaks, which is what we want for a formula wider than the column.
+   This must be set before mathjax@4/tex-chtml.js loads; _styles.html is pulled in via
+   include-in-header and lands far above the (deferred) script tag. */
+window.MathJax = {
+  chtml: {
+    linebreaks: { inline: false }
+  }
+};
+</script>
+<style>
+/* Math inside an RTL page. The document is <html dir="rtl">, so both Quarto's
+   .math wrapper and MathJax's own container inherit direction:rtl, and math with
+   more than one token comes out mirrored: (L-ε, L+ε) renders as )L+ε, L-ε(, and
+   ⌊m⌋ ≤ m < ⌊m⌋+1 reverses too. Give every math run its own LTR bidi context.
+   Single-symbol math ($L$, $\varepsilon$) cannot show the fault, which is why it
+   surfaces in figure captions — that is where the intervals and the chained
+   inequalities are. The PDF is unaffected; xelatex already boxes math LTR. */
+.math.inline, .math.display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+mjx-container, mjx-container * {
+  direction: ltr;
+}
+/* Never break a line inside a formula. A formula split across two lines reads as two
+   unrelated fragments, and here it is worse than usual: the LTR isolation above makes
+   each fragment its own bidi run, so the halves can land in the wrong visual order.
+   This also protects the book's convention of putting the closing punctuation inside
+   the math ($.a_n \le b_n$) — that period must never be orphaned onto the next line.
+   Display math is left breakable-free too, but is allowed to scroll rather than
+   overflow the column when a formula is genuinely wider than the text. */
+.math.inline, mjx-container:not([display="true"]) {
+  white-space: nowrap;
+}
+.math.display, mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.todo {
+  color: #8a8a8a;
+  font-style: italic;
+  background: #fafafa;
+  border: 1px dashed #cccccc;
+  border-radius: 4px;
+  padding: 1.2rem 1rem;
+  margin: 0.4rem 0 1.2rem;
+}
+.tf-quiz {
+  margin: 0.6rem 0 1rem;
+}
+.tf-quiz .tf-opt {
+  margin: 0 0 0 0.5rem;
+  padding: 0.35rem 1.4rem;
+  cursor: pointer;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background: #f5f5f5;
+  font: inherit;
+  color: inherit;
+}
+.tf-quiz .tf-opt:hover {
+  background: #ececec;
+}
+.tf-quiz .tf-opt.correct {
+  background: #d4edda;
+  border-color: #28a745;
+}
+.tf-quiz .tf-opt.incorrect {
+  background: #f8d7da;
+  border-color: #dc3545;
+}
+.tf-quiz .tf-feedback {
+  margin-top: 0.45rem;
+  font-weight: bold;
+  min-height: 1.2em;
+}
+.set-quiz {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+}
+.set-quiz .set-label {
+  min-width: 5rem;
+}
+.set-quiz .set-input {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  font: inherit;
+  direction: ltr;
+  text-align: left;
+  min-width: 12rem;
+}
+.set-quiz .set-input.correct {
+  border-color: #28a745;
+  background: #d4edda;
+}
+.set-quiz .set-input.incorrect {
+  border-color: #dc3545;
+  background: #f8d7da;
+}
+.set-quiz .set-check {
+  padding: 0.25rem 0.9rem;
+  cursor: pointer;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background: #f5f5f5;
+  font: inherit;
+  color: inherit;
+}
+.set-quiz .set-check:hover {
+  background: #ececec;
+}
+.set-quiz .set-feedback {
+  font-weight: bold;
+  min-height: 1.2em;
+}
+.seq-quiz, .formula-quiz {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+}
+.seq-quiz .seq-label, .formula-quiz .seq-label { min-width: 12rem; }
+.seq-quiz .seq-input, .formula-quiz .seq-input {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  font: inherit;
+  direction: ltr;
+  text-align: left;
+  min-width: 16rem;
+}
+.seq-quiz .seq-input.correct, .formula-quiz .seq-input.correct { border-color: #28a745; background: #d4edda; }
+.seq-quiz .seq-input.incorrect, .formula-quiz .seq-input.incorrect { border-color: #dc3545; background: #f8d7da; }
+.seq-quiz .seq-check, .formula-quiz .seq-check {
+  padding: 0.25rem 0.9rem;
+  cursor: pointer;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background: #f5f5f5;
+  font: inherit;
+  color: inherit;
+}
+.seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover { background: #ececec; }
+.seq-quiz .seq-feedback, .formula-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
+/* Interactive π-approximation demo (HTML only) */
+.pi-demo {
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  padding: 0.8rem 0.9rem 1rem;
+  margin: 1.2rem 0;
+}
+/* Inside a theorem box the demo shouldn't draw a second frame. */
+.thmbox .pi-demo { border: 0; background: transparent; padding: 0; margin: 0.4rem 0; }
+.pi-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+.pi-demo-slider { flex: 1 1 14rem; max-width: 22rem; direction: ltr; }
+.pi-demo-badge {
+  font-weight: 700;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  min-width: 4.5rem;
+  text-align: center;
+}
+.pi-demo-svg {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  margin: 0.9rem auto 0.5rem;
+}
+.pi-demo-circle { fill: #dbeafe; stroke: #1f4e79; stroke-width: 0.014; }
+/* drawn BEFORE the circle, so only the ring outside the circle shows through */
+.pi-demo-poly-out {
+  fill: #f6c445;
+  stroke: #7f1d1d;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-poly {
+  fill: #c0392b;
+  fill-opacity: 0.5;
+  stroke: #c0392b;
+  stroke-width: 0.014;
+  stroke-linejoin: round;
+}
+.pi-demo-readout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1.4rem;
+  margin-top: 0.5rem;
+}
+.pi-demo-readout > div { white-space: nowrap; }
+.pi-demo-key { color: #475569; }
+.pi-demo-val { font-weight: 700; font-family: ui-monospace, "Courier New", monospace; }
+/* Interactive widgets embedded from widgets/<chapter>/*.html.
+   They live in an iframe so their CSS (which styles body/table/button
+   unscoped) cannot leak into the book page, and so several copies on one
+   page do not collide on element ids. The height below is a first guess;
+   each widget posts its real height and the listener at the bottom of this
+   file applies it. */
+iframe.widget-frame {
+  display: block;
+  width: 100%;
+  height: 440px;      /* replaced by the widget's own reported height */
+  border: 0;          /* the widget draws its own frame, like .pi-demo */
+  background: transparent;
+  margin: 1.2rem 0 0;
+}
+/* Inside a .thmsim box the frame sits flush; the box supplies the padding. */
+.thmbox-simulation iframe.widget-frame { margin: 0.5rem 0 0.2rem; }
+.thmbox {
+  border-inline-start: 4px solid #9ca3af;
+  background: #fafafa;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+}
+.thmbox > :first-child { margin-top: 0; }
+.thmbox > :last-child { margin-bottom: 0; }
+.thmbox-definition  { border-color: #3b82f6; background: #eff6ff; }
+.thmbox-theorem     { border-color: #16a34a; background: #f0fdf4; }
+.thmbox-proposition { border-color: #0d9488; background: #f0fdfa; }
+.thmbox-lemma       { border-color: #0d9488; background: #f0fdfa; }
+.thmbox-corollary   { border-color: #16a34a; background: #f0fdf4; }
+.thmbox-example     { border-color: #d97706; background: #fffbeb; }
+/* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
+   solution reuses the proof's slate — a solution is to a question what a proof
+   is to a theorem, and the reader already reads that grey as "the working". */
+.thmbox-question    { border-color: #b45309; background: #fef6e7; }
+.thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
+.thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
+.thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
+.thmbox-proof       { border-color: #94a3b8; background: #f1f5f9; }
+.thmbox-proof > p:first-child > strong { font-weight: 600; color: #64748b; }
+.thmbox-remark      { border-color: #cbd5e1; background: #f8fafc; }
+.thmbox-remark > p:first-child > strong { font-weight: 600; color: #64748b; }
+/* Explanation (.thmexpl): supporting material like proof/remark, so it keeps the
+   lighter label weight rather than the full bold of a theorem — but it carries the
+   idea the proof formalises, so it gets a hue of its own instead of more grey.
+   Indigo, kept clear of the definition blue and of the simulation violet. */
+.thmbox-explanation { border-color: #818cf8; background: #f5f6ff; }
+.thmbox-explanation > p:first-child > strong { font-weight: 600; color: #4f46e5; }
+/* Warning (.thmwarn): the one box meant to stop the eye. Full-weight label and a
+   thicker border, unlike the supporting boxes above — a warning marks something
+   students actually get wrong, so it should read louder than a remark.
+   HTML only: the PDF has no frames (tcolorbox breaks RTL), just the bold label.
+   NB widen with border-inline-start-WIDTH, not the physical `border-width`
+   shorthand: that one overrides all four sides, and since .thmbox draws the edge
+   with `border-inline-start: 4px`, `border-width: 3px` made this box THINNER than
+   an ordinary one — the opposite of what the rule is for. */
+.thmbox-warning     { border-color: #ef4444; border-inline-start-width: 6px; background: #fef2f2; }
+.thmbox-warning > p:first-child > strong { font-weight: 700; color: #b91c1c; }
+/* Key point (.thmkey): the warning's blue counterpart. A warning says "students get
+   this wrong"; this one says "carry this with you" — a convention, or a fact used
+   silently from here on. Same loud treatment so the pair reads as a pair. Sky rather
+   than the definition blue (#3b82f6) or the explanation indigo, and the coloured
+   full-weight label keeps it clear of a definition box at a glance. */
+.thmbox-key-point   { border-color: #0284c7; border-inline-start-width: 6px; background: #f0f9ff; }
+.thmbox-key-point > p:first-child > strong { font-weight: 700; color: #0369a1; }
+/* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
+   but the gray bar is the clickable <summary>. */
+details.thmoptional {
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+  margin: 1.5rem 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+details.thmoptional > summary {
+  background: #d1d5db;
+  color: #374151;
+  font-weight: 700;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+details.thmoptional[open] > summary { border-bottom: 1px solid #9ca3af; }
+details.thmoptional > .optional { padding: 0.7rem 0.9rem; }
+details.thmoptional > .optional > :first-child { margin-top: 0; }
+details.thmoptional > .optional > :last-child { margin-bottom: 0; }
+/* .foldable: hidden calculations / derivations. Distinct from .optional (which is a
+   whole gray-boxed aside) — this is a light inline disclosure inside the running text. */
+details.thmfoldable {
+  margin: 1rem 0;
+  border-inline-start: 3px solid #cbd5e1;
+  padding-inline-start: 0.8rem;
+}
+details.thmfoldable > summary {
+  cursor: pointer;
+  color: #475569;
+  font-weight: 600;
+}
+details.thmfoldable[open] > summary { margin-bottom: 0.5rem; }
+details.thmcollapse { margin: 1rem 0; }
+details.thmcollapse > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #475569;
+  padding: 0.2rem 0;
+}
+details.thmcollapse[open] > summary { margin-bottom: 0.4rem; }
+/* Enrichment box (.extra): non-foldable, gray box; the section heading becomes a gray
+   header bar. Quarto merges the div into <section class="... extra">, so we style .extra. */
+.extra {
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+  margin: 1.5rem 0;
+  background: #ffffff;
+  padding: 0.7rem 0.9rem;
+}
+.extra > h2, .extra > h3, .extra > .extra-title {
+  background: #d1d5db;
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: -0.7rem -0.9rem 0.8rem;
+  padding: 0.45rem 0.8rem;
+  border-bottom: 1px solid #9ca3af;
+}
+.extra > :last-child { margin-bottom: 0; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".tf-quiz").forEach(function (quiz) {
+    var correct = quiz.getAttribute("data-correct");
+    var feedback = quiz.querySelector(".tf-feedback");
+    quiz.querySelectorAll(".tf-opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        quiz.querySelectorAll(".tf-opt").forEach(function (b) {
+          b.classList.remove("correct", "incorrect");
+        });
+        if (btn.getAttribute("data-val") === correct) {
+          btn.classList.add("correct");
+          if (feedback) feedback.textContent = "✓ נכון!";
+        } else {
+          btn.classList.add("incorrect");
+          if (feedback) feedback.textContent = "✗ לא מדויק — נסו שוב, או פתחו את הפתרון.";
+        }
+        /* Opt-in via a bare data-reveal attribute: answering opens the solution that
+           follows, so the reasoning appears once the reader has committed. Quizzes
+           without the attribute (chapter 1) are untouched.
+           Located by document order, NOT by id: a Div carrying an identifier together
+           with .thmsol .foldable crashes Quarto's own main.lua ("attempt to index a
+           nil value (field 'attr')"). Either attribute alone is fine; only the
+           combination breaks, so the solution boxes deliberately have no id. */
+        if (quiz.hasAttribute("data-reveal")) {
+          var box = null;
+          for (var node = quiz; node && node.tagName !== "MAIN" && !box; node = node.parentElement) {
+            for (var sib = node.nextElementSibling; sib && !box; sib = sib.nextElementSibling) {
+              box = sib.tagName === "DETAILS" ? sib
+                  : (sib.querySelector ? sib.querySelector("details") : null);
+            }
+          }
+          if (box) box.open = true;
+        }
+      });
+    });
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function normSet(str) {
+    if (!str) return [];
+    return Array.from(new Set(
+      str.split(/[\s,;]+/).filter(function (s) { return s.length; }).map(Number)
+    )).filter(function (n) { return !Number.isNaN(n); }).sort(function (a, b) { return a - b; });
+  }
+  function eqSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
+    return true;
+  }
+  document.querySelectorAll(".set-quiz").forEach(function (q) {
+    var answer = normSet(q.getAttribute("data-answer"));
+    var input = q.querySelector(".set-input");
+    var feedback = q.querySelector(".set-feedback");
+    var btn = q.querySelector(".set-check");
+    function check() {
+      input.classList.remove("correct", "incorrect");
+      if (eqSet(normSet(input.value), answer)) {
+        input.classList.add("correct");
+        if (feedback) feedback.textContent = "✓ נכון!";
+      } else {
+        input.classList.add("incorrect");
+        if (feedback) feedback.textContent = "✗ נסו שוב";
+      }
+    }
+    if (btn) btn.addEventListener("click", check);
+    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Evaluate one entered term as arithmetic (whitelisted chars only: digits + - * / ^ ( ) . )
+  function evalTerm(s) {
+    s = String(s).trim();
+    if (!s) return null;
+    if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;
+    try {
+      var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
+      return (typeof v === "number" && isFinite(v)) ? v : null;
+    } catch (e) { return null; }
+  }
+  function parseSeq(str) { return String(str || "").split(",").map(evalTerm); }
+  function eqSeq(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] == null || b[i] == null || Math.abs(a[i] - b[i]) > 1e-9) return false;
+    }
+    return true;
+  }
+  document.querySelectorAll(".seq-quiz").forEach(function (q) {
+    var answer = parseSeq(q.getAttribute("data-answer"));
+    var input = q.querySelector(".seq-input");
+    var feedback = q.querySelector(".seq-feedback");
+    var btn = q.querySelector(".seq-check");
+    function check() {
+      input.classList.remove("correct", "incorrect");
+      if (eqSeq(parseSeq(input.value), answer)) {
+        input.classList.add("correct");
+        if (feedback) feedback.textContent = "✓ נכון!";
+      } else {
+        input.classList.add("incorrect");
+        if (feedback) feedback.textContent = "✗ נסו שוב";
+      }
+    }
+    if (btn) btn.addEventListener("click", check);
+    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Inscribed regular n-gon in the unit circle: area a_n = (n/2)*sin(2*pi/n) -> pi
+  document.querySelectorAll(".pi-demo").forEach(function (demo) {
+    var slider = demo.querySelector(".pi-demo-slider");
+    var poly = demo.querySelector(".pi-demo-poly");
+    var polyOut = demo.querySelector(".pi-demo-poly-out");
+    // Two instances of this widget appear in the chapter: the first shows only the
+    // inscribed polygon (the circumscribed one has not been motivated yet), the second
+    // shows both. Which one is decided by data-show-out, not by a control — a checkbox
+    // there would give away the second half of the argument.
+    var showOutward = demo.getAttribute("data-show-out") === "1";
+    var outRow = demo.querySelector(".pi-demo-out-row");
+    var bandRow = demo.querySelector(".pi-demo-band-row");
+    var kOut = demo.querySelector(".pi-demo-k");
+    var nOut = demo.querySelector(".pi-demo-n");
+    var aOut = demo.querySelector(".pi-demo-area");
+    var aOutC = demo.querySelector(".pi-demo-area-out");
+    var bOut = demo.querySelector(".pi-demo-band");
+    var dOut = demo.querySelector(".pi-demo-diff");
+    if (slider && poly) {
+      var update = function () {
+        var kIdx = parseInt(slider.value, 10);                 // the slider value IS k (1..10)
+        var n = 6 * Math.pow(2, kIdx - 1);                     // n_k = 6,12,24,...,3072
+        var R = 1 / Math.cos(Math.PI / n);   // circumradius of the circumscribed n-gon (apothem 1)
+        var pts = [], ptsOut = [];
+        for (var k = 0; k < n; k++) {
+          var t = -Math.PI / 2 + 2 * Math.PI * k / n;   // start at the top
+          pts.push(Math.cos(t).toFixed(5) + "," + Math.sin(t).toFixed(5));
+          // the circumscribed polygon is tangent at the inscribed polygon's vertices,
+          // so its own vertices sit half a step further round, at radius R
+          var u = t + Math.PI / n;
+          ptsOut.push((R * Math.cos(u)).toFixed(5) + "," + (R * Math.sin(u)).toFixed(5));
+        }
+        poly.setAttribute("points", pts.join(" "));
+        if (polyOut) polyOut.setAttribute("points", ptsOut.join(" "));
+        var area = (n / 2) * Math.sin(2 * Math.PI / n);
+        var areaOut = n * Math.tan(Math.PI / n);
+        if (polyOut) polyOut.style.display = showOutward ? "" : "none";
+        if (outRow) outRow.style.display = showOutward ? "" : "none";
+        if (bandRow) bandRow.style.display = showOutward ? "" : "none";
+        if (kOut) kOut.textContent = kIdx;
+        if (nOut) nOut.textContent = n;
+        if (aOut) aOut.textContent = area.toFixed(6);
+        if (aOutC) aOutC.textContent = areaOut.toFixed(6);
+        // the gaps shrink by ~4 per step, so they need more digits than the areas
+        if (bOut) bOut.textContent = (areaOut - area).toFixed(8);
+        if (dOut) dOut.textContent = (Math.PI - area).toFixed(8);
+      };
+      slider.addEventListener("input", update);
+      update();
+    }
+  });
+
+  // Build n -> value from a formula in n (whitelisted: digits, n, + - * / ^ ! ( ) . )
+  function makeFormula(s) {
+    s = String(s || "").trim();
+    if (!s || !/^[0-9n+\-*/^!().\s]+$/.test(s)) return null;
+    s = s.replace(/(\d)\s*([n(])/g, "$1*$2")             // 2n, 2(  -> 2*n, 2*(
+         .replace(/([n)])\s*([n(])/g, "$1*$2")           // )n, )(, n(  -> insert *
+         .replace(/(\([^()]*\)|\d+|n)!/g, "fact($1)")    // n!, 5!, (n+1)!  -> fact(...)
+         .replace(/\^/g, "**");
+    try {
+      var f = Function("n", '"use strict"; var fact=function(k){k=Math.round(k);var r=1;for(var i=2;i<=k;i++)r*=i;return r;}; return (' + s + ");");
+      var t = f(1);
+      return (typeof t === "number" && isFinite(t)) ? f : null;
+    } catch (e) { return null; }
+  }
+  function parseTargets(str) {
+    return String(str || "").split(",").map(function (t) {
+      t = t.trim();
+      if (!/^-?[0-9]+(?:\/[0-9]+)?$/.test(t)) return NaN;
+      var p = t.split("/");
+      return p.length === 2 ? Number(p[0]) / Number(p[1]) : Number(p[0]);
+    });
+  }
+  document.querySelectorAll(".formula-quiz").forEach(function (q) {
+    var targets = parseTargets(q.getAttribute("data-answer"));
+    var input = q.querySelector(".seq-input");
+    var feedback = q.querySelector(".seq-feedback");
+    var btn = q.querySelector(".seq-check");
+    function check() {
+      input.classList.remove("correct", "incorrect");
+      var f = makeFormula(input.value), ok = !!f;
+      for (var i = 0; ok && i < targets.length; i++) {
+        var v; try { v = f(i + 1); } catch (e) { ok = false; break; }
+        if (typeof v !== "number" || !isFinite(v) || Math.abs(v - targets[i]) > 1e-9) ok = false;
+      }
+      if (ok) {
+        input.classList.add("correct");
+        if (feedback) feedback.textContent = "✓ נכון!";
+      } else {
+        input.classList.add("incorrect");
+        if (feedback) feedback.textContent = "✗ נסו שוב";
+      }
+    }
+    if (btn) btn.addEventListener("click", check);
+    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+  });
+});
+</script>
+<script>
+// Widgets embedded from widgets/<chapter>/ report their own height, so the
+// iframe does not need a hard-coded one (which breaks on narrow screens,
+// where the control panel stacks above the plot).
+window.addEventListener("message", function (e) {
+  var d = e.data;
+  if (!d || d.type !== "widget-height" || typeof d.height !== "number") return;
+  var frames = document.querySelectorAll("iframe.widget-frame");
+  for (var i = 0; i < frames.length; i++) {
+    if (frames[i].contentWindow === e.source) {
+      frames[i].style.height = Math.max(320, Math.min(2000, d.height)) + "px";
+      return;
+    }
+  }
+});
+</script>

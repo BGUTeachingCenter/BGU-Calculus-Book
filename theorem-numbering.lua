@@ -27,7 +27,8 @@ Extensions:
                 FOLLOWS the question rather than nesting inside it. Add .foldable
                 to hide it behind a click; like a proof it is exempt from the
                 "אפשר לדלג" print wrapper, since a solution is not skippable.
-  * .thmexpl / .thmwarn — labelled, titled, but UNNUMBERED (see the UNNUMBERED table).
+  * .thmexpl / .thmwarn / .thmkey — labelled, titled, but UNNUMBERED (see the
+                UNNUMBERED table).
   * .optional — "רשות" wrapper: its inner boxes are labelled but UNNUMBERED
                 (\newtheorem* style). Tinted via _styles.html (HTML) / the
                 'optionalbox' LaTeX environment (PDF).
@@ -58,9 +59,12 @@ local BOX = {
 --              not "thmexp", to keep it clear of .thmexm (דוגמה).
 --   .thmwarn — a warning or a common mistake. Distinct from .thmrem: a remark is an
 --              aside you may skip, a warning is the thing students get wrong.
+--   .thmkey  — the warning's blue counterpart: a convention or a fact the reader must
+--              carry forward, rather than a mistake to avoid. Same loud treatment.
 local UNNUMBERED = {
-  thmexpl = { word = "הסבר",    css = "explanation" },
-  thmwarn = { word = "שימו לב", css = "warning"     },
+  thmexpl = { word = "הסבר",      css = "explanation" },
+  thmwarn = { word = "שימו לב",   css = "warning"     },
+  thmkey  = { word = "חשוב לזכור", css = "key-point"   },
 }
 
 local function chapter_number()

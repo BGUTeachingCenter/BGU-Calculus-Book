@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מקטע חסום אל חסם סימטרי</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+<style>
+/* Widget-specific bits only; the rest comes from seq-limit.css so this reads as the
+   same artwork as the chapter-7 widgets and the static figures. */
+.axis{stroke:#1f2937;stroke-width:1.4}
+.tick{stroke:#1f2937;stroke-width:1.6}
+.lbl{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:16px;
+     text-anchor:middle}
+.expr{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:1.05rem;
+      direction:ltr;unicode-bidi:isolate}
+.chain{margin-top:.6rem;text-align:center}
+.verdict{margin-top:.4rem;text-align:center;font-weight:700;color:var(--key)}
+</style>
+</head>
+<body>
+<div class="demo">
+
+<svg id="plot" viewBox="0 0 640 200" role="img"
+     aria-label="ציר מספרים ובו הקטע שבין k ל-K, והקטע הסימטרי שבין מינוס M ל-M המכיל אותו"></svg>
+
+<div class="row">
+  <span class="key">הקצה השמאלי <span class="expr">k</span></span>
+  <input id="kr" type="range" min="-50" max="50" step="1" value="-20"
+         aria-label="הזזת הקצה השמאלי k">
+</div>
+
+<div class="row">
+  <span class="key">הקצה הימני <span class="expr">K</span></span>
+  <input id="Kr" type="range" min="-50" max="50" step="1" value="35"
+         aria-label="הזזת הקצה הימני K">
+</div>
+
+<div class="chain"><span class="expr" id="chain"></span></div>
+
+<div class="readout">
+  <div><span class="expr" id="mval"></span></div>
+</div>
+
+<div class="verdict" id="verdict"></div>
+
+</div>
+
+<script>
+(function (global) {
+  "use strict";
+
+  // Palette. Read once from the shared stylesheet and kept as literal strings:
+  // var() does NOT resolve inside SVG presentation attributes set via setAttribute,
+  // so passing "var(--blue)" there silently yields black.
+  var css = getComputedStyle(document.documentElement);
+  function cssvar(name, fallback) {
+    var s = css.getPropertyValue(name).trim();
+    return s || fallback;
+  }
+  var INK   = cssvar("--ink",  "#1f2937");
+  var BLUE  = cssvar("--blue", "#1f4e79");
+  var RED   = cssvar("--red",  "#c0392b");
+  var GREEN = "#2e7d32";
+
+  // Model units: the slider runs -5..5 in steps of 0.1. The view is a little wider so
+  // that the symmetric interval, which is always at least as wide as [k, K], still fits.
+  var LO = -5, HI = 5, STEP = 0.1;
+  var VMIN = -5.9, VMAX = 5.9;
+  var PX0 = 30, PX1 = 610, BASE = 108;
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  function sx(v) { return PX0 + (v - VMIN) * (PX1 - PX0) / (VMAX - VMIN); }
+
+  var svg = document.getElementById("plot");
+  var dyn = document.createElementNS(SVGNS, "g");   // rebuilt on every update
+
+  function make(parent, name, attrs, text) {
+    var n = document.createElementNS(SVGNS, name);
+    for (var a in attrs) { if (attrs[a] !== undefined) n.setAttribute(a, attrs[a]); }
+    if (text !== undefined) n.textContent = text;
+    parent.appendChild(n);
+    return n;
+  }
+
+  // ---------- static layer ----------
+
+  make(svg, "line", { x1: 12, y1: BASE, x2: 628, y2: BASE, "class": "axis" });
+  make(svg, "line", { x1: sx(0), y1: BASE - 7, x2: sx(0), y2: BASE + 7, "class": "tick" });
+  make(svg, "text", { x: sx(0), y: BASE + 26, fill: INK, "class": "lbl" }, "0");
+
+  svg.appendChild(dyn);                              // dynamic layer sits on top
+
+  // ---------- dynamic layer ----------
+
+  var kSl = document.getElementById("kr");
+  var KSl = document.getElementById("Kr");
+  var chainEl = document.getElementById("chain");
+  var mEl = document.getElementById("mval");
+  var verdict = document.getElementById("verdict");
+
+  function fmt(x) {
+    var s = x.toFixed(1);
+    return s === "-0.0" ? "0.0" : s;
+  }
+
+  function reportHeight() {
+    requestAnimationFrame(function () {
+      if (global.parent && global.parent !== global) {
+        global.parent.postMessage({
+          type: "widget-height",
+          height: Math.ceil(document.documentElement.scrollHeight)
+        }, "*");
+      }
+    });
+  }
+
+  function update(moved) {
+    var k = Number(kSl.value) * STEP;
+    var K = Number(KSl.value) * STEP;
+
+    // k <= K is part of the setup, not something the reader should have to maintain:
+    // push the OTHER handle rather than snapping back the one being dragged.
+    if (k > K) {
+      if (moved === "k") { K = k; KSl.value = kSl.value; }
+      else               { k = K; kSl.value = KSl.value; }
+    }
+
+    var M = Math.max(Math.abs(k), Math.abs(K));
+
+    while (dyn.firstChild) { dyn.removeChild(dyn.firstChild); }
+
+    // the symmetric interval first, so [k, K] is drawn on top of it
+    make(dyn, "rect", { x: sx(-M), y: BASE - 26, width: sx(M) - sx(-M), height: 52,
+                        fill: GREEN, opacity: 0.12 });
+    make(dyn, "line", { x1: sx(-M), y1: BASE - 26, x2: sx(-M), y2: BASE + 26,
+                        stroke: GREEN, "stroke-width": 1.6 });
+    make(dyn, "line", { x1: sx(M), y1: BASE - 26, x2: sx(M), y2: BASE + 26,
+                        stroke: GREEN, "stroke-width": 1.6 });
+    make(dyn, "text", { x: sx(-M), y: BASE - 34, fill: GREEN, "class": "lbl" }, "−M");
+    make(dyn, "text", { x: sx(M), y: BASE - 34, fill: GREEN, "class": "lbl" }, "M");
+
+    make(dyn, "line", { x1: sx(k), y1: BASE, x2: sx(K), y2: BASE,
+                        stroke: INK, "stroke-width": 5, opacity: 0.55 });
+    make(dyn, "circle", { cx: sx(k), cy: BASE, r: 5.5, fill: BLUE,
+                          stroke: "#fff", "stroke-width": 1.4 });
+    make(dyn, "circle", { cx: sx(K), cy: BASE, r: 5.5, fill: RED,
+                          stroke: "#fff", "stroke-width": 1.4 });
+    make(dyn, "text", { x: sx(k), y: BASE + 26, fill: BLUE, "class": "lbl" }, "k");
+    make(dyn, "text", { x: sx(K), y: BASE + 26, fill: RED, "class": "lbl" }, "K");
+
+    chainEl.textContent = "−M ≤ k ≤ x ≤ K ≤ M";
+    mEl.textContent = "M = max{ |" + fmt(k) + "| , |" + fmt(K) + "| } = " + fmt(M);
+
+    // Which of the three sign cases the reader is looking at. Stated as the relation
+    // between the ends and zero — the same three cases the text walks through.
+    var EPS = 1e-9;
+    if (k >= -EPS)      { verdict.textContent = "שני הקצוות אי-שליליים: M = K"; }
+    else if (K <= EPS)  { verdict.textContent = "שני הקצוות אי-חיוביים: M = |k|"; }
+    else                { verdict.textContent = "האפס בין הקצוות: M הוא הגדול שבמרחקים |k| ו-|K|"; }
+
+    reportHeight();
+  }
+
+  kSl.addEventListener("input", function () { update("k"); });
+  KSl.addEventListener("input", function () { update("K"); });
+  global.addEventListener("resize", reportHeight);
+  update();
+})(window);
+</script>
+</body>
+</html>

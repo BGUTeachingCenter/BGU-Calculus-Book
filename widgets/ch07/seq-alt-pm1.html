@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>התבדרות: aₙ = (−1)ⁿ⁻¹</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="../shared/seq-limit.js"></script>
+<script>
+/* The divergent case gets its own shape.
+
+   The value axis is pinned to [-3, 3] rather than following ε, so that -1 and
+   1 sit in the same place no matter how wide the band gets, and so that the
+   wide bands stay on screen. That is the whole point here: with a moving axis,
+   a huge ε would simply rescale the picture and nothing would look different.
+
+   The ε stops are given explicitly because this widget needs a value strictly
+   above 2. At ε = 2 the term -1 is at distance exactly 2 from L = 1, so it is
+   still outside; at ε = 2.5 every term is inside and the sequence looks as if
+   it converges. That single-ε illusion is the thing worth simulating. */
+SeqLimit.mount({
+  candidates: [
+    { v: 1,  label: '1' },
+    { v: -1, label: '−1' },
+    { v: 0,  label: '0' }
+  ],
+  f: function (n) { return n % 2 ? 1 : -1; },   /* (-1)^(n-1): 1, -1, 1, -1, ... */
+  L: 1,
+  range: [-3, 3],
+  eps: { list: [2.5, 2, 1.5, 1, 0.7, 0.5, 0.3, 0.2, 0.1], def: 1 },
+  scanMax: 400
+});
+</script>
+</body>
+</html>
