@@ -804,19 +804,13 @@ $,\lim_{n\to\infty} a_n = \lim_{n\to\infty} c_n = L$
 
 גם ההנחה $a_n \leq b_n \leq c_n$ מתקיימת החל ממקום מסוים, לפי הנתון.
 
-לפנינו אפוא שלוש תכונות, שכל אחת מהן מתקיימת החל ממקום מסוים. לפי [הכלל על מספר סופי של תכונות](07-sequences-limit.qmd#box-key-finitely-many) קיים $N$ שהחל ממנו שלושתן מתקיימות יחד, ואז לכל $n \geq N$
+שלוש התכונות האלה מתקיימות אפוא יחד החל ממקום מסוים, ושם
 
 $$,L - \varepsilon < a_n \leq b_n \leq c_n < L + \varepsilon$$
 
 ובפרט $.\left|b_n - L\right| < \varepsilon$
 
 מכיוון ש-$\varepsilon$ היה שרירותי, זוהי בדיוק הגדרת הגבול: הסדרה $(b_n)_{n=1}^{\infty}$ מתכנסת, וגבולה $.L$
-:::
-
-::: {.thmrem numbered="false"}
-כדאי לשים לב היכן [](#box-cor-limit-compare) כן חלה כאן. אילו כבר היינו יודעים ש-$(b_n)_{n=1}^{\infty}$ מתכנסת, היה אפשר לקבוע את ערך הגבול בשורה אחת: מ-$a_n \leq b_n$ נובע $,L \leq \lim\limits_{n\to\infty} b_n$ מ-$b_n \leq c_n$ נובע $,\lim\limits_{n\to\infty} b_n \leq L$ ויחד $.\lim\limits_{n\to\infty} b_n = L$
-
-מה שההשוואה אינה יכולה לספק הוא את ההתכנסות עצמה, והיא עיקר המשפט: המסקנה על השוואה מניחה מראש ששתי הסדרות מתכנסות, ואילו כאן ההתכנסות של $(b_n)_{n=1}^{\infty}$ היא בדיוק מה שיש להוכיח.
 :::
 
 המשפט הבא הוא יישום ישיר של כלל הסנדוויץ׳. נפתח בשם שנוח לתת לסדרות המתכנסות ל-$.0$
@@ -855,6 +849,198 @@ $$.-M\left|a_n\right| \leq a_n b_n \leq M\left|a_n\right|$$
 $$,\lim_{n\to\infty} a_n b_n = 0$$
 
 כלומר היא אפסה.
+:::
+
+### דוגמאות
+
+::: {#box-qst-sin-n-over-n .thmqst title="הגבול של $\\dfrac{\\sin n}{n}$"}
+מצאו את הגבול של הסדרה $.a_n = \dfrac{\sin n}{n}$
+:::
+
+::: {.thmsol .foldable}
+נראה שני פתרונות, משום שהדוגמה הזאת נופלת בדיוק בתחום שבו שני המשפטים של הסעיף חופפים.
+
+**דרך ראשונה: אפסה כפול חסומה.** נכתוב $.\dfrac{\sin n}{n} = \dfrac{1}{n} \cdot \sin n$ הסדרה $\dfrac{1}{n}$ אפסה, והסדרה $\sin n$ חסומה שכן $\left|\sin n\right| \leq 1$ לכל $.n$ לכן לפי [](#box-thm-null-times-bounded) המכפלה אפסה, כלומר הגבול הוא $.0$
+
+**דרך שנייה: כלל הסנדוויץ׳.** מ-$-1 \leq \sin n \leq 1$ ובחלוקה ב-$n > 0$ נקבל לכל $n \geq 1$
+
+$$.-\frac{1}{n} \leq \frac{\sin n}{n} \leq \frac{1}{n}$$
+
+שתי הסדרות החיצוניות מתכנסות ל-$,0$ ולכן לפי [](#box-thm-squeeze-sequences) גם הסדרה שבאמצע מתכנסת ל-$.0$
+:::
+
+::: {#box-qst-alt-over-n .thmqst title="גורם חסום שאינו מתכנס"}
+מצאו את הגבול של הסדרה $.a_n = \dfrac{\left(-1\right)^{n}}{n}$
+:::
+
+::: {.thmsol .foldable}
+נכתוב $.\dfrac{\left(-1\right)^{n}}{n} = \dfrac{1}{n} \cdot \left(-1\right)^{n}$ הסדרה $\dfrac{1}{n}$ אפסה, והסדרה $\left(-1\right)^{n}$ חסומה, שכן כל איבריה הם $1$ או $.-1$ לכן לפי [](#box-thm-null-times-bounded) הגבול הוא $.0$
+
+שימו לב שהסדרה $\left(-1\right)^{n}$ **אינה מתכנסת** כלל, ובכל זאת המשפט חל עליה: הוא דורש ממנה חסימות בלבד. [](#box-thm-sequence-arithmetic) לעומת זאת אינו עוזר כאן, משום שהוא מניח ששני הגורמים מתכנסים.
+:::
+
+::: {#box-qst-n-plus-sin .thmqst title="שילוב עם אריתמטיקת הגבולות"}
+מצאו את הגבול של הסדרה $.a_n = \dfrac{n + \sin n}{n^2 + 3n}$
+:::
+
+::: {.thmsol .foldable}
+נחלק מונה ומכנה ב-$:n^2$
+
+$$.\frac{n + \sin n}{n^2 + 3n} = \frac{\dfrac{1}{n} + \dfrac{\sin n}{n^2}}{1 + \dfrac{3}{n}}$$
+
+**המונה.** הסדרה $\dfrac{1}{n}$ אפסה. הסדרה $\dfrac{\sin n}{n^2} = \dfrac{1}{n^2} \cdot \sin n$ אפסה אף היא לפי [](#box-thm-null-times-bounded), שכן $\dfrac{1}{n^2}$ אפסה ו-$\sin n$ חסומה. לכן לפי סעיף (א) של [](#box-thm-sequence-arithmetic) גבול המונה הוא $.0 + 0 = 0$
+
+**המכנה.** גבול הסדרה $1 + \dfrac{3}{n}$ הוא $,1 + 0 = 1$ והוא שונה מאפס.
+
+לכן לפי סעיף (ד) של אותו משפט
+
+$$.\lim_{n\to\infty} \frac{n + \sin n}{n^2 + 3n} = \frac{0}{1} = 0$$
+:::
+
+::: {#box-qst-sum-of-roots .thmqst title="סכום שמספר מחובריו גדל"}
+מצאו את הגבול של הסדרה
+
+$$.a_n = \frac{1}{\sqrt{n^2+1}} + \frac{1}{\sqrt{n^2+2}} + \dots + \frac{1}{\sqrt{n^2+n}}$$
+:::
+
+::: {.thmsol .foldable}
+כאן אריתמטיקת הגבולות אינה חלה כלל, ומסיבה עקרונית: מספר המחוברים עצמו משתנה עם $,n$ ואילו המשפט מטפל במספר **קבוע** של סדרות. נחסום אפוא את הסכום כולו.
+
+בסכום יש בדיוק $n$ מחוברים, וכל אחד מהם הוא מהצורה $\dfrac{1}{\sqrt{n^2+k}}$ עבור $.1 \leq k \leq n$ מ-$1 \leq k \leq n$ נובע
+
+$$,n^2 + 1 \leq n^2 + k \leq n^2 + n$$
+
+וככל שהמכנה גדול יותר השבר קטן יותר, ולכן
+
+$$.\frac{1}{\sqrt{n^2+n}} \leq \frac{1}{\sqrt{n^2+k}} \leq \frac{1}{\sqrt{n^2+1}}$$
+
+נחליף כל אחד מ-$n$ המחוברים בחסם התחתון, ואחר כך בחסם העליון, ונקבל
+
+$$.\frac{n}{\sqrt{n^2+n}} \leq a_n \leq \frac{n}{\sqrt{n^2+1}}$$
+
+נותר לחשב את גבולות שתי הסדרות החיצוניות. נכניס את $n$ אל תוך השורש:
+
+$$.\frac{n}{\sqrt{n^2+n}} = \sqrt{\frac{n^2}{n^2+n}} = \sqrt{\frac{1}{1 + \dfrac{1}{n}}}$$
+
+הביטוי שמתחת לשורש שואף ל-$\dfrac{1}{1+0} = 1$ לפי אריתמטיקת הגבולות, ולכן לפי [](#box-thm-limit-root) הסדרה עצמה שואפת ל-$.\sqrt{1} = 1$ באותו אופן
+
+$$,\frac{n}{\sqrt{n^2+1}} = \sqrt{\frac{n^2}{n^2+1}} = \sqrt{\frac{1}{1 + \dfrac{1}{n^2}}} \longrightarrow 1$$
+
+שתי הסדרות החיצוניות מתכנסות ל-$,1$ ולכן לפי [](#box-thm-squeeze-sequences)
+
+$$.\lim_{n\to\infty} a_n = 1$$
+:::
+
+### תרגילים
+
+**תרגיל 1.** חשבו את הגבולות הבאים.
+
+(א) $\lim\limits_{n\to\infty} \dfrac{\left(-1\right)^{n}}{n^2+1}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="0"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+(ב) $\lim\limits_{n\to\infty} \dfrac{2n + \cos n}{n+1}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="2"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+(ג) $\lim\limits_{n\to\infty} \dfrac{\sin\left(n!\right)}{\sqrt{n}}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="0"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+::: {.thmsol .foldable}
+**סעיף (א).** נכתוב $.\dfrac{\left(-1\right)^{n}}{n^2+1} = \dfrac{1}{n^2+1} \cdot \left(-1\right)^{n}$ הסדרה $\dfrac{1}{n^2+1}$ אפסה, שכן בחלוקה ב-$n^2$ מתקבל
+
+$$,\frac{1}{n^2+1} = \frac{\dfrac{1}{n^2}}{1 + \dfrac{1}{n^2}} \longrightarrow \frac{0}{1} = 0$$
+
+והסדרה $\left(-1\right)^{n}$ חסומה. לכן לפי [](#box-thm-null-times-bounded) הגבול הוא $.0$
+
+**סעיף (ב).** נחלק מונה ומכנה ב-$:n$
+
+$$.\frac{2n + \cos n}{n+1} = \frac{2 + \dfrac{\cos n}{n}}{1 + \dfrac{1}{n}}$$
+
+הסדרה $\dfrac{\cos n}{n}$ אפסה לפי [](#box-thm-null-times-bounded), ולכן גבול המונה הוא $,2 + 0 = 2$ גבול המכנה הוא $,1$ והגבול המבוקש הוא $.2$
+
+**סעיף (ג).** נכתוב $.\dfrac{\sin\left(n!\right)}{\sqrt{n}} = \dfrac{1}{\sqrt{n}} \cdot \sin\left(n!\right)$ מתקיים $,\dfrac{1}{\sqrt{n}} = \sqrt{\dfrac{1}{n}}$ ולכן לפי [](#box-thm-limit-root) הסדרה $\dfrac{1}{\sqrt{n}}$ שואפת ל-$,\sqrt{0} = 0$ כלומר היא אפסה. הסדרה $\sin\left(n!\right)$ חסומה, ולכן הגבול הוא $.0$
+:::
+
+**תרגיל 2.** אם $(a_n)$ מתכנסת ו-$(b_n)$ חסומה, אז $(a_n \cdot b_n)$ מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** ניקח את הסדרה הקבועה $,a_n = 1$ שמתכנסת ל-$,1$ ואת $,b_n = \left(-1\right)^{n}$ שחסומה. המכפלה היא $,a_n b_n = \left(-1\right)^{n}$ ואינה מתכנסת.
+
+המשפט דורש ש-$(a_n)$ תהיה **אפסה**, ולא רק מתכנסת, וזה בדיוק ההבדל: כאן הגורם המתכנס אינו מכווץ את המכפלה לאפס.
+:::
+
+**תרגיל 3.** אם $(a_n)$ אפסה ו-$(b_n)$ חסומה, אז $(a_n \cdot b_n)$ אפסה.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**נכון.** זהו בדיוק [](#box-thm-null-times-bounded). ההשוואה עם התרגיל הקודם מראה עד כמה ההנחה ״אפסה״ חיונית.
+:::
+
+**תרגיל 4.** אם לכל $n \geq 1$ מתקיים $,n^2\left|a_n\right| \leq n - \left|a_n\right|$ אז $(a_n)$ מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**נכון,** והסדרה אף מתכנסת ל-$.0$
+
+נבודד את $.\left|a_n\right|$ נוסיף $\left|a_n\right|$ לשני האגפים:
+
+$$,n^2\left|a_n\right| + \left|a_n\right| \leq n$$
+
+נוציא גורם משותף:
+
+$$,\left|a_n\right| \left(n^2+1\right) \leq n$$
+
+ומכיוון ש-$n^2 + 1 > 0$ אפשר לחלק בו:
+
+$$.\left|a_n\right| \leq \frac{n}{n^2+1}$$
+
+יחד עם $\left|a_n\right| \geq 0$ קיבלנו כליאה:
+
+$$.0 \leq \left|a_n\right| \leq \frac{n}{n^2+1}$$
+
+הסדרה שמימין אפסה, שכן בחלוקה ב-$n^2$ מתקבל $\dfrac{n}{n^2+1} = \dfrac{\dfrac{1}{n}}{1 + \dfrac{1}{n^2}} \longrightarrow \dfrac{0}{1} = 0$, וגם הסדרה הקבועה $0$ אפסה. לכן לפי [](#box-thm-squeeze-sequences) מתקיים $,\left|a_n\right| \to 0$ ומכאן $,a_n \to 0$ שכן שתי הטענות האלה הן אותו תנאי בדיוק.
 :::
 
 ## מונוטוניות של סדרות; דוגמה
