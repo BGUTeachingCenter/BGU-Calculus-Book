@@ -29,6 +29,12 @@ Extensions:
                 "אפשר לדלג" print wrapper, since a solution is not skippable.
   * .thmexpl / .thmwarn / .thmkey — labelled, titled, but UNNUMBERED (see the
                 UNNUMBERED table).
+  * numbered="false" — opts a SINGLE box out of the counter while keeping its label,
+                title and styling: ::: {.thmrem numbered="false"}. Works on any numbered
+                class, so remarks (or definitions, examples…) can be numbered where they
+                are referred back to and unnumbered where they are a passing aside.
+                Cross-reference link text names its target rather than carrying a number,
+                so an unnumbered box is still perfectly citable by its #box- id.
   * .optional — "רשות" wrapper: its inner boxes are labelled but UNNUMBERED
                 (\newtheorem* style). Tinted via _styles.html (HTML) / the
                 'optionalbox' LaTeX environment (PDF).
@@ -89,6 +95,78 @@ end
 local function unnumbered_for(classes)
   for _, c in ipairs(classes) do if UNNUMBERED[c] then return UNNUMBERED[c] end end
   return nil
+end
+
+-- numbered="false" on an individual box: label it, but draw no number and — crucially —
+-- do NOT advance the counter, exactly like the UNNUMBERED classes.
+local function opts_out(b)
+  return b.attributes and b.attributes.numbered == "false"
+end
+
+--------------------------------------------------------------------------------
+-- REFERENCE RESOLVER — the \label/\ref half of the filter.
+--
+-- Write an EMPTY link at the citation site and the filter fills in the target's
+-- label:  [](#box-thm-limit-window)  ->  [משפט 7.4.1](#box-thm-limit-window)
+-- Never write the number by hand; it goes stale the moment a box is inserted above.
+--
+-- LABELS is what THIS pandoc pass numbered. PRIOR is the sidecar left by earlier
+-- passes, and is only ever a fallback — a fresh number always wins over a stale one.
+--
+-- Why a sidecar at all: an HTML book render is one pandoc pass PER CHAPTER, so the
+-- pass over chapter 8 has never seen chapter 4's boxes. The sidecar carries them
+-- across, exactly like LaTeX's .aux, and with the same consequence: a NEW
+-- cross-chapter reference resolves on the SECOND render, showing ?? on the first.
+-- Same-chapter references always resolve on the first. The PDF is one merged pass,
+-- so it resolves everything in one go. It lives in .quarto/, which Quarto already
+-- owns and .gitignore already excludes; deleting it costs one extra render, nothing more.
+local SIDECAR = ".quarto/box-refs.tsv"
+local LABELS, PRIOR = {}, {}
+
+local function record(b, text)
+  if b.identifier and b.identifier ~= "" then LABELS[b.identifier] = text end
+end
+
+local function load_sidecar()
+  local f = io.open(SIDECAR, "r")
+  if not f then return end
+  for line in f:lines() do
+    local id, lab = line:match("^([^\t]+)\t(.+)$")
+    if id then PRIOR[id] = lab end
+  end
+  f:close()
+end
+
+local function save_sidecar()
+  local merged, keys = {}, {}
+  for k, v in pairs(PRIOR)  do merged[k] = v end
+  for k, v in pairs(LABELS) do merged[k] = v end   -- this pass wins
+  for k in pairs(merged) do keys[#keys + 1] = k end
+  table.sort(keys)                                  -- stable file, so no spurious churn
+  local f = io.open(SIDECAR, "w")
+  if not f then return end                          -- no .quarto/ yet: silently skip
+  for _, k in ipairs(keys) do f:write(k, "\t", merged[k], "\n") end
+  f:close()
+end
+
+-- Fill every empty link whose target is a #box- anchor. An unresolved one renders as
+-- ?? rather than staying blank, so a typo'd or unnumbered target is visible on the page
+-- instead of silently producing an unclickable empty span.
+local function fill_refs(blocks)
+  return pandoc.walk_block(pandoc.Div(blocks), {
+    Link = function(l)
+      if #l.content > 0 then return nil end
+      local id = tostring(l.target):match("#(box%-[%w%-_]+)$")
+      if not id then return nil end
+      local lab = LABELS[id] or PRIOR[id]
+      if lab then
+        l.content = pandoc.utils.blocks_to_inlines(pandoc.read(lab, "markdown").blocks)
+      else
+        l.content = { pandoc.Str("??") }
+      end
+      return l
+    end
+  }).content
 end
 
 -- Build the bold label paragraph: "<text> — <title>." (the title part is optional).
@@ -154,11 +232,12 @@ process = function(blocks, in_optional)
         -- title= is folded into the label. Change `word` to rename the label everywhere.
         local word = "הערה"
         local text
-        if in_optional or not chap then
+        if in_optional or not chap or opts_out(b) then
           text = word                                    -- unnumbered fallback
         else
           item = item + 1
           text = word .. " " .. chap .. "." .. section .. "." .. item
+          record(b, text)
         end
         local t = b.attributes and b.attributes.title
         table.insert(b.content, 1, label_para(text, t))
@@ -193,11 +272,12 @@ process = function(blocks, in_optional)
         local box = box_for(orig)
         if box then
           local text
-          if in_optional or not chap then
+          if in_optional or not chap or opts_out(b) then
             text = box.word                              -- unnumbered
           else
             item = item + 1
             text = box.word .. " " .. chap .. "." .. section .. "." .. item
+            record(b, text)
           end
           local t = b.attributes and b.attributes.title  -- optional title, e.g. "סדרת פיבונאצ׳י"
           table.insert(b.content, 1, label_para(text, t))
@@ -260,6 +340,9 @@ function Pandoc(doc)
   else
     is_html = (FORMAT ~= nil and FORMAT:match("html") ~= nil)
   end
-  doc.blocks = process(doc.blocks, false)
+  load_sidecar()
+  doc.blocks = process(doc.blocks, false)   -- numbers the boxes, fills LABELS
+  doc.blocks = fill_refs(doc.blocks)        -- then resolves [](#box-…) against them
+  save_sidecar()
   return doc
 end

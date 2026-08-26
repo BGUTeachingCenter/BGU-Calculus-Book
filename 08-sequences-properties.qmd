@@ -36,6 +36,12 @@
 
 היתרון של הניסוח הזה הוא שמעורבים בו שני סימנים בלבד, $a_n$ ו-$,M$ ואי-שוויון אחד במקום שניים: כדי להראות שסדרה חסומה די למצוא $M$ אחד, וכדי להשתמש בחסימוּת די לדעת ש-$.\left|a_n\right| \leq M$
 
+::: {#box-key-any-bound-will-do .thmkey title="כל חסם טוב, לא רק הטוב ביותר"}
+כדי להראות שסדרה חסומה די למצוא **חסם אחד** שעובד, ואין שום צורך שיהיה הקטן ביותר או אפילו קרוב אליו. אם $\left|a_n\right| \leq 1$ לכל $,n$ אפשר באותה מידה לכתוב $\left|a_n\right| \leq 1000$ ולסיים. ההגדרה דורשת **קיום** של $,M$ לא מציאה של הקטן שבהם.
+
+מציאת החסם הקטן ביותר היא שאלה אחרת, ולעיתים קרובות קשה בהרבה. כשהיא נדרשת, היא תנוסח במפורש.
+:::
+
 בתרגילים הבאים נשתמש בכך שלכל $x$ ממשי מתקיים $\left|\sin x\right| \leq 1$ וגם $.\left|\cos x\right| \leq 1$
 
 ::: {#box-qst-bounded-examples .thmqst title="אילו מהסדרות חסומות?"}
@@ -96,19 +102,27 @@
 שאר הסדרות חסומות: $\left|\dfrac{\sin n}{n}\right| \leq \dfrac{1}{n} \leq 1$ לכל $,n$ מתקיים $0 < \dfrac{n^2}{n^2+1} < 1$ לכל $,n$ וכן $\left|\cos\left(n!\right)\right| \leq 1$ לכל $.n$
 :::
 
-**תרגיל 2.** נתונה הסדרה $.a_n = 17 + \dfrac{\left(-1\right)^n}{n}$ מצאו את המספר הקטן ביותר $M$ שעבורו $a_n \leq M$ לכל $,n$ ואת המספר הגדול ביותר $m$ שעבורו $m \leq a_n$ לכל $.n$
+**תרגיל 2.** נתונה הסדרה $.a_n = 17 + \dfrac{\left(-1\right)^n}{n}$ בסעיפים (א) ו-(ב) מספיק **חסם כלשהו**, וכל תשובה נכונה תתקבל; בסעיפים (ג) ו-(ד) מבוקש דווקא החסם הטוב ביותר.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
-<div class="seq-quiz" data-answer="35/2"><span class="seq-label">(א) המספר הקטן ביותר \(M\)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-<div class="seq-quiz" data-answer="16"><span class="seq-label">(ב) המספר הגדול ביותר \(m\)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="bound-quiz" data-atleast="35/2"><span class="seq-label">(א) חסם מלעיל \(M\) כלשהו</span><input class="seq-input" type="text" placeholder="לדוגמה: 100"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="bound-quiz" data-atmost="16"><span class="seq-label">(ב) חסם מלרע \(m\) כלשהו</span><input class="seq-input" type="text" placeholder="לדוגמה: 0"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="seq-quiz" data-answer="35/2"><span class="seq-label">(ג) החסם מלעיל הקטן ביותר</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<div class="seq-quiz" data-answer="16"><span class="seq-label">(ד) החסם מלרע הגדול ביותר</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
 ```
 :::
 
 ::: {.thmsol .foldable}
-נפריד לפי זוגיות $.n$ עבור $n$ זוגי מתקיים $,a_n = 17 + \dfrac{1}{n}$ וזהו ביטוי יורד ב-$,n$ ולכן הגדול ביותר מתקבל ב-$n = 2$ ושווה $.\dfrac{35}{2}$ עבור $n$ אי-זוגי מתקיים $,a_n = 17 - \dfrac{1}{n}$ וזהו ביטוי עולה ב-$,n$ ולכן הקטן ביותר מתקבל ב-$n = 1$ ושווה $.16$
+**סעיפים (א) ו-(ב).** לכל $n \geq 1$ מתקיים $,\left|\dfrac{\left(-1\right)^n}{n}\right| = \dfrac{1}{n} \leq 1$ ולכן
 
-לכן לכל $n$ מתקיים $,16 \leq a_n \leq \dfrac{35}{2}$ ושני החסמים מתקבלים בפועל כערכים של הסדרה, ולכן אי אפשר להקטין את $M$ או להגדיל את $.m$
+$$,16 = 17 - 1 \leq a_n \leq 17 + 1 = 18$$
+
+כלומר $M = 18$ הוא חסם מלעיל ו-$m = 16$ הוא חסם מלרע. גם $M = 100$ עובד, וגם $,M = 10^{6}$ וכל אחד מהם הוא תשובה נכונה לשאלה כפי שנשאלה.
+
+**סעיפים (ג) ו-(ד).** נפריד לפי זוגיות $.n$ עבור $n$ זוגי מתקיים $,a_n = 17 + \dfrac{1}{n}$ וזהו ביטוי יורד ב-$,n$ ולכן הגדול ביותר מתקבל ב-$n = 2$ ושווה $.\dfrac{35}{2}$ עבור $n$ אי-זוגי מתקיים $,a_n = 17 - \dfrac{1}{n}$ וזהו ביטוי עולה ב-$,n$ ולכן הקטן ביותר מתקבל ב-$n = 1$ ושווה $.16$
+
+לכן לכל $n$ מתקיים $,16 \leq a_n \leq \dfrac{35}{2}$ ושני החסמים האלה מתקבלים בפועל כערכים של הסדרה, ולכן אי אפשר להקטין את $M$ או להגדיל את $.m$ שימו לב שהחסם $18$ מסעיף (א) היה נכון לגמרי, פשוט לא הטוב ביותר.
 :::
 
 **תרגיל 3.** אם $(a_n)$ ו-$(b_n)$ חסומות, אז גם $(a_n \cdot b_n)$ חסומה.
@@ -303,6 +317,16 @@ plt.close(fig)
 
 בסעיף הזה נפתח ארגז כלים שימושי, שיאפשר לנו לחשב בקלות יחסית גבולות של סדרות רבות. הרעיון הוא לפרק סדרה מסובכת לסדרות פשוטות יותר, שאת הגבולות שלהן אנחנו כבר יודעים לחשב, ואז להרכיב מהגבולות האלה את הגבול המבוקש בעזרת פעולות החשבון המוכרות: חיבור, חיסור, כפל וחילוק.
 
+לפני שנפנה למשפט נאמר במפורש דבר שכבר עשינו לא פעם באופן מובלע: מסדרות נתונות אפשר לבנות סדרות חדשות. בהינתן שתי סדרות $(a_n)_{n=1}^{\infty}$ ו-$,(b_n)_{n=1}^{\infty}$ פעולות החשבון פועלות אבר-אבר ומייצרות את הסדרות
+
+$$,\left(a_n + b_n\right),\quad \left(a_n - b_n\right),\quad \left(a_n \cdot b_n\right),\quad \left(\frac{a_n}{b_n}\right)$$
+
+כאשר האחרונה מוגדרת כמובן רק כאשר $.b_n \neq 0$ למשל, עבור $a_n = \dfrac{1}{n}$ ו-$b_n = n$ הסכום הוא $,\dfrac{1}{n} + n$ המכפלה היא הסדרה הקבועה $,1$ והמנה $\dfrac{a_n}{b_n}$ היא $.\dfrac{1}{n^2}$
+
+באותו אופן פועלת גם פונקציה: אם $f$ פונקציה וכל איברי הסדרה נמצאים בתחום ההגדרה שלה, אז $f(a_n)$ היא שוב סדרה. מ-$a_n = \dfrac{1}{n}$ ומ-$f(x) = x^2$ מתקבלת הסדרה $,\dfrac{1}{n^2}$ ומ-$a_n = n$ ומ-$f = \sin$ מתקבלת הסדרה $,\sin n$ שכבר פגשנו לא פעם.
+
+השאלה שהסעיף הזה עונה עליה היא: אם ידועים הגבולות של המרכיבים, האם ידוע גם הגבול של מה שבנינו מהם?
+
 ::: {#box-thm-sequence-arithmetic .thmthm}
 יהיו $(a_n)_{n=1}^{\infty}$ , $(b_n)_{n=1}^{\infty}$ סדרות מתכנסות, ונסמן $\lim\limits_{n\to\infty} a_n = L_1$ ו-$.\lim\limits_{n\to\infty} b_n = L_2$ אז כל אחת מהסדרות הבאות מתכנסת, ומתקיים:
 
@@ -313,10 +337,6 @@ plt.close(fig)
 (ג) **כפל.** $\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = L_1 \cdot L_2$
 
 (ד) **חילוק.** אם בנוסף $L_2 \neq 0$ ומתקיים $b_n \neq 0$ לכל $,n$ אז $\lim\limits_{n\to\infty} \dfrac{a_n}{b_n} = \dfrac{L_1}{L_2}$
-:::
-
-::: {#box-rem-denominator-nonzero .thmrem}
-הדרישה $b_n \neq 0$ לכל $n$ נועדה רק כדי שהמנה $\dfrac{a_n}{b_n}$ תהיה מוגדרת. ההנחה $L_2 \neq 0$ כבר מבטיחה שהתנאי מתקיים החל ממקום מסוים: נפעיל את הגדרת הגבול על $(b_n)_{n=1}^{\infty}$ עם $,\varepsilon = \frac{\left|L_2\right|}{2}$ ונקבל $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים $.\left|b_n - L_2\right| < \frac{\left|L_2\right|}{2}$ אילו היה $,b_n = 0$ היינו מקבלים $,\left|L_2\right| < \frac{\left|L_2\right|}{2}$ וזו סתירה, שכן $.\left|L_2\right| > 0$ לכן $b_n \neq 0$ לכל $.n \geq N$
 :::
 
 ::: {#box-expl-arithmetic-method .thmexpl title="השיטה: פירוק ואי-שוויון המשולש"}
@@ -432,15 +452,15 @@ $$,\lim_{n\to\infty} \frac{1}{b_n} = \frac{1}{L_2}$$
 
 $$.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \left|\frac{L_2 - b_n}{b_n L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|}$$
 
-במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: $\left|b_n\right|$ עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא **חסם מלרע** על $,\left|b_n\right|$ וזהו בדיוק החישוב שכבר עשינו ב[הערה על המכנה שאינו מתאפס](#box-rem-denominator-nonzero), הפעם עד הסוף: שם הסתפקנו במסקנה $,b_n \neq 0$ וכאן נחלץ ממנו חסם מספרי. מכיוון ש-$,L_2 \neq 0$ מתקיים $,\frac{\left|L_2\right|}{2} > 0$ ולכן קיים $N_0$ כך שלכל $n \geq N_0$ מתקיים
+במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: $\left|b_n\right|$ עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא **חסם מלרע** על $,\left|b_n\right|$ וכאן נכנס לתמונה התנאי $.L_2 \neq 0$ נפריד לשני מקרים, ובשניהם נפעיל את [](07-sequences-limit.qmd#box-thm-limit-window) על הסדרה $(b_n)_{n=1}^{\infty}$ ועל הגבול $.L_2$
 
-$$.\left|b_n - L_2\right| < \frac{\left|L_2\right|}{2}$$
+אם $,L_2 > 0$ אז $,\frac{L_2}{2} < L_2$ ולפי סעיף (א) קיים $N_0$ כך שלכל $n \geq N_0$ מתקיים $.b_n > \frac{L_2}{2}$
 
-לפי אי-שוויון המשולש
+אם $,L_2 < 0$ אז $,\frac{L_2}{2} > L_2$ ולפי סעיף (ב) קיים $N_0$ כך שלכל $n \geq N_0$ מתקיים $.b_n < \frac{L_2}{2}$
 
-$$,\left|L_2\right| = \left|\left(L_2 - b_n\right) + b_n\right| \leq \left|L_2 - b_n\right| + \left|b_n\right| < \frac{\left|L_2\right|}{2} + \left|b_n\right|$$
+בשני המקרים מתקיים לכל $n \geq N_0$
 
-ומכאן $\left|b_n\right| > \frac{\left|L_2\right|}{2}$ לכל $.n \geq N_0$
+$$.\left|b_n\right| > \frac{\left|L_2\right|}{2}$$
 
 נציב את החסם במכנה: לכל $n \geq N_0$
 
@@ -460,6 +480,12 @@ $$.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| < \frac{2}{\left|L_2\right|^{2}} \
 
 $$.\lim_{n\to\infty} \frac{a_n}{b_n} = \lim_{n\to\infty} \left(a_n \cdot \frac{1}{b_n}\right) = \lim_{n\to\infty} a_n \cdot \lim_{n\to\infty} \frac{1}{b_n} = L_1 \cdot \frac{1}{L_2} = \frac{L_1}{L_2}$$
 :::::
+
+::: {.thmrem numbered="false"}
+בניסוח סעיף (ד) דרשנו $b_n \neq 0$ לכל $,n$ אבל הדרישה הזאת נועדה רק כדי שהמנה $\dfrac{a_n}{b_n}$ תהיה מוגדרת מלכתחילה. ההוכחה עצמה לא נזקקה לה מעבר לכך.
+
+למעשה, בתוך ההוכחה ראינו שההנחה $L_2 \neq 0$ כבר גוררת שהחל ממקום מסוים מתקיים $,\left|b_n\right| > \frac{\left|L_2\right|}{2}$ ובפרט $b_n \neq 0$ שם. לכן גם בלי הדרישה המפורשת סדרת המנות מוגדרת החל ממקום מסוים, וזה מספיק: הגדרת הגבול מסתכלת רק על $n \geq N$ עבור $N$ כלשהו, ולכן מספר סופי של איברים בתחילת הסדרה אינו משפיע על הגבול.
+:::
 
 ### דוגמאות
 
@@ -519,16 +545,246 @@ $$.\lim_{n\to\infty} \left(\frac{8}{n} + \frac{3}{n^2}\right) = 0 + 0 = 0 \qquad
 $$.\lim_{n\to\infty} \frac{8n+3}{n^2+1} = \lim_{n\to\infty} \frac{\dfrac{8}{n} + \dfrac{3}{n^2}}{1 + \dfrac{1}{n^2}} = \frac{\lim\limits_{n\to\infty} \left(\dfrac{8}{n} + \dfrac{3}{n^2}\right)}{\lim\limits_{n\to\infty} \left(1 + \dfrac{1}{n^2}\right)} = \frac{0}{1} = 0$$
 :::
 
+### מסקנות מאריתמטיקת הגבולות
+
+אילו גבולות אפשר לחשב בעזרת המשפט? מתברר שלא מעט. נאסוף כאן כמה מסקנות ישירות, ואז נשאל מה קורה כשמפעילים על סדרה **פונקציה** ולא רק פעולת חשבון.
+
+::: {#box-cor-limit-constant-multiple .thmcor title="כפל בקבוע"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת ויהי $c \in \mathbb{R}$ קבוע. אז הסדרה $\left(c \cdot a_n\right)$ מתכנסת, ומתקיים $$.\lim_{n\to\infty} \left(c \cdot a_n\right) = c \cdot \lim_{n\to\infty} a_n$$
+:::
+
+::: thmproof
+הסדרה הקבועה $b_n = c$ מתכנסת ל-$,c$ ולכן סעיף (ג) של [](#box-thm-sequence-arithmetic) חל על המכפלה ונותן בדיוק את הטענה.
+:::
+
+::: {#box-cor-limit-compare .thmcor title="השוואה בין שתי סדרות"}
+תהיינה $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ סדרות מתכנסות המקיימות $a_n \leq b_n$ לכל $.n$ אז $$.\lim_{n\to\infty} a_n \leq \lim_{n\to\infty} b_n$$
+:::
+
+::: thmproof
+נסמן $\lim\limits_{n\to\infty} a_n = L_1$ ו-$.\lim\limits_{n\to\infty} b_n = L_2$ לפי סעיף (ב) של [](#box-thm-sequence-arithmetic) הסדרה $\left(b_n - a_n\right)$ מתכנסת, ומתקיים $.\lim\limits_{n\to\infty}\left(b_n - a_n\right) = L_2 - L_1$
+
+מן ההנחה $a_n \leq b_n$ נובע $b_n - a_n \geq 0$ לכל $,n$ כלומר כל איברי הסדרה $\left(b_n - a_n\right)$ אי-שליליים. לכן לפי סעיף (א) של [](07-sequences-limit.qmd#box-thm-limit-preserves-order) גם הגבול שלה אי-שלילי:
+
+$$.L_2 - L_1 \geq 0$$
+
+נוסיף $L_1$ לשני האגפים ונקבל $,L_1 \leq L_2$ כנדרש.
+:::
+
+גם כאן, כמו במקרה של סדרה אחת ומספר קבוע, **אי-שוויון חד אינו נשמר**: מ-$a_n < b_n$ לכל $n$ נובע רק $,L_1 \leq L_2$ ולא יותר מזה. נחזור לכך בתרגילים.
+
+עכשיו נעבור לשאלה השנייה. אם $f$ פונקציה ו-$,a_n \to L$ מה אפשר לומר על $?f(a_n)$ באופן כללי דרושים לכך כלים שיפותחו רק בהמשך הספר, אבל עבור משפחה חשובה של פונקציות התשובה כבר בידינו.
+
+התשובה המיידית היא **חזקות טבעיות**. אם $k$ טבעי, אז $a_n^{k}$ אינו אלא מכפלה של $k$ עותקים של $,a_n$ ולכן די להפעיל את סעיף (ג) של המשפט שוב ושוב. באותו אופן, $\dfrac{1}{a_n^{k}}$ מתקבל מהפעלת סעיף (ד) על החזקה.
+
+::: {#box-cor-limit-power .thmcor title="חזקות"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת, ונסמן $.\lim\limits_{n\to\infty} a_n = L$ אז לכל $k$ טבעי $$.\lim_{n\to\infty} a_n^{k} = L^{k}$$
+
+אם בנוסף $L \neq 0$ ומתקיים $a_n \neq 0$ לכל $,n$ אז גם $$.\lim_{n\to\infty} \frac{1}{a_n^{k}} = \frac{1}{L^{k}}$$
+:::
+
+הטענה הראשונה היא הפעלה חוזרת של כלל הכפל, והשנייה מתקבלת ממנה בהפעלת כלל החילוק. הוכחה מסודרת באינדוקציה על $k$ נשאירה כתרגיל בסוף הסעיף.
+
+שורשים הם סיפור אחר. הפונקציה $f(x) = \sqrt[k]{x}$ אינה מורכבת מחיבור, חיסור, כפל וחילוק, ולכן אריתמטיקת הגבולות אינה חלה עליה כלל. בכל זאת הטענה נכונה, וההוכחה שלה היא יישום ישיר של [](07-sequences-limit.qmd#box-thm-limit-window).
+
+::: {#box-thm-limit-root .thmthm title="שורשים"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה מתכנסת המקיימת $a_n \geq 0$ לכל $,n$ ונסמן $.\lim\limits_{n\to\infty} a_n = L$ אז לכל $k \geq 2$ טבעי $$.\lim_{n\to\infty} \sqrt[k]{a_n} = \sqrt[k]{L}$$
+:::
+
+::: thmproof
+ראשית, מ-$a_n \geq 0$ לכל $n$ נובע לפי סעיף (א) של [](07-sequences-limit.qmd#box-thm-limit-preserves-order) ש-$,L \geq 0$ ולכן $\sqrt[k]{L}$ מוגדר. נסמן $.\ell = \sqrt[k]{L}$
+
+בהוכחה נשתמש פעמיים בשתי עובדות פשוטות על מספרים אי-שליליים: אם $0 \leq s < t$ אז $,s^{k} < t^{k}$ ואם $0 \leq s < t$ אז $.\sqrt[k]{s} < \sqrt[k]{t}$
+
+**המקרה $.L > 0$** אז גם $.\ell > 0$ יהי $.\varepsilon > 0$ מותר להניח $,\varepsilon < \ell$ שכן אם התנאי מתקיים עבור $\varepsilon$ קטן הוא מתקיים גם עבור כל $\varepsilon$ גדול ממנו. מ-$0 \leq \ell - \varepsilon < \ell < \ell + \varepsilon$ ובהעלאה בחזקת $k$ נקבל
+
+$$.\left(\ell-\varepsilon\right)^{k} < \ell^{k} = L < \left(\ell+\varepsilon\right)^{k}$$
+
+נפעיל את [](07-sequences-limit.qmd#box-thm-limit-window) עם $m = \left(\ell-\varepsilon\right)^{k}$ ועם $:M = \left(\ell+\varepsilon\right)^{k}$ שני הסעיפים יחד נותנים שהחל ממקום מסוים מתקיים
+
+$$.\left(\ell-\varepsilon\right)^{k} < a_n < \left(\ell+\varepsilon\right)^{k}$$
+
+נוציא שורש $k$-י משלושת האגפים, ונקבל שהחל מאותו מקום
+
+$$,\ell - \varepsilon < \sqrt[k]{a_n} < \ell + \varepsilon$$
+
+כלומר $.\left|\sqrt[k]{a_n} - \ell\right| < \varepsilon$ מכיוון ש-$\varepsilon$ היה שרירותי, זוהי בדיוק הגדרת הגבול עבור הסדרה $\left(\sqrt[k]{a_n}\right)$ והמספר $.\ell$
+
+**המקרה $.L = 0$** כאן $.\ell = 0$ יהי $.\varepsilon > 0$ מתקיים $,\varepsilon^{k} > 0 = L$ ולכן לפי סעיף (ב) של אותו משפט מתקיים $a_n < \varepsilon^{k}$ החל ממקום מסוים. יחד עם $a_n \geq 0$ ובהוצאת שורש $k$-י נקבל שם
+
+$$,0 \leq \sqrt[k]{a_n} < \varepsilon$$
+
+ובפרט $.\left|\sqrt[k]{a_n} - 0\right| < \varepsilon$
+:::
+
+בשילוב שתי הטענות אפשר לטפל גם ב**חזקות רציונליות** של סדרה אי-שלילית. נזכיר מה פירושן: עבור מספר אי-שלילי $x$ ועבור שברים $\dfrac{p}{q}$ עם $p$ שלם ו-$q$ טבעי, מסמנים
+
+$$,x^{p/q} = \sqrt[q]{x^{p}}$$
+
+כלומר מעלים בחזקת $p$ ואז מוציאים שורש מסדר $.q$ למשל $x^{3/2} = \sqrt{x^{3}}$ ו-$.x^{1/2} = \sqrt{x}$ מכיוון שאת החזקה יודעים לחשב לפי [](#box-cor-limit-power) ואת השורש לפי [](#box-thm-limit-root), אפשר להפעיל את שתיהן בזו אחר זו.
+
+### תרגילים
+
+בארבעת התרגילים הראשונים $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ הן סדרות כלשהן. הכריעו אם הטענה נכונה.
+
+**תרגיל 1.** אם $(a_n)$ אינה מתכנסת ו-$(b_n)$ אינה מתכנסת, אז $(a_n + b_n)$ אינה מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** ניקח $a_n = \left(-1\right)^n$ ו-$.b_n = -\left(-1\right)^n$ שתיהן אינן מתכנסות, כפי שראינו בפרק הקודם עבור הסדרה המתחלפת, ואילו $a_n + b_n = 0$ לכל $,n$ כלומר הסכום הוא הסדרה הקבועה $,0$ שמתכנסת.
+:::
+
+**תרגיל 2.** אם $(a_n)$ מתכנסת ו-$(b_n)$ אינה מתכנסת, אז $(a_n + b_n)$ אינה מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**נכון.** נניח בשלילה ש-$(a_n + b_n)$ כן מתכנסת. הסדרה $(a_n)$ מתכנסת לפי הנתון, ולכן לפי סעיף (ב) של [](#box-thm-sequence-arithmetic) גם ההפרש
+
+$$b_n = \left(a_n + b_n\right) - a_n$$
+
+מתכנס, בסתירה לנתון ש-$(b_n)$ אינה מתכנסת.
+:::
+
+**תרגיל 3.** אם $(a_n + b_n)$ מתכנסת, אז לפחות אחת מבין $(a_n)$ ו-$(b_n)$ מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** אותה דוגמה מתרגיל 1: עבור $a_n = \left(-1\right)^n$ ו-$b_n = -\left(-1\right)^n$ הסכום מתכנס ואף אחת משתי הסדרות אינה מתכנסת.
+:::
+
+**תרגיל 4.** אם $(a_n + b_n)$ אינה מתכנסת, אז לפחות אחת מבין $(a_n)$ ו-$(b_n)$ אינה מתכנסת.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**נכון.** זוהי הטענה הנגדית של סעיף (א) של [](#box-thm-sequence-arithmetic): אילו שתי הסדרות היו מתכנסות, המשפט היה נותן שגם הסכום מתכנס.
+:::
+
+**תרגיל 5.** אם $a_n \to L_1$ וגם $,b_n \to L_2$ ומתקיים $a_n < b_n$ לכל $,n \geq 1$ אז $.L_1 < L_2$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** ניקח $a_n = 0$ ו-$.b_n = \dfrac{1}{n}$ לכל $n \geq 1$ מתקיים $a_n < b_n$ ממש, ובכל זאת שתי הסדרות מתכנסות ל-$,0$ כלומר $.L_1 = L_2$
+
+מה שכן נכון הוא [](#box-cor-limit-compare) עם אי-שוויון **חלש**: מ-$a_n < b_n$ נובע בפרט $,a_n \leq b_n$ ומכאן $.L_1 \leq L_2$
+:::
+
+**תרגיל 6.** חשבו את הגבולות הבאים בעזרת אריתמטיקת הגבולות.
+
+(א) $\lim\limits_{n\to\infty} \dfrac{2n+1}{n-2}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="2"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+(ב) $\lim\limits_{n\to\infty} \dfrac{5n-12}{2n+3}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="5/2"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+(ג) $\lim\limits_{n\to\infty} \sqrt{\dfrac{4n^2+1}{n^2+3}}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="seq-quiz" data-answer="2"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+```
+:::
+
+::: {.thmsol .foldable}
+**סעיף (א).** נחלק מונה ומכנה ב-$:n$
+
+$$.\frac{2n+1}{n-2} = \frac{2 + \dfrac{1}{n}}{1 - \dfrac{2}{n}}$$
+
+גבול המונה הוא $,2 + 0 = 2$ גבול המכנה הוא $,1 - 0 = 1$ והוא שונה מאפס, ולכן לפי סעיף (ד) הגבול הוא $.\dfrac{2}{1} = 2$
+
+**סעיף (ב).** באותו אופן,
+
+$$,\frac{5n-12}{2n+3} = \frac{5 - \dfrac{12}{n}}{2 + \dfrac{3}{n}}$$
+
+גבול המונה הוא $,5$ גבול המכנה הוא $,2$ ולכן הגבול הוא $.\dfrac{5}{2}$
+
+**סעיף (ג).** נטפל תחילה בביטוי שמתחת לשורש. נחלק מונה ומכנה ב-$:n^2$
+
+$$.\frac{4n^2+1}{n^2+3} = \frac{4 + \dfrac{1}{n^2}}{1 + \dfrac{3}{n^2}} \longrightarrow \frac{4}{1} = 4$$
+
+כל איברי הסדרה הזאת אי-שליליים, ולכן לפי [](#box-thm-limit-root) אפשר להוציא שורש ולקבל שהגבול המבוקש הוא $.\sqrt{4} = 2$
+:::
+
+**תרגיל 7.** הוכיחו במסודר את [](#box-cor-limit-power). כלומר:
+
+(א) הוכיחו באינדוקציה על $k$ שאם $(a_n)_{n=1}^{\infty}$ מתכנסת ל-$L$ אז $a_n^{k}$ מתכנסת ל-$L^{k}$ לכל $k$ טבעי.
+
+(ב) הסיקו מכך ומסעיף (ד) של [](#box-thm-sequence-arithmetic) את הטענה על $.\dfrac{1}{a_n^{k}}$
+
+::: {.thmsol .foldable}
+**סעיף (א).** בסיס האינדוקציה הוא $,k = 1$ ושם הטענה היא בדיוק הנתון $.a_n \to L$
+
+צעד האינדוקציה: נניח שהטענה נכונה עבור $,k$ כלומר $.\lim\limits_{n\to\infty} a_n^{k} = L^{k}$ נכתוב $,a_n^{k+1} = a_n^{k} \cdot a_n$ וזוהי מכפלה של שתי סדרות מתכנסות: הראשונה מתכנסת ל-$L^{k}$ לפי הנחת האינדוקציה, והשנייה ל-$L$ לפי הנתון. לכן לפי סעיף (ג) של [](#box-thm-sequence-arithmetic)
+
+$$,\lim_{n\to\infty} a_n^{k+1} = \lim_{n\to\infty} \left(a_n^{k} \cdot a_n\right) = L^{k} \cdot L = L^{k+1}$$
+
+וזהו בדיוק צעד האינדוקציה.
+
+**סעיף (ב).** נתון $L \neq 0$ ו-$a_n \neq 0$ לכל $.n$ מסעיף (א) נובע $,a_n^{k} \to L^{k}$ ומכיוון ש-$L \neq 0$ גם $,L^{k} \neq 0$ וכן $a_n^{k} \neq 0$ לכל $.n$ נפעיל את סעיף (ד) על המנה של הסדרה הקבועה $1$ בסדרה $:a_n^{k}$
+
+$$.\lim_{n\to\infty} \frac{1}{a_n^{k}} = \frac{1}{L^{k}}$$
+:::
+
 <!-- מקור: הרצאה 5 -->
 
 ## משפט הסנדוויץ׳; כפל אפסה בחסומה
 
-::: {#box-def-null-sequence .thmdef}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **סדרה אפסה** אם היא מתכנסת ל-$0$, כלומר אם $\lim\limits_{n\to\infty} a_n = 0$.
-:::
-
 ::: {#box-thm-squeeze-sequences .thmthm title="כלל הסנדוויץ׳"}
-יהיו $(a_n)_{n=1}^{\infty}$ , $(b_n)_{n=1}^{\infty}$ , $(c_n)_{n=1}^{\infty}$ שלוש סדרות, ונניח כי קיים $N_0 \in \mathbb{N}$ כך שלכל $n \geq N_0$ מתקיים
+יהיו $(a_n)_{n=1}^{\infty}$ , $(b_n)_{n=1}^{\infty}$ , $(c_n)_{n=1}^{\infty}$ שלוש סדרות, ונניח כי החל ממקום מסוים מתקיים
 
 $.a_n \leq b_n \leq c_n$
 
@@ -539,12 +795,66 @@ $,\lim_{n\to\infty} a_n = \lim_{n\to\infty} c_n = L$
 אז גם $(b_n)_{n=1}^{\infty}$ מתכנסת, ומתקיים $\lim\limits_{n\to\infty} b_n = L$.
 :::
 
+::: thmproof
+יהי $.\varepsilon > 0$
+
+הסדרה $(a_n)_{n=1}^{\infty}$ מתכנסת ל-$,L$ ומתקיים $,L - \varepsilon < L$ ולכן לפי סעיף (א) של [](07-sequences-limit.qmd#box-thm-limit-window) מתקיים החל ממקום מסוים $.a_n > L - \varepsilon$
+
+הסדרה $(c_n)_{n=1}^{\infty}$ מתכנסת ל-$,L$ ומתקיים $,L + \varepsilon > L$ ולכן לפי סעיף (ב) של אותו משפט מתקיים החל ממקום מסוים $.c_n < L + \varepsilon$
+
+גם ההנחה $a_n \leq b_n \leq c_n$ מתקיימת החל ממקום מסוים, לפי הנתון.
+
+לפנינו אפוא שלוש תכונות, שכל אחת מהן מתקיימת החל ממקום מסוים. לפי [הכלל על מספר סופי של תכונות](07-sequences-limit.qmd#box-key-finitely-many) קיים $N$ שהחל ממנו שלושתן מתקיימות יחד, ואז לכל $n \geq N$
+
+$$,L - \varepsilon < a_n \leq b_n \leq c_n < L + \varepsilon$$
+
+ובפרט $.\left|b_n - L\right| < \varepsilon$
+
+מכיוון ש-$\varepsilon$ היה שרירותי, זוהי בדיוק הגדרת הגבול: הסדרה $(b_n)_{n=1}^{\infty}$ מתכנסת, וגבולה $.L$
+:::
+
+::: {.thmrem numbered="false"}
+כדאי לשים לב היכן [](#box-cor-limit-compare) כן חלה כאן. אילו כבר היינו יודעים ש-$(b_n)_{n=1}^{\infty}$ מתכנסת, היה אפשר לקבוע את ערך הגבול בשורה אחת: מ-$a_n \leq b_n$ נובע $,L \leq \lim\limits_{n\to\infty} b_n$ מ-$b_n \leq c_n$ נובע $,\lim\limits_{n\to\infty} b_n \leq L$ ויחד $.\lim\limits_{n\to\infty} b_n = L$
+
+מה שההשוואה אינה יכולה לספק הוא את ההתכנסות עצמה, והיא עיקר המשפט: המסקנה על השוואה מניחה מראש ששתי הסדרות מתכנסות, ואילו כאן ההתכנסות של $(b_n)_{n=1}^{\infty}$ היא בדיוק מה שיש להוכיח.
+:::
+
+המשפט הבא הוא יישום ישיר של כלל הסנדוויץ׳. נפתח בשם שנוח לתת לסדרות המתכנסות ל-$.0$
+
+::: {#box-def-null-sequence .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **סדרה אפסה** אם היא מתכנסת ל-$0$, כלומר אם $\lim\limits_{n\to\infty} a_n = 0$.
+:::
+
 ::: {#box-thm-null-times-bounded .thmthm title="אפסה כפול חסומה"}
 תהי $(a_n)_{n=1}^{\infty}$ סדרה אפסה, ותהי $(b_n)_{n=1}^{\infty}$ סדרה חסומה. אז גם הסדרה $(a_n \cdot b_n)_{n=1}^{\infty}$ אפסה, כלומר
 
 $.\lim_{n\to\infty} a_n \cdot b_n = 0$
 
 שימו לב כי $(b_n)_{n=1}^{\infty}$ אינה נדרשת להתכנס, אלא רק להיות חסומה.
+:::
+
+::: thmproof
+**שלב ראשון: הסדרה $M\left|a_n\right|$ אפסה.** הסדרה $(b_n)_{n=1}^{\infty}$ חסומה, ולכן לפי [](#box-thm-bounded-abs) קיים $M \geq 0$ כך שלכל $n$ מתקיים $.\left|b_n\right| \leq M$
+
+הסדרה $(a_n)_{n=1}^{\infty}$ אפסה, כלומר $,a_n \to 0$ ומכאן גם $:\left|a_n\right| \to 0$ שתי הטענות אומרות בדיוק את אותו הדבר, שכן
+
+$$.\Bigl|\left|a_n\right| - 0\Bigr| = \left|a_n\right| = \left|a_n - 0\right|$$
+
+לפי [](#box-cor-limit-constant-multiple) נובע מכאן
+
+$$.\lim_{n\to\infty} M\left|a_n\right| = M \cdot 0 = 0 \qquad\text{,}\qquad \lim_{n\to\infty} \left(-M\left|a_n\right|\right) = -M \cdot 0 = 0$$
+
+**שלב שני: כליאה בין שתי הסדרות האלה.** מכפליות הערך המוחלט ומ-$\left|b_n\right| \leq M$ נובע שלכל $n$ מתקיים $,\left|a_n b_n\right| = \left|a_n\right| \cdot \left|b_n\right| \leq M\left|a_n\right|$ ופתיחת הערך המוחלט נותנת
+
+$$.-M\left|a_n\right| \leq a_n b_n \leq M\left|a_n\right|$$
+
+זהו בדיוק המצב שכלל הסנדוויץ׳ מטפל בו: הסדרה $(a_n b_n)_{n=1}^{\infty}$ כלואה בין שתי סדרות, ולפי השלב הראשון שתיהן מתכנסות לאותו גבול $.0$
+
+**שלב שלישי: הפעלת המשפט.** לפי [](#box-thm-squeeze-sequences) הסדרה $(a_n b_n)_{n=1}^{\infty}$ מתכנסת, ומתקיים
+
+$$,\lim_{n\to\infty} a_n b_n = 0$$
+
+כלומר היא אפסה.
 :::
 
 ## מונוטוניות של סדרות; דוגמה

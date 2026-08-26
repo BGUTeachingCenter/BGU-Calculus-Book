@@ -1,34 +1,28 @@
-import re, glob, html, os, sys
+import re, glob, html
 
 # 1. CITATION AUDIT -----------------------------------------------------------
-# Build id -> number from the RENDERED html (the filter's own output), then check
-# every [.. N.N.N ..](..#box-..) in the .qmd sources against it.
-num = {}
+# Every rendered box id, NUMBERED OR NOT (numbered="false" and the .thmkey/.thmwarn
+# classes produce ids with no number in the label — they are still link targets).
+ids = set()
 for f in glob.glob("_book/*.html"):
-    t = open(f, encoding="utf-8").read()
-    for m in re.finditer(r'<div id="(box-[^"]+)"[^>]*>\s*<p><strong>(.*?)</strong>', t, re.S):
-        lab = html.unescape(re.sub('<[^>]+>', '', m.group(2)))
-        g = re.search(r'(\d+\.\d+\.\d+)', lab)
-        if g:
-            num[m.group(1)] = g.group(1)
-
+    ids |= set(re.findall(r'<div id="(box-[^"]+)"', open(f, encoding="utf-8").read()))
 bad = []
 for q in sorted(glob.glob("*.qmd")):
-    for m in re.finditer(r'\[([^\]]*?)\]\(([^)]*?)#(box-[^)\s]+)\)', open(q, encoding="utf-8").read()):
-        text, bid = m.group(1), m.group(3)
-        g = re.search(r'(\d+\.\d+\.\d+)', text)
-        if bid not in num:
-            bad.append(f"{q}: DANGLING #{bid}  (link text: {text.strip()})")
-        elif g and g.group(1) != num[bid]:
-            bad.append(f"{q}: STALE  #{bid}  text says {g.group(1)}, rendered is {num[bid]}")
+    src = open(q, encoding="utf-8").read()
+    for m in re.finditer(r'\[([^\]]*?)\]\(([^)]*?)#(box-[^)\s]+)\)', src):
+        if m.group(3) not in ids:
+            bad.append(f"{q}: DANGLING #{m.group(3)}  (text: {m.group(1).strip()})")
+        # link text must NAME the target, never carry the filter's number
+        if re.search(r'\d+\.\d+\.\d+', m.group(1)):
+            bad.append(f"{q}: NUMBER IN LINK TEXT  {m.group(1).strip()} -> #{m.group(3)}")
 print(f"1. citation audit          : {len(bad)}")
 for b in bad: print("     " + b)
 
 # 2. em-dash straight after math ----------------------------------------------
-hits = [(q, i) for q in sorted(glob.glob("*.qmd"))
+hits = [f"{q}:{i}" for q in sorted(glob.glob("*.qmd"))
         for i, l in enumerate(open(q, encoding="utf-8"), 1) if re.search(r'\$ *—', l)]
 print(f"2. '$ —' after math        : {len(hits)}")
-for q, i in hits: print(f"     {q}:{i}")
+for h in hits: print("     " + h)
 
 # 3. bullets inside a .thmproof / .thmsol fence -------------------------------
 hits = []
@@ -47,15 +41,22 @@ for q in sorted(glob.glob("*.qmd")):
 print(f"3. bullets in proof/sol    : {len(hits)}")
 for h in hits: print("     " + h)
 
-# 4. unguarded centred caption div --------------------------------------------
+# 4. centred caption div with no enclosing when-format="pdf" ------------------
+# Tracks the fence stack; a 6-line proximity test gives false positives, because the
+# guard sits above a ```{=latex}``` block and is 7+ lines up.
 hits = []
 for q in sorted(glob.glob("*.qmd")):
-    lines = open(q, encoding="utf-8").read().split("\n")
-    open_pdf = 0
-    for i, l in enumerate(lines, 1):
-        if 'when-format="pdf"' in l: open_pdf = i
-        if re.match(r'^:{3,}\s*\{style="text-align:center"\}\s*$', l.strip()):
-            # legal only inside a when-format="pdf" wrapper opened just above
-            if not (0 < i - open_pdf <= 6): hits.append(f"{q}:{i}")
+    stack = []
+    for i, l in enumerate(open(q, encoding="utf-8"), 1):
+        m = re.match(r'^(:{3,})(\s*\{.*\}|\s+\w.*)?\s*$', l.rstrip())
+        if not m: continue
+        attrs = (m.group(2) or "").strip()
+        if attrs:
+            if attrs == '{style="text-align:center"}' and \
+               not any('when-format="pdf"' in a for a in stack):
+                hits.append(f"{q}:{i}")
+            stack.append(attrs)
+        elif stack:
+            stack.pop()
 print(f"4. unguarded centred div   : {len(hits)}")
 for h in hits: print("     " + h)
