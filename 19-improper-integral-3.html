@@ -205,15 +205,15 @@ mjx-container, mjx-container * {
   font-weight: bold;
   min-height: 1.2em;
 }
-.seq-quiz, .formula-quiz {
+.seq-quiz, .formula-quiz, .bound-quiz {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin: 0.4rem 0;
 }
-.seq-quiz .seq-label, .formula-quiz .seq-label { min-width: 12rem; }
-.seq-quiz .seq-input, .formula-quiz .seq-input {
+.seq-quiz .seq-label, .formula-quiz .seq-label, .bound-quiz .seq-label { min-width: 12rem; }
+.seq-quiz .seq-input, .formula-quiz .seq-input, .bound-quiz .seq-input {
   padding: 0.25rem 0.5rem;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
@@ -222,9 +222,9 @@ mjx-container, mjx-container * {
   text-align: left;
   min-width: 16rem;
 }
-.seq-quiz .seq-input.correct, .formula-quiz .seq-input.correct { border-color: #28a745; background: #d4edda; }
-.seq-quiz .seq-input.incorrect, .formula-quiz .seq-input.incorrect { border-color: #dc3545; background: #f8d7da; }
-.seq-quiz .seq-check, .formula-quiz .seq-check {
+.seq-quiz .seq-input.correct, .formula-quiz .seq-input.correct, .bound-quiz .seq-input.correct { border-color: #28a745; background: #d4edda; }
+.seq-quiz .seq-input.incorrect, .formula-quiz .seq-input.incorrect, .bound-quiz .seq-input.incorrect { border-color: #dc3545; background: #f8d7da; }
+.seq-quiz .seq-check, .formula-quiz .seq-check, .bound-quiz .seq-check {
   padding: 0.25rem 0.9rem;
   cursor: pointer;
   border: 1px solid #bbbbbb;
@@ -233,8 +233,8 @@ mjx-container, mjx-container * {
   font: inherit;
   color: inherit;
 }
-.seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover { background: #ececec; }
-.seq-quiz .seq-feedback, .formula-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
+.seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover, .bound-quiz .seq-check:hover { background: #ececec; }
+.seq-quiz .seq-feedback, .formula-quiz .seq-feedback, .bound-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
 /* Interactive π-approximation demo (HTML only) */
 .pi-demo {
   border: 1px solid #9ca3af;
@@ -456,6 +456,50 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+  });
+});
+</script>
+<script>
+/* .bound-quiz — for "give SOME bound" questions, where there is no single right
+   answer. Unlike .seq-quiz (exact match), it accepts ANY number on the correct side
+   of a threshold: data-atleast="35/2" accepts every M >= 35/2, data-atmost="16"
+   every m <= 16. Arithmetic is allowed in the input, so "35/2" and "17.5" both pass.
+   The point of the exercise is that a bound need not be optimal, so a widget that
+   demanded the optimal one would contradict the question. */
+document.addEventListener("DOMContentLoaded", function () {
+  function evalNum(s) {
+    s = String(s || "").trim();
+    if (!s) return null;
+    if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;      /* digits and operators only */
+    try {
+      var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
+      return (typeof v === "number" && isFinite(v)) ? v : null;
+    } catch (e) { return null; }
+  }
+  document.querySelectorAll(".bound-quiz").forEach(function (q) {
+    var atLeast = evalNum(q.getAttribute("data-atleast"));
+    var atMost  = evalNum(q.getAttribute("data-atmost"));
+    var input = q.querySelector(".seq-input");
+    var feedback = q.querySelector(".seq-feedback");
+    var btn = q.querySelector(".seq-check");
+    function check() {
+      input.classList.remove("correct", "incorrect");
+      var v = evalNum(input.value);
+      if (v === null) {
+        input.classList.add("incorrect");
+        if (feedback) feedback.textContent = "✗ נא להזין מספר";
+        return;
+      }
+      var ok = (atLeast !== null) ? v >= atLeast : v <= atMost;
+      input.classList.add(ok ? "correct" : "incorrect");
+      if (feedback) {
+        feedback.textContent = ok ? "✓ נכון! כל חסם מתאים מתקבל."
+          : (atLeast !== null ? "✗ יש איברים בסדרה הגדולים מהמספר הזה."
+                              : "✗ יש איברים בסדרה הקטנים מהמספר הזה.");
+      }
+    }
+    if (btn) btn.addEventListener("click", check);
+    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
   });
 });
 </script>

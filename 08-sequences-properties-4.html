@@ -206,15 +206,15 @@ mjx-container, mjx-container * {
   font-weight: bold;
   min-height: 1.2em;
 }
-.seq-quiz, .formula-quiz {
+.seq-quiz, .formula-quiz, .bound-quiz {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin: 0.4rem 0;
 }
-.seq-quiz .seq-label, .formula-quiz .seq-label { min-width: 12rem; }
-.seq-quiz .seq-input, .formula-quiz .seq-input {
+.seq-quiz .seq-label, .formula-quiz .seq-label, .bound-quiz .seq-label { min-width: 12rem; }
+.seq-quiz .seq-input, .formula-quiz .seq-input, .bound-quiz .seq-input {
   padding: 0.25rem 0.5rem;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
@@ -223,9 +223,9 @@ mjx-container, mjx-container * {
   text-align: left;
   min-width: 16rem;
 }
-.seq-quiz .seq-input.correct, .formula-quiz .seq-input.correct { border-color: #28a745; background: #d4edda; }
-.seq-quiz .seq-input.incorrect, .formula-quiz .seq-input.incorrect { border-color: #dc3545; background: #f8d7da; }
-.seq-quiz .seq-check, .formula-quiz .seq-check {
+.seq-quiz .seq-input.correct, .formula-quiz .seq-input.correct, .bound-quiz .seq-input.correct { border-color: #28a745; background: #d4edda; }
+.seq-quiz .seq-input.incorrect, .formula-quiz .seq-input.incorrect, .bound-quiz .seq-input.incorrect { border-color: #dc3545; background: #f8d7da; }
+.seq-quiz .seq-check, .formula-quiz .seq-check, .bound-quiz .seq-check {
   padding: 0.25rem 0.9rem;
   cursor: pointer;
   border: 1px solid #bbbbbb;
@@ -234,8 +234,8 @@ mjx-container, mjx-container * {
   font: inherit;
   color: inherit;
 }
-.seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover { background: #ececec; }
-.seq-quiz .seq-feedback, .formula-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
+.seq-quiz .seq-check:hover, .formula-quiz .seq-check:hover, .bound-quiz .seq-check:hover { background: #ececec; }
+.seq-quiz .seq-feedback, .formula-quiz .seq-feedback, .bound-quiz .seq-feedback { font-weight: bold; min-height: 1.2em; }
 /* Interactive π-approximation demo (HTML only) */
 .pi-demo {
   border: 1px solid #9ca3af;
@@ -457,6 +457,50 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+  });
+});
+</script>
+<script>
+/* .bound-quiz — for "give SOME bound" questions, where there is no single right
+   answer. Unlike .seq-quiz (exact match), it accepts ANY number on the correct side
+   of a threshold: data-atleast="35/2" accepts every M >= 35/2, data-atmost="16"
+   every m <= 16. Arithmetic is allowed in the input, so "35/2" and "17.5" both pass.
+   The point of the exercise is that a bound need not be optimal, so a widget that
+   demanded the optimal one would contradict the question. */
+document.addEventListener("DOMContentLoaded", function () {
+  function evalNum(s) {
+    s = String(s || "").trim();
+    if (!s) return null;
+    if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;      /* digits and operators only */
+    try {
+      var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
+      return (typeof v === "number" && isFinite(v)) ? v : null;
+    } catch (e) { return null; }
+  }
+  document.querySelectorAll(".bound-quiz").forEach(function (q) {
+    var atLeast = evalNum(q.getAttribute("data-atleast"));
+    var atMost  = evalNum(q.getAttribute("data-atmost"));
+    var input = q.querySelector(".seq-input");
+    var feedback = q.querySelector(".seq-feedback");
+    var btn = q.querySelector(".seq-check");
+    function check() {
+      input.classList.remove("correct", "incorrect");
+      var v = evalNum(input.value);
+      if (v === null) {
+        input.classList.add("incorrect");
+        if (feedback) feedback.textContent = "✗ נא להזין מספר";
+        return;
+      }
+      var ok = (atLeast !== null) ? v >= atLeast : v <= atMost;
+      input.classList.add(ok ? "correct" : "incorrect");
+      if (feedback) {
+        feedback.textContent = ok ? "✓ נכון! כל חסם מתאים מתקבל."
+          : (atLeast !== null ? "✗ יש איברים בסדרה הגדולים מהמספר הזה."
+                              : "✗ יש איברים בסדרה הקטנים מהמספר הזה.");
+      }
+    }
+    if (btn) btn.addEventListener("click", check);
+    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
   });
 });
 </script>
@@ -900,7 +944,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#משפט-הסנדוויץ-כפל-אפסה-בחסומה" class="nav-link">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#משפט-הסנדוויץ-כפל-אפסה-בחסומה" class="nav-link">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</a></li><li class="toc-indent"><a href="#דוגמאות-1" class="nav-link">דוגמאות</a></li><li class="toc-indent"><a href="#תרגילים-1" class="nav-link">תרגילים</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./08-sequences-properties.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></a></li></ol></nav>
@@ -923,17 +967,29 @@ window.Quarto = {
 
 <section id="משפט-הסנדוויץ-כפל-אפסה-בחסומה" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="משפט-הסנדוויץ-כפל-אפסה-בחסומה"><span class="header-section-number">8.4</span> משפט הסנדוויץ׳; כפל אפסה בחסומה</h2>
-<div id="box-def-null-sequence" class="thmbox thmbox-definition">
-<p><strong>הגדרה 8.4.1.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. נאמר כי היא <strong>סדרה אפסה</strong> אם היא מתכנסת ל-<span class="math inline">\(0\)</span>, כלומר אם <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 0\)</span>.</p>
-</div>
 <div id="box-thm-squeeze-sequences" class="thmbox thmbox-theorem" title="כלל הסנדוויץ׳">
-<p><strong>משפט 8.4.2 — כלל הסנדוויץ׳.</strong></p>
-<p>יהיו <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> , <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> , <span class="math inline">\((c_n)_{n=1}^{\infty}\)</span> שלוש סדרות, ונניח כי קיים <span class="math inline">\(N_0 \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים</p>
+<p><strong>משפט 8.4.1 — כלל הסנדוויץ׳.</strong></p>
+<p>יהיו <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> , <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> , <span class="math inline">\((c_n)_{n=1}^{\infty}\)</span> שלוש סדרות, ונניח כי החל ממקום מסוים מתקיים</p>
 <p><span class="math inline">\(.a_n \leq b_n \leq c_n\)</span></p>
 <p>אם בנוסף שתי הסדרות החיצוניות מתכנסות לאותו גבול, כלומר</p>
 <p><span class="math inline">\(,\lim_{n\to\infty} a_n = \lim_{n\to\infty} c_n = L\)</span></p>
 <p>אז גם <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> מתכנסת, ומתקיים <span class="math inline">\(\lim\limits_{n\to\infty} b_n = L\)</span>.</p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span></p>
+<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(,L\)</span> ומתקיים <span class="math inline">\(,L - \varepsilon &lt; L\)</span> ולכן לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.1</a> מתקיים החל ממקום מסוים <span class="math inline">\(.a_n &gt; L - \varepsilon\)</span></p>
+<p>הסדרה <span class="math inline">\((c_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(,L\)</span> ומתקיים <span class="math inline">\(,L + \varepsilon &gt; L\)</span> ולכן לפי סעיף (ב) של אותו משפט מתקיים החל ממקום מסוים <span class="math inline">\(.c_n &lt; L + \varepsilon\)</span></p>
+<p>גם ההנחה <span class="math inline">\(a_n \leq b_n \leq c_n\)</span> מתקיימת החל ממקום מסוים, לפי הנתון.</p>
+<p>שלוש התכונות האלה מתקיימות אפוא יחד החל ממקום מסוים, ושם</p>
+<p><span class="math display">\[,L - \varepsilon &lt; a_n \leq b_n \leq c_n &lt; L + \varepsilon\]</span></p>
+<p>ובפרט <span class="math inline">\(.\left|b_n - L\right| &lt; \varepsilon\)</span></p>
+<p>מכיוון ש-<span class="math inline">\(\varepsilon\)</span> היה שרירותי, זוהי בדיוק הגדרת הגבול: הסדרה <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> מתכנסת, וגבולה <span class="math inline">\(.L\)</span></p>
+</div>
+<p>המשפט הבא הוא יישום ישיר של כלל הסנדוויץ׳. נפתח בשם שנוח לתת לסדרות המתכנסות ל-<span class="math inline">\(.0\)</span></p>
+<div id="box-def-null-sequence" class="thmbox thmbox-definition">
+<p><strong>הגדרה 8.4.2.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. נאמר כי היא <strong>סדרה אפסה</strong> אם היא מתכנסת ל-<span class="math inline">\(0\)</span>, כלומר אם <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 0\)</span>.</p>
 </div>
 <div id="box-thm-null-times-bounded" class="thmbox thmbox-theorem" title="אפסה כפול חסומה">
 <p><strong>משפט 8.4.3 — אפסה כפול חסומה.</strong></p>
@@ -941,6 +997,154 @@ window.Quarto = {
 <p><span class="math inline">\(.\lim_{n\to\infty} a_n \cdot b_n = 0\)</span></p>
 <p>שימו לב כי <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> אינה נדרשת להתכנס, אלא רק להיות חסומה.</p>
 </div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p><strong>שלב ראשון: הסדרה <span class="math inline">\(M\left|a_n\right|\)</span> אפסה.</strong> הסדרה <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> חסומה, ולכן לפי <a href="./08-sequences-properties-2.html#box-thm-bounded-abs">משפט 8.2.3</a> קיים <span class="math inline">\(M \geq 0\)</span> כך שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(.\left|b_n\right| \leq M\)</span></p>
+<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> אפסה, כלומר <span class="math inline">\(,a_n \to 0\)</span> ומכאן גם <span class="math inline">\(:\left|a_n\right| \to 0\)</span> שתי הטענות אומרות בדיוק את אותו הדבר, שכן</p>
+<p><span class="math display">\[.\Bigl|\left|a_n\right| - 0\Bigr| = \left|a_n\right| = \left|a_n - 0\right|\]</span></p>
+<p>לפי <a href="./08-sequences-properties-3.html#box-cor-limit-constant-multiple">מסקנה 8.3.4</a> נובע מכאן</p>
+<p><span class="math display">\[.\lim_{n\to\infty} M\left|a_n\right| = M \cdot 0 = 0 \qquad\text{,}\qquad \lim_{n\to\infty} \left(-M\left|a_n\right|\right) = -M \cdot 0 = 0\]</span></p>
+<p><strong>שלב שני: כליאה בין שתי הסדרות האלה.</strong> מכפליות הערך המוחלט ומ-<span class="math inline">\(\left|b_n\right| \leq M\)</span> נובע שלכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,\left|a_n b_n\right| = \left|a_n\right| \cdot \left|b_n\right| \leq M\left|a_n\right|\)</span> ופתיחת הערך המוחלט נותנת</p>
+<p><span class="math display">\[.-M\left|a_n\right| \leq a_n b_n \leq M\left|a_n\right|\]</span></p>
+<p>זהו בדיוק המצב שכלל הסנדוויץ׳ מטפל בו: הסדרה <span class="math inline">\((a_n b_n)_{n=1}^{\infty}\)</span> כלואה בין שתי סדרות, ולפי השלב הראשון שתיהן מתכנסות לאותו גבול <span class="math inline">\(.0\)</span></p>
+<p><strong>שלב שלישי: הפעלת המשפט.</strong> לפי <a href="#box-thm-squeeze-sequences">משפט 8.4.1</a> הסדרה <span class="math inline">\((a_n b_n)_{n=1}^{\infty}\)</span> מתכנסת, ומתקיים</p>
+<p><span class="math display">\[,\lim_{n\to\infty} a_n b_n = 0\]</span></p>
+<p>כלומר היא אפסה.</p>
+</div>
+<section id="דוגמאות-1" class="level3">
+<h3 class="anchored" data-anchor-id="דוגמאות-1">דוגמאות</h3>
+<div id="box-qst-sin-n-over-n" class="thmbox thmbox-question" title="הגבול של $\dfrac{\sin n}{n}$">
+<p><strong>שאלה 8.4.4 — הגבול של <span class="math inline">\(\dfrac{\sin n}{n}\)</span>.</strong></p>
+<p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{\sin n}{n}\)</span></p>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>נראה שני פתרונות, משום שהדוגמה הזאת נופלת בדיוק בתחום שבו שני המשפטים של הסעיף חופפים.</p>
+<p><strong>דרך ראשונה: אפסה כפול חסומה.</strong> נכתוב <span class="math inline">\(.\dfrac{\sin n}{n} = \dfrac{1}{n} \cdot \sin n\)</span> הסדרה <span class="math inline">\(\dfrac{1}{n}\)</span> אפסה, והסדרה <span class="math inline">\(\sin n\)</span> חסומה שכן <span class="math inline">\(\left|\sin n\right| \leq 1\)</span> לכל <span class="math inline">\(.n\)</span> לכן לפי <a href="#box-thm-null-times-bounded">משפט 8.4.3</a> המכפלה אפסה, כלומר הגבול הוא <span class="math inline">\(.0\)</span></p>
+<p><strong>דרך שנייה: כלל הסנדוויץ׳.</strong> מ-<span class="math inline">\(-1 \leq \sin n \leq 1\)</span> ובחלוקה ב-<span class="math inline">\(n &gt; 0\)</span> נקבל לכל <span class="math inline">\(n \geq 1\)</span></p>
+<p><span class="math display">\[.-\frac{1}{n} \leq \frac{\sin n}{n} \leq \frac{1}{n}\]</span></p>
+<p>שתי הסדרות החיצוניות מתכנסות ל-<span class="math inline">\(,0\)</span> ולכן לפי <a href="#box-thm-squeeze-sequences">משפט 8.4.1</a> גם הסדרה שבאמצע מתכנסת ל-<span class="math inline">\(.0\)</span></p>
+</div>
+</details>
+<div id="box-qst-alt-over-n" class="thmbox thmbox-question" title="גורם חסום שאינו מתכנס">
+<p><strong>שאלה 8.4.5 — גורם חסום שאינו מתכנס.</strong></p>
+<p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span></p>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>נכתוב <span class="math inline">\(.\dfrac{\left(-1\right)^{n}}{n} = \dfrac{1}{n} \cdot \left(-1\right)^{n}\)</span> הסדרה <span class="math inline">\(\dfrac{1}{n}\)</span> אפסה, והסדרה <span class="math inline">\(\left(-1\right)^{n}\)</span> חסומה, שכן כל איבריה הם <span class="math inline">\(1\)</span> או <span class="math inline">\(.-1\)</span> לכן לפי <a href="#box-thm-null-times-bounded">משפט 8.4.3</a> הגבול הוא <span class="math inline">\(.0\)</span></p>
+<p>שימו לב שהסדרה <span class="math inline">\(\left(-1\right)^{n}\)</span> <strong>אינה מתכנסת</strong> כלל, ובכל זאת המשפט חל עליה: הוא דורש ממנה חסימות בלבד. <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> לעומת זאת אינו עוזר כאן, משום שהוא מניח ששני הגורמים מתכנסים.</p>
+</div>
+</details>
+<div id="box-qst-n-plus-sin" class="thmbox thmbox-question" title="שילוב עם אריתמטיקת הגבולות">
+<p><strong>שאלה 8.4.6 — שילוב עם אריתמטיקת הגבולות.</strong></p>
+<p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{n + \sin n}{n^2 + 3n}\)</span></p>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>נחלק מונה ומכנה ב-<span class="math inline">\(:n^2\)</span></p>
+<p><span class="math display">\[.\frac{n + \sin n}{n^2 + 3n} = \frac{\dfrac{1}{n} + \dfrac{\sin n}{n^2}}{1 + \dfrac{3}{n}}\]</span></p>
+<p><strong>המונה.</strong> הסדרה <span class="math inline">\(\dfrac{1}{n}\)</span> אפסה. הסדרה <span class="math inline">\(\dfrac{\sin n}{n^2} = \dfrac{1}{n^2} \cdot \sin n\)</span> אפסה אף היא לפי <a href="#box-thm-null-times-bounded">משפט 8.4.3</a>, שכן <span class="math inline">\(\dfrac{1}{n^2}\)</span> אפסה ו-<span class="math inline">\(\sin n\)</span> חסומה. לכן לפי סעיף (א) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> גבול המונה הוא <span class="math inline">\(.0 + 0 = 0\)</span></p>
+<p><strong>המכנה.</strong> גבול הסדרה <span class="math inline">\(1 + \dfrac{3}{n}\)</span> הוא <span class="math inline">\(,1 + 0 = 1\)</span> והוא שונה מאפס.</p>
+<p>לכן לפי סעיף (ד) של אותו משפט</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \frac{n + \sin n}{n^2 + 3n} = \frac{0}{1} = 0\]</span></p>
+</div>
+</details>
+<div id="box-qst-sum-of-roots" class="thmbox thmbox-question" title="סכום שמספר מחובריו גדל">
+<p><strong>שאלה 8.4.7 — סכום שמספר מחובריו גדל.</strong></p>
+<p>מצאו את הגבול של הסדרה</p>
+<p><span class="math display">\[.a_n = \frac{1}{\sqrt{n^2+1}} + \frac{1}{\sqrt{n^2+2}} + \dots + \frac{1}{\sqrt{n^2+n}}\]</span></p>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>כאן אריתמטיקת הגבולות אינה חלה כלל, ומסיבה עקרונית: מספר המחוברים עצמו משתנה עם <span class="math inline">\(,n\)</span> ואילו המשפט מטפל במספר <strong>קבוע</strong> של סדרות. נחסום אפוא את הסכום כולו.</p>
+<p>בסכום יש בדיוק <span class="math inline">\(n\)</span> מחוברים, וכל אחד מהם הוא מהצורה <span class="math inline">\(\dfrac{1}{\sqrt{n^2+k}}\)</span> עבור <span class="math inline">\(.1 \leq k \leq n\)</span> מ-<span class="math inline">\(1 \leq k \leq n\)</span> נובע</p>
+<p><span class="math display">\[,n^2 + 1 \leq n^2 + k \leq n^2 + n\]</span></p>
+<p>וככל שהמכנה גדול יותר השבר קטן יותר, ולכן</p>
+<p><span class="math display">\[.\frac{1}{\sqrt{n^2+n}} \leq \frac{1}{\sqrt{n^2+k}} \leq \frac{1}{\sqrt{n^2+1}}\]</span></p>
+<p>נחליף כל אחד מ-<span class="math inline">\(n\)</span> המחוברים בחסם התחתון, ואחר כך בחסם העליון, ונקבל</p>
+<p><span class="math display">\[.\frac{n}{\sqrt{n^2+n}} \leq a_n \leq \frac{n}{\sqrt{n^2+1}}\]</span></p>
+<p>נותר לחשב את גבולות שתי הסדרות החיצוניות. נכניס את <span class="math inline">\(n\)</span> אל תוך השורש:</p>
+<p><span class="math display">\[.\frac{n}{\sqrt{n^2+n}} = \sqrt{\frac{n^2}{n^2+n}} = \sqrt{\frac{1}{1 + \dfrac{1}{n}}}\]</span></p>
+<p>הביטוי שמתחת לשורש שואף ל-<span class="math inline">\(\dfrac{1}{1+0} = 1\)</span> לפי אריתמטיקת הגבולות, ולכן לפי <a href="./08-sequences-properties-3.html#box-thm-limit-root">משפט 8.3.7</a> הסדרה עצמה שואפת ל-<span class="math inline">\(.\sqrt{1} = 1\)</span> באותו אופן</p>
+<p><span class="math display">\[,\frac{n}{\sqrt{n^2+1}} = \sqrt{\frac{n^2}{n^2+1}} = \sqrt{\frac{1}{1 + \dfrac{1}{n^2}}} \longrightarrow 1\]</span></p>
+<p>שתי הסדרות החיצוניות מתכנסות ל-<span class="math inline">\(,1\)</span> ולכן לפי <a href="#box-thm-squeeze-sequences">משפט 8.4.1</a></p>
+<p><span class="math display">\[.\lim_{n\to\infty} a_n = 1\]</span></p>
+</div>
+</details>
+</section>
+<section id="תרגילים-1" class="level3">
+<h3 class="anchored" data-anchor-id="תרגילים-1">תרגילים</h3>
+<p><strong>תרגיל 1.</strong> חשבו את הגבולות הבאים.</p>
+<p>(א) <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{\left(-1\right)^{n}}{n^2+1}\)</span></p>
+<div class="seq-quiz" data-answer="0"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<p>(ב) <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{2n + \cos n}{n+1}\)</span></p>
+<div class="seq-quiz" data-answer="2"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<p>(ג) <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{\sin\left(n!\right)}{\sqrt{n}}\)</span></p>
+<div class="seq-quiz" data-answer="0"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>סעיף (א).</strong> נכתוב <span class="math inline">\(.\dfrac{\left(-1\right)^{n}}{n^2+1} = \dfrac{1}{n^2+1} \cdot \left(-1\right)^{n}\)</span> הסדרה <span class="math inline">\(\dfrac{1}{n^2+1}\)</span> אפסה, שכן בחלוקה ב-<span class="math inline">\(n^2\)</span> מתקבל</p>
+<p><span class="math display">\[,\frac{1}{n^2+1} = \frac{\dfrac{1}{n^2}}{1 + \dfrac{1}{n^2}} \longrightarrow \frac{0}{1} = 0\]</span></p>
+<p>והסדרה <span class="math inline">\(\left(-1\right)^{n}\)</span> חסומה. לכן לפי <a href="#box-thm-null-times-bounded">משפט 8.4.3</a> הגבול הוא <span class="math inline">\(.0\)</span></p>
+<p><strong>סעיף (ב).</strong> נחלק מונה ומכנה ב-<span class="math inline">\(:n\)</span></p>
+<p><span class="math display">\[.\frac{2n + \cos n}{n+1} = \frac{2 + \dfrac{\cos n}{n}}{1 + \dfrac{1}{n}}\]</span></p>
+<p>הסדרה <span class="math inline">\(\dfrac{\cos n}{n}\)</span> אפסה לפי <a href="#box-thm-null-times-bounded">משפט 8.4.3</a>, ולכן גבול המונה הוא <span class="math inline">\(,2 + 0 = 2\)</span> גבול המכנה הוא <span class="math inline">\(,1\)</span> והגבול המבוקש הוא <span class="math inline">\(.2\)</span></p>
+<p><strong>סעיף (ג).</strong> נכתוב <span class="math inline">\(.\dfrac{\sin\left(n!\right)}{\sqrt{n}} = \dfrac{1}{\sqrt{n}} \cdot \sin\left(n!\right)\)</span> מתקיים <span class="math inline">\(,\dfrac{1}{\sqrt{n}} = \sqrt{\dfrac{1}{n}}\)</span> ולכן לפי <a href="./08-sequences-properties-3.html#box-thm-limit-root">משפט 8.3.7</a> הסדרה <span class="math inline">\(\dfrac{1}{\sqrt{n}}\)</span> שואפת ל-<span class="math inline">\(,\sqrt{0} = 0\)</span> כלומר היא אפסה. הסדרה <span class="math inline">\(\sin\left(n!\right)\)</span> חסומה, ולכן הגבול הוא <span class="math inline">\(.0\)</span></p>
+</div>
+</details>
+<p><strong>תרגיל 2.</strong> אם <span class="math inline">\((a_n)\)</span> מתכנסת ו-<span class="math inline">\((b_n)\)</span> חסומה, אז <span class="math inline">\((a_n \cdot b_n)\)</span> מתכנסת.</p>
+<div class="tf-quiz" data-correct="false" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>לא נכון.</strong> ניקח את הסדרה הקבועה <span class="math inline">\(,a_n = 1\)</span> שמתכנסת ל-<span class="math inline">\(,1\)</span> ואת <span class="math inline">\(,b_n = \left(-1\right)^{n}\)</span> שחסומה. המכפלה היא <span class="math inline">\(,a_n b_n = \left(-1\right)^{n}\)</span> ואינה מתכנסת.</p>
+<p>המשפט דורש ש-<span class="math inline">\((a_n)\)</span> תהיה <strong>אפסה</strong>, ולא רק מתכנסת, וזה בדיוק ההבדל: כאן הגורם המתכנס אינו מכווץ את המכפלה לאפס.</p>
+</div>
+</details>
+<p><strong>תרגיל 3.</strong> אם <span class="math inline">\((a_n)\)</span> אפסה ו-<span class="math inline">\((b_n)\)</span> חסומה, אז <span class="math inline">\((a_n \cdot b_n)\)</span> אפסה.</p>
+<div class="tf-quiz" data-correct="true" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>נכון.</strong> זהו בדיוק <a href="#box-thm-null-times-bounded">משפט 8.4.3</a>. ההשוואה עם התרגיל הקודם מראה עד כמה ההנחה ״אפסה״ חיונית.</p>
+</div>
+</details>
+<p><strong>תרגיל 4.</strong> אם לכל <span class="math inline">\(n \geq 1\)</span> מתקיים <span class="math inline">\(,n^2\left|a_n\right| \leq n - \left|a_n\right|\)</span> אז <span class="math inline">\((a_n)\)</span> מתכנסת.</p>
+<div class="tf-quiz" data-correct="true" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>נכון,</strong> והסדרה אף מתכנסת ל-<span class="math inline">\(.0\)</span></p>
+<p>נבודד את <span class="math inline">\(.\left|a_n\right|\)</span> נוסיף <span class="math inline">\(\left|a_n\right|\)</span> לשני האגפים:</p>
+<p><span class="math display">\[,n^2\left|a_n\right| + \left|a_n\right| \leq n\]</span></p>
+<p>נוציא גורם משותף:</p>
+<p><span class="math display">\[,\left|a_n\right| \left(n^2+1\right) \leq n\]</span></p>
+<p>ומכיוון ש-<span class="math inline">\(n^2 + 1 &gt; 0\)</span> אפשר לחלק בו:</p>
+<p><span class="math display">\[.\left|a_n\right| \leq \frac{n}{n^2+1}\]</span></p>
+<p>יחד עם <span class="math inline">\(\left|a_n\right| \geq 0\)</span> קיבלנו כליאה:</p>
+<p><span class="math display">\[.0 \leq \left|a_n\right| \leq \frac{n}{n^2+1}\]</span></p>
+<p>הסדרה שמימין אפסה, שכן בחלוקה ב-<span class="math inline">\(n^2\)</span> מתקבל <span class="math inline">\(\dfrac{n}{n^2+1} = \dfrac{\dfrac{1}{n}}{1 + \dfrac{1}{n^2}} \longrightarrow \dfrac{0}{1} = 0\)</span>, וגם הסדרה הקבועה <span class="math inline">\(0\)</span> אפסה. לכן לפי <a href="#box-thm-squeeze-sequences">משפט 8.4.1</a> מתקיים <span class="math inline">\(,\left|a_n\right| \to 0\)</span> ומכאן <span class="math inline">\(,a_n \to 0\)</span> שכן שתי הטענות האלה הן אותו תנאי בדיוק.</p>
+</div>
+</details>
+</section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
