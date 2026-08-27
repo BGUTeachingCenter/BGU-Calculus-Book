@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -985,7 +993,7 @@ window.Quarto = {
 <p>בהוכחה מראים כי <span class="math inline">\(a_n\)</span> עולה ומתכנסת ל-<span class="math inline">\(M\)</span>, כאשר הוא לא סתם חסם שלה מלמעלה, אלא הוא החסם הכי קטן.</p>
 </div>
 <div id="box-q-recursive-sequence" class="thmbox thmbox-question" title="סדרה רקורסיבית">
-<p><strong>שאלה 8.6.4 — סדרה רקורסיבית.</strong></p>
+<p><strong>תרגיל פתור 8.6.4 — סדרה רקורסיבית.</strong></p>
 <p>נתונה סדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> <a href="./05-induction-3.html#sec-recursive-definition">באופן הרקורסיבי</a> הבא:</p>
 <p><span class="math display">\[a_1 = 1\]</span></p>
 <p><span class="math display">\[a_{n+1} = \dfrac{a_n + 2}{2}\]</span></p>

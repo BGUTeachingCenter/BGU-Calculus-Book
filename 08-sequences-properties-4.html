@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -978,7 +986,7 @@ window.Quarto = {
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
 <p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span></p>
-<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(,L\)</span> ומתקיים <span class="math inline">\(,L - \varepsilon &lt; L\)</span> ולכן לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.1</a> מתקיים החל ממקום מסוים <span class="math inline">\(.a_n &gt; L - \varepsilon\)</span></p>
+<p>הסדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(,L\)</span> ומתקיים <span class="math inline">\(,L - \varepsilon &lt; L\)</span> ולכן לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.3</a> מתקיים החל ממקום מסוים <span class="math inline">\(.a_n &gt; L - \varepsilon\)</span></p>
 <p>הסדרה <span class="math inline">\((c_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(,L\)</span> ומתקיים <span class="math inline">\(,L + \varepsilon &gt; L\)</span> ולכן לפי סעיף (ב) של אותו משפט מתקיים החל ממקום מסוים <span class="math inline">\(.c_n &lt; L + \varepsilon\)</span></p>
 <p>גם ההנחה <span class="math inline">\(a_n \leq b_n \leq c_n\)</span> מתקיימת החל ממקום מסוים, לפי הנתון.</p>
 <p>שלוש התכונות האלה מתקיימות אפוא יחד החל ממקום מסוים, ושם</p>
@@ -1014,7 +1022,7 @@ window.Quarto = {
 <section id="דוגמאות-1" class="level3">
 <h3 class="anchored" data-anchor-id="דוגמאות-1">דוגמאות</h3>
 <div id="box-qst-sin-n-over-n" class="thmbox thmbox-question" title="הגבול של $\dfrac{\sin n}{n}$">
-<p><strong>שאלה 8.4.4 — הגבול של <span class="math inline">\(\dfrac{\sin n}{n}\)</span>.</strong></p>
+<p><strong>תרגיל פתור 8.4.4 — הגבול של <span class="math inline">\(\dfrac{\sin n}{n}\)</span>.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{\sin n}{n}\)</span></p>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
@@ -1028,7 +1036,7 @@ window.Quarto = {
 </div>
 </details>
 <div id="box-qst-alt-over-n" class="thmbox thmbox-question" title="גורם חסום שאינו מתכנס">
-<p><strong>שאלה 8.4.5 — גורם חסום שאינו מתכנס.</strong></p>
+<p><strong>תרגיל פתור 8.4.5 — גורם חסום שאינו מתכנס.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span></p>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
@@ -1039,7 +1047,7 @@ window.Quarto = {
 </div>
 </details>
 <div id="box-qst-n-plus-sin" class="thmbox thmbox-question" title="שילוב עם אריתמטיקת הגבולות">
-<p><strong>שאלה 8.4.6 — שילוב עם אריתמטיקת הגבולות.</strong></p>
+<p><strong>תרגיל פתור 8.4.6 — שילוב עם אריתמטיקת הגבולות.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math inline">\(.a_n = \dfrac{n + \sin n}{n^2 + 3n}\)</span></p>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
@@ -1054,7 +1062,7 @@ window.Quarto = {
 </div>
 </details>
 <div id="box-qst-sum-of-roots" class="thmbox thmbox-question" title="סכום שמספר מחובריו גדל">
-<p><strong>שאלה 8.4.7 — סכום שמספר מחובריו גדל.</strong></p>
+<p><strong>תרגיל פתור 8.4.7 — סכום שמספר מחובריו גדל.</strong></p>
 <p>מצאו את הגבול של הסדרה</p>
 <p><span class="math display">\[.a_n = \frac{1}{\sqrt{n^2+1}} + \frac{1}{\sqrt{n^2+2}} + \dots + \frac{1}{\sqrt{n^2+n}}\]</span></p>
 </div>

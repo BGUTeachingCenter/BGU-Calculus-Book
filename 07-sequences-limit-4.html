@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -944,7 +952,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מסקנות-מיידיות-מהגדרת-הגבול" class="nav-link">7.4 מסקנות מיידיות מהגדרת הגבול</a></li><li class="toc-indent"><a href="#טווח-ערכי-הסדרה-החל-ממקום-מסוים" class="nav-link">טווח ערכי הסדרה החל ממקום מסוים</a></li><li class="toc-indent"><a href="#אי-שוויונות-עוברים-לגבול" class="nav-link">אי-שוויונות עוברים לגבול</a></li><li class="toc-indent"><a href="#יחידות-הגבול" class="nav-link">יחידות הגבול</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מסקנות-מיידיות-מהגדרת-הגבול" class="nav-link">7.4 מסקנות מיידיות מהגדרת הגבול</a></li><li class="toc-indent"><a href="#פירוש-קיים-n-בשפה-יומיומית" class="nav-link">פירוש ״קיים \(N\)״ בשפה יומיומית</a></li><li class="toc-indent"><a href="#טווח-ערכי-הסדרה-החל-ממקום-מסוים" class="nav-link">טווח ערכי הסדרה החל ממקום מסוים</a></li><li class="toc-indent"><a href="#אי-שוויונות-עוברים-לגבול" class="nav-link">אי-שוויונות עוברים לגבול</a></li><li class="toc-indent"><a href="#יחידות-הגבול" class="nav-link">יחידות הגבול</a></li><li class="toc-indent"><a href="#תרגילים-2" class="nav-link">תרגילים</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./07-sequences-limit.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></a></li></ol></nav>
@@ -967,9 +975,11 @@ window.Quarto = {
 
 <section id="מסקנות-מיידיות-מהגדרת-הגבול" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="מסקנות-מיידיות-מהגדרת-הגבול"><span class="header-section-number">7.4</span> מסקנות מיידיות מהגדרת הגבול</h2>
-<section id="טווח-ערכי-הסדרה-החל-ממקום-מסוים" class="level3">
-<h3 class="anchored" data-anchor-id="טווח-ערכי-הסדרה-החל-ממקום-מסוים">טווח ערכי הסדרה החל ממקום מסוים</h3>
-<p>נניח ש-<span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(.8\)</span> אם ניקח <span class="math inline">\(,\varepsilon = 1\)</span> אז לפי הגדרת הגבול קיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - 8\right| &lt; 1\)</span> ננתח לפרטים מה בדיוק אומרת ההגדרה הזאת.</p>
+<p>בסעיף הזה נתבונן מקרוב בהגדרת הגבול, ונראה דרכים נוספות לחשוב על המושג וכן כמה תובנות מיידיות העולות ממנה.</p>
+<section id="פירוש-קיים-n-בשפה-יומיומית" class="level3">
+<h3 class="anchored" data-anchor-id="פירוש-קיים-n-בשפה-יומיומית">פירוש ״קיים <span class="math inline">\(N\)</span>״ בשפה יומיומית</h3>
+<p>ננסה להציב מספר קונקרטי במקום <span class="math inline">\(,\varepsilon\)</span> ולצורך הפשטות ניקח <span class="math inline">\(.\varepsilon = 1\)</span></p>
+<p>נניח ש-<span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מתכנסת ל-<span class="math inline">\(.8\)</span> לפי הגדרת הגבול קיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - 8\right| &lt; 1\)</span> ננתח לפרטים מה בדיוק אומרת ההגדרה הזאת.</p>
 <p>קודם כל, הביטוי ״קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(\left|a_n - 8\right| &lt; 1\)</span>״ פירושו בעצם שהחל ממקום מסוים מתקיים <span class="math inline">\(.\left|a_n - 8\right| &lt; 1\)</span> דרך אחרת לומר זאת: עבור <span class="math inline">\(n\)</span> גדול מספיק מתקיים <span class="math inline">\(.\left|a_n - 8\right| &lt; 1\)</span></p>
 <p>התבנית ״קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(P(n)\)</span>״, כאשר <span class="math inline">\(P(n)\)</span> היא טענה כלשהי על <span class="math inline">\(,n\)</span> חוזרת על עצמה לעיתים קרובות, ובמקום לכתוב אותה במלואה אפשר לומר ״החל ממקום מסוים״ או ״עבור <span class="math inline">\(n\)</span> גדול מספיק״.</p>
 <div id="box-key-eventually" class="thmbox thmbox-key-point" title="מוסכמה: החל ממקום מסוים">
@@ -981,6 +991,7 @@ window.Quarto = {
 <p>בתבנית ״קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(P(n)\)</span>״, הטענה <span class="math inline">\(P(n)\)</span> היא טענה על <strong>המספר הטבעי</strong> <span class="math inline">\(,n\)</span> ולא על איבר הסדרה <span class="math inline">\(.a_n\)</span></p>
 <p>למשל, <span class="math inline">\(\left|a_n - 8\right| &lt; 1\)</span> היא טענה על <span class="math inline">\(:n\)</span> עבור כל <span class="math inline">\(n\)</span> בנפרד היא נכונה או אינה נכונה, ואנחנו שואלים החל מאיזה מקום היא נכונה תמיד. גם <span class="math inline">\(a_n\)</span> מופיע בה, אבל הוא רק חלק מן הטענה, שהרי הוא עצמו נקבע על ידי <span class="math inline">\(.n\)</span></p>
 </div>
+<p><strong>נחזור לטענה המקורית:</strong> קיים מספר טבעי <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - 8\right| &lt; 1\)</span></p>
 <p>נפתח עכשיו את הערך המוחלט. אי-השוויון <span class="math inline">\(\left|a_n - 8\right| &lt; 1\)</span> שקול לאי-השוויון הכפול</p>
 <p><span class="math display">\[,-1 &lt; a_n - 8 &lt; 1\]</span></p>
 <p>ואם נוסיף <span class="math inline">\(8\)</span> לשלושת האגפים נקבל</p>
@@ -991,21 +1002,52 @@ window.Quarto = {
 <li><p>החל ממקום מסוים מתקיים <span class="math inline">\(;a_n &gt; 7\)</span></p></li>
 <li><p>החל ממקום מסוים מתקיים <span class="math inline">\(.a_n &lt; 9\)</span></p></li>
 </ol>
-<p>שום דבר בחישוב הזה לא היה תלוי בכך שבחרנו <span class="math inline">\(.\varepsilon = 1\)</span> עבור <span class="math inline">\(\varepsilon &gt; 0\)</span> כלשהו אותו חישוב עצמו נותן שהחל ממקום מסוים מתקיים</p>
-<p><span class="math display">\[,8 - \varepsilon &lt; a_n &lt; 8 + \varepsilon\]</span></p>
-<p>ואותו פיצול עצמו נותן הפעם:</p>
-<ol type="1">
-<li><p>החל ממקום מסוים מתקיים <span class="math inline">\(;a_n &gt; 8 - \varepsilon\)</span></p></li>
-<li><p>החל ממקום מסוים מתקיים <span class="math inline">\(.a_n &lt; 8 + \varepsilon\)</span></p></li>
-</ol>
-<p>נשים לב עכשיו ש-<span class="math inline">\(8 - \varepsilon\)</span> אינו אלא מספר כלשהו הקטן מ-<span class="math inline">\(:8\)</span> כאשר <span class="math inline">\(\varepsilon\)</span> עובר על כל המספרים החיוביים, <span class="math inline">\(8 - \varepsilon\)</span> עובר על כל המספרים הקטנים מ-<span class="math inline">\(.8\)</span> באותו אופן, <span class="math inline">\(8 + \varepsilon\)</span> הוא מספר כלשהו הגדול מ-<span class="math inline">\(.8\)</span> נסמן אפוא <span class="math inline">\(m = 8 - \varepsilon\)</span> ו-<span class="math inline">\(,M = 8 + \varepsilon\)</span> ושתי הטענות שלנו אומרות:</p>
-<ol type="1">
-<li><p>לכל <span class="math inline">\(m &lt; 8\)</span> מתקיים, החל ממקום מסוים, <span class="math inline">\(;a_n &gt; m\)</span></p></li>
-<li><p>לכל <span class="math inline">\(M &gt; 8\)</span> מתקיים, החל ממקום מסוים, <span class="math inline">\(.a_n &lt; M\)</span></p></li>
-</ol>
-<p>לבסוף, גם המספר <span class="math inline">\(8\)</span> עצמו לא מילא כל תפקיד בטיעון; הוא נכנס אליו רק בתור הגבול של הסדרה. אם נחליף אותו בגבול <span class="math inline">\(L\)</span> כלשהו נקבל את המשפט הבא.</p>
+<div id="box-key-splitting" class="thmbox thmbox-key-point" title="פיצול טענות מהסוג ״החל ממקום מסוים״">
+<p><strong>חשוב לזכור — פיצול טענות מהסוג ״החל ממקום מסוים״.</strong></p>
+<p>טענה מהסוג ״החל ממקום מסוים״ שבתוכה מופיע ״וגם״ אפשר לפצל לשתי טענות מאותו סוג. במפורש: אם הטענה ״<span class="math inline">\(P(n)\)</span> <strong>וגם</strong> <span class="math inline">\(Q(n)\)</span>״ מתקיימת החל ממקום מסוים, אז גם <span class="math inline">\(P(n)\)</span> לבדה מתקיימת החל ממקום מסוים, וגם <span class="math inline">\(Q(n)\)</span> לבדה מתקיימת החל ממקום מסוים.</p>
+<p>אין כאן שום עבודה לעשות: המקום שהחל ממנו שתי הטענות מתקיימות יחד מתאים, כמובן, גם לכל אחת מהן בנפרד.</p>
+</div>
+<p>נלך עכשיו בכיוון ההפוך. בידינו שתי הטענות הקונקרטיות שקיבלנו זה עתה: החל ממקום מסוים מתקיים <span class="math inline">\(,a_n &gt; 7\)</span> והחל ממקום מסוים מתקיים <span class="math inline">\(.a_n &lt; 9\)</span> האם מותר לשלב אותן ולומר שהחל ממקום מסוים מתקיימות <strong>שתיהן</strong> יחד, כלומר ש-<span class="math inline">\(?7 &lt; a_n &lt; 9\)</span></p>
+<p>התשובה היא כן, אבל נדרשת כאן מעט זהירות, משום שכל אחת משתי הטענות מסתירה מקום משלה: הראשונה נותנת <span class="math inline">\(N_1\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(,a_n &gt; 7\)</span> והשנייה נותנת <span class="math inline">\(N_2\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(,a_n &lt; 9\)</span> ואין שום סיבה ששני המקומות יהיו שווים. אבל אין בכך מכשול: ניקח <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> כל <span class="math inline">\(n \geq N\)</span> מקיים גם <span class="math inline">\(n \geq N_1\)</span> וגם <span class="math inline">\(,n \geq N_2\)</span> ולכן שתי הטענות מתקיימות עבורו, והחל מהמקום <span class="math inline">\(N\)</span> מתקיים</p>
+<p><span class="math display">\[.7 &lt; a_n &lt; 9\]</span></p>
+<div id="box-key-finitely-many" class="thmbox thmbox-key-point" title="שילוב טענות מהסוג ״החל ממקום מסוים״">
+<p><strong>חשוב לזכור — שילוב טענות מהסוג ״החל ממקום מסוים״.</strong></p>
+<p>אפשר גם ללכת בכיוון ההפוך ולשלב שתי טענות מהסוג ״החל ממקום מסוים״ לטענה אחת מאותו סוג. במפורש: אם <span class="math inline">\(P(n)\)</span> מתקיימת החל ממקום מסוים, וגם <span class="math inline">\(Q(n)\)</span> מתקיימת החל ממקום מסוים, אז החל ממקום מסוים מתקיימות שתיהן <strong>יחד</strong>.</p>
+<p>כאן, בניגוד לפיצול, יש עבודה קטנה לעשות: לכל אחת מן הטענות יש מקום משלה, ויש לבחור את המאוחר מבין השניים.</p>
+<p>אותו טיעון בדיוק עובד עבור כל מספר <strong>סופי</strong> של טענות <span class="math inline">\(,P_1(n),\ \dots,\ P_k(n)\)</span> ולכן גם הן מתקיימות יחד החל ממקום מסוים.</p>
+</div>
+<div id="box-exm-infinitely-many-fails" class="thmbox thmbox-example" title="שילוב של אינסוף טענות">
+<p><strong>דוגמה 7.4.1 — שילוב של אינסוף טענות.</strong></p>
+<p>נתבונן בסדרה <span class="math inline">\(.a_n = \dfrac{1}{n}\)</span> לכל <span class="math inline">\(k\)</span> טבעי מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{k}\)</span> לכל <span class="math inline">\(,n &gt; k\)</span> ולכן הטענה <span class="math inline">\(a_n &lt; \dfrac{1}{k}\)</span> מתקיימת החל ממקום מסוים. אלה אינסוף טענות, אחת לכל <span class="math inline">\(.k\)</span></p>
+<p>אילו היה מותר לשלב את כולן, היינו מקבלים שהחל ממקום מסוים מתקיים <span class="math inline">\(a_n &lt; \dfrac{1}{k}\)</span> <strong>לכל</strong> <span class="math inline">\(,k\)</span> ומכאן <span class="math inline">\(.a_n \leq 0\)</span> אבל כל איברי הסדרה חיוביים, ולכן זה אינו נכון.</p>
+<p><strong>מה השתבש כאן?</strong> נחזור אל הטיעון של השילוב. לכל <span class="math inline">\(k\)</span> הטענה <span class="math inline">\(a_n &lt; \dfrac{1}{k}\)</span> אכן מתקיימת, אבל היא מתקיימת החל ממקום <strong>משלה</strong>, והמקום הזה הוא <span class="math inline">\(.n = k+1\)</span> ככל ש-<span class="math inline">\(k\)</span> גדל, המקום מתרחק.</p>
+<p>השילוב של שתי טענות התבסס על לקיחת המאוחר מבין שני המקומות. כדי לשלב את כל אינסוף הטענות היינו צריכים לקחת את המאוחר מבין אינסוף המקומות <span class="math inline">\(,2,\ 3,\ 4,\ \dots\)</span> ולקבוצה אינסופית כזאת אין איבר גדול ביותר. בדיוק שם נשבר הטיעון.</p>
+</div>
+<div id="box-warn-finiteness-essential" class="thmbox thmbox-warning" title="הסופיות חיונית">
+<p><strong>שימו לב — הסופיות חיונית.</strong></p>
+<p>השילוב דורש מספר <strong>סופי</strong> של טענות. כאשר מספר הטענות אינו סופי הוא עלול להיכשל.</p>
+</div>
+<p>גם הפיצול אינו חף מהפתעות, והפעם הקושי אינו במספר הטענות אלא במילה המחברת ביניהן.</p>
+<div id="box-exm-or-fails" class="thmbox thmbox-example" title="פיצול של טענה המחוברת ב״או״">
+<p><strong>דוגמה 7.4.2 — פיצול של טענה המחוברת ב״או״.</strong></p>
+<p>נתבונן בסדרה <span class="math inline">\(.a_n = \left(-1\right)^{n}\)</span> החל ממקום מסוים מתקיים <span class="math inline">\(a_n = 1\)</span> <strong>או</strong> <span class="math inline">\(,a_n = -1\)</span> שהרי הדבר נכון לכל <span class="math inline">\(.n\)</span></p>
+<p>ובכל זאת אין זה נכון שהחל ממקום מסוים מתקיים <span class="math inline">\(,a_n = 1\)</span> ואין זה נכון שהחל ממקום מסוים מתקיים <span class="math inline">\(:a_n = -1\)</span> שתי האפשרויות מתחלפות ביניהן לכל אורך הסדרה.</p>
+<p><strong>מה השתבש כאן?</strong> בפיצול של ״וגם״ הסתמכנו על כך שאותו מקום עצמו מתאים לשתי הטענות. ב״או״ אין מקום כזה כלל: בכל מקום מתקיימת אחת משתי האפשרויות, אבל לא אותה אחת כל הזמן, ולכן אין אף אחת מהן שמתקיימת החל ממקום מסוים.</p>
+</div>
+<div id="box-warn-and-not-or" class="thmbox thmbox-warning" title="הפיצול עובד עם ״וגם״, לא עם ״או״">
+<p><strong>שימו לב — הפיצול עובד עם ״וגם״, לא עם ״או״.</strong></p>
+<p>פיצול של טענה מהסוג ״החל ממקום מסוים״ מותר כאשר המילה המחברת היא <strong>״וגם״</strong>. כאשר המילה המחברת היא <strong>״או״</strong> הפיצול אינו מותר.</p>
+</div>
+<!-- TODO (לא עכשיו): הכישלון של ״או״ כאן הוא מקרה פרטי של כך ש-∀ אינו מתפלג מעל ∨.
+     ראוי להרחבה קצרה בפרק הלוגיקה (01-logic.qmd), ואז אפשר להפנות לכאן משם. -->
+</section>
+<section id="טווח-ערכי-הסדרה-החל-ממקום-מסוים" class="level3">
+<h3 class="anchored" data-anchor-id="טווח-ערכי-הסדרה-החל-ממקום-מסוים">טווח ערכי הסדרה החל ממקום מסוים</h3>
+<p>בתת-הפרק הקודם ראינו שאם הסדרה מתכנסת ל-<span class="math inline">\(8\)</span> וניקח <span class="math inline">\(\varepsilon = 1\)</span> בהגדרה, הדבר מתורגם לכך שהחל ממקום מסוים מתקיים <span class="math inline">\(.7 &lt; a_n &lt; 9\)</span></p>
+<p>באותו אופן, אם נחזור על אותם צעדים עם <span class="math inline">\(,\varepsilon = 0.1\)</span> נקבל שהחל ממקום מסוים מתקיים <span class="math inline">\(.7.9 &lt; a_n &lt; 8.1\)</span></p>
+<p>נשים לב שזה עובד לכל <span class="math inline">\(,\varepsilon\)</span> ולכל גבול <span class="math inline">\(,L\)</span> ולאו דווקא עבור <span class="math inline">\(.8\)</span> אם נסמן את <span class="math inline">\(L + \varepsilon\)</span> על ידי <span class="math inline">\(M\)</span> ואת <span class="math inline">\(L - \varepsilon\)</span> על ידי <span class="math inline">\(,m\)</span> נקבל את המשפט הבא.</p>
 <div id="box-thm-limit-window" class="thmbox thmbox-theorem">
-<p><strong>משפט 7.4.1.</strong></p>
+<p><strong>משפט 7.4.3.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המקיימת <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span> אז:</p>
 <p>(א) לכל <span class="math inline">\(m &lt; L\)</span> מתקיים, החל ממקום מסוים, <span class="math inline">\(.a_n &gt; m\)</span></p>
 <p>(ב) לכל <span class="math inline">\(M &gt; L\)</span> מתקיים, החל ממקום מסוים, <span class="math inline">\(.a_n &lt; M\)</span></p>
@@ -1023,48 +1065,27 @@ window.Quarto = {
 <p>יהי <span class="math inline">\(.M &gt; L\)</span> הפעם ניקח <span class="math inline">\(,\varepsilon = M - L &gt; 0\)</span> ונקבל <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,\left|a_n - L\right| &lt; \varepsilon\)</span> ובפרט</p>
 <p><span class="math display">\[.a_n &lt; L + \varepsilon = L + \left(M - L\right) = M\]</span></p>
 </div>
-<p>נשכח לרגע כיצד הגענו לשני סעיפי המשפט, וננסה ללכת בכיוון ההפוך: בידינו שתי טענות נפרדות, ואנחנו רוצים לאחד אותן לטענה אחת. נקבע <span class="math inline">\(m &lt; L\)</span> ו-<span class="math inline">\(.M &gt; L\)</span> סעיף (א) אומר שהחל ממקום מסוים מתקיים <span class="math inline">\(,a_n &gt; m\)</span> וסעיף (ב) אומר שהחל ממקום מסוים מתקיים <span class="math inline">\(.a_n &lt; M\)</span> האם מותר להסיק שהחל ממקום מסוים מתקיימים <strong>שני</strong> האי-שוויונות, כלומר ש-<span class="math inline">\(?m &lt; a_n &lt; M\)</span></p>
-<p>התשובה היא כן. נדרשת כאן מעט זהירות, משום שכל אחת משתי הטענות מסתירה מקום משלה: סעיף (א) נותן <span class="math inline">\(N_1\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(,a_n &gt; m\)</span> וסעיף (ב) נותן <span class="math inline">\(N_2\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(,a_n &lt; M\)</span> ואין שום סיבה ששני המקומות יהיו שווים. אבל אין בכך מכשול: ניקח <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> כל <span class="math inline">\(n \geq N\)</span> מקיים גם <span class="math inline">\(n \geq N_1\)</span> וגם <span class="math inline">\(,n \geq N_2\)</span> ולכן שני האי-שוויונות מתקיימים עבורו, והחל מהמקום <span class="math inline">\(N\)</span> מתקיים</p>
-<p><span class="math display">\[.m &lt; a_n &lt; M\]</span></p>
-<div id="box-key-finitely-many" class="thmbox thmbox-key-point" title="מספר סופי של תכונות בבת אחת">
-<p><strong>חשוב לזכור — מספר סופי של תכונות בבת אחת.</strong></p>
-<p>אם שתי טענות מתקיימות, כל אחת מהן החל ממקום מסוים, אז החל ממקום מסוים שתיהן מתקיימות יחד.</p>
-<p>אותו טיעון בדיוק עובד עבור כל מספר <strong>סופי</strong> של טענות <span class="math inline">\(,P_1(n),\ \dots,\ P_k(n)\)</span> ולכן גם הן מתקיימות יחד החל ממקום מסוים.</p>
+<div id="box-exr-window-characterisation" class="thmbox thmbox-question">
+<p><strong>תרגיל פתור 7.4.4.</strong></p>
+<p>הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span> <strong>אם ורק אם</strong> לכל <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> המקיימים <span class="math inline">\(m &lt; L &lt; M\)</span> מתקיים <span class="math inline">\(m &lt; a_n &lt; M\)</span> החל ממקום מסוים.</p>
 </div>
-<div id="box-warn-finiteness-essential" class="thmbox thmbox-warning" title="הסופיות חיונית">
-<p><strong>שימו לב — הסופיות חיונית.</strong></p>
-<p>הדרישה שמספר הטענות יהיה <strong>סופי</strong> אינה דקדקנות טכנית. בהינתן אינסוף טענות <span class="math inline">\(,P_1(n),\ P_2(n),\ P_3(n),\ \dots\)</span> שכל אחת מהן מתקיימת החל ממקום מסוים, אם המקומות <span class="math inline">\(N_1,\ N_2,\ N_3,\ \dots\)</span> שונים זה מזה אז ייתכן שהקבוצה <span class="math inline">\(\left\{N_1,\ N_2,\ N_3,\ \dots\right\}\)</span> היא אינסופית, ולקבוצה אינסופית של מספרים טבעיים אין מקסימום. במקרה כזה אין שום מקום שהחל ממנו כל הטענות מתקיימות יחד.</p>
-<p>לדוגמה, תהי <span class="math inline">\(P_k(n)\)</span> הטענה <span class="math inline">\(.n &gt; k\)</span> כל טענה כזאת אכן מתקיימת החל ממקום מסוים, כלומר החל מ-<span class="math inline">\(,n = k+1\)</span> ובכל זאת אין אף <span class="math inline">\(n\)</span> יחיד המקיים את כולן בבת אחת.</p>
-</div>
-<div id="box-cor-limit-open-interval" class="thmbox thmbox-remark" data-numbered="false" title="ניסוח באמצעות קטעים פתוחים">
-<p><strong>הערה — ניסוח באמצעות קטעים פתוחים.</strong></p>
-<p>ראינו זה עתה שלכל <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> המקיימים <span class="math inline">\(,m &lt; L &lt; M\)</span> מתקיים <span class="math inline">\(m &lt; a_n &lt; M\)</span> החל ממקום מסוים.</p>
-<p>נשים לב עכשיו שהקבוצה <span class="math inline">\(\left\{x \mid m &lt; x &lt; M\right\}\)</span> אינה אלא הקטע הפתוח <span class="math inline">\(,\left(m,\ M\right)\)</span> והתנאי <span class="math inline">\(m &lt; L &lt; M\)</span> אומר בדיוק ש-<span class="math inline">\(.L \in \left(m,\ M\right)\)</span> מצד שני, גם סביבת <span class="math inline">\(\varepsilon\)</span> של <span class="math inline">\(,L\)</span> כלומר <span class="math inline">\(,\left(L-\varepsilon,\ L+\varepsilon\right)\)</span> היא קטע פתוח המכיל את <span class="math inline">\(.L\)</span> מכאן מתקבל הניסוח הבא: מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span> <strong>אם ורק אם</strong> לכל קטע פתוח <span class="math inline">\(\left(m,\ M\right)\)</span> המקיים <span class="math inline">\(L \in \left(m,\ M\right)\)</span> מתקיים <span class="math inline">\(a_n \in \left(m,\ M\right)\)</span> החל ממקום מסוים.</p>
-</div>
-<div id="box-sim-window" class="thmbox thmbox-simulation" title="הקטע הפתוח $(m,\ M)$">
-<p><strong>סימולציה 7.4.2 — הקטע הפתוח <span class="math inline">\((m,\ M)\)</span>.</strong></p>
-<iframe class="widget-frame" src="widgets/ch07/window-m-M.html" loading="lazy" title="איברי הסדרה, הקטע הפתוח שבין m ל-M סביב הגבול, והאינדקס N שממנו והלאה כל האיברים בתוך הקטע"></iframe>
-<p>הזיזו את <span class="math inline">\(m\)</span> ואת <span class="math inline">\(,M\)</span> וראו כיצד <span class="math inline">\(N\)</span> משתנה. שימו לב לשני דברים: <span class="math inline">\(N\)</span> מגיב לשני המחוונים ולא רק לצר שביניהם, והקטע אינו חייב להיות סימטרי סביב <span class="math inline">\(:L\)</span> אפשר להצמיד את <span class="math inline">\(m\)</span> קרוב מאוד ל-<span class="math inline">\(L\)</span> ולהשאיר את <span class="math inline">\(M\)</span> רחוק, ועדיין יימצא <span class="math inline">\(N\)</span> מתאים.</p>
-</div>
-<div id="box-qst-window-equivalent" class="thmbox thmbox-question">
-<p><strong>שאלה 7.4.3.</strong></p>
-<p>השלימו את פרטי ההוכחה של הטענה שב<a href="#box-cor-limit-open-interval">הערה על קטעים פתוחים</a>: הוכיחו כי <span class="math inline">\(\lim\limits_{n\to\infty} a_n = L\)</span> אם ורק אם לכל קטע פתוח <span class="math inline">\(\left(m,\ M\right)\)</span> המקיים <span class="math inline">\(L \in \left(m,\ M\right)\)</span> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n \in \left(m,\ M\right)\)</span></p>
-</div>
-<details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>הכיוון הראשון.</strong> נניח <span class="math inline">\(,\lim\limits_{n\to\infty} a_n = L\)</span> ויהי <span class="math inline">\(\left(m,\ M\right)\)</span> קטע פתוח המקיים <span class="math inline">\(.L \in \left(m,\ M\right)\)</span></p>
-<p>מהגדרת הקטע הפתוח נובע <span class="math inline">\(,m &lt; L &lt; M\)</span> ולכן אפשר להפעיל עליהם את <a href="#box-thm-limit-window">משפט 7.4.1</a>.</p>
+<p><strong>הכיוון הראשון.</strong> נניח <span class="math inline">\(,\lim\limits_{n\to\infty} a_n = L\)</span> ויהיו <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> המקיימים <span class="math inline">\(.m &lt; L &lt; M\)</span> אפשר להפעיל עליהם את <a href="#box-thm-limit-window">משפט 7.4.3</a>:</p>
 <p>סעיף (א) נותן <span class="math inline">\(N_1 \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(.a_n &gt; m\)</span></p>
 <p>סעיף (ב) נותן <span class="math inline">\(N_2 \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(.a_n &lt; M\)</span></p>
-<p>נבחר <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> אז לכל <span class="math inline">\(n \geq N\)</span> שני האי-שוויונות מתקיימים, כלומר <span class="math inline">\(.a_n \in \left(m,\ M\right)\)</span></p>
-<p><strong>הכיוון השני.</strong> נניח שהתנאי מתקיים לכל קטע פתוח המכיל את <span class="math inline">\(,L\)</span> ויהי <span class="math inline">\(.\varepsilon &gt; 0\)</span></p>
-<p>הקטע <span class="math inline">\(\left(L-\varepsilon,\ L+\varepsilon\right)\)</span> הוא קטע פתוח המכיל את <span class="math inline">\(,L\)</span> ולכן ההנחה חלה עליו: קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,a_n \in \left(L-\varepsilon,\ L+\varepsilon\right)\)</span> כלומר</p>
+<p>נבחר <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> אז לכל <span class="math inline">\(n \geq N\)</span> שני האי-שוויונות מתקיימים, כלומר <span class="math inline">\(.m &lt; a_n &lt; M\)</span></p>
+<p><strong>הכיוון השני.</strong> נניח שהתנאי מתקיים לכל זוג מספרים <span class="math inline">\(m\)</span> ו-<span class="math inline">\(M\)</span> כאלה, ויהי <span class="math inline">\(.\varepsilon &gt; 0\)</span></p>
+<p>המספרים <span class="math inline">\(m = L - \varepsilon\)</span> ו-<span class="math inline">\(M = L + \varepsilon\)</span> מקיימים <span class="math inline">\(,m &lt; L &lt; M\)</span> ולכן ההנחה חלה עליהם: החל ממקום מסוים מתקיים</p>
 <p><span class="math display">\[,L - \varepsilon &lt; a_n &lt; L + \varepsilon\]</span></p>
 <p>ובאופן שקול <span class="math inline">\(.\left|a_n - L\right| &lt; \varepsilon\)</span></p>
 <p>זוהי בדיוק הגדרת הגבול, ולכן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
 </div>
-</details>
+<div id="box-sim-window" class="thmbox thmbox-simulation" title="הקטע הפתוח $(m,\ M)$">
+<p><strong>סימולציה 7.4.5 — הקטע הפתוח <span class="math inline">\((m,\ M)\)</span>.</strong></p>
+<iframe class="widget-frame" src="widgets/ch07/window-m-M.html" loading="lazy" title="איברי הסדרה, הקטע הפתוח שבין m ל-M סביב הגבול, והאינדקס N שממנו והלאה כל האיברים בתוך הקטע"></iframe>
+<p>הזיזו את <span class="math inline">\(m\)</span> ואת <span class="math inline">\(,M\)</span> וראו כיצד <span class="math inline">\(N\)</span> משתנה. שימו לב לשני דברים: <span class="math inline">\(N\)</span> מגיב לשני המחוונים ולא רק לצר שביניהם, והקטע אינו חייב להיות סימטרי סביב <span class="math inline">\(:L\)</span> אפשר להצמיד את <span class="math inline">\(m\)</span> קרוב מאוד ל-<span class="math inline">\(L\)</span> ולהשאיר את <span class="math inline">\(M\)</span> רחוק, ועדיין יימצא <span class="math inline">\(N\)</span> מתאים.</p>
+</div>
 </section>
 <section id="אי-שוויונות-עוברים-לגבול" class="level3">
 <h3 class="anchored" data-anchor-id="אי-שוויונות-עוברים-לגבול">אי-שוויונות עוברים לגבול</h3>
@@ -1072,14 +1093,14 @@ window.Quarto = {
 <p>למשל, נניח ש-<span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מתכנסת שכל איבריה חיוביים. האם בהכרח גם הגבול שלה חיובי? נחזור לשאלה הזאת מיד.</p>
 <p>התשובה טמונה במשפט הבא.</p>
 <div id="box-thm-limit-preserves-order" class="thmbox thmbox-theorem">
-<p><strong>משפט 7.4.4.</strong></p>
+<p><strong>משפט 7.4.6.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מתכנסת, ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span> אז:</p>
 <p>(א) אם <span class="math inline">\(a_n \geq m\)</span> לכל <span class="math inline">\(,n\)</span> אז <span class="math inline">\(.L \geq m\)</span></p>
 <p>(ב) אם <span class="math inline">\(a_n \leq M\)</span> לכל <span class="math inline">\(,n\)</span> אז <span class="math inline">\(.L \leq M\)</span></p>
 </div>
 <div class="thmbox thmbox-proof" title="סעיף (א)">
 <p><strong>הוכחה — סעיף (א).</strong></p>
-<p>נניח בשלילה ש-<span class="math inline">\(.L &lt; m\)</span> אז <span class="math inline">\(m\)</span> הוא מספר הגדול מן הגבול, ולכן לפי סעיף (ב) של <a href="#box-thm-limit-window">משפט 7.4.1</a> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n &lt; m\)</span> בפרט <span class="math inline">\(,a_N &lt; m\)</span> בסתירה להנחה ש-<span class="math inline">\(a_n \geq m\)</span> לכל <span class="math inline">\(.n\)</span> לכן <span class="math inline">\(.L \geq m\)</span></p>
+<p>נניח בשלילה ש-<span class="math inline">\(.L &lt; m\)</span> אז <span class="math inline">\(m\)</span> הוא מספר הגדול מן הגבול, ולכן לפי סעיף (ב) של <a href="#box-thm-limit-window">משפט 7.4.3</a> קיים <span class="math inline">\(N \in \mathbb{N}\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n &lt; m\)</span> בפרט <span class="math inline">\(,a_N &lt; m\)</span> בסתירה להנחה ש-<span class="math inline">\(a_n \geq m\)</span> לכל <span class="math inline">\(.n\)</span> לכן <span class="math inline">\(.L \geq m\)</span></p>
 </div>
 <div class="thmbox thmbox-proof" title="סעיף (ב)">
 <p><strong>הוכחה — סעיף (ב).</strong></p>
@@ -1093,6 +1114,54 @@ window.Quarto = {
 <p>הדוגמה הפשוטה ביותר היא <span class="math inline">\(:a_n = \dfrac{1}{n}\)</span> לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,a_n &gt; 0\)</span> ובכל זאת ראינו ב<a href="./07-sequences-limit-3.html#box-q-one-over-n">שאלה על הסדרה <span class="math inline">\(\frac{1}{n}\)</span></a> שהגבול הוא <span class="math inline">\(,0\)</span> ולא מספר חיובי כלשהו.</p>
 <p>לכן מ-<span class="math inline">\(a_n &gt; m\)</span> לכל <span class="math inline">\(n\)</span> אפשר להסיק רק <span class="math inline">\(,L \geq m\)</span> ולעולם לא <span class="math inline">\(.L &gt; m\)</span></p>
 </div>
+<div id="fig-strict-becomes-weak" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-strict-becomes-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig18.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strict-becomes-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.12: כל איברי הסדרה <span class="math inline">\(a_n = \frac{1}{n}\)</span> נמצאים <strong>מעל</strong> הקו <span class="math inline">\(,y = 0\)</span> ואף אחד מהם אינו נוגע בו; ובכל זאת הגבול יושב בדיוק עליו. כך אי-שוויון חד על האיברים הופך לאי-שוויון חלש על הגבול.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="יחידות-הגבול" class="level3">
+<h3 class="anchored" data-anchor-id="יחידות-הגבול">יחידות הגבול</h3>
+<p>אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.</p>
+<div id="box-thm-limit-uniqueness" class="thmbox thmbox-theorem">
+<p><strong>משפט 7.4.7.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. אם מתקיים <span class="math inline">\(\lim_{n\to\infty}a_n = L_1\)</span> וגם <span class="math inline">\(\lim_{n \to \infty} a_n = L_2\)</span> אז <span class="math inline">\(.L_1 = L_2\)</span></p>
+<p>כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.</p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נניח בשלילה ש-<span class="math inline">\(.L_1 \neq L_2\)</span></p>
+<p><strong>בלי הגבלת הכלליות נניח ש-</strong><span class="math inline">\(.L_1 &lt; L_2\)</span></p>
+<div class="thmbox thmbox-explanation" title="בלי הגבלת הכלליות">
+<p><strong>הסבר — בלי הגבלת הכלליות.</strong></p>
+<p>הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-<span class="math inline">\(L_1\)</span> וב-<span class="math inline">\(,L_2\)</span> ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם <span class="math inline">\(.L_1\)</span> המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.</p>
+</div>
+<p>ניקח את נקודת האמצע שבין שני הגבולות:</p>
+<p><span class="math display">\[.M = \frac{L_1 + L_2}{2}\]</span></p>
+<p>מתקיים <span class="math inline">\(,L_1 &lt; M &lt; L_2\)</span> ולכן אפשר להפעיל את <a href="#box-thm-limit-window">משפט 7.4.3</a> פעמיים, פעם על כל גבול:</p>
+<p>הסדרה מתכנסת ל-<span class="math inline">\(L_1\)</span> ומתקיים <span class="math inline">\(,M &gt; L_1\)</span> ולכן לפי סעיף (ב) קיים <span class="math inline">\(N_1\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(.a_n &lt; M\)</span></p>
+<p>הסדרה מתכנסת ל-<span class="math inline">\(L_2\)</span> ומתקיים <span class="math inline">\(,M &lt; L_2\)</span> ולכן לפי סעיף (א) קיים <span class="math inline">\(N_2\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(.a_n &gt; M\)</span></p>
+<p>נבחר <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> שני התנאים מתקיימים עבור <span class="math inline">\(,n = N\)</span> כלומר <span class="math inline">\(a_N &lt; M\)</span> וגם <span class="math inline">\(,a_N &gt; M\)</span> וזו סתירה.</p>
+<p>לכן ההנחה <span class="math inline">\(L_1 \neq L_2\)</span> אינה יכולה להתקיים, ומכאן <span class="math inline">\(.L_1 = L_2\)</span></p>
+<div id="fig-uniqueness-midpoint" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c07_fig16.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;7.13: <span class="math inline">\(M\)</span> היא נקודת האמצע בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(.L_2\)</span> מצד אחד, עבור <span class="math inline">\(n\)</span> גדול מספיק <span class="math inline">\(a_n\)</span> נמצא משמאל ל-<span class="math inline">\(,M\)</span> כי <span class="math inline">\(a_n\)</span> מתכנס ל-<span class="math inline">\(L_1\)</span> ומתקיים <span class="math inline">\(;L_1 &lt; M\)</span> ומצד שני מימינו, כי <span class="math inline">\(a_n\)</span> מתכנס ל-<span class="math inline">\(L_2\)</span> ומתקיים <span class="math inline">\(.M &lt; L_2\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="תרגילים-2" class="level3">
+<h3 class="anchored" data-anchor-id="תרגילים-2">תרגילים</h3>
 <p><strong>תרגיל 1.</strong> כל אחת מן הסדרות הבאות מתכנסת, והגבול שלה הוא אחד מן הערכים המוצעים. מצאו אותו. אין צורך בחישוב: חסמו את הסדרה, העבירו את החסמים לגבול, וראו איזה מן הערכים שורד.</p>
 <p>(א) <span class="math inline">\(,a_n = \sin\left(\sqrt{n+1} - \sqrt{n}\right)\)</span> והערכים המוצעים <span class="math inline">\(.-3,\ 0,\ 2,\ 5\)</span></p>
 <div class="tf-quiz" data-correct="b">
@@ -1129,7 +1198,7 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><strong>סעיף (א).</strong> לכל <span class="math inline">\(x\)</span> ממשי מתקיים <span class="math inline">\(,-1 \leq \sin x \leq 1\)</span> ולכן <span class="math inline">\(-1 \leq a_n \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ולפי <a href="#box-thm-limit-preserves-order">משפט 7.4.4</a> גם <span class="math inline">\(.-1 \leq L \leq 1\)</span> מבין הערכים המוצעים רק <span class="math inline">\(0\)</span> נמצא בקטע הזה, ולכן הגבול הוא <span class="math inline">\(.0\)</span></p>
+<p><strong>סעיף (א).</strong> לכל <span class="math inline">\(x\)</span> ממשי מתקיים <span class="math inline">\(,-1 \leq \sin x \leq 1\)</span> ולכן <span class="math inline">\(-1 \leq a_n \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ולפי <a href="#box-thm-limit-preserves-order">משפט 7.4.6</a> גם <span class="math inline">\(.-1 \leq L \leq 1\)</span> מבין הערכים המוצעים רק <span class="math inline">\(0\)</span> נמצא בקטע הזה, ולכן הגבול הוא <span class="math inline">\(.0\)</span></p>
 <p><strong>סעיף (ב).</strong> לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,\left|\dfrac{\cos\left(n!\right)}{\sqrt{n}}\right| \leq \dfrac{1}{\sqrt{n}} \leq 1\)</span> ולכן <span class="math inline">\(,4 \leq a_n \leq 6\)</span> ומכאן <span class="math inline">\(.4 \leq L \leq 6\)</span> רק <span class="math inline">\(5\)</span> נמצא בקטע, ולכן הגבול הוא <span class="math inline">\(.5\)</span></p>
 <p><strong>סעיף (ג).</strong> נחלק את המונה אבר-אבר:</p>
 <p><span class="math display">\[.a_n = \frac{2n}{n} + \frac{\sin\left(n^{3}\right)}{n} = 2 + \frac{\sin\left(n^{3}\right)}{n}\]</span></p>
@@ -1143,7 +1212,7 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p>מ-<span class="math inline">\(2 &lt; a_n &lt; 4\)</span> נובע בפרט <span class="math inline">\(2 \leq a_n \leq 4\)</span> לכל <span class="math inline">\(,n\)</span> ולכן לפי <a href="#box-thm-limit-preserves-order">משפט 7.4.4</a> מתקיים <span class="math inline">\(.2 \leq L \leq 4\)</span></p>
+<p>מ-<span class="math inline">\(2 &lt; a_n &lt; 4\)</span> נובע בפרט <span class="math inline">\(2 \leq a_n \leq 4\)</span> לכל <span class="math inline">\(,n\)</span> ולכן לפי <a href="#box-thm-limit-preserves-order">משפט 7.4.6</a> מתקיים <span class="math inline">\(.2 \leq L \leq 4\)</span></p>
 <p>המספרים <span class="math inline">\(1\)</span>, <span class="math inline">\(4.0001\)</span> ו-<span class="math inline">\(5\)</span> אינם בקטע <span class="math inline">\(,\left[2,\ 4\right]\)</span> ולכן אינם יכולים להיות הגבול. שלושת הנותרים אינם נפסלים.</p>
 </div>
 </details>
@@ -1152,46 +1221,11 @@ window.Quarto = {
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p>מן הנתון נובע בפרט <span class="math inline">\(-3 \leq b_n \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן לפי <a href="#box-thm-limit-preserves-order">משפט 7.4.4</a> מתקיים <span class="math inline">\(.-3 \leq L \leq 1\)</span></p>
+<p>מן הנתון נובע בפרט <span class="math inline">\(-3 \leq b_n \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן לפי <a href="#box-thm-limit-preserves-order">משפט 7.4.6</a> מתקיים <span class="math inline">\(.-3 \leq L \leq 1\)</span></p>
 <p>לכן <span class="math inline">\(-4\)</span> ו-<span class="math inline">\(2\)</span> אינם יכולים להיות הגבול, ואילו <span class="math inline">\(-3\)</span>, <span class="math inline">\(0\)</span> ו-<span class="math inline">\(1\)</span> יכולים.</p>
 <p>שימו לב ש-<span class="math inline">\(1\)</span> יכול להיות הגבול, אף שכל איברי הסדרה מקיימים <span class="math inline">\(b_n &lt; 1\)</span> ממש. זו אותה תופעה שבתיבה שלמעלה.</p>
 </div>
 </details>
-</section>
-<section id="יחידות-הגבול" class="level3">
-<h3 class="anchored" data-anchor-id="יחידות-הגבול">יחידות הגבול</h3>
-<p>אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.</p>
-<div id="box-thm-limit-uniqueness" class="thmbox thmbox-theorem">
-<p><strong>משפט 7.4.5.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. אם מתקיים <span class="math inline">\(\lim_{n\to\infty}a_n = L_1\)</span> וגם <span class="math inline">\(\lim_{n \to \infty} a_n = L_2\)</span> אז <span class="math inline">\(.L_1 = L_2\)</span></p>
-<p>כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.</p>
-</div>
-<div class="thmbox thmbox-proof">
-<p><strong>הוכחה.</strong></p>
-<p>נניח בשלילה ש-<span class="math inline">\(.L_1 \neq L_2\)</span></p>
-<p><strong>בלי הגבלת הכלליות נניח ש-</strong><span class="math inline">\(.L_1 &lt; L_2\)</span></p>
-<div class="thmbox thmbox-explanation" title="בלי הגבלת הכלליות">
-<p><strong>הסבר — בלי הגבלת הכלליות.</strong></p>
-<p>הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-<span class="math inline">\(L_1\)</span> וב-<span class="math inline">\(,L_2\)</span> ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם <span class="math inline">\(.L_1\)</span> המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.</p>
-</div>
-<p>ניקח את נקודת האמצע שבין שני הגבולות:</p>
-<p><span class="math display">\[.M = \frac{L_1 + L_2}{2}\]</span></p>
-<p>מתקיים <span class="math inline">\(,L_1 &lt; M &lt; L_2\)</span> ולכן אפשר להפעיל את <a href="#box-thm-limit-window">משפט 7.4.1</a> פעמיים, פעם על כל גבול:</p>
-<p>הסדרה מתכנסת ל-<span class="math inline">\(L_1\)</span> ומתקיים <span class="math inline">\(,M &gt; L_1\)</span> ולכן לפי סעיף (ב) קיים <span class="math inline">\(N_1\)</span> כך שלכל <span class="math inline">\(n \geq N_1\)</span> מתקיים <span class="math inline">\(.a_n &lt; M\)</span></p>
-<p>הסדרה מתכנסת ל-<span class="math inline">\(L_2\)</span> ומתקיים <span class="math inline">\(,M &lt; L_2\)</span> ולכן לפי סעיף (א) קיים <span class="math inline">\(N_2\)</span> כך שלכל <span class="math inline">\(n \geq N_2\)</span> מתקיים <span class="math inline">\(.a_n &gt; M\)</span></p>
-<p>נבחר <span class="math inline">\(.N = \max\left\{N_1,\ N_2\right\}\)</span> שני התנאים מתקיימים עבור <span class="math inline">\(,n = N\)</span> כלומר <span class="math inline">\(a_N &lt; M\)</span> וגם <span class="math inline">\(,a_N &gt; M\)</span> וזו סתירה.</p>
-<p>לכן ההנחה <span class="math inline">\(L_1 \neq L_2\)</span> אינה יכולה להתקיים, ומכאן <span class="math inline">\(.L_1 = L_2\)</span></p>
-<div id="fig-uniqueness-midpoint" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="figures/c07_fig16.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniqueness-midpoint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-תרשים&nbsp;7.12: <span class="math inline">\(M\)</span> היא נקודת האמצע בין <span class="math inline">\(L_1\)</span> ל-<span class="math inline">\(.L_2\)</span> מצד אחד, עבור <span class="math inline">\(n\)</span> גדול מספיק <span class="math inline">\(a_n\)</span> נמצא משמאל ל-<span class="math inline">\(,M\)</span> כי <span class="math inline">\(a_n\)</span> מתכנס ל-<span class="math inline">\(L_1\)</span> ומתקיים <span class="math inline">\(;L_1 &lt; M\)</span> ומצד שני מימינו, כי <span class="math inline">\(a_n\)</span> מתכנס ל-<span class="math inline">\(L_2\)</span> ומתקיים <span class="math inline">\(.M &lt; L_2\)</span>
-</figcaption>
-</figure>
-</div>
-</div>
 </section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -1047,7 +1055,7 @@ window.Quarto = {
 <p>ואז נסיים בכפל: <span class="math inline">\(\dfrac{a_n}{b_n} = a_n \cdot \dfrac{1}{b_n}\)</span> לפי סעיף (ג).</p>
 <p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> נאחד למכנה משותף:</p>
 <p><span class="math display">\[.\left|\frac{1}{b_n} - \frac{1}{L_2}\right| = \left|\frac{L_2 - b_n}{b_n L_2}\right| = \frac{\left|b_n - L_2\right|}{\left|b_n\right| \cdot \left|L_2\right|}\]</span></p>
-<p>במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: <span class="math inline">\(\left|b_n\right|\)</span> עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא <strong>חסם מלרע</strong> על <span class="math inline">\(,\left|b_n\right|\)</span> וכאן נכנס לתמונה התנאי <span class="math inline">\(.L_2 \neq 0\)</span> נפריד לשני מקרים, ובשניהם נפעיל את <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.1</a> על הסדרה <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> ועל הגבול <span class="math inline">\(.L_2\)</span></p>
+<p>במונה מופיע בדיוק הביטוי שאנחנו שולטים בו. הבעיה היא במכנה: <span class="math inline">\(\left|b_n\right|\)</span> עלול להיות קטן, ואז המנה גדולה. דרוש לנו אפוא <strong>חסם מלרע</strong> על <span class="math inline">\(,\left|b_n\right|\)</span> וכאן נכנס לתמונה התנאי <span class="math inline">\(.L_2 \neq 0\)</span> נפריד לשני מקרים, ובשניהם נפעיל את <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.3</a> על הסדרה <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> ועל הגבול <span class="math inline">\(.L_2\)</span></p>
 <p>אם <span class="math inline">\(,L_2 &gt; 0\)</span> אז <span class="math inline">\(,\frac{L_2}{2} &lt; L_2\)</span> ולפי סעיף (א) קיים <span class="math inline">\(N_0\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים <span class="math inline">\(.b_n &gt; \frac{L_2}{2}\)</span></p>
 <p>אם <span class="math inline">\(,L_2 &lt; 0\)</span> אז <span class="math inline">\(,\frac{L_2}{2} &gt; L_2\)</span> ולפי סעיף (ב) קיים <span class="math inline">\(N_0\)</span> כך שלכל <span class="math inline">\(n \geq N_0\)</span> מתקיים <span class="math inline">\(.b_n &lt; \frac{L_2}{2}\)</span></p>
 <p>בשני המקרים מתקיים לכל <span class="math inline">\(n \geq N_0\)</span></p>
@@ -1072,7 +1080,7 @@ window.Quarto = {
 <p>נראה עכשיו כיצד מיישמים את אריתמטיקת הגבולות. מוטיב חוזר בדוגמאות הבאות הוא שאי אפשר להפעיל את <a href="#box-thm-sequence-arithmetic">משפט אריתמטיקת הגבולות</a> ישירות, משום שהסדרות המרכיבות את הביטוי אינן מתכנסות כלל. אבל לאחר מניפולציה אלגברית פשוטה, אותו ביטוי עצמו נהיה מנה של סדרות שכן מתכנסות, ואז המשפט חל.</p>
 <p>בשני הפתרונות נשתמש שוב ושוב באותו גבול יסודי, <span class="math inline">\(,\lim\limits_{n\to\infty} \dfrac{1}{n} = 0\)</span> שהוכחנו ישירות מן ההגדרה ב<a href="./07-sequences-limit-3.html#box-q-one-over-n">שאלה על הסדרה <span class="math inline">\(\frac{1}{n}\)</span></a>.</p>
 <div id="box-exm-seq-rational-1" class="thmbox thmbox-question" title="מנת פולינומים מאותה דרגה">
-<p><strong>שאלה 8.3.2 — מנת פולינומים מאותה דרגה.</strong></p>
+<p><strong>תרגיל פתור 8.3.2 — מנת פולינומים מאותה דרגה.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math display">\[.a_n = \frac{3n-4}{n+2}\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1090,7 +1098,7 @@ window.Quarto = {
 <p><span class="math display">\[.\lim_{n\to\infty} \frac{3n-4}{n+2} = \lim_{n\to\infty} \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}} = \frac{\lim\limits_{n\to\infty} \left(3 - \dfrac{4}{n}\right)}{\lim\limits_{n\to\infty} \left(1 + \dfrac{2}{n}\right)} = \frac{3}{1} = 3\]</span></p>
 </div>
 <div id="box-exm-seq-rational-2" class="thmbox thmbox-question" title="מנת פולינומים מדרגות שונות">
-<p><strong>שאלה 8.3.3 — מנת פולינומים מדרגות שונות.</strong></p>
+<p><strong>תרגיל פתור 8.3.3 — מנת פולינומים מדרגות שונות.</strong></p>
 <p>מצאו את הגבול של הסדרה <span class="math display">\[.a_n = \frac{8n+3}{n^2+1}\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1124,7 +1132,7 @@ window.Quarto = {
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
 <p>נסמן <span class="math inline">\(\lim\limits_{n\to\infty} a_n = L_1\)</span> ו-<span class="math inline">\(.\lim\limits_{n\to\infty} b_n = L_2\)</span> לפי סעיף (ב) של <a href="#box-thm-sequence-arithmetic">משפט 8.3.1</a> הסדרה <span class="math inline">\(\left(b_n - a_n\right)\)</span> מתכנסת, ומתקיים <span class="math inline">\(.\lim\limits_{n\to\infty}\left(b_n - a_n\right) = L_2 - L_1\)</span></p>
-<p>מן ההנחה <span class="math inline">\(a_n \leq b_n\)</span> נובע <span class="math inline">\(b_n - a_n \geq 0\)</span> לכל <span class="math inline">\(,n\)</span> כלומר כל איברי הסדרה <span class="math inline">\(\left(b_n - a_n\right)\)</span> אי-שליליים. לכן לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.4</a> גם הגבול שלה אי-שלילי:</p>
+<p>מן ההנחה <span class="math inline">\(a_n \leq b_n\)</span> נובע <span class="math inline">\(b_n - a_n \geq 0\)</span> לכל <span class="math inline">\(,n\)</span> כלומר כל איברי הסדרה <span class="math inline">\(\left(b_n - a_n\right)\)</span> אי-שליליים. לכן לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> גם הגבול שלה אי-שלילי:</p>
 <p><span class="math display">\[.L_2 - L_1 \geq 0\]</span></p>
 <p>נוסיף <span class="math inline">\(L_1\)</span> לשני האגפים ונקבל <span class="math inline">\(,L_1 \leq L_2\)</span> כנדרש.</p>
 </div>
@@ -1137,18 +1145,18 @@ window.Quarto = {
 <p>אם בנוסף <span class="math inline">\(L \neq 0\)</span> ומתקיים <span class="math inline">\(a_n \neq 0\)</span> לכל <span class="math inline">\(,n\)</span> אז גם <span class="math display">\[.\lim_{n\to\infty} \frac{1}{a_n^{k}} = \frac{1}{L^{k}}\]</span></p>
 </div>
 <p>הטענה הראשונה היא הפעלה חוזרת של כלל הכפל, והשנייה מתקבלת ממנה בהפעלת כלל החילוק. הוכחה מסודרת באינדוקציה על <span class="math inline">\(k\)</span> נשאירה כתרגיל בסוף הסעיף.</p>
-<p>שורשים הם סיפור אחר. הפונקציה <span class="math inline">\(f(x) = \sqrt[k]{x}\)</span> אינה מורכבת מחיבור, חיסור, כפל וחילוק, ולכן אריתמטיקת הגבולות אינה חלה עליה כלל. בכל זאת הטענה נכונה, וההוכחה שלה היא יישום ישיר של <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.1</a>.</p>
+<p>שורשים הם סיפור אחר. הפונקציה <span class="math inline">\(f(x) = \sqrt[k]{x}\)</span> אינה מורכבת מחיבור, חיסור, כפל וחילוק, ולכן אריתמטיקת הגבולות אינה חלה עליה כלל. בכל זאת הטענה נכונה, וההוכחה שלה היא יישום ישיר של <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.3</a>.</p>
 <div id="box-thm-limit-root" class="thmbox thmbox-theorem" title="שורשים">
 <p><strong>משפט 8.3.7 — שורשים.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מתכנסת המקיימת <span class="math inline">\(a_n \geq 0\)</span> לכל <span class="math inline">\(,n\)</span> ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span> אז לכל <span class="math inline">\(k \geq 2\)</span> טבעי <span class="math display">\[.\lim_{n\to\infty} \sqrt[k]{a_n} = \sqrt[k]{L}\]</span></p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>ראשית, מ-<span class="math inline">\(a_n \geq 0\)</span> לכל <span class="math inline">\(n\)</span> נובע לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.4</a> ש-<span class="math inline">\(,L \geq 0\)</span> ולכן <span class="math inline">\(\sqrt[k]{L}\)</span> מוגדר. נסמן <span class="math inline">\(.\ell = \sqrt[k]{L}\)</span></p>
+<p>ראשית, מ-<span class="math inline">\(a_n \geq 0\)</span> לכל <span class="math inline">\(n\)</span> נובע לפי סעיף (א) של <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> ש-<span class="math inline">\(,L \geq 0\)</span> ולכן <span class="math inline">\(\sqrt[k]{L}\)</span> מוגדר. נסמן <span class="math inline">\(.\ell = \sqrt[k]{L}\)</span></p>
 <p>בהוכחה נשתמש פעמיים בשתי עובדות פשוטות על מספרים אי-שליליים: אם <span class="math inline">\(0 \leq s &lt; t\)</span> אז <span class="math inline">\(,s^{k} &lt; t^{k}\)</span> ואם <span class="math inline">\(0 \leq s &lt; t\)</span> אז <span class="math inline">\(.\sqrt[k]{s} &lt; \sqrt[k]{t}\)</span></p>
 <p><strong>המקרה <span class="math inline">\(.L &gt; 0\)</span></strong> אז גם <span class="math inline">\(.\ell &gt; 0\)</span> יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> מותר להניח <span class="math inline">\(,\varepsilon &lt; \ell\)</span> שכן אם התנאי מתקיים עבור <span class="math inline">\(\varepsilon\)</span> קטן הוא מתקיים גם עבור כל <span class="math inline">\(\varepsilon\)</span> גדול ממנו. מ-<span class="math inline">\(0 \leq \ell - \varepsilon &lt; \ell &lt; \ell + \varepsilon\)</span> ובהעלאה בחזקת <span class="math inline">\(k\)</span> נקבל</p>
 <p><span class="math display">\[.\left(\ell-\varepsilon\right)^{k} &lt; \ell^{k} = L &lt; \left(\ell+\varepsilon\right)^{k}\]</span></p>
-<p>נפעיל את <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.1</a> עם <span class="math inline">\(m = \left(\ell-\varepsilon\right)^{k}\)</span> ועם <span class="math inline">\(:M = \left(\ell+\varepsilon\right)^{k}\)</span> שני הסעיפים יחד נותנים שהחל ממקום מסוים מתקיים</p>
+<p>נפעיל את <a href="./07-sequences-limit-4.html#box-thm-limit-window">משפט 7.4.3</a> עם <span class="math inline">\(m = \left(\ell-\varepsilon\right)^{k}\)</span> ועם <span class="math inline">\(:M = \left(\ell+\varepsilon\right)^{k}\)</span> שני הסעיפים יחד נותנים שהחל ממקום מסוים מתקיים</p>
 <p><span class="math display">\[.\left(\ell-\varepsilon\right)^{k} &lt; a_n &lt; \left(\ell+\varepsilon\right)^{k}\]</span></p>
 <p>נוציא שורש <span class="math inline">\(k\)</span>-י משלושת האגפים, ונקבל שהחל מאותו מקום</p>
 <p><span class="math display">\[,\ell - \varepsilon &lt; \sqrt[k]{a_n} &lt; \ell + \varepsilon\]</span></p>

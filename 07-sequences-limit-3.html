@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -1026,7 +1034,7 @@ window.Quarto = {
 <p>נשים לב מה בדיוק יש בידינו בשלב הזה: <strong>ההגדרה הפורמלית בלבד</strong>. ההגדרה היא כלי <strong>בדיקה</strong> ולא כלי <strong>חיפוש</strong> — היא מקבלת מספר <span class="math inline">\(L\)</span> שהוצע, ומאשרת או פוסלת אותו, אך אינה מייצרת אותו. לכן היא מאפשרת לענות על שני סוגים של שאלות: האם הסדרה מתכנסת לגבול נתון <span class="math inline">\(L\)</span>, והאם היא <strong>אינה</strong> מתכנסת אליו. יש מקרים שבהם ההגדרה לבדה מספיקה גם כדי להראות ששום <span class="math inline">\(L\)</span> אינו יכול להיות גבול של הסדרה — כלומר שהסדרה מתבדרת.</p>
 <p>מה שההגדרה אינה נותנת הוא את <span class="math inline">\(L\)</span> עצמו. אם ישאלו אותנו ״הוכיחו שהסדרה מתכנסת״ בלי לציין לאיזה גבול, או ״מהו הגבול של הסדרה?״, אין לנו בשלב הזה דרך לענות — פרט לניחוש הגבול ולהוכחת ההתכנסות אליו. בהמשך נכיר שיטות שיאפשרו להוכיח קיום של גבול, וגם לחשב אותו במקרים מסוימים.</p>
 <div id="box-q-constant-seq" class="thmbox thmbox-question" title="סדרה קבועה">
-<p><strong>שאלה 7.3.4 — סדרה קבועה.</strong></p>
+<p><strong>תרגיל פתור 7.3.4 — סדרה קבועה.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> הסדרה הקבועה <span class="math inline">\(a_n = 1\)</span> (כלומר <span class="math inline">\(1, 1, 1, \dots\)</span>). הראו כי <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 1\)</span>.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1057,7 +1065,7 @@ window.Quarto = {
 <p>גררו את <span class="math inline">\(\varepsilon\)</span> עד הקצה — ה-<span class="math inline">\(N\)</span> המינימלי נשאר קבוע. זה המקרה החריג שבו אותו שער מתאים לכל <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-one-over-n" class="thmbox thmbox-question" title="הסדרה $a_n=\frac{1}{n}$">
-<p><strong>שאלה 7.3.6 — הסדרה <span class="math inline">\(a_n=\frac{1}{n}\)</span>.</strong></p>
+<p><strong>תרגיל פתור 7.3.6 — הסדרה <span class="math inline">\(a_n=\frac{1}{n}\)</span>.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n=\dfrac{1}{n}\)</span>. הראו כי <span class="math inline">\(\lim\limits_{n\to\infty}a_n=0\)</span>.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1145,7 +1153,7 @@ window.Quarto = {
 </details>
 <p>הטענה הזו שימושית מפני שהיא מחליפה שאלה על התכנסות לגבול כלשהו בשאלה על שאיפה לאפס — ולשם כך די לחסום את <span class="math inline">\(\left|a_n-L\right|\)</span> מלמעלה בביטוי ששואף לאפס, בלי לעקוב אחרי הסדרה עצמה.</p>
 <div id="box-q-pm-one" class="thmbox thmbox-question" title="סדרה מתחלפת">
-<p><strong>שאלה 7.3.9 — סדרה מתחלפת.</strong></p>
+<p><strong>תרגיל פתור 7.3.9 — סדרה מתחלפת.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> הסדרה המוגדרת על ידי <span class="math inline">\(a_n = (-1)^{n-1}\)</span> (כלומר <span class="math inline">\(1, -1, 1, -1, \dots\)</span>). הוכיחו או הפריכו: הסדרה מתכנסת.</p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1242,7 +1250,7 @@ window.Quarto = {
 :::
 -->
 <div id="box-q-one-frac-n" class="thmbox thmbox-question" title="סדרה מתכנסת שאינה מונוטונית">
-<p><strong>שאלה 7.3.11 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
+<p><strong>תרגיל פתור 7.3.11 — סדרה מתכנסת שאינה מונוטונית.</strong></p>
 <p>הסדרה <span class="math inline">\(a_n = 1 + \dfrac{\sin(n)}{n}\)</span> (עבור <span class="math inline">\(n \ge 1\)</span>) מתכנסת, וגבולה <span class="math inline">\(1\)</span>. יהי <span class="math inline">\(\varepsilon&gt;0\)</span>. קיים <span class="math inline">\(N\)</span> כך ש-<span class="math inline">\(N \ge \dfrac{1}{\varepsilon}\)</span>, ולכן לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{1}{n} &lt; \dfrac{1}{N} \le \varepsilon\)</span>. לכן <span class="math display">\[|a_n - 1| = \left|\frac{\sin(n)}{n}\right| \le \frac{1}{n} &lt; \varepsilon,\]</span> כנדרש.</p>
 </div>
 <div id="box-sim-sin-n" class="thmbox thmbox-simulation" title="הסדרה $a_n = 1 + \frac{\sin(n)}{n}$">
@@ -1251,7 +1259,7 @@ window.Quarto = {
 <p>ההתקרבות אינה מונוטונית: הסדרה חוצה את הגבול שוב ושוב, וה-<span class="math inline">\(N\)</span> המינימלי קופץ בצורה לא צפויה כשמקטינים את <span class="math inline">\(\varepsilon\)</span>.</p>
 </div>
 <div id="box-q-seq-3n-4" class="thmbox thmbox-question" title="מנה של ביטויים לינאריים">
-<p><strong>שאלה 7.3.13 — מנה של ביטויים לינאריים.</strong></p>
+<p><strong>תרגיל פתור 7.3.13 — מנה של ביטויים לינאריים.</strong></p>
 <p>עבור <span class="math inline">\(a_n = \dfrac{3n-4}{n+2}\)</span> מתקיים <span class="math inline">\(\lim\limits_{n\to\infty} a_n = 3\)</span>. נפשט: <span class="math display">\[\left|\frac{3n-4}{n+2} - 3\right| = \left|\frac{3n-4-3(n+2)}{n+2}\right| = \frac{10}{n+2} &lt; \frac{10}{n}.\]</span> יהי <span class="math inline">\(\varepsilon&gt;0\)</span>; נבחר <span class="math inline">\(N = \left\lfloor \dfrac{10}{\varepsilon}\right\rfloor + 1\)</span>. אז לכל <span class="math inline">\(n&gt;N\)</span> מתקיים <span class="math inline">\(\dfrac{10}{n} &lt; \varepsilon\)</span>, ולכן <span class="math inline">\(\left|a_n - 3\right| &lt; \varepsilon\)</span>.</p>
 </div>
 <div id="box-sim-3n-4" class="thmbox thmbox-simulation" title="הסדרה $a_n = \frac{3n-4}{n+2}$">

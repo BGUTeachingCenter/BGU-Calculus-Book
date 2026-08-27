@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -973,7 +981,7 @@ window.Quarto = {
 <li><p>צעד האינדוקציה — נניח כי הטענה נכונה עבור <span class="math inline">\(n\)</span> כללי (זוהי <strong>הנחת האינדוקציה</strong>), ואז נראה כי הטענה נכונה עבור <span class="math inline">\(.n+1\)</span></p></li>
 </ol>
 <div id="box-qst-induction-sum-squares" class="thmbox thmbox-question">
-<p><strong>שאלה 5.2.1.</strong></p>
+<p><strong>תרגיל פתור 5.2.1.</strong></p>
 <p>הוכיחו באינדוקציה כי לכל <span class="math inline">\(n \in \mathbb{N}\)</span> מתקיים <span class="math display">\[.1^2 + 2^2 + \dots + n^2 = \frac{n(n+1)(2n+1)}{6}\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -991,7 +999,7 @@ window.Quarto = {
 <p>וזה בדיוק אגף ימין. שני התנאים מתקיימים, ולכן לפי <a href="./05-induction.html#box-thm-induction">עקרון האינדוקציה</a> הטענה נכונה לכל <span class="math inline">\(.n \in \mathbb{N}\)</span></p>
 </div>
 <div id="box-qst-induction-2n-geq-n" class="thmbox thmbox-question">
-<p><strong>שאלה 5.2.2.</strong></p>
+<p><strong>תרגיל פתור 5.2.2.</strong></p>
 <p>הוכיחו באינדוקציה כי לכל <span class="math inline">\(n \in \mathbb{N}\)</span> מתקיים <span class="math display">\[.2^{n} \geq n\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
@@ -1003,7 +1011,7 @@ window.Quarto = {
 <p>לכן לפי עקרון האינדוקציה <span class="math inline">\(2^{n} \geq n\)</span> לכל <span class="math inline">\(.n \in \mathbb{N}\)</span></p>
 </div>
 <div id="box-qst-induction-divisibility" class="thmbox thmbox-question">
-<p><strong>שאלה 5.2.3.</strong></p>
+<p><strong>תרגיל פתור 5.2.3.</strong></p>
 <p>הוכיחו באינדוקציה כי לכל <span class="math inline">\(n \in \mathbb{N}\)</span> מתקיים <span class="math display">\[.24 \mid 2 \cdot 7^{n} + 3 \cdot 5^{n} - 5\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">

@@ -329,7 +329,15 @@ iframe.widget-frame {
 /* Question: kin to .thmbox-example, so same hue family, one shade deeper. Its
    solution reuses the proof's slate — a solution is to a question what a proof
    is to a theorem, and the reader already reads that grey as "the working". */
+/* .thmexr (תרגיל פתור) keeps this amber — it is the class that used to be .thmqst, so
+   every existing worked exercise looks exactly as it did before the rename. */
 .thmbox-question    { border-color: #b45309; background: #fef6e7; }
+/* Conceptual question (.thmqst): a question put to the reader to set up what follows,
+   answered by the running text rather than by a solution box. Purple, and the loud
+   6px edge of .thmwarn / .thmkey, so it reads as a beat in the argument. Deliberately
+   NOT the amber above — a worked exercise and an open question are different acts. */
+.thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
+.thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
 .thmbox-solution    { border-color: #94a3b8; background: #f1f5f9; }
 .thmbox-solution > p:first-child > strong { font-weight: 600; color: #64748b; }
 .thmbox-simulation  { border-color: #7c3aed; background: #f7f5ff; }
@@ -969,7 +977,7 @@ window.Quarto = {
 <h2 data-number="4.4" class="anchored" data-anchor-id="פתרון-אי-שוויונות-עם-ערך-מוחלט"><span class="header-section-number">4.4</span> פתרון אי-שוויונות עם ערך מוחלט</h2>
 <p>כשבביטוי מופיע יותר מערך מוחלט אחד, אי אפשר ״לפתוח״ את כולם בבת אחת: לכל ערך מוחלט יש שני מקרים, והם תלויים בסימן של הביטוי שבתוכו. השיטה היא לחלק את ציר המספרים לקטעים לפי הנקודות שבהן מתאפסים הביטויים, ולפתור בכל קטע בנפרד.</p>
 <div id="box-qst-abs-sum-inequality" class="thmbox thmbox-question">
-<p><strong>שאלה 4.4.1.</strong></p>
+<p><strong>תרגיל פתור 4.4.1.</strong></p>
 <p>פתרו את אי-השוויון <span class="math display">\[.\left|x-1\right| + \left|x-2\right| &lt; 2\]</span></p>
 </div>
 <div class="thmbox thmbox-solution">
