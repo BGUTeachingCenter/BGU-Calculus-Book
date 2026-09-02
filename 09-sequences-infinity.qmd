@@ -30,7 +30,7 @@ $a_n = n$ , $a_n = n+1$ , $a_n = n^2$
 מתקיים: $a_n \to -\infty$ אם ורק אם $-a_n \to \infty$
 :::
 
-::: {#box-q-limit-minus-infinity .thmqst title="שאיפה למינוס אינסוף לפי ההגדרה"}
+::: {#box-q-limit-minus-infinity .thmexr title="שאיפה למינוס אינסוף לפי ההגדרה"}
 נראה לפי ההגדרה שמתקיים
 
 $$\lim_{n \to \infty} \frac{-n^2 - \sin(n)}{2n + 3} = -\infty$$
@@ -117,7 +117,7 @@ $$(-1, 2, -3, 4, -5, \ldots)$$
 אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $a_n \to \infty$, אז $$\lim_{n\to\infty} b_n = \infty$$
 :::
 
-::: {#box-exm-piza-1 .thmqst title="הסדרה $n+(-1)^n$"}
+::: {#box-exm-piza-1 .thmexr title="הסדרה $n+(-1)^n$"}
 האם הסדרה $b_n = n + (-1)^n$ מתכנסת במובן הרחב?
 :::
 
@@ -127,7 +127,7 @@ $$(-1, 2, -3, 4, -5, \ldots)$$
 אז מכלל הפיצה $$b_n \to \infty$$
 :::
 
-::: {#box-exm-piza-2 .thmqst title="הסדרה $n^2/n!$"}
+::: {#box-exm-piza-2 .thmexr title="הסדרה $n^2/n!$"}
 האם הסדרה $b_n = \dfrac{n^2}{n!}$ מתכנסת במובן הרחב?
 :::
 
@@ -137,7 +137,7 @@ $$b_n = \frac{n^2}{n!} = \frac{n \cdots n}{1 \cdot 2 \cdots n} = \frac{n}{1} \cd
 לכן מכלל הפיצה $$b_n \to \infty$$
 :::
 
-::: {#box-exm-piza-3 .thmqst title="הסדרה $(1+1/n)^{n^2}$"}
+::: {#box-exm-piza-3 .thmexr title="הסדרה $(1+1/n)^{n^2}$"}
 האם הסדרה $b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}$ מתכנסת במובן הרחב?
 :::
 
@@ -189,7 +189,7 @@ $.L = \lim_{n\to\infty} \sqrt[n]{a_n}$
 - אם $L = 1$ , אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.
 :::
 
-::: {#box-exm-mivchanim-1 .thmqst title="הסדרה $2^n/n^2$"}
+::: {#box-exm-mivchanim-1 .thmexr title="הסדרה $2^n/n^2$"}
 חשבו את הגבול $$\lim_{n\to\infty} \frac{2^n}{n^2}$$
 :::
 
@@ -203,7 +203,7 @@ $$\frac{a_{n+1}}{a_n} = \frac{\left(\frac{2^{n+1}}{(n+1)^2}\right)}{\left(\frac{
 לכן לפי מבחן המנה נקבל: $$\boxed{\lim_{n\to\infty} \frac{2^n}{n^2} = \infty}$$
 :::
 
-::: {#box-exm-mivchanim-2 .thmqst title="הסדרה $3^n$"}
+::: {#box-exm-mivchanim-2 .thmexr title="הסדרה $3^n$"}
 הסדרה $a_n = 3^n$ היא $a_n \to \infty$, מדוע?
 :::
 
@@ -226,7 +226,7 @@ $$\sqrt[n]{a_n} = 3 \xrightarrow[n\to\infty]{} 3$$ וגם $a_n > 0$
 $.\lim_{n\to\infty} \sqrt[n]{a_n} = L$
 :::
 
-::: {#box-exm-dalembert-root-n .thmqst title="שורש מסדר $n$ של $n$"}
+::: {#box-exm-dalembert-root-n .thmexr title="שורש מסדר $n$ של $n$"}
 נבדוק מהו הגבול של הסדרה $\sqrt[n]{n}=\sqrt[n]{a_n}$ ?
 
 $$(1,\sqrt{2},\sqrt[3]{3},\sqrt[4]{4},\dots)$$

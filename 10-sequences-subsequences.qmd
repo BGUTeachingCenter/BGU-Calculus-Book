@@ -50,7 +50,7 @@ $$a_n=-1,1,-1,1,-1,1,\dots \qquad a_{2n}\to\boxed{1} \quad,\quad a_{2n-1}\to\box
 נניח כי הסדרה $(a_n)_{n=1}^{\infty}$ מתפרקת למספר **סופי** של תת-סדרות מתכנסות, המכסות יחד את כל אינדקסי הסדרה. אז אוסף הגבולות של תת-סדרות אלו הוא בדיוק אוסף הגבולות החלקיים של $(a_n)_{n=1}^{\infty}$.
 :::
 
-::: {#box-exm-gvulot-chelkiim .thmqst title="מציאת כל הגבולות החלקיים"}
+::: {#box-exm-gvulot-chelkiim .thmexr title="מציאת כל הגבולות החלקיים"}
 מצאו את כל הגבולות החלקיים של הסדרה:
 
 $$a_n = (\frac{\cos(\frac{\pi}{2} \cdot n) \cdot 2n}{3n + 4} + \frac{\sin(\frac{\pi}{2} \cdot n) \cdot (2n^2 + n - 3)}{3n^2 + 5n})^2$$
@@ -156,7 +156,7 @@ $.\left(1 + a_n\right)^{\frac{1}{a_n}} \to e$
 הבחירה $a_n = \dfrac{1}{n}$ מחזירה את הגבול המוכר $\left(1 + \dfrac{1}{n}\right)^{n} \to e$.
 :::
 
-::: {#box-exm-gvul-e .thmqst title="הסדרה $(1-1/n)^n$"}
+::: {#box-exm-gvul-e .thmexr title="הסדרה $(1-1/n)^n$"}
 לאן מתכנסת הסדרה $(1 - \frac{1}{n})^n$
 :::
 

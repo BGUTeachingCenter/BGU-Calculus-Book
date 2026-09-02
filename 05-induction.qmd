@@ -52,7 +52,7 @@ $$.S = \left\{n \in \mathbb{N} \mid P(n) \text{ שקרית}\right\}$$
 
 2)  צעד האינדוקציה — נניח כי הטענה נכונה עבור $n$ כללי (זוהי **הנחת האינדוקציה**), ואז נראה כי הטענה נכונה עבור $.n+1$
 
-::: {#box-qst-induction-sum-squares .thmqst}
+::: {#box-qst-induction-sum-squares .thmexr}
 הוכיחו באינדוקציה כי לכל $n \in \mathbb{N}$ מתקיים $$.1^2 + 2^2 + \dots + n^2 = \frac{n(n+1)(2n+1)}{6}$$
 :::
 
@@ -80,7 +80,7 @@ $$= \frac{(n+1)\left[n(2n+1) + 6(n+1)\right]}{6} = \frac{(n+1)\left(2n^2 + 7n + 
 וזה בדיוק אגף ימין. שני התנאים מתקיימים, ולכן לפי [עקרון האינדוקציה](#box-thm-induction) הטענה נכונה לכל $.n \in \mathbb{N}$
 :::
 
-::: {#box-qst-induction-2n-geq-n .thmqst}
+::: {#box-qst-induction-2n-geq-n .thmexr}
 הוכיחו באינדוקציה כי לכל $n \in \mathbb{N}$ מתקיים $$.2^{n} \geq n$$
 :::
 
@@ -96,7 +96,7 @@ $$,2^{n+1} = 2 \cdot 2^{n} \geq 2n = n + n \geq n + 1$$
 לכן לפי עקרון האינדוקציה $2^{n} \geq n$ לכל $.n \in \mathbb{N}$
 :::
 
-::: {#box-qst-induction-divisibility .thmqst}
+::: {#box-qst-induction-divisibility .thmexr}
 הוכיחו באינדוקציה כי לכל $n \in \mathbb{N}$ מתקיים $$.24 \mid 2 \cdot 7^{n} + 3 \cdot 5^{n} - 5$$
 :::
 

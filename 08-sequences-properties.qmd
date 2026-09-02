@@ -44,7 +44,7 @@
 
 בתרגילים הבאים נשתמש בכך שלכל $x$ ממשי מתקיים $\left|\sin x\right| \leq 1$ וגם $.\left|\cos x\right| \leq 1$
 
-::: {#box-qst-bounded-examples .thmqst title="אילו מהסדרות חסומות?"}
+::: {#box-qst-bounded-examples .thmexr title="אילו מהסדרות חסומות?"}
 עבור כל אחת מהסדרות הבאות, קבעו אם היא חסומה, ונמקו.
 
 (א) $a_n = \dfrac{1}{n^2+1}$
@@ -493,7 +493,7 @@ $$.\lim_{n\to\infty} \frac{a_n}{b_n} = \lim_{n\to\infty} \left(a_n \cdot \frac{1
 
 בשני הפתרונות נשתמש שוב ושוב באותו גבול יסודי, $,\lim\limits_{n\to\infty} \dfrac{1}{n} = 0$ שהוכחנו ישירות מן ההגדרה ב[שאלה על הסדרה $\frac{1}{n}$](07-sequences-limit.qmd#box-q-one-over-n).
 
-::: {#box-exm-seq-rational-1 .thmqst title="מנת פולינומים מאותה דרגה"}
+::: {#box-exm-seq-rational-1 .thmexr title="מנת פולינומים מאותה דרגה"}
 מצאו את הגבול של הסדרה $$.a_n = \frac{3n-4}{n+2}$$
 :::
 
@@ -521,7 +521,7 @@ $$.\lim_{n\to\infty} \left(1 + \frac{2}{n}\right) = \lim_{n\to\infty} 1 + \lim_{
 $$.\lim_{n\to\infty} \frac{3n-4}{n+2} = \lim_{n\to\infty} \frac{3 - \dfrac{4}{n}}{1 + \dfrac{2}{n}} = \frac{\lim\limits_{n\to\infty} \left(3 - \dfrac{4}{n}\right)}{\lim\limits_{n\to\infty} \left(1 + \dfrac{2}{n}\right)} = \frac{3}{1} = 3$$
 :::
 
-::: {#box-exm-seq-rational-2 .thmqst title="מנת פולינומים מדרגות שונות"}
+::: {#box-exm-seq-rational-2 .thmexr title="מנת פולינומים מדרגות שונות"}
 מצאו את הגבול של הסדרה $$.a_n = \frac{8n+3}{n^2+1}$$
 :::
 
@@ -853,7 +853,7 @@ $$,\lim_{n\to\infty} a_n b_n = 0$$
 
 ### דוגמאות
 
-::: {#box-qst-sin-n-over-n .thmqst title="הגבול של $\\dfrac{\\sin n}{n}$"}
+::: {#box-qst-sin-n-over-n .thmexr title="הגבול של $\\dfrac{\\sin n}{n}$"}
 מצאו את הגבול של הסדרה $.a_n = \dfrac{\sin n}{n}$
 :::
 
@@ -869,7 +869,7 @@ $$.-\frac{1}{n} \leq \frac{\sin n}{n} \leq \frac{1}{n}$$
 שתי הסדרות החיצוניות מתכנסות ל-$,0$ ולכן לפי [](#box-thm-squeeze-sequences) גם הסדרה שבאמצע מתכנסת ל-$.0$
 :::
 
-::: {#box-qst-alt-over-n .thmqst title="גורם חסום שאינו מתכנס"}
+::: {#box-qst-alt-over-n .thmexr title="גורם חסום שאינו מתכנס"}
 מצאו את הגבול של הסדרה $.a_n = \dfrac{\left(-1\right)^{n}}{n}$
 :::
 
@@ -879,7 +879,7 @@ $$.-\frac{1}{n} \leq \frac{\sin n}{n} \leq \frac{1}{n}$$
 שימו לב שהסדרה $\left(-1\right)^{n}$ **אינה מתכנסת** כלל, ובכל זאת המשפט חל עליה: הוא דורש ממנה חסימות בלבד. [](#box-thm-sequence-arithmetic) לעומת זאת אינו עוזר כאן, משום שהוא מניח ששני הגורמים מתכנסים.
 :::
 
-::: {#box-qst-n-plus-sin .thmqst title="שילוב עם אריתמטיקת הגבולות"}
+::: {#box-qst-n-plus-sin .thmexr title="שילוב עם אריתמטיקת הגבולות"}
 מצאו את הגבול של הסדרה $.a_n = \dfrac{n + \sin n}{n^2 + 3n}$
 :::
 
@@ -897,7 +897,7 @@ $$.\frac{n + \sin n}{n^2 + 3n} = \frac{\dfrac{1}{n} + \dfrac{\sin n}{n^2}}{1 + \
 $$.\lim_{n\to\infty} \frac{n + \sin n}{n^2 + 3n} = \frac{0}{1} = 0$$
 :::
 
-::: {#box-qst-sum-of-roots .thmqst title="סכום שמספר מחובריו גדל"}
+::: {#box-qst-sum-of-roots .thmexr title="סכום שמספר מחובריו גדל"}
 מצאו את הגבול של הסדרה
 
 $$.a_n = \frac{1}{\sqrt{n^2+1}} + \frac{1}{\sqrt{n^2+2}} + \dots + \frac{1}{\sqrt{n^2+n}}$$
@@ -1097,7 +1097,7 @@ $a_n$ מתכנסת $\not\Leftarrow$ $a_n$ מונוטונית
 בהוכחה מראים כי $a_n$ עולה ומתכנסת ל-$M$, כאשר הוא לא סתם חסם שלה מלמעלה, אלא הוא החסם הכי קטן.
 :::
 
-::: {#box-q-recursive-sequence .thmqst title="סדרה רקורסיבית"}
+::: {#box-q-recursive-sequence .thmexr title="סדרה רקורסיבית"}
 נתונה סדרה $(a_n)_{n=1}^{\infty}$ [באופן הרקורסיבי](05-induction.qmd#sec-recursive-definition) הבא:
 
 $$a_1 = 1$$

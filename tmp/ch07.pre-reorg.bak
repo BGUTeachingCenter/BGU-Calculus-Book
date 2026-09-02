@@ -1894,52 +1894,42 @@ $$.7 < a_n < 9$$
 
 (2) החל ממקום מסוים מתקיים $.a_n < 9$
 
-::: {#box-key-splitting .thmkey title="פיצול טענות מהסוג ״החל ממקום מסוים״"}
-טענה מהסוג ״החל ממקום מסוים״ שבתוכה מופיע ״וגם״ אפשר לפצל לשתי טענות מאותו סוג. במפורש: אם הטענה ״$P(n)$ **וגם** $Q(n)$״ מתקיימת החל ממקום מסוים, אז גם $P(n)$ לבדה מתקיימת החל ממקום מסוים, וגם $Q(n)$ לבדה מתקיימת החל ממקום מסוים.
+::: {#box-key-splitting .thmkey title="פיצול"}
+אם הטענה ״$P(n)$ **וגם** $Q(n)$״ מתקיימת החל ממקום מסוים, אז $P(n)$ מתקיימת החל ממקום מסוים וגם $Q(n)$ מתקיימת החל ממקום מסוים.
 
-אין כאן שום עבודה לעשות: המקום שהחל ממנו שתי הטענות מתקיימות יחד מתאים, כמובן, גם לכל אחת מהן בנפרד.
+הכיוון הזה תמיד נכון ואינו דורש עבודה: אותו מקום עצמו מתאים לשתי הטענות.
 :::
 
-נלך עכשיו בכיוון ההפוך. בידינו שתי הטענות הקונקרטיות שקיבלנו זה עתה: החל ממקום מסוים מתקיים $,a_n > 7$ והחל ממקום מסוים מתקיים $.a_n < 9$ האם מותר לשלב אותן ולומר שהחל ממקום מסוים מתקיימות **שתיהן** יחד, כלומר ש-$?7 < a_n < 9$
+נלך עכשיו בכיוון ההפוך. בידינו שתי הטענות הקונקרטיות שקיבלנו זה עתה: החל ממקום מסוים מתקיים $,a_n > 7$ והחל ממקום מסוים מתקיים $.a_n < 9$ האם מותר לצרף אותן ולומר שהחל ממקום מסוים מתקיימות **שתיהן** יחד, כלומר ש-$?7 < a_n < 9$
 
 התשובה היא כן, אבל נדרשת כאן מעט זהירות, משום שכל אחת משתי הטענות מסתירה מקום משלה: הראשונה נותנת $N_1$ כך שלכל $n \geq N_1$ מתקיים $,a_n > 7$ והשנייה נותנת $N_2$ כך שלכל $n \geq N_2$ מתקיים $,a_n < 9$ ואין שום סיבה ששני המקומות יהיו שווים. אבל אין בכך מכשול: ניקח $.N = \max\left\{N_1,\ N_2\right\}$ כל $n \geq N$ מקיים גם $n \geq N_1$ וגם $,n \geq N_2$ ולכן שתי הטענות מתקיימות עבורו, והחל מהמקום $N$ מתקיים
 
 $$.7 < a_n < 9$$
 
-::: {#box-key-finitely-many .thmkey title="שילוב טענות מהסוג ״החל ממקום מסוים״"}
-אפשר גם ללכת בכיוון ההפוך ולשלב שתי טענות מהסוג ״החל ממקום מסוים״ לטענה אחת מאותו סוג. במפורש: אם $P(n)$ מתקיימת החל ממקום מסוים, וגם $Q(n)$ מתקיימת החל ממקום מסוים, אז החל ממקום מסוים מתקיימות שתיהן **יחד**.
-
-כאן, בניגוד לפיצול, יש עבודה קטנה לעשות: לכל אחת מן הטענות יש מקום משלה, ויש לבחור את המאוחר מבין השניים.
+::: {#box-key-finitely-many .thmkey title="צירוף"}
+אם שתי טענות מתקיימות, כל אחת מהן החל ממקום מסוים, אז החל ממקום מסוים שתיהן מתקיימות יחד.
 
 אותו טיעון בדיוק עובד עבור כל מספר **סופי** של טענות $,P_1(n),\ \dots,\ P_k(n)$ ולכן גם הן מתקיימות יחד החל ממקום מסוים.
 :::
 
-::: {#box-exm-infinitely-many-fails .thmexm title="שילוב של אינסוף טענות"}
+::: {#box-exm-infinitely-many-fails .thmexm title="צירוף של אינסוף טענות"}
 נתבונן בסדרה $.a_n = \dfrac{1}{n}$ לכל $k$ טבעי מתקיים $\dfrac{1}{n} < \dfrac{1}{k}$ לכל $,n > k$ ולכן הטענה $a_n < \dfrac{1}{k}$ מתקיימת החל ממקום מסוים. אלה אינסוף טענות, אחת לכל $.k$
 
-אילו היה מותר לשלב את כולן, היינו מקבלים שהחל ממקום מסוים מתקיים $a_n < \dfrac{1}{k}$ **לכל** $,k$ ומכאן $.a_n \leq 0$ אבל כל איברי הסדרה חיוביים, ולכן זה אינו נכון.
-
-**מה השתבש כאן?** נחזור אל הטיעון של השילוב. לכל $k$ הטענה $a_n < \dfrac{1}{k}$ אכן מתקיימת, אבל היא מתקיימת החל ממקום **משלה**, והמקום הזה הוא $.n = k+1$ ככל ש-$k$ גדל, המקום מתרחק.
-
-השילוב של שתי טענות התבסס על לקיחת המאוחר מבין שני המקומות. כדי לשלב את כל אינסוף הטענות היינו צריכים לקחת את המאוחר מבין אינסוף המקומות $,2,\ 3,\ 4,\ \dots$ ולקבוצה אינסופית כזאת אין איבר גדול ביותר. בדיוק שם נשבר הטיעון.
+אילו היה מותר לצרף את כולן, היינו מקבלים שהחל ממקום מסוים מתקיים $a_n < \dfrac{1}{k}$ **לכל** $,k$ ומכאן $.a_n \leq 0$ אבל כל איברי הסדרה חיוביים, ולכן זה אינו נכון.
 :::
 
 ::: {#box-warn-finiteness-essential .thmwarn title="הסופיות חיונית"}
-השילוב דורש מספר **סופי** של טענות. כאשר מספר הטענות אינו סופי הוא עלול להיכשל.
+הצירוף דורש מספר **סופי** של טענות. כאשר מספר הטענות אינו סופי הוא עלול להיכשל.
 :::
 
-גם הפיצול אינו חף מהפתעות, והפעם הקושי אינו במספר הטענות אלא במילה המחברת ביניהן.
-
-::: {#box-exm-or-fails .thmexm title="פיצול של טענה המחוברת ב״או״"}
+::: {#box-exm-or-fails .thmexm title="צירוף של טענות המחוברות ב״או״"}
 נתבונן בסדרה $.a_n = \left(-1\right)^{n}$ החל ממקום מסוים מתקיים $a_n = 1$ **או** $,a_n = -1$ שהרי הדבר נכון לכל $.n$
 
 ובכל זאת אין זה נכון שהחל ממקום מסוים מתקיים $,a_n = 1$ ואין זה נכון שהחל ממקום מסוים מתקיים $:a_n = -1$ שתי האפשרויות מתחלפות ביניהן לכל אורך הסדרה.
-
-**מה השתבש כאן?** בפיצול של ״וגם״ הסתמכנו על כך שאותו מקום עצמו מתאים לשתי הטענות. ב״או״ אין מקום כזה כלל: בכל מקום מתקיימת אחת משתי האפשרויות, אבל לא אותה אחת כל הזמן, ולכן אין אף אחת מהן שמתקיימת החל ממקום מסוים.
 :::
 
-::: {#box-warn-and-not-or .thmwarn title="הפיצול עובד עם ״וגם״, לא עם ״או״"}
-פיצול של טענה מהסוג ״החל ממקום מסוים״ מותר כאשר המילה המחברת היא **״וגם״**. כאשר המילה המחברת היא **״או״** הפיצול אינו מותר.
+::: {#box-warn-and-not-or .thmwarn title="צירוף עובד עם ״וגם״, לא עם ״או״"}
+הצירוף עובד עבור טענות המחוברות ב**״וגם״**. עבור טענות המחוברות ב**״או״** הוא אינו עובד.
 :::
 
 <!-- TODO (לא עכשיו): הכישלון של ״או״ כאן הוא מקרה פרטי של כך ש-∀ אינו מתפלג מעל ∨.
@@ -2023,32 +2013,6 @@ fig.savefig("figures/c07_fig15.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 ```
 
-::: {#box-exr-window-characterisation .thmexr}
-הוכיחו כי $\lim\limits_{n\to\infty} a_n = L$ **אם ורק אם** לכל $m$ ו-$M$ המקיימים $m < L < M$ מתקיים $m < a_n < M$ החל ממקום מסוים.
-:::
-
-::: {.thmsol}
-**הכיוון הראשון.** נניח $,\lim\limits_{n\to\infty} a_n = L$ ויהיו $m$ ו-$M$ המקיימים $.m < L < M$ אפשר להפעיל עליהם את [](#box-thm-limit-window):
-
-סעיף (א) נותן $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.a_n > m$
-
-סעיף (ב) נותן $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.a_n < M$
-
-נבחר $.N = \max\left\{N_1,\ N_2\right\}$ אז לכל $n \geq N$ שני האי-שוויונות מתקיימים, כלומר $.m < a_n < M$
-
-**הכיוון השני.** נניח שהתנאי מתקיים לכל זוג מספרים $m$ ו-$M$ כאלה, ויהי $.\varepsilon > 0$
-
-המספרים $m = L - \varepsilon$ ו-$M = L + \varepsilon$ מקיימים $,m < L < M$ ולכן ההנחה חלה עליהם: החל ממקום מסוים מתקיים
-
-$$,L - \varepsilon < a_n < L + \varepsilon$$
-
-ובאופן שקול $.\left|a_n - L\right| < \varepsilon$
-
-זוהי בדיוק הגדרת הגבול, ולכן $.\lim\limits_{n\to\infty} a_n = L$
-:::
-
-
-
 :::::: {#box-sim-window .thmsim title="הקטע הפתוח $(m,\\ M)$"}
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -2070,6 +2034,7 @@ $$,L - \varepsilon < a_n < L + \varepsilon$$
 :::
 ::::
 ::::::
+
 
 ### אי-שוויונות עוברים לגבול
 
@@ -2106,144 +2071,6 @@ $$,L - \varepsilon < a_n < L + \varepsilon$$
 
 לכן מ-$a_n > m$ לכל $n$ אפשר להסיק רק $,L \geq m$ ולעולם לא $.L > m$
 :::
-
-```{python}
-#| echo: false
-#| output: false
-import numpy as np
-import matplotlib.pyplot as plt
-
-# The strict-to-weak picture: every term sits STRICTLY above the line, and the limit
-# sits exactly ON it. One frozen frame is the whole point, so this is a static figure
-# and not a widget — there is no parameter worth dragging.
-n = np.arange(1, 26)
-a = 1.0 / n
-
-fig, ax = plt.subplots(figsize=(6.4, 3.0))
-ax.axhline(0, color="tab:red", lw=1.6, ls="--")
-ax.plot(n, a, "o", ms=5, color="tab:blue", zorder=3)
-# the limit itself, on the line the terms never reach
-ax.plot([25.8], [0], "o", ms=9, color="tab:red", zorder=4, clip_on=False)
-
-ax.annotate(r"$a_n = \frac{1}{n} > 0$", xy=(9, 0.42), fontsize=12, color="tab:blue")
-ax.annotate(r"$L = 0$", xy=(23.0, 0.075), fontsize=12, color="tab:red")
-
-ax.set_yticks([0, 0.5, 1.0])
-ax.set_xlabel("$n$")
-ax.set_xlim(0, 27)
-ax.set_ylim(-0.12, 1.1)
-ax.spines[["top", "right"]].set_visible(False)
-fig.savefig("figures/c07_fig18.png", dpi=150, bbox_inches="tight")
-plt.close(fig)
-```
-
-```{=latex}
-\par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig18.png}\hss}\endL\par
-\medskip
-```
-
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: כל איברי הסדרה $a_n = \frac{1}{n}$ נמצאים **מעל** הקו $,y = 0$ ואף אחד מהם אינו נוגע בו; ובכל זאת הגבול יושב בדיוק עליו. כך אי-שוויון חד על האיברים הופך לאי-שוויון חלש על הגבול.
-:::
-
-::: {.content-visible when-format="html"}
-![כל איברי הסדרה $a_n = \frac{1}{n}$ נמצאים **מעל** הקו $,y = 0$ ואף אחד מהם אינו נוגע בו; ובכל זאת הגבול יושב בדיוק עליו. כך אי-שוויון חד על האיברים הופך לאי-שוויון חלש על הגבול.](figures/c07_fig18.png){#fig-strict-becomes-weak width="62%" fig-align="center"}
-:::
-
-### יחידות הגבול
-
-אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.
-
-::: {#box-thm-limit-uniqueness .thmthm}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה. אם מתקיים $\lim_{n\to\infty}a_n = L_1$ וגם $\lim_{n \to \infty} a_n = L_2$ אז $.L_1 = L_2$
-
-כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.
-:::
-
-```{python}
-#| echo: false
-#| output: false
-import matplotlib.pyplot as plt
-
-L1, L2 = -1.0, 1.0
-Mid = (L1 + L2) / 2
-
-fig, ax = plt.subplots(figsize=(6.4, 1.9))
-ax.axhline(0, color="0.2", lw=1.3)
-
-for x, col, lab in [(L1, "tab:blue", "$L_1$"), (L2, "tab:red", "$L_2$")]:
-    ax.plot([x], [0], "o", ms=8, color=col, zorder=4)
-    ax.annotate(lab, xy=(x, -0.46), ha="center", fontsize=13, color=col)
-
-ax.plot([Mid, Mid], [-0.13, 0.13], color="0.15", lw=1.6, zorder=5)
-ax.annotate("$M$", xy=(Mid, -0.46), ha="center", fontsize=13, color="0.15")
-
-# the two halves, marked equal: M is the midpoint, and that is all the proof needs
-for x0, x1, y in [(L1, Mid, 0.34), (Mid, L2, 0.34)]:
-    ax.annotate("", xy=(x0, y), xytext=(x1, y),
-                arrowprops=dict(arrowstyle="<->", color="0.35", lw=1.1))
-ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((L1 + Mid) / 2, 0.44), ha="center", fontsize=11,
-            color="0.35")
-ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((Mid + L2) / 2, 0.44), ha="center", fontsize=11,
-            color="0.35")
-
-ax.annotate("", xy=(L1 - 0.9, 0.13), xytext=(Mid, 0.13),
-            arrowprops=dict(arrowstyle="-", color="tab:blue", lw=2.4, alpha=0.55))
-ax.annotate("$a_n < M$", xy=((L1 - 0.9 + Mid) / 2, 0.19), ha="center", fontsize=11,
-            color="tab:blue")
-ax.annotate("", xy=(Mid, -0.13), xytext=(L2 + 0.9, -0.13),
-            arrowprops=dict(arrowstyle="-", color="tab:red", lw=2.4, alpha=0.55))
-# to the right of L2, not above it: centred on the segment it would sit on the L2 label
-ax.annotate("$a_n > M$", xy=(L2 + 0.55, -0.26), ha="center", fontsize=11,
-            color="tab:red")
-
-ax.set_xlim(-2.3, 2.3)
-ax.set_ylim(-0.62, 0.62)
-ax.axis("off")
-fig.savefig("figures/c07_fig16.png", dpi=150, bbox_inches="tight")
-plt.close(fig)
-```
-
-:::::: thmproof
-נניח בשלילה ש-$.L_1 \neq L_2$
-
-**בלי הגבלת הכלליות נניח ש-**$.L_1 < L_2$
-
-::: {.thmexpl title="בלי הגבלת הכלליות"}
-הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-$L_1$ וב-$,L_2$ ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם $.L_1$ המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.
-:::
-
-ניקח את נקודת האמצע שבין שני הגבולות:
-
-$$.M = \frac{L_1 + L_2}{2}$$
-
-מתקיים $,L_1 < M < L_2$ ולכן אפשר להפעיל את [](#box-thm-limit-window) פעמיים, פעם על כל גבול:
-
-הסדרה מתכנסת ל-$L_1$ ומתקיים $,M > L_1$ ולכן לפי סעיף (ב) קיים $N_1$ כך שלכל $n \geq N_1$ מתקיים $.a_n < M$
-
-הסדרה מתכנסת ל-$L_2$ ומתקיים $,M < L_2$ ולכן לפי סעיף (א) קיים $N_2$ כך שלכל $n \geq N_2$ מתקיים $.a_n > M$
-
-נבחר $.N = \max\left\{N_1,\ N_2\right\}$ שני התנאים מתקיימים עבור $,n = N$ כלומר $a_N < M$ וגם $,a_N > M$ וזו סתירה.
-
-לכן ההנחה $L_1 \neq L_2$ אינה יכולה להתקיים, ומכאן $.L_1 = L_2$
-
-```{=latex}
-\par\medskip
-\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig16.png}\hss}\endL\par
-\medskip
-```
-
-::: {.content-visible when-format="pdf" style="text-align:center"}
-תרשים: $M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$
-:::
-
-::: {.content-visible when-format="html"}
-![$M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$](figures/c07_fig16.png){#fig-uniqueness-midpoint width="62%" fig-align="center"}
-:::
-::::::
-
-### תרגילים
 
 **תרגיל 1.** כל אחת מן הסדרות הבאות מתכנסת, והגבול שלה הוא אחד מן הערכים המוצעים. מצאו אותו. אין צורך בחישוב: חסמו את הסדרה, העבירו את החסמים לגבול, וראו איזה מן הערכים שורד.
 
@@ -2349,6 +2176,119 @@ $$.a_n = \frac{2n}{n} + \frac{\sin\left(n^{3}\right)}{n} = 2 + \frac{\sin\left(n
 שימו לב ש-$1$ יכול להיות הגבול, אף שכל איברי הסדרה מקיימים $b_n < 1$ ממש. זו אותה תופעה שבתיבה שלמעלה.
 :::
 
+**תרגיל 4.** הוכיחו כי $\lim\limits_{n\to\infty} a_n = L$ **אם ורק אם** לכל $m$ ו-$M$ המקיימים $m < L < M$ מתקיים $m < a_n < M$ החל ממקום מסוים.
+
+::: {.thmsol .foldable}
+**הכיוון הראשון.** נניח $,\lim\limits_{n\to\infty} a_n = L$ ויהיו $m$ ו-$M$ המקיימים $.m < L < M$ אפשר להפעיל עליהם את [](#box-thm-limit-window):
+
+סעיף (א) נותן $N_1 \in \mathbb{N}$ כך שלכל $n \geq N_1$ מתקיים $.a_n > m$
+
+סעיף (ב) נותן $N_2 \in \mathbb{N}$ כך שלכל $n \geq N_2$ מתקיים $.a_n < M$
+
+נבחר $.N = \max\left\{N_1,\ N_2\right\}$ אז לכל $n \geq N$ שני האי-שוויונות מתקיימים, כלומר $.m < a_n < M$
+
+**הכיוון השני.** נניח שהתנאי מתקיים לכל זוג מספרים $m$ ו-$M$ כאלה, ויהי $.\varepsilon > 0$
+
+המספרים $m = L - \varepsilon$ ו-$M = L + \varepsilon$ מקיימים $,m < L < M$ ולכן ההנחה חלה עליהם: החל ממקום מסוים מתקיים
+
+$$,L - \varepsilon < a_n < L + \varepsilon$$
+
+ובאופן שקול $.\left|a_n - L\right| < \varepsilon$
+
+זוהי בדיוק הגדרת הגבול, ולכן $.\lim\limits_{n\to\infty} a_n = L$
+:::
+
+### יחידות הגבול
+
+אם הגדרת ההתכנסות היא הפורמליזציה של הרעיון ״הסדרה מקרבת מספר״, עלינו לוודא שהיא מאפשרת לקרב מספר אחד בלבד. המשפט הבא אומר שאכן כך.
+
+::: {#box-thm-limit-uniqueness .thmthm}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. אם מתקיים $\lim_{n\to\infty}a_n = L_1$ וגם $\lim_{n \to \infty} a_n = L_2$ אז $.L_1 = L_2$
+
+כלומר, אם סדרה מתכנסת אז הגבול שלה הוא יחיד.
+:::
+
+```{python}
+#| echo: false
+#| output: false
+import matplotlib.pyplot as plt
+
+L1, L2 = -1.0, 1.0
+Mid = (L1 + L2) / 2
+
+fig, ax = plt.subplots(figsize=(6.4, 1.9))
+ax.axhline(0, color="0.2", lw=1.3)
+
+for x, col, lab in [(L1, "tab:blue", "$L_1$"), (L2, "tab:red", "$L_2$")]:
+    ax.plot([x], [0], "o", ms=8, color=col, zorder=4)
+    ax.annotate(lab, xy=(x, -0.46), ha="center", fontsize=13, color=col)
+
+ax.plot([Mid, Mid], [-0.13, 0.13], color="0.15", lw=1.6, zorder=5)
+ax.annotate("$M$", xy=(Mid, -0.46), ha="center", fontsize=13, color="0.15")
+
+# the two halves, marked equal: M is the midpoint, and that is all the proof needs
+for x0, x1, y in [(L1, Mid, 0.34), (Mid, L2, 0.34)]:
+    ax.annotate("", xy=(x0, y), xytext=(x1, y),
+                arrowprops=dict(arrowstyle="<->", color="0.35", lw=1.1))
+ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((L1 + Mid) / 2, 0.44), ha="center", fontsize=11,
+            color="0.35")
+ax.annotate("$\\frac{L_2-L_1}{2}$", xy=((Mid + L2) / 2, 0.44), ha="center", fontsize=11,
+            color="0.35")
+
+ax.annotate("", xy=(L1 - 0.9, 0.13), xytext=(Mid, 0.13),
+            arrowprops=dict(arrowstyle="-", color="tab:blue", lw=2.4, alpha=0.55))
+ax.annotate("$a_n < M$", xy=((L1 - 0.9 + Mid) / 2, 0.19), ha="center", fontsize=11,
+            color="tab:blue")
+ax.annotate("", xy=(Mid, -0.13), xytext=(L2 + 0.9, -0.13),
+            arrowprops=dict(arrowstyle="-", color="tab:red", lw=2.4, alpha=0.55))
+# to the right of L2, not above it: centred on the segment it would sit on the L2 label
+ax.annotate("$a_n > M$", xy=(L2 + 0.55, -0.26), ha="center", fontsize=11,
+            color="tab:red")
+
+ax.set_xlim(-2.3, 2.3)
+ax.set_ylim(-0.62, 0.62)
+ax.axis("off")
+fig.savefig("figures/c07_fig16.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+:::::: thmproof
+נניח בשלילה ש-$.L_1 \neq L_2$
+
+**בלי הגבלת הכלליות נניח ש-**$.L_1 < L_2$
+
+::: {.thmexpl title="בלי הגבלת הכלליות"}
+הביטוי הזה חוזר בהוכחות רבות וכדאי לעמוד על משמעותו: הטענה סימטרית ב-$L_1$ וב-$,L_2$ ולכן אם השניים שונים אחד מהם קטן מן האחר, ואין שום הפסד בכך שנקרא לקטן שבהם $.L_1$ המקרה השני הוא בדיוק אותה הוכחה עם החלפת התפקידים, ולכן אין צורך לכתוב אותו.
+:::
+
+ניקח את נקודת האמצע שבין שני הגבולות:
+
+$$.M = \frac{L_1 + L_2}{2}$$
+
+מתקיים $,L_1 < M < L_2$ ולכן אפשר להפעיל את [](#box-thm-limit-window) פעמיים, פעם על כל גבול:
+
+הסדרה מתכנסת ל-$L_1$ ומתקיים $,M > L_1$ ולכן לפי סעיף (ב) קיים $N_1$ כך שלכל $n \geq N_1$ מתקיים $.a_n < M$
+
+הסדרה מתכנסת ל-$L_2$ ומתקיים $,M < L_2$ ולכן לפי סעיף (א) קיים $N_2$ כך שלכל $n \geq N_2$ מתקיים $.a_n > M$
+
+נבחר $.N = \max\left\{N_1,\ N_2\right\}$ שני התנאים מתקיימים עבור $,n = N$ כלומר $a_N < M$ וגם $,a_N > M$ וזו סתירה.
+
+לכן ההנחה $L_1 \neq L_2$ אינה יכולה להתקיים, ומכאן $.L_1 = L_2$
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.62\linewidth]{figures/c07_fig16.png}\hss}\endL\par
+\medskip
+```
+
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: $M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$
+:::
+
+::: {.content-visible when-format="html"}
+![$M$ היא נקודת האמצע בין $L_1$ ל-$.L_2$ מצד אחד, עבור $n$ גדול מספיק $a_n$ נמצא משמאל ל-$,M$ כי $a_n$ מתכנס ל-$L_1$ ומתקיים $;L_1 < M$ ומצד שני מימינו, כי $a_n$ מתכנס ל-$L_2$ ומתקיים $.M < L_2$](figures/c07_fig16.png){#fig-uniqueness-midpoint width="62%" fig-align="center"}
+:::
+::::::
 
 :::::::::::: extra
 ## פיתוח עשרוני כסדרה (העשרה)

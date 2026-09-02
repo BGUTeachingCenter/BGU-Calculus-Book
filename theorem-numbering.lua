@@ -46,12 +46,22 @@ The filter RECURSES into nested divs, so boxes inside .optional (or any wrapper)
 are still labelled. Top-level boxes are numbered; boxes inside .optional are not.
 ]]
 
+-- .thmexr vs .thmqst — two different things that used to share one class:
+--   .thmexr "תרגיל פתור" — a worked exercise, stated as a problem and then solved. Lives
+--            in the flow of the subsection it illustrates, normally followed by a .thmsol
+--            (foldable or not). Exercises the READER is meant to attempt go in the
+--            end-of-section תרגילים block as plain **תרגיל N.** prose instead.
+--   .thmqst "שאלה"       — a conceptual question put to the reader to set up what follows
+--            ("does a_n > x force L > x?"), answered by the running text, not by a
+--            solution box. Its own colour, and the loud edge, so it reads as a beat in
+--            the argument rather than as a reference box.
 local BOX = {
   thmdef = { word = "הגדרה", css = "definition"  },
   thmthm = { word = "משפט",  css = "theorem"     },
   thmprp = { word = "טענה",  css = "proposition" },
   thmexm = { word = "דוגמה", css = "example"     },
-  thmqst = { word = "שאלה",  css = "question"   },
+  thmexr = { word = "תרגיל פתור", css = "question" },        -- keeps the old amber
+  thmqst = { word = "שאלה",  css = "concept-question" },     -- new colour
   thmsim = { word = "סימולציה", css = "simulation" },
   thmlem = { word = "למה",   css = "lemma"       },
   thmcor = { word = "מסקנה", css = "corollary"   },
