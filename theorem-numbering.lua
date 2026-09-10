@@ -118,6 +118,28 @@ local function opts_out(b)
   return b.attributes and b.attributes.numbered == "false"
 end
 
+-- numbered="true" is the mirror image: it opts an individual box of an UNNUMBERED class
+-- INTO the counter. Use it where one instance of a normally-unnumbered class really is a
+-- result worth citing — §8.5's two .thmkey method boxes want numbers, while §7.4's
+-- .thmkey conventions do not. Numbering the whole class would be the wrong lever.
+local function opts_in(b)
+  return b.attributes and b.attributes.numbered == "true"
+end
+
+-- icon="method" marks a box's ROLE, which is not the same as its class: .thmkey carries
+-- both a convention (§7.4's "החל ממקום מסוים") and a proof method (§8.5's מבחן ההפרש), and
+-- they should not look alike. The attribute becomes a class, thmicon-method, and
+-- _styles.html hangs a glyph off the label with ::before. HTML only — the PDF has no
+-- frames and simply ignores it. Keep the vocabulary SMALL (method / technique /
+-- convention); one icon per box would stop being a signal.
+local ICONS = { method = true, technique = true, convention = true }
+
+local function icon_class(b)
+  local ic = b.attributes and b.attributes.icon
+  if ic and ICONS[ic] then return "thmicon-" .. ic end
+  return nil
+end
+
 --------------------------------------------------------------------------------
 -- REFERENCE RESOLVER — the \label/\ref half of the filter.
 --
@@ -280,7 +302,13 @@ process = function(blocks, in_optional)
       elseif unnumbered_for(orig) then
         local u = unnumbered_for(orig)
         local t = b.attributes and b.attributes.title
-        table.insert(b.content, 1, label_para(u.word, t))
+        local text = u.word
+        if opts_in(b) and not in_optional and chap then
+          item = item + 1
+          text = u.word .. " " .. chap .. "." .. section .. "." .. item
+          record(b, text)
+        end
+        table.insert(b.content, 1, label_para(text, t))
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-" .. u.css }
       else
@@ -302,6 +330,10 @@ process = function(blocks, in_optional)
           b.content = process(b.content, in_optional)   -- generic wrapper: recurse
         end
       end
+
+      -- after every branch above has settled b.classes, so one place covers them all
+      local ic = icon_class(b)
+      if ic then b.classes[#b.classes + 1] = ic end
 
       if do_collapse and is_html then
         -- title= supplies the <summary> text for .foldable and .optional alike; plain

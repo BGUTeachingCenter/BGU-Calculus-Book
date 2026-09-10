@@ -1,0 +1,627 @@
+# Book index
+
+**Generated — do not edit by hand.** Regenerate with `python3 make-index.py`
+from `BGU-Calculus-Book/`. Parses the `.qmd` sources, so it needs no render.
+
+Box numbers are deliberately absent: they are produced by `theorem-numbering.lua`
+at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
+
+
+## `01-logic.qmd` — שפת המתמטיקה ולוגיקה
+
+- **מבוא קצר ללוגיקה מתמטית**
+    - דוגמה       `box-exm-deduction`
+- **פסוקים**
+    - הגדרה       `box-def-proposition`
+    - דוגמה       `box-exm-propositions`
+    - הגדרה       `box-def-predicate`
+    - דוגמה       `box-exm-predicate`
+- **קשרים לוגיים**
+  - *שלילה*
+    - דוגמה       `box-exm-negation`
+  - *וגם*
+    - דוגמה       `box-exm-conjunction`
+  - *או*
+    - דוגמה       `box-exm-or-jokes`
+  - *גרירה*
+    - דוגמה       `box-exm-implication-smoke`
+  - *שקילות*
+    - דוגמה       `box-exm-equivalence`
+- **כמתים לוגיים**
+  - *לכל*
+  - *קיים*
+  - *חידה לסיכום*
+- **מונחים נפוצים.**
+  - *״יהי״ ו״תהי״*
+  - *״נניח״*
+    - ״נניח בשלילה״
+  - *הסימן $\blacksquare$ (סוף הוכחה)*
+
+## `02-sets.qmd` — קבוצות
+
+- **איברים והכלה**
+    - הגדרה       `box-def-set-equality`
+    - הגדרה       `box-def-subset`
+    - דוגמה       `box-exm-subset`
+    - טענה        `box-prp-double-inclusion`
+    - הגדרה       `box-def-set-builder`
+    - דוגמה       `box-exm-set-builder`
+- **הכמתים בשפה של תורת הקבוצות**
+- **הקבוצה הריקה**
+    - הגדרה       `box-def-empty-set`
+    - טענה        `box-prp-empty-subset`
+- **פעולות על קבוצות: איחוד, חיתוך והפרש**
+  - *איחוד*
+    - הגדרה       `box-def-union`
+    - דוגמה       `box-exm-union`
+  - *חיתוך*
+    - הגדרה       `box-def-intersection`
+    - דוגמה       `box-exm-intersection`
+  - *הפרש*
+    - הגדרה       `box-def-difference`
+    - דוגמה       `box-exm-difference`
+  - *הפרש סימטרי*
+    - הגדרה       `box-def-symmetric-difference`
+    - דוגמה       `box-exm-symmetric-difference`
+    - טענה        `box-prp-symmetric-difference`
+  - *משלים*
+    - הגדרה       `box-def-complement`
+    - דוגמה       `box-exm-complement`
+    - טענה        `box-prp-difference-complement`
+  - *תרגילים*
+    - 4 תרגילים
+- **עוצמה של קבוצה**
+- **פונקציות**
+
+## `03-number-systems.qmd` — מערכות מספרים: $\mathbb
+
+- **המספרים הטבעיים**
+    - הגדרה       `box-def-successor`
+  - *יחס סדר*
+    - הגדרה       `box-def-order`
+  - *הסדר על הטבעיים*
+    - הגדרה       `box-def-natural-order`
+    - טענה        `box-prp-natural-order-is-order`
+    - הגדרה       `box-def-leq`
+    - הגדרה       `box-def-min-max`
+  - *אין מספר טבעי גדול ביותר*
+    - טענה        `box-prp-no-max-natural`
+  - *עקרון הסדר הטוב*
+    - למה         `box-lem-finite-min`
+    - טענה        `box-prp-well-ordering`
+- **המספרים השלמים**
+    - הגדרה       `box-def-integers`
+    - הגדרה       `box-def-integer-order`
+    - טענה        `box-prp-integer-order-props`
+    - הגדרה       `box-def-divides`
+    - הגדרה       `box-def-gcd`
+    - משפט        `box-thm-gcd-coprime`
+- **המספרים הרציונליים**
+    - הגדרה       `box-def-rationals`
+    - הגדרה       `box-def-rational-order`
+    - טענה        `box-prp-rational-order-is-order`
+    - הגדרה       `box-def-reduced-fraction`
+- **המספרים הממשיים**
+  - *אי-רציונליות; $\sqrt{2}$ כדוגמה*
+    - הוכחות
+    - טענה        `box-prp-sqrt2-irrational`
+  - *תכונות הסדר על הממשיים*
+  - *הערך השלם*
+    - הגדרה       `box-def-floor`
+    - דוגמה       `box-exm-floor`
+    - טענה        `box-prp-floor-bounds`
+  - *תכונת ארכימדס*
+    - משפט        `box-thm-archimedes`
+  - *צפיפות*
+    - משפט        `box-thm-rationals-dense`
+    - משפט        `box-thm-irrationals-dense`
+- **המספרים המרוכבים**
+
+## `04-abs-value.qmd` — ערך מוחלט וקטעים
+
+- **קטעים**
+    - הגדרה       `box-def-interval`
+    - הגדרה       `box-def-unbounded-interval`
+- **ערך מוחלט**
+    - הגדרה       `box-def-absolute-value`
+    - דוגמה       `box-exm-abs-values`
+    - דוגמה       `box-exm-abs-distance`
+    - דוגמה       `box-exm-abs-no-solution`
+    - דוגמה       `box-exm-abs-open-interval`
+    - דוגמה       `box-exm-abs-closed-interval`
+    - דוגמה       `box-exm-abs-greater`
+  - *אי שוויון המשולש*
+    - משפט        `box-thm-triangle-inequality` · אי-שוויון המשולש
+    - דוגמה       `box-exm-triangle-inequality`
+- **סביבת-$\varepsilon$ של נקודה**
+    - הגדרה       `box-def-epsilon-neighborhood`
+    - דוגמה       `box-exm-epsilon-neighborhood`
+- **פתרון אי-שוויונות עם ערך מוחלט**
+    - תרגיל פתור  `box-qst-abs-sum-inequality`
+- **קבוצות חסומות**
+    - הגדרה       `box-def-bounded-set`
+    - משפט        `box-thm-bounded-center-radius`
+    - משפט        `box-thm-bounded-any-center`
+    - מסקנה       `box-cor-bounded-abs`
+    - סימולציה    `box-sim-bounded-set` · מ-$[k,\ K]$ אל החסם הסימטרי
+
+## `05-induction.qmd` — אינדוקציה
+
+- **עקרון האינדוקציה**
+    - דוגמה       `box-exm-induction-statements`
+    - משפט        `box-thm-induction` · עקרון האינדוקציה
+- **שלבי האינדוקציה**
+    - תרגיל פתור  `box-qst-induction-sum-squares`
+    - תרגיל פתור  `box-qst-induction-2n-geq-n`
+    - תרגיל פתור  `box-qst-induction-divisibility`
+- **הגדרה רקורסיבית**
+    - הגדרה       `box-def-recursive`
+    - דוגמה       `box-exm-factorial`
+    - דוגמה       `box-exm-recursive-sqrt`
+
+## `06-sequences-intro.qmd` — מבוא לסדרות
+
+
+## `07-sequences-limit.qmd` — גבול של סדרה
+
+- **הגדרה ודרכי תיאור**
+    - הגדרה       `box-def-sequence`
+    - הערה        — · ההגדרה הפורמלית: סדרה כפונקציה
+  - *הדרך ה״נאיבית״*
+  - *נוסחה סגורה*
+    - דוגמה       `box-exm-closed-form` · סדרות בנוסחה סגורה
+  - *רקורסיה*
+    - דוגמה       `box-exm-arithmetic` · סדרה חשבונית
+    - דוגמה       `box-exm-geometric` · סדרה הנדסית
+    - דוגמה       `box-exm-factorial` · העצרת
+    - דוגמה       `box-exm-fibonacci` · סדרת פיבונאצ׳י
+  - *תרגילים*
+    - 8 תרגילים
+- **גבול של סדרה: מוטיבציה ואינטואיציה**
+    - הערה        — · אותו רעיון, בהקשרים רבים
+  - *קירוב המספר $\pi$*
+    - הרעיון: מצולע עם הרבה צלעות דומה למעגל
+    - התהליך: הכפלת מספר הצלעות
+    - הערה        — · חילוץ שורש ריבועי
+    - שתי שאלות
+    - הערה        — · מדוע אין כאן ערך מוחלט
+    - האיברים הראשונים
+    - מ״נראה נכון״ להוכחה: מצולעים חוסמים
+    - חסימת השגיאה
+  - *מה למדנו*
+- **גבול של סדרה: הגדרה פורמלית ודוגמאות**
+    - הגדרה       `box-def-convergence`
+    - הגדרה       `box-def-convergence-strict`
+    - הערה        `box-rem-strict-vs-weak`
+  - *דוגמאות ושאלות פתורות*
+    - תרגיל פתור  `box-q-constant-seq` · סדרה קבועה
+    - סימולציה    `box-sim-const` · הסדרה $a_n = 1$
+    - תרגיל פתור  `box-q-one-over-n` · הסדרה $a_n=\frac{1}{n}$
+    - סימולציה    `box-sim-one-over-n` · הסדרה $a_n = \frac{1}{n}$
+    - למה         `box-lem-abs-to-zero`
+    - תרגיל פתור  `box-q-pm-one` · סדרה מתחלפת
+    - סימולציה    `box-sim-pm-one` · הסדרה $a_n = (-1)^{n-1}$
+    - הערה        `box-rem-cauchy`
+    - הגדרה       `box-def-cauchy`
+    - למה         `box-lem-cauchy-test` · מבחן קושי להתכנסות
+    - הערה        `box-rem-two-symbols`
+    - תרגיל פתור  `box-q-one-frac-n` · סדרה מתכנסת שאינה מונוטונית
+    - סימולציה    `box-sim-sin-n` · הסדרה $a_n = 1 + \frac{\sin(n)}{n}$
+    - תרגיל פתור  `box-q-seq-3n-4` · מנה של ביטויים לינאריים
+    - סימולציה    `box-sim-3n-4` · הסדרה $a_n = \frac{3n-4}{n+2}$
+  - *תרגילים*
+    - 10 תרגילים
+- **מסקנות מיידיות מהגדרת הגבול**
+  - *פירוש ״קיים $N$״ בשפה יומיומית*
+    - חשוב לזכור  `box-key-eventually` · מוסכמה: החל ממקום מסוים
+    - שימו לב     `box-warn-statement-about-n` · $P(n)$ היא טענה על $n$
+    - חשוב לזכור  `box-key-splitting` · פיצול טענות מהסוג ״החל ממקום מסוים״
+    - חשוב לזכור  `box-key-finitely-many` · שילוב טענות מהסוג ״החל ממקום מסוים״
+    - דוגמה       `box-exm-infinitely-many-fails` · שילוב של אינסוף טענות
+    - שימו לב     `box-warn-finiteness-essential` · הסופיות חיונית
+    - דוגמה       `box-exm-or-fails` · פיצול של טענה המחוברת ב״או״
+    - שימו לב     `box-warn-and-not-or` · הפיצול עובד עם ״וגם״, לא עם ״או״
+  - *טווח ערכי הסדרה החל ממקום מסוים*
+    - משפט        `box-thm-limit-window`
+    - תרגיל פתור  `box-exr-window-characterisation`
+    - סימולציה    `box-sim-window` · הקטע הפתוח $(m,\ M)$
+  - *אי-שוויונות עוברים לגבול*
+    - משפט        `box-thm-limit-preserves-order`
+    - שימו לב     `box-warn-strict-becomes-weak` · אי-שוויון חד אינו נשמר בגבול
+  - *יחידות הגבול*
+    - משפט        `box-thm-limit-uniqueness`
+    - הסבר        — · בלי הגבלת הכלליות
+  - *תרגילים*
+    - 3 תרגילים
+- **פיתוח עשרוני כסדרה (העשרה)**
+    - הגדרה       `box-def-decimal-expansion`
+    - טענה        `box-prp-decimal-convergence`
+    - דוגמה       `box-exm-expansion-25` · הפיתוח העשרוני של 2.5
+    - סימולציה    `box-sim-decimal` · הקירובים העשרוניים של $2.5$
+
+## `08-sequences-properties.qmd` — כלים לחישוב גבולות ולהוכחת התכנסות
+
+- **הקדמה**
+- **חסימוּת של סדרה מתכנסת (וההיפך השגוי)**
+  - *סדרה חסומה*
+    - הגדרה       `box-def-bounded-sequence`
+    - דוגמה       `box-exm-bounded-sequences` · סדרות חסומות ושאינן חסומות
+    - משפט        `box-thm-bounded-abs`
+    - חשוב לזכור  `box-key-any-bound-will-do` · כל חסם טוב, לא רק הטוב ביותר
+    - תרגיל פתור  `box-qst-bounded-examples` · אילו מהסדרות חסומות?
+    - 4 תרגילים
+  - *הקשר בין התכנסות לחסימות של סדרה*
+    - משפט        `box-thm-convergent-bounded`
+    - שימו לב     `box-warn-bounded-not-convergent` · חסימוּת אינה גוררת התכנסות
+    - מסקנה       `box-cor-unbounded-diverges`
+- **אריתמטיקה של גבולות**
+    - משפט        `box-thm-sequence-arithmetic`
+    - הסבר        `box-expl-arithmetic-method` · השיטה: פירוק ואי-שוויון המשולש
+    - הערה        — · (ללא מספר)
+  - *דוגמאות*
+    - תרגיל פתור  `box-exm-seq-rational-1` · מנת פולינומים מאותה דרגה
+    - תרגיל פתור  `box-exm-seq-rational-2` · מנת פולינומים מדרגות שונות
+  - *מסקנות מאריתמטיקת הגבולות*
+    - מסקנה       `box-cor-limit-constant-multiple` · כפל בקבוע
+    - מסקנה       `box-cor-limit-compare` · השוואה בין שתי סדרות
+    - מסקנה       `box-cor-limit-power` · חזקות
+    - משפט        `box-thm-limit-root` · שורשים
+  - *תרגילים*
+    - 7 תרגילים
+- **משפט הסנדוויץ׳; כפל אפסה בחסומה**
+    - משפט        `box-thm-squeeze-sequences` · כלל הסנדוויץ׳
+    - הגדרה       `box-def-null-sequence`
+    - משפט        `box-thm-null-times-bounded` · אפסה כפול חסומה
+  - *דוגמאות*
+    - תרגיל פתור  `box-qst-sin-n-over-n` · הגבול של $\dfrac{\sin n}{n}$
+    - תרגיל פתור  `box-qst-alt-over-n` · גורם חסום שאינו מתכנס
+    - תרגיל פתור  `box-qst-n-plus-sin` · שילוב עם אריתמטיקת הגבולות
+    - תרגיל פתור  `box-qst-sum-of-roots` · סכום שמספר מחובריו גדל
+  - *תרגילים*
+    - 4 תרגילים
+- **מונוטוניות של סדרות**
+  - *הגדרה ודוגמאות*
+    - הגדרה       `box-def-monotone-sequence`
+    - דוגמה       `box-exm-monotone-increasing` · הסדרה $a_n = n$
+    - דוגמה       `box-exm-monotone-decreasing` · הסדרה $b_n = \frac{1}{n}$
+    - דוגמה       `box-exm-not-monotone` · הסדרה $c_n = (-1)^{n}$
+    - טענה        `box-prp-monotone-shift-scale` · הזזה וכפל בקבוע
+    - דוגמה       `box-exm-shift-scale` · הסדרה $3 - \frac{2}{n}$
+    - בדיקה עצמית `box-chk-monotone`
+  - *שיטות הוכחה*
+    - חשוב לזכור  `box-key-monotone-difference` · מבחן ההפרש
+    - דוגמה       `box-exm-monotone-difference` · מבחן ההפרש: הסדרה $\frac{n}{n+1}$
+    - חשוב לזכור  `box-key-monotone-ratio` · מבחן המנה
+    - דוגמה       `box-exm-monotone-ratio` · מבחן המנה: הסדרה $\frac{n}{2^{n}}$
+    - דוגמה       `box-exm-ratio-fails` · מה קורה כשמדלגים על בדיקת הסימן
+    - שימו לב     `box-warn-ratio-needs-sign` · מבחן המנה דורש סימן קבוע
+    - הערה        `box-rem-monotone-eventual-sign` · סימן קבוע הוא כמעט חינם עבור סדרה מונוטונית
+  - *תרגילים*
+    - 4 תרגילים
+- **סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)**
+    - הערה        `box-rem-monotone-vs-convergent` · מונוטוניות והתכנסות אינן גוררות זו את זו
+    - משפט        `box-thm-monotone-bounded-converges`
+    - הערה        `box-rem-monotone-limit-is-sup` · מהו הגבול בהוכחה
+    - תרגיל פתור  `box-q-recursive-sequence` · סדרה רקורסיבית
+- **המספר $e$ והסדרה המתאימה**
+    - למה         `box-lem-bernoulli` · אי-שוויון ברנולי
+    - משפט        `box-thm-e-sequence-monotone-bounded`
+    - הגדרה       `box-def-number-e`
+
+## `09-sequences-infinity.qmd` — גבולות אינסופיים וסדרי גודל
+
+- **אינסוף כגבול**
+    - הגדרה       `box-def-limit-infinity`
+    - הגדרה       `box-def-limit-minus-infinity`
+    - הגדרה       `box-def-convergence-wide-sense`
+    - דוגמה       `box-exm-tends-to-infinity` · סדרות השואפות לאינסוף
+    - טענה        `box-def-shlilit`
+    - תרגיל פתור  `box-q-limit-minus-infinity` · שאיפה למינוס אינסוף לפי ההגדרה
+    - משפט        `box-thm-arithmetika-rachav`
+    - הערה        `box-rem-indeterminate-forms` · צורות שאין להן חוקיות
+  - *כלל הפיצה*
+    - משפט        `box-thm-piza-rachav` · משפט הפיצה
+    - תרגיל פתור  `box-exm-piza-1` · הסדרה $n+(-1)^n$
+    - תרגיל פתור  `box-exm-piza-2` · הסדרה $n^2/n!$
+    - תרגיל פתור  `box-exm-piza-3` · הסדרה $(1+1/n)^{n^2}$
+    - משפט        `box-thm-piza-minf` · כלל הפיצה ההפוכה
+- **מבחן המנה ומבחן השורש**
+  - *מבחן המנה*
+    - משפט        `box-thm-ratio-test` · מבחן המנה
+  - *מבחן השורש*
+    - משפט        `box-thm-root-test` · מבחן השורש
+    - תרגיל פתור  `box-exm-mivchanim-1` · הסדרה $2^n/n^2$
+    - תרגיל פתור  `box-exm-mivchanim-2` · הסדרה $3^n$
+    - מסקנה       `box-cor-geometric-limit` · גבול הסדרה ההנדסית
+    - משפט        `box-thm-dalembert` · משפט דלאמבר
+    - תרגיל פתור  `box-exm-dalembert-root-n` · שורש מסדר $n$ של $n$
+  - *אריתמטיקה של חזקות בשאיפות*
+    - משפט        `box-thm-power-arithmetic`
+    - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
+- **יחסי הגדילה הבסיסיים: $n^k \ll k^n \ll n! \ll n^n$**
+  - *סדר שואף לאינסוף בסדרות*
+    - משפט        `box-thm-growth-orders`
+
+## `10-sequences-subsequences.qmd` — תת-סדרות וגבולות חלקיים
+
+- **תת-סדרות**
+    - הגדרה       `box-def-subsequence`
+    - דוגמה       `box-exm-subsequences` · תת-סדרות של סדרה נתונה
+    - הגדרה       `box-def-partial-limit`
+    - דוגמה       `box-exm-minus-one-power-n` · הגבולות החלקיים של $(-1)^n$
+    - משפט        `box-thm-subsequences-same-limit`
+    - מסקנה       `box-cor-two-partial-limits-diverge`
+    - טענה        `box-prp-covering-subsequences`
+    - תרגיל פתור  `box-exm-gvulot-chelkiim` · מציאת כל הגבולות החלקיים
+- **משפט בולצאנו–ויירשטראס (ללא הוכחה)**
+    - משפט        `box-thm-chsuma-monotonit` · משפט החסומה והמונוטונית
+    - משפט        `box-thm-hitkansut-monotoniot` · משפט התכנסות הסדרות המונוטוניות
+    - משפט        `box-thm-sandvich` · משפט הסנדוויץ' החזק
+    - משפט        `box-thm-gvul-shoresh` · משפט גבול שורש
+    - דוגמה       `box-exm-gvul-shoresh` · שורש מסדר $n$ של $2$
+- **הגבול העליון והגבול התחתון (ללא הוכחות)**
+    - הגדרה       `box-def-limsup-liminf`
+    - משפט        `box-thm-limsup-eq-liminf`
+    - TODO        —
+- **סדרות מהצורה $(1+a_n)^{1/a_n}$ כאשר $a_n\to 0$**
+    - משפט        `box-thm-e-general-form`
+    - תרגיל פתור  `box-exm-gvul-e` · הסדרה $(1-1/n)^n$
+    - TODO        —
+
+## `11-functions-intro.qmd` — מבוא לפונקציות
+
+- **מושג הפונקציה**
+    - הגדרה       `box-def-funkcia`
+    - הגדרה       `box-def-tmuna`
+    - דוגמה       `box-exm-tmuna`
+  - *חיבור*
+  - *חיסור*
+  - *כפל*
+  - *חילוק*
+- **תחום, טווח ותמונה של פונקציה**
+    - TODO        —
+- **גרפים**
+    - TODO        —
+- **תכונות של פונקציות: מונוטוניות**
+- **פונקציות זוגיות ואי-זוגיות**
+- **פונקציות מחזוריות**
+- **הרכבת פונקציות**
+  - *הרכבת פונקציות*
+- **פונקציות הפוכות**
+  - *פונקציה הפיכה והופכית*
+  - *פונקציות הפוכות מוכרות*
+
+## `12-function-limits.qmd` — גבולות של פונקציות
+
+- **הגדרת הגבול של פונקציה + דוגמה**
+- **משפט היינה**
+  - *משפט היינה*
+  - *דוגמא מטעית היינה:*
+  - *פתרון:*
+- **אריתמטיקה של גבולות**
+  - *אריתמטיקה של גבולות*
+  - *דוגמאות שימושיות*
+    - 1) פונקציות מהצורה $x^a$
+    - 2) פונקציות מעריכיות
+    - 3) פונקציות טריגונומטריות
+    - 4) פונקציות לוגריתמיות
+- **משפט הסנדוויץ׳**
+  - *משפט כלל הסנדויץ'*
+  - *לדוגמא:*
+  - *פתרון:*
+- **גבולות חד-צדדיים**
+  - *דוגמא:*
+  - *פתרון:*
+  - *דוגמא נוספת:*
+    - טענה        `box-prp-onesided-limit`
+  - *דוגמא:*
+  - *פתרון:*
+- **הגבולות ה״מופלאים״: $\frac{\sin x}{x}$, $\frac{1-\cos x}{x^2}$**
+- **גבולות מופלאים נוספים: $(1+x)^{1/x}$, $\frac{\ln(1+x)}{x}$, $\frac{e^x-1}{x}$, $\frac{(1+x)^a-1}{x}$**
+  - *הסבר ל-(3)*
+  - *הסבר ל-(4)*
+  - *הסבר ל-(5)*
+  - *הסבר ל-(6)*
+  - *הסבר ל-(3)*
+  - *הסבר ל-(4)*
+  - *הסבר ל-(5)*
+  - *הסבר ל-(6)*
+- **אינסוף כגבול וגבול באינסוף**
+  - *גבולות לא סופיים של פונקציות*
+  - *האחד מבל האפשרויות של גבולות לא סופיים*
+  - *נכון תמיד לכל סוגי הגבולות:*
+
+## `13-continuity.qmd` — רציפות
+
+- **הגדרת רציפות בנקודה ובקטע**
+  - *פונקציות רציפות*
+  - *דוגמאות:*
+- **דוגמה: פונקציה מפוצלת עם גבולות מופלאים ופרמטר**
+  - *דוגמא נוספת*
+- **דוגמה: פונקציית דיריכלה**
+  - *פונקציית דיריכלה*
+- **דוגמה: פונקציית הערך השלם**
+  - *דוגמאות מיוחדות*
+- **אריתמטיקה של פונקציות רציפות**
+  - *אריתמטיקה של פונקציות רציפות*
+    - משפט ערך הביניים
+- **פונקציות אלמנטריות**
+  - *פונקציה אלמנטרית*
+- **משפט ערך הביניים**
+- **דוגמה: חוסר רציפות בנקודה אחת הורס את המסקנה**
+- **דוגמה: קיום פתרון של משוואה**
+  - *דוגמאות לשימושים בערך הביניים*
+- **דוגמה: קיום מספר פתרונות של משוואה**
+- **משפט ויירשטראס**
+  - *דוגמאות לגרפים:*
+- **נקודות אי-רציפות: סליקה, קפיצה ועיקרית**
+
+## `14-derivative.qmd` — הנגזרת
+
+- **אינטואיציה גיאומטרית ופיזיקלית למושג הנגזרת**
+- **הגדרת הנגזרת**
+- **חישובי נגזרת לפונקציות בסיסיות: $C,\ x^a,\ \sin x,\ \cos x,\ e^x,\ \ln x,\ |x|$**
+  - *דוגמאות:*
+- **הקשר בין גזירוּת לרציפות**
+    - משפט        `box-thm-gzira-retzifut`
+    - 1 תרגילים
+- **אריתמטיקה של נגזרות**
+    - משפט        `box-thm-aritmetika-nagzeret`
+- **כלל השרשרת**
+    - משפט        `box-thm-chain-rule`
+- **נגזרת של פונקציה הפוכה**
+    - משפט        `box-thm-inverse-derivative`
+- **נגזרות של $\sqrt{x}$, $\log_a x$, $\arctan x$, $\arccos x$, $\arcsin x$**
+    - TODO        —
+- **נוסחת המשיק והקירוב הלינארי**
+    - TODO        —
+- **נגזרת חד-צדדית**
+    - משפט        `box-thm-derivative-iff-one-sided`
+
+## `15-derivative-applications.qmd` — שימושים של הנגזרת
+
+- **קיצון מקומי ומשפט פרמה**
+    - משפט        `box-thm-fermat`
+  - *טעויות נפוצות:*
+  - *הוכחה למשפט פרמה*
+- **מציאת קיצון של פונקציה רציפה בקטע סגור**
+  - *דוגמא:*
+    - דוגמה       `box-exm-max-min-x3-3x`
+- **משפט רול**
+    - משפט        `box-thm-rolle`
+  - *הוכחת משפט רול*
+- **משפט לגראנז'**
+    - משפט        `box-thm-lagrange`
+  - *דוגמא:*
+    - דוגמה       `box-exm-lagrange-sin-sqrt`
+  - *הוכחת משפט לגראנג'*
+- **מסקנות ממשפט לגראנז' — מונוטוניות**
+    - משפט        `box-thm-monotone-derivative`
+  - *הוכחה לסעיף (א)*
+  - *תרגיל (1)*
+  - *תרגיל (2)*
+- **משפט קושי**
+- **כלל לופיטל ($0/0$)**
+  - *דוגמאות:*
+- **כלל לופיטל ($\infty/\infty$)**
+  - *דוגמאות:*
+
+## `16-higher-derivatives.qmd` — נגזרות מסדר גבוה וחקירת פונקציות
+
+- **הגדרת הנגזרת מסדר גבוה וסימונים**
+- **דוגמאות לנגזרת מסדר גבוה**
+    - TODO        —
+- **פולינום טיילור ומקלורן**
+  - *רעיון ראשון - פולינום טיילור*
+- **מציאת פולינום מקלורן מסדר $n$**
+  - *פולינום מקלורן*
+- **סימון $o(x^n)$ של פיאנו והשימוש בו לחישוב גבולות**
+  - *רעיון שני*
+    - חישובי גבולות
+    - משפט        `box-thm-taylor-limit`
+  - *השארית*
+  - *סדרי גודל*
+  - *דוגמאות:*
+  - *השארית בטיילור*
+  - *דוגמאות:*
+- **משפט לגראנז' על השארית**
+    - משפט        `box-thm-lagrange-remainder`
+  - *דוגמא:*
+- **מבחן הנגזרת השנייה לנקודות קיצון מקומי**
+    - משפט        `box-thm-second-derivative-test`
+  - *הסבר רעיוני למשפט*
+    - דוגמה       `box-exm-critical-points`
+- **קמירות וקעירות של פונקציה**
+    - משפט        `box-thm-convexity`
+    - דוגמה       `box-exm-convexity`
+- **נקודת פיתול**
+    - TODO        —
+- **אסימפטוטות — אנכיות ומשופעות**
+  - *אסימפטוטה אנכית*
+    - דוגמה       `box-exm-vertical-asymptote`
+  - *אסימפטוטה משופעת*
+    - דוגמה       `box-exm-oblique-asymptote`
+- **שרטוט גרף של פונקציה**
+    - TODO        —
+
+## `17-indefinite-integral.qmd` — האינטגרל הלא-מסוים
+
+- **הגדרת האינטגרל הלא-מסוים**
+  - *אינטגרל לא מסוים*
+- **אינטגרלים מיידיים**
+  - *פונקציות אלמנטריות ונגזרותיהן*
+  - *אינטגרלים מיידיים*
+  - *טענה (סכום)*
+  - *טענה (כפל בקבוע)*
+- **אינטגרציה בחלקים**
+  - *שיטת האינטגרציה בחלקים*
+- **החלפת משתנה אינטגרציה — שיטת ההצבה**
+  - *שיטת ההצבה / כלל השרשרת מאחורה*
+  - *שיטת ההצבה: חזרה והרחבה*
+  - *שיטה ראשונה*
+- **הצבות חשובות: $a\sin x$ באינטגרל של $\sqrt{a^2-x^2}$**
+  - *שיטה שנייה*
+- **הצבת ויירשטראס (ההצבה האוניברסלית $t=\tan(x/2)$)**
+  - *הצבת ויירשטראס*
+- **אינטגרציה של פונקציות רציונליות**
+  - *אינטגרלים של פונקציות רציונליות*
+  - *אינטגרלים מסוימים*
+  - *שיטת ההשלמה לריבוע*
+  - *שיטת הפירוק לאברים חלקים*
+  - *דוגמאות נוספות*
+  - *שיטה ראשונה- פישוט המונה*
+  - *שיטה שנייה- הצבות*
+
+## `18-definite-integral.qmd` — האינטגרל המסוים
+
+- **חלוקה של קטע, עובי החלוקה ובחירת נקודות**
+- **סכום רימן**
+  - *דוגמא*
+  - *פיתוח האינטואיציה*
+- **פונקציה אינטגרבילית בקטע**
+  - *מהסכומים והתחומים*
+- **פונקציית דיריכלה כפונקציה שאינה אינטגרבילית**
+  - *דוגמא*
+- **משפט: כל פונקציה רציפה בקטע סגור אינטגרבילית**
+  - *משפט*
+- **משפט: כל פונקציה מונוטונית בקטע סגור אינטגרבילית**
+    - TODO        —
+- **משפט: פונקציה חסומה עם מספר סופי של נקודות אי-רציפות אינטגרבילית**
+- **המשפט היסודי של החשבון האינפיניטסימלי**
+- **נוסחת ניוטון-לייבניץ ומסקנות לגבי נגזרת של אינטגרל**
+  - *הוכחת המשפט*
+    - הגדרה       `rem-hagdara`
+  - *דוגמאות*
+    - הגדרה       `rem-zugiut`
+- **דוגמה: גבול עם אינטגרל**
+    - TODO        —
+- **שימושים: שטח, נפח גוף סיבוב ואורך עקומה**
+
+## `19-improper-integral.qmd` — האינטגרל המוכלל
+
+- **הגדרת האינטגרל המוכלל (מהסוג הראשון — בקרן)**
+    - TODO        —
+- **דוגמאות לחישוב אינטגרל מוכלל**
+    - TODO        —
+- **מבחן ההשוואה לפונקציות אי-שליליות**
+    - TODO        —
+- **מבחן ההשוואה הגבולית לפונקציות אי-שליליות**
+    - TODO        —
+
+## Totals
+
+- דוגמה: 55
+- הגדרה: 49
+- משפט: 47
+- תרגיל: 45
+- תרגיל פתור: 27
+- טענה: 16
+- TODO: 15
+- הערה: 12
+- סימולציה: 8
+- מסקנה: 7
+- חשוב לזכור: 6
+- שימו לב: 6
+- למה: 4
+- הסבר: 2
+- בדיקה עצמית: 1

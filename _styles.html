@@ -261,6 +261,18 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role icons (icon="method" etc. on the box). The glyph hangs off the bold label, so it
+   reads as part of it rather than as decoration floating in the margin. HTML only: the
+   PDF never sees these rules. U+FE0E forces TEXT presentation — without it some
+   platforms substitute a colour emoji, which would clash with everything else here. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.4em;
+  font-weight: 400;
+  opacity: 0.75;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "\2699\FE0E"; }  /* gear — a method to apply */
+.thmbox.thmicon-technique  > p:first-child > strong::before { content: "\270E\FE0E"; }  /* pencil — a manipulation to perform */
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "\2261"; }        /* ≡ — a naming we adopt. BMP only: U+1F58B fell back to emoji/tofu */
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
