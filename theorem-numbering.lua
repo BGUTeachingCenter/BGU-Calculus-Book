@@ -77,10 +77,15 @@ local BOX = {
 --              aside you may skip, a warning is the thing students get wrong.
 --   .thmkey  — the warning's blue counterpart: a convention or a fact the reader must
 --              carry forward, rather than a mistake to avoid. Same loud treatment.
+--   .thmchk  — "בדיקה עצמית": a short mid-section check that the reader has followed,
+--              normally a quiz plus a foldable solution. UNNUMBERED on purpose — it is a
+--              prompt, not a result, and nothing will ever cite "בדיקה עצמית 8.5.4".
+--              Move it to BOX if that ever stops being true.
 local UNNUMBERED = {
   thmexpl = { word = "הסבר",      css = "explanation" },
   thmwarn = { word = "שימו לב",   css = "warning"     },
   thmkey  = { word = "חשוב לזכור", css = "key-point"   },
+  thmchk  = { word = "בדיקה עצמית", css = "self-check" },
 }
 
 local function chapter_number()

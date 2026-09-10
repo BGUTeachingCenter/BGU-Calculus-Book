@@ -1043,7 +1043,9 @@ $$.0 \leq \left|a_n\right| \leq \frac{n}{n^2+1}$$
 הסדרה שמימין אפסה, שכן בחלוקה ב-$n^2$ מתקבל $\dfrac{n}{n^2+1} = \dfrac{\dfrac{1}{n}}{1 + \dfrac{1}{n^2}} \longrightarrow \dfrac{0}{1} = 0$, וגם הסדרה הקבועה $0$ אפסה. לכן לפי [](#box-thm-squeeze-sequences) מתקיים $,\left|a_n\right| \to 0$ ומכאן $,a_n \to 0$ שכן שתי הטענות האלה הן אותו תנאי בדיוק.
 :::
 
-## מונוטוניות של סדרות; דוגמה
+## מונוטוניות של סדרות
+
+לאחר שדיברנו על תכונת החסימוּת, נעבור לדבר על תכונה נוספת של סדרות. בהינתן סדרה, די טבעי לשאול האם יש איזשהו סדר על איברי הסדרה, כלומר האם האיבר הבא בסדרה גדול מן האיבר הקודם או להפך, קטן ממנו, והאם איברי הסדרה גדלים או קטנים ככל שהאינדקס גדל. לתכונה הזאת יש שם, **מונוטוניות**, ואותה ננסח באופן פורמלי בהגדרה הבאה.
 
 ::: {#box-def-monotone-sequence .thmdef}
 תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא:
@@ -1056,20 +1058,461 @@ $$.0 \leq \left|a_n\right| \leq \frac{n}{n^2+1}$$
 הסדרה תיקרא **מונוטונית** אם היא מונוטונית עולה או מונוטונית יורדת.
 :::
 
-::: {#box-exm-monotone-examples .thmexm title="בדיקת מונוטוניות"}
-$a_n = n$ מונוטונית עולה ממש
+ההבדל בין ״עולה״ ל״עולה ממש״ הוא בדיוק ההבדל בין אי-שוויון חלש לאי-שוויון חד: בראשונה מותר גם שוויון בין שני איברים סמוכים, ובשנייה אסור. כך למשל הסדרה הקבועה $a_n = 5$ מקיימת $a_n \leq a_{n+1}$ לכל $,n$ ולכן היא מונוטונית עולה, ובאותה מידה היא מקיימת $a_n \geq a_{n+1}$ ולכן היא גם מונוטונית יורדת. עולה ממש או יורדת ממש היא אינה, שכן איבריה הסמוכים שווים זה לזה.
 
-כי לכל $n \ge 1$: $a_n = n < n+1 = a_{n+1}$
+שימו לב גם שההגדרה משווה בין כל איבר לבין **עוקבו בלבד**, ולא בין כל שני איברים בסדרה. מיד נראה שדי בכך.
 
-$c_n = \dfrac{1}{n}$ מונוטונית יורדת
+```{python}
+#| echo: false
+#| output: false
+import numpy as np
+import matplotlib.pyplot as plt
 
-כי לכל $n \ge 1$: $c_n = \dfrac{1}{n} > \dfrac{1}{n+1} = c_{n+1}$
+# Two views of the same three sequences. NO connecting lines anywhere: a sequence is a
+# set of separate terms, and joining them draws a function that was never there.
+#   top row    — the usual (n, a_n) picture
+#   bottom row — the terms as points on the number line, with arrows for the first steps.
+# The bottom row is what makes monotonicity visible AS SUCH: for a monotone sequence
+# every arrow points the same way, and for (-1)^n they double back over two points.
+n = np.arange(1, 13)
+panels = [(n.astype(float),   r"$a_n = n$",           "tab:blue",  r"$a_n$"),
+          (1.0 / n,           r"$b_n = \frac{1}{n}$", "tab:green", r"$b_n$"),
+          ((-1.0) ** n,       r"$c_n = (-1)^n$",      "tab:red",   r"$c_n$")]
 
-$d_n = (-1)^n$ אינה מונוטונית
+fig, axes = plt.subplots(2, 3, figsize=(9.4, 4.4),
+                         gridspec_kw={"height_ratios": [2.4, 1]})
+for j, (y, lab, col, sym) in enumerate(panels):
+    ax = axes[0][j]
+    ax.plot(n, y, "o", ms=4.5, color=col)
+    ax.set_title(lab, fontsize=12, pad=8)
+    ax.set_xlabel("$n$")
+    ax.set_xticks([1, 4, 8, 12])
+    ax.spines[["top", "right"]].set_visible(False)
 
-$d_1 = -1$ , $d_2 = 1$ , $d_3 = -1$
+    ax1 = axes[1][j]
+    ax1.axhline(0, color="0.35", lw=1.0, zorder=1)
+    ax1.plot(y, np.zeros_like(y), "o", ms=5, color=col, zorder=3, clip_on=False)
+    # first few steps, stacked so repeated jumps stay legible for the alternating one
+    for i in range(5):
+        ax1.annotate("", xy=(y[i + 1], 0.22 + 0.17 * i), xytext=(y[i], 0.22 + 0.17 * i),
+                     arrowprops=dict(arrowstyle="->", color=col, lw=1.1, alpha=0.8))
+    pad = 0.12 * (y.max() - y.min())
+    ax1.set_xlim(y.min() - pad, y.max() + pad)
+    ax1.set_ylim(-0.25, 1.15)
+    ax1.set_yticks([])
+    ax1.set_xlabel(sym, fontsize=11)
+    ax1.spines[["top", "right", "left"]].set_visible(False)
+    ax1.spines["bottom"].set_visible(False)
+    ax1.tick_params(axis="x", labelsize=9)
 
-$d_1 < d_2 , d_3 < d_2$
+fig.tight_layout()
+fig.savefig("figures/c08_fig03.png", dpi=150, bbox_inches="tight")
+plt.close(fig)
+```
+
+```{=latex}
+\par\medskip
+\noindent\beginL\hbox to \linewidth{\hss\includegraphics[width=0.92\linewidth]{figures/c08_fig03.png}\hss}\endL\par
+\medskip
+```
+
+::: {.content-visible when-format="pdf" style="text-align:center"}
+תרשים: שלוש הסדרות שבדוגמאות, בשני ייצוגים. בשורה העליונה כל איבר מסומן כנקודה בגובה $a_n$ מעל האינדקס $;n$ בשורה התחתונה מסומנים ערכי הסדרה עצמם על ציר המספרים, והחצים מראים את המעבר מכל איבר לעוקבו. בשתי הסדרות הראשונות כל החצים מצביעים לאותו כיוון, ואילו בסדרה $c_n = (-1)^n$ הם חוזרים הלוך ושוב בין שתי נקודות בלבד, וזה בדיוק מה שאומר שהיא אינה מונוטונית.
+:::
+
+::: {.content-visible when-format="html"}
+![שלוש הסדרות שבדוגמאות, בשני ייצוגים. בשורה העליונה כל איבר מסומן כנקודה בגובה $a_n$ מעל האינדקס $;n$ בשורה התחתונה מסומנים ערכי הסדרה עצמם על ציר המספרים, והחצים מראים את המעבר מכל איבר לעוקבו. בשתי הסדרות הראשונות כל החצים מצביעים לאותו כיוון, ואילו בסדרה $c_n = (-1)^n$ הם חוזרים הלוך ושוב בין שתי נקודות בלבד, וזה בדיוק מה שאומר שהיא אינה מונוטונית.](figures/c08_fig03.png){#fig-monotone-three width="92%" fig-align="center"}
+:::
+
+::: {#box-exm-monotone-increasing .thmexm title="הסדרה $a_n = n$"}
+נראה שהסדרה $a_n = n$ מונוטונית **עולה ממש**. לפי ההגדרה עלינו להראות ש-$a_n < a_{n+1}$ לכל $.n \geq 1$
+
+נציב את שני האיברים: $a_n = n$ ו-$.a_{n+1} = n+1$ לכל $n$ מתקיים $,n < n+1$ וזהו בדיוק אי-השוויון הדרוש.
+
+בפרט הסדרה היא גם מונוטונית עולה במובן החלש, שכן מ-$a_n < a_{n+1}$ נובע $.a_n \leq a_{n+1}$
+:::
+
+::: {#box-exm-monotone-decreasing .thmexm title="הסדרה $b_n = \\frac{1}{n}$"}
+נראה שהסדרה $b_n = \dfrac{1}{n}$ מונוטונית **יורדת ממש**, כלומר $b_n > b_{n+1}$ לכל $.n \geq 1$
+
+שני האיברים הם $b_n = \dfrac{1}{n}$ ו-$.b_{n+1} = \dfrac{1}{n+1}$ שני המכנים חיוביים ומתקיים $,n < n+1$ וככל שהמכנה של שבר חיובי גדול יותר, השבר עצמו קטן יותר. לכן
+
+$$,\frac{1}{n} > \frac{1}{n+1}$$
+
+כלומר $,b_n > b_{n+1}$ כנדרש.
+:::
+
+::: {#box-exm-not-monotone .thmexm title="הסדרה $c_n = (-1)^{n}$"}
+נראה שהסדרה $c_n = \left(-1\right)^{n}$ **אינה מונוטונית**. לפי ההגדרה, סדרה היא מונוטונית אם היא עולה או יורדת, ולכן כדי לשלול מונוטוניות עלינו לשלול את שתי האפשרויות.
+
+נחשב את שלושת האיברים הראשונים:
+
+$$.c_1 = -1, \qquad c_2 = 1, \qquad c_3 = -1$$
+
+**הסדרה אינה יורדת.** סדרה יורדת מקיימת $c_n \geq c_{n+1}$ לכל $,n$ ובפרט הייתה צריכה לקיים $.c_1 \geq c_2$ אבל $,c_1 = -1$ ואילו $,c_2 = 1$ כלומר $,c_1 < c_2$ בסתירה.
+
+**הסדרה אינה עולה.** סדרה עולה מקיימת $c_n \leq c_{n+1}$ לכל $,n$ ובפרט הייתה צריכה לקיים $.c_2 \leq c_3$ אבל $,c_2 = 1$ ואילו $,c_3 = -1$ כלומר $,c_2 > c_3$ בסתירה.
+
+הסדרה אינה עולה ואינה יורדת, ולכן אינה מונוטונית.
+:::
+
+:::: {#box-chk-monotone .thmchk}
+**1.** איזו מן הסדרות הבאות מונוטונית **עולה ממש**?
+
+(א) $a_n = 5$ ; (ב) $a_n = \dfrac{1}{n}$ ; (ג) $a_n = n^{2}$ ; (ד) $a_n = \left(-1\right)^{n}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c">
+<button class="tf-opt" data-val="a">(א)</button>
+<button class="tf-opt" data-val="b">(ב)</button>
+<button class="tf-opt" data-val="c">(ג)</button>
+<button class="tf-opt" data-val="d">(ד)</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+**2.** איזו מן הסדרות הבאות מונוטונית **יורדת**?
+
+(א) $a_n = n$ ; (ב) $a_n = \dfrac{1}{n^{2}}$ ; (ג) $a_n = \left(-1\right)^{n}$ ; (ד) $a_n = n^{2} - n$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="b">
+<button class="tf-opt" data-val="a">(א)</button>
+<button class="tf-opt" data-val="b">(ב)</button>
+<button class="tf-opt" data-val="c">(ג)</button>
+<button class="tf-opt" data-val="d">(ד)</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+**3.** הסדרה הקבועה $a_n = 7$ היא:
+
+(א) עולה ממש ; (ב) יורדת ממש ; (ג) גם מונוטונית עולה וגם מונוטונית יורדת ; (ד) אינה מונוטונית
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c">
+<button class="tf-opt" data-val="a">(א)</button>
+<button class="tf-opt" data-val="b">(ב)</button>
+<button class="tf-opt" data-val="c">(ג)</button>
+<button class="tf-opt" data-val="d">(ד)</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+**4.** כל סדרה מונוטונית עולה ממש היא בפרט מונוטונית עולה.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="true">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+**5.** איזו מן הסדרות הבאות **אינה** מונוטונית?
+
+(א) $a_n = 2n+1$ ; (ב) $a_n = \dfrac{1}{n+1}$ ; (ג) $a_n = \dfrac{\left(-1\right)^{n}}{n}$ ; (ד) $a_n = -n$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c">
+<button class="tf-opt" data-val="a">(א)</button>
+<button class="tf-opt" data-val="b">(ב)</button>
+<button class="tf-opt" data-val="c">(ג)</button>
+<button class="tf-opt" data-val="d">(ד)</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+::::
+
+::: {.thmsol .foldable}
+**1. התשובה היא (ג).** לכל $n \geq 1$ מתקיים $,n^{2} < \left(n+1\right)^{2}$ ולכן הסדרה עולה ממש. הסדרה שבסעיף (א) קבועה, ולכן היא עולה ויורדת במובן החלש אך אינה עולה ממש; הסדרה שבסעיף (ב) יורדת ממש; והסדרה שבסעיף (ד) אינה מונוטונית כלל.
+
+**2. התשובה היא (ב).** לכל $n \geq 1$ מתקיים $,n^{2} < \left(n+1\right)^{2}$ ושני האגפים חיוביים, ולכן $,\dfrac{1}{n^{2}} > \dfrac{1}{\left(n+1\right)^{2}}$ כלומר הסדרה יורדת ממש. הסדרה שבסעיף (א) עולה, הסדרה שבסעיף (ג) אינה מונוטונית, והסדרה שבסעיף (ד) עולה: איבריה הם $0,\ 2,\ 6,\ 12,\ \dots$
+
+**3. התשובה היא (ג).** לכל $n$ מתקיים $,a_n = a_{n+1} = 7$ ובפרט גם $a_n \leq a_{n+1}$ וגם $,a_n \geq a_{n+1}$ ולכן הסדרה גם עולה וגם יורדת. אף אחד משני האי-שוויונות אינו חד, ולכן היא אינה עולה ממש ואינה יורדת ממש.
+
+**4. נכון.** אם $a_n < a_{n+1}$ לכל $,n$ אז בפרט $a_n \leq a_{n+1}$ לכל $,n$ שכן אי-שוויון חד גורר את האי-שוויון החלש המתאים.
+
+**5. התשובה היא (ג).** האיברים הראשונים של הסדרה $a_n = \dfrac{\left(-1\right)^{n}}{n}$ הם
+
+$$,a_1 = -1, \qquad a_2 = \frac{1}{2}, \qquad a_3 = -\frac{1}{3}$$
+
+ומ-$a_1 < a_2$ נובע שהיא אינה יורדת, ומ-$a_2 > a_3$ נובע שהיא אינה עולה. שלוש הסדרות האחרות מונוטוניות: (א) עולה ממש, (ב) יורדת ממש, ו-(ד) יורדת ממש.
+:::
+
+איך נדע שסדרה נתונה היא מונוטונית? בדוגמאות שלמעלה השווינו ישירות בין $a_n$ לבין $,a_{n+1}$ אבל כשהנוסחה מסובכת יותר נוח להשתמש באחת משתי שיטות קבועות: **ההפרש** $a_{n+1} - a_n$ ו**המנה** $.\dfrac{a_{n+1}}{a_n}$ נציג עכשיו את שתיהן במדויק.
+
+הדרך הפשוטה ביותר היא להתבונן בהפרש בין שני איברים סמוכים ולבדוק את **סימנו**. היתרון בכך הוא שהשוואה בין שני ביטויים הופכת לשאלה על סימן של ביטוי אחד, ובשאלות כאלה האלגברה מטפלת היטב.
+
+::: {#box-prp-monotone-difference .thmprp title="מבחן ההפרש"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. אז:
+
+(א) הסדרה מונוטונית **עולה** אם ורק אם $a_{n+1} - a_n \geq 0$ לכל $;n \geq 1$
+
+(ב) הסדרה מונוטונית **עולה ממש** אם ורק אם $a_{n+1} - a_n > 0$ לכל $;n \geq 1$
+
+(ג) הסדרה מונוטונית **יורדת** אם ורק אם $a_{n+1} - a_n \leq 0$ לכל $;n \geq 1$
+
+(ד) הסדרה מונוטונית **יורדת ממש** אם ורק אם $a_{n+1} - a_n < 0$ לכל $.n \geq 1$
+:::
+
+::: thmproof
+ארבעת הסעיפים זהים זה לזה, ובכולם מדובר בהעברת אגף בלבד. נראה את סעיף (א), והשאר מתקבלים באותו אופן בדיוק עם סימן האי-שוויון המתאים.
+
+לפי ההגדרה, הסדרה מונוטונית עולה אם ורק אם $a_n \leq a_{n+1}$ לכל $.n \geq 1$ נחסר $a_n$ משני האגפים; חיסור אותו מספר משני אגפים אינו משנה את כיוון אי-השוויון, ולכן התנאי שקול ל-
+
+$$.0 \leq a_{n+1} - a_n$$
+:::
+
+השיטה השנייה מתאימה במיוחד כשהסדרה בנויה ממכפלות ומחזקות, שאז המנה מצטמצמת יפה. לפני שנציג אותה נעצור על תכונה של סדרות מונוטוניות שכדאי להכיר בפני עצמה.
+
+::: {#box-prp-monotone-sign-change .thmprp title="סדרה מונוטונית מחליפה סימן פעם אחת לכל היותר"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה מונוטונית. אז קיים לכל היותר אינדקס אחד $n$ שעבורו $.a_n \cdot a_{n+1} < 0$
+:::
+
+התנאי $a_n \cdot a_{n+1} < 0$ אומר בדיוק ששני האיברים הסמוכים הם בעלי סימנים הפוכים, כלומר שבמעבר מ-$a_n$ ל-$a_{n+1}$ הסדרה **מחליפה סימן**.
+
+::: thmproof
+נניח שהסדרה מונוטונית עולה; המקרה היורד זהה, עם החלפת כיווני האי-שוויונות.
+
+נניח בשלילה שקיימים שני אינדקסים שונים כאלה, ונסמן אותם $m$ ו-$k$ כך ש-$.m < k$
+
+מכפלה של שני מספרים היא שלילית בדיוק כאשר סימניהם הפוכים. לכן ל-$a_m$ ול-$a_{m+1}$ יש סימנים הפוכים, ומכיוון שהסדרה עולה מתקיים $,a_m \leq a_{m+1}$ ולכן בהכרח השלילי הוא הראשון:
+
+$$.a_m < 0 < a_{m+1}$$
+
+באותו נימוק בדיוק, $.a_k < 0 < a_{k+1}$
+
+אבל $,m < k$ ולכן $,m+1 \leq k$ ומכיוון שהסדרה עולה מתקיים $.a_{m+1} \leq a_k$ נחבר את שלושת האי-שוויונות ונקבל
+
+$$,0 < a_{m+1} \leq a_k < 0$$
+
+כלומר $,0 < 0$ וזו סתירה.
+:::
+
+בפועל משתמשים בטענה הזאת בכיוון ההפוך: אם מצאנו **שני** מקומות שבהם שני איברים סמוכים הם בעלי סימנים הפוכים, אפשר לקבוע מיד שהסדרה אינה מונוטונית, בלי שום חישוב נוסף.
+
+::: {#box-prp-monotone-ratio .thmprp title="מבחן המנה"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה שכל איבריה **חיוביים**. אז:
+
+(א) הסדרה מונוטונית **עולה** אם ורק אם $\dfrac{a_{n+1}}{a_n} \geq 1$ לכל $;n \geq 1$
+
+(ב) הסדרה מונוטונית **יורדת** אם ורק אם $\dfrac{a_{n+1}}{a_n} \leq 1$ לכל $.n \geq 1$
+
+אם לעומת זאת כל איברי הסדרה **שליליים**, שני התנאים מתהפכים: הסדרה עולה אם ורק אם $\dfrac{a_{n+1}}{a_n} \leq 1$ לכל $,n$ ויורדת אם ורק אם $\dfrac{a_{n+1}}{a_n} \geq 1$ לכל $.n$
+:::
+
+::: thmproof
+נניח תחילה $a_n > 0$ לכל $.n$ כפל שני אגפי אי-שוויון במספר **חיובי** אינו משנה את כיוונו, ולכן מותר לכפול ב-$a_n$ ולקבל
+
+$$.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \geq a_n$$
+
+האגף הימני הוא בדיוק התנאי שהסדרה עולה, וזהו סעיף (א). סעיף (ב) מתקבל באותו אופן עם $\leq$ במקום $.\geq$
+
+נניח עכשיו $a_n < 0$ לכל $.n$ הפעם הכפל ב-$a_n$ הוא כפל במספר **שלילי**, ולכן הוא **הופך** את כיוון אי-השוויון:
+
+$$.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \leq a_n$$
+
+כלומר עבור סדרה שלילית מנה גדולה מ-$1$ מעידה דווקא על ירידה, ולא על עלייה.
+:::
+
+::: {#box-warn-ratio-needs-sign .thmwarn title="מבחן המנה דורש סימן קבוע"}
+לפני שמשתמשים במבחן המנה חובה לוודא שכל איברי הסדרה בעלי אותו סימן, ושאף אחד מהם אינו $,0$ שאחרת המנה אינה מוגדרת כלל.
+
+בלי הבדיקה הזאת המבחן נותן תשובות שגויות. למשל, עבור $a_n = \left(-1\right)^{n}$ מתקיים לכל $n$
+
+$$,\frac{a_{n+1}}{a_n} = \frac{\left(-1\right)^{n+1}}{\left(-1\right)^{n}} = -1 \leq 1$$
+
+ולפי סעיף (ב) היינו ״מסיקים״ שהסדרה יורדת. אבל ראינו כבר ב[](#box-exm-not-monotone) שהסדרה הזאת אינה מונוטונית כלל.
+:::
+
+בשני התרגילים הבאים נפעיל את שני המבחנים, אחד בכל תרגיל.
+
+::: {#box-exr-monotone-difference .thmexr title="שיטת ההפרש"}
+הראו שהסדרה $a_n = \dfrac{n}{n+1}$ מונוטונית עולה ממש.
+:::
+
+::: {.thmsol .foldable}
+נבדוק את הסימן של ההפרש $.a_{n+1} - a_n$ אם נראה שהוא חיובי לכל $,n$ סיימנו.
+
+נציב $a_{n+1} = \dfrac{n+1}{n+2}$ ונחסר:
+
+$$.a_{n+1} - a_n = \frac{n+1}{n+2} - \frac{n}{n+1}$$
+
+נאחד למכנה משותף $:\left(n+1\right)\left(n+2\right)$
+
+$$.a_{n+1} - a_n = \frac{\left(n+1\right)^{2} - n\left(n+2\right)}{\left(n+1\right)\left(n+2\right)}$$
+
+נפתח את המונה:
+
+$$.\left(n+1\right)^{2} - n\left(n+2\right) = \left(n^{2} + 2n + 1\right) - \left(n^{2} + 2n\right) = 1$$
+
+לכן
+
+$$,a_{n+1} - a_n = \frac{1}{\left(n+1\right)\left(n+2\right)} > 0$$
+
+שכן לכל $n \geq 1$ שני הגורמים במכנה חיוביים. מ-$a_{n+1} - a_n > 0$ נובע $,a_{n+1} > a_n$ כלומר הסדרה עולה ממש.
+:::
+
+::: {#box-exr-monotone-ratio .thmexr title="שיטת המנה"}
+הראו שהסדרה $a_n = \dfrac{n}{2^{n}}$ מונוטונית יורדת. האם היא יורדת ממש?
+:::
+
+::: {.thmsol .foldable}
+כל איברי הסדרה חיוביים, ולכן במקום לחסר נוח יותר לחלק ולהשוות את המנה ל-$.1$ אם המנה קטנה או שווה ל-$,1$ הסדרה יורדת.
+
+נציב $a_{n+1} = \dfrac{n+1}{2^{n+1}}$ ונחלק:
+
+$$.\frac{a_{n+1}}{a_n} = \frac{\dfrac{n+1}{2^{n+1}}}{\dfrac{n}{2^{n}}} = \frac{n+1}{2^{n+1}} \cdot \frac{2^{n}}{n} = \frac{n+1}{2n}$$
+
+נשווה את המנה הזאת ל-$:1$ מכיוון ש-$2n > 0$ אפשר לכפול בו את שני האגפים, ומתקבל
+
+$$.\frac{n+1}{2n} \leq 1 \iff n+1 \leq 2n \iff 1 \leq n$$
+
+התנאי $1 \leq n$ מתקיים לכל $n$ בסדרה, ולכן $\dfrac{a_{n+1}}{a_n} \leq 1$ תמיד. מכיוון ש-$a_n > 0$ אפשר לכפול בו וקיבלנו $,a_{n+1} \leq a_n$ כלומר הסדרה מונוטונית יורדת.
+
+**האם יורדת ממש?** לא. שוויון במנה מתקבל בדיוק כאשר $,n = 1$ ואכן
+
+$$,a_1 = \frac{1}{2^{1}} = \frac{1}{2} \qquad\text{,}\qquad a_2 = \frac{2}{2^{2}} = \frac{1}{2}$$
+
+כלומר $.a_1 = a_2$ עבור $n \geq 2$ האי-שוויון חד והסדרה כן יורדת ממש, אבל הצמד הראשון מונע ממנה להיות יורדת ממש כהגדרתה.
+:::
+
+### תרגילים
+
+**תרגיל 1.** קבעו אם הסדרה $a_n = \dfrac{n}{n^2+1}$ מונוטונית, ואם כן — עולה או יורדת. (רמז: הסתכלו על $.a_{n+1} - a_n$)
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="b" data-reveal>
+<button class="tf-opt" data-val="a">מונוטונית עולה</button>
+<button class="tf-opt" data-val="b">מונוטונית יורדת</button>
+<button class="tf-opt" data-val="c">אינה מונוטונית</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**מונוטונית יורדת.** נחשב את ההפרש. נציב $a_{n+1} = \dfrac{n+1}{\left(n+1\right)^{2}+1}$ ונאחד למכנה משותף:
+
+$$.a_{n+1} - a_n = \frac{n+1}{\left(n+1\right)^{2}+1} - \frac{n}{n^{2}+1} = \frac{\left(n+1\right)\left(n^{2}+1\right) - n\left(\left(n+1\right)^{2}+1\right)}{\left(\left(n+1\right)^{2}+1\right)\left(n^{2}+1\right)}$$
+
+שני הגורמים במכנה חיוביים, ולכן הסימן נקבע על ידי המונה בלבד. נפתח אותו:
+
+$$\left(n+1\right)\left(n^{2}+1\right) = n^{3} + n^{2} + n + 1$$
+
+$$n\left(\left(n+1\right)^{2}+1\right) = n\left(n^{2} + 2n + 2\right) = n^{3} + 2n^{2} + 2n$$
+
+ולכן המונה שווה
+
+$$.\left(n^{3} + n^{2} + n + 1\right) - \left(n^{3} + 2n^{2} + 2n\right) = -n^{2} - n + 1$$
+
+לכל $n \geq 1$ מתקיים $,n^{2} + n \geq 2 > 1$ ולכן $,-n^{2} - n + 1 < 0$ כלומר $.a_{n+1} < a_n$ הסדרה יורדת ממש, ובפרט מונוטונית יורדת.
+:::
+
+**תרגיל 2.** לכל אחת מן הסדרות הבאות, קבעו אם היא מונוטונית עולה, מונוטונית יורדת, או אינה מונוטונית.
+
+(א) הסדרה $1,\ 2,\ 2,\ 3,\ 3,\ 3,\ 4,\ 4,\ 4,\ 4,\ \dots$ (כל מספר טבעי $k$ מופיע $k$ פעמים ברציפות)
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="a" data-reveal>
+<button class="tf-opt" data-val="a">מונוטונית עולה</button>
+<button class="tf-opt" data-val="b">מונוטונית יורדת</button>
+<button class="tf-opt" data-val="c">אינה מונוטונית</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+(ב) $a_n = \left(-1\right)^{n} - n$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c" data-reveal>
+<button class="tf-opt" data-val="a">מונוטונית עולה</button>
+<button class="tf-opt" data-val="b">מונוטונית יורדת</button>
+<button class="tf-opt" data-val="c">אינה מונוטונית</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+(ג) $a_n = \dfrac{1}{n^{2}+1}$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="b" data-reveal>
+<button class="tf-opt" data-val="a">מונוטונית עולה</button>
+<button class="tf-opt" data-val="b">מונוטונית יורדת</button>
+<button class="tf-opt" data-val="c">אינה מונוטונית</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+(ד) $a_n = \sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor$
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="c" data-reveal>
+<button class="tf-opt" data-val="a">מונוטונית עולה</button>
+<button class="tf-opt" data-val="b">מונוטונית יורדת</button>
+<button class="tf-opt" data-val="c">אינה מונוטונית</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**סעיף (א).** מונוטונית עולה. כל איבר שווה לעוקבו או קטן ממנו באחד, ולעולם אינו גדול ממנו, ולכן $a_n \leq a_{n+1}$ לכל $.n$ שימו לב שהיא **אינה** עולה ממש, שכן יש בה איברים סמוכים שווים, למשל האיבר השני והשלישי.
+
+**סעיף (ב).** אינה מונוטונית. נחשב את שלושת האיברים הראשונים:
+
+$$.a_1 = \left(-1\right) - 1 = -2, \qquad a_2 = 1 - 2 = -1, \qquad a_3 = \left(-1\right) - 3 = -4$$
+
+מ-$a_1 = -2 < -1 = a_2$ נובע שהסדרה אינה יורדת, ומ-$a_2 = -1 > -4 = a_3$ נובע שהיא אינה עולה.
+
+**סעיף (ג).** מונוטונית יורדת. לכל $n \geq 1$ מתקיים $,n^{2} + 1 < \left(n+1\right)^{2} + 1$ ושני האגפים חיוביים, ולכן השבר בעל המכנה הגדול יותר קטן יותר:
+
+$$.\frac{1}{n^{2}+1} > \frac{1}{\left(n+1\right)^{2}+1}$$
+
+כלומר $,a_n > a_{n+1}$ והסדרה יורדת ממש.
+
+**סעיף (ד).** אינה מונוטונית. הסדרה מודדת את ה״שארית״ של $\sqrt{n}$ מעבר לערך השלם שלו. נחשב:
+
+$$.a_1 = 1 - 1 = 0, \qquad a_2 = \sqrt{2} - 1 \approx 0.41, \qquad a_4 = 2 - 2 = 0$$
+
+מ-$a_1 < a_2$ נובע שהסדרה אינה יורדת. מ-$a_2 \approx 0.41 > 0 = a_4$ נובע שהיא אינה עולה, שכן סדרה עולה מקיימת $a_2 \leq a_3 \leq a_4$ ובפרט $.a_2 \leq a_4$
+:::
+
+**תרגיל 3.** כל סדרה מונוטונית היא חסומה.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="tf-quiz" data-correct="false" data-reveal>
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+```
+:::
+
+::: {.thmsol .foldable}
+**לא נכון.** הסדרה $a_n = n$ מונוטונית עולה ממש, כפי שראינו למעלה, ואינה חסומה, כפי שראינו ב[](#box-exm-bounded-sequences).
+
+מונוטוניות וחסימוּת הן אפוא שתי תכונות נפרדות. בסעיף הבא נראה מה קורה כאשר סדרה מקיימת את שתיהן יחד.
 :::
 
 ## סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)
