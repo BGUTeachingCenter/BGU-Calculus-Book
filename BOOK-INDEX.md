@@ -324,6 +324,22 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - משפט        `box-thm-two-monotone-sequences`
   - *תרגילים*
     - 4 תרגילים
+- **חישוב גבולות סדרות עם גבול בחזקה**
+  - *הסדרה $r^{n}$*
+    - משפט        `box-thm-geometric-power` · הסדרה הגאומטרית
+    - דוגמה       `box-exm-geometric-power`
+  - *הסדרה $\sqrt[n]{r}$*
+    - משפט        `box-thm-nth-root-of-a`
+    - דוגמה       `box-exm-nth-root`
+  - *הסדרה $x^{t_n}$ כאשר $t_n \to 0$*
+    - משפט        `box-thm-power-to-zero`
+    - הגדרה       `box-def-real-power` · חזקה עם מעריך ממשי
+    - מסקנה       `box-cor-real-power-laws`
+  - *אריתמטיקה של חזקות*
+    - משפט        `box-thm-power-arithmetic` · גבול של חזקה
+    - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
+  - *תרגילים*
+    - 3 תרגילים
 
 ## `09-sequences-infinity.qmd` — גבולות אינסופיים וסדרי גודל
 
@@ -340,7 +356,8 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - טענה        `box-prp-infinite-limit-unbounded`
     - דוגמה       `box-exm-infinite-limit-unbounded`
     - דוגמה       `box-exm-unbounded-no-limit` · סדרה שאינה חסומה ואינה שואפת לאינסוף
-    - חשוב לזכור  `box-key-unbounded-not-infinite` · אי-חסימוּת אינה שאיפה לאינסוף
+    - שימו לב     `box-warn-unbounded-not-infinite` · אי-חסימוּת אינה שאיפה לאינסוף
+    - בדיקה עצמית `box-chk-abs-to-infinity`
     - משפט        `box-thm-monotone-wide-sense`
     - דוגמה       `box-exm-monotone-wide-sense`
   - *כלל הפיצה*
@@ -357,14 +374,18 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - שאלה        `box-qst-infinite-sum-or-difference`
     - שאלה        `box-qst-quotient-through-infinity`
     - שאלה        `box-qst-real-limit-infinite-result`
+    - הגדרה       `box-def-extended-arithmetic` · פעולות ב-$\overline{\mathbb{R}}$
+    - הגדרה       `box-def-one-sided-limit` · שאיפה מלמעלה ומלמטה
+    - דוגמה       `box-exm-reciprocal-of-null` · שלוש סדרות השואפות לאפס
+    - שימו לב     `box-warn-one-over-zero` · $\frac{1}{0}$ אינו מוגדר
     - משפט        `box-thm-arithmetika-rachav` · אריתמטיקה של גבולות אינסופיים
+    - הערה        — · (ללא מספר)
     - דוגמה       `box-exm-infinite-arithmetic` · שימוש בסעיפי המשפט
   - *צורות לא מוגדרות*
     - הערה        `box-rem-indeterminate-forms` · צורות שאין להן חוקיות
+    - דוגמה       `box-exm-resolving-indeterminate` · צורה לא מוגדרת שנפתרת
     - שימו לב     `box-warn-indeterminate-not-no-limit` · צורה לא מוגדרת אינה אומרת שאין גבול
-  - *אריתמטיקה של חזקות בשאיפות*
-    - משפט        `box-thm-power-arithmetic` · גבול של חזקה
-    - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
+    - דוגמה       `box-exm-one-to-infinity` · שלוש סדרות מן הצורה $1^{\infty}$
     - שימו לב     `box-warn-one-to-infinity` · הצורה $1^{\infty}$
 - **מבחן המנה ומבחן השורש**
   - *מבחן המנה*
@@ -653,19 +674,19 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 
 ## Totals
 
-- דוגמה: 69
-- תרגיל: 55
-- הגדרה: 51
-- משפט: 51
+- דוגמה: 74
+- תרגיל: 58
+- הגדרה: 54
+- משפט: 54
 - תרגיל פתור: 29
 - טענה: 17
 - TODO: 16
-- חשוב לזכור: 12
-- הערה: 10
-- שימו לב: 10
+- שימו לב: 12
+- הערה: 11
+- חשוב לזכור: 11
 - סימולציה: 9
-- מסקנה: 7
+- מסקנה: 8
 - למה: 4
 - שאלה: 3
 - הסבר: 2
-- בדיקה עצמית: 1
+- בדיקה עצמית: 2
