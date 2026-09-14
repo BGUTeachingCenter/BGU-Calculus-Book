@@ -132,7 +132,25 @@ end
 -- _styles.html hangs a glyph off the label with ::before. HTML only — the PDF has no
 -- frames and simply ignores it. Keep the vocabulary SMALL (method / technique /
 -- convention); one icon per box would stop being a signal.
-local ICONS = { method = true, technique = true, convention = true }
+local ICONS = { method = true, calc = true, rule = true, convention = true, idea = true }
+
+-- A role also supplies the LABEL WORD, replacing the class's own. "חשוב לזכור 8.5.7 —
+-- מבחן ההפרש" said the generic thing twice; "שיטת הוכחה 8.5.7 — מבחן ההפרש" says what the
+-- box actually is. Only .thmkey takes a role word, because only its own label is generic:
+-- a theorem stays a theorem whatever role icon it carries. `idea` has no word on purpose
+-- — it IS the general case, so it keeps "חשוב לזכור".
+local ROLE_WORD = {
+  method     = "שיטת הוכחה",
+  calc       = "שיטת חישוב",
+  rule       = "כלל",
+  convention = "מוסכמה",
+}
+
+local function role_word(b, classes)
+  if not has_class(classes, "thmkey") then return nil end
+  local ic = b.attributes and b.attributes.icon
+  return ic and ROLE_WORD[ic] or nil
+end
 
 local function icon_class(b)
   local ic = b.attributes and b.attributes.icon
@@ -302,10 +320,11 @@ process = function(blocks, in_optional)
       elseif unnumbered_for(orig) then
         local u = unnumbered_for(orig)
         local t = b.attributes and b.attributes.title
-        local text = u.word
+        local word = role_word(b, orig) or u.word     -- role wins over the class label
+        local text = word
         if opts_in(b) and not in_optional and chap then
           item = item + 1
-          text = u.word .. " " .. chap .. "." .. section .. "." .. item
+          text = word .. " " .. chap .. "." .. section .. "." .. item
           record(b, text)
         end
         table.insert(b.content, 1, label_para(text, t))

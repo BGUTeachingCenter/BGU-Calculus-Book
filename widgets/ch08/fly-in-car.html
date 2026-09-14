@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הזבוב: שלושה מצבים</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+<style>
+/* Three animated scenes, no controls: this one is an illustration, not an instrument.
+   DOM + transforms rather than SVG, so there is no chance of the var()-in-a-presentation-
+   attribute trap that bit the earlier widgets. */
+.scene { margin: 0 0 1.05rem; }
+.scene:last-child { margin-bottom: .2rem; }
+.cap { font-weight: 700; margin-bottom: .3rem; color: var(--ink); }
+.cap .verdict { font-weight: 400; color: var(--key); }
+.track {
+  position: relative; height: 62px; border-radius: 6px;
+  background: #f8fafc; border: 1px solid var(--soft); overflow: hidden;
+}
+/* the glass a fly cannot pass */
+.pane { position: absolute; top: 0; bottom: 0; width: 11px; background: #93c5fd;
+        border: 0; }
+.pane.right { right: 0; border-left: 2px solid #2563eb; }
+.pane.left  { left: 0;  border-right: 2px solid #2563eb; }
+.pane.open  { background: repeating-linear-gradient(45deg,#e2e8f0 0 4px,#f8fafc 4px 8px);
+              border-color: var(--soft); }
+/* scene 3: the fan sits at the fly's STARTING side and blows it toward the far wall.
+   Putting both on the same side would have the fly pushed into the wall it starts at. */
+.fan { position: absolute; top: 50%; transform: translateY(-50%); right: 14px;
+       font-size: 21px; opacity: .85; }
+.fly { position: absolute; top: 50%; font-size: 19px; line-height: 1;
+       transform: translate(-50%, -50%); will-change: left; }
+.limitmark { position: absolute; top: 0; bottom: 0; width: 0;
+             border-inline-start: 2px dashed var(--red); }
+.limitmark span { position: absolute; top: 2px; inset-inline-start: 4px;
+                  font-size: 12px; color: var(--red); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .fly { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="demo">
+
+  <div class="scene">
+    <div class="cap">1. שני חלונות סגורים <span class="verdict">— חסומה, אך אינה מתכנסת</span></div>
+    <div class="track" id="t1">
+      <div class="pane right"></div><div class="pane left"></div>
+      <div class="fly" id="f1">🪰</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="cap">2. חלון פתוח, תעופה לכיוון אחד <span class="verdict">— מונוטונית, אך אינה חסומה</span></div>
+    <div class="track" id="t2">
+      <div class="pane left open"></div>
+      <div class="fly" id="f2">🪰</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="cap">3. מאוורר בכניסה וקיר בצד השני <span class="verdict">— מונוטונית וחסומה, ולכן מתכנסת</span></div>
+    <div class="track" id="t3">
+      <div class="pane left"></div>
+      <div class="fan">💨</div>
+      <div class="limitmark" id="lm"><span>L</span></div>
+      <div class="fly" id="f3">🪰</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function (global) {
+  "use strict";
+  var W = function (el) { return el.clientWidth; };
+  var t1 = document.getElementById("t1"), f1 = document.getElementById("f1");
+  var t2 = document.getElementById("t2"), f2 = document.getElementById("f2");
+  var t3 = document.getElementById("t3"), f3 = document.getElementById("f3");
+  var lm = document.getElementById("lm");
+
+  var PAD = 18;                 // keep the fly clear of the glass
+  var start = null;
+  var PERIOD = 9000;            // one full loop, ms
+
+  function place(fly, track, frac) {          // frac 0 = right edge, 1 = left edge
+    fly.style.left = (W(track) * (1 - frac)) + "px";
+  }
+
+  function frame(ts) {
+    if (start === null) start = ts;
+    var t = ((ts - start) % PERIOD) / PERIOD;   // 0..1
+
+    // 1. bounces between the panes forever — bounded, never settles
+    var bounce = Math.abs(((t * 6) % 2) - 1);   // triangle wave, 3 round trips
+    place(f1, t1, 0.08 + 0.84 * bounce);
+
+    // 2. one direction only, straight out of the open window — monotone, unbounded
+    place(f2, t2, Math.min(1.25, t * 1.25));
+
+    // 3. forced one way, blocked by the wall: steps shrink and it settles ON the limit.
+    //    1 - 2^{-6t} is increasing and bounded, which is the theorem in one line.
+    // stops short of the wall: the "comes to rest in mid-air" case, not the pressed-flat one
+    var L = 0.78;
+    place(f3, t3, L * (1 - Math.pow(2, -6 * t)));
+    lm.style.left = (W(t3) * (1 - L)) + "px";   // same axis as place(), not inset-inline-*
+
+    global.requestAnimationFrame(frame);
+  }
+
+  function reportHeight() {
+    global.requestAnimationFrame(function () {
+      if (global.parent && global.parent !== global) {
+        global.parent.postMessage({
+          type: "widget-height",
+          height: Math.ceil(document.documentElement.scrollHeight)
+        }, "*");
+      }
+    });
+  }
+
+  global.requestAnimationFrame(frame);
+  global.addEventListener("resize", reportHeight);
+  reportHeight();
+})(window);
+</script>
+</body>
+</html>

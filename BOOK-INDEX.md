@@ -133,6 +133,8 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *אי שוויון המשולש*
     - משפט        `box-thm-triangle-inequality` · אי-שוויון המשולש
     - דוגמה       `box-exm-triangle-inequality`
+    - משפט        `box-thm-reverse-triangle-inequality` · אי-שוויון המשולש ההפוך
+    - דוגמה       `box-exm-reverse-triangle-inequality`
 - **סביבת-$\varepsilon$ של נקודה**
     - הגדרה       `box-def-epsilon-neighborhood`
     - דוגמה       `box-exm-epsilon-neighborhood`
@@ -154,6 +156,8 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - תרגיל פתור  `box-qst-induction-sum-squares`
     - תרגיל פתור  `box-qst-induction-2n-geq-n`
     - תרגיל פתור  `box-qst-induction-divisibility`
+    - TODO        —
+    - למה         `box-lem-bernoulli` · אי-שוויון ברנולי
 - **הגדרה רקורסיבית**
     - הגדרה       `box-def-recursive`
     - דוגמה       `box-exm-factorial`
@@ -173,7 +177,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *רקורסיה*
     - דוגמה       `box-exm-arithmetic` · סדרה חשבונית
     - דוגמה       `box-exm-geometric` · סדרה הנדסית
-    - דוגמה       `box-exm-factorial` · העצרת
+    - דוגמה       `box-exm-factorial-seq` · העצרת
     - דוגמה       `box-exm-fibonacci` · סדרת פיבונאצ׳י
   - *תרגילים*
     - 8 תרגילים
@@ -213,7 +217,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - 10 תרגילים
 - **מסקנות מיידיות מהגדרת הגבול**
   - *פירוש ״קיים $N$״ בשפה יומיומית*
-    - חשוב לזכור  `box-key-eventually` · מוסכמה: החל ממקום מסוים
+    - חשוב לזכור  `box-key-eventually` · החל ממקום מסוים
     - שימו לב     `box-warn-statement-about-n` · $P(n)$ היא טענה על $n$
     - חשוב לזכור  `box-key-splitting` · פיצול טענות מהסוג ״החל ממקום מסוים״
     - חשוב לזכור  `box-key-finitely-many` · שילוב טענות מהסוג ״החל ממקום מסוים״
@@ -267,7 +271,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - מסקנה       `box-cor-limit-power` · חזקות
     - משפט        `box-thm-limit-root` · שורשים
   - *תרגילים*
-    - 7 תרגילים
+    - 8 תרגילים
 - **משפט הסנדוויץ׳; כפל אפסה בחסומה**
     - משפט        `box-thm-squeeze-sequences` · כלל הסנדוויץ׳
     - הגדרה       `box-def-null-sequence`
@@ -297,34 +301,71 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - שימו לב     `box-warn-ratio-needs-sign` · מבחן המנה דורש סימן קבוע
     - הערה        `box-rem-monotone-eventual-sign` · סימן קבוע הוא כמעט חינם עבור סדרה מונוטונית
   - *תרגילים*
-    - 4 תרגילים
-- **סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)**
-    - הערה        `box-rem-monotone-vs-convergent` · מונוטוניות והתכנסות אינן גוררות זו את זו
+    - 5 תרגילים
+- **סדרה חסומה ומונוטונית מתכנסת**
+    - דוגמה       `box-exm-monotone-not-convergent` · מונוטונית שאינה מתכנסת
+    - דוגמה       `box-exm-convergent-not-monotone` · מתכנסת שאינה מונוטונית
+    - שימו לב     `box-warn-monotone-convergence-independent` · אף אחת מן התכונות אינה גוררת את השנייה
+    - סימולציה    `box-sim-fly` · שלושת מצבי הזבוב
     - משפט        `box-thm-monotone-bounded-converges`
-    - הערה        `box-rem-monotone-limit-is-sup` · מהו הגבול בהוכחה
+    - חשוב לזכור  `box-key-dance-escape` · שני אופני הכישלון
+    - הגדרה       `box-def-supremum` · חסם עליון
+    - חשוב לזכור  `box-key-completeness` · שלמות הממשיים
+    - דוגמה       `box-exm-monotone-bounded-simple` · הסדרה $a_n = \frac{n}{n+1}$
+    - דוגמה       `box-exm-monotone-bounded-decreasing` · הסדרה $a_n = \frac{n+1}{n}$
+    - חשוב לזכור  `box-key-one-sided-bound` · די בחסם בכיוון אחד
+    - דוגמה       `box-exm-monotone-bounded-sum` · סכום ההופכיים של הריבועים
     - תרגיל פתור  `box-q-recursive-sequence` · סדרה רקורסיבית
-- **המספר $e$ והסדרה המתאימה**
-    - למה         `box-lem-bernoulli` · אי-שוויון ברנולי
-    - משפט        `box-thm-e-sequence-monotone-bounded`
-    - הגדרה       `box-def-number-e`
+    - חשוב לזכור  `box-key-recursive-fixed-point` · גבול של סדרה רקורסיבית פותר משוואה
+    - דוגמה       `box-exm-sqrt-recursion` · הסדרה $a_{n+1} = \sqrt{a_n}$
+    - דוגמה       `box-exm-recursive-square` · הסדרה $a_{n+1} = a_n^{2}$
+    - דוגמה       `box-exm-recursive-square-diverges` · אותה רקורסיה, איבר ראשון אחר
+    - שימו לב     `box-warn-fixed-point-not-existence` · פתרון למשוואה אינו מבטיח שהגבול קיים
+    - משפט        `box-thm-two-monotone-sequences`
+  - *תרגילים*
+    - 4 תרגילים
 
 ## `09-sequences-infinity.qmd` — גבולות אינסופיים וסדרי גודל
 
-- **אינסוף כגבול**
+- **מוטיבציה והגדרה**
+    - הגדרה       `box-def-extended-reals` · מערכת המספרים המורחבת
     - הגדרה       `box-def-limit-infinity`
     - הגדרה       `box-def-limit-minus-infinity`
+    - חשוב לזכור  `box-key-infinity-not-a-number` · מה אומר הכתיב $\lim a_n = \infty$
     - הגדרה       `box-def-convergence-wide-sense`
     - דוגמה       `box-exm-tends-to-infinity` · סדרות השואפות לאינסוף
-    - טענה        `box-def-shlilit`
+    - טענה        `box-prp-negate-infinity`
     - תרגיל פתור  `box-q-limit-minus-infinity` · שאיפה למינוס אינסוף לפי ההגדרה
-    - משפט        `box-thm-arithmetika-rachav`
-    - הערה        `box-rem-indeterminate-forms` · צורות שאין להן חוקיות
+  - *הקשר לחסימוּת ולמונוטוניות*
+    - טענה        `box-prp-infinite-limit-unbounded`
+    - דוגמה       `box-exm-infinite-limit-unbounded`
+    - דוגמה       `box-exm-unbounded-no-limit` · סדרה שאינה חסומה ואינה שואפת לאינסוף
+    - חשוב לזכור  `box-key-unbounded-not-infinite` · אי-חסימוּת אינה שאיפה לאינסוף
+    - משפט        `box-thm-monotone-wide-sense`
+    - דוגמה       `box-exm-monotone-wide-sense`
   - *כלל הפיצה*
     - משפט        `box-thm-piza-rachav` · משפט הפיצה
     - תרגיל פתור  `box-exm-piza-1` · הסדרה $n+(-1)^n$
-    - תרגיל פתור  `box-exm-piza-2` · הסדרה $n^2/n!$
-    - תרגיל פתור  `box-exm-piza-3` · הסדרה $(1+1/n)^{n^2}$
+    - תרגיל פתור  `box-exm-piza-2` · הסדרה $n^n/n!$
+    - תרגיל פתור  `box-exm-piza-n-plus-1` · הסדרה $n+1$
     - משפט        `box-thm-piza-minf` · כלל הפיצה ההפוכה
+    - תרגיל פתור  `box-exm-piza-minf-1` · הסדרה $-n-1$
+    - משפט        `box-thm-order-wide-sense` · אי-שוויונות עוברים לגבול גם במובן הרחב
+  - *תרגילים*
+    - 4 תרגילים
+- **אריתמטיקה**
+    - שאלה        `box-qst-infinite-sum-or-difference`
+    - שאלה        `box-qst-quotient-through-infinity`
+    - שאלה        `box-qst-real-limit-infinite-result`
+    - משפט        `box-thm-arithmetika-rachav` · אריתמטיקה של גבולות אינסופיים
+    - דוגמה       `box-exm-infinite-arithmetic` · שימוש בסעיפי המשפט
+  - *צורות לא מוגדרות*
+    - הערה        `box-rem-indeterminate-forms` · צורות שאין להן חוקיות
+    - שימו לב     `box-warn-indeterminate-not-no-limit` · צורה לא מוגדרת אינה אומרת שאין גבול
+  - *אריתמטיקה של חזקות בשאיפות*
+    - משפט        `box-thm-power-arithmetic` · גבול של חזקה
+    - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
+    - שימו לב     `box-warn-one-to-infinity` · הצורה $1^{\infty}$
 - **מבחן המנה ומבחן השורש**
   - *מבחן המנה*
     - משפט        `box-thm-ratio-test` · מבחן המנה
@@ -335,9 +376,15 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - מסקנה       `box-cor-geometric-limit` · גבול הסדרה ההנדסית
     - משפט        `box-thm-dalembert` · משפט דלאמבר
     - תרגיל פתור  `box-exm-dalembert-root-n` · שורש מסדר $n$ של $n$
-  - *אריתמטיקה של חזקות בשאיפות*
-    - משפט        `box-thm-power-arithmetic`
-    - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
+- **המספר $e$**
+    - משפט        `box-thm-e-sequence-monotone-bounded`
+    - הגדרה       `box-def-number-e`
+    - תרגיל פתור  `box-exm-piza-3` · הסדרה $(1+1/n)^{n^2}$
+    - דוגמה       `box-exm-power-limit-e` · גבול מן הצורה $1^{\infty}$
+  - *סדרות מהצורה $(1+a_n)^{1/a_n}$ כאשר $a_n\to 0$*
+    - משפט        `box-thm-e-general-form`
+    - תרגיל פתור  `box-exm-gvul-e` · הסדרה $(1-1/n)^n$
+    - TODO        —
 - **יחסי הגדילה הבסיסיים: $n^k \ll k^n \ll n! \ll n^n$**
   - *סדר שואף לאינסוף בסדרות*
     - משפט        `box-thm-growth-orders`
@@ -362,10 +409,6 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - **הגבול העליון והגבול התחתון (ללא הוכחות)**
     - הגדרה       `box-def-limsup-liminf`
     - משפט        `box-thm-limsup-eq-liminf`
-    - TODO        —
-- **סדרות מהצורה $(1+a_n)^{1/a_n}$ כאשר $a_n\to 0$**
-    - משפט        `box-thm-e-general-form`
-    - תרגיל פתור  `box-exm-gvul-e` · הסדרה $(1-1/n)^n$
     - TODO        —
 
 ## `11-functions-intro.qmd` — מבוא לפונקציות
@@ -610,18 +653,19 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 
 ## Totals
 
-- דוגמה: 55
-- הגדרה: 49
-- משפט: 47
-- תרגיל: 45
-- תרגיל פתור: 27
-- טענה: 16
-- TODO: 15
-- הערה: 12
-- סימולציה: 8
+- דוגמה: 69
+- תרגיל: 55
+- הגדרה: 51
+- משפט: 51
+- תרגיל פתור: 29
+- טענה: 17
+- TODO: 16
+- חשוב לזכור: 12
+- הערה: 10
+- שימו לב: 10
+- סימולציה: 9
 - מסקנה: 7
-- חשוב לזכור: 6
-- שימו לב: 6
 - למה: 4
+- שאלה: 3
 - הסבר: 2
 - בדיקה עצמית: 1

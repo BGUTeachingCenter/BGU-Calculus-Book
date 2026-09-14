@@ -60,3 +60,44 @@ for q in sorted(glob.glob("*.qmd")):
             stack.pop()
 print(f"4. unguarded centred div   : {len(hits)}")
 for h in hits: print("     " + h)
+
+# 5. every #box- id defined exactly once book-wide --------------------------
+# Check 1 only tests link -> id, so a duplicated DEFINITION slips past it. Duplicates are
+# invalid HTML in the merged PDF pass and make the [] resolver ambiguous, silently.
+seen = {}
+for q in sorted(glob.glob("*.qmd")):
+    for i, l in enumerate(open(q, encoding="utf-8"), 1):
+        m = re.match(r'^:{3,}\s*\{#(box-[\w-]+)', l)
+        if m:
+            seen.setdefault(m.group(1), []).append(f"{q}:{i}")
+dups = {k: v for k, v in seen.items() if len(v) > 1}
+print(f"5. duplicate box ids       : {len(dups)}")
+for k, v in sorted(dups.items()):
+    print(f"     {k}  ->  {', '.join(v)}")
+
+# 6. empty-link citation of a box the filter never records ---------------------
+# theorem-numbering.lua calls record() only for boxes it NUMBERS. The UNNUMBERED classes
+# below, and anything carrying numbered="false", are skipped — so an empty [](#box-...)
+# pointing at one renders a literal "??". Such a box must be cited with NAMED link text
+# instead (which is the house convention anyway), or opt in with numbered="true".
+UNNUMBERED = ("thmexpl", "thmwarn", "thmkey", "thmchk")
+unrecorded = set()
+for q in sorted(glob.glob("*.qmd")):
+    for l in open(q, encoding="utf-8"):
+        m = re.match(r'^:{3,}\s*\{#(box-[\w-]+)([^}]*)\}', l)
+        if not m:
+            continue
+        bid, attrs = m.group(1), m.group(2)
+        opts_in = 'numbered="true"' in attrs
+        if 'numbered="false"' in attrs and not opts_in:
+            unrecorded.add(bid)
+        elif any(f".{c}" in attrs for c in UNNUMBERED) and not opts_in:
+            unrecorded.add(bid)
+hits = []
+for q in sorted(glob.glob("*.qmd")):
+    for i, l in enumerate(open(q, encoding="utf-8"), 1):
+        for m in re.finditer(r'\[\]\(([^)]*?)#(box-[^)\s]+)\)', l):
+            if m.group(2) in unrecorded:
+                hits.append(f"{q}:{i}  [](#{m.group(2)}) -> renders ??")
+print(f"6. empty ref to unnumbered : {len(hits)}")
+for h in hits: print("     " + h)

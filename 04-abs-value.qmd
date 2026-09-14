@@ -322,6 +322,34 @@ plt.close(fig)
 $$x = 2, y = -1$$ $$|x+y| < |x| + |y|$$ $$|1| < |2| + |(-1)|$$ $$1 < 2 + 1 = 3$$
 :::
 
+מאי-שוויון המשולש נובע אי-שוויון שימושי נוסף, החוסם את **ההפרש** בין שני ערכים מוחלטים באמצעות הערך המוחלט של ההפרש. הוא נקרא **אי-שוויון המשולש ההפוך**.
+
+::: {#box-thm-reverse-triangle-inequality .thmthm title="אי-שוויון המשולש ההפוך"}
+לכל $x, y \in \mathbb{R}$ מתקיים $$.\Bigl|\left|x\right| - \left|y\right|\Bigr| \leq \left|x-y\right|$$
+:::
+
+::: thmproof
+נכתוב $x = \left(x-y\right) + y$ ונפעיל על הסכום הזה את [](#box-thm-triangle-inequality):
+
+$$,\left|x\right| = \Bigl|\left(x-y\right) + y\Bigr| \leq \left|x-y\right| + \left|y\right|$$
+
+ובהעברת אגפים
+
+$$.\left|x\right| - \left|y\right| \leq \left|x-y\right|$$
+
+האגף הימני אינו משתנה כאשר מחליפים בין $x$ ל-$,y$ שכן $,\left|y-x\right| = \left|x-y\right|$ ולכן אותו חישוב עצמו עם התפקידים המוחלפים נותן
+
+$$.\left|y\right| - \left|x\right| \leq \left|x-y\right|$$
+
+קיבלנו אפוא שגם המספר $\left|x\right| - \left|y\right|$ וגם נגדוֹ אינם עולים על $,\left|x-y\right|$ וזה בדיוק אומר שהערך המוחלט של המספר הזה אינו עולה על $,\left|x-y\right|$ כנדרש.
+:::
+
+::: {#box-exm-reverse-triangle-inequality .thmexm}
+עבור $x = 5$ ו-$y = 3$ אגף שמאל הוא $\bigl|5-3\bigr| = 2$ ואגף ימין הוא $,\left|5-3\right| = 2$ ומתקיים שוויון.
+
+עבור $x = 5$ ו-$y = -3$ אגף שמאל הוא $\bigl|5-3\bigr| = 2$ ואגף ימין הוא $,\left|5-\left(-3\right)\right| = 8$ והאי-שוויון חד. שני מספרים יכולים להיות רחוקים זה מזה מאוד גם כאשר הערכים המוחלטים שלהם קרובים.
+:::
+
 ## סביבת-$\varepsilon$ של נקודה
 
 

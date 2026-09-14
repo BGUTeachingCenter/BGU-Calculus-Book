@@ -261,18 +261,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
-/* Role icons (icon="method" etc. on the box). The glyph hangs off the bold label, so it
-   reads as part of it rather than as decoration floating in the margin. HTML only: the
-   PDF never sees these rules. U+FE0E forces TEXT presentation — without it some
-   platforms substitute a colour emoji, which would clash with everything else here. */
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
 .thmbox[class*="thmicon-"] > p:first-child > strong::before {
-  margin-inline-end: 0.4em;
-  font-weight: 400;
-  opacity: 0.75;
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
 }
-.thmbox.thmicon-method     > p:first-child > strong::before { content: "\2699\FE0E"; }  /* gear — a method to apply */
-.thmbox.thmicon-technique  > p:first-child > strong::before { content: "\270E\FE0E"; }  /* pencil — a manipulation to perform */
-.thmbox.thmicon-convention > p:first-child > strong::before { content: "\2261"; }        /* ≡ — a naming we adopt. BMP only: U+1F58B fell back to emoji/tofu */
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red

@@ -1,0 +1,282 @@
+# גבולות אינסופיים וסדרי גודל {chapter="9"}
+
+## אינסוף כגבול
+
+::: {#box-def-limit-infinity .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **שואפת לאינסוף**, ונסמן $\lim\limits_{n\to\infty} a_n = \infty$ , אם לכל $M > 0$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים
+
+$.a_n > M$
+:::
+
+::: {#box-def-limit-minus-infinity .thmdef}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה. נאמר כי היא **שואפת למינוס אינסוף**, ונסמן $\lim\limits_{n\to\infty} a_n = -\infty$ , אם לכל $M < 0$ קיים $N \in \mathbb{N}$ כך שלכל $n \geq N$ מתקיים
+
+$.a_n < M$
+:::
+
+::: {#box-def-convergence-wide-sense .thmdef}
+נאמר כי סדרה **מתכנסת במובן הרחב** אם יש לה גבול, והוא מספר ממשי או $\infty$ או $-\infty$.
+:::
+
+::: {#box-exm-tends-to-infinity .thmexm title="סדרות השואפות לאינסוף"}
+$a_n = n$ , $a_n = n+1$ , $a_n = n^2$
+:::
+
+<!-- מקור: הרצאה 6 -->
+
+::: {#box-def-shlilit .thmprp}
+תהי סדרה $a_n$.
+
+מתקיים: $a_n \to -\infty$ אם ורק אם $-a_n \to \infty$
+:::
+
+::: {#box-q-limit-minus-infinity .thmexr title="שאיפה למינוס אינסוף לפי ההגדרה"}
+נראה לפי ההגדרה שמתקיים
+
+$$\lim_{n \to \infty} \frac{-n^2 - \sin(n)}{2n + 3} = -\infty$$
+:::
+
+::: thmsol
+יהי $M < 0$, אז ננסה להבין מתי $a_n < M$
+
+$$a_n = \frac{-n^2 - \sin(n)}{2n + 3}$$
+
+$$-1 \le \sin(n) \le 1 \longrightarrow -\sin(n) < 1$$
+
+$$a_n = \frac{-n^2 - \sin(n)}{2n + 3} < \frac{-n^2 + 1}{2n + 3} < \frac{-n^2 + 1}{2n + n} = \frac{-n^2 + 1}{3 \cdot n} = \frac{-n}{3} + \frac{1}{3n} < -\frac{n}{3} + 1$$
+
+<!-- הערה בכתב יד: הערה שלילי ועדיין גדולה את המכנה -->
+
+נרצה לדרוש: $-\frac{n}{3} + 1 < M \quad\leftarrow\quad -\frac{n}{3} < M - 1 \quad\leftarrow\quad n > -3(M-1)$
+
+לכן נבחר: $N = \lfloor -3(M-1) \rfloor + 1$ וכך לכל $n > N$: $a_n < M$
+:::
+
+::: {#box-thm-arithmetika-rachav .thmthm}
+שאיפות:
+
+(א) אם $a_n \to \infty$, $b_n \to \infty$ אז $a_n + b_n \to \infty$
+
+(ב) אם $a_n \to \infty$, $b_n \to \infty$ אז $a_n \cdot b_n \to \infty$
+
+(ג) אם $a_n \to \infty$, $b_n \to L$ ($L > 0$) אז $a_n + b_n \to \infty$
+
+(ד) אם $a_n \to \infty$, $b_n \to L$ ($L > 0$) אז $a_n \cdot b_n \to \infty$
+
+(ה) אם $a_n \to \infty$, $b_n \to L$ ($L < 0$) אז $a_n \cdot b_n \to -\infty$
+
+(ו) אם $a_n \to \infty$ אז $\frac{1}{a_n} \to 0$
+
+(ז) אם $a_n \to -\infty$ אז $\frac{1}{a_n} \to 0$
+
+(ח) אם $a_n \to 0$, וגם $a_n > 0$ אז $\frac{1}{a_n} \to \infty$
+
+(ט) אם $a_n \to 0$, וגם $a_n < 0$ אז $\frac{1}{a_n} \to -\infty$
+:::
+
+::: {#box-rem-indeterminate-forms .thmrem title="צורות שאין להן חוקיות"}
+$\star$ אין חוקיות ל $\infty - \infty$:
+
+| $a_n \to \infty$ | $b_n \to \infty$ | $a_n - b_n$ |
+|:----------------:|:----------------:|:-----------:|
+|        n         |       n+1        |     -1      |
+|       n+L        |        n         |      L      |
+|      $n^2$       |        n         |  $\infty$   |
+
+$$n^2 - n \to \infty$$
+
+$$\underset{\to \infty}{n^2} - \underset{\to \infty}{n} = n(n-1)$$
+
+$\star$ אין חוקיות ל $\infty \cdot 0$:
+
+| $a_n \to \infty$ | $b_n \to \infty$ | $a_n \cdot b_n$ |
+|:--:|:--:|:--:|
+| n | $\frac{1}{n}$ | 1 |
+| n | $\frac{L}{n}$ | L ($L \in \mathbb{R}$) |
+| $n^2$ | $\frac{1}{n} \Big/ -\frac{1}{n}$ | $\infty \Big/ -\infty$ |
+| n | $\frac{(-1)^n}{n}$ | $(-1)^n$ (לא מתכנסת אפילו במובן הרחב) |
+
+$\star$
+
+|     $a_n \to 0$      |      $\frac{1}{a_n}$       |
+|:--------------------:|:--------------------------:|
+| $a_n = \frac{1}{n}$  |          $\infty$          |
+| $a_n = -\frac{1}{n}$ |         $-\infty$          |
+|  $\frac{(-1)^n}{n}$  | לא מתכנסת אפילו במובן הרחב |
+
+עבור $a_n = \frac{(-1)^n}{n}$
+
+נראה כי $\frac{1}{a_n} = \frac{n}{(-1)^n} = (-1)^n \cdot n$
+
+$$(-1, 2, -3, 4, -5, \ldots)$$
+:::
+
+### כלל הפיצה
+
+::: {#box-thm-piza-rachav .thmthm title="משפט הפיצה"}
+אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $a_n \to \infty$, אז $$\lim_{n\to\infty} b_n = \infty$$
+:::
+
+::: {#box-exm-piza-1 .thmexr title="הסדרה $n+(-1)^n$"}
+האם הסדרה $b_n = n + (-1)^n$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+נראה כי $b_n \to \infty$ מתקיים $b_n \geq n - 1$ אם נסתכל על $n - 1 \xrightarrow[\to\infty]{} \infty$
+
+אז מכלל הפיצה $$b_n \to \infty$$
+:::
+
+::: {#box-exm-piza-2 .thmexr title="הסדרה $n^2/n!$"}
+האם הסדרה $b_n = \dfrac{n^2}{n!}$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+$$b_n = \frac{n^2}{n!} = \frac{n \cdots n}{1 \cdot 2 \cdots n} = \frac{n}{1} \cdot \underbrace{\frac{n}{2}}_{\geq 1} \cdots \cdots \underbrace{\frac{n}{n}}_{\geq 1} \geq n \geq n \cdot 1 \cdots \cdots 1$$
+
+לכן מכלל הפיצה $$b_n \to \infty$$
+:::
+
+::: {#box-exm-piza-3 .thmexr title="הסדרה $(1+1/n)^{n^2}$"}
+האם הסדרה $b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}$ מתכנסת במובן הרחב?
+:::
+
+::: thmsol
+$$\left(1 + \frac{1}{n}\right)^{n^2} = \left(1 + \frac{1}{n}\right)^{n \cdot n} = \left(\left(1 + \frac{1}{n}\right)^n\right)^n$$
+
+$$\left(1 + \frac{1}{n}\right)^n \to e$$ כאשר $\left(1 + \frac{1}{n}\right)^n > 2$ באשר הם מספר מאוחרים מסוים
+
+$$a_n = \left(\left(1 + \frac{1}{n}\right)^n\right)^n > 2$$ לבן הם מספר מאוחרים מסוים
+
+הרי $2^n \to \infty$ לכן מכלל הפיצה: $$\boxed{a_n \to \infty}$$
+:::
+
+::: {#box-thm-piza-minf .thmthm title="כלל הפיצה ההפוכה"}
+אם $a_n \leq b_n$ לכל $n \geq 1$, ואם $b_n \to -\infty$, אז $$\lim_{n\to n} a_n = -\infty$$
+:::
+
+<!-- מקור: הרצאה 7 -->
+
+## מבחן המנה ומבחן השורש
+
+
+
+### מבחן המנה
+
+::: {#box-thm-ratio-test .thmthm title="מבחן המנה"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה חיובית, כלומר $a_n > 0$ לכל $n \ge 1$, ונניח כי קיים הגבול
+
+$.L = \lim_{n\to\infty} \frac{a_{n+1}}{a_n}$
+
+אז:
+
+- אם $L < 1$ , הסדרה מתכנסת ומתקיים $a_n \to 0$.
+- אם $L > 1$ , מתקיים $a_n \to \infty$.
+- אם $L = 1$ , אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.
+:::
+
+### מבחן השורש
+
+::: {#box-thm-root-test .thmthm title="מבחן השורש"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה חיובית, כלומר $a_n > 0$ לכל $n \ge 1$, ונניח כי קיים הגבול
+
+$.L = \lim_{n\to\infty} \sqrt[n]{a_n}$
+
+אז:
+
+- אם $L < 1$ , הסדרה מתכנסת ומתקיים $a_n \to 0$.
+- אם $L > 1$ , מתקיים $a_n \to \infty$.
+- אם $L = 1$ , אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.
+:::
+
+::: {#box-exm-mivchanim-1 .thmexr title="הסדרה $2^n/n^2$"}
+חשבו את הגבול $$\lim_{n\to\infty} \frac{2^n}{n^2}$$
+:::
+
+::: thmsol
+נסמן: $$a_n = \frac{2^n}{n^2}$$
+
+נסתכל על מבחן המנה:
+
+$$\frac{a_{n+1}}{a_n} = \frac{\left(\frac{2^{n+1}}{(n+1)^2}\right)}{\left(\frac{2^n}{n^2}\right)} = \frac{n^2}{2^n} \cdot \frac{2^{n+1}}{(n+1)^2} = 2 \cdot \frac{n^2}{(n+1)^2} = 2 \cdot \frac{1}{\left(\frac{n+1}{n}\right)^2} = 2 \cdot \frac{1}{\left(1 + \frac{1}{n}\right)^2} \to 2$$
+
+לכן לפי מבחן המנה נקבל: $$\boxed{\lim_{n\to\infty} \frac{2^n}{n^2} = \infty}$$
+:::
+
+::: {#box-exm-mivchanim-2 .thmexr title="הסדרה $3^n$"}
+הסדרה $a_n = 3^n$ היא $a_n \to \infty$, מדוע?
+:::
+
+::: thmsol
+בעזרת מבחן השורש:
+
+$$\sqrt[n]{a_n} = 3 \xrightarrow[n\to\infty]{} 3$$ וגם $a_n > 0$
+:::
+
+::: {#box-cor-geometric-limit .thmcor title="גבול הסדרה ההנדסית"}
+- $q > 1$: $q^n \to \infty$
+- $0 < q < 1$: $q^n \to 0$
+:::
+
+<!-- מקור: הרצאה 8 -->
+
+::: {#box-thm-dalembert .thmthm title="משפט דלאמבר"}
+תהי $(a_n)_{n=1}^{\infty}$ סדרה חיובית. אם קיים הגבול $\lim\limits_{n\to\infty} \dfrac{a_{n+1}}{a_n} = L$ , אז קיים גם הגבול $\lim\limits_{n\to\infty} \sqrt[n]{a_n}$ , ומתקיים
+
+$.\lim_{n\to\infty} \sqrt[n]{a_n} = L$
+:::
+
+::: {#box-exm-dalembert-root-n .thmexr title="שורש מסדר $n$ של $n$"}
+נבדוק מהו הגבול של הסדרה $\sqrt[n]{n}=\sqrt[n]{a_n}$ ?
+
+$$(1,\sqrt{2},\sqrt[3]{3},\sqrt[4]{4},\dots)$$
+:::
+
+::: thmsol
+נסמן: $a_n=n$ ונרצה לבדוק לאן מתכנסת הסדרה $\sqrt[n]{a_n}$
+
+ננסה להשתמש במשפט דלאמבר ונבדוק:
+
+$$\frac{a_{n+1}}{a_n}=\frac{n+1}{n}=\frac{n}{n}+\frac{1}{n}=1+\frac{1}{n}\longrightarrow 1$$
+
+ולכן מדלאמבר נקבל $\sqrt[n]{a_n}=\sqrt[n]{n}\longrightarrow \boxed{1}$
+:::
+
+### אריתמטיקה של חזקות בשאיפות
+
+::: {#box-thm-power-arithmetic .thmthm}
+תהיינה $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ סדרות, ונניח כי $a_n > 0$ לכל $n \ge 1$, כי $a_n \to L$ עבור $L > 0$, וכי $b_n \to x$ עבור $x \in \mathbb{R}$. אז
+
+$.a_n^{\,b_n} \to L^{x}$
+:::
+
+::: {#box-exm-power-limits .thmexm title="חישוב גבולות של חזקות"}
+- $\left(1+\frac{1}{n}\right)^{1+\frac{1}{n}}\Rightarrow 1^1=\boxed{1}$
+
+  <!-- בדיקה: הערה בכתב יד מתחת לדוגמא -->
+
+- $\left(1+\frac{1}{n}\right)^{\frac{2n^2+n+1}{3n-5}}=\left(1+\frac{1}{n}\right)^{n\cdot\left(\frac{2n^2+n+1}{3n-5}\right)}=\left(\left(1+\frac{1}{n}\right)^n\right)^{\frac{2n^2+n+1}{3n-5}}\longrightarrow e^{\frac{2}{3}}$
+
+  <!-- בדיקה: מסומן מתחת לסוגריים $\longrightarrow e$ , והערה בכתב יד -->
+:::
+
+## יחסי הגדילה הבסיסיים: $n^k \ll k^n \ll n! \ll n^n$
+
+### סדר שואף לאינסוף בסדרות
+
+::: {#box-thm-growth-orders .thmthm}
+לכל $x > 0$ ולכל $q > 1$ מתקיים
+
+$,\lim_{n\to\infty} \frac{n^{x}}{q^{n}} = 0 \qquad \lim_{n\to\infty} \frac{q^{n}}{n!} = 0 \qquad \lim_{n\to\infty} \frac{n!}{n^{n}} = 0$
+
+כלומר כל אחת מן הסדרות $n^{x}$ , $q^{n}$ , $n!$ , $n^{n}$ שואפת לאינסוף מהר יותר מקודמתה. נהוג לסמן זאת
+
+$.n^{x} \ll q^{n} \ll n! \ll n^{n}$
+:::
+
+<!-- בדיקה: השורה הבאה נשמרה כפי שנכתבה במקור, אך היא שגויה כמות שהיא -
+     $n^2/n!$ שואף ל-0 ולא לאינסוף. שני האגפים האחרים אכן שואפים לאינסוף. -->
+
+$$\frac{n^2}{n!},\frac{n!}{2^n},\frac{2^n}{n^2}\to\infty$$
+
+<!-- מקור: הרצאה 8 -->
