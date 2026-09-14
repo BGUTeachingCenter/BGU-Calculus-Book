@@ -338,6 +338,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
@@ -827,11 +844,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 אינסוף כגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -957,7 +974,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#המספר-e-והסדרה-המתאימה" class="nav-link">8.7 המספר \(e\) והסדרה המתאימה</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#חישוב-גבולות-סדרות-עם-גבול-בחזקה" class="nav-link">8.7 חישוב גבולות סדרות עם גבול בחזקה</a></li><li class="toc-indent"><a href="#הסדרה-rn" class="nav-link">הסדרה \(r^{n}\)</a></li><li class="toc-indent"><a href="#הסדרה-sqrtnr" class="nav-link">הסדרה \(\sqrt[n]{r}\)</a></li><li class="toc-indent"><a href="#הסדרה-xt_n-כאשר-t_n-to-0" class="nav-link">הסדרה \(x^{t_n}\) כאשר \(t_n \to 0\)</a></li><li class="toc-indent"><a href="#אריתמטיקה-של-חזקות" class="nav-link">אריתמטיקה של חזקות</a></li><li class="toc-indent"><a href="#תרגילים-2" class="nav-link">תרגילים</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./08-sequences-properties.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></a></li></ol></nav>
@@ -978,30 +995,230 @@ window.Quarto = {
 
 </header>
 
-<section id="המספר-e-והסדרה-המתאימה" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="המספר-e-והסדרה-המתאימה"><span class="header-section-number">8.7</span> המספר <span class="math inline">\(e\)</span> והסדרה המתאימה</h2>
-<div id="box-lem-bernoulli" class="thmbox thmbox-lemma" title="אי-שוויון ברנולי">
-<p><strong>למה 8.7.1 — אי-שוויון ברנולי.</strong></p>
-<p>לכל <span class="math inline">\(n \in \mathbb{N}\)</span> ולכל <span class="math inline">\(x &gt; -1\)</span> מתקיים</p>
-<p><span class="math inline">\(.\left(1+x\right)^{n} \geq 1 + nx\)</span></p>
+<section id="חישוב-גבולות-סדרות-עם-גבול-בחזקה" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="חישוב-גבולות-סדרות-עם-גבול-בחזקה"><span class="header-section-number">8.7</span> חישוב גבולות סדרות עם גבול בחזקה</h2>
+<p>עד כה המעריך בחזקה היה <strong>קבוע</strong>: ב<a href="./08-sequences-properties-3.html#box-cor-limit-power">מסקנה 8.3.6</a> הוא היה מספר טבעי, ובדיון על שורשים ועל חזקות רציונליות הוא היה שבר קבוע. בסעיף הזה נטפל בביטוי</p>
+<p><span class="math display">\[,a_n^{\,b_n}\]</span></p>
+<p>שבו <strong>גם הבסיס וגם המעריך</strong> משתנים עם <span class="math inline">\(.n\)</span> ביטוי כזה אינו סכום, אינו מכפלה ואינו מנה, ולכן <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> אינו מגיע אליו כלל.</p>
+<p>הדרך אל המשפט הכללי עוברת דרך שלוש סדרות פרטיות, ואת שלושתן נטפל בכלים שכבר יש בידינו: מונוטוניות, חסימוּת, והשיטה של פתרון משוואה לגבול. נתחיל בפשוטה שבהן.</p>
+<p>נזכיר שתי תכונות של חזקות <strong>רציונליות</strong> שנשתמש בהן לאורך הסעיף ולא נוכיח כאן: <span class="math inline">\(a^{s+t} = a^{s} \cdot a^{t}\)</span> לכל <span class="math inline">\(a&gt;0\)</span> ולכל רציונליים <span class="math inline">\(,s,t\)</span> וכן תכונת הסדר — אם <span class="math inline">\(a &gt; 1\)</span> ואם <span class="math inline">\(s &lt; t\)</span> רציונליים, אז <span class="math inline">\(.a^{s} &lt; a^{t}\)</span></p>
+<section id="הסדרה-rn" class="level3">
+<h3 class="anchored" data-anchor-id="הסדרה-rn">הסדרה <span class="math inline">\(r^{n}\)</span></h3>
+<div id="box-thm-geometric-power" class="thmbox thmbox-theorem" title="הסדרה הגאומטרית">
+<p><strong>משפט 8.7.1 — הסדרה הגאומטרית.</strong></p>
+<p>יהי <span class="math inline">\(.r &gt; 0\)</span> אז:</p>
+<p>(א) אם <span class="math inline">\(,r &gt; 1\)</span> הסדרה <span class="math inline">\(\left(r^{n}\right)\)</span> אינה חסומה, ובפרט אין לה גבול.</p>
+<p>(ב) אם <span class="math inline">\(,0 &lt; r &lt; 1\)</span> אז <span class="math inline">\(.r^{n} \to 0\)</span></p>
 </div>
-<!-- מקומו הטבעי של אי-שוויון ברנולי הוא פרק 5 (אינדוקציה), שאינו בתחום העדכון הזה.
-     הוא מובא כאן משום שהוא הכלי המרכזי בהוכחת המונוטוניות של הסדרה שמגדירה את e. -->
-<div id="box-thm-e-sequence-monotone-bounded" class="thmbox thmbox-theorem">
-<p><strong>משפט 8.7.2.</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = \left(1 + \dfrac{1}{n}\right)^{n}\)</span> מונוטונית עולה, ומתקיים <span class="math inline">\(2 \le a_n \le 3\)</span> לכל <span class="math inline">\(n \ge 1\)</span>. בפרט היא מונוטונית וחסומה, ולכן היא מתכנסת.</p>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>שני הסעיפים מתחילים באותה הבחנה. הסדרה <span class="math inline">\(a_n = r^{n}\)</span> מקיימת את יחס הרקורסיה</p>
+<p><span class="math display">\[,a_{n+1} = r \cdot a_n\]</span></p>
+<p>ולכן אם <strong>ידוע</strong> שהיא מתכנסת לגבול <span class="math inline">\(,L\)</span> אפשר להפעיל את <a href="./08-sequences-properties-6.html#box-key-recursive-fixed-point">שיטת חישוב 8.6.9</a> עם <span class="math inline">\(:f(x) = rx\)</span> לפי <a href="./08-sequences-properties-3.html#box-cor-limit-constant-multiple">מסקנה 8.3.4</a> מתקיים <span class="math inline">\(,\lim r a_n = r L\)</span> ולכן</p>
+<p><span class="math display">\[,L = rL\]</span></p>
+<p>כלומר <span class="math inline">\(.L\left(r-1\right) = 0\)</span> מכיוון ש-<span class="math inline">\(,r \neq 1\)</span> נובע מכאן <span class="math inline">\(.L = 0\)</span> נזכור את המסקנה הזאת: <strong>אם הסדרה מתכנסת, גבולה הוא בהכרח אפס.</strong></p>
+<p><strong>סעיף (א).</strong> נניח <span class="math inline">\(.r &gt; 1\)</span> נחשב את ההפרש בין איברים סמוכים:</p>
+<p><span class="math display">\[,a_{n+1} - a_n = r^{n+1} - r^{n} = r^{n}\left(r-1\right) &gt; 0\]</span></p>
+<p>ולכן הסדרה עולה. נניח בשלילה שהיא חסומה. אז לפי <a href="./08-sequences-properties-6.html#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת, ולפי ההבחנה שלמעלה גבולה <span class="math inline">\(.0\)</span></p>
+<p>אבל הסדרה עולה, ולכן <span class="math inline">\(a_n \geq a_1 = r\)</span> לכל <span class="math inline">\(,n\)</span> ולפי <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> גם הגבול מקיים <span class="math inline">\(.L \geq r &gt; 1\)</span> קיבלנו <span class="math inline">\(0 = L &gt; 1\)</span>, וזו סתירה.</p>
+<p>לכן הסדרה אינה חסומה, ולפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">מסקנה 8.2.6</a> אין לה גבול.</p>
+<p><strong>סעיף (ב).</strong> נניח <span class="math inline">\(.0 &lt; r &lt; 1\)</span> אותו חישוב עצמו נותן עכשיו</p>
+<p><span class="math display">\[,a_{n+1} - a_n = r^{n}\left(r-1\right) &lt; 0\]</span></p>
+<p>שכן <span class="math inline">\(.r - 1 &lt; 0\)</span> לכן הסדרה יורדת. כל איבריה חיוביים, ולכן היא חסומה מלרע על ידי <span class="math inline">\(,0\)</span> ולפי <a href="./08-sequences-properties-6.html#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת. לפי ההבחנה שלמעלה גבולה הוא <span class="math inline">\(,0\)</span> כנדרש.</p>
 </div>
-<div id="box-def-number-e" class="thmbox thmbox-definition">
-<p><strong>הגדרה 8.7.3.</strong></p>
-<p><strong>המספר</strong> <span class="math inline">\(e\)</span> מוגדר כגבול של הסדרה שב<a href="#box-thm-e-sequence-monotone-bounded">משפט על מונוטוניות וחסימות</a>:</p>
-<p><span class="math inline">\(.e = \lim_{n\to\infty} \left(1 + \frac{1}{n}\right)^{n}\)</span></p>
-<p>מן החסמים שבמשפט נובע <span class="math inline">\(2 &lt; e &lt; 3\)</span>.</p>
+<div id="box-exm-geometric-power" class="thmbox thmbox-example">
+<p><strong>דוגמה 8.7.2.</strong></p>
+<p>(א) <span class="math inline">\(.a_n = 2^{n}\)</span> כאן <span class="math inline">\(,r = 2 &gt; 1\)</span> ולכן לפי סעיף (א) של המשפט הסדרה אינה חסומה ואין לה גבול. אין צורך בחישוב נוסף.</p>
+<p>(ב) <span class="math inline">\(.a_n = \left(\frac{1}{2}\right)^{n}\)</span> כאן <span class="math inline">\(,r = \frac{1}{2}\)</span> ולכן לפי סעיף (ב) של המשפט הסדרה שואפת לאפס.</p>
+<p>(ג) <span class="math inline">\(.a_n = \left(0.99\right)^{n}\)</span> גם כאן <span class="math inline">\(,0 &lt; r &lt; 1\)</span> ולכן הגבול הוא <span class="math inline">\(.0\)</span> שימו לב שהאיברים הראשונים כמעט אינם קטנים, ובכל זאת הגבול הוא אפס: הבסיס הוא שקובע את התוצאה, ולא קצב הירידה בהתחלה.</p>
 </div>
-<div class="todo">
-<p>המספר <span class="math inline">\(e\)</span> והסדרה <span class="math inline">\((1+\tfrac1n)^n\)</span> נדונים יחד עם המשפט על התכנסות סדרה חסומה ומונוטונית (לעיל) ובסעיף ״משפטי התכנסות״. יש לרכז ולהרחיב כאן.</p>
+</section>
+<section id="הסדרה-sqrtnr" class="level3">
+<h3 class="anchored" data-anchor-id="הסדרה-sqrtnr">הסדרה <span class="math inline">\(\sqrt[n]{r}\)</span></h3>
+<p>עכשיו הבסיס דווקא קבוע, ומה שגדל עם <span class="math inline">\(n\)</span> הוא <strong>סדר השורש</strong>. בכתיב של חזקות מדובר בסדרה <span class="math inline">\(,r^{1/n}\)</span> שהמעריך שלה שואף לאפס.</p>
+<div id="box-thm-nth-root-of-a" class="thmbox thmbox-theorem">
+<p><strong>משפט 8.7.3.</strong></p>
+<p>לכל <span class="math inline">\(r &gt; 0\)</span> מתקיים</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \sqrt[n]{r} = 1\]</span></p>
 </div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p><strong>המקרה <span class="math inline">\(.r &gt; 1\)</span></strong> נראה תחילה שהסדרה <span class="math inline">\(a_n = \sqrt[n]{r}\)</span> יורדת. נשווה שני איברים סמוכים על ידי העלאה בחזקת <span class="math inline">\(:n\left(n+1\right)\)</span></p>
+<p><span class="math display">\[,\left(\sqrt[n+1]{r}\right)^{n\left(n+1\right)} = r^{n} \qquad,\qquad \left(\sqrt[n]{r}\right)^{n\left(n+1\right)} = r^{n+1}\]</span></p>
+<p>ומכיוון ש-<span class="math inline">\(r &gt; 1\)</span> מתקיים <span class="math inline">\(,r^{n} &lt; r^{n+1}\)</span> ולכן <span class="math inline">\(.a_{n+1} &lt; a_n\)</span> הסדרה יורדת.</p>
+<p>היא גם חסומה מלרע על ידי <span class="math inline">\(,1\)</span> שכן מ-<span class="math inline">\(r&gt;1\)</span> נובע <span class="math inline">\(.\sqrt[n]{r} &gt; 1\)</span> לכן לפי <a href="./08-sequences-properties-6.html#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת; נסמן את גבולה <span class="math inline">\(.L\)</span> ולפי <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> מתקיים <span class="math inline">\(.L \geq 1\)</span></p>
+<p>נניח בשלילה <span class="math inline">\(.L &gt; 1\)</span> הסדרה יורדת ומתכנסת ל-<span class="math inline">\(,L\)</span> ולכן <span class="math inline">\(a_n \geq L\)</span> לכל <span class="math inline">\(,n\)</span> ובהעלאה בחזקת <span class="math inline">\(n\)</span></p>
+<p><span class="math display">\[.r = a_n^{\,n} \geq L^{n}\]</span></p>
+<p>אבל <span class="math inline">\(,L &gt; 1\)</span> ולכן לפי סעיף (א) של <a href="#box-thm-geometric-power">משפט 8.7.1</a> הסדרה <span class="math inline">\(\left(L^{n}\right)\)</span> אינה חסומה, וקיים <span class="math inline">\(n\)</span> שעבורו <span class="math inline">\(.L^{n} &gt; r\)</span> זו סתירה, שכן <span class="math inline">\(r\)</span> קבוע. לכן <span class="math inline">\(.L = 1\)</span></p>
+<p><strong>המקרה <span class="math inline">\(.r = 1\)</span></strong> הסדרה קבועה ושווה ל-<span class="math inline">\(,1\)</span> ואין מה להוכיח.</p>
+<p><strong>המקרה <span class="math inline">\(.0 &lt; r &lt; 1\)</span></strong> אז <span class="math inline">\(,\frac{1}{r} &gt; 1\)</span> ולפי המקרה הראשון <span class="math inline">\(.\sqrt[n]{\tfrac{1}{r}} \to 1\)</span> מכיוון ש-</p>
+<p><span class="math display">\[,\sqrt[n]{r} = \frac{1}{\sqrt[n]{1/r}}\]</span></p>
+<p>והגבול במכנה הוא <span class="math inline">\(1\)</span> ושונה מאפס, נובע מסעיף (ד) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> ש-<span class="math inline">\(.\sqrt[n]{r} \to 1\)</span></p>
+</div>
+<div id="box-exm-nth-root" class="thmbox thmbox-example">
+<p><strong>דוגמה 8.7.4.</strong></p>
+<p>(א) <span class="math inline">\(.a_n = \sqrt[n]{5}\)</span> לפי המשפט הגבול הוא <span class="math inline">\(,1\)</span> ואין תלות בגודלו של הבסיס.</p>
+<p>(ב) <span class="math inline">\(.a_n = \sqrt[n]{0.001}\)</span> גם כאן הגבול הוא <span class="math inline">\(,1\)</span> הפעם מן המקרה <span class="math inline">\(.0 &lt; r &lt; 1\)</span> שימו לב שהסדרה הזאת <strong>עולה</strong> אל <span class="math inline">\(1\)</span> מלמטה, בעוד שהסדרה שבסעיף (א) יורדת אליו מלמעלה.</p>
+</div>
+</section>
+<section id="הסדרה-xt_n-כאשר-t_n-to-0" class="level3">
+<h3 class="anchored" data-anchor-id="הסדרה-xt_n-כאשר-t_n-to-0">הסדרה <span class="math inline">\(x^{t_n}\)</span> כאשר <span class="math inline">\(t_n \to 0\)</span></h3>
+<p>השלב הבא מכליל את הקודם: במקום המעריך <span class="math inline">\(\frac{1}{n}\)</span> נרשה לו להיות כל סדרה השואפת לאפס. כאן עדיין נדרוש שהמעריכים יהיו <strong>רציונליים</strong>, שכן חזקה עם מעריך אי-רציונלי טרם הוגדרה.</p>
+<div id="box-thm-power-to-zero" class="thmbox thmbox-theorem">
+<p><strong>משפט 8.7.5.</strong></p>
+<p>יהי <span class="math inline">\(,x &gt; 0\)</span> ותהי <span class="math inline">\(\left(t_n\right)\)</span> סדרה של מספרים <strong>רציונליים</strong> המקיימת <span class="math inline">\(.t_n \to 0\)</span> אז</p>
+<p><span class="math display">\[.x^{t_n} \to 1\]</span></p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>די להוכיח עבור <span class="math inline">\(:x &gt; 1\)</span> עבור <span class="math inline">\(x = 1\)</span> הסדרה קבועה, ועבור <span class="math inline">\(0 &lt; x &lt; 1\)</span> מפעילים את המקרה הראשון על <span class="math inline">\(\frac{1}{x}\)</span> ועוברים להופכי.</p>
+<p>הרעיון הוא לכלוא את <span class="math inline">\(x^{t_n}\)</span> בין שתי חזקות <strong>קבועות</strong> של <span class="math inline">\(,x\)</span> ששתיהן קרובות ל-<span class="math inline">\(.1\)</span> את הקרבה הזאת מספק לנו המשפט הקודם.</p>
+<p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> לפי <a href="#box-thm-nth-root-of-a">משפט 8.7.3</a> מתקיים <span class="math inline">\(\sqrt[m]{x} \to 1\)</span> כאשר <span class="math inline">\(,m \to \infty\)</span> ולפי אריתמטיקת הגבולות גם <span class="math inline">\(.\frac{1}{\sqrt[m]{x}} \to 1\)</span> לכן קיים <span class="math inline">\(m\)</span> טבעי <strong>אחד</strong> שעבורו מתקיימים שני האי-שוויונות</p>
+<p><span class="math display">\[.\sqrt[m]{x} &lt; 1 + \varepsilon \qquad,\qquad \frac{1}{\sqrt[m]{x}} &gt; 1 - \varepsilon\]</span></p>
+<p>נקבע את ה-<span class="math inline">\(m\)</span> הזה. מכיוון ש-<span class="math inline">\(,t_n \to 0\)</span> מתקיים <span class="math inline">\(\left|t_n\right| &lt; \frac{1}{m}\)</span> החל ממקום מסוים, כלומר</p>
+<p><span class="math display">\[.-\frac{1}{m} &lt; t_n &lt; \frac{1}{m}\]</span></p>
+<p>שלושת המעריכים האלה רציונליים, ולכן תכונת הסדר נותנת</p>
+<p><span class="math display">\[,x^{-1/m} &lt; x^{t_n} &lt; x^{1/m}\]</span></p>
+<p>ובכתיב של שורשים</p>
+<p><span class="math display">\[.1 - \varepsilon &lt; \frac{1}{\sqrt[m]{x}} &lt; x^{t_n} &lt; \sqrt[m]{x} &lt; 1 + \varepsilon\]</span></p>
+<p>קיבלנו <span class="math inline">\(\left|x^{t_n} - 1\right| &lt; \varepsilon\)</span> החל ממקום מסוים, וזוהי בדיוק הגדרת הגבול.</p>
+</div>
+<div class="extra" title="העשרה: מהו $a^{x}$ כאשר $x$ אינו רציונלי?">
+<div class="extra-title">
+העשרה: מהו <span class="math inline">\(a^{x}\)</span> כאשר <span class="math inline">\(x\)</span> אינו רציונלי?
+</div>
+<p>בכל מה שעשינו עד כה המעריך היה רציונלי. הגדרנו <span class="math inline">\(x^{p/q} = \sqrt[q]{x^{p}}\)</span> ולא מעבר לכך, ולכן ביטוי כמו <span class="math inline">\(2^{\sqrt{2}}\)</span> עדיין חסר משמעות. המשפט שבסוף הסעיף מדבר על <span class="math inline">\(L^{x}\)</span> עבור <span class="math inline">\(x\)</span> ממשי כלשהו, ולכן כדאי לעצור ולהגדיר מהו.</p>
+<p>הרעיון טבעי: נקרב את <span class="math inline">\(x\)</span> על ידי מספרים רציונליים, שעבורם החזקה כבר מוגדרת, ונראה לאן הולכות החזקות המתאימות.</p>
+<p>בדיון הזה נשתמש בשתי תכונות החזקות הרציונליות שהזכרנו בתחילת הסעיף, וכן ב<a href="#box-thm-power-to-zero">משפט 8.7.5</a> שזה עתה הוכחנו. למעשה, המשפט ההוא הוא כל מה שדרוש.</p>
+<div id="box-def-real-power" class="thmbox thmbox-definition" title="חזקה עם מעריך ממשי">
+<p><strong>הגדרה 8.7.6 — חזקה עם מעריך ממשי.</strong></p>
+<p>יהי <span class="math inline">\(a &gt; 0\)</span> ויהי <span class="math inline">\(.x \in \mathbb{R}\)</span> תהי <span class="math inline">\((x_n)\)</span> סדרה <strong>כלשהי</strong> של מספרים רציונליים המקיימת <span class="math inline">\(.x_n \to x\)</span> אז הסדרה <span class="math inline">\(\left(a^{x_n}\right)\)</span> מתכנסת, וגבולה אינו תלוי בבחירת הסדרה. מגדירים</p>
+<p><span class="math display">\[.a^{x} = \lim_{n\to\infty} a^{x_n}\]</span></p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נניח <span class="math inline">\(;a &gt; 1\)</span> המקרים <span class="math inline">\(a = 1\)</span> ו-<span class="math inline">\(0 &lt; a &lt; 1\)</span> נובעים ממנו מיד.</p>
+<p><strong>שלב א: עבור בחירה אחת מסוימת הגבול קיים.</strong> כאן, ורק כאן, נשתמש במונוטוניות. נבחר סדרה <strong>עולה</strong> של רציונליים <span class="math inline">\(,x_n \to x\)</span> למשל הקירובים העשרוניים של <span class="math inline">\(x\)</span> מלמטה. לפי תכונת הסדר גם <span class="math inline">\(\left(a^{x_n}\right)\)</span> עולה. נבחר רציונלי <span class="math inline">\(q\)</span> המקיים <span class="math inline">\(;q &gt; x\)</span> אז <span class="math inline">\(x_n &lt; q\)</span> לכל <span class="math inline">\(,n\)</span> ולכן</p>
+<p><span class="math display">\[.a^{x_n} &lt; a^{q}\]</span></p>
+<p>הסדרה עולה וחסומה מלעיל על ידי <span class="math inline">\(,a^{q}\)</span> ולכן לפי <a href="./08-sequences-properties-6.html#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת. נסמן את גבולה <span class="math inline">\(.\ell\)</span></p>
+<p><strong>שלב ב: כל בחירה אחרת נותנת את אותו גבול.</strong> מכאן ואילך המונוטוניות אינה נחוצה עוד. תהי <span class="math inline">\((y_n)\)</span> סדרה <strong>כלשהי</strong> של רציונליים השואפת ל-<span class="math inline">\(.x\)</span> לפי תכונת החיבור</p>
+<p><span class="math display">\[,a^{y_n} = a^{x_n} \cdot a^{y_n - x_n}\]</span></p>
+<p>והמעריכים <span class="math inline">\(y_n - x_n\)</span> רציונליים ושואפים ל-<span class="math inline">\(.0\)</span> לכן לפי <a href="#box-thm-power-to-zero">משפט 8.7.5</a> מתקיים <span class="math inline">\(,a^{y_n - x_n} \to 1\)</span> ולפי סעיף (ג) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a></p>
+<p><span class="math display">\[.a^{y_n} \longrightarrow \ell \cdot 1 = \ell\]</span></p>
+<p>כל סדרה של רציונליים השואפת ל-<span class="math inline">\(x\)</span> מובילה אפוא לאותו גבול <span class="math inline">\(,\ell\)</span> וההגדרה חד-משמעית.</p>
+<p>שימו לב לחלוקת העבודה: המונוטוניות שימשה רק כדי להבטיח שגבול אחד <strong>קיים</strong>, ומרגע שהוא קיים ההשוואה אליו כבר אינה זקוקה לה. לכן ההגדרה עצמה יכולה לדבר על סדרה רציונלית כלשהי.</p>
+</div>
+<p>נשים לב שאם <span class="math inline">\(x\)</span> עצמו רציונלי אפשר לקחת את הסדרה הקבועה <span class="math inline">\(,x_n = x\)</span> ואז ההגדרה החדשה מחזירה בדיוק את החזקה הרציונלית המוכרת. ההגדרה <strong>מרחיבה</strong> אפוא את הקודמת ואינה סותרת אותה.</p>
+<p><strong>יישום: חוקי החזקות עוברים גם למעריכים אי-רציונליים.</strong> שתי התכונות שהנחנו לאורך הדרך נאמרו על מעריכים רציונליים בלבד. עכשיו אפשר להסיק אותן לכל מעריך ממשי, וזהו למעשה השכר על כל העבודה.</p>
+<div id="box-cor-real-power-laws" class="thmbox thmbox-corollary">
+<p><strong>מסקנה 8.7.7.</strong></p>
+<p>יהי <span class="math inline">\(.a &gt; 0\)</span> אז לכל <span class="math inline">\(x, y \in \mathbb{R}\)</span> מתקיים</p>
+<p><span class="math display">\[,a^{x+y} = a^{x} \cdot a^{y}\]</span></p>
+<p>ואם <span class="math inline">\(a &gt; 1\)</span> ואם <span class="math inline">\(,x &lt; y\)</span> אז <span class="math inline">\(.a^{x} \leq a^{y}\)</span></p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p><strong>חוק החיבור.</strong> נבחר סדרות של רציונליים <span class="math inline">\(x_n \to x\)</span> ו-<span class="math inline">\(.y_n \to y\)</span> הסכומים <span class="math inline">\(x_n + y_n\)</span> רציונליים ושואפים ל-<span class="math inline">\(,x+y\)</span> ולכן לפי ההגדרה, ולפי תכונת החיבור עבור רציונליים,</p>
+<p><span class="math display">\[.a^{x+y} = \lim_{n\to\infty} a^{x_n + y_n} = \lim_{n\to\infty} a^{x_n} \cdot a^{y_n} = a^{x} \cdot a^{y}\]</span></p>
+<p>המעבר האחרון הוא סעיף (ג) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a>.</p>
+<p><strong>תכונת הסדר.</strong> נניח <span class="math inline">\(.x &lt; y\)</span> נבחר רציונלי <span class="math inline">\(c\)</span> המקיים <span class="math inline">\(,x &lt; c &lt; y\)</span> ונבחר את הסדרות כך ש-<span class="math inline">\(x_n &lt; c\)</span> ו-<span class="math inline">\(y_n &gt; c\)</span> לכל <span class="math inline">\(n\)</span> (אפשר תמיד, שכן אי-השוויונות מתקיימים החל ממקום מסוים ואפשר להשמיט מספר סופי של איברים). לפי תכונת הסדר עבור רציונליים</p>
+<p><span class="math display">\[,a^{x_n} &lt; a^{c} &lt; a^{y_n}\]</span></p>
+<p>ולפי <a href="./08-sequences-properties-3.html#box-cor-limit-compare">מסקנה 8.3.5</a> אי-השוויונות עוברים לגבול ונותנים <span class="math inline">\(.a^{x} \leq a^{c} \leq a^{y}\)</span></p>
+</div>
+<p>מעתה, משהוגדרה החזקה לכל מעריך ממשי, גם <a href="#box-thm-power-to-zero">משפט 8.7.5</a> נכון עבור סדרת מעריכים <strong>ממשית</strong> כלשהי השואפת לאפס: ההוכחה זהה מילה במילה, שכן תכונת הסדר תקפה עכשיו לכל המעריכים.</p>
+</div>
+</section>
+<section id="אריתמטיקה-של-חזקות" class="level3">
+<h3 class="anchored" data-anchor-id="אריתמטיקה-של-חזקות">אריתמטיקה של חזקות</h3>
+<p>עכשיו, כשהביטוי <span class="math inline">\(L^{x}\)</span> מוגדר לכל <span class="math inline">\(L &gt; 0\)</span> ולכל <span class="math inline">\(x\)</span> ממשי, אפשר לנסח את המשפט המרכזי של הסעיף.</p>
+<div id="box-thm-power-arithmetic" class="thmbox thmbox-theorem" title="גבול של חזקה">
+<p><strong>משפט 8.7.8 — גבול של חזקה.</strong></p>
+<p>תהיינה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> ו-<span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> סדרות, ונניח כי <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>, כי <span class="math inline">\(a_n \to L\)</span> עבור <span class="math inline">\(L &gt; 0\)</span>, וכי <span class="math inline">\(b_n \to x\)</span> עבור <span class="math inline">\(x \in \mathbb{R}\)</span>. אז</p>
+<p><span class="math inline">\(.a_n^{\,b_n} \to L^{x}\)</span></p>
+</div>
+<p>שימו לב לשלושת התנאים: הבסיס חיובי, גבולו חיובי (ולא אפס), וגבול המעריך הוא מספר <strong>ממשי</strong>. כל אחד מהם נחוץ.</p>
+<details class="thmcollapse thmoptional"><summary>קריאה לא הכרחית — אפשר לדלג · הוכחת המשפט</summary>
+<div class="optional" title="הוכחת המשפט">
+<p>ההוכחה נשענת על ההגדרה של <span class="math inline">\(a^{x}\)</span> ועל <a href="#box-cor-real-power-laws">מסקנה 8.7.7</a> שבהעשרה הקודמת, ולכן גם היא מובאת כאן כקריאת רשות. הרעיון הוא לפרק את הביטוי לשלושה גורמים, שאחד מהם הוא כבר התשובה ושני האחרים שואפים ל-<span class="math inline">\(.1\)</span></p>
+<p>נסמן <span class="math inline">\(.c_n = \dfrac{a_n}{L}\)</span> מכיוון ש-<span class="math inline">\(a_n \to L\)</span> ו-<span class="math inline">\(,L \neq 0\)</span> מתקיים <span class="math inline">\(,c_n \to 1\)</span> וכל איבריה חיוביים. נכתוב <span class="math inline">\(a_n = L \cdot c_n\)</span> ונפרק:</p>
+<p><span class="math display">\[.a_n^{\,b_n} = \left(L \cdot c_n\right)^{b_n} = L^{\,b_n} \cdot c_n^{\,b_n} = L^{x} \cdot L^{\,b_n - x} \cdot c_n^{\,b_n}\]</span></p>
+<p>בשני המעברים האחרונים השתמשנו בחוק החיבור, בגרסתו הממשית. נראה עכשיו ששני הגורמים האחרונים שואפים ל-<span class="math inline">\(.1\)</span></p>
+<p><strong>הגורם <span class="math inline">\(.L^{\,b_n-x}\)</span></strong> המעריכים <span class="math inline">\(b_n - x\)</span> שואפים ל-<span class="math inline">\(,0\)</span> ולכן לפי <a href="#box-thm-power-to-zero">משפט 8.7.5</a>, בגרסתו הממשית שנזכרה בסוף ההעשרה הקודמת, מתקיים <span class="math inline">\(.L^{\,b_n-x} \to 1\)</span></p>
+<p><strong>הגורם <span class="math inline">\(.c_n^{\,b_n}\)</span></strong> הסדרה <span class="math inline">\((b_n)\)</span> מתכנסת ולכן חסומה, לפי <a href="./08-sequences-properties-2.html#box-thm-convergent-bounded">משפט 8.2.5</a>. נבחר אפוא מספר <strong>טבעי</strong> <span class="math inline">\(K\)</span> המקיים <span class="math inline">\(\left|b_n\right| \leq K\)</span> לכל <span class="math inline">\(,n\)</span> כלומר <span class="math inline">\(.-K \leq b_n \leq K\)</span></p>
+<p>לפי תכונת הסדר, אם <span class="math inline">\(c_n &gt; 1\)</span> מתקיים <span class="math inline">\(,c_n^{-K} \leq c_n^{\,b_n} \leq c_n^{K}\)</span> ואם <span class="math inline">\(c_n &lt; 1\)</span> מתחלפים התפקידים בין שני החסמים. בשני המקרים</p>
+<p><span class="math display">\[.\min\left\{c_n^{K},\ c_n^{-K}\right\} \leq c_n^{\,b_n} \leq \max\left\{c_n^{K},\ c_n^{-K}\right\}\]</span></p>
+<p>כאן <span class="math inline">\(K\)</span> קבוע וטבעי, ולכן לפי <a href="./08-sequences-properties-3.html#box-cor-limit-power">מסקנה 8.3.6</a> מתקיים <span class="math inline">\(,c_n^{K} \to 1^{K} = 1\)</span> וכן <span class="math inline">\(.c_n^{-K} = \dfrac{1}{c_n^{K}} \to 1\)</span> שני החסמים שואפים ל-<span class="math inline">\(,1\)</span> ולכן לפי <a href="./08-sequences-properties-4.html#box-thm-squeeze-sequences">משפט 8.4.1</a> גם <span class="math inline">\(.c_n^{\,b_n} \to 1\)</span></p>
+<p><strong>סיום.</strong> לפי סעיף (ג) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> המכפלה של שלושת הגורמים שואפת למכפלת הגבולות:</p>
+<p><span class="math display">\[,a_n^{\,b_n} = L^{x} \cdot L^{\,b_n-x} \cdot c_n^{\,b_n} \longrightarrow L^{x} \cdot 1 \cdot 1 = L^{x}\]</span></p>
+<p>כנדרש.</p>
+</div>
+</details>
+<div id="box-exm-power-limits" class="thmbox thmbox-example" title="חישוב גבולות של חזקות">
+<p><strong>דוגמה 8.7.9 — חישוב גבולות של חזקות.</strong></p>
+<p>(א) <span class="math inline">\(.\left(1+\dfrac{1}{n}\right)^{1+\frac{1}{n}}\)</span> הבסיס <span class="math inline">\(1+\frac{1}{n}\)</span> חיובי לכל <span class="math inline">\(,n\)</span> ומתכנס ל-<span class="math inline">\(,1\)</span> שהוא חיובי. המעריך <span class="math inline">\(1+\frac{1}{n}\)</span> מתכנס ל-<span class="math inline">\(,1\)</span> שהוא ממשי. שלושת התנאים מתקיימים, ולכן</p>
+<p><span class="math display">\[.\left(1+\frac{1}{n}\right)^{1+\frac{1}{n}} \longrightarrow 1^{1} = 1\]</span></p>
+<p>(ב) <span class="math inline">\(.\left(\dfrac{2n+1}{n}\right)^{\frac{n+1}{n}}\)</span> נפריד את הבסיס:</p>
+<p><span class="math display">\[,\frac{2n+1}{n} = 2 + \frac{1}{n} \longrightarrow 2\]</span></p>
+<p>והוא חיובי לכל <span class="math inline">\(.n\)</span> המעריך הוא <span class="math inline">\(,\frac{n+1}{n} = 1 + \frac{1}{n} \longrightarrow 1\)</span> ולכן</p>
+<p><span class="math display">\[.\left(\frac{2n+1}{n}\right)^{\frac{n+1}{n}} \longrightarrow 2^{1} = 2\]</span></p>
+<p>(ג) <span class="math inline">\(.\sqrt[n]{\dfrac{3n+1}{n+2}}\)</span> נכתוב את הביטוי כחזקה: <span class="math inline">\(,a_n^{1/n}\)</span> כאשר <span class="math inline">\(.a_n = \dfrac{3n+1}{n+2}\)</span> הבסיס חיובי לכל <span class="math inline">\(,n\)</span> ומתכנס ל-<span class="math inline">\(3\)</span> לפי אריתמטיקת הגבולות, והמעריך <span class="math inline">\(\frac{1}{n}\)</span> מתכנס ל-<span class="math inline">\(.0\)</span> לכן</p>
+<p><span class="math display">\[.\sqrt[n]{\frac{3n+1}{n+2}} \longrightarrow 3^{0} = 1\]</span></p>
+<p>בשלוש הדוגמאות המעריך התכנס לגבול ממשי. הקושי מתחיל בדיוק כאשר הוא אינו מתכנס.</p>
+</div>
+<p>מן המשפט נובע מקרה פרטי שימושי. ניקח <span class="math inline">\(,b_n = \dfrac{1}{n}\)</span> שגבולו <span class="math inline">\(,0\)</span> ונקבל שלכל סדרה <span class="math inline">\(a_n \to L\)</span> עם <span class="math inline">\(L &gt; 0\)</span> מתקיים</p>
+<p><span class="math display">\[.\sqrt[n]{a_n} = a_n^{1/n} \longrightarrow L^{0} = 1\]</span></p>
+<p>זוהי הכללה של <a href="#box-thm-nth-root-of-a">משפט 8.7.3</a>: שם הבסיס היה קבוע, וכאן מותר לו להשתנות, ובלבד שגבולו חיובי. אין כאן מעגליות — המשפט שבתחילת הסעיף הוכח בנפרד, והוא ששימש בבניית ההגדרה של <span class="math inline">\(.L^{x}\)</span></p>
+<p>התנאי <span class="math inline">\(L &gt; 0\)</span> חיוני, והמשפט גם אינו אומר דבר כאשר המעריך עצמו אינו מתכנס לגבול ממשי אלא גדל מעבר לכל חסם. את המקרה הזה, <a href="./09-sequences-infinity-2.html#box-warn-one-to-infinity">הצורה <span class="math inline">\(1^{\infty}\)</span></a>, נפגוש בפרק הבא.</p>
+</section>
+<section id="תרגילים-2" class="level3">
+<h3 class="anchored" data-anchor-id="תרגילים-2">תרגילים</h3>
+<p><strong>תרגיל 1.</strong> חשבו את הגבולות הבאים.</p>
+<p>(א) <span class="math inline">\(\lim\limits_{n\to\infty} \left(\dfrac{n+1}{n}\right)^{3 + \frac{1}{n}}\)</span></p>
+<div class="seq-quiz" data-answer="1"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<p>(ב) <span class="math inline">\(\lim\limits_{n\to\infty} \left(\dfrac{n^{2}+1}{2n^{2}+3}\right)^{\frac{2n+1}{n}}\)</span></p>
+<div class="seq-quiz" data-answer="1/4"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<p>(ג) <span class="math inline">\(\lim\limits_{n\to\infty} \sqrt[n]{7}\)</span></p>
+<div class="seq-quiz" data-answer="1"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>סעיף (א).</strong> הבסיס הוא <span class="math inline">\(,\frac{n+1}{n} = 1 + \frac{1}{n} \longrightarrow 1\)</span> והוא חיובי לכל <span class="math inline">\(.n\)</span> המעריך הוא <span class="math inline">\(3 + \frac{1}{n} \longrightarrow 3\)</span> והוא ממשי. לכן לפי <a href="#box-thm-power-arithmetic">משפט 8.7.8</a> הגבול הוא <span class="math inline">\(.1^{3} = 1\)</span></p>
+<p><strong>סעיף (ב).</strong> נחלק מונה ומכנה ב-<span class="math inline">\(n^{2}\)</span> ונקבל שהבסיס שואף ל-<span class="math inline">\(,\frac{1}{2}\)</span> שהוא חיובי. המעריך הוא <span class="math inline">\(\frac{2n+1}{n} = 2 + \frac{1}{n} \longrightarrow 2\)</span>. לכן הגבול הוא</p>
+<p><span class="math display">\[.\left(\frac{1}{2}\right)^{2} = \frac{1}{4}\]</span></p>
+<p><strong>סעיף (ג).</strong> זהו בדיוק <a href="#box-thm-nth-root-of-a">משפט 8.7.3</a> עם <span class="math inline">\(,r = 7\)</span> ולכן הגבול הוא <span class="math inline">\(.1\)</span></p>
+</div>
+</details>
+<p><strong>תרגיל 2.</strong> הסדרה <span class="math inline">\(\left(\dfrac{3}{2}\right)^{n}\)</span> חסומה.</p>
+<div class="tf-quiz" data-correct="false" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>לא נכון.</strong> כאן <span class="math inline">\(,r = \frac{3}{2} &gt; 1\)</span> ולכן לפי סעיף (א) של <a href="#box-thm-geometric-power">משפט 8.7.1</a> הסדרה אינה חסומה.</p>
+<p>שימו לב שהבסיס קרוב ל-<span class="math inline">\(,1\)</span> והאיברים הראשונים גדלים לאט מאוד. זה אינו משנה דבר: כל בסיס הגדול מ-<span class="math inline">\(1\)</span> מוביל לסדרה בלתי חסומה.</p>
+</div>
+</details>
+<p><strong>תרגיל 3.</strong> חשבו את <span class="math inline">\(.\lim\limits_{n\to\infty} \sqrt[n]{2^{n} + 3^{n}}\)</span> (רמז: כלאו את הביטוי שמתחת לשורש בין שתי חזקות של <span class="math inline">\(.3\)</span>)</p>
+<div class="seq-quiz" data-answer="3"><span class="seq-label">תשובה</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>נתחיל מן הרמז. מכיוון ש-<span class="math inline">\(2^{n} &gt; 0\)</span> מתקיים <span class="math inline">\(,2^{n} + 3^{n} &gt; 3^{n}\)</span> ומכיוון ש-<span class="math inline">\(2^{n} \leq 3^{n}\)</span> מתקיים גם <span class="math inline">\(.2^{n} + 3^{n} \leq 2 \cdot 3^{n}\)</span> יחד:</p>
+<p><span class="math display">\[.3^{n} &lt; 2^{n} + 3^{n} \leq 2 \cdot 3^{n}\]</span></p>
+<p>נוציא שורש <span class="math inline">\(n\)</span>-י משלושת האגפים. הוצאת שורש שומרת על הסדר בין מספרים חיוביים, ולכן</p>
+<p><span class="math display">\[,3 &lt; \sqrt[n]{2^{n}+3^{n}} \leq \sqrt[n]{2} \cdot 3\]</span></p>
+<p>שכן <span class="math inline">\(\sqrt[n]{3^{n}} = 3\)</span> ו-<span class="math inline">\(.\sqrt[n]{2 \cdot 3^{n}} = \sqrt[n]{2} \cdot 3\)</span></p>
+<p>הסדרה החוסמת מלרע היא הקבועה <span class="math inline">\(,3\)</span> והחוסמת מלעיל היא <span class="math inline">\(,3\sqrt[n]{2}\)</span> ולפי <a href="#box-thm-nth-root-of-a">משפט 8.7.3</a> היא שואפת ל-<span class="math inline">\(.3 \cdot 1 = 3\)</span> שתי הסדרות שואפות ל-<span class="math inline">\(,3\)</span> ולכן לפי <a href="./08-sequences-properties-4.html#box-thm-squeeze-sequences">משפט 8.4.1</a></p>
+<p><span class="math display">\[.\sqrt[n]{2^{n}+3^{n}} \longrightarrow 3\]</span></p>
+<p>הרעיון כללי: בסכום של חזקות, הבסיס <strong>הגדול ביותר</strong> הוא שקובע את הגבול.</p>
+</div>
+</details>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1405,7 +1622,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-6.html" class="pagination-link" aria-label="8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div><div class="nav-page nav-page-next"><a href="./09-sequences-infinity.html" class="pagination-link" aria-label="9"><span class="nav-page-text"><span class="chapter-number">9</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-6.html" class="pagination-link" aria-label="8.6 סדרה חסומה ומונוטונית מתכנסת"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div><div class="nav-page nav-page-next"><a href="./09-sequences-infinity.html" class="pagination-link" aria-label="9"><span class="nav-page-text"><span class="chapter-number">9</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 

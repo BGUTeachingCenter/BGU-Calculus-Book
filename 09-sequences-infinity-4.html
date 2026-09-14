@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; תת-סדרות וגבולות חלקיים – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
+<title>9&nbsp; גבולות אינסופיים וסדרי גודל – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./11-functions-intro.html" rel="next">
-<link href="./09-sequences-infinity.html" rel="prev">
+<link href="./10-sequences-subsequences.html" rel="next">
+<link href="./08-sequences-properties.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -338,6 +338,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
@@ -749,7 +766,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./10-sequences-subsequences.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./09-sequences-infinity.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="חפש" onclick="window.quartoOpenSearch();">
@@ -827,11 +844,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 אינסוף כגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -957,12 +974,12 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0" class="nav-link">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#sec-number-e" class="nav-link">9.4 המספר \(e\)</a></li><li class="toc-indent"><a href="#סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0" class="nav-link">סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</a></li></ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./10-sequences-subsequences.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></a></li></ol></nav>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./09-sequences-infinity.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></h1>
 </div>
 
 
@@ -978,31 +995,68 @@ window.Quarto = {
 
 </header>
 
-<section id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0"><span class="header-section-number">10.4</span> סדרות מהצורה <span class="math inline">\((1+a_n)^{1/a_n}\)</span> כאשר <span class="math inline">\(a_n\to 0\)</span></h2>
+<section id="sec-number-e" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-number-e"><span class="header-section-number">9.4</span> המספר <span class="math inline">\(e\)</span></h2>
+<div id="box-thm-e-sequence-monotone-bounded" class="thmbox thmbox-theorem">
+<p><strong>משפט 9.4.1.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = \left(1 + \dfrac{1}{n}\right)^{n}\)</span> מונוטונית עולה, ומתקיים <span class="math inline">\(2 \le a_n \le 3\)</span> לכל <span class="math inline">\(n \ge 1\)</span>. בפרט היא מונוטונית וחסומה, ולכן היא מתכנסת.</p>
+</div>
+<div id="box-def-number-e" class="thmbox thmbox-definition">
+<p><strong>הגדרה 9.4.2.</strong></p>
+<p><strong>המספר</strong> <span class="math inline">\(e\)</span> מוגדר כגבול של הסדרה שב<a href="#box-thm-e-sequence-monotone-bounded">משפט על מונוטוניות וחסימות</a>:</p>
+<p><span class="math inline">\(.e = \lim_{n\to\infty} \left(1 + \frac{1}{n}\right)^{n}\)</span></p>
+<p>מן החסמים שבמשפט נובע <span class="math inline">\(2 &lt; e &lt; 3\)</span>.</p>
+</div>
+<div class="todo">
+<p>המספר <span class="math inline">\(e\)</span> והסדרה <span class="math inline">\((1+\tfrac1n)^n\)</span> נדונים יחד עם המשפט על התכנסות סדרה חסומה ומונוטונית (לעיל) ובסעיף ״משפטי התכנסות״. יש לרכז ולהרחיב כאן.</p>
+</div>
+<div id="box-exm-piza-3" class="thmbox thmbox-question" title="הסדרה $(1+1/n)^{n^2}$">
+<p><strong>תרגיל פתור 9.4.3 — הסדרה <span class="math inline">\((1+1/n)^{n^2}\)</span>.</strong></p>
+<p>האם הסדרה <span class="math inline">\(b_n = \left(1 + \dfrac{1}{n}\right)^{n^2}\)</span> מתכנסת במובן הרחב?</p>
+</div>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><span class="math display">\[\left(1 + \frac{1}{n}\right)^{n^2} = \left(1 + \frac{1}{n}\right)^{n \cdot n} = \left(\left(1 + \frac{1}{n}\right)^n\right)^n\]</span></p>
+<p><span class="math display">\[\left(1 + \frac{1}{n}\right)^n \to e\]</span> כאשר <span class="math inline">\(\left(1 + \frac{1}{n}\right)^n &gt; 2\)</span> באשר הם מספר מאוחרים מסוים</p>
+<p><span class="math display">\[a_n = \left(\left(1 + \frac{1}{n}\right)^n\right)^n &gt; 2\]</span> לבן הם מספר מאוחרים מסוים</p>
+<p>הרי <span class="math inline">\(2^n \to \infty\)</span> לכן מכלל הפיצה: <span class="math display">\[\boxed{a_n \to \infty}\]</span></p>
+</div>
+<div id="box-exm-power-limit-e" class="thmbox thmbox-example" title="גבול מן הצורה $1^{\infty}$">
+<p><strong>דוגמה 9.4.4 — גבול מן הצורה <span class="math inline">\(1^{\infty}\)</span>.</strong></p>
+<p><span class="math inline">\(\left(1+\frac{1}{n}\right)^{\frac{2n^2+n+1}{3n-5}}=\left(1+\frac{1}{n}\right)^{n\cdot\left(\frac{2n^2+n+1}{3n-5}\right)}=\left(\left(1+\frac{1}{n}\right)^n\right)^{\frac{2n^2+n+1}{3n-5}}\longrightarrow e^{\frac{2}{3}}\)</span></p>
+<!-- בדיקה: מסומן מתחת לסוגריים $\longrightarrow e$ , והערה בכתב יד -->
+<!-- בדיקה: המעריך החיצוני נכתב פעמיים כ-(2n²+n+1)/(3n-5); כדי שהשוויון הראשון יתקיים
+     הוא צריך להיות (2n²+n+1)/(n(3n-5)), ורק הוא אכן שואף ל-2/3. נשמר כפי שנכתב. -->
+</div>
+<section id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0" class="level3">
+<h3 class="anchored" data-anchor-id="סדרות-מהצורה-1a_n1a_n-כאשר-a_nto-0">סדרות מהצורה <span class="math inline">\((1+a_n)^{1/a_n}\)</span> כאשר <span class="math inline">\(a_n\to 0\)</span></h3>
+<p>הגבול המגדיר את <span class="math inline">\(e\)</span> נכתב עם הסדרה <span class="math inline">\(\frac{1}{n}\)</span> במקום הספציפי הזה, אבל אין בבחירה הזאת דבר מיוחד. מה שבאמת עובד הוא הקשר בין הבסיס למעריך: הבסיס הוא <span class="math inline">\(1\)</span> ועוד כמות קטנה, והמעריך הוא <strong>ההופכי</strong> של אותה כמות. כל עוד הקשר הזה נשמר, הגבול נשאר <span class="math inline">\(.e\)</span></p>
 <div id="box-thm-e-general-form" class="thmbox thmbox-theorem">
-<p><strong>משפט 10.4.1.</strong></p>
+<p><strong>משפט 9.4.5.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המקיימת <span class="math inline">\(a_n \to 0\)</span> , וכן <span class="math inline">\(a_n \neq 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>. אז</p>
 <p><span class="math inline">\(.\left(1 + a_n\right)^{\frac{1}{a_n}} \to e\)</span></p>
 <p>הבחירה <span class="math inline">\(a_n = \dfrac{1}{n}\)</span> מחזירה את הגבול המוכר <span class="math inline">\(\left(1 + \dfrac{1}{n}\right)^{n} \to e\)</span>.</p>
 </div>
 <div id="box-exm-gvul-e" class="thmbox thmbox-question" title="הסדרה $(1-1/n)^n$">
-<p><strong>תרגיל פתור 10.4.2 — הסדרה <span class="math inline">\((1-1/n)^n\)</span>.</strong></p>
-<p>לאן מתכנסת הסדרה <span class="math inline">\((1 - \frac{1}{n})^n\)</span></p>
+<p><strong>תרגיל פתור 9.4.6 — הסדרה <span class="math inline">\((1-1/n)^n\)</span>.</strong></p>
+<p>לאן מתכנסת הסדרה <span class="math inline">\(?\left(1 - \dfrac{1}{n}\right)^{n}\)</span></p>
 </div>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p><span class="math display">\[(1 - \frac{1}{n})^n \to \frac{1}{e}\]</span></p>
-<p>ולכן <span class="math inline">\(\frac{1}{(1 - \frac{1}{n})^n}\)</span> ונקבל: <span class="math inline">\((1 - \frac{1}{n})^{-n} \to e\)</span> כי: נציב את <span class="math inline">\(a_n = -\frac{1}{n}\)</span></p>
+<p>נציב במשפט <span class="math inline">\(.a_n = -\dfrac{1}{n}\)</span> הסדרה הזאת שואפת ל-<span class="math inline">\(,0\)</span> ואיבריה שונים מאפס, ולכן תנאי המשפט מתקיימים. המעריך הוא</p>
+<p><span class="math display">\[,\frac{1}{a_n} = -n\]</span></p>
+<p>ולכן המשפט נותן</p>
+<p><span class="math display">\[.\left(1 - \frac{1}{n}\right)^{-n} \longrightarrow e\]</span></p>
+<p>זו אינה הסדרה שנשאלנו עליה, אלא ההופכית שלה. מכיוון ש-<span class="math inline">\(e \neq 0\)</span> אפשר להפעיל את כלל המנה ולקבל</p>
+<p><span class="math display">\[.\left(1 - \frac{1}{n}\right)^{n} = \frac{1}{\left(1 - \frac{1}{n}\right)^{-n}} \longrightarrow \frac{1}{e}\]</span></p>
 </div>
+<!-- הועבר ב-2026-09-14 מסעיף 10.4. פתרון התרגיל נכתב מחדש: בתמלול הוא הופיע בסדר
+     הפוך (המסקנה לפני ההצבה) ובלי הנימוק למעבר להופכי. -->
 <div class="todo">
-<p>הצורה הכללית <span class="math inline">\((1+a_n)^{1/a_n}\)</span> מבוססת על הגבול <span class="math inline">\((1+\tfrac1n)^n\to e\)</span> שנדון לעיל. להשלמה.</p>
+<p>הצורה הכללית <span class="math inline">\((1+a_n)^{1/a_n}\)</span> מובאת כאן ללא הוכחה. להשלמה.</p>
 </div>
-
-
 </section>
-
-</main> <!-- /main -->
+</section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1403,7 +1457,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./10-sequences-subsequences-3.html" class="pagination-link" aria-label="10.3 הגבול העליון והגבול התחתון (ללא הוכחות)"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div><div class="nav-page nav-page-next"><a href="./11-functions-intro.html" class="pagination-link" aria-label="11"><span class="nav-page-text"><span class="chapter-number">11</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./09-sequences-infinity-3.html" class="pagination-link" aria-label="9.3 מבחן המנה ומבחן השורש"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">9.3 מבחן המנה ומבחן השורש</span></a></div><div class="nav-page nav-page-next"><a href="./09-sequences-infinity-5.html" class="pagination-link" aria-label="9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)"><span class="nav-page-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 

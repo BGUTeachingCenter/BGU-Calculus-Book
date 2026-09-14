@@ -338,6 +338,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
@@ -827,11 +844,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 אינסוף כגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -957,7 +974,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#סדרה-חסומה-ומונוטונית-מתכנסת-ללא-הוכחה" class="nav-link">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#סדרה-חסומה-ומונוטונית-מתכנסת" class="nav-link">8.6 סדרה חסומה ומונוטונית מתכנסת</a></li><li class="toc-indent"><a href="#תרגילים-1" class="nav-link">תרגילים</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./08-sequences-properties.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></a></li></ol></nav>
@@ -978,27 +995,148 @@ window.Quarto = {
 
 </header>
 
-<section id="סדרה-חסומה-ומונוטונית-מתכנסת-ללא-הוכחה" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="סדרה-חסומה-ומונוטונית-מתכנסת-ללא-הוכחה"><span class="header-section-number">8.6</span> סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</h2>
-<div id="box-rem-monotone-vs-convergent" class="thmbox thmbox-remark" title="מונוטוניות והתכנסות אינן גוררות זו את זו">
-<p><strong>הערה 8.6.1 — מונוטוניות והתכנסות אינן גוררות זו את זו.</strong></p>
-<p><span class="math inline">\(a_n\)</span> מונוטונית <span class="math inline">\(\not\Leftarrow\)</span> <span class="math inline">\(a_n\)</span> מתכנסת</p>
-<p>דוגמא: <span class="math display">\[a_n = n\]</span></p>
-<p><span class="math inline">\(a_n\)</span> מתכנסת <span class="math inline">\(\not\Leftarrow\)</span> <span class="math inline">\(a_n\)</span> מונוטונית</p>
-<p>דוגמא: <span class="math inline">\(a_n = \dfrac{(-1)^n}{n}\)</span> (<span class="math inline">\(a_n \to 0\)</span>)</p>
+<section id="סדרה-חסומה-ומונוטונית-מתכנסת" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="סדרה-חסומה-ומונוטונית-מתכנסת"><span class="header-section-number">8.6</span> סדרה חסומה ומונוטונית מתכנסת</h2>
+<p>בסעיפים הקודמים ראינו שתי תכונות של סדרות: חסימוּת ומונוטוניות. ראינו גם שחסימוּת אינה גוררת התכנסות, אבל שהתכנסות כן גוררת חסימוּת. נשאלת השאלה: האם קיים קשר דומה בין התכנסות למונוטוניות?</p>
+<p>התשובה היא לא, ובשני הכיוונים. יש סדרה מונוטונית שאינה מתכנסת, ויש סדרה מתכנסת שאינה מונוטונית.</p>
+<div id="box-exm-monotone-not-convergent" class="thmbox thmbox-example" title="מונוטונית שאינה מתכנסת">
+<p><strong>דוגמה 8.6.1 — מונוטונית שאינה מתכנסת.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = n\)</span> מונוטונית עולה ממש, כפי שראינו ב<a href="./08-sequences-properties-5.html#box-exm-monotone-increasing">דוגמה 8.5.2</a>. היא אינה חסומה, ולפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">מסקנה 8.2.6</a> סדרה שאינה חסומה אינה מתכנסת.</p>
 </div>
+<div id="box-exm-convergent-not-monotone" class="thmbox thmbox-example" title="מתכנסת שאינה מונוטונית">
+<p><strong>דוגמה 8.6.2 — מתכנסת שאינה מונוטונית.</strong></p>
+<p>הסדרה <span class="math inline">\(a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span> מתכנסת ל-<span class="math inline">\(,0\)</span> כפי שראינו ב<a href="./07-sequences-limit-3.html#box-q-one-frac-n">תרגיל פתור 7.3.11</a>.</p>
+<p>היא אינה מונוטונית: שלושת איבריה הראשונים הם</p>
+<p><span class="math display">\[,a_1 = -1, \qquad a_2 = \frac{1}{2}, \qquad a_3 = -\frac{1}{3}\]</span></p>
+<p>ומ-<span class="math inline">\(a_1 &lt; a_2\)</span> נובע שהיא אינה יורדת, ומ-<span class="math inline">\(a_2 &gt; a_3\)</span> נובע שהיא אינה עולה.</p>
+</div>
+<div id="box-warn-monotone-convergence-independent" class="thmbox thmbox-warning" title="אף אחת מן התכונות אינה גוררת את השנייה">
+<p><strong>שימו לב — אף אחת מן התכונות אינה גוררת את השנייה.</strong></p>
+<p>התכנסות אינה גוררת מונוטוניות, ומונוטוניות אינה גוררת התכנסות. שתי הדוגמאות שלמעלה מראות את שני הכיוונים.</p>
+</div>
+<p>אף אחת משתי התכונות, בפני עצמה, אינה מספיקה אפוא כדי להבטיח התכנסות. כדאי לעצור ולשאול <strong>מדוע</strong> — שכן שני הכישלונות אינם אותו כישלון.</p>
+<p><strong>סדרה חסומה ״רוקדת״.</strong> הסדרה <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> אינה יוצאת מן הקטע <span class="math inline">\(\left[-1,1\right]\)</span> לעולם, ובכל זאת היא מקפצת בין <span class="math inline">\(-1\)</span> ל-<span class="math inline">\(1\)</span> בלי סוף. החסימוּת קובעת <strong>היכן</strong> מותר לאיברים להימצא, אך אינה מחייבת אותם לנוח באיזשהו מקום. (בספרות מקובל לומר על סדרה כזאת שהיא ״מתנדנדת״.)</p>
+<p><strong>סדרה מונוטונית ״בורחת״.</strong> הסדרה <span class="math inline">\(a_n = n\)</span> רק מטפסת ולעולם אינה חוזרת אחורה, ובדיוק משום כך היא בורחת אל האינסוף. המונוטוניות קובעת <strong>לאיזה כיוון</strong> נעים האיברים, אך אינה מחייבת אותם להישאר בתחום כלשהו.</p>
+<p>עכשיו שימו לב לדבר הבא: כל אחת משתי התכונות אוסרת בדיוק את מה שהשנייה מתירה. סדרה מונוטונית אינה יכולה לרקוד, שהרי ריקוד פירושו לחזור אחורה; וסדרה חסומה אינה יכולה לברוח, שהרי בריחה פירושה לצאת מכל תחום. אפשר אפוא להגיע לאותה שאלה עצמה משני הכיוונים — לא לתת לסדרה המונוטונית לברוח, או לא לתת לסדרה החסומה לרקוד — ובשני המקרים מגיעים לאותה דרישה: <strong>לזוז לכיוון אחד בלבד, ולא לצאת מתחום קבוע.</strong></p>
+<p>נוח לראות את שלושת המצבים האלה בתמונה אחת. נחשוב על האיבר <span class="math inline">\(a_n\)</span> כאילו הוא <strong>זבוב</strong>, שבשנייה ה-<span class="math inline">\(n\)</span> נמצא במקום מסוים בתוך מכונית סגורה.</p>
+<p>הזבוב עף אל החלון הימני, נתקע בזכוכית ועף לצד השני; מגיע לחלון השמאלי, נתקע שוב וחוזר. מצד אחד הוא אינו יכול לצאת מן המכונית, ויש גבול למרחק שאליו יגיע. מצד שני יש לו הרבה מקום, ואין שום נקודה שבה הוא נעצר. זו בדיוק סדרה חסומה שאינה מתכנסת.</p>
+<p>נניח עכשיו שהזבוב עף בכיוון אחד בלבד, שאחד החלונות פתוח ושאין מכשולים בדרך. תחת ההנחות הנדיבות שכדור הארץ שטוח ואין לו קצה, ושהזבוב חי לנצח, הוא ימשיך לעוף ושום דבר לא יעצור אותו. הוא עובר על פני כל המרחקים שעל הציר, בלי להתקרב לאף אחד מהם. זו סדרה מונוטונית שאינה חסומה, ולכן אינה מתכנסת.</p>
+<p>ומה יקרה אם נשלב את שני הדברים? נניח שהזבוב נכנס לחדר, ובכניסה מוצב מאוורר חזק שאינו מאפשר לו לנוע לכיוון הדלת, אלא מעיף אותו לכיוון השני בלבד. מצד שני, בקצה החדר יש קיר שאינו מאפשר לו לצאת מן התחום. גם אם הזבוב ינסה בכל כוחו להתקדם, אחת משתיים: או שתהיה נקודה שבה ייעצר באוויר, או שיידחק אל הקיר בסופו של דבר.</p>
+<div id="box-sim-fly" class="thmbox thmbox-simulation" title="שלושת מצבי הזבוב">
+<p><strong>סימולציה 8.6.3 — שלושת מצבי הזבוב.</strong></p>
+<iframe class="widget-frame" src="widgets/ch08/fly-in-car.html" loading="lazy" title="אנימציה: זבוב מקפץ בין שני חלונות סגורים; זבוב עף דרך חלון פתוח והלאה; וזבוב שמאוורר דוחף אותו לכיוון קיר עד שהוא נעצר"></iframe>
+<p>שלוש הסצנות רצות במקביל. בראשונה הזבוב כלוא אך אינו נעצר לעולם; בשנייה הוא חופשי להתרחק בלי גבול; ורק בשלישית, כשהוא נדחף לכיוון אחד <strong>וגם</strong> אינו יכול לצאת, הוא מתקרב למקום מסוים.</p>
+</div>
+<p>זה נכון באופן כללי: אם מותר לזוז רק בכיוון אחד, ואסור לצאת מתחום מסוים, בסופו של דבר מתקרבים לאיזשהו מקום — באמצע התחום או באחד מקצותיו, תלוי באיזה כיוון זזים.</p>
+<p>נתרגם את זה למונחים מתמטיים. נחשוב על <span class="math inline">\(a_n\)</span> כעל המקום בזמן <span class="math inline">\(:n\)</span> ״אסור לצאת מתחום מסוים״ פירושו שהסדרה <strong>חסומה</strong>, ו״מותר לזוז רק בכיוון אחד״ פירושו שהיא <strong>מונוטונית</strong>. מה שהזבוב הראה לנו הוא בדיוק המשפט הבא.</p>
 <div id="box-thm-monotone-bounded-converges" class="thmbox thmbox-theorem">
-<p><strong>משפט 8.6.2.</strong></p>
+<p><strong>משפט 8.6.4.</strong></p>
 <p>אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית <strong>וגם</strong> חסומה, אז היא מתכנסת.</p>
+</div>
+<div id="box-key-dance-escape" class="thmbox thmbox-key-point thmicon-idea" data-icon="idea" title="שני אופני הכישלון">
+<p><strong>חשוב לזכור — שני אופני הכישלון.</strong></p>
+<p>סדרה יכולה שלא להתכנס משתי סיבות שונות:</p>
+<p>(א) היא <strong>רוקדת</strong> — נשארת בתחום, אך אינה נחה באף מקום;</p>
+<p>(ב) היא <strong>בורחת</strong> — נעה לכיוון אחד, ויוצאת מכל תחום.</p>
+<p>המונוטוניות אוסרת את הריקוד, והחסימוּת אוסרת את הבריחה. סדרה שהיא גם מונוטונית וגם חסומה אינה יכולה לעשות לא את זה ולא את זה, ולא נותרה לה ברירה אלא להתכנס.</p>
+</div>
+<p><strong>תמונה שווה 1000 מילים.</strong></p>
+<div id="fig-monotone-bounded" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-monotone-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/c08_fig04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:62.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-monotone-bounded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+תרשים&nbsp;8.4: סדרה מונוטונית עולה וחסומה. האיברים רק מטפסים ולעולם אינם חוצים את הקו <span class="math inline">\(,L\)</span> ולכן לא נותר להם לאן ללכת מלבד להצטופף אליו. הקו <span class="math inline">\(L\)</span> אינו סתם חסם מלעיל אלא <strong>הקטן ביותר</strong> מבין חסמי המלעיל, וזה בדיוק הגבול.
+</figcaption>
+</figure>
 </div>
 <!-- בהרצאה של דניס המשפט מופיע בשם ״משפט בולצאנו״. כאן הוא נשאר ללא שם, כדי שלא
      יתנגש עם ״משפט התכנסות הסדרות המונוטוניות״ שבפרק 11. -->
-<div id="box-rem-monotone-limit-is-sup" class="thmbox thmbox-remark" title="מהו הגבול בהוכחה">
-<p><strong>הערה 8.6.3 — מהו הגבול בהוכחה.</strong></p>
-<p>בהוכחה מראים כי <span class="math inline">\(a_n\)</span> עולה ומתכנסת ל-<span class="math inline">\(M\)</span>, כאשר הוא לא סתם חסם שלה מלמעלה, אלא הוא החסם הכי קטן.</p>
+<details class="thmcollapse thmoptional"><summary>קריאה לא הכרחית — אפשר לדלג · הוכחת המשפט</summary>
+<div class="optional" title="הוכחת המשפט">
+<p>ההוכחה נשענת על מושג שאינו חלק מן הקורס, <strong>החסם העליון</strong>, ולכן היא מובאת כאן כקריאת רשות. אפשר לדלג עליה ולהשתמש במשפט כפי שהוא.</p>
+<div id="box-def-supremum" class="thmbox thmbox-definition" title="חסם עליון">
+<p><strong>הגדרה — חסם עליון.</strong></p>
+<p>תהי <span class="math inline">\(A \subseteq \mathbb{R}\)</span> קבוצה לא ריקה החסומה מלעיל. מספר <span class="math inline">\(L\)</span> נקרא <strong>החסם העליון</strong> של <span class="math inline">\(A\)</span> אם מתקיימים שני התנאים:</p>
+<p>(א) <span class="math inline">\(L\)</span> הוא חסם מלעיל של <span class="math inline">\(,A\)</span> כלומר <span class="math inline">\(x \leq L\)</span> לכל <span class="math inline">\(;x \in A\)</span></p>
+<p>(ב) <span class="math inline">\(L\)</span> הוא הקטן ביותר מבין חסמי המלעיל, כלומר אף מספר הקטן מ-<span class="math inline">\(L\)</span> אינו חסם מלעיל של <span class="math inline">\(.A\)</span></p>
+<p>מסמנים <span class="math inline">\(.L = \sup A\)</span></p>
 </div>
+<div id="box-key-completeness" class="thmbox thmbox-key-point" title="שלמות הממשיים">
+<p><strong>חשוב לזכור — שלמות הממשיים.</strong></p>
+<p>לכל קבוצה לא ריקה של מספרים ממשיים החסומה מלעיל <strong>קיים</strong> חסם עליון.</p>
+<p>זו תכונה יסודית של <span class="math inline">\(\mathbb{R}\)</span> שאנחנו מניחים ואיננו מוכיחים. בלעדיה המשפט שלפנינו פשוט אינו נכון: הסדרה של הקירובים העשרוניים של <span class="math inline">\(\sqrt{2}\)</span> היא עולה וחסומה, אך בתוך המספרים הרציונליים בלבד אין לה גבול.</p>
+</div>
+<div class="thmbox thmbox-proof" title="המקרה העולה">
+<p><strong>הוכחה — המקרה העולה.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מונוטונית עולה וחסומה, ותהי</p>
+<p><span class="math display">\[A = \left\{a_n \mid n \in \mathbb{N}\right\}\]</span></p>
+<p>קבוצת איבריה. הקבוצה אינה ריקה, והיא חסומה מלעיל שכן הסדרה חסומה, ולכן לפי שלמות הממשיים קיים לה חסם עליון. נסמן <span class="math inline">\(.L = \sup A\)</span> נראה ש-<span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
+<p>יהי <span class="math inline">\(.\varepsilon &gt; 0\)</span> המספר <span class="math inline">\(L - \varepsilon\)</span> קטן מ-<span class="math inline">\(,L\)</span> ולכן לפי סעיף (ב) של הגדרת החסם העליון הוא <strong>אינו</strong> חסם מלעיל של <span class="math inline">\(.A\)</span> כלומר קיים איבר של הסדרה הגדול ממנו: קיים <span class="math inline">\(N\)</span> שעבורו</p>
+<p><span class="math display">\[.a_N &gt; L - \varepsilon\]</span></p>
+<p>יהי עכשיו <span class="math inline">\(.n \geq N\)</span> מכיוון שהסדרה עולה מתקיים <span class="math inline">\(,a_n \geq a_N\)</span> ומכיוון ש-<span class="math inline">\(L\)</span> חסם מלעיל של <span class="math inline">\(A\)</span> מתקיים <span class="math inline">\(.a_n \leq L\)</span> נשרשר את שלושת האי-שוויונות:</p>
+<p><span class="math display">\[.L - \varepsilon &lt; a_N \leq a_n \leq L &lt; L + \varepsilon\]</span></p>
+<p>לכן <span class="math inline">\(\left|a_n - L\right| &lt; \varepsilon\)</span> לכל <span class="math inline">\(,n \geq N\)</span> וזוהי בדיוק הגדרת הגבול.</p>
+</div>
+<div class="thmbox thmbox-proof" title="המקרה היורד">
+<p><strong>הוכחה — המקרה היורד.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מונוטונית יורדת וחסומה. לפי סעיף (ג) של <a href="./08-sequences-properties-5.html#box-prp-monotone-shift-scale">טענה 8.5.5</a> עם <span class="math inline">\(c = -1\)</span> הסדרה <span class="math inline">\(\left(-a_n\right)\)</span> מונוטונית <strong>עולה</strong>, והיא חסומה שכן <span class="math inline">\(\left|-a_n\right| = \left|a_n\right|\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p>לפי המקרה הראשון <span class="math inline">\(\left(-a_n\right)\)</span> מתכנסת; נסמן את גבולה <span class="math inline">\(.L'\)</span> לפי <a href="./08-sequences-properties-3.html#box-cor-limit-constant-multiple">מסקנה 8.3.4</a> עם <span class="math inline">\(c = -1\)</span> מתכנסת גם הסדרה <span class="math inline">\(a_n = -\left(-a_n\right)\)</span> וגבולה <span class="math inline">\(.-L'\)</span></p>
+</div>
+<p>שימו לב מה בדיוק הראינו במקרה העולה: הגבול אינו סתם חסם מלעיל כלשהו של הסדרה, אלא <strong>הקטן ביותר</strong> מבין חסמי המלעיל שלה. זה מסביר מדוע דווקא החסם העליון הוא הכלי המתאים כאן.</p>
+</div>
+</details>
+<p>נראה עכשיו את המשפט בפעולה על שתי סדרות פשוטות, אחת עולה ואחת יורדת.</p>
+<div id="box-exm-monotone-bounded-simple" class="thmbox thmbox-example" title="הסדרה $a_n = \frac{n}{n+1}$">
+<p><strong>דוגמה 8.6.5 — הסדרה <span class="math inline">\(a_n = \frac{n}{n+1}\)</span>.</strong></p>
+<p>נוח לכתוב את הסדרה בצורה</p>
+<p><span class="math display">\[.a_n = \frac{n}{n+1} = \frac{\left(n+1\right) - 1}{n+1} = 1 - \frac{1}{n+1}\]</span></p>
+<p><strong>מונוטונית עולה.</strong> נחשב את ההפרש בין איברים סמוכים:</p>
+<p><span class="math display">\[,a_{n+1} - a_n = \left(1 - \frac{1}{n+2}\right) - \left(1 - \frac{1}{n+1}\right) = \frac{1}{n+1} - \frac{1}{n+2} &gt; 0\]</span></p>
+<p>שכן <span class="math inline">\(.n+1 &lt; n+2\)</span> לכן הסדרה עולה ממש.</p>
+<p><strong>חסומה.</strong> מ-<span class="math inline">\(\frac{1}{n+1} &gt; 0\)</span> נובע מיד</p>
+<p><span class="math display">\[,a_n = 1 - \frac{1}{n+1} &lt; 1\]</span></p>
+<p>וזהו חסם מלעיל. חסם מלרע איננו צריכים לחפש כלל: הסדרה עולה, ולכן <span class="math inline">\(a_n \geq a_1 = \frac{1}{2}\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p>הסדרה מונוטונית וחסומה, ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+</div>
+<div id="box-exm-monotone-bounded-decreasing" class="thmbox thmbox-example" title="הסדרה $a_n = \frac{n+1}{n}$">
+<p><strong>דוגמה 8.6.6 — הסדרה <span class="math inline">\(a_n = \frac{n+1}{n}\)</span>.</strong></p>
+<p>גם כאן נפריד את השבר:</p>
+<p><span class="math display">\[.a_n = \frac{n+1}{n} = 1 + \frac{1}{n}\]</span></p>
+<p><strong>מונוטונית יורדת.</strong> שוב נחשב את ההפרש:</p>
+<p><span class="math display">\[,a_{n+1} - a_n = \frac{1}{n+1} - \frac{1}{n} &lt; 0\]</span></p>
+<p>שכן <span class="math inline">\(.n &lt; n+1\)</span> לכן הסדרה יורדת ממש.</p>
+<p><strong>חסומה.</strong> מ-<span class="math inline">\(\frac{1}{n} &gt; 0\)</span> נובע</p>
+<p><span class="math display">\[,a_n = 1 + \frac{1}{n} &gt; 1\]</span></p>
+<p>וזהו חסם מלרע. את החסם מלעיל, שוב, איננו צריכים לחפש: הסדרה יורדת, ולכן <span class="math inline">\(a_n \leq a_1 = 2\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p>הסדרה מונוטונית וחסומה, ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+</div>
+<p>בשתי הדוגמאות חזר אותו דבר עצמו: חסם אחד דרש עבודה, והחסם בכיוון הנגדי התקבל בחינם מן האיבר הראשון. זה אינו מקרה.</p>
+<div id="box-key-one-sided-bound" class="thmbox thmbox-key-point thmicon-rule" data-icon="rule" title="די בחסם בכיוון אחד">
+<p><strong>כלל — די בחסם בכיוון אחד.</strong></p>
+<p>בסדרה מונוטונית <strong>עולה</strong> מתקיים <span class="math inline">\(a_1 \leq a_n\)</span> לכל <span class="math inline">\(,n\)</span> ולכן היא חסומה מלרע תמיד, בלי שנצטרך להוכיח על כך דבר. כדי להפעיל את המשפט די אפוא להראות שהיא חסומה <strong>מלעיל</strong>.</p>
+<p>בסדרה מונוטונית <strong>יורדת</strong> מתקיים <span class="math inline">\(a_n \leq a_1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן היא חסומה מלעיל תמיד, ודי להראות שהיא חסומה <strong>מלרע</strong>.</p>
+<p>בקיצור: בסדרה עולה מחפשים חסם מלעיל, ובסדרה יורדת מחפשים חסם מלרע. ואכן, בהוכחת המקרה העולה שלמעלה נעשה שימוש בחסם מלעיל בלבד.</p>
+</div>
+<p>בשתי הדוגמאות שראינו אפשר היה לחשב את הגבול גם ישירות, באמצעות אריתמטיקת הגבולות, ולכן המשפט לא חסך שם עבודה. הדוגמה הבאה היא סיפור אחר.</p>
+<div id="box-exm-monotone-bounded-sum" class="thmbox thmbox-example" title="סכום ההופכיים של הריבועים">
+<p><strong>דוגמה 8.6.7 — סכום ההופכיים של הריבועים.</strong></p>
+<p>נגדיר</p>
+<p><span class="math display">\[.a_n = 1 + \frac{1}{2^{2}} + \frac{1}{3^{2}} + \dots + \frac{1}{n^{2}}\]</span></p>
+<p><strong>עולה.</strong> המעבר מ-<span class="math inline">\(a_n\)</span> ל-<span class="math inline">\(a_{n+1}\)</span> הוא הוספת המחובר <span class="math inline">\(,\frac{1}{\left(n+1\right)^{2}}\)</span> שהוא חיובי, ולכן <span class="math inline">\(.a_{n+1} &gt; a_n\)</span></p>
+<p><strong>חסומה מלעיל.</strong> לכל <span class="math inline">\(k \geq 2\)</span> מתקיים <span class="math inline">\(,k^{2} &gt; k\left(k-1\right)\)</span> ולכן</p>
+<p><span class="math display">\[.\frac{1}{k^{2}} &lt; \frac{1}{k\left(k-1\right)} = \frac{1}{k-1} - \frac{1}{k}\]</span></p>
+<p>נסכום את האי-שוויון הזה עבור <span class="math inline">\(k\)</span> הרץ מ-<span class="math inline">\(2\)</span> עד <span class="math inline">\(.n\)</span> באגף ימין כל מחובר שלילי מבטל את החיובי שאחריו, ונשארים רק שני הקצוות:</p>
+<p><span class="math display">\[.\frac{1}{2^{2}} + \dots + \frac{1}{n^{2}} &lt; \left(\frac{1}{1} - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \dots + \left(\frac{1}{n-1} - \frac{1}{n}\right) = 1 - \frac{1}{n}\]</span></p>
+<p>נוסיף לשני האגפים את המחובר הראשון <span class="math inline">\(,1\)</span> ונקבל</p>
+<p><span class="math display">\[.a_n &lt; 1 + \left(1 - \frac{1}{n}\right) = 2 - \frac{1}{n} &lt; 2\]</span></p>
+<p>הסדרה עולה וחסומה מלעיל על ידי <span class="math inline">\(,2\)</span> ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+<p>שימו לב מה קרה כאן: הוכחנו שהגבול <strong>קיים</strong>, ואין בידינו שום נוסחה עבורו. אריתמטיקת הגבולות אינה יכולה לעזור, שכן מספר המחוברים עצמו גדל עם <span class="math inline">\(,n\)</span> ואיננו סכום קבוע של סדרות מתכנסות. זהו המצב שבו המשפט באמת עובד בשבילנו. (למתעניינים: הגבול הוא <span class="math inline">\(,\frac{\pi^{2}}{6}\)</span> תוצאה מפורסמת שהוכחתה חורגת הרבה מעבר לקורס הזה.)</p>
+</div>
+<p>המשפט שימושי במיוחד בסדרות המוגדרות ברקורסיה, שבהן אין בידינו נוסחה לאיבר הכללי כלל.</p>
 <div id="box-q-recursive-sequence" class="thmbox thmbox-question" title="סדרה רקורסיבית">
-<p><strong>תרגיל פתור 8.6.4 — סדרה רקורסיבית.</strong></p>
+<p><strong>תרגיל פתור 8.6.8 — סדרה רקורסיבית.</strong></p>
 <p>נתונה סדרה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> <a href="./05-induction-3.html#sec-recursive-definition">באופן הרקורסיבי</a> הבא:</p>
 <p><span class="math display">\[a_1 = 1\]</span></p>
 <p><span class="math display">\[a_{n+1} = \dfrac{a_n + 2}{2}\]</span></p>
@@ -1032,9 +1170,153 @@ window.Quarto = {
 <p>ואז: <span class="math inline">\(\dfrac{a_n + 2}{2} \to \dfrac{L + 2}{2}\)</span></p>
 <!-- הערה: מסומן "כל ארתמטיקה" ליד הביטוי -->
 <p>מצד שני, מתקיים <span class="math inline">\(a_n \to L\)</span> כי <span class="math inline">\(a_{n+1} \to L\)</span> אבל <span class="math inline">\(a_{n+1} = \dfrac{a_n + 2}{2}\)</span></p>
-<p>לכן מיחידות הגבול: <span class="math inline">\(L = \dfrac{L + 2}{L} \Rightarrow \boxed{L = 2}\)</span></p>
+<p>לכן מיחידות הגבול מתקיים <span class="math inline">\(,L = \dfrac{L + 2}{2}\)</span> כלומר <span class="math inline">\(,2L = L + 2\)</span> ומכאן <span class="math inline">\(.L = 2\)</span></p>
 </div>
-<!-- בדיקה: בכתב היד נראה L = (L+2)/L אך מהמשוואה הרקורסיבית מצופה L = (L+2)/2; נשמר כפי שנכתב -->
+<p>הצעד האחרון בפתרון הזה אינו מקרי, והוא עובד עבור כל סדרה רקורסיבית. כדאי לבודד אותו.</p>
+<div id="box-key-recursive-fixed-point" class="thmbox thmbox-key-point thmicon-calc" data-numbered="true" data-icon="calc" title="גבול של סדרה רקורסיבית פותר משוואה">
+<p><strong>שיטת חישוב 8.6.9 — גבול של סדרה רקורסיבית פותר משוואה.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המוגדרת ברקורסיה <span class="math inline">\(,a_{n+1} = f(a_n)\)</span> ונניח כי <strong>ידוע שהיא מתכנסת</strong>, ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
+<p>אם אנחנו יודעים לחשב את <span class="math inline">\(\lim\limits_{n\to\infty} f(a_n)\)</span> ולקבל <span class="math inline">\(,f(L)\)</span> אז <span class="math inline">\(L\)</span> מקיים את המשוואה</p>
+<p><span class="math display">\[.f(L) = L\]</span></p>
+<p>כלומר הגבול הוא אחד מפתרונות המשוואה <span class="math inline">\(,f(x) = x\)</span> ודי לפתור אותה כדי לקבל רשימה קצרה של מועמדים.</p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נשים לב תחילה שגם הסדרה ה״מוזזת״ <span class="math inline">\((a_{n+1})\)</span> מתכנסת ל-<span class="math inline">\(.L\)</span> ואכן, יהי <span class="math inline">\(;\varepsilon &gt; 0\)</span> לפי הגדרת הגבול קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| &lt; \varepsilon\)</span> אבל אם <span class="math inline">\(n \geq N\)</span> אז גם <span class="math inline">\(,n + 1 \geq N\)</span> ולכן <span class="math inline">\(\left|a_{n+1} - L\right| &lt; \varepsilon\)</span> לכל <span class="math inline">\(.n \geq N\)</span></p>
+<p>עכשיו נחשב את הגבול של אותה סדרה בשתי דרכים. מצד אחד היא <span class="math inline">\(,(a_{n+1})\)</span> שגבולה <span class="math inline">\(.L\)</span> מצד שני, לפי הרקורסיה, היא הסדרה <span class="math inline">\(,\left(f(a_n)\right)\)</span> שגבולה <span class="math inline">\(f(L)\)</span> לפי ההנחה. מיחידות הגבול נובע <span class="math inline">\(.f(L) = L\)</span></p>
+</div>
+<div id="box-exm-sqrt-recursion" class="thmbox thmbox-example" title="הסדרה $a_{n+1} = \sqrt{a_n}$">
+<p><strong>דוגמה 8.6.10 — הסדרה <span class="math inline">\(a_{n+1} = \sqrt{a_n}\)</span>.</strong></p>
+<p>תהי <span class="math inline">\(a_1 = 4\)</span> ו-<span class="math inline">\(.a_{n+1} = \sqrt{a_n}\)</span> האיברים הראשונים הם <span class="math inline">\(,4,\ 2,\ \sqrt{2},\ \dots\)</span> והסדרה נראית יורדת.</p>
+<p><strong>התכנסות.</strong> באינדוקציה, <span class="math inline">\(a_n \geq 1\)</span> לכל <span class="math inline">\(:n\)</span> הבסיס הוא <span class="math inline">\(,a_1 = 4 \geq 1\)</span> ואם <span class="math inline">\(a_n \geq 1\)</span> אז <span class="math inline">\(.a_{n+1} = \sqrt{a_n} \geq \sqrt{1} = 1\)</span> הסדרה גם יורדת, שכן מ-<span class="math inline">\(a_n \geq 1\)</span> נובע <span class="math inline">\(.a_{n+1} = \sqrt{a_n} \leq a_n\)</span> היא יורדת וחסומה מלרע על ידי <span class="math inline">\(,1\)</span> ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+<p><strong>חישוב הגבול.</strong> כאן <span class="math inline">\(,f(x) = \sqrt{x}\)</span> ואנחנו אכן יודעים לחשב את <span class="math inline">\(\lim\limits_{n\to\infty}\sqrt{a_n}\)</span> ולקבל <span class="math inline">\(\sqrt{L}\)</span> לפי <a href="./08-sequences-properties-3.html#box-thm-limit-root">משפט 8.3.7</a>. לכן</p>
+<p><span class="math display">\[,L = \sqrt{L}\]</span></p>
+<p>ובהעלאה בריבוע <span class="math inline">\(,L^{2} = L\)</span> כלומר <span class="math inline">\(,L\left(L - 1\right) = 0\)</span> ולכן <span class="math inline">\(L = 0\)</span> או <span class="math inline">\(.L = 1\)</span></p>
+<p><strong>בחירת המועמד.</strong> כל איברי הסדרה מקיימים <span class="math inline">\(,a_n \geq 1\)</span> ולכן לפי <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> גם <span class="math inline">\(.L \geq 1\)</span> המועמד <span class="math inline">\(L = 0\)</span> נפסל, ומכאן <span class="math inline">\(.L = 1\)</span></p>
+</div>
+<div id="box-exm-recursive-square" class="thmbox thmbox-example" title="הסדרה $a_{n+1} = a_n^{2}$">
+<p><strong>דוגמה 8.6.11 — הסדרה <span class="math inline">\(a_{n+1} = a_n^{2}\)</span>.</strong></p>
+<p>תהי <span class="math inline">\(a_1 = \dfrac{1}{2}\)</span> ו-<span class="math inline">\(.a_{n+1} = a_n^{2}\)</span> האיברים הראשונים הם <span class="math inline">\(.\dfrac{1}{2},\ \dfrac{1}{4},\ \dfrac{1}{16},\ \dots\)</span></p>
+<p>באינדוקציה <span class="math inline">\(0 &lt; a_n \leq \dfrac{1}{2}\)</span> לכל <span class="math inline">\(,n\)</span> ומ-<span class="math inline">\(0 &lt; a_n \leq \dfrac{1}{2} &lt; 1\)</span> נובע <span class="math inline">\(,a_{n+1} = a_n^{2} \leq a_n\)</span> כלומר הסדרה יורדת. היא חסומה מלרע על ידי <span class="math inline">\(,0\)</span> ולכן מתכנסת.</p>
+<p>כאן <span class="math inline">\(,f(x) = x^{2}\)</span> ואנחנו יודעים לחשב את <span class="math inline">\(\lim\limits_{n\to\infty} a_n^{2}\)</span> ולקבל <span class="math inline">\(L^{2}\)</span> לפי <a href="./08-sequences-properties-3.html#box-cor-limit-power">מסקנה 8.3.6</a>. לכן</p>
+<p><span class="math display">\[,L = L^{2}\]</span></p>
+<p>ושוב <span class="math inline">\(L = 0\)</span> או <span class="math inline">\(.L = 1\)</span> הפעם כל האיברים מקיימים <span class="math inline">\(,a_n \leq \dfrac{1}{2}\)</span> ולכן <span class="math inline">\(,L \leq \dfrac{1}{2}\)</span> והמועמד <span class="math inline">\(L = 1\)</span> נפסל. מכאן <span class="math inline">\(.L = 0\)</span></p>
+</div>
+<p>בדוגמה האחרונה טרחנו להוכיח תחילה שהסדרה מתכנסת, ורק אחר כך פתרנו את המשוואה. אפשר לתהות אם הצעד הראשון באמת נחוץ, או שהוא רק פורמליות. ננסה אפוא את <strong>אותו יחס רקורסיה בדיוק</strong>, ונשנה רק את האיבר הראשון.</p>
+<div id="box-exm-recursive-square-diverges" class="thmbox thmbox-example" title="אותה רקורסיה, איבר ראשון אחר">
+<p><strong>דוגמה 8.6.12 — אותה רקורסיה, איבר ראשון אחר.</strong></p>
+<p>נשאיר את <span class="math inline">\(a_{n+1} = a_n^{2}\)</span> ונחליף רק את האיבר הראשון: הפעם <span class="math inline">\(.a_1 = 2\)</span></p>
+<p>הפונקציה <span class="math inline">\(f(x) = x^{2}\)</span> לא השתנתה, ולכן גם המשוואה שהשיטה מובילה אליה לא השתנתה:</p>
+<p><span class="math display">\[,L = L^{2}\]</span></p>
+<p>ופתרונותיה הם שוב <span class="math inline">\(0\)</span> ו-<span class="math inline">\(.1\)</span> עד כאן הכול נראה כמו קודם.</p>
+<p>נחשב עכשיו את האיברים עצמם:</p>
+<p><span class="math display">\[.a_1 = 2,\qquad a_2 = 4,\qquad a_3 = 16,\qquad a_4 = 256,\ \dots\]</span></p>
+<p>באינדוקציה מתקיים <span class="math inline">\(a_n \geq 2^{n}\)</span> לכל <span class="math inline">\(:n\)</span> הבסיס הוא <span class="math inline">\(,a_1 = 2 = 2^{1}\)</span> ואם <span class="math inline">\(a_n \geq 2^{n}\)</span> אז</p>
+<p><span class="math display">\[.a_{n+1} = a_n^{2} \geq \left(2^{n}\right)^{2} = 2^{2n} \geq 2^{n+1}\]</span></p>
+<p>לכן הסדרה אינה חסומה, ולפי <a href="./08-sequences-properties-2.html#box-cor-unbounded-diverges">מסקנה 8.2.6</a> היא אינה מתכנסת.</p>
+<p><strong>מה ההבדל בין שתי הדוגמאות?</strong> המשוואה זהה בשתיהן, והיא אינה יודעת דבר על האיבר הראשון. כל מה שהיא אומרת הוא: <strong>אם</strong> קיים גבול, הוא אחד מפתרונותיה. בדוגמה הקודמת הוכחנו תחילה שהגבול קיים, ולכן היה למשוואה על מה לדבר; כאן הגבול פשוט אינו קיים, ושני הפתרונות <span class="math inline">\(0\)</span> ו-<span class="math inline">\(1\)</span> אינם קשורים לסדרה כלל.</p>
+</div>
+<div id="box-warn-fixed-point-not-existence" class="thmbox thmbox-warning" title="פתרון למשוואה אינו מבטיח שהגבול קיים">
+<p><strong>שימו לב — פתרון למשוואה אינו מבטיח שהגבול קיים.</strong></p>
+<p>סדר הפעולות חשוב: קודם מוכיחים שהסדרה מתכנסת, ורק אחר כך פותרים את המשוואה.</p>
+</div>
+<details class="thmcollapse thmoptional"><summary>קריאה לא הכרחית — אפשר לדלג · שתי סדרות מונוטוניות המתקרבות זו לזו</summary>
+<div class="optional" title="שתי סדרות מונוטוניות המתקרבות זו לזו">
+<p>הטענה הבאה נובעת ישירות מן המשפט על סדרה מונוטונית וחסומה, ואינה נדרשת להמשך הסעיפים שראינו. היא מובאת כאן משום שהיא הכלי שבו משתמשים בהמשך הקורס להוכחת משפט בולצאנו־ויירשטראס.</p>
+<div id="box-thm-two-monotone-sequences" class="thmbox thmbox-theorem">
+<p><strong>משפט.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית עולה, ותהי <span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית יורדת, ונניח כי</p>
+<p><span class="math display">\[.\lim_{n\to\infty} \left(b_n - a_n\right) = 0\]</span></p>
+<p>אז שתי הסדרות מתכנסות, ומתקיים</p>
+<p><span class="math display">\[.\lim_{n\to\infty} a_n = \lim_{n\to\infty} b_n\]</span></p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p><strong>שלב א: מתקיים <span class="math inline">\(a_n \leq b_n\)</span> לכל <span class="math inline">\(.n\)</span></strong> נתבונן בסדרת ההפרשים <span class="math inline">\(,c_n = b_n - a_n\)</span> ונחשב את ההפרש בין שני איברים סמוכים שלה:</p>
+<p><span class="math display">\[.c_{n+1} - c_n = \left(b_{n+1} - b_n\right) - \left(a_{n+1} - a_n\right)\]</span></p>
+<p>הסדרה <span class="math inline">\((b_n)\)</span> יורדת ולכן <span class="math inline">\(,b_{n+1} - b_n \leq 0\)</span> והסדרה <span class="math inline">\((a_n)\)</span> עולה ולכן <span class="math inline">\(.a_{n+1} - a_n \geq 0\)</span> ההפרש בין מספר אי-חיובי למספר אי-שלילי הוא אי-חיובי, ולכן לפי <a href="./08-sequences-properties-5.html#box-key-monotone-difference">שיטת הוכחה 8.5.7</a> הסדרה <span class="math inline">\((c_n)\)</span> מונוטונית יורדת.</p>
+<p>נניח בשלילה שקיים אינדקס <span class="math inline">\(m\)</span> שעבורו <span class="math inline">\(.c_m &lt; 0\)</span> מכיוון ש-<span class="math inline">\((c_n)\)</span> יורדת, לכל <span class="math inline">\(n \geq m\)</span> מתקיים <span class="math inline">\(,c_n \leq c_m\)</span> ולפי סעיף (ב) של <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> גם הגבול מקיים <span class="math inline">\(.0 \leq c_m &lt; 0\)</span> זו סתירה, ולכן <span class="math inline">\(c_n \geq 0\)</span> לכל <span class="math inline">\(,n\)</span> כלומר <span class="math inline">\(.a_n \leq b_n\)</span></p>
+<p><strong>שלב ב: כל אחת מהן מתכנסת.</strong> מכיוון ש-<span class="math inline">\((b_n)\)</span> יורדת מתקיים <span class="math inline">\(b_n \leq b_1\)</span> לכל <span class="math inline">\(,n\)</span> ויחד עם שלב א נקבל</p>
+<p><span class="math display">\[.a_n \leq b_n \leq b_1\]</span></p>
+<p>כלומר <span class="math inline">\((a_n)\)</span> חסומה מלעיל על ידי <span class="math inline">\(,b_1\)</span> והיא גם חסומה מלרע על ידי <span class="math inline">\(a_1\)</span> שכן היא עולה. היא מונוטונית וחסומה, ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+<p>באותו אופן, מכיוון ש-<span class="math inline">\((a_n)\)</span> עולה מתקיים <span class="math inline">\(,a_1 \leq a_n \leq b_n\)</span> ולכן <span class="math inline">\((b_n)\)</span> חסומה מלרע על ידי <span class="math inline">\(,a_1\)</span> וחסומה מלעיל על ידי <span class="math inline">\(b_1\)</span> שכן היא יורדת. גם היא מונוטונית וחסומה, ולכן מתכנסת.</p>
+<p><strong>שלב ג: הגבולות שווים.</strong> נסמן <span class="math inline">\(\lim\limits_{n\to\infty} a_n = L_1\)</span> ו-<span class="math inline">\(.\lim\limits_{n\to\infty} b_n = L_2\)</span> לפי סעיף (ב) של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a></p>
+<p><span class="math display">\[,0 = \lim_{n\to\infty}\left(b_n - a_n\right) = L_2 - L_1\]</span></p>
+<p>ומכאן <span class="math inline">\(.L_1 = L_2\)</span></p>
+</div>
+<p>שימו לב לתמונה שמאחורי הטענה: הקטעים <span class="math inline">\(\left[a_n,\ b_n\right]\)</span> מוכלים זה בזה, אחד בתוך השני, ואורכם שואף ל-<span class="math inline">\(.0\)</span> הטענה אומרת שהם ״מתכווצים״ אל נקודה אחת משותפת.</p>
+</div>
+</details>
+<section id="תרגילים-1" class="level3">
+<h3 class="anchored" data-anchor-id="תרגילים-1">תרגילים</h3>
+<p><strong>תרגיל 1.</strong> הוכיחו כי הסדרה <span class="math inline">\(a_n = \dfrac{n}{n^{2}+1}\)</span> מתכנסת.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p>הסדרה מונוטונית יורדת: זהו בדיוק החישוב שנעשה בתרגיל 1 של <a href="./08-sequences-properties-5.html#sec-monotone-exercises">תרגילי הסעיף על מונוטוניות של סדרות</a>, שם פתחנו את ההפרש <span class="math inline">\(a_{n+1} - a_n\)</span> וראינו שהוא שלילי לכל <span class="math inline">\(.n\)</span></p>
+<p>היא חסומה מלרע על ידי <span class="math inline">\(:0\)</span> המונה והמכנה חיוביים לכל <span class="math inline">\(,n\)</span> ולכן <span class="math inline">\(.a_n &gt; 0\)</span></p>
+<p>הסדרה יורדת וחסומה מלרע, ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
+<p>שימו לב מה בדיוק עשינו כאן: הוכחנו שהגבול <strong>קיים</strong> בלי לחשב אותו ובלי לנחש אותו מראש. זה כוחו של המשפט. (במקרה הזה אפשר גם לחשב את הגבול ולקבל <span class="math inline">\(,0\)</span> כפי שנעשה בתרגילים של <a href="./08-sequences-properties-4.html#sec-squeeze-exercises">סעיף הסנדוויץ׳</a> — אבל לשם כך נדרשת אריתמטיקת הגבולות, והמשפט לא נזקק לה.)</p>
+</div>
+</details>
+<p><strong>תרגיל 2.</strong> נתונה הסדרה הרקורסיבית</p>
+<p><span class="math display">\[a_1 = \sqrt{2} \qquad,\qquad a_{n+1} = \sqrt{2 + a_n}\]</span></p>
+<p>(א) הוכיחו באינדוקציה כי <span class="math inline">\(a_n &lt; 2\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p>(ב) הוכיחו כי הסדרה מונוטונית עולה.</p>
+<p>(ג) הסיקו שהיא מתכנסת, וחשבו את גבולה.</p>
+<div class="seq-quiz" data-answer="2"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>סעיף (א).</strong> בסיס האינדוקציה: <span class="math inline">\(,a_1 = \sqrt{2}\)</span> ואכן <span class="math inline">\(.\sqrt{2} &lt; 2\)</span></p>
+<p>צעד האינדוקציה: נניח <span class="math inline">\(.a_n &lt; 2\)</span> אז <span class="math inline">\(,2 + a_n &lt; 4\)</span> ומכיוון שפונקציית השורש שומרת על הסדר בין מספרים אי-שליליים,</p>
+<p><span class="math display">\[,a_{n+1} = \sqrt{2+a_n} &lt; \sqrt{4} = 2\]</span></p>
+<p>כנדרש.</p>
+<p>שימו לב שהוכחנו חסם מלעיל בלבד: כל איברי הסדרה הם שורשים ריבועיים, ולכן אי-שליליים ממילא.</p>
+<p><strong>סעיף (ב).</strong> נראה ש-<span class="math inline">\(a_{n+1} \geq a_n\)</span> לכל <span class="math inline">\(.n\)</span> שני האגפים אי-שליליים, ולכן אפשר להשוות את ריבועיהם:</p>
+<p><span class="math display">\[.a_{n+1} \geq a_n \quad\Longleftrightarrow\quad 2 + a_n \geq a_n^{2} \quad\Longleftrightarrow\quad a_n^{2} - a_n - 2 \leq 0\]</span></p>
+<p>נפרק לגורמים:</p>
+<p><span class="math display">\[.a_n^{2} - a_n - 2 = \left(a_n - 2\right)\left(a_n + 1\right)\]</span></p>
+<p>כל איברי הסדרה אי-שליליים, ולפי סעיף (א) מתקיים <span class="math inline">\(,a_n &lt; 2\)</span> ולכן הגורם <span class="math inline">\(a_n - 2\)</span> שלילי והגורם <span class="math inline">\(a_n + 1\)</span> חיובי, ומכפלתם שלילית. בפרט היא אי-חיובית, ולכן <span class="math inline">\(,a_{n+1} \geq a_n\)</span> והסדרה עולה.</p>
+<p><strong>סעיף (ג).</strong> הסדרה עולה לפי סעיף (ב) וחסומה מלעיל על ידי <span class="math inline">\(2\)</span> לפי סעיף (א), ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת; נסמן <span class="math inline">\(.L = \lim\limits_{n\to\infty} a_n\)</span></p>
+<p>כאן <span class="math inline">\(,f(x) = \sqrt{2+x}\)</span> ואנחנו יודעים לחשב את <span class="math inline">\(\lim\limits_{n\to\infty}\sqrt{2+a_n}\)</span> ולקבל <span class="math inline">\(\sqrt{2+L}\)</span> לפי <a href="./08-sequences-properties-3.html#box-thm-limit-root">משפט 8.3.7</a> ואריתמטיקת הגבולות. לכן לפי <a href="#box-key-recursive-fixed-point">שיטת חישוב 8.6.9</a></p>
+<p><span class="math display">\[,L = \sqrt{2+L}\]</span></p>
+<p>ובהעלאה בריבוע <span class="math inline">\(,L^{2} = L + 2\)</span> כלומר <span class="math inline">\(,\left(L-2\right)\left(L+1\right) = 0\)</span> ולכן <span class="math inline">\(L = 2\)</span> או <span class="math inline">\(.L = -1\)</span></p>
+<p>כל איברי הסדרה חיוביים, ולכן לפי <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> גם <span class="math inline">\(,L \geq 0\)</span> והמועמד <span class="math inline">\(L = -1\)</span> נפסל. מכאן <span class="math inline">\(.L = 2\)</span></p>
+</div>
+</details>
+<p>בשני התרגילים הבאים הכריעו אם הטענה נכונה.</p>
+<p><strong>תרגיל 3.</strong> אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מונוטונית עולה וחסומה מלעיל על ידי <span class="math inline">\(,M\)</span> אז <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = M\)</span></p>
+<div class="tf-quiz" data-correct="false" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>לא נכון.</strong> ניקח <span class="math inline">\(a_n = 1 - \dfrac{1}{n}\)</span> ו-<span class="math inline">\(.M = 5\)</span> הסדרה עולה, וחסומה מלעיל על ידי <span class="math inline">\(5\)</span> שכן <span class="math inline">\(a_n &lt; 1 &lt; 5\)</span> לכל <span class="math inline">\(,n\)</span> ובכל זאת גבולה הוא <span class="math inline">\(1\)</span> ולא <span class="math inline">\(.5\)</span></p>
+<p>הטעות כאן היא בדיוק זו שמפניה מזהיר <a href="./08-sequences-properties-2.html#box-key-any-bound-will-do">כל חסם טוב, לא רק הטוב ביותר</a>: <span class="math inline">\(M\)</span> הוא <strong>חסם כלשהו</strong>, ואין שום דרישה שיהיה הקטן ביותר. מה שכן נכון — וזה מה שראינו בהוכחת המשפט — הוא שהגבול שווה לחסם המלעיל ה<strong>קטן ביותר</strong>, כלומר לחסם העליון.</p>
+</div>
+</details>
+<p><strong>תרגיל 4.</strong> אם <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> מונוטונית עולה ומתכנסת ל-<span class="math inline">\(,L\)</span> אז <span class="math inline">\(a_n \leq L\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<div class="tf-quiz" data-correct="true" data-reveal="">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>נכון.</strong> נניח בשלילה שקיים אינדקס <span class="math inline">\(N\)</span> שעבורו <span class="math inline">\(.a_N &gt; L\)</span></p>
+<p>הסדרה עולה, ולכן לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.a_n \geq a_N\)</span> זהו אי-שוויון בין הסדרה <span class="math inline">\((a_n)\)</span> לבין הסדרה הקבועה <span class="math inline">\(,a_N\)</span> המתקיים החל מן המקום <span class="math inline">\(,N\)</span> ולכן לפי <a href="./07-sequences-limit-4.html#box-thm-limit-preserves-order">משפט 7.4.6</a> הוא עובר לגבול:</p>
+<p><span class="math display">\[.L \geq a_N\]</span></p>
+<p>אבל הנחנו <span class="math inline">\(,a_N &gt; L\)</span> וקיבלנו סתירה. לכן <span class="math inline">\(a_n \leq L\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p>במילים אחרות: סדרה עולה מתקרבת אל גבולה <strong>מלמטה</strong> ולעולם אינה חוצה אותו. זו בדיוק התמונה שבתרשים שלמעלה.</p>
+</div>
+</details>
+<!-- התרגילים נלקחו מדף התרגילים 2 של הקורס (שאלה 4) ומן הדוגמאות שבפרקים 5 ו-8. -->
+</section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1436,7 +1718,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-5.html" class="pagination-link" aria-label="8.5 מונוטוניות של סדרות"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.5 מונוטוניות של סדרות</span></a></div><div class="nav-page nav-page-next"><a href="./08-sequences-properties-7.html" class="pagination-link" aria-label="8.7 המספר \(e\) והסדרה המתאימה"><span class="nav-page-text">8.7 המספר \(e\) והסדרה המתאימה</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-5.html" class="pagination-link" aria-label="8.5 מונוטוניות של סדרות"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.5 מונוטוניות של סדרות</span></a></div><div class="nav-page nav-page-next"><a href="./08-sequences-properties-7.html" class="pagination-link" aria-label="8.7 חישוב גבולות סדרות עם גבול בחזקה"><span class="nav-page-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 

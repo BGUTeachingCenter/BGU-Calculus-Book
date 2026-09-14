@@ -338,6 +338,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
@@ -827,11 +844,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 אינסוף כגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -957,7 +974,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מונוטוניות-של-סדרות" class="nav-link">8.5 מונוטוניות של סדרות</a></li><li class="toc-indent"><a href="#תרגילים-2" class="nav-link">תרגילים</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מונוטוניות-של-סדרות" class="nav-link">8.5 מונוטוניות של סדרות</a></li><li class="toc-indent"><a href="#הגדרה-ודוגמאות" class="nav-link">הגדרה ודוגמאות</a></li><li class="toc-indent"><a href="#שיטות-הוכחה" class="nav-link">שיטות הוכחה</a></li><li class="toc-indent"><a href="#sec-monotone-exercises" class="nav-link">תרגילים</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./08-sequences-properties.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></a></li></ol></nav>
@@ -981,6 +998,8 @@ window.Quarto = {
 <section id="מונוטוניות-של-סדרות" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="מונוטוניות-של-סדרות"><span class="header-section-number">8.5</span> מונוטוניות של סדרות</h2>
 <p>לאחר שדיברנו על תכונת החסימוּת, נעבור לדבר על תכונה נוספת של סדרות. בהינתן סדרה, די טבעי לשאול האם יש איזשהו סדר על איברי הסדרה, כלומר האם האיבר הבא בסדרה גדול מן האיבר הקודם או להפך, קטן ממנו, והאם איברי הסדרה גדלים או קטנים ככל שהאינדקס גדל. לתכונה הזאת יש שם, <strong>מונוטוניות</strong>, ואותה ננסח באופן פורמלי בהגדרה הבאה.</p>
+<section id="הגדרה-ודוגמאות" class="level3">
+<h3 class="anchored" data-anchor-id="הגדרה-ודוגמאות">הגדרה ודוגמאות</h3>
 <div id="box-def-monotone-sequence" class="thmbox thmbox-definition">
 <p><strong>הגדרה 8.5.1.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. נאמר כי היא:</p>
@@ -1026,6 +1045,38 @@ window.Quarto = {
 <p><strong>הסדרה אינה עולה.</strong> סדרה עולה מקיימת <span class="math inline">\(c_n \leq c_{n+1}\)</span> לכל <span class="math inline">\(,n\)</span> ובפרט הייתה צריכה לקיים <span class="math inline">\(.c_2 \leq c_3\)</span> אבל <span class="math inline">\(,c_2 = 1\)</span> ואילו <span class="math inline">\(,c_3 = -1\)</span> כלומר <span class="math inline">\(,c_2 &gt; c_3\)</span> בסתירה.</p>
 <p>הסדרה אינה עולה ואינה יורדת, ולכן אינה מונוטונית.</p>
 </div>
+<p>שלוש הדוגמאות שראינו נבדקו כל אחת מאפס. אבל מונוטוניות נשמרת תחת שתי פעולות פשוטות, ולכן לעיתים קרובות אפשר להימנע מחישוב חדש ולהישען על סדרה שכבר מוכרת לנו.</p>
+<div id="box-prp-monotone-shift-scale" class="thmbox thmbox-proposition" title="הזזה וכפל בקבוע">
+<p><strong>טענה 8.5.5 — הזזה וכפל בקבוע.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית ויהיו <span class="math inline">\(k\)</span> ו-<span class="math inline">\(c\)</span> מספרים ממשיים. אז:</p>
+<p>(א) הסדרה <span class="math inline">\(\left(a_n + k\right)\)</span> מונוטונית <strong>מאותו סוג</strong> כמו <span class="math inline">\(;(a_n)\)</span></p>
+<p>(ב) אם <span class="math inline">\(c &gt; 0\)</span> אז הסדרה <span class="math inline">\(\left(c \cdot a_n\right)\)</span> מונוטונית <strong>מאותו סוג</strong> כמו <span class="math inline">\(;(a_n)\)</span></p>
+<p>(ג) אם <span class="math inline">\(c &lt; 0\)</span> אז הסדרה <span class="math inline">\(\left(c \cdot a_n\right)\)</span> מונוטונית <strong>מהסוג ההפוך</strong>: עולה הופכת ליורדת, ויורדת הופכת לעולה.</p>
+<p>(עבור <span class="math inline">\(c = 0\)</span> מתקבלת הסדרה הקבועה <span class="math inline">\(,0\)</span> שהיא גם עולה וגם יורדת.)</p>
+</div>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נניח ש-<span class="math inline">\((a_n)\)</span> מונוטונית עולה, כלומר <span class="math inline">\(a_n \leq a_{n+1}\)</span> לכל <span class="math inline">\(.n\)</span> המקרה היורד זהה עם החלפת כיוון האי-שוויון, והמקרים ה״ממש״ זהים עם אי-שוויון חד במקום חלש.</p>
+<p><strong>סעיף (א).</strong> חיבור אותו מספר לשני אגפי אי-שוויון אינו משנה את כיוונו, ולכן מ-<span class="math inline">\(a_n \leq a_{n+1}\)</span> נובע</p>
+<p><span class="math display">\[,a_n + k \leq a_{n+1} + k\]</span></p>
+<p>כלומר הסדרה <span class="math inline">\(\left(a_n + k\right)\)</span> מונוטונית עולה.</p>
+<p><strong>סעיף (ב).</strong> כפל שני אגפים במספר <strong>חיובי</strong> אינו משנה את כיוון האי-שוויון, ולכן מ-<span class="math inline">\(a_n \leq a_{n+1}\)</span> ומ-<span class="math inline">\(c &gt; 0\)</span> נובע</p>
+<p><span class="math display">\[,c \cdot a_n \leq c \cdot a_{n+1}\]</span></p>
+<p>כלומר הסדרה <span class="math inline">\(\left(c \cdot a_n\right)\)</span> מונוטונית עולה.</p>
+<p><strong>סעיף (ג).</strong> כפל שני אגפים במספר <strong>שלילי</strong> הופך את כיוון האי-שוויון, ולכן מ-<span class="math inline">\(a_n \leq a_{n+1}\)</span> ומ-<span class="math inline">\(c &lt; 0\)</span> נובע</p>
+<p><span class="math display">\[,c \cdot a_n \geq c \cdot a_{n+1}\]</span></p>
+<p>כלומר הסדרה <span class="math inline">\(\left(c \cdot a_n\right)\)</span> מונוטונית יורדת.</p>
+</div>
+<div id="box-exm-shift-scale" class="thmbox thmbox-example" title="הסדרה $3 - \frac{2}{n}$">
+<p><strong>דוגמה 8.5.6 — הסדרה <span class="math inline">\(3 - \frac{2}{n}\)</span>.</strong></p>
+<p>נקבע את המונוטוניות של <span class="math inline">\(a_n = 3 - \dfrac{2}{n}\)</span> בלי לחשב הפרש או מנה, אלא בפירוק לשלבים.</p>
+<p><strong>שלב א.</strong> ראינו ב<a href="#box-exm-monotone-decreasing">דוגמה 8.5.3</a> שהסדרה <span class="math inline">\(\dfrac{1}{n}\)</span> מונוטונית יורדת ממש.</p>
+<p><strong>שלב ב.</strong> נכפול ב-<span class="math inline">\(.c = -2\)</span> מכיוון ש-<span class="math inline">\(,c &lt; 0\)</span> סעיף (ג) של <a href="#box-prp-monotone-shift-scale">טענה 8.5.5</a> הופך את הסוג, ולכן הסדרה <span class="math inline">\(-\dfrac{2}{n}\)</span> מונוטונית <strong>עולה</strong> ממש.</p>
+<p><strong>שלב ג.</strong> נוסיף <span class="math inline">\(.k = 3\)</span> לפי סעיף (א) ההזזה אינה משנה את הסוג, ולכן גם</p>
+<p><span class="math display">\[a_n = 3 - \frac{2}{n}\]</span></p>
+<p>מונוטונית עולה ממש.</p>
+<p>שימו לב שלא חישבנו דבר: כל צעד היה הפעלה של סעיף אחד מן הטענה על תוצאה שכבר הייתה בידינו.</p>
+</div>
 <div id="box-chk-monotone" class="thmbox thmbox-self-check">
 <p><strong>בדיקה עצמית.</strong></p>
 <p><strong>1.</strong> איזו מן הסדרות הבאות מונוטונית <strong>עולה ממש</strong>?</p>
@@ -1070,6 +1121,12 @@ window.Quarto = {
 <button class="tf-opt" data-val="d">(ד)</button>
 <div class="tf-feedback"></div>
 </div>
+<p><strong>6.</strong> אם סדרה היא גם מונוטונית עולה וגם מונוטונית יורדת, אז היא קבועה.</p>
+<div class="tf-quiz" data-correct="true">
+<button class="tf-opt" data-val="true">נכון</button>
+<button class="tf-opt" data-val="false">לא נכון</button>
+<div class="tf-feedback"></div>
+</div>
 </div>
 <details class="thmcollapse"><summary>פתרון</summary>
 <div class="thmbox thmbox-solution">
@@ -1081,12 +1138,16 @@ window.Quarto = {
 <p><strong>5. התשובה היא (ג).</strong> האיברים הראשונים של הסדרה <span class="math inline">\(a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span> הם</p>
 <p><span class="math display">\[,a_1 = -1, \qquad a_2 = \frac{1}{2}, \qquad a_3 = -\frac{1}{3}\]</span></p>
 <p>ומ-<span class="math inline">\(a_1 &lt; a_2\)</span> נובע שהיא אינה יורדת, ומ-<span class="math inline">\(a_2 &gt; a_3\)</span> נובע שהיא אינה עולה. שלוש הסדרות האחרות מונוטוניות: (א) עולה ממש, (ב) יורדת ממש, ו-(ד) יורדת ממש.</p>
+<p><strong>6. נכון.</strong> אם הסדרה עולה אז <span class="math inline">\(a_n \leq a_{n+1}\)</span> לכל <span class="math inline">\(,n\)</span> ואם היא גם יורדת אז <span class="math inline">\(a_n \geq a_{n+1}\)</span> לכל <span class="math inline">\(.n\)</span> שני אי-שוויונות חלשים בכיוונים מנוגדים בין אותם שני מספרים אפשריים רק כאשר מתקיים שוויון, ולכן <span class="math inline">\(a_n = a_{n+1}\)</span> לכל <span class="math inline">\(.n\)</span> כל איבר שווה לעוקבו, ולכן כל איברי הסדרה שווים זה לזה והסדרה קבועה.</p>
 </div>
 </details>
+</section>
+<section id="שיטות-הוכחה" class="level3">
+<h3 class="anchored" data-anchor-id="שיטות-הוכחה">שיטות הוכחה</h3>
 <p>איך נדע שסדרה נתונה היא מונוטונית? בדוגמאות שלמעלה השווינו ישירות בין <span class="math inline">\(a_n\)</span> לבין <span class="math inline">\(,a_{n+1}\)</span> אבל כשהנוסחה מסובכת יותר נוח להשתמש באחת משתי שיטות קבועות: <strong>ההפרש</strong> <span class="math inline">\(a_{n+1} - a_n\)</span> ו<strong>המנה</strong> <span class="math inline">\(.\dfrac{a_{n+1}}{a_n}\)</span> נציג עכשיו את שתיהן במדויק.</p>
 <p>הדרך הפשוטה ביותר היא להתבונן בהפרש בין שני איברים סמוכים ולבדוק את <strong>סימנו</strong>. היתרון בכך הוא שהשוואה בין שני ביטויים הופכת לשאלה על סימן של ביטוי אחד, ובשאלות כאלה האלגברה מטפלת היטב.</p>
-<div id="box-prp-monotone-difference" class="thmbox thmbox-proposition" title="מבחן ההפרש">
-<p><strong>טענה 8.5.5 — מבחן ההפרש.</strong></p>
+<div id="box-key-monotone-difference" class="thmbox thmbox-key-point thmicon-method" data-numbered="true" data-icon="method" title="מבחן ההפרש">
+<p><strong>שיטת הוכחה 8.5.7 — מבחן ההפרש.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה. אז:</p>
 <p>(א) הסדרה מונוטונית <strong>עולה</strong> אם ורק אם <span class="math inline">\(a_{n+1} - a_n \geq 0\)</span> לכל <span class="math inline">\(;n \geq 1\)</span></p>
 <p>(ב) הסדרה מונוטונית <strong>עולה ממש</strong> אם ורק אם <span class="math inline">\(a_{n+1} - a_n &gt; 0\)</span> לכל <span class="math inline">\(;n \geq 1\)</span></p>
@@ -1099,56 +1160,9 @@ window.Quarto = {
 <p>לפי ההגדרה, הסדרה מונוטונית עולה אם ורק אם <span class="math inline">\(a_n \leq a_{n+1}\)</span> לכל <span class="math inline">\(.n \geq 1\)</span> נחסר <span class="math inline">\(a_n\)</span> משני האגפים; חיסור אותו מספר משני אגפים אינו משנה את כיוון אי-השוויון, ולכן התנאי שקול ל-</p>
 <p><span class="math display">\[.0 \leq a_{n+1} - a_n\]</span></p>
 </div>
-<p>השיטה השנייה מתאימה במיוחד כשהסדרה בנויה ממכפלות ומחזקות, שאז המנה מצטמצמת יפה. לפני שנציג אותה נעצור על תכונה של סדרות מונוטוניות שכדאי להכיר בפני עצמה.</p>
-<div id="box-prp-monotone-sign-change" class="thmbox thmbox-proposition" title="סדרה מונוטונית מחליפה סימן פעם אחת לכל היותר">
-<p><strong>טענה 8.5.6 — סדרה מונוטונית מחליפה סימן פעם אחת לכל היותר.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית. אז קיים לכל היותר אינדקס אחד <span class="math inline">\(n\)</span> שעבורו <span class="math inline">\(.a_n \cdot a_{n+1} &lt; 0\)</span></p>
-</div>
-<p>התנאי <span class="math inline">\(a_n \cdot a_{n+1} &lt; 0\)</span> אומר בדיוק ששני האיברים הסמוכים הם בעלי סימנים הפוכים, כלומר שבמעבר מ-<span class="math inline">\(a_n\)</span> ל-<span class="math inline">\(a_{n+1}\)</span> הסדרה <strong>מחליפה סימן</strong>.</p>
-<div class="thmbox thmbox-proof">
-<p><strong>הוכחה.</strong></p>
-<p>נניח שהסדרה מונוטונית עולה; המקרה היורד זהה, עם החלפת כיווני האי-שוויונות.</p>
-<p>נניח בשלילה שקיימים שני אינדקסים שונים כאלה, ונסמן אותם <span class="math inline">\(m\)</span> ו-<span class="math inline">\(k\)</span> כך ש-<span class="math inline">\(.m &lt; k\)</span></p>
-<p>מכפלה של שני מספרים היא שלילית בדיוק כאשר סימניהם הפוכים. לכן ל-<span class="math inline">\(a_m\)</span> ול-<span class="math inline">\(a_{m+1}\)</span> יש סימנים הפוכים, ומכיוון שהסדרה עולה מתקיים <span class="math inline">\(,a_m \leq a_{m+1}\)</span> ולכן בהכרח השלילי הוא הראשון:</p>
-<p><span class="math display">\[.a_m &lt; 0 &lt; a_{m+1}\]</span></p>
-<p>באותו נימוק בדיוק, <span class="math inline">\(.a_k &lt; 0 &lt; a_{k+1}\)</span></p>
-<p>אבל <span class="math inline">\(,m &lt; k\)</span> ולכן <span class="math inline">\(,m+1 \leq k\)</span> ומכיוון שהסדרה עולה מתקיים <span class="math inline">\(.a_{m+1} \leq a_k\)</span> נחבר את שלושת האי-שוויונות ונקבל</p>
-<p><span class="math display">\[,0 &lt; a_{m+1} \leq a_k &lt; 0\]</span></p>
-<p>כלומר <span class="math inline">\(,0 &lt; 0\)</span> וזו סתירה.</p>
-</div>
-<p>בפועל משתמשים בטענה הזאת בכיוון ההפוך: אם מצאנו <strong>שני</strong> מקומות שבהם שני איברים סמוכים הם בעלי סימנים הפוכים, אפשר לקבוע מיד שהסדרה אינה מונוטונית, בלי שום חישוב נוסף.</p>
-<div id="box-prp-monotone-ratio" class="thmbox thmbox-proposition" title="מבחן המנה">
-<p><strong>טענה 8.5.7 — מבחן המנה.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה שכל איבריה <strong>חיוביים</strong>. אז:</p>
-<p>(א) הסדרה מונוטונית <strong>עולה</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \geq 1\)</span> לכל <span class="math inline">\(;n \geq 1\)</span></p>
-<p>(ב) הסדרה מונוטונית <strong>יורדת</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> לכל <span class="math inline">\(.n \geq 1\)</span></p>
-<p>אם לעומת זאת כל איברי הסדרה <strong>שליליים</strong>, שני התנאים מתהפכים: הסדרה עולה אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ויורדת אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \geq 1\)</span> לכל <span class="math inline">\(.n\)</span></p>
-</div>
-<div class="thmbox thmbox-proof">
-<p><strong>הוכחה.</strong></p>
-<p>נניח תחילה <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(.n\)</span> כפל שני אגפי אי-שוויון במספר <strong>חיובי</strong> אינו משנה את כיוונו, ולכן מותר לכפול ב-<span class="math inline">\(a_n\)</span> ולקבל</p>
-<p><span class="math display">\[.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \geq a_n\]</span></p>
-<p>האגף הימני הוא בדיוק התנאי שהסדרה עולה, וזהו סעיף (א). סעיף (ב) מתקבל באותו אופן עם <span class="math inline">\(\leq\)</span> במקום <span class="math inline">\(.\geq\)</span></p>
-<p>נניח עכשיו <span class="math inline">\(a_n &lt; 0\)</span> לכל <span class="math inline">\(.n\)</span> הפעם הכפל ב-<span class="math inline">\(a_n\)</span> הוא כפל במספר <strong>שלילי</strong>, ולכן הוא <strong>הופך</strong> את כיוון אי-השוויון:</p>
-<p><span class="math display">\[.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \leq a_n\]</span></p>
-<p>כלומר עבור סדרה שלילית מנה גדולה מ-<span class="math inline">\(1\)</span> מעידה דווקא על ירידה, ולא על עלייה.</p>
-</div>
-<div id="box-warn-ratio-needs-sign" class="thmbox thmbox-warning" title="מבחן המנה דורש סימן קבוע">
-<p><strong>שימו לב — מבחן המנה דורש סימן קבוע.</strong></p>
-<p>לפני שמשתמשים במבחן המנה חובה לוודא שכל איברי הסדרה בעלי אותו סימן, ושאף אחד מהם אינו <span class="math inline">\(,0\)</span> שאחרת המנה אינה מוגדרת כלל.</p>
-<p>בלי הבדיקה הזאת המבחן נותן תשובות שגויות. למשל, עבור <span class="math inline">\(a_n = \left(-1\right)^{n}\)</span> מתקיים לכל <span class="math inline">\(n\)</span></p>
-<p><span class="math display">\[,\frac{a_{n+1}}{a_n} = \frac{\left(-1\right)^{n+1}}{\left(-1\right)^{n}} = -1 \leq 1\]</span></p>
-<p>ולפי סעיף (ב) היינו ״מסיקים״ שהסדרה יורדת. אבל ראינו כבר ב<a href="#box-exm-not-monotone">דוגמה 8.5.4</a> שהסדרה הזאת אינה מונוטונית כלל.</p>
-</div>
-<p>בשני התרגילים הבאים נפעיל את שני המבחנים, אחד בכל תרגיל.</p>
-<div id="box-exr-monotone-difference" class="thmbox thmbox-question" title="שיטת ההפרש">
-<p><strong>תרגיל פתור 8.5.8 — שיטת ההפרש.</strong></p>
-<p>הראו שהסדרה <span class="math inline">\(a_n = \dfrac{n}{n+1}\)</span> מונוטונית עולה ממש.</p>
-</div>
-<details class="thmcollapse"><summary>פתרון</summary>
-<div class="thmbox thmbox-solution">
-<p><strong>פתרון.</strong></p>
-<p>נבדוק את הסימן של ההפרש <span class="math inline">\(.a_{n+1} - a_n\)</span> אם נראה שהוא חיובי לכל <span class="math inline">\(,n\)</span> סיימנו.</p>
+<div id="box-exm-monotone-difference" class="thmbox thmbox-example" title="מבחן ההפרש: הסדרה $\frac{n}{n+1}$">
+<p><strong>דוגמה 8.5.8 — מבחן ההפרש: הסדרה <span class="math inline">\(\frac{n}{n+1}\)</span>.</strong></p>
+<p>נראה שהסדרה <span class="math inline">\(a_n = \dfrac{n}{n+1}\)</span> מונוטונית עולה ממש. לפי המבחן די לבדוק את הסימן של ההפרש <span class="math inline">\(:a_{n+1} - a_n\)</span> אם הוא חיובי לכל <span class="math inline">\(,n\)</span> סיימנו.</p>
 <p>נציב <span class="math inline">\(a_{n+1} = \dfrac{n+1}{n+2}\)</span> ונחסר:</p>
 <p><span class="math display">\[.a_{n+1} - a_n = \frac{n+1}{n+2} - \frac{n}{n+1}\]</span></p>
 <p>נאחד למכנה משותף <span class="math inline">\(:\left(n+1\right)\left(n+2\right)\)</span></p>
@@ -1159,15 +1173,30 @@ window.Quarto = {
 <p><span class="math display">\[,a_{n+1} - a_n = \frac{1}{\left(n+1\right)\left(n+2\right)} &gt; 0\]</span></p>
 <p>שכן לכל <span class="math inline">\(n \geq 1\)</span> שני הגורמים במכנה חיוביים. מ-<span class="math inline">\(a_{n+1} - a_n &gt; 0\)</span> נובע <span class="math inline">\(,a_{n+1} &gt; a_n\)</span> כלומר הסדרה עולה ממש.</p>
 </div>
-</details>
-<div id="box-exr-monotone-ratio" class="thmbox thmbox-question" title="שיטת המנה">
-<p><strong>תרגיל פתור 8.5.9 — שיטת המנה.</strong></p>
-<p>הראו שהסדרה <span class="math inline">\(a_n = \dfrac{n}{2^{n}}\)</span> מונוטונית יורדת. האם היא יורדת ממש?</p>
+<p>השיטה השנייה מתאימה במיוחד כשהסדרה בנויה ממכפלות ומחזקות, שאז המנה מצטמצמת יפה.</p>
+<div id="box-key-monotone-ratio" class="thmbox thmbox-key-point thmicon-method" data-numbered="true" data-icon="method" title="מבחן המנה">
+<p><strong>שיטת הוכחה 8.5.9 — מבחן המנה.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה שכל איבריה בעלי <strong>אותו סימן</strong>, ואף אחד מהם אינו <span class="math inline">\(.0\)</span></p>
+<p>אם כל האיברים <strong>חיוביים</strong>:</p>
+<p>(א) הסדרה מונוטונית <strong>עולה</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \geq 1\)</span> לכל <span class="math inline">\(;n \geq 1\)</span></p>
+<p>(ב) הסדרה מונוטונית <strong>יורדת</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> לכל <span class="math inline">\(.n \geq 1\)</span></p>
+<p>אם כל האיברים <strong>שליליים</strong>, שני התנאים מתהפכים:</p>
+<p>(ג) הסדרה מונוטונית <strong>עולה</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> לכל <span class="math inline">\(;n \geq 1\)</span></p>
+<p>(ד) הסדרה מונוטונית <strong>יורדת</strong> אם ורק אם <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \geq 1\)</span> לכל <span class="math inline">\(.n \geq 1\)</span></p>
 </div>
-<details class="thmcollapse"><summary>פתרון</summary>
-<div class="thmbox thmbox-solution">
-<p><strong>פתרון.</strong></p>
-<p>כל איברי הסדרה חיוביים, ולכן במקום לחסר נוח יותר לחלק ולהשוות את המנה ל-<span class="math inline">\(.1\)</span> אם המנה קטנה או שווה ל-<span class="math inline">\(,1\)</span> הסדרה יורדת.</p>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נניח תחילה <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(.n\)</span> כפל שני אגפי אי-שוויון במספר <strong>חיובי</strong> אינו משנה את כיוונו, ולכן מותר לכפול ב-<span class="math inline">\(a_n\)</span> ולקבל</p>
+<p><span class="math display">\[.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \geq a_n\]</span></p>
+<p>האגף הימני הוא בדיוק התנאי שהסדרה עולה, וזהו סעיף (א). סעיף (ב) מתקבל באותו אופן עם <span class="math inline">\(\leq\)</span> במקום <span class="math inline">\(.\geq\)</span></p>
+<p>נניח עכשיו <span class="math inline">\(a_n &lt; 0\)</span> לכל <span class="math inline">\(.n\)</span> הפעם הכפל ב-<span class="math inline">\(a_n\)</span> הוא כפל במספר <strong>שלילי</strong>, ולכן הוא <strong>הופך</strong> את כיוון אי-השוויון:</p>
+<p><span class="math display">\[.\frac{a_{n+1}}{a_n} \geq 1 \iff a_{n+1} \leq a_n\]</span></p>
+<p>האגף הימני הוא הפעם התנאי שהסדרה <strong>יורדת</strong>, וזהו סעיף (ד). סעיף (ג) מתקבל באותו אופן עם <span class="math inline">\(\leq\)</span> במקום <span class="math inline">\(.\geq\)</span> כלומר עבור סדרה שלילית מנה גדולה מ-<span class="math inline">\(1\)</span> מעידה דווקא על ירידה, ולא על עלייה.</p>
+</div>
+<div id="box-exm-monotone-ratio" class="thmbox thmbox-example" title="מבחן המנה: הסדרה $\frac{n}{2^{n}}$">
+<p><strong>דוגמה 8.5.10 — מבחן המנה: הסדרה <span class="math inline">\(\frac{n}{2^{n}}\)</span>.</strong></p>
+<p>נראה שהסדרה <span class="math inline">\(a_n = \dfrac{n}{2^{n}}\)</span> מונוטונית יורדת, ונשאל בסוף אם היא יורדת ממש.</p>
+<p>כל איברי הסדרה חיוביים, ולכן תנאי הסימן מתקיים ואפשר להפעיל את המבחן. במקום לחסר נוח כאן לחלק ולהשוות את המנה ל-<span class="math inline">\(,1\)</span> שכן הסדרה בנויה ממכפלה וחזקה והמנה תצטמצם.</p>
 <p>נציב <span class="math inline">\(a_{n+1} = \dfrac{n+1}{2^{n+1}}\)</span> ונחלק:</p>
 <p><span class="math display">\[.\frac{a_{n+1}}{a_n} = \frac{\dfrac{n+1}{2^{n+1}}}{\dfrac{n}{2^{n}}} = \frac{n+1}{2^{n+1}} \cdot \frac{2^{n}}{n} = \frac{n+1}{2n}\]</span></p>
 <p>נשווה את המנה הזאת ל-<span class="math inline">\(:1\)</span> מכיוון ש-<span class="math inline">\(2n &gt; 0\)</span> אפשר לכפול בו את שני האגפים, ומתקבל</p>
@@ -1177,9 +1206,29 @@ window.Quarto = {
 <p><span class="math display">\[,a_1 = \frac{1}{2^{1}} = \frac{1}{2} \qquad\text{,}\qquad a_2 = \frac{2}{2^{2}} = \frac{1}{2}\]</span></p>
 <p>כלומר <span class="math inline">\(.a_1 = a_2\)</span> עבור <span class="math inline">\(n \geq 2\)</span> האי-שוויון חד והסדרה כן יורדת ממש, אבל הצמד הראשון מונע ממנה להיות יורדת ממש כהגדרתה.</p>
 </div>
-</details>
-<section id="תרגילים-2" class="level3">
-<h3 class="anchored" data-anchor-id="תרגילים-2">תרגילים</h3>
+<div id="box-exm-ratio-fails" class="thmbox thmbox-example" title="מה קורה כשמדלגים על בדיקת הסימן">
+<p><strong>דוגמה 8.5.11 — מה קורה כשמדלגים על בדיקת הסימן.</strong></p>
+<p>ננסה להפעיל את מבחן המנה על הסדרה <span class="math inline">\(.a_n = \left(-1\right)^{n}\)</span> המנה בין שני איברים סמוכים היא</p>
+<p><span class="math display">\[,\frac{a_{n+1}}{a_n} = \frac{\left(-1\right)^{n+1}}{\left(-1\right)^{n}} = -1\]</span></p>
+<p>ובפרט <span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> לכל <span class="math inline">\(.n\)</span> לפי סעיף (ב) היינו ״מסיקים״ שהסדרה מונוטונית יורדת, אבל ראינו ב<a href="#box-exm-not-monotone">דוגמה 8.5.4</a> שהיא אינה מונוטונית כלל.</p>
+<p><strong>היכן נשבר הטיעון?</strong> בהוכחת המבחן כפלנו את שני אגפי אי-השוויון ב-<span class="math inline">\(,a_n\)</span> וכדי לדעת אם כיוון האי-שוויון נשמר או מתהפך היינו חייבים לדעת את <strong>סימנו</strong> של <span class="math inline">\(.a_n\)</span> כאן הסימן מתחלף מאיבר לאיבר, ולכן אין לשאלה הזאת תשובה אחת:</p>
+<p>עבור <span class="math inline">\(n\)</span> זוגי מתקיים <span class="math inline">\(,a_n = 1 &gt; 0\)</span> הכפל שומר על הכיוון, ומ-<span class="math inline">\(\dfrac{a_{n+1}}{a_n} \leq 1\)</span> נובע <span class="math inline">\(.a_{n+1} \leq a_n\)</span></p>
+<p>עבור <span class="math inline">\(n\)</span> אי-זוגי מתקיים <span class="math inline">\(,a_n = -1 &lt; 0\)</span> הכפל הופך את הכיוון, ומאותה מנה עצמה נובע דווקא <span class="math inline">\(.a_{n+1} \geq a_n\)</span></p>
+<p>שתי המסקנות מתחלפות זו בזו לאורך הסדרה, וזה בדיוק מה שהסדרה עושה: יורדת, עולה, יורדת, עולה. המנה הקבועה <span class="math inline">\(-1\)</span> אינה מטעה אותנו, היא פשוט אינה אומרת דבר על מונוטוניות כל עוד הסימן אינו קבוע.</p>
+</div>
+<div id="box-warn-ratio-needs-sign" class="thmbox thmbox-warning" title="מבחן המנה דורש סימן קבוע">
+<p><strong>שימו לב — מבחן המנה דורש סימן קבוע.</strong></p>
+<p>לפני שמשתמשים במבחן המנה יש לוודא שכל איברי הסדרה בעלי אותו סימן, ושאף אחד מהם אינו <span class="math inline">\(,0\)</span> שאחרת המנה אינה מוגדרת כלל.</p>
+</div>
+<div id="box-rem-monotone-eventual-sign" class="thmbox thmbox-remark" title="סימן קבוע הוא כמעט חינם עבור סדרה מונוטונית">
+<p><strong>הערה 8.5.12 — סימן קבוע הוא כמעט חינם עבור סדרה מונוטונית.</strong></p>
+<p>דרישת הסימן הקבוע נשמעת מגבילה, אבל עבור סדרות מונוטוניות היא כמעט תמיד מתקיימת, לפחות החל ממקום מסוים: <strong>כל סדרה מונוטונית שאינה מתאפסת החל ממקום מסוים היא חיובית החל ממקום מסוים או שלילית החל ממקום מסוים.</strong></p>
+<p>שימו לב שאין בכך רשות לדלג על הבדיקה. הטענה מדברת על סדרה שכבר <strong>ידוע</strong> שהיא מונוטונית, ואילו מבחן המנה נועד דווקא להוכיח מונוטוניות, כך שברגע הפעלתו עדיין איננו יודעים זאת. מה שהטענה כן אומרת הוא שכאשר הסדרה אכן מונוטונית, תנאי הסימן אינו מגביל במיוחד.</p>
+<p>את ההוכחה נשאיר כתרגיל בסוף הסעיף.</p>
+</div>
+</section>
+<section id="sec-monotone-exercises" class="level3">
+<h3 class="anchored" data-anchor-id="sec-monotone-exercises">תרגילים</h3>
 <p><strong>תרגיל 1.</strong> קבעו אם הסדרה <span class="math inline">\(a_n = \dfrac{n}{n^2+1}\)</span> מונוטונית, ואם כן — עולה או יורדת. (רמז: הסתכלו על <span class="math inline">\(.a_{n+1} - a_n\)</span>)</p>
 <div class="tf-quiz" data-correct="b" data-reveal="">
 <button class="tf-opt" data-val="a">מונוטונית עולה</button>
@@ -1244,7 +1293,55 @@ window.Quarto = {
 <p>מ-<span class="math inline">\(a_1 &lt; a_2\)</span> נובע שהסדרה אינה יורדת. מ-<span class="math inline">\(a_2 \approx 0.41 &gt; 0 = a_4\)</span> נובע שהיא אינה עולה, שכן סדרה עולה מקיימת <span class="math inline">\(a_2 \leq a_3 \leq a_4\)</span> ובפרט <span class="math inline">\(.a_2 \leq a_4\)</span></p>
 </div>
 </details>
-<p><strong>תרגיל 3.</strong> כל סדרה מונוטונית היא חסומה.</p>
+<p><strong>תרגיל 3.</strong> עבור כל אחת מהסדרות הבאות, קבעו אם היא חסומה, חסומה מלרע בלבד, חסומה מלעיל בלבד, או אינה חסומה משני הצדדים.</p>
+<p>(א) הסדרה <span class="math inline">\(1,\ 2,\ 2,\ 3,\ 3,\ 3,\ 4,\ 4,\ 4,\ 4,\ \dots\)</span></p>
+<div class="tf-quiz" data-correct="b" data-reveal="">
+<button class="tf-opt" data-val="a">חסומה</button>
+<button class="tf-opt" data-val="b">חסומה מלרע בלבד</button>
+<button class="tf-opt" data-val="c">חסומה מלעיל בלבד</button>
+<button class="tf-opt" data-val="d">אינה חסומה משני הצדדים</button>
+<div class="tf-feedback"></div>
+</div>
+<p>(ב) <span class="math inline">\(a_n = \left(-1\right)^{n} - n\)</span></p>
+<div class="tf-quiz" data-correct="c" data-reveal="">
+<button class="tf-opt" data-val="a">חסומה</button>
+<button class="tf-opt" data-val="b">חסומה מלרע בלבד</button>
+<button class="tf-opt" data-val="c">חסומה מלעיל בלבד</button>
+<button class="tf-opt" data-val="d">אינה חסומה משני הצדדים</button>
+<div class="tf-feedback"></div>
+</div>
+<p>(ג) <span class="math inline">\(a_n = \dfrac{1}{n^{2}+1}\)</span></p>
+<div class="tf-quiz" data-correct="a" data-reveal="">
+<button class="tf-opt" data-val="a">חסומה</button>
+<button class="tf-opt" data-val="b">חסומה מלרע בלבד</button>
+<button class="tf-opt" data-val="c">חסומה מלעיל בלבד</button>
+<button class="tf-opt" data-val="d">אינה חסומה משני הצדדים</button>
+<div class="tf-feedback"></div>
+</div>
+<p>(ד) <span class="math inline">\(a_n = \sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor\)</span></p>
+<div class="tf-quiz" data-correct="a" data-reveal="">
+<button class="tf-opt" data-val="a">חסומה</button>
+<button class="tf-opt" data-val="b">חסומה מלרע בלבד</button>
+<button class="tf-opt" data-val="c">חסומה מלעיל בלבד</button>
+<button class="tf-opt" data-val="d">אינה חסומה משני הצדדים</button>
+<div class="tf-feedback"></div>
+</div>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>סעיף (א).</strong> חסומה מלרע בלבד. הסדרה עולה, ולכן <span class="math inline">\(a_n \geq a_1 = 1\)</span> לכל <span class="math inline">\(,n\)</span> וזה חסם מלרע. מלעיל היא אינה חסומה: כל מספר טבעי <span class="math inline">\(k\)</span> מופיע בה, ולכן לכל <span class="math inline">\(M\)</span> יש בה איבר הגדול מ-<span class="math inline">\(.M\)</span></p>
+<p><strong>סעיף (ב).</strong> חסומה מלעיל בלבד. מתקיים <span class="math inline">\(\left(-1\right)^{n} \leq 1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן</p>
+<p><span class="math display">\[,a_n = \left(-1\right)^{n} - n \leq 1 - n \leq 0\]</span></p>
+<p>והמספר <span class="math inline">\(0\)</span> הוא חסם מלעיל. מלרע היא אינה חסומה: יהי <span class="math inline">\(m\)</span> כלשהו; אם נבחר <span class="math inline">\(n &gt; 1 - m\)</span> נקבל <span class="math inline">\(,a_n \leq 1 - n &lt; m\)</span> ולכן אף <span class="math inline">\(m\)</span> אינו חסם מלרע.</p>
+<p><strong>סעיף (ג).</strong> חסומה. לכל <span class="math inline">\(n\)</span> מתקיים <span class="math inline">\(,n^{2} + 1 \geq 2\)</span> ולכן</p>
+<p><span class="math display">\[,0 &lt; \frac{1}{n^{2}+1} \leq \frac{1}{2}\]</span></p>
+<p>כלומר הסדרה כלואה בין <span class="math inline">\(0\)</span> ל-<span class="math inline">\(.\frac{1}{2}\)</span></p>
+<p><strong>סעיף (ד).</strong> חסומה. לפי הגדרת הערך השלם התחתון, <span class="math inline">\(\left\lfloor \sqrt{n} \right\rfloor\)</span> הוא השלם הגדול ביותר שאינו עולה על <span class="math inline">\(,\sqrt{n}\)</span> ולכן ההפרש <span class="math inline">\(\sqrt{n} - \left\lfloor \sqrt{n} \right\rfloor\)</span> הוא ה״שארית״ שלו, ומקיים תמיד</p>
+<p><span class="math display">\[.0 \leq a_n &lt; 1\]</span></p>
+<p>שימו לב לסעיף הזה במיוחד: הסדרה חסומה, ובתרגיל הקודם ראינו שהיא <strong>אינה</strong> מונוטונית. בסעיף הבא נראה מה מוסיפה כל אחת משתי התכונות לחברתה.</p>
+</div>
+</details>
+<p><strong>תרגיל 4.</strong> כל סדרה מונוטונית היא חסומה.</p>
 <div class="tf-quiz" data-correct="false" data-reveal="">
 <button class="tf-opt" data-val="true">נכון</button>
 <button class="tf-opt" data-val="false">לא נכון</button>
@@ -1255,6 +1352,30 @@ window.Quarto = {
 <p><strong>פתרון.</strong></p>
 <p><strong>לא נכון.</strong> הסדרה <span class="math inline">\(a_n = n\)</span> מונוטונית עולה ממש, כפי שראינו למעלה, ואינה חסומה, כפי שראינו ב<a href="./08-sequences-properties-2.html#box-exm-bounded-sequences">דוגמה 8.2.2</a>.</p>
 <p>מונוטוניות וחסימוּת הן אפוא שתי תכונות נפרדות. בסעיף הבא נראה מה קורה כאשר סדרה מקיימת את שתיהן יחד.</p>
+</div>
+</details>
+<p><strong>תרגיל 5.</strong> תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה מונוטונית.</p>
+<p>(א) הוכיחו שקיים לכל היותר אינדקס אחד <span class="math inline">\(n\)</span> שעבורו <span class="math inline">\(a_n &lt; 0 &lt; a_{n+1}\)</span> (אם הסדרה עולה), או <span class="math inline">\(a_n &gt; 0 &gt; a_{n+1}\)</span> (אם הסדרה יורדת).</p>
+<p>(ב) הוכיחו שהתנאי שבסעיף (א) שקול לתנאי <span class="math inline">\(.a_n \cdot a_{n+1} &lt; 0\)</span></p>
+<p>(ג) הוכיחו את הטענה שב<a href="#box-rem-monotone-eventual-sign">הערה 8.5.12</a>: אם הסדרה אינה מתאפסת החל ממקום מסוים, אז היא חיובית החל ממקום מסוים או שלילית החל ממקום מסוים.</p>
+<details class="thmcollapse"><summary>פתרון</summary>
+<div class="thmbox thmbox-solution">
+<p><strong>פתרון.</strong></p>
+<p><strong>סעיף (א).</strong> נניח שהסדרה עולה; המקרה היורד זהה עם החלפת כיווני האי-שוויונות.</p>
+<p>נניח בשלילה שקיימים שני אינדקסים כאלה, ונסמן אותם <span class="math inline">\(m\)</span> ו-<span class="math inline">\(p\)</span> כך ש-<span class="math inline">\(.m &lt; p\)</span> אז</p>
+<p><span class="math display">\[.a_m &lt; 0 &lt; a_{m+1} \qquad\text{,}\qquad a_p &lt; 0 &lt; a_{p+1}\]</span></p>
+<p>מ-<span class="math inline">\(m &lt; p\)</span> נובע <span class="math inline">\(,m+1 \leq p\)</span> ומכיוון שהסדרה עולה מתקיים <span class="math inline">\(.a_{m+1} \leq a_p\)</span> נשרשר:</p>
+<p><span class="math display">\[,0 &lt; a_{m+1} \leq a_p &lt; 0\]</span></p>
+<p>כלומר <span class="math inline">\(,0 &lt; 0\)</span> וזו סתירה.</p>
+<p><strong>סעיף (ב).</strong> מכפלת שני מספרים היא שלילית בדיוק כאשר סימניהם הפוכים, כלומר כאשר אחד מהם חיובי והשני שלילי. לכן <span class="math inline">\(a_n \cdot a_{n+1} &lt; 0\)</span> אומר שאחד משני האיברים הסמוכים נמצא מתחת ל-<span class="math inline">\(0\)</span> והשני מעליו.</p>
+<p>נותר רק לקבוע <strong>מי</strong> משניהם השלילי. אם הסדרה עולה מתקיים <span class="math inline">\(,a_n \leq a_{n+1}\)</span> ולכן השלילי הוא הראשון, כלומר <span class="math inline">\(.a_n &lt; 0 &lt; a_{n+1}\)</span> אם הסדרה יורדת מתקיים <span class="math inline">\(,a_n \geq a_{n+1}\)</span> ולכן השלילי הוא השני, כלומר <span class="math inline">\(.a_n &gt; 0 &gt; a_{n+1}\)</span> אלה בדיוק שני התנאים שבסעיף (א).</p>
+<p>בניסוח אחר: התנאי אומר שהסדרה <strong>חוצה את הרמה <span class="math inline">\(0\)</span></strong> בין המקום <span class="math inline">\(n\)</span> למקום <span class="math inline">\(,n+1\)</span> וסעיף (א) אומר שסדרה מונוטונית חוצה את הרמה הזאת לכל היותר פעם אחת.</p>
+<p><strong>סעיף (ג).</strong> נניח שוב שהסדרה עולה. נפריד למקרים לפי הסימנים שמופיעים בה.</p>
+<p><strong>מקרה ראשון: קיים <span class="math inline">\(N\)</span> שעבורו <span class="math inline">\(.a_N &gt; 0\)</span></strong> אז לכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(,a_n \geq a_N &gt; 0\)</span> ולכן הסדרה חיובית החל מן המקום <span class="math inline">\(.N\)</span></p>
+<p><strong>מקרה שני: <span class="math inline">\(a_n \leq 0\)</span> לכל <span class="math inline">\(.n\)</span></strong> אם <span class="math inline">\(a_n &lt; 0\)</span> לכל <span class="math inline">\(,n\)</span> הסדרה שלילית ואין מה להוכיח. אחרת קיים <span class="math inline">\(m\)</span> שעבורו <span class="math inline">\(,a_m = 0\)</span> ואז לכל <span class="math inline">\(n \geq m\)</span> מתקיים</p>
+<p><span class="math display">\[,0 = a_m \leq a_n \leq 0\]</span></p>
+<p>ולכן <span class="math inline">\(a_n = 0\)</span> לכל <span class="math inline">\(.n \geq m\)</span> כלומר הסדרה מתאפסת החל ממקום מסוים, בסתירה להנחה.</p>
+<p>בשני המקרים קיבלנו את הנדרש. המקרה של סדרה יורדת זהה, עם החלפת התפקידים בין ״חיובית״ ל״שלילית״.</p>
 </div>
 </details>
 </section>
@@ -1659,7 +1780,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-4.html" class="pagination-link" aria-label="8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div><div class="nav-page nav-page-next"><a href="./08-sequences-properties-6.html" class="pagination-link" aria-label="8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)"><span class="nav-page-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./08-sequences-properties-4.html" class="pagination-link" aria-label="8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div><div class="nav-page nav-page-next"><a href="./08-sequences-properties-6.html" class="pagination-link" aria-label="8.6 סדרה חסומה ומונוטונית מתכנסת"><span class="nav-page-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 

@@ -338,6 +338,23 @@ iframe.widget-frame {
    NOT the amber above — a worked exercise and an open question are different acts. */
 .thmbox-concept-question { border-color: #7e22ce; border-inline-start-width: 6px; background: #faf5ff; }
 .thmbox-concept-question > p:first-child > strong { font-weight: 700; color: #6b21a8; }
+/* Role badges (icon="method" etc. on the box). A box's CLASS says what kind of thing it
+   is; its ROLE says what the reader should do with it, and .thmkey carries both a
+   convention and a proof method. The badge is a block line above the label so the emoji
+   and the Hebrew never share a line's bidi ordering, and so it can be sized freely.
+   HTML only — these rules never reach xelatex, which is why colour emoji are safe here
+   and would not be inside a PDF-bound `title=`. Literal characters rather than \XXXX
+   escapes: an escape followed by a space swallows the space. */
+.thmbox[class*="thmicon-"] > p:first-child > strong::before {
+  margin-inline-end: 0.35em;
+  font-size: 1.45em;
+  vertical-align: -0.18em;
+}
+.thmbox.thmicon-method     > p:first-child > strong::before { content: "🛠️"; }
+.thmbox.thmicon-calc       > p:first-child > strong::before { content: "🧮"; }
+.thmbox.thmicon-rule       > p:first-child > strong::before { content: "✅"; }
+.thmbox.thmicon-convention > p:first-child > strong::before { content: "🤝"; }
+.thmbox.thmicon-idea       > p:first-child > strong::before { content: "💡"; }
 /* Self-check (.thmchk): a light beat, not a loud one — thin edge and a normal-weight
    label, so it reads as smaller than a תרגיל פתור rather than as a warning. Rose was
    the last clearly free hue; it stays clear of the warning red, which is a true red
@@ -827,11 +844,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 המספר \(e\) והסדרה המתאימה</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 אינסוף כגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">9.2 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.4 סדרות מהצורה \((1+a_n)^{1/a_n}\) כאשר \(a_n\to 0\)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -957,7 +974,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#מבחן-המנה-ומבחן-השורש" class="nav-link">9.2 מבחן המנה ומבחן השורש</a></li><li class="toc-indent"><a href="#מבחן-המנה" class="nav-link">מבחן המנה</a></li><li class="toc-indent"><a href="#מבחן-השורש" class="nav-link">מבחן השורש</a></li><li class="toc-indent"><a href="#אריתמטיקה-של-חזקות-בשאיפות" class="nav-link">אריתמטיקה של חזקות בשאיפות</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#אריתמטיקה" class="nav-link">9.2 אריתמטיקה</a></li><li class="toc-indent"><a href="#צורות-לא-מוגדרות" class="nav-link">צורות לא מוגדרות</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-sequences-intro.html">חלק 2: סדרות</a></li><li class="breadcrumb-item"><a href="./09-sequences-infinity.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></a></li></ol></nav>
@@ -978,96 +995,295 @@ window.Quarto = {
 
 </header>
 
-<section id="מבחן-המנה-ומבחן-השורש" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="מבחן-המנה-ומבחן-השורש"><span class="header-section-number">9.2</span> מבחן המנה ומבחן השורש</h2>
-<section id="מבחן-המנה" class="level3">
-<h3 class="anchored" data-anchor-id="מבחן-המנה">מבחן המנה</h3>
-<div id="box-thm-ratio-test" class="thmbox thmbox-theorem" title="מבחן המנה">
-<p><strong>משפט 9.2.1 — מבחן המנה.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה חיובית, כלומר <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>, ונניח כי קיים הגבול</p>
-<p><span class="math inline">\(.L = \lim_{n\to\infty} \frac{a_{n+1}}{a_n}\)</span></p>
-<p>אז:</p>
+<section id="אריתמטיקה" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="אריתמטיקה"><span class="header-section-number">9.2</span> אריתמטיקה</h2>
+<p>לאחר שהרחבנו בסעיף הקודם את מושג הגבול, נרצה להרחיב גם את אריתמטיקת הגבולות. לכך יש שלוש סיבות שונות.</p>
+<p><strong>ראשית</strong>, אנחנו רוצים לדעת כיצד פעולות על סדרות משפיעות על הגבול כאשר <span class="math inline">\(a_n \to \infty\)</span> או <span class="math inline">\(,b_n \to \infty\)</span> וכן כאשר אחת מהן שואפת ל-<span class="math inline">\(.-\infty\)</span> <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a> אינו עונה על כך, שכן כל סעיפיו מניחים ששני הגבולות הם מספרים ממשיים.</p>
+<div id="box-qst-infinite-sum-or-difference" class="thmbox thmbox-concept-question">
+<p><strong>שאלה 9.2.1.</strong></p>
+<p>תהי <span class="math inline">\(,a_n = n^{2}\)</span> ותהי <span class="math inline">\(.b_n = n\)</span> שתיהן שואפות לאינסוף.</p>
+<p>מה אפשר לומר על <span class="math inline">\(?a_n + b_n\)</span> ומה על <span class="math inline">\(?a_n - b_n\)</span> והאם התשובה לשאלה השנייה הייתה משתנה אילו הייתה <span class="math inline">\(?b_n = n^{2}\)</span></p>
+</div>
+<p><strong>שנית</strong>, ולעיתים קרובות זה המצב המעשי, גם כאשר הסדרה שאנו מחשבים מתכנסת לגבול ממשי לחלוטין, שלבי הביניים של החישוב עוברים דרך סדרות השואפות לאינסוף.</p>
+<div id="box-qst-quotient-through-infinity" class="thmbox thmbox-concept-question">
+<p><strong>שאלה 9.2.2.</strong></p>
+<p>נתבונן בסדרה</p>
+<p><span class="math display">\[.c_n = \frac{3n^{2} - n}{n^{2} + 5}\]</span></p>
+<p>המונה שואף לאינסוף, שכן <span class="math inline">\(3n^{2} - n = n\left(3n-1\right) \geq n\)</span> לכל <span class="math inline">\(,n \geq 1\)</span> וכך גם המכנה, שכן <span class="math inline">\(.n^{2} + 5 \geq n\)</span> ובכל זאת הסדרה כולה מתכנסת לגבול ממשי.</p>
+<p>נסו להפעיל עליה את סעיף המנה של <a href="./08-sequences-properties-3.html#box-thm-sequence-arithmetic">משפט 8.3.1</a>. מה בדיוק מונע מאיתנו לעשות זאת?</p>
+</div>
+<p><strong>שלישית</strong>, לפעמים דווקא אריתמטיקה על גבולות <strong>ממשיים</strong> מובילה לתוצאה אינסופית.</p>
+<div id="box-qst-real-limit-infinite-result" class="thmbox thmbox-concept-question">
+<p><strong>שאלה 9.2.3.</strong></p>
+<p>תהי <span class="math inline">\(.a_n = \dfrac{1}{n^{2}}\)</span> גבולה הוא <span class="math inline">\(,0\)</span> מספר ממשי לכל דבר, וכל איבריה חיוביים.</p>
+<p>מהו הגבול של <span class="math inline">\(?\dfrac{1}{a_n}\)</span> האם גם הוא מספר ממשי?</p>
+</div>
+<p>לפני שנענה על השאלות האלה ניקח צעד אחורה. נרחיב את כללי החשבון באופן <strong>חלקי</strong> אל <span class="math inline">\(\infty\)</span> ואל <span class="math inline">\(,-\infty\)</span> נצדיק כל כלל וכלל, ונסביר מדוע יש צירופים שאי-אפשר להרחיב אליהם כלל. אחר כך נראה שאריתמטיקת הגבולות <strong>עקבית</strong> עם הכללים האלה בכל מקום שבו הם מוגדרים. לבסוף נחזור אל המקרים שבהם ההרחבה נכשלת, ונראה שיטות לטפל בהם.</p>
+<p>ב<a href="./09-sequences-infinity.html#box-def-extended-reals">הגדרה 9.1.1</a> הוספנו לישר הממשי שני איברים חדשים, והסכמנו רק על מקומם בסדר. עכשיו נוסיף להם גם חלק מפעולות החשבון — אבל כדאי לומר מראש מאין הכללים האלה מגיעים.</p>
+<p>הם <strong>אינם</strong> מערכת חשבון חדשה שאנחנו ממציאים, אלא <strong>קיצור רישום עבור גבולות</strong>. כל שורה בהגדרה שלהלן היא תמצית של טענה על סדרות, והיא נכונה אך ורק משום שהמשפט שאחריה מוכיח אותה. את <span class="math inline">\(r + \infty = \infty\)</span> יש לקרוא ״אם סדרה אחת מתכנסת ל-<span class="math inline">\(r\)</span> והשנייה גדלה מעבר לכל חסם, אז סכומן גדל מעבר לכל חסם״, ולא כפעולת חיבור בין מספרים.</p>
+<p>מכאן נובע גם הכלל המנחה: נגדיר פעולה רק כאשר יש <strong>תשובה אחת</strong> שהיא הגיונית. למשל, מהו <span class="math inline">\(?r + \infty\)</span> אם מוסיפים למספר שגדל מעבר לכל חסם כמות קבועה, הוא ממשיך לגדול מעבר לכל חסם, ואין שום ערך אחר שאפשר היה לתת לביטוי הזה. לעומת זאת, מהו <span class="math inline">\(?\infty - \infty\)</span> כאן אין תשובה אחת: שני גדלים ההולכים וגדלים יכולים להשאיר ביניהם הפרש קבוע, הפרש ההולך וגדל, או הפרש שאינו מתייצב כלל. במקרה כזה לא נגדיר דבר.</p>
+<div id="box-def-extended-arithmetic" class="thmbox thmbox-definition" title="פעולות ב-$\overline{\mathbb{R}}$">
+<p><strong>הגדרה 9.2.4 — פעולות ב-<span class="math inline">\(\overline{\mathbb{R}}\)</span>.</strong></p>
+<p>יהי <span class="math inline">\(r \in \mathbb{R}\)</span> מספר ממשי. נגדיר:</p>
+<p><strong>חיבור וחיסור עם מספר סופי.</strong></p>
+<p><span class="math display">\[r + \infty = \infty \qquad,\qquad r - \infty = -\infty\]</span></p>
+<p><strong>חיבור של אינסופיים מאותו סימן.</strong></p>
+<p><span class="math display">\[\left(-\infty\right) + \left(-\infty\right) = -\infty \qquad,\qquad \infty + \infty = \infty\]</span></p>
+<p><strong>כפל.</strong></p>
+<p><span class="math display">\[r \cdot \infty = \begin{cases} \infty &amp; r &gt; 0 \\ -\infty &amp; r &lt; 0 \end{cases} \qquad,\qquad r \cdot \left(-\infty\right) = \begin{cases} -\infty &amp; r &gt; 0 \\ \infty &amp; r &lt; 0 \end{cases}\]</span></p>
+<p><span class="math display">\[\left(-\infty\right) \cdot \left(-\infty\right) = \infty \qquad,\qquad \infty \cdot \left(-\infty\right) = -\infty \qquad,\qquad \infty \cdot \infty = \infty\]</span></p>
+<p><strong>חלוקה של מספר סופי באינסופי.</strong></p>
+<p><span class="math display">\[.\frac{r}{\infty} = \frac{r}{-\infty} = 0\]</span></p>
+</div>
+<p>ההרחבה הזאת <strong>חלקית</strong>, ובכוונה: כל צירוף שאינו ברשימה שלמעלה אינו מוגדר. שלושת החסרים החשובים הם</p>
+<p><span class="math display">\[,\infty - \infty \qquad,\qquad \frac{\infty}{\infty} \qquad,\qquad 0 \cdot \infty\]</span></p>
+<p>והתבנית שלהם ברורה. חיבור של שני אינסופיים מאותו סימן מוגדר, וכן כפל של שני אינסופיים; אבל <strong>חיסור וחלוקה בין שני אינסופיים אינם מוגדרים</strong>. ל-<span class="math inline">\(\frac{1}{0}\)</span> נגיע מיד, ואל שלושת אלה נחזור ב<a href="#box-rem-indeterminate-forms">הערה 9.2.9</a> שבהמשך הסעיף, שם גם נראה מדוע.</p>
+<p>נותרה אפוא החלוקה באפס. מפתה לכתוב <span class="math inline">\(,\frac{1}{0} = \infty\)</span> אבל זה <strong>אינו נכון</strong>, ולא משום שאנחנו קפדנים: לביטוי הזה באמת אין ערך אחד. כדי לראות זאת נוח להבחין בין שתי דרכים שבהן סדרה יכולה לשאוף לאפס.</p>
+<div id="box-def-one-sided-limit" class="thmbox thmbox-definition" title="שאיפה מלמעלה ומלמטה">
+<p><strong>הגדרה 9.2.5 — שאיפה מלמעלה ומלמטה.</strong></p>
+<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה ויהי <span class="math inline">\(.a \in \mathbb{R}\)</span></p>
+<p>נאמר כי הסדרה <strong>שואפת ל-<span class="math inline">\(a\)</span> מלמעלה</strong>, ונסמן <span class="math inline">\(,a_n \to a^{+}\)</span> אם <span class="math inline">\(a_n \to a\)</span> וגם <span class="math inline">\(a_n &gt; a\)</span> החל ממקום מסוים.</p>
+<p>נאמר כי הסדרה <strong>שואפת ל-<span class="math inline">\(a\)</span> מלמטה</strong>, ונסמן <span class="math inline">\(,a_n \to a^{-}\)</span> אם <span class="math inline">\(a_n \to a\)</span> וגם <span class="math inline">\(a_n &lt; a\)</span> החל ממקום מסוים.</p>
+</div>
+<p>בסימון הזה אפשר להשלים את טבלת הכללים:</p>
+<p><span class="math display">\[\frac{r}{0^{+}} = \begin{cases} \infty &amp; r &gt; 0 \\ -\infty &amp; r &lt; 0 \end{cases} \qquad,\qquad \frac{r}{0^{-}} = \begin{cases} -\infty &amp; r &gt; 0 \\ \infty &amp; r &lt; 0 \end{cases}\]</span></p>
+<p>הדוגמה הבאה מראה מדוע הכיוון הוא שקובע, ומדוע בלעדיו אין תשובה כלל.</p>
+<div id="box-exm-reciprocal-of-null" class="thmbox thmbox-example" title="שלוש סדרות השואפות לאפס">
+<p><strong>דוגמה 9.2.6 — שלוש סדרות השואפות לאפס.</strong></p>
+<p>לשלוש הסדרות הבאות אותו גבול בדיוק, <span class="math inline">\(,0\)</span> ונשווה את ההופכיות שלהן.</p>
+<p>(א) <span class="math inline">\(.a_n = \dfrac{1}{n}\)</span> כל איבריה חיוביים, ולכן <span class="math inline">\(,a_n \to 0^{+}\)</span> וההופכית היא <span class="math inline">\(,\dfrac{1}{a_n} = n\)</span> הגדלה מעבר לכל חסם.</p>
+<p>(ב) <span class="math inline">\(.a_n = -\dfrac{1}{n}\)</span> כל איבריה שליליים, ולכן <span class="math inline">\(,a_n \to 0^{-}\)</span> וההופכית היא <span class="math inline">\(,\dfrac{1}{a_n} = -n\)</span> הקטנה מתחת לכל חסם.</p>
+<p>(ג) <span class="math inline">\(.a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span> גם היא שואפת לאפס, אך לא מלמעלה ולא מלמטה: סימנה מתחלף ללא הרף. ההופכית היא</p>
+<p><span class="math display">\[,\frac{1}{a_n} = \left(-1\right)^{n} n\]</span></p>
+<p>ואיבריה <span class="math inline">\(,-1,\ 2,\ -3,\ 4,\ \dots\)</span> סדרה שאינה חסומה משני הצדדים ואין לה גבול כלל.</p>
+<p>אותו גבול עצמו, אפוא, ושלוש התנהגויות שונות לחלוטין.</p>
+</div>
+<div id="box-warn-one-over-zero" class="thmbox thmbox-warning" title="$\frac{1}{0}$ אינו מוגדר">
+<p><strong>שימו לב — <span class="math inline">\(\frac{1}{0}\)</span> אינו מוגדר.</strong></p>
+<p>בלי ציון הכיוון <span class="math inline">\(\frac{r}{0}\)</span> <strong>אינו מוגדר</strong>, ולא משנה מהו <span class="math inline">\(.r\)</span> הידיעה ש-<span class="math inline">\(a_n \to 0\)</span> לבדה אינה קובעת דבר על <span class="math inline">\(.\frac{1}{a_n}\)</span></p>
+<p>זו גם הסיבה שסעיפים (ח) ו-(ט) במשפט הבא דורשים כיוון, <span class="math inline">\(0^{+}\)</span> או <span class="math inline">\(,0^{-}\)</span> ואינם מסתפקים ב-<span class="math inline">\(.a_n \to 0\)</span></p>
+</div>
+<p>עכשיו אפשר לנסח את הקשר שאליו חתרנו: אריתמטיקת הגבולות <strong>עקבית</strong> עם כללי החשבון שהגדרנו. בכל מקום שבו הכללים נותנים תשובה, גבול הסדרה המורכבת הוא בדיוק אותה תשובה.</p>
+<div id="box-thm-arithmetika-rachav" class="thmbox thmbox-theorem" title="אריתמטיקה של גבולות אינסופיים">
+<p><strong>משפט 9.2.7 — אריתמטיקה של גבולות אינסופיים.</strong></p>
+<p>תהיינה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> ו-<span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> סדרות. אז:</p>
+<p><strong>שתי סדרות השואפות לאינסוף.</strong></p>
+<p>(א) אם <span class="math inline">\(a_n \to \infty\)</span> וגם <span class="math inline">\(,b_n \to \infty\)</span> אז <span class="math inline">\(.a_n + b_n \to \infty\)</span></p>
+<p>(ב) אם <span class="math inline">\(a_n \to \infty\)</span> וגם <span class="math inline">\(,b_n \to \infty\)</span> אז <span class="math inline">\(.a_n \cdot b_n \to \infty\)</span></p>
+<p><strong>סדרה השואפת לאינסוף יחד עם סדרה מתכנסת.</strong></p>
+<p>(ג) אם <span class="math inline">\(a_n \to \infty\)</span> וגם <span class="math inline">\(b_n \to L\)</span> עבור <span class="math inline">\(L \in \mathbb{R}\)</span> כלשהו, אז <span class="math inline">\(.a_n + b_n \to \infty\)</span></p>
+<p>(ד) אם <span class="math inline">\(a_n \to \infty\)</span> וגם <span class="math inline">\(b_n \to L\)</span> עבור <span class="math inline">\(,L &gt; 0\)</span> אז <span class="math inline">\(.a_n \cdot b_n \to \infty\)</span></p>
+<p>(ה) אם <span class="math inline">\(a_n \to \infty\)</span> וגם <span class="math inline">\(b_n \to L\)</span> עבור <span class="math inline">\(,L &lt; 0\)</span> אז <span class="math inline">\(.a_n \cdot b_n \to -\infty\)</span></p>
+<p><strong>היפוך.</strong></p>
+<p>(ו) אם <span class="math inline">\(,a_n \to \infty\)</span> אז <span class="math inline">\(.\dfrac{1}{a_n} \to 0\)</span></p>
+<p>(ז) אם <span class="math inline">\(,a_n \to -\infty\)</span> אז <span class="math inline">\(.\dfrac{1}{a_n} \to 0\)</span></p>
+<p>(ח) אם <span class="math inline">\(,a_n \to 0^{+}\)</span> אז <span class="math inline">\(.\dfrac{1}{a_n} \to \infty\)</span></p>
+<p>(ט) אם <span class="math inline">\(,a_n \to 0^{-}\)</span> אז <span class="math inline">\(.\dfrac{1}{a_n} \to -\infty\)</span></p>
+</div>
+<!-- תוקן ב-2026-09-14: בתמלול הופיע בסעיף (ג) התנאי L > 0, אבל הוא מיותר — לסכום
+     די בכך ש-b_n מתכנסת לגבול ממשי כלשהו, ואפילו שלילי. התנאי על הסימן נחוץ רק
+     במכפלה, שם הוא מכריע אם התוצאה היא ∞ או −∞, ולכן הוא נשאר בסעיפים (ד) ו-(ה). -->
+<div class="thmbox thmbox-remark" data-numbered="false">
+<p><strong>הערה.</strong></p>
+<p>המשפט מנוסח כולו עבור <span class="math inline">\(,a_n \to \infty\)</span> ואין בכך הגבלה: את המקרים המשלימים, שבהם <span class="math inline">\(,a_n \to -\infty\)</span> מקבלים מיד מ<a href="./09-sequences-infinity.html#box-prp-negate-infinity">טענה 9.1.6</a> בהפעלה על <span class="math inline">\(.\left(-a_n\right)\)</span> כך למשל, מסעיף (א) נובע שאם <span class="math inline">\(a_n \to -\infty\)</span> וגם <span class="math inline">\(b_n \to -\infty\)</span> אז <span class="math inline">\(,a_n + b_n \to -\infty\)</span> ואין צורך לרשום את כל הווריאציות בנפרד.</p>
+<p>שימו לב גם לתנאים שאינם מופיעים במשפט, ואין זה מקרה:</p>
 <ul>
-<li>אם <span class="math inline">\(L &lt; 1\)</span> , הסדרה מתכנסת ומתקיים <span class="math inline">\(a_n \to 0\)</span>.</li>
-<li>אם <span class="math inline">\(L &gt; 1\)</span> , מתקיים <span class="math inline">\(a_n \to \infty\)</span>.</li>
-<li>אם <span class="math inline">\(L = 1\)</span> , אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.</li>
+<li>בסעיפים (ד) ו-(ה) נדרש <span class="math inline">\(L \neq 0\)</span> במפורש. המקרה <span class="math inline">\(L = 0\)</span> חסר, ולא בטעות.</li>
+<li>בסעיפים (ח) ו-(ט) לא די ש-<span class="math inline">\(,a_n \to 0\)</span> אלא נדרש כיוון: <span class="math inline">\(0^{+}\)</span> או <span class="math inline">\(.0^{-}\)</span> סדרה השואפת לאפס ומחליפה סימן ללא הרף אינה נכללת בשניהם.</li>
 </ul>
+<p>בשני המקרים האלה אין תשובה אחידה, ונחזור אליהם מיד אחרי ההוכחה.</p>
 </div>
-</section>
-<section id="מבחן-השורש" class="level3">
-<h3 class="anchored" data-anchor-id="מבחן-השורש">מבחן השורש</h3>
-<div id="box-thm-root-test" class="thmbox thmbox-theorem" title="מבחן השורש">
-<p><strong>משפט 9.2.2 — מבחן השורש.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה חיובית, כלומר <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>, ונניח כי קיים הגבול</p>
-<p><span class="math inline">\(.L = \lim_{n\to\infty} \sqrt[n]{a_n}\)</span></p>
-<p>אז:</p>
-<ul>
-<li>אם <span class="math inline">\(L &lt; 1\)</span> , הסדרה מתכנסת ומתקיים <span class="math inline">\(a_n \to 0\)</span>.</li>
-<li>אם <span class="math inline">\(L &gt; 1\)</span> , מתקיים <span class="math inline">\(a_n \to \infty\)</span>.</li>
-<li>אם <span class="math inline">\(L = 1\)</span> , אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.</li>
-</ul>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נוכיח את סעיפים (א), (ד) ו-(ח). שאר הסעיפים מוכחים באותם טיעונים בדיוק.</p>
+<p><strong>סעיף (א).</strong> יהי <span class="math inline">\(.M \in \mathbb{R}\)</span> לפי הגדרת השאיפה לאינסוף, המופעלת על <span class="math inline">\((a_n)\)</span> עם המספר <span class="math inline">\(,M\)</span> מתקיים <span class="math inline">\(a_n &gt; M\)</span> החל ממקום מסוים. לפי אותה הגדרה, המופעלת על <span class="math inline">\((b_n)\)</span> עם המספר <span class="math inline">\(,0\)</span> מתקיים <span class="math inline">\(b_n &gt; 0\)</span> החל ממקום מסוים. לפי <a href="./07-sequences-limit-4.html#box-key-finitely-many">שילוב טענות מהסוג ״החל ממקום מסוים״</a> שתי הטענות מתקיימות יחד החל ממקום מסוים, ושם</p>
+<p><span class="math display">\[,a_n + b_n &gt; M + 0 = M\]</span></p>
+<p>ולכן <span class="math inline">\(.a_n + b_n \to \infty\)</span></p>
+<p><strong>סעיף (ד).</strong> נניח <span class="math inline">\(a_n \to \infty\)</span> ו-<span class="math inline">\(b_n \to L\)</span> עבור <span class="math inline">\(.L &gt; 0\)</span> נפעיל את הגדרת הגבול על <span class="math inline">\((b_n)\)</span> עם <span class="math inline">\(:\varepsilon = \frac{L}{2}\)</span> החל ממקום מסוים מתקיים <span class="math inline">\(,\left|b_n - L\right| &lt; \frac{L}{2}\)</span> ובפרט</p>
+<p><span class="math display">\[.b_n &gt; L - \frac{L}{2} = \frac{L}{2} &gt; 0\]</span></p>
+<p>יהי עכשיו <span class="math inline">\(.M \in \mathbb{R}\)</span> החל ממקום מסוים מתקיים גם <span class="math inline">\(,a_n &gt; \max\left\{0,\ \dfrac{2M}{L}\right\}\)</span> ושוב לפי אותו כלל שתי הטענות מתקיימות יחד החל ממקום מסוים. שם <span class="math inline">\(,a_n &gt; 0\)</span> ולכן אפשר להכפיל את <span class="math inline">\(a_n\)</span> באי-השוויון <span class="math inline">\(:b_n &gt; \frac{L}{2}\)</span></p>
+<p><span class="math display">\[.a_n \cdot b_n &gt; a_n \cdot \frac{L}{2} &gt; \frac{2M}{L} \cdot \frac{L}{2} = M\]</span></p>
+<p>לכן <span class="math inline">\(.a_n b_n \to \infty\)</span></p>
+<p><strong>סעיף (ח).</strong> נניח <span class="math inline">\(,a_n \to 0^{+}\)</span> כלומר <span class="math inline">\(a_n \to 0\)</span> וגם <span class="math inline">\(a_n &gt; 0\)</span> החל ממקום מסוים, ויהי <span class="math inline">\(.M \in \mathbb{R}\)</span></p>
+<p>אם <span class="math inline">\(,M \leq 0\)</span> אז מן המקום שבו האיברים חיוביים והלאה מתקיים <span class="math inline">\(,\frac{1}{a_n} &gt; 0 \geq M\)</span> ואין מה להוכיח.</p>
+<p>אם <span class="math inline">\(,M &gt; 0\)</span> נפעיל את הגדרת הגבול עם <span class="math inline">\(:\varepsilon = \frac{1}{M}\)</span> החל ממקום מסוים מתקיים <span class="math inline">\(.\left|a_n\right| &lt; \frac{1}{M}\)</span> נצרף לכך את החיוביות, ומן המקום שבו שתי הטענות מתקיימות יחד נקבל</p>
+<p><span class="math display">\[.0 &lt; a_n &lt; \frac{1}{M}\]</span></p>
+<p>היפוך אי-שוויון בין מספרים חיוביים מהפך את כיוונו, ולכן <span class="math inline">\(,\frac{1}{a_n} &gt; M\)</span> כנדרש.</p>
 </div>
-<div id="box-exm-mivchanim-1" class="thmbox thmbox-question" title="הסדרה $2^n/n^2$">
-<p><strong>תרגיל פתור 9.2.3 — הסדרה <span class="math inline">\(2^n/n^2\)</span>.</strong></p>
-<p>חשבו את הגבול <span class="math display">\[\lim_{n\to\infty} \frac{2^n}{n^2}\]</span></p>
+<div id="box-exm-infinite-arithmetic" class="thmbox thmbox-example" title="שימוש בסעיפי המשפט">
+<p><strong>דוגמה 9.2.8 — שימוש בסעיפי המשפט.</strong></p>
+<p><strong><span class="math inline">\(.a_n = n^{2} + n\)</span></strong> שתי הסדרות <span class="math inline">\(n^{2}\)</span> ו-<span class="math inline">\(n\)</span> שואפות לאינסוף, ולכן לפי סעיף (א) גם סכומן.</p>
+<p><strong><span class="math inline">\(.a_n = n\left(2 + \dfrac{1}{n}\right)\)</span></strong> כאן <span class="math inline">\(n \to \infty\)</span> ואילו <span class="math inline">\(2 + \frac{1}{n} \to 2\)</span> שהוא חיובי, ולכן לפי סעיף (ד) המכפלה שואפת לאינסוף. שימו לב שלא היינו צריכים לפתוח את הסוגריים.</p>
+<p><strong><span class="math inline">\(.a_n = n\left(\dfrac{1}{n} - 3\right)\)</span></strong> הפעם הגורם השני שואף ל-<span class="math inline">\(,-3\)</span> שהוא שלילי, ולכן לפי סעיף (ה) המכפלה שואפת ל-<span class="math inline">\(.-\infty\)</span></p>
+<p><strong><span class="math inline">\(.a_n = \dfrac{1}{n^{2}+1}\)</span></strong> המכנה שואף לאינסוף, ולכן לפי סעיף (ו) המנה שואפת ל-<span class="math inline">\(.0\)</span></p>
+<p><strong><span class="math inline">\(.a_n = \dfrac{n+1}{n} \cdot n^{2}\)</span></strong> המנה <span class="math inline">\(\frac{n+1}{n}\)</span> מתכנסת ל-<span class="math inline">\(,1\)</span> הסדרה <span class="math inline">\(n^{2}\)</span> שואפת לאינסוף, ולפי סעיף (ד) המכפלה שואפת לאינסוף.</p>
 </div>
-<div class="thmbox thmbox-solution">
-<p><strong>פתרון.</strong></p>
-<p>נסמן: <span class="math display">\[a_n = \frac{2^n}{n^2}\]</span></p>
-<p>נסתכל על מבחן המנה:</p>
-<p><span class="math display">\[\frac{a_{n+1}}{a_n} = \frac{\left(\frac{2^{n+1}}{(n+1)^2}\right)}{\left(\frac{2^n}{n^2}\right)} = \frac{n^2}{2^n} \cdot \frac{2^{n+1}}{(n+1)^2} = 2 \cdot \frac{n^2}{(n+1)^2} = 2 \cdot \frac{1}{\left(\frac{n+1}{n}\right)^2} = 2 \cdot \frac{1}{\left(1 + \frac{1}{n}\right)^2} \to 2\]</span></p>
-<p>לכן לפי מבחן המנה נקבל: <span class="math display">\[\boxed{\lim_{n\to\infty} \frac{2^n}{n^2} = \infty}\]</span></p>
+<section id="צורות-לא-מוגדרות" class="level3">
+<h3 class="anchored" data-anchor-id="צורות-לא-מוגדרות">צורות לא מוגדרות</h3>
+<p>המשפט שראינו מכסה חלק מן הצירופים האפשריים, ובכוונה אינו מכסה את כולם. בצירופים החסרים אין תשובה אחידה: ידיעת הגבולות של <span class="math inline">\((a_n)\)</span> ושל <span class="math inline">\((b_n)\)</span> בלבד <strong>אינה מספיקה</strong> כדי לקבוע את גבול התוצאה. צירופים כאלה נקראים <strong>צורות לא מוגדרות</strong>.</p>
+<p>כדי להראות שצורה מסוימת אינה מוגדרת די להציג כמה זוגות של סדרות בעלות אותם גבולות בדיוק, שהתוצאה שלהן שונה. כל שורה בטבלאות שלהלן היא זוג כזה, והעמודה האחרונה מראה שהתוצאה יכולה להיות כל דבר: מספר ממשי כלשהו, <span class="math inline">\(,\infty\)</span> <span class="math inline">\(,-\infty\)</span> או שום גבול בכלל.</p>
+<div id="box-rem-indeterminate-forms" class="thmbox thmbox-remark" title="צורות שאין להן חוקיות">
+<p><strong>הערה 9.2.9 — צורות שאין להן חוקיות.</strong></p>
+<p><strong>הצורה <span class="math inline">\(:\infty - \infty\)</span></strong> שתי הסדרות שואפות לאינסוף, וההפרש יכול להיות כל דבר.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(a_n \to \infty\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_n \to \infty\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_n - b_n\)</span></th>
+<th style="text-align: center;">הגבול</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n+1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n+L\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(L\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(L\)</span> (כל ממשי)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\left(n-1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\infty\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\left(1-n\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\infty\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n+\left(-1\right)^{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\left(-1\right)^{n}\)</span></td>
+<td style="text-align: center;">אינו קיים</td>
+</tr>
+</tbody>
+</table>
+<p><strong>הצורה <span class="math inline">\(:\infty \cdot 0\)</span></strong> האחת שואפת לאינסוף והשנייה לאפס, והמכפלה יכולה להיות כל דבר.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(a_n \to \infty\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_n \to 0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_n \cdot b_n\)</span></th>
+<th style="text-align: center;">הגבול</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{L}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(L\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(L\)</span> (כל ממשי)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\infty\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\dfrac{1}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\infty\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\left(-1\right)^{n}}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\left(-1\right)^{n}\)</span></td>
+<td style="text-align: center;">אינו קיים</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ההופכי של סדרה השואפת לאפס, ללא תנאי על הסימן.</strong> סעיפים (ח) ו-(ט) דרשו שכל האיברים יהיו בעלי אותו סימן. בלי הדרישה הזאת אין מסקנה.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(a_n \to 0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\dfrac{1}{a_n}\)</span></th>
+<th style="text-align: center;">הגבול</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\infty\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(-\dfrac{1}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\infty\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\left(-1\right)^{n}}{n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\left(-1\right)^{n} n\)</span></td>
+<td style="text-align: center;">אינו קיים</td>
+</tr>
+</tbody>
+</table>
+<p>בשורה האחרונה כדאי לעצור רגע. עבור <span class="math inline">\(a_n = \dfrac{\left(-1\right)^{n}}{n}\)</span> מתקיים</p>
+<p><span class="math display">\[,\frac{1}{a_n} = \frac{n}{\left(-1\right)^{n}} = \left(-1\right)^{n} \cdot n\]</span></p>
+<p>שכן <span class="math inline">\(.\frac{1}{\left(-1\right)^{n}} = \left(-1\right)^{n}\)</span> איברי הסדרה הזאת הם</p>
+<p><span class="math display">\[,-1,\ 2,\ -3,\ 4,\ -5,\ \dots\]</span></p>
+<p>וכבר פגשנו אותה: היא אינה חסומה משני הצדדים, ולכן אינה מתכנסת ואינה שואפת לאף אחד משני האינסופים.</p>
 </div>
-<div id="box-exm-mivchanim-2" class="thmbox thmbox-question" title="הסדרה $3^n$">
-<p><strong>תרגיל פתור 9.2.4 — הסדרה <span class="math inline">\(3^n\)</span>.</strong></p>
-<p>הסדרה <span class="math inline">\(a_n = 3^n\)</span> היא <span class="math inline">\(a_n \to \infty\)</span>, מדוע?</p>
+<div id="box-exm-resolving-indeterminate" class="thmbox thmbox-example" title="צורה לא מוגדרת שנפתרת">
+<p><strong>דוגמה 9.2.10 — צורה לא מוגדרת שנפתרת.</strong></p>
+<p>נחזור אל הסדרה שב<a href="#box-qst-quotient-through-infinity">שאלה 9.2.2</a>:</p>
+<p><span class="math display">\[.c_n = \frac{3n^{2} - n}{n^{2} + 5}\]</span></p>
+<p>המונה והמכנה שואפים שניהם לאינסוף, ולכן הצורה כאן היא <span class="math inline">\(,\frac{\infty}{\infty}\)</span> ואין כלל שאפשר להפעיל עליה.</p>
+<p>אבל הביטוי אינו מחויב לצורה שבה נכתב. נחלק מונה ומכנה ב-<span class="math inline">\(:n^{2}\)</span></p>
+<p><span class="math display">\[.\frac{3n^{2}-n}{n^{2}+5} = \frac{3 - \dfrac{1}{n}}{1 + \dfrac{5}{n^{2}}} \longrightarrow \frac{3}{1} = 3\]</span></p>
+<p>עכשיו שני הגבולות ממשיים והמכנה שואף ל-<span class="math inline">\(,1\)</span> ולכן סעיף המנה חל והצורה <span class="math inline">\(\frac{\infty}{\infty}\)</span> נעלמה מאליה. זו גם התשובה לשאלה שנשאלה שם: הגבול קיים והוא <span class="math inline">\(,3\)</span> אף שהצורה עצמה לא הבטיחה דבר.</p>
 </div>
-<div class="thmbox thmbox-solution">
-<p><strong>פתרון.</strong></p>
-<p>בעזרת מבחן השורש:</p>
-<p><span class="math display">\[\sqrt[n]{a_n} = 3 \xrightarrow[n\to\infty]{} 3\]</span> וגם <span class="math inline">\(a_n &gt; 0\)</span></p>
+<div id="box-warn-indeterminate-not-no-limit" class="thmbox thmbox-warning" title="צורה לא מוגדרת אינה אומרת שאין גבול">
+<p><strong>שימו לב — צורה לא מוגדרת אינה אומרת שאין גבול.</strong></p>
+<p>כשמזהים צורה לא מוגדרת המסקנה היא <strong>לא</strong> שהגבול אינו קיים, אלא שהצורה לבדה אינה מכריעה. הטבלאות שלמעלה מראות בדיוק את זה: לכל צורה יש דוגמאות שבהן הגבול קיים וסופי, ולצידן דוגמאות שבהן אינו קיים כלל.</p>
+<p>כשנתקלים בצורה כזאת חוזרים אל הסדרה הקונקרטית ומשנים את צורתה, כמו בדוגמה שלמעלה.</p>
 </div>
-<div id="box-cor-geometric-limit" class="thmbox thmbox-corollary" title="גבול הסדרה ההנדסית">
-<p><strong>מסקנה 9.2.5 — גבול הסדרה ההנדסית.</strong></p>
-<ul>
-<li><span class="math inline">\(q &gt; 1\)</span>: <span class="math inline">\(q^n \to \infty\)</span></li>
-<li><span class="math inline">\(0 &lt; q &lt; 1\)</span>: <span class="math inline">\(q^n \to 0\)</span></li>
-</ul>
+<div id="box-exm-one-to-infinity" class="thmbox thmbox-example" title="שלוש סדרות מן הצורה $1^{\infty}$">
+<p><strong>דוגמה 9.2.11 — שלוש סדרות מן הצורה <span class="math inline">\(1^{\infty}\)</span>.</strong></p>
+<p>ב<a href="./08-sequences-properties-7.html#box-thm-nth-root-of-a">משפט 8.7.3</a> ראינו ש-<span class="math inline">\(,\sqrt[n]{2} \to 1\)</span> ומכאן אפשר לבנות בקלות סדרות שבהן הבסיס שואף ל-<span class="math inline">\(1\)</span> והמעריך שואף לאינסוף.</p>
+<p>(א) <span class="math inline">\(a_n = 1\)</span> ו-<span class="math inline">\(.b_n = n\)</span> כאן <span class="math inline">\(a_n^{\,b_n} = 1^{n} = 1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן הגבול הוא <span class="math inline">\(.1\)</span></p>
+<p>(ב) <span class="math inline">\(a_n = \sqrt[n]{2}\)</span> ו-<span class="math inline">\(.b_n = n\)</span> כאן</p>
+<p><span class="math display">\[,a_n^{\,b_n} = \left(\sqrt[n]{2}\right)^{n} = 2\]</span></p>
+<p>כלומר הסדרה קבועה ושווה ל-<span class="math inline">\(,2\)</span> והגבול הוא <span class="math inline">\(.2\)</span></p>
+<p>(ג) <span class="math inline">\(a_n = \sqrt[n]{2}\)</span> ו-<span class="math inline">\(.b_n = n^{2}\)</span> כאן</p>
+<p><span class="math display">\[,a_n^{\,b_n} = \left(\sqrt[n]{2}\right)^{n^{2}} = \left(\left(\sqrt[n]{2}\right)^{n}\right)^{n} = 2^{n}\]</span></p>
+<p>והסדרה <span class="math inline">\(2^{n}\)</span> עולה ואינה חסומה, לפי סעיף (א) של <a href="./08-sequences-properties-7.html#box-thm-geometric-power">משפט 8.7.1</a>, ולכן לפי <a href="./09-sequences-infinity.html#box-thm-monotone-wide-sense">משפט 9.1.11</a> מתקיים <span class="math inline">\(.2^{n} \to \infty\)</span></p>
+<p>בשלושת המקרים <span class="math inline">\(a_n \to 1\)</span> וגם <span class="math inline">\(,b_n \to \infty\)</span> והתוצאות הן <span class="math inline">\(,1\)</span> <span class="math inline">\(,2\)</span> ואינסוף.</p>
 </div>
-<!-- מקור: הרצאה 8 -->
-<div id="box-thm-dalembert" class="thmbox thmbox-theorem" title="משפט דלאמבר">
-<p><strong>משפט 9.2.6 — משפט דלאמבר.</strong></p>
-<p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה חיובית. אם קיים הגבול <span class="math inline">\(\lim\limits_{n\to\infty} \dfrac{a_{n+1}}{a_n} = L\)</span> , אז קיים גם הגבול <span class="math inline">\(\lim\limits_{n\to\infty} \sqrt[n]{a_n}\)</span> , ומתקיים</p>
-<p><span class="math inline">\(.\lim_{n\to\infty} \sqrt[n]{a_n} = L\)</span></p>
-</div>
-<div id="box-exm-dalembert-root-n" class="thmbox thmbox-question" title="שורש מסדר $n$ של $n$">
-<p><strong>תרגיל פתור 9.2.7 — שורש מסדר <span class="math inline">\(n\)</span> של <span class="math inline">\(n\)</span>.</strong></p>
-<p>נבדוק מהו הגבול של הסדרה <span class="math inline">\(\sqrt[n]{n}=\sqrt[n]{a_n}\)</span> ?</p>
-<p><span class="math display">\[(1,\sqrt{2},\sqrt[3]{3},\sqrt[4]{4},\dots)\]</span></p>
-</div>
-<div class="thmbox thmbox-solution">
-<p><strong>פתרון.</strong></p>
-<p>נסמן: <span class="math inline">\(a_n=n\)</span> ונרצה לבדוק לאן מתכנסת הסדרה <span class="math inline">\(\sqrt[n]{a_n}\)</span></p>
-<p>ננסה להשתמש במשפט דלאמבר ונבדוק:</p>
-<p><span class="math display">\[\frac{a_{n+1}}{a_n}=\frac{n+1}{n}=\frac{n}{n}+\frac{1}{n}=1+\frac{1}{n}\longrightarrow 1\]</span></p>
-<p>ולכן מדלאמבר נקבל <span class="math inline">\(\sqrt[n]{a_n}=\sqrt[n]{n}\longrightarrow \boxed{1}\)</span></p>
-</div>
-</section>
-<section id="אריתמטיקה-של-חזקות-בשאיפות" class="level3">
-<h3 class="anchored" data-anchor-id="אריתמטיקה-של-חזקות-בשאיפות">אריתמטיקה של חזקות בשאיפות</h3>
-<div id="box-thm-power-arithmetic" class="thmbox thmbox-theorem">
-<p><strong>משפט 9.2.8.</strong></p>
-<p>תהיינה <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> ו-<span class="math inline">\((b_n)_{n=1}^{\infty}\)</span> סדרות, ונניח כי <span class="math inline">\(a_n &gt; 0\)</span> לכל <span class="math inline">\(n \ge 1\)</span>, כי <span class="math inline">\(a_n \to L\)</span> עבור <span class="math inline">\(L &gt; 0\)</span>, וכי <span class="math inline">\(b_n \to x\)</span> עבור <span class="math inline">\(x \in \mathbb{R}\)</span>. אז</p>
-<p><span class="math inline">\(.a_n^{\,b_n} \to L^{x}\)</span></p>
-</div>
-<div id="box-exm-power-limits" class="thmbox thmbox-example" title="חישוב גבולות של חזקות">
-<p><strong>דוגמה 9.2.9 — חישוב גבולות של חזקות.</strong></p>
-<ul>
-<li><p><span class="math inline">\(\left(1+\frac{1}{n}\right)^{1+\frac{1}{n}}\Rightarrow 1^1=\boxed{1}\)</span></p>
-<!-- בדיקה: הערה בכתב יד מתחת לדוגמא --></li>
-<li><p><span class="math inline">\(\left(1+\frac{1}{n}\right)^{\frac{2n^2+n+1}{3n-5}}=\left(1+\frac{1}{n}\right)^{n\cdot\left(\frac{2n^2+n+1}{3n-5}\right)}=\left(\left(1+\frac{1}{n}\right)^n\right)^{\frac{2n^2+n+1}{3n-5}}\longrightarrow e^{\frac{2}{3}}\)</span></p>
-<!-- בדיקה: מסומן מתחת לסוגריים $\longrightarrow e$ , והערה בכתב יד --></li>
-</ul>
+<div id="box-warn-one-to-infinity" class="thmbox thmbox-warning" title="הצורה $1^{\infty}$">
+<p><strong>שימו לב — הצורה <span class="math inline">\(1^{\infty}\)</span>.</strong></p>
+<p><a href="./08-sequences-properties-7.html#box-thm-power-arithmetic">משפט 8.7.8</a> דורש שגבול המעריך יהיה מספר <strong>ממשי</strong>, ולכן אינו חל כאשר <span class="math inline">\(a_n \to 1\)</span> ואילו <span class="math inline">\(.b_n \to \infty\)</span> זו צורה לא מוגדרת נוספת, ומפתה במיוחד: קל לחשוב ש-<span class="math inline">\(1\)</span> בכל חזקה הוא <span class="math inline">\(,1\)</span> ולסיים.</p>
+<p>הטעות היא שהבסיס אינו <strong>שווה</strong> ל-<span class="math inline">\(,1\)</span> אלא רק שואף אליו. בכל שלב נותרת סטייה קטנה, והמעריך ההולך וגדל מגביר אותה, כפי שמראה הדוגמה שלמעלה.</p>
 </div>
 </section>
 </section></main> <!-- /main -->
@@ -1471,7 +1687,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./09-sequences-infinity.html" class="pagination-link" aria-label="9.1 אינסוף כגבול"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">9.1 אינסוף כגבול</span></a></div><div class="nav-page nav-page-next"><a href="./09-sequences-infinity-3.html" class="pagination-link" aria-label="9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)"><span class="nav-page-text">9.3 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./09-sequences-infinity.html" class="pagination-link" aria-label="9.1 מוטיבציה והגדרה"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">9.1 מוטיבציה והגדרה</span></a></div><div class="nav-page nav-page-next"><a href="./09-sequences-infinity-3.html" class="pagination-link" aria-label="9.3 מבחן המנה ומבחן השורש"><span class="nav-page-text">9.3 מבחן המנה ומבחן השורש</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 
