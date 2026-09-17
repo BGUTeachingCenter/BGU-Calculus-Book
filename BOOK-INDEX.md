@@ -258,6 +258,8 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - משפט        `box-thm-convergent-bounded`
     - שימו לב     `box-warn-bounded-not-convergent` · חסימוּת אינה גוררת התכנסות
     - מסקנה       `box-cor-unbounded-diverges`
+  - *תרגילים*
+    - 1 תרגילים
 - **אריתמטיקה של גבולות**
     - משפט        `box-thm-sequence-arithmetic`
     - הסבר        `box-expl-arithmetic-method` · השיטה: פירוק ואי-שוויון המשולש
@@ -301,7 +303,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - שימו לב     `box-warn-ratio-needs-sign` · מבחן המנה דורש סימן קבוע
     - הערה        `box-rem-monotone-eventual-sign` · סימן קבוע הוא כמעט חינם עבור סדרה מונוטונית
   - *תרגילים*
-    - 5 תרגילים
+    - 4 תרגילים
 - **סדרה חסומה ומונוטונית מתכנסת**
     - דוגמה       `box-exm-monotone-not-convergent` · מונוטונית שאינה מתכנסת
     - דוגמה       `box-exm-convergent-not-monotone` · מתכנסת שאינה מונוטונית
@@ -315,6 +317,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - דוגמה       `box-exm-monotone-bounded-decreasing` · הסדרה $a_n = \frac{n+1}{n}$
     - חשוב לזכור  `box-key-one-sided-bound` · די בחסם בכיוון אחד
     - דוגמה       `box-exm-monotone-bounded-sum` · סכום ההופכיים של הריבועים
+    - שימו לב     `box-warn-bound-is-not-limit` · חסם אינו גבול
     - תרגיל פתור  `box-q-recursive-sequence` · סדרה רקורסיבית
     - חשוב לזכור  `box-key-recursive-fixed-point` · גבול של סדרה רקורסיבית פותר משוואה
     - דוגמה       `box-exm-sqrt-recursion` · הסדרה $a_{n+1} = \sqrt{a_n}$
@@ -331,15 +334,15 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *הסדרה $\sqrt[n]{r}$*
     - משפט        `box-thm-nth-root-of-a`
     - דוגמה       `box-exm-nth-root`
-  - *הסדרה $x^{t_n}$ כאשר $t_n \to 0$*
+  - *הסדרה $r^{t_n}$ כאשר $t_n \to 0$*
     - משפט        `box-thm-power-to-zero`
-    - הגדרה       `box-def-real-power` · חזקה עם מעריך ממשי
-    - מסקנה       `box-cor-real-power-laws`
   - *אריתמטיקה של חזקות*
     - משפט        `box-thm-power-arithmetic` · גבול של חזקה
     - דוגמה       `box-exm-power-limits` · חישוב גבולות של חזקות
   - *תרגילים*
     - 3 תרגילים
+    - הגדרה       `box-def-real-power` · חזקה עם מעריך ממשי
+    - מסקנה       `box-cor-real-power-laws`
 
 ## `09-sequences-infinity.qmd` — גבולות אינסופיים וסדרי גודל
 
@@ -681,7 +684,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - תרגיל פתור: 29
 - טענה: 17
 - TODO: 16
-- שימו לב: 12
+- שימו לב: 13
 - הערה: 11
 - חשוב לזכור: 11
 - סימולציה: 9
