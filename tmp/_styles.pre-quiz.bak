@@ -474,58 +474,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
-/* Shared answer evaluator for .seq-quiz and .set-quiz (2026-09-24).
-   Accepts arithmetic (digits and + - * / ^ ( ) . only, e.g. "3/2", "2^10") and infinity:
-   the primary form is "inf" / "-inf" (easy on any keyboard, phones included); also
-   accepted are the symbol ∞, "oo", "infinity", and the Hebrew words אינסוף / מינוס אינסוף.
-   U+2212 (the typographic minus) counts as "-". Returns a number (±Infinity for the
-   infinite answers) or null when the input is not a valid answer. */
-window.bookEvalAnswer = function (s) {
-  s = String(s == null ? "" : s).trim().replace(/−/g, "-");
-  if (!s) return null;
-  var t = s.toLowerCase().replace(/\s+/g, "");
-  var INF = /^(inf|infinity|oo|∞|אינסוף)$/;
-  var m = t.match(/^([+-]?)(.*)$/);
-  if (INF.test(m[2])) return m[1] === "-" ? -Infinity : Infinity;
-  if (/^מינוס(אינסוף|∞)$/.test(t)) return -Infinity;
-  if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;
-  try {
-    var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
-    return (typeof v === "number" && isFinite(v)) ? v : null;
-  } catch (e) { return null; }
-};
-/* equality of two evaluated answers: infinities exactly, finite values up to rounding */
-window.bookSameAnswer = function (a, b) {
-  if (a == null || b == null) return false;
-  if (!isFinite(a) || !isFinite(b)) return a === b;
-  return Math.abs(a - b) <= 1e-9;
-};
-</script>
-<script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Elements may be separated by commas/semicolons or by spaces ("1 2 3"); a space inside
-  // the Hebrew "מינוס אינסוף" is not a separator. Each element goes through the shared
-  // evaluator, so "1/2" and "inf" work. Returns null if any element is invalid.
   function normSet(str) {
     if (!str) return [];
-    var parts = [];
-    String(str).split(/[,;]+/).forEach(function (tok) {
-      tok = tok.trim();
-      if (!tok) return;
-      if (/\s/.test(tok) && !/אינסוף/.test(tok)) parts = parts.concat(tok.split(/\s+/));
-      else parts.push(tok);
-    });
-    var vals = [];
-    for (var i = 0; i < parts.length; i++) {
-      var v = window.bookEvalAnswer(parts[i]);
-      if (v === null) return null;
-      if (!vals.some(function (w) { return window.bookSameAnswer(v, w); })) vals.push(v);
-    }
-    return vals.sort(function (a, b) { return a - b; });
+    return Array.from(new Set(
+      str.split(/[\s,;]+/).filter(function (s) { return s.length; }).map(Number)
+    )).filter(function (n) { return !Number.isNaN(n); }).sort(function (a, b) { return a - b; });
   }
   function eqSet(a, b) {
-    if (a === null || b === null || a.length !== b.length) return false;
-    for (var i = 0; i < a.length; i++) { if (!window.bookSameAnswer(a[i], b[i])) return false; }
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
     return true;
   }
   document.querySelectorAll(".set-quiz").forEach(function (q) {
@@ -550,13 +508,21 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // One entered term: arithmetic or ±infinity, via the shared evaluator above.
-  function evalTerm(s) { return window.bookEvalAnswer(s); }
+  // Evaluate one entered term as arithmetic (whitelisted chars only: digits + - * / ^ ( ) . )
+  function evalTerm(s) {
+    s = String(s).trim();
+    if (!s) return null;
+    if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;
+    try {
+      var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
+      return (typeof v === "number" && isFinite(v)) ? v : null;
+    } catch (e) { return null; }
+  }
   function parseSeq(str) { return String(str || "").split(",").map(evalTerm); }
   function eqSeq(a, b) {
     if (a.length !== b.length) return false;
     for (var i = 0; i < a.length; i++) {
-      if (!window.bookSameAnswer(a[i], b[i])) return false;
+      if (a[i] == null || b[i] == null || Math.abs(a[i] - b[i]) > 1e-9) return false;
     }
     return true;
   }

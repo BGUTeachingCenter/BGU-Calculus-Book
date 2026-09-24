@@ -1242,43 +1242,13 @@ $$.\lim_{n\to\infty} \left(n^{2} - 5n\right) = 1 \cdot \infty = \infty$$
 
 (א) $\lim\limits_{n\to\infty} \left(n - \sqrt{n}\right)$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ב) $\lim\limits_{n\to\infty} \dfrac{n^{2} + \sin n}{n}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 (ג) $\lim\limits_{n\to\infty} \left(\sqrt{n+1} - \sqrt{n}\right)$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ד) $\lim\limits_{n\to\infty} \dfrac{3 + \sin n}{\sqrt{n+1} - \sqrt{n}}$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ד)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ה) $\lim\limits_{n\to\infty} \left(2n^{2} - n\sqrt{n}\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ה)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 ::: {.thmsol .foldable}
 **סעיף (א).** הגבול הוא $.\infty$ זו צורה מן הסוג $,\infty - \infty$ ולכן נוציא גורם משותף: $.n - \sqrt{n} = \sqrt{n}\left(\sqrt{n} - 1\right)$ הגורם $\sqrt{n}$ שואף לאינסוף, והגורם $\sqrt{n} - 1$ מקיים $\sqrt{n} - 1 \geq 1$ לכל $.n \geq 4$ לפי סעיף (ב) של [](#box-thm-infinite-limits-general) ולפי [הכלל שלפיו די בתנאים החל ממקום מסוים](#box-key-infinite-arithmetic-eventually) המכפלה שואפת לאינסוף.
@@ -1337,12 +1307,6 @@ $$.\frac{2n^{2} - n\sqrt{n}}{n^{2}} = 2 - \frac{1}{\sqrt{n}}$$
 :::
 
 **תרגיל 4.** האם קיים הגבול $?\lim\limits_{n\to\infty} \dfrac{n}{2 + \left(-1\right)^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">הגבול</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 ::: {.thmsol .foldable}
 כן, והוא $.\infty$ המכנה אינו מתכנס, שכן הוא מתחלף בין $1$ ל-$,3$ אבל הוא חסום: $.1 \leq 2 + \left(-1\right)^{n} \leq 3$ לכן
@@ -2216,35 +2180,11 @@ $$,\frac{n^{3}}{n!} = \frac{n^{3}}{2^{n}} \cdot \frac{2^{n}}{n!}$$
 
 (א) $\lim\limits_{n\to\infty} \dfrac{n^{20}}{1.05^{n}}$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ב) $\lim\limits_{n\to\infty} \dfrac{3^{n} - n^{3}}{3^{n} + n^{3}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 (ג) $\lim\limits_{n\to\infty} \dfrac{5^{n} + n!}{n! + n^{5}}$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ד) $\lim\limits_{n\to\infty} \dfrac{n^{2} + 2^{n}}{n^{3} + 3^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(ד)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 ::: {.thmsol .foldable}
 **סעיף (א).** הגבול הוא $,0$ לפי [](#box-thm-growth-orders) עם $x = 20$ ו-$.q = 1.05$
@@ -2277,12 +2217,6 @@ $$.\frac{n^{2} + 2^{n}}{n^{3} + 3^{n}} = \frac{\frac{n^{2}}{3^{n}} + \left(\frac
 :::
 
 **תרגיל 3.** חשבו את $\lim\limits_{n\to\infty} \dfrac{2^{n}\, n!}{n^{n}}$ ואת $.\lim\limits_{n\to\infty} \dfrac{3^{n}\, n!}{n^{n}}$ מה מבדיל בין שני המקרים?
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0, inf"><span class="seq-label">שני הגבולות, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 1/2, inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
 
 ::: {.thmsol .foldable}
 נפעיל את מבחן המנה על $,a_n = \frac{q^{n}\, n!}{n^{n}}$ עם $q = 2$ או $.q = 3$ כמו בהוכחת [](#box-thm-growth-orders):
@@ -2738,39 +2672,9 @@ $$.\limsup_{n\to\infty} a_n = 1 \qquad,\qquad \liminf_{n\to\infty} a_n = -1$$
 
 (א) $a_n = \left(-1\right)^{n}\left(1 + \dfrac{1}{n}\right)$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="1, -1"><span class="set-label">(א) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1, -1"><span class="seq-label">(א) הגבול העליון והתחתון, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 2, -1"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ב) $a_n = \cos\left(\dfrac{\pi}{3} n\right)$
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="1/2, -1/2, -1, 1"><span class="set-label">(ב) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1, -1"><span class="seq-label">(ב) הגבול העליון והתחתון, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 2, -1"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
 (ג) $a_n = n^{\left(-1\right)^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="0"><span class="set-label">(ג) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
 
 ::: {.thmsol .foldable}
 **סעיף (א).** במקומות הזוגיים $a_{2k} = 1 + \frac{1}{2k} \to 1$ ובמקומות האי-זוגיים $.a_{2k-1} = -\left(1 + \frac{1}{2k-1}\right) \to -1$ הגבולות החלקיים הם $1$ ו-$,-1$ ולכן $\limsup = 1$ ו-$.\liminf = -1$

@@ -344,7 +344,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - הגדרה       `box-def-real-power` · חזקה עם מעריך ממשי
     - מסקנה       `box-cor-real-power-laws`
 
-## `09-sequences-infinity.qmd` — גבולות אינסופיים וסדרי גודל
+## `09-sequences-infinity.qmd` — גבולות אינסופיים, סדרי גודל וגבולות חלקיים
 
 - **מוטיבציה והגדרה**
     - הגדרה       `box-def-extended-reals` · מערכת המספרים המורחבת
@@ -393,13 +393,16 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - **מבחן המנה ומבחן השורש**
   - *מבחן המנה*
     - משפט        `box-thm-ratio-test` · מבחן המנה
+    - תרגיל פתור  `box-exm-mivchanim-1` · הסדרה $2^n/n^2$
   - *מבחן השורש*
     - משפט        `box-thm-root-test` · מבחן השורש
-    - תרגיל פתור  `box-exm-mivchanim-1` · הסדרה $2^n/n^2$
     - תרגיל פתור  `box-exm-mivchanim-2` · הסדרה $3^n$
-    - מסקנה       `box-cor-geometric-limit` · גבול הסדרה ההנדסית
+    - מסקנה       `box-cor-geometric-limit` · גבול הסדרה הגאומטרית
     - משפט        `box-thm-dalembert` · משפט דלאמבר
+    - הערה        — · (ללא מספר)
     - תרגיל פתור  `box-exm-dalembert-root-n` · שורש מסדר $n$ של $n$
+  - *תרגילים*
+    - 3 תרגילים
 - **המספר $e$**
     - משפט        `box-thm-e-sequence-monotone-bounded`
     - הגדרה       `box-def-number-e`
@@ -410,12 +413,10 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - תרגיל פתור  `box-exm-gvul-e` · הסדרה $(1-1/n)^n$
     - TODO        —
 - **יחסי הגדילה הבסיסיים: $n^k \ll k^n \ll n! \ll n^n$**
-  - *סדר שואף לאינסוף בסדרות*
-    - משפט        `box-thm-growth-orders`
-
-## `10-sequences-subsequences.qmd` — תת-סדרות וגבולות חלקיים
-
-- **תת-סדרות**
+    - משפט        `box-thm-growth-orders` · יחסי הגדילה הבסיסיים
+    - דוגמה       `box-exm-growth-orders` · שימוש ביחסי הגדילה
+- **תת-סדרות וגבולות חלקיים**
+  - *תת-סדרות*
     - הגדרה       `box-def-subsequence`
     - דוגמה       `box-exm-subsequences` · תת-סדרות של סדרה נתונה
     - הגדרה       `box-def-partial-limit`
@@ -424,18 +425,15 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - מסקנה       `box-cor-two-partial-limits-diverge`
     - טענה        `box-prp-covering-subsequences`
     - תרגיל פתור  `box-exm-gvulot-chelkiim` · מציאת כל הגבולות החלקיים
-- **משפט בולצאנו–ויירשטראס (ללא הוכחה)**
-    - משפט        `box-thm-chsuma-monotonit` · משפט החסומה והמונוטונית
-    - משפט        `box-thm-hitkansut-monotoniot` · משפט התכנסות הסדרות המונוטוניות
-    - משפט        `box-thm-sandvich` · משפט הסנדוויץ' החזק
-    - משפט        `box-thm-gvul-shoresh` · משפט גבול שורש
-    - דוגמה       `box-exm-gvul-shoresh` · שורש מסדר $n$ של $2$
-- **הגבול העליון והגבול התחתון (ללא הוכחות)**
+  - *משפט בולצאנו–ויירשטראס*
+    - משפט        `box-thm-bolzano-weierstrass` · משפט בולצאנו–ויירשטראס
+    - הערה        — · (ללא מספר)
+  - *הגבול העליון והגבול התחתון*
     - הגדרה       `box-def-limsup-liminf`
+    - דוגמה       `box-exm-limsup-liminf`
     - משפט        `box-thm-limsup-eq-liminf`
-    - TODO        —
 
-## `11-functions-intro.qmd` — מבוא לפונקציות
+## `10-functions-intro.qmd` — מבוא לפונקציות
 
 - **מושג הפונקציה**
     - הגדרה       `box-def-funkcia`
@@ -458,7 +456,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *פונקציה הפיכה והופכית*
   - *פונקציות הפוכות מוכרות*
 
-## `12-function-limits.qmd` — גבולות של פונקציות
+## `11-function-limits.qmd` — גבולות של פונקציות
 
 - **הגדרת הגבול של פונקציה + דוגמה**
 - **משפט היינה**
@@ -498,7 +496,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *האחד מבל האפשרויות של גבולות לא סופיים*
   - *נכון תמיד לכל סוגי הגבולות:*
 
-## `13-continuity.qmd` — רציפות
+## `12-continuity.qmd` — רציפות
 
 - **הגדרת רציפות בנקודה ובקטע**
   - *פונקציות רציפות*
@@ -523,7 +521,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *דוגמאות לגרפים:*
 - **נקודות אי-רציפות: סליקה, קפיצה ועיקרית**
 
-## `14-derivative.qmd` — הנגזרת
+## `13-derivative.qmd` — הנגזרת
 
 - **אינטואיציה גיאומטרית ופיזיקלית למושג הנגזרת**
 - **הגדרת הנגזרת**
@@ -545,7 +543,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - **נגזרת חד-צדדית**
     - משפט        `box-thm-derivative-iff-one-sided`
 
-## `15-derivative-applications.qmd` — שימושים של הנגזרת
+## `14-derivative-applications.qmd` — שימושים של הנגזרת
 
 - **קיצון מקומי ומשפט פרמה**
     - משפט        `box-thm-fermat`
@@ -573,7 +571,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - **כלל לופיטל ($\infty/\infty$)**
   - *דוגמאות:*
 
-## `16-higher-derivatives.qmd` — נגזרות מסדר גבוה וחקירת פונקציות
+## `15-higher-derivatives.qmd` — נגזרות מסדר גבוה וחקירת פונקציות
 
 - **הגדרת הנגזרת מסדר גבוה וסימונים**
 - **דוגמאות לנגזרת מסדר גבוה**
@@ -611,7 +609,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 - **שרטוט גרף של פונקציה**
     - TODO        —
 
-## `17-indefinite-integral.qmd` — האינטגרל הלא-מסוים
+## `16-indefinite-integral.qmd` — האינטגרל הלא-מסוים
 
 - **הגדרת האינטגרל הלא-מסוים**
   - *אינטגרל לא מסוים*
@@ -639,7 +637,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
   - *שיטה ראשונה- פישוט המונה*
   - *שיטה שנייה- הצבות*
 
-## `18-definite-integral.qmd` — האינטגרל המסוים
+## `17-definite-integral.qmd` — האינטגרל המסוים
 
 - **חלוקה של קטע, עובי החלוקה ובחירת נקודות**
 - **סכום רימן**
@@ -664,7 +662,7 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
     - TODO        —
 - **שימושים: שטח, נפח גוף סיבוב ואורך עקומה**
 
-## `19-improper-integral.qmd` — האינטגרל המוכלל
+## `18-improper-integral.qmd` — האינטגרל המוכלל
 
 - **הגדרת האינטגרל המוכלל (מהסוג הראשון — בקרן)**
     - TODO        —
@@ -677,15 +675,15 @@ at render time and shift whenever a box is inserted. Cite by the `#box-…` id.
 
 ## Totals
 
-- דוגמה: 74
-- תרגיל: 58
+- דוגמה: 75
+- תרגיל: 61
 - הגדרה: 54
-- משפט: 54
+- משפט: 51
 - תרגיל פתור: 29
 - טענה: 17
-- TODO: 16
+- TODO: 15
+- הערה: 13
 - שימו לב: 13
-- הערה: 11
 - חשוב לזכור: 11
 - סימולציה: 9
 - מסקנה: 8

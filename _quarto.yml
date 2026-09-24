@@ -39,34 +39,33 @@ book:
         - 07-sequences-limit.qmd
         - 08-sequences-properties.qmd
         - 09-sequences-infinity.qmd
-        - 10-sequences-subsequences.qmd
     - part: "חלק 3: מבוא לפונקציות"
       chapters:
-        - 11-functions-intro.qmd
+        - 10-functions-intro.qmd
     - part: "חלק 4: גבולות של פונקציות"
       chapters:
-        - 12-function-limits.qmd
+        - 11-function-limits.qmd
     - part: "חלק 5: רציפות"
       chapters:
-        - 13-continuity.qmd
+        - 12-continuity.qmd
     - part: "חלק 6: הנגזרת"
       chapters:
-        - 14-derivative.qmd
+        - 13-derivative.qmd
     - part: "חלק 7: שימושים של הנגזרת"
       chapters:
-        - 15-derivative-applications.qmd
+        - 14-derivative-applications.qmd
     - part: "חלק 8: נגזרות מסדר גבוה וחקירת פונקציות"
       chapters:
-        - 16-higher-derivatives.qmd
+        - 15-higher-derivatives.qmd
     - part: "חלק 9: האינטגרל הלא-מסוים"
       chapters:
-        - 17-indefinite-integral.qmd
+        - 16-indefinite-integral.qmd
     - part: "חלק 10: האינטגרל המסוים"
       chapters:
-        - 18-definite-integral.qmd
+        - 17-definite-integral.qmd
     - part: "חלק 11: האינטגרל המוכלל"
       chapters:
-        - 19-improper-integral.qmd
+        - 18-improper-integral.qmd
 
 lang: he
 dir: rtl
@@ -132,9 +131,16 @@ format:
         % .foldable blocks: collapsed in HTML, but print cannot fold — so show them and
         % flag them as skippable. Rules, not a frame (framed envs break RTL, see above).
         \definecolor{foldaccent}{HTML}{64748B}
-        \newenvironment{foldablebox}[1]{\par\medskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\smallskip\noindent{\bfseries\color{foldaccent}#1}\ {\color{foldaccent}(אפשר לדלג)}\par\smallskip}{\par\smallskip\noindent{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\medskip}
-        \definecolor{optionalaccent}{HTML}{9A7B1F}
-        \newenvironment{optionalbox}{\par\medskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent{\bfseries\color{optionalaccent}קריאה לא הכרחית — אפשר לדלג}\par\smallskip}{\par\smallskip\noindent{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
+        % Every coloured piece sits in its own \parbox. In an RTL paragraph XeTeX reverses
+        % each line, colour push/pop specials included, so a bare {\color{..}..} inline can
+        % emit the pop BEFORE the push: the colour never switches off, and the rest of the
+        % book prints in it (found 2026-09-24: everything after §8.6's proof came out orange).
+        \newenvironment{foldablebox}[1]{\par\medskip\noindent\parbox{\linewidth}{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\smallskip\noindent\parbox{\linewidth}{\color{foldaccent}\bfseries #1\ \mdseries(אפשר לדלג)}\par\smallskip}{\par\smallskip\noindent\parbox{\linewidth}{\color{foldaccent}\rule{\linewidth}{0.6pt}}\par\medskip}
+        \definecolor{optionalaccent}{HTML}{6B7280}
+        \newenvironment{optionalbox}[1]{\par\medskip\noindent\parbox{\linewidth}{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent\parbox{\linewidth}{\color{optionalaccent}\bfseries #1}\par\smallskip}{\par\smallskip\noindent\parbox{\linewidth}{\color{optionalaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
+        % העשרה (.extra): same shape as optionalbox, orange like the HTML edition (2026-09-24).
+        \definecolor{extraaccent}{HTML}{C2410C}
+        \newenvironment{extrabox}[1]{\par\medskip\noindent\parbox{\linewidth}{\color{extraaccent}\rule{\linewidth}{1.2pt}}\par\smallskip\noindent\parbox{\linewidth}{\color{extraaccent}\bfseries #1}\par\smallskip}{\par\smallskip\noindent\parbox{\linewidth}{\color{extraaccent}\rule{\linewidth}{1.2pt}}\par\medskip}
     mainfont: Arial
     sansfont: Arial
     monofont: "Courier New"

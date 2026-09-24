@@ -35,9 +35,15 @@ Extensions:
                 are referred back to and unnumbered where they are a passing aside.
                 Cross-reference link text names its target rather than carrying a number,
                 so an unnumbered box is still perfectly citable by its #box- id.
-  * .optional — "רשות" wrapper: its inner boxes are labelled but UNNUMBERED
-                (\newtheorem* style). Tinted via _styles.html (HTML) / the
-                'optionalbox' LaTeX environment (PDF).
+  * .optional — "העמקה" (theory beyond the core): folded by default; bar reads
+                "[shovel] העמקה · <title> — קריאה לא הכרחית, אפשר לדלג". Inner boxes are
+                labelled but UNNUMBERED (\newtheorem* style). GREY, via _styles.html
+                (HTML) / the 'optionalbox' LaTeX environment, which takes the label (PDF).
+  * .extra    — "העשרה" (enrichment): foldable but OPEN by default; bar reads
+                "💎 העשרה · <title> — לחצו כדי לקפל/לפתוח". ORANGE (HTML) / 'extrabox'
+                (PDF). Inner boxes UNNUMBERED. A
+                section-sized enrichment is `## … {.unnumbered}` with the .extra inside
+                it; unnumbered `##` headings do not advance the counter.
   * .foldable — in HTML the block is wrapped in <details> (click to reveal); in
                 PDF it is shown as-is. (Marker class only; deliberately NOT named
                 "collapse", which is a Bootstrap utility that forces display:none.)
@@ -244,6 +250,11 @@ local function label_para(text, title)
   return pandoc.Para({ pandoc.Strong(inlines) })
 end
 
+-- Plain-text title -> safe inside a raw <summary> (which is not re-parsed as markdown).
+local function html_escape(x)
+  return (x:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+end
+
 local chap, section, item, is_html
 local process
 
@@ -263,12 +274,17 @@ process = function(blocks, in_optional)
       end
       out[#out + 1] = b
     elseif b.t == "Header" and b.level == 2 and not in_optional then
-      section = section + 1
-      item = 0
+      -- An {.unnumbered} section (e.g. an enrichment section) gets no number from Quarto,
+      -- so it must not advance ours either, or every section after it would be off by one.
+      if not has_class(b.classes, "unnumbered") then
+        section = section + 1
+        item = 0
+      end
       out[#out + 1] = b
     elseif b.t == "Div" then
       local orig       = b.classes
       local do_collapse = has_class(orig, "foldable") or has_class(orig, "optional")   -- NB: not "collapse" (Bootstrap owns that; it sets display:none)
+                          or has_class(orig, "extra")      -- foldable but OPEN by default (2026-09-23)
       local is_proof    = has_class(orig, "thmproof")
       local is_solution = has_class(orig, "thmsol")
       local is_remark   = has_class(orig, "thmrem")
@@ -299,21 +315,29 @@ process = function(blocks, in_optional)
         b.content = process(b.content, in_optional)
         b.classes = { "thmbox", "thmbox-remark" }
       elseif has_class(orig, "extra") then
-        -- Enrichment ("העשרה"): NOT foldable, part of the running text; inner boxes numbered
-        -- (in_optional = false). A `## heading` inside becomes the box's header bar (a real
-        -- numbered section, via makeSections). For a small aside with no heading, a `title=`
-        -- attribute is rendered instead as a (non-section) header bar. Box look is pure CSS.
+        -- Enrichment ("העשרה"): NOT foldable, part of the running text. Like .optional, its
+        -- inner boxes are labelled but UNNUMBERED (decided 2026-09-23: numbered results in
+        -- material outside the core course confuse students). An enrichment that deserves a
+        -- section of its own is written as `## title {.unnumbered}` OUTSIDE the block, with
+        -- the .extra inside the section — never a `##` inside the .extra. For a small aside,
+        -- a `title=` attribute is rendered as a (non-section) header bar. Look is pure CSS.
+        -- HTML: the header bar is the <summary> built below (gem + העשרה + title + a
+        -- fold hint). PDF cannot fold, so it gets the same label as a bold line.
         local t = b.attributes and b.attributes.title
-        if t and t ~= "" and not (b.content[1] and b.content[1].t == "Header") then
-          table.insert(b.content, 1,
-            pandoc.Div({ pandoc.Plain(title_inlines(t)) }, pandoc.Attr("", { "extra-title" })))
+        b.content = process(b.content, true)
+        if not is_html then
+          -- PDF: the orange 'extrabox' environment (_quarto.yml), same shape as optionalbox.
+          local lab = "העשרה" .. ((t and t ~= "") and (" · " .. t) or "")
+          table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{extrabox}{" .. lab .. "}"))
+          table.insert(b.content, pandoc.RawBlock("latex", "\\end{extrabox}"))
         end
-        b.content = process(b.content, false)
         -- keep the .extra class for HTML/CSS
       elseif has_class(orig, "optional") then
         b.content = process(b.content, true)
         if not is_html then
-          table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{optionalbox}"))
+          local t = b.attributes and b.attributes.title
+          local lab = "העמקה" .. ((t and t ~= "") and (" · " .. t) or "") .. " — קריאה לא הכרחית, אפשר לדלג"
+          table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{optionalbox}{" .. lab .. "}"))
           table.insert(b.content, pandoc.RawBlock("latex", "\\end{optionalbox}"))
         end
         -- keep the .optional class for HTML CSS
@@ -367,12 +391,23 @@ process = function(blocks, in_optional)
           summary = "פתרון"
           attrs = ' class="thmcollapse"'
         elseif has_class(orig, "optional") then
-          -- The bar is always visible even while the box is collapsed, so it doubles as
-          -- the "you may skip this" banner. A title= is appended rather than replacing
-          -- the banner, so the skip marking never disappears behind a topic name.
-          summary = "קריאה לא הכרחית — אפשר לדלג"
-          if t and t ~= "" then summary = summary .. " · " .. t end
+          -- העמקה (deepening): theory beyond the core course. The bar is always visible
+          -- even while collapsed, so it doubles as the skip banner. Order requested by the
+          -- teaching team: icon + category, then the SUBJECT, then the skip note.
+          -- The shovel is a CSS-drawn SVG (.ico-shovel): the 🪏 emoji is Unicode 16 and
+          -- shows as an empty box on many student machines.
+          summary = '<span class="ico ico-shovel" aria-hidden="true"></span>העמקה'
+            .. ((t and t ~= "") and (" · " .. html_escape(t)) or "")
+            .. '<span class="skip-note"> — קריאה לא הכרחית, אפשר לדלג</span>'
           attrs = ' class="thmcollapse thmoptional"'   -- collapsed by default (no "open")
+        elseif has_class(orig, "extra") then
+          -- העשרה (enrichment): open by default, but the reader may fold it away. The hint
+          -- flips with the state via CSS (.when-open / .when-closed).
+          summary = '<span class="ico ico-gem" aria-hidden="true">💎</span>העשרה'
+            .. ((t and t ~= "") and (" · " .. html_escape(t)) or "")
+            .. '<span class="fold-hint when-open"> — לחצו כדי לקפל</span>'
+            .. '<span class="fold-hint when-closed"> — לחצו כדי לפתוח</span>'
+          attrs = ' class="thmcollapse thmextra" open'
         end
         out[#out + 1] = pandoc.RawBlock("html", '<details' .. attrs .. '><summary>' .. summary .. '</summary>')
         out[#out + 1] = b
@@ -380,7 +415,8 @@ process = function(blocks, in_optional)
       else
         -- PDF can't fold. Show .foldable content, but flag it as skippable so the print
         -- reader sees it is an aside. (.optional already got its own optionalbox above.)
-        if do_collapse and not has_class(orig, "optional") and not is_proof and not is_solution then
+        if do_collapse and not has_class(orig, "optional") and not has_class(orig, "extra")
+           and not is_proof and not is_solution then
           local t = b.attributes and b.attributes.title
           local label = (t and t ~= "") and t or "פירוט"
           table.insert(b.content, 1, pandoc.RawBlock("latex", "\\begin{foldablebox}{" .. label .. "}"))

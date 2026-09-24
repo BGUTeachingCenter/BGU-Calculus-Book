@@ -490,7 +490,7 @@ $$.\lim_{n\to\infty} a_n \leq \lim_{n\to\infty} b_n$$
 
 שני כללי הפיצה הם אפוא בדיוק המקרים שבהם אחד הצדדים בורח, והם אלה שעושים את העבודה בהוכחה. המשפט האחרון רק אורז את כולם יחד עם המקרה הממשי בניסוח אחד.
 
-### תרגילים {#sec-limit-infinity-exercises}
+### תרגילים
 
 בשני התרגילים הראשונים הכריעו אם הטענה נכונה.
 
@@ -620,50 +620,48 @@ $$,\sqrt{n} > \sqrt{M^{2}} = M$$
 
 ## אריתמטיקה {#sec-infinite-arithmetic}
 
-לאחר שהרחבנו בסעיף הקודם את מושג הגבול, נרצה להרחיב גם את אריתמטיקת הגבולות. [](08-sequences-properties.qmd#box-thm-sequence-arithmetic) אינו עונה על השאלות החדשות, שכן כל סעיפיו מניחים ששני הגבולות הם מספרים ממשיים. נפתח בשלוש שאלות שמראות מה חסר.
+לאחר שהרחבנו בסעיף הקודם את מושג הגבול, נרצה להרחיב גם את אריתמטיקת הגבולות. לכך יש שלוש סיבות שונות.
 
-**ראשית**, סכום והפרש של שתי סדרות השואפות לאינסוף.
+**ראשית**, אנחנו רוצים לדעת כיצד פעולות על סדרות משפיעות על הגבול כאשר $a_n \to \infty$ או $,b_n \to \infty$ וכן כאשר אחת מהן שואפת ל-$.-\infty$ [](08-sequences-properties.qmd#box-thm-sequence-arithmetic) אינו עונה על כך, שכן כל סעיפיו מניחים ששני הגבולות הם מספרים ממשיים.
 
 ::: {#box-qst-infinite-sum-or-difference .thmqst}
-תהי $a_n = \sqrt{n^{2}+n}$ ותהי $.b_n = n$ שתיהן שואפות לאינסוף, שכן $\sqrt{n^{2}+n} \geq \sqrt{n^{2}} = n$ לכל $.n$
+תהי $,a_n = n^{2}$ ותהי $.b_n = n$ שתיהן שואפות לאינסוף.
 
-מה אפשר לומר על $?a_n + b_n$ ומה על $?a_n - b_n$ נסו לנחש את התשובה לשאלה השנייה לפני שממשיכים.
+מה אפשר לומר על $?a_n + b_n$ ומה על $?a_n - b_n$ והאם התשובה לשאלה השנייה הייתה משתנה אילו הייתה $?b_n = n^{2}$
 :::
 
-**שנית**, מנה של שתי סדרות השואפות לאינסוף.
+**שנית**, ולעיתים קרובות זה המצב המעשי, גם כאשר הסדרה שאנו מחשבים מתכנסת לגבול ממשי לחלוטין, שלבי הביניים של החישוב עוברים דרך סדרות השואפות לאינסוף.
 
 ::: {#box-qst-quotient-through-infinity .thmqst}
 נתבונן בסדרה
 
-$$.c_n = \frac{n}{1.01^{n}}$$
+$$.c_n = \frac{3n^{2} - n}{n^{2} + 5}$$
 
-המונה שואף לאינסוף, וגם המכנה גדל ללא הגבלה, שכן $1.01 > 1$ ולפי [](08-sequences-properties.qmd#box-thm-geometric-power) הסדרה $1.01^{n}$ אינה חסומה.
+המונה שואף לאינסוף, שכן $3n^{2} - n = n\left(3n-1\right) \geq n$ לכל $,n \geq 1$ וכך גם המכנה, שכן $.n^{2} + 5 \geq n$ ובכל זאת הסדרה כולה מתכנסת לגבול ממשי.
 
-סעיף המנה של [](08-sequences-properties.qmd#box-thm-sequence-arithmetic) אינו חל, שכן אף אחד משני הגבולות אינו מספר ממשי. גם חלוקה של המונה והמכנה ב-$n$ אינה עוזרת: מתקבל $,\frac{1}{1.01^{n}/n}$ ובמכנה החדש שוב שתי סדרות גדלות. האם לסדרה $(c_n)$ יש גבול, ומהו?
+נסו להפעיל עליה את סעיף המנה של [](08-sequences-properties.qmd#box-thm-sequence-arithmetic). מה בדיוק מונע מאיתנו לעשות זאת?
 :::
 
-לשאלה הזאת נחזור ב[סעיף על מבחן המנה ומבחן השורש](#sec-ratio-root-tests), שם יהיה בידינו הכלי המתאים.
-
-**שלישית**, חלוקה בסדרה השואפת לאפס.
+**שלישית**, לפעמים דווקא אריתמטיקה על גבולות **ממשיים** מובילה לתוצאה אינסופית.
 
 ::: {#box-qst-real-limit-infinite-result .thmqst}
-שתי הסדרות $a_n = \dfrac{1}{n^{2}}$ ו-$b_n = \dfrac{\left(-1\right)^{n}}{n^{2}}$ שואפות לאפס.
+תהי $.a_n = \dfrac{1}{n^{2}}$ גבולה הוא $,0$ מספר ממשי לכל דבר, וכל איבריה חיוביים.
 
-האם קיים הגבול של $?\dfrac{1}{a_n}$ והאם קיים הגבול של $?\dfrac{1}{b_n}$
+מהו הגבול של $?\dfrac{1}{a_n}$ האם גם הוא מספר ממשי?
 :::
 
-לפני שנענה על השאלות האלה נעשה צעד אחורה. נגדיר תחילה פעולות חשבון על הסימנים $\infty$ ו-$-\infty$ עצמם, ככל שאפשר לעשות זאת באופן הגיוני, ונסביר מדוע יש פעולות שאי-אפשר להגדיר כלל. אחר כך נראה שגבולות של סדרות מצייתים בדיוק לכללים האלה.
+לפני שנענה על השאלות האלה ניקח צעד אחורה. נרחיב את כללי החשבון באופן **חלקי** אל $\infty$ ואל $,-\infty$ נצדיק כל כלל וכלל, ונסביר מדוע יש צירופים שאי-אפשר להרחיב אליהם כלל. אחר כך נראה שאריתמטיקת הגבולות **עקבית** עם הכללים האלה בכל מקום שבו הם מוגדרים. לבסוף נחזור אל המקרים שבהם ההרחבה נכשלת, ונראה שיטות לטפל בהם.
 
-### פעולות חשבון עם אינסוף
+ב[](#box-def-extended-reals) הוספנו למספרים הממשיים שני סימנים חדשים, והסכמנו רק על מקומם בסדר. עכשיו נוסיף להם גם חלק מפעולות החשבון — אבל כדאי לומר מראש מאין הכללים האלה מגיעים.
 
-ב[](#box-def-extended-reals) הוספנו למספרים הממשיים שני סימנים, והסכמנו רק על מקומם בסדר: $\infty$ גדול מכל מספר ממשי, ו-$-\infty$ קטן מכל מספר ממשי. את פעולות החשבון נגדיר כך שיתאימו לתפקיד הזה.
+הם **אינם** מערכת חשבון חדשה שאנחנו ממציאים, אלא **קיצור רישום עבור גבולות**. כל שורה בהגדרה שלהלן היא תמצית של טענה על סדרות, והיא נכונה אך ורק משום שהמשפט שאחריה מוכיח אותה. את $r + \infty = \infty$ יש לקרוא ״אם סדרה אחת מתכנסת ל-$r$ והשנייה גדלה מעבר לכל חסם, אז סכומן גדל מעבר לכל חסם״, ולא כפעולת חיבור בין מספרים.
 
-למשל, מהו $?r + \infty$ אם מוסיפים מספר קבוע $r$ למשהו הגדול מכל מספר, טבעי שהתוצאה תהיה עדיין גדולה מכל מספר, ולכן נגדיר $.r + \infty = \infty$ באותו אופן, סכום של שני ״גדולים מכל מספר״ גדול מכל מספר, וכפל של ״גדול מכל מספר״ במספר חיובי קבוע משאיר אותו גדול מכל מספר. ואילו חלוקה של מספר קבוע במשהו הגדול מכל מספר נותנת תוצאה קרובה לאפס כרצוננו, ולכן נגדיר $.\frac{r}{\infty} = 0$
+מכאן נובע גם הכלל המנחה: נגדיר פעולה רק כאשר יש **תשובה אחת** שהיא הגיונית. למשל, מהו $?r + \infty$ אם מוסיפים למספר שגדל מעבר לכל חסם כמות קבועה, הוא ממשיך לגדול מעבר לכל חסם, ואין שום ערך אחר שאפשר היה לתת לביטוי הזה. לעומת זאת, מהו $?\infty - \infty$ כאן אין תשובה אחת: שני גדלים ההולכים וגדלים יכולים להשאיר ביניהם הפרש קבוע, הפרש ההולך וגדל, או הפרש שאינו מתייצב כלל. במקרה כזה לא נגדיר דבר.
 
 ::: {#box-def-extended-arithmetic .thmdef title="פעולות עם $\\infty$ ו-$-\\infty$"}
 יהי $r \in \mathbb{R}$ מספר ממשי. נגדיר:
 
-**חיבור וחיסור עם מספר ממשי.**
+**חיבור וחיסור עם מספר סופי.**
 
 $$r + \infty = \infty \qquad,\qquad r - \infty = -\infty$$
 
@@ -677,304 +675,18 @@ $$r \cdot \infty = \begin{cases} \infty & r > 0 \\ -\infty & r < 0 \end{cases} \
 
 $$\left(-\infty\right) \cdot \left(-\infty\right) = \infty \qquad,\qquad \infty \cdot \left(-\infty\right) = -\infty \qquad,\qquad \infty \cdot \infty = \infty$$
 
-**חלוקה של מספר ממשי באינסוף.**
+**חלוקה של מספר סופי באינסופי.**
 
 $$.\frac{r}{\infty} = \frac{r}{-\infty} = 0$$
 :::
 
-ההגדרה הזאת **חלקית**: כל צירוף שאינו ברשימה אינו מוגדר. החשובים שבהם הם
+ההרחבה הזאת **חלקית**, ובכוונה: כל צירוף שאינו ברשימה שלמעלה אינו מוגדר. שלושת החסרים החשובים הם
 
-$$.\infty - \infty \qquad,\qquad \frac{\infty}{\infty} \qquad,\qquad 0 \cdot \infty \qquad,\qquad \frac{1}{0}$$
+$$,\infty - \infty \qquad,\qquad \frac{\infty}{\infty} \qquad,\qquad 0 \cdot \infty$$
 
-לא השמטנו אותם בשרירות. לכל אחד מהם אין ערך שאפשר לתת לו בלי להגיע לסתירה, ונראה זאת אחד אחד.
+והתבנית שלהם פשוטה. חיבור של שני אינסופיים מאותו סימן מוגדר, וכן כפל של שני אינסופיים; אבל **חיסור וחלוקה בין שני אינסופיים אינם מוגדרים**. ל-$\frac{1}{0}$ נגיע מיד, ואל שלושת אלה נחזור ב[](#box-rem-indeterminate-forms) שבהמשך הסעיף, שם גם נראה מדוע.
 
-**מדוע $\infty - \infty$ אינו מוגדר.** לפי ההגדרה, $r + \infty = \infty$ לכל מספר ממשי $.r$ אילו היה ל-$\infty - \infty$ ערך, והחיסור היה מתנהג כרגיל, היינו יכולים לחסר $\infty$ משני האגפים ולקבל
-
-$$.r = \infty - \infty$$
-
-וזאת **לכל** $r$ ממשי. כלומר $\infty - \infty$ היה צריך להיות שווה ל-$,0$ ל-$1$ ול-$17$ בבת אחת, וזה בלתי אפשרי.
-
-**מדוע $\frac{\infty}{\infty}$ אינו מוגדר.** באותו אופן, $r \cdot \infty = \infty$ לכל $.r > 0$ חלוקה של שני האגפים ב-$\infty$ הייתה נותנת $r = \frac{\infty}{\infty}$ לכל $,r > 0$ ושוב אין ערך אחד שמתאים לכולם.
-
-**מדוע $0 \cdot \infty$ אינו מוגדר.** לפי ההגדרה $\frac{r}{\infty} = 0$ לכל $r$ ממשי. כפל של שני האגפים ב-$\infty$ היה נותן $r = 0 \cdot \infty$ לכל $,r$ וזו אותה סתירה.
-
-**מדוע $\frac{1}{0}$ אינו מוגדר.** מתקיים $\frac{1}{\infty} = 0$ וגם $.\frac{1}{-\infty} = 0$ אילו היה ל-$\frac{1}{0}$ ערך, היפוך של שני האגפים היה נותן גם $\frac{1}{0} = \infty$ וגם $,\frac{1}{0} = -\infty$ כלומר שתי תשובות שונות. לכן גם $\frac{1}{0}$ אינו מוגדר.
-
-::: {#box-warn-undefined-forms .thmwarn title="צירופים שאינם מוגדרים"}
-טעות נפוצה היא לכתוב $\infty - \infty = 0$ או $.\frac{1}{0} = \infty$ הביטויים $,\infty - \infty$ $,\frac{\infty}{\infty}$ $0 \cdot \infty$ ו-$\frac{1}{0}$ **אינם מוגדרים**, ואין לחשב איתם כאילו היו מספרים.
-:::
-
-::: {#box-chk-extended-operations .thmchk}
-אילו מן הביטויים הבאים מוגדרים?
-
-(א) $\infty + \infty$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="a" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ב) $\infty - \infty$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="b" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ג) $2 \cdot \left(-\infty\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="a" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ד) $0 \cdot \infty$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="b" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ה) $\dfrac{5}{-\infty}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="a" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ו) $\dfrac{1}{0}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="b" data-reveal>
-<button class="tf-opt" data-val="a">מוגדר</button>
-<button class="tf-opt" data-val="b">אינו מוגדר</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-:::
-
-::: {.thmsol .foldable}
-**(א)** מוגדר, ושווה ל-$.\infty$
-
-**(ב)** אינו מוגדר.
-
-**(ג)** מוגדר, ושווה ל-$,-\infty$ לפי כלל הכפל במספר חיובי.
-
-**(ד)** אינו מוגדר.
-
-**(ה)** מוגדר, ושווה ל-$.0$
-
-**(ו)** אינו מוגדר.
-:::
-
-### אריתמטיקה של גבולות אינסופיים
-
-עכשיו נחזור אל הסדרות. נראה שבכל מקום שבו הכללים שהגדרנו נותנים תשובה, גבול הסדרה המורכבת הוא בדיוק אותה תשובה. נתחיל במשפט כללי יותר מן הכללים עצמם: הוא אינו דורש שהסדרה השנייה תתכנס כלל, אלא רק שתהיה חסומה, או רחוקה מאפס.
-
-::: {#box-thm-infinite-limits-general .thmthm title="אריתמטיקה עם סדרה השואפת לאינסוף"}
-תהיינה $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ סדרות, ונניח כי $.\lim\limits_{n\to\infty} a_n = \infty$ אז:
-
-(א) אם $(b_n)$ חסומה מלרע, אז $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
-
-(ב) אם קיים $c > 0$ כך ש-$b_n \geq c$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = \infty$
-
-(ג) אם קיים $c > 0$ כך ש-$b_n \leq -c$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = -\infty$
-
-(ד) אם $(b_n)$ חסומה ו-$a_n \neq 0$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \dfrac{b_n}{a_n} = 0$
-:::
-
-בשלושת הסעיפים הראשונים המסקנה היא שאיפה לאינסוף או למינוס אינסוף, ולכן לפי [הכלל שלפיו די לבדוק $M$ חיובי](#box-key-positive-M) נוכל להניח בהם $.M > 0$
-
-::: {.thmproof title="סעיף (א)"}
-מכיוון ש-$(b_n)$ חסומה מלרע, קיים מספר $m$ כך ש-$b_n \geq m$ לכל $.n$
-
-יהי $.M > 0$ נפעיל את הגדרת השאיפה לאינסוף על $(a_n)$ עם המספר $:M - m$ קיים $N$ כך שלכל $n \geq N$ מתקיים $.a_n > M - m$ לכל $n \geq N$ נקבל אפוא
-
-$$.a_n + b_n > \left(M - m\right) + m = M$$
-
-מצאנו $N$ מתאים לכל $,M > 0$ ולכן $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
-:::
-
-::: {.thmproof title="סעיף (ב)"}
-יהי $.M > 0$ נפעיל את הגדרת השאיפה לאינסוף על $(a_n)$ עם המספר $:\frac{M}{c}$ קיים $N$ כך שלכל $n \geq N$ מתקיים $.a_n > \frac{M}{c}$ בפרט $a_n > 0$ שם, ולכן אפשר להכפיל את אי-השוויון $b_n \geq c$ ב-$a_n$ בלי לשנות את כיוונו:
-
-$$.a_n \cdot b_n \geq a_n \cdot c > \frac{M}{c} \cdot c = M$$
-
-מצאנו $N$ מתאים לכל $,M > 0$ ולכן $.\lim\limits_{n\to\infty} \left(a_n b_n\right) = \infty$
-:::
-
-::: {.thmproof title="סעיף (ג)"}
-הסדרה $\left(-b_n\right)$ מקיימת $-b_n \geq c$ לכל $,n$ ולכן לפי סעיף (ב)
-
-$$.\lim_{n\to\infty} \left(a_n \cdot \left(-b_n\right)\right) = \infty$$
-
-מכיוון ש-$,a_n \cdot \left(-b_n\right) = -\left(a_n b_n\right)$ נובע מ[](#box-prp-negate-infinity) ש-$.\lim\limits_{n\to\infty} \left(a_n b_n\right) = -\infty$
-:::
-
-::: {.thmproof title="סעיף (ד)"}
-מכיוון ש-$(b_n)$ חסומה, קיים $K > 0$ כך ש-$\left|b_n\right| \leq K$ לכל $.n$
-
-יהי $.\varepsilon > 0$ נפעיל את הגדרת השאיפה לאינסוף על $(a_n)$ עם המספר $:\frac{K}{\varepsilon}$ קיים $N$ כך שלכל $n \geq N$ מתקיים $.a_n > \frac{K}{\varepsilon} > 0$ לכל $n \geq N$ נקבל אפוא
-
-$$.\left|\frac{b_n}{a_n} - 0\right| = \frac{\left|b_n\right|}{a_n} \leq \frac{K}{a_n} < K \cdot \frac{\varepsilon}{K} = \varepsilon$$
-
-זו בדיוק הגדרת הגבול, ולכן $.\lim\limits_{n\to\infty} \dfrac{b_n}{a_n} = 0$
-:::
-
-כמו בכללי הפיצה, גם כאן די שהתנאים על $(b_n)$ יתקיימו החל ממקום מסוים: נפעיל את המשפט על זנבות הסדרות, ו[הגבול אינו תלוי באיברים הראשונים של הסדרה](07-sequences-limit.qmd#box-def-convergence-strict).
-
-::: {#box-key-infinite-arithmetic-eventually .thmkey icon="rule" title="די בתנאים החל ממקום מסוים"}
-את [](#box-thm-infinite-limits-general) מותר להפעיל גם כאשר התנאים על $(b_n)$ מתקיימים רק **החל ממקום מסוים**: חסימוּת מלרע, $,b_n \geq c$ $,b_n \leq -c$ או חסימוּת.
-:::
-
-::: {#box-exm-infinite-limits-general .thmexm title="סדרות שאינן מתכנסות לצד סדרה השואפת לאינסוף"}
-בשלוש הדוגמאות הבאות הסדרה השנייה אינה מתכנסת כלל, ולכן משפט שמניח ששתי הסדרות מתכנסות לא היה עוזר כאן.
-
-**(א) הסדרה $.n + \cos n$**
-
-הסדרה $\cos n$ אינה מתכנסת, אבל היא חסומה מלרע, שכן $.\cos n \geq -1$ מכיוון ש-$,\lim\limits_{n\to\infty} n = \infty$ לפי סעיף (א)
-
-$$.\lim_{n\to\infty} \left(n + \cos n\right) = \infty$$
-
-**(ב) הסדרה $.n\left(2 + \sin n\right)$**
-
-מ-$\sin n \geq -1$ נובע $2 + \sin n \geq 1$ לכל $,n$ ולכן לפי סעיף (ב) עם $c = 1$
-
-$$.\lim_{n\to\infty} n\left(2 + \sin n\right) = \infty$$
-
-**(ג) הסדרה $.\dfrac{\sin n}{n}$**
-
-המונה חסום, שכן $,\left|\sin n\right| \leq 1$ והמכנה שואף לאינסוף. לפי סעיף (ד)
-
-$$.\lim_{n\to\infty} \frac{\sin n}{n} = 0$$
-
-בסעיפים (א) ו-(ב) הגענו לאותן מסקנות בתרגילי [סעיף 9.1](#sec-limit-infinity-exercises) בעזרת כלל הפיצה. המשפט הכללי חוסך את החיפוש אחר סדרה מתאימה שיושבת מתחת.
-:::
-
-מן המשפט הכללי נובעים ישירות הכללים שהגדרנו לסימנים $\infty$ ו-$.-\infty$ המסקנה הבאה היא הצד השני של [](#box-def-extended-arithmetic): כל סעיף בה הוא שורה מן ההגדרה, והיא אומרת שגבולות של סדרות מצייתים לשורה הזאת.
-
-::: {#box-thm-arithmetika-rachav .thmcor title="אריתמטיקה של גבולות אינסופיים"}
-תהיינה $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ סדרות. אז:
-
-**שתי סדרות השואפות לאינסוף.**
-
-(א) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $,\lim\limits_{n\to\infty} b_n = \infty$ אז $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
-
-(ב) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $,\lim\limits_{n\to\infty} b_n = \infty$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = \infty$
-
-**סדרה השואפת לאינסוף יחד עם סדרה מתכנסת.**
-
-(ג) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $L \in \mathbb{R}$ כלשהו, אז $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
-
-(ד) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $,L > 0$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = \infty$
-
-(ה) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $,L < 0$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = -\infty$
-
-**היפוך.**
-
-(ו) אם $\lim\limits_{n\to\infty} a_n = \infty$ ו-$a_n \neq 0$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
-
-(ז) אם $\lim\limits_{n\to\infty} a_n = -\infty$ ו-$a_n \neq 0$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
-:::
-
-כל הסעיפים נובעים מ[](#box-thm-infinite-limits-general), ובכולם העבודה היא לוודא שהסדרה השנייה מקיימת את התנאי שם, לפחות החל ממקום מסוים. נשתמש בשתי עובדות. סדרה מתכנסת היא חסומה, לפי [](08-sequences-properties.qmd#box-thm-convergent-bounded). וסדרה השואפת לאינסוף חסומה מלרע: החל ממקום מסוים איבריה חיוביים, ולפני כן יש רק מספר סופי של איברים.
-
-::: {.thmproof title="סעיפים (א) ו-(ג) — סכום"}
-בשני הסעיפים $(b_n)$ חסומה מלרע: בסעיף (א) משום שהיא שואפת לאינסוף, ובסעיף (ג) משום שהיא מתכנסת ולכן חסומה. לפי סעיף (א) של [](#box-thm-infinite-limits-general) מתקיים $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
-:::
-
-::: {.thmproof title="סעיפים (ב), (ד) ו-(ה) — מכפלה"}
-**סעיף (ב).** מכיוון ש-$,\lim\limits_{n\to\infty} b_n = \infty$ החל ממקום מסוים $.b_n \geq 1$ לפי סעיף (ב) של [](#box-thm-infinite-limits-general) עם $,c = 1$ ולפי [הכלל שלפיו די בתנאים החל ממקום מסוים](#box-key-infinite-arithmetic-eventually), המכפלה שואפת לאינסוף.
-
-**סעיף (ד).** מכיוון ש-$,L > 0$ לפי [](07-sequences-limit.qmd#box-thm-limit-window) החל ממקום מסוים $.b_n > \frac{L}{2}$ לפי סעיף (ב) של המשפט עם $c = \frac{L}{2}$ המכפלה שואפת לאינסוף.
-
-**סעיף (ה).** מכיוון ש-$,L < 0$ לפי אותו משפט החל ממקום מסוים $,b_n < \frac{L}{2}$ כלומר $b_n \leq -c$ עבור $.c = -\frac{L}{2} > 0$ לפי סעיף (ג) של המשפט המכפלה שואפת למינוס אינסוף.
-:::
-
-::: {.thmproof title="סעיפים (ו) ו-(ז) — היפוך"}
-**סעיף (ו).** הסדרה הקבועה $b_n = 1$ חסומה, ולכן לפי סעיף (ד) של [](#box-thm-infinite-limits-general) מתקיים $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
-
-**סעיף (ז).** לפי [](#box-prp-negate-infinity) מתקיים $,\lim\limits_{n\to\infty} \left(-a_n\right) = \infty$ ולכן לפי סעיף (ו) $.\lim\limits_{n\to\infty} \dfrac{1}{-a_n} = 0$ מכיוון ש-$\dfrac{1}{a_n} = -\dfrac{1}{-a_n}$ גם $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
-:::
-
-::: {.thmrem numbered="false"}
-המסקנה מנוסחת עבור $,a_n \to \infty$ ואין בכך הגבלה: את המקרים המשלימים, שבהם $,a_n \to -\infty$ מקבלים מ[](#box-prp-negate-infinity) בהפעלה על $.\left(-a_n\right)$ כך למשל, מסעיף (א) נובע שאם $a_n \to -\infty$ וגם $b_n \to -\infty$ אז $,a_n + b_n \to -\infty$ ואין צורך לרשום את כל הווריאציות בנפרד.
-
-שימו לב גם שבסעיפים (ד) ו-(ה) נדרש $L \neq 0$ במפורש. המקרה $L = 0$ הוא הצירוף $,\infty \cdot 0$ שאינו מוגדר, ונחזור אליו ב[](#box-rem-indeterminate-forms).
-:::
-
-::: {#box-exm-infinite-arithmetic .thmexm title="שימוש בסעיפי המסקנה"}
-**(א) הסדרה $.a_n = n^{2} + n$**
-
-שתי הסדרות $n^{2}$ ו-$n$ שואפות לאינסוף, ולכן לפי סעיף (א) גם סכומן.
-
-**(ב) הסדרה $.a_n = n\left(2 + \dfrac{1}{n}\right)$**
-
-כאן $n \to \infty$ ואילו $2 + \frac{1}{n} \to 2$ שהוא חיובי, ולכן לפי סעיף (ד) המכפלה שואפת לאינסוף. שימו לב שלא היינו צריכים לפתוח את הסוגריים.
-
-**(ג) הסדרה $.a_n = n\left(\dfrac{1}{n} - 3\right)$**
-
-הפעם הגורם השני שואף ל-$,-3$ שהוא שלילי, ולכן לפי סעיף (ה) המכפלה שואפת למינוס אינסוף.
-
-**(ד) הסדרה $.a_n = \dfrac{1}{n^{2}+1}$**
-
-המכנה שואף לאינסוף, ולכן לפי סעיף (ו) המנה שואפת ל-$.0$
-
-**(ה) הסדרה $.a_n = \dfrac{n+1}{n} \cdot n^{2}$**
-
-המנה $\frac{n+1}{n}$ מתכנסת ל-$,1$ הסדרה $n^{2}$ שואפת לאינסוף, ולפי סעיף (ד) המכפלה שואפת לאינסוף.
-:::
-
-::: {#box-exr-infinite-arithmetic .thmexr title="הסדרה $n^3 - 10n^2 + \\cos n$"}
-חשבו את $.\lim\limits_{n\to\infty} \left(n^{3} - 10n^{2} + \cos n\right)$
-:::
-
-::: thmsol
-הגבול הוא $.\infty$
-
-הביטוי $n^{3} - 10n^{2}$ הוא הפרש של שתי סדרות השואפות לאינסוף, כלומר צורה מן הסוג $,\infty - \infty$ ולכן לא נחשב אותו איבר-איבר. נוציא גורם משותף:
-
-$$.n^{3} - 10n^{2} = n^{2}\left(n - 10\right)$$
-
-הגורם $n^{2}$ שואף לאינסוף. הגורם $n - 10$ מקיים $n - 10 \geq 1$ לכל $,n \geq 11$ ולכן לפי סעיף (ב) של [](#box-thm-infinite-limits-general) עם $,c = 1$ ולפי [הכלל שלפיו די בתנאים החל ממקום מסוים](#box-key-infinite-arithmetic-eventually)
-
-$$.\lim_{n\to\infty} \left(n^{3} - 10n^{2}\right) = \infty$$
-
-נותר להוסיף את $.\cos n$ הסדרה הזאת אינה מתכנסת, אבל היא חסומה מלרע על ידי $,-1$ ולכן לפי סעיף (א) של אותו משפט
-
-$$.\lim_{n\to\infty} \left(n^{3} - 10n^{2} + \cos n\right) = \infty$$
-:::
-
-### שאיפה מלמעלה ומלמטה
-
-נותרה החלוקה בסדרה השואפת לאפס. ראינו ש-$\frac{1}{0}$ אינו מוגדר, משום שהוא ״היה צריך״ להיות גם $\infty$ וגם $.-\infty$ אצל סדרות אפשר לעשות יותר: אם יודעים **מאיזה צד** הסדרה מתקרבת לאפס, אפשר לדעת גם לאיזה מן השניים שואפת ההופכית שלה.
+נותרה אפוא החלוקה באפס. מפתה לכתוב $,\frac{1}{0} = \infty$ אבל זה **אינו נכון**, ולא משום שאנחנו קפדנים: לביטוי הזה באמת אין ערך אחד. כדי לראות זאת נוח להבחין בין שתי דרכים שבהן סדרה יכולה לשאוף לאפס.
 
 ::: {#box-def-one-sided-limit .thmdef title="שאיפה מלמעלה ומלמטה"}
 תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $.a \in \mathbb{R}$
@@ -994,63 +706,134 @@ $$,\lim_{n\to\infty} a_n = a^{-}$$
 
 במילים: הסדרה שואפת ל-$a$ מלמעלה אם היא מתכנסת ל-$,a$ ואיבריה גדולים מ-$a$ עבור $n$ גדול מספיק.
 
-::: {#box-exm-reciprocal-of-null .thmexm title="שלוש סדרות השואפות לאפס"}
-לשלוש הסדרות הבאות אותו גבול בדיוק, $,0$ ונשווה את ההופכיות שלהן. שתיים מהן הן הסדרות שב[](#box-qst-real-limit-infinite-result).
-
-**(א) הסדרה $.a_n = \dfrac{1}{n^{2}}$**
-
-כל איבריה חיוביים, ולכן $,\lim\limits_{n\to\infty} a_n = 0^{+}$ וההופכית היא $,\dfrac{1}{a_n} = n^{2}$ השואפת לאינסוף.
-
-**(ב) הסדרה $.a_n = -\dfrac{1}{n^{2}}$**
-
-כל איבריה שליליים, ולכן $,\lim\limits_{n\to\infty} a_n = 0^{-}$ וההופכית היא $,\dfrac{1}{a_n} = -n^{2}$ השואפת למינוס אינסוף.
-
-**(ג) הסדרה $.a_n = \dfrac{\left(-1\right)^{n}}{n^{2}}$**
-
-גם היא שואפת לאפס, אך לא מלמעלה ולא מלמטה: סימנה מתחלף ללא הרף. ההופכית היא
-
-$$,\frac{1}{a_n} = \left(-1\right)^{n} n^{2}$$
-
-ואיבריה $,-1,\ 4,\ -9,\ 16,\ \dots$ סדרה שאינה חסומה משני הצדדים ואין לה גבול כלל, גם לא במובן הרחב.
-
-אותו גבול עצמו, אפוא, ושלוש התנהגויות שונות לחלוטין. זו גם התשובה לשאלה שנשאלה שם: הגבול של $\frac{1}{a_n}$ קיים במובן הרחב, והגבול של $\frac{1}{b_n}$ אינו קיים.
-:::
-
-::: {#box-warn-one-over-zero .thmwarn title="$\\frac{1}{0}$ אינו מוגדר"}
-הידיעה ש-$\lim a_n = 0$ לבדה אינה קובעת דבר על $.\frac{1}{a_n}$ דרוש גם הכיוון, $0^{+}$ או $,0^{-}$ וזו הסיבה ש[](#box-prp-reciprocal-of-null) שלהלן דורשת אותו.
-:::
-
-::: {#box-prp-reciprocal-of-null .thmprp}
-תהי $(a_n)_{n=1}^{\infty}$ סדרה שאיבריה שונים מאפס. אז:
-
-(א) אם $,\lim\limits_{n\to\infty} a_n = 0^{+}$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = \infty$
-
-(ב) אם $,\lim\limits_{n\to\infty} a_n = 0^{-}$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = -\infty$
-
-(ג) אם $\lim\limits_{n\to\infty} a_n = 0^{+}$ ואם קיים $c > 0$ כך ש-$b_n \geq c$ לכל $,n$ אז $.\lim\limits_{n\to\infty} \dfrac{b_n}{a_n} = \infty$
-:::
-
-::: {.thmproof title="סעיף (א)"}
-יהי $.M > 0$ לפי ההנחה קיים מקום שהחל ממנו $,a_n > 0$ ולפי הגדרת הגבול עם $\varepsilon = \frac{1}{M}$ קיים מקום שהחל ממנו $.\left|a_n\right| < \frac{1}{M}$ לפי [שילוב טענות מהסוג ״החל ממקום מסוים״](07-sequences-limit.qmd#box-key-finitely-many) שתי הטענות מתקיימות יחד החל ממקום מסוים, ושם
-
-$$.0 < a_n < \frac{1}{M}$$
-
-היפוך אי-שוויון בין מספרים חיוביים מהפך את כיוונו, ולכן שם $.\frac{1}{a_n} > M$ מצאנו מקום כזה לכל $,M > 0$ ולכן $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = \infty$
-:::
-
-::: {.thmproof title="סעיף (ב)"}
-הסדרה $\left(-a_n\right)$ שואפת ל-$0$ מלמעלה, ולכן לפי סעיף (א) מתקיים $.\lim\limits_{n\to\infty} \dfrac{1}{-a_n} = \infty$ מכיוון ש-$,\dfrac{1}{a_n} = -\dfrac{1}{-a_n}$ לפי [](#box-prp-negate-infinity) מתקיים $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = -\infty$
-:::
-
-::: {.thmproof title="סעיף (ג)"}
-נכתוב $.\dfrac{b_n}{a_n} = \dfrac{1}{a_n} \cdot b_n$ לפי סעיף (א) הגורם הראשון שואף לאינסוף, והגורם השני מקיים $b_n \geq c$ לכל $.n$ לפי סעיף (ב) של [](#box-thm-infinite-limits-general) המכפלה שואפת לאינסוף.
-:::
-
-בסימון מקוצר אפשר לרשום את הטענה כך:
+בסימון הזה אפשר להשלים את טבלת הכללים:
 
 $$\frac{r}{0^{+}} = \begin{cases} \infty & r > 0 \\ -\infty & r < 0 \end{cases} \qquad,\qquad \frac{r}{0^{-}} = \begin{cases} -\infty & r > 0 \\ \infty & r < 0 \end{cases}$$
 
-אלה אינם כללים על המספר $,0$ אלא קיצור לטענות על סדרות השואפות לאפס מצד מסוים.
+הדוגמה הבאה מראה מדוע הכיוון הוא שקובע, ומדוע בלעדיו אין תשובה כלל.
+
+::: {#box-exm-reciprocal-of-null .thmexm title="שלוש סדרות השואפות לאפס"}
+לשלוש הסדרות הבאות אותו גבול בדיוק, $,0$ ונשווה את ההופכיות שלהן.
+
+**(א) הסדרה $.a_n = \dfrac{1}{n}$**
+
+כל איבריה חיוביים, ולכן $,\lim\limits_{n\to\infty} a_n = 0^{+}$ וההופכית היא $,\dfrac{1}{a_n} = n$ הגדלה מעבר לכל חסם.
+
+**(ב) הסדרה $.a_n = -\dfrac{1}{n}$**
+
+כל איבריה שליליים, ולכן $,\lim\limits_{n\to\infty} a_n = 0^{-}$ וההופכית היא $,\dfrac{1}{a_n} = -n$ הקטנה מתחת לכל חסם.
+
+**(ג) הסדרה $.a_n = \dfrac{\left(-1\right)^{n}}{n}$**
+
+גם היא שואפת לאפס, אך לא מלמעלה ולא מלמטה: סימנה מתחלף ללא הרף. ההופכית היא
+
+$$,\frac{1}{a_n} = \left(-1\right)^{n} n$$
+
+ואיבריה $,-1,\ 2,\ -3,\ 4,\ \dots$ סדרה שאינה חסומה משני הצדדים ואין לה גבול כלל.
+
+אותו גבול עצמו, אפוא, ושלוש התנהגויות שונות לחלוטין.
+:::
+
+::: {#box-warn-one-over-zero .thmwarn title="$\\frac{1}{0}$ אינו מוגדר"}
+בלי ציון הכיוון $\frac{r}{0}$ **אינו מוגדר**, ולא משנה מהו $.r$ הידיעה ש-$a_n \to 0$ לבדה אינה קובעת דבר על $.\frac{1}{a_n}$
+
+זו גם הסיבה שסעיפים (ח) ו-(ט) במשפט הבא דורשים כיוון, $0^{+}$ או $,0^{-}$ ואינם מסתפקים ב-$.a_n \to 0$
+:::
+
+עכשיו אפשר לנסח את הקשר שאליו חתרנו: אריתמטיקת הגבולות **עקבית** עם כללי החשבון שהגדרנו. בכל מקום שבו הכללים נותנים תשובה, גבול הסדרה המורכבת הוא בדיוק אותה תשובה.
+
+::: {#box-thm-arithmetika-rachav .thmthm title="אריתמטיקה של גבולות אינסופיים"}
+תהיינה $(a_n)_{n=1}^{\infty}$ ו-$(b_n)_{n=1}^{\infty}$ סדרות. אז:
+
+**שתי סדרות השואפות לאינסוף.**
+
+(א) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $,\lim\limits_{n\to\infty} b_n = \infty$ אז $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
+
+(ב) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $,\lim\limits_{n\to\infty} b_n = \infty$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = \infty$
+
+**סדרה השואפת לאינסוף יחד עם סדרה מתכנסת.**
+
+(ג) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $L \in \mathbb{R}$ כלשהו, אז $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
+
+(ד) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $,L > 0$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = \infty$
+
+(ה) אם $\lim\limits_{n\to\infty} a_n = \infty$ וגם $\lim\limits_{n\to\infty} b_n = L$ עבור $,L < 0$ אז $.\lim\limits_{n\to\infty} \left(a_n \cdot b_n\right) = -\infty$
+
+**היפוך.**
+
+(ו) אם $,\lim\limits_{n\to\infty} a_n = \infty$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
+
+(ז) אם $,\lim\limits_{n\to\infty} a_n = -\infty$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = 0$
+
+(ח) אם $,\lim\limits_{n\to\infty} a_n = 0^{+}$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = \infty$
+
+(ט) אם $,\lim\limits_{n\to\infty} a_n = 0^{-}$ אז $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = -\infty$
+:::
+
+```{=html}
+<!-- תוקן ב-2026-09-14: בתמלול הופיע בסעיף (ג) התנאי L > 0, אבל הוא מיותר — לסכום
+     די בכך ש-b_n מתכנסת לגבול ממשי כלשהו, ואפילו שלילי. התנאי על הסימן נחוץ רק
+     במכפלה, שם הוא מכריע אם התוצאה היא ∞ או −∞, ולכן הוא נשאר בסעיפים (ד) ו-(ה). -->
+```
+
+::: {.thmrem numbered="false"}
+המשפט מנוסח כולו עבור $,a_n \to \infty$ ואין בכך הגבלה: את המקרים המשלימים, שבהם $,a_n \to -\infty$ מקבלים מיד מ[](#box-prp-negate-infinity) בהפעלה על $.\left(-a_n\right)$ כך למשל, מסעיף (א) נובע שאם $a_n \to -\infty$ וגם $b_n \to -\infty$ אז $,a_n + b_n \to -\infty$ ואין צורך לרשום את כל הווריאציות בנפרד.
+
+שימו לב גם לתנאים שאינם מופיעים במשפט, ואין זה מקרה:
+
+- בסעיפים (ד) ו-(ה) נדרש $L \neq 0$ במפורש. המקרה $L = 0$ חסר, ולא בטעות.
+- בסעיפים (ח) ו-(ט) לא די ש-$,a_n \to 0$ אלא נדרש כיוון: $0^{+}$ או $.0^{-}$ סדרה השואפת לאפס ומחליפה סימן ללא הרף אינה נכללת בשניהם.
+
+בשני המקרים האלה אין תשובה אחידה, ונחזור אליהם מיד אחרי ההוכחה.
+:::
+
+::: thmproof
+נוכיח את סעיפים (א), (ד) ו-(ח). שאר הסעיפים מוכחים באותם טיעונים בדיוק. בכל שלושת הסעיפים המסקנה היא שאיפה לאינסוף, ולכן לפי [הכלל שלפיו די לבדוק $M$ חיובי](#box-key-positive-M) נוכל להניח $.M > 0$
+
+**סעיף (א).** יהי $.M > 0$ לפי הגדרת השאיפה לאינסוף, המופעלת על $(a_n)$ עם המספר $,M$ מתקיים $a_n > M$ החל ממקום מסוים. לפי אותה הגדרה, המופעלת על $(b_n)$ עם המספר $,0$ מתקיים $b_n > 0$ החל ממקום מסוים. לפי [שילוב טענות מהסוג ״החל ממקום מסוים״](07-sequences-limit.qmd#box-key-finitely-many) שתי הטענות מתקיימות יחד החל ממקום מסוים, ושם
+
+$$,a_n + b_n > M + 0 = M$$
+
+ולכן $.\lim\limits_{n\to\infty} \left(a_n + b_n\right) = \infty$
+
+**סעיף (ד).** נניח $\lim\limits_{n\to\infty} a_n = \infty$ ו-$\lim\limits_{n\to\infty} b_n = L$ עבור $.L > 0$ נפעיל את הגדרת הגבול על $(b_n)$ עם $:\varepsilon = \frac{L}{2}$ החל ממקום מסוים מתקיים $,\left|b_n - L\right| < \frac{L}{2}$ ובפרט
+
+$$.b_n > L - \frac{L}{2} = \frac{L}{2} > 0$$
+
+יהי עכשיו $.M > 0$ החל ממקום מסוים מתקיים גם $,a_n > \dfrac{2M}{L}$ ושוב לפי אותו כלל שתי הטענות מתקיימות יחד החל ממקום מסוים. שם $,a_n > \dfrac{2M}{L} > 0$ ולכן אפשר להכפיל את $a_n$ באי-השוויון $:b_n > \frac{L}{2}$
+
+$$.a_n \cdot b_n > a_n \cdot \frac{L}{2} > \frac{2M}{L} \cdot \frac{L}{2} = M$$
+
+לכן $.\lim\limits_{n\to\infty} a_n b_n = \infty$
+
+**סעיף (ח).** נניח $,\lim\limits_{n\to\infty} a_n = 0^{+}$ כלומר $\lim\limits_{n\to\infty} a_n = 0$ וגם $a_n > 0$ החל ממקום מסוים, ויהי $.M > 0$ נפעיל את הגדרת הגבול עם $:\varepsilon = \frac{1}{M}$ החל ממקום מסוים מתקיים $.\left|a_n\right| < \frac{1}{M}$ נצרף לכך את החיוביות, ומן המקום שבו שתי הטענות מתקיימות יחד נקבל
+
+$$.0 < a_n < \frac{1}{M}$$
+
+היפוך אי-שוויון בין מספרים חיוביים מהפך את כיוונו, ולכן $.\frac{1}{a_n} > M$ מצאנו מקום כזה לכל $,M > 0$ ולכן $.\lim\limits_{n\to\infty} \dfrac{1}{a_n} = \infty$
+:::
+
+::: {#box-exm-infinite-arithmetic .thmexm title="שימוש בסעיפי המשפט"}
+**(א) הסדרה $.a_n = n^{2} + n$**
+
+שתי הסדרות $n^{2}$ ו-$n$ שואפות לאינסוף, ולכן לפי סעיף (א) גם סכומן.
+
+**(ב) הסדרה $.a_n = n\left(2 + \dfrac{1}{n}\right)$**
+
+כאן $n \to \infty$ ואילו $2 + \frac{1}{n} \to 2$ שהוא חיובי, ולכן לפי סעיף (ד) המכפלה שואפת לאינסוף. שימו לב שלא היינו צריכים לפתוח את הסוגריים.
+
+**(ג) הסדרה $.a_n = n\left(\dfrac{1}{n} - 3\right)$**
+
+הפעם הגורם השני שואף ל-$,-3$ שהוא שלילי, ולכן לפי סעיף (ה) המכפלה שואפת ל-$.-\infty$
+
+**(ד) הסדרה $.a_n = \dfrac{1}{n^{2}+1}$**
+
+המכנה שואף לאינסוף, ולכן לפי סעיף (ו) המנה שואפת ל-$.0$
+
+**(ה) הסדרה $.a_n = \dfrac{n+1}{n} \cdot n^{2}$**
+
+המנה $\frac{n+1}{n}$ מתכנסת ל-$,1$ הסדרה $n^{2}$ שואפת לאינסוף, ולפי סעיף (ד) המכפלה שואפת לאינסוף.
+:::
 
 ### צורות לא מוגדרות
 
@@ -1079,7 +862,7 @@ $$\frac{r}{0^{+}} = \begin{cases} \infty & r > 0 \\ -\infty & r < 0 \end{cases} 
 | $n^2$ | $-\dfrac{1}{n}$ | $-n$ | $-\infty$ |
 | $n$ | $\dfrac{\left(-1\right)^{n}}{n}$ | $\left(-1\right)^{n}$ | אינו קיים |
 
-**ההופכי של סדרה השואפת לאפס, ללא תנאי על הסימן.** [](#box-prp-reciprocal-of-null) דרשה שהסדרה תשאף לאפס מצד מסוים. בלי הדרישה הזאת אין מסקנה.
+**ההופכי של סדרה השואפת לאפס, ללא תנאי על הסימן.** סעיפים (ח) ו-(ט) דרשו שכל האיברים יהיו בעלי אותו סימן. בלי הדרישה הזאת אין מסקנה.
 
 | $a_n \to 0$ | $\dfrac{1}{a_n}$ | הגבול |
 |:---:|:---:|:---:|
@@ -1099,21 +882,21 @@ $$,-1,\ 2,\ -3,\ 4,\ -5,\ \dots$$
 :::
 
 ::: {#box-exm-resolving-indeterminate .thmexm title="צורה לא מוגדרת שנפתרת"}
-נחזור אל [](#box-qst-infinite-sum-or-difference), עם $a_n = \sqrt{n^{2}+n}$ ו-$.b_n = n$ הסכום $a_n + b_n$ שואף לאינסוף לפי סעיף (א) של [](#box-thm-arithmetika-rachav). ההפרש, לעומת זאת, הוא מן הצורה $,\infty - \infty$ ואין כלל שאפשר להפעיל עליו.
+נחזור אל הסדרה שב[](#box-qst-quotient-through-infinity):
 
-אבל הביטוי אינו מחויב לצורה שבה נכתב. נכפול ונחלק בביטוי **הצמוד** $,\sqrt{n^{2}+n} + n$ שהוא חיובי לכל $,n$ ונשתמש בזהות $:\left(x-y\right)\left(x+y\right) = x^{2} - y^{2}$
+$$.c_n = \frac{3n^{2} - n}{n^{2} + 5}$$
 
-$$.\sqrt{n^{2}+n} - n = \frac{\left(\sqrt{n^{2}+n} - n\right)\left(\sqrt{n^{2}+n} + n\right)}{\sqrt{n^{2}+n} + n} = \frac{\left(n^{2}+n\right) - n^{2}}{\sqrt{n^{2}+n} + n} = \frac{n}{\sqrt{n^{2}+n} + n}$$
+המונה והמכנה שואפים שניהם לאינסוף, ולכן הצורה כאן היא $,\frac{\infty}{\infty}$ ואין כלל שאפשר להפעיל עליה.
 
-עכשיו נחלק מונה ומכנה ב-$.n$ מכיוון ש-$,n > 0$ מתקיים $,\frac{\sqrt{n^{2}+n}}{n} = \sqrt{\frac{n^{2}+n}{n^{2}}} = \sqrt{1 + \frac{1}{n}}$ ולכן
+אבל הביטוי אינו מחויב לצורה שבה נכתב. נחלק מונה ומכנה ב-$:n^{2}$
 
-$$.\frac{n}{\sqrt{n^{2}+n} + n} = \frac{1}{\sqrt{1 + \frac{1}{n}} + 1}$$
+$$.\frac{3n^{2}-n}{n^{2}+5} = \frac{3 - \dfrac{1}{n}}{1 + \dfrac{5}{n^{2}}}$$
 
-לפי [](08-sequences-properties.qmd#box-thm-power-arithmetic) מתקיים $,\lim\limits_{n\to\infty} \sqrt{1 + \frac{1}{n}} = \sqrt{1} = 1$ ולכן המכנה שואף ל-$.2$ לפי סעיף המנה של [](08-sequences-properties.qmd#box-thm-sequence-arithmetic)
+עכשיו המונה שואף ל-$3$ והמכנה שואף ל-$,1$ ולכן סעיף המנה של [](08-sequences-properties.qmd#box-thm-sequence-arithmetic) נותן
 
-$$.\lim_{n\to\infty} \left(\sqrt{n^{2}+n} - n\right) = \frac{1}{2}$$
+$$.\lim_{n\to\infty} c_n = \frac{3}{1} = 3$$
 
-זו התשובה לשאלה שנשאלה שם: ההפרש בין שתי הסדרות מתכנס, והגבול שלו הוא $,\frac{1}{2}$ מספר שקשה לנחש מראש. הכפל בצמוד הוא הכלי הרגיל לצורה $\infty - \infty$ כאשר מופיעים שורשים.
+שני הגבולות ממשיים, סעיף המנה חל, והצורה $\frac{\infty}{\infty}$ נעלמה מאליה. זו גם התשובה לשאלה שנשאלה שם: הגבול קיים והוא $,3$ אף שהצורה עצמה לא הבטיחה דבר.
 :::
 
 ::: {#box-warn-indeterminate-not-no-limit .thmwarn title="צורה לא מוגדרת אינה אומרת שאין גבול"}
@@ -1193,7 +976,7 @@ $$,\lim_{n\to\infty} \frac{b_n}{a_n} = \lim_{n\to\infty} \frac{1}{\ \frac{a_n}{b
 :::
 
 ::: {.thmproof title="סעיף (ב)"}
-מכיוון ש-$\frac{a_n}{b_n} > 0$ לכל $,n$ גם $a_n \neq 0$ לכל $,n$ והנתון $\lim \frac{a_n}{b_n} = 0$ אומר ש-$.\lim \frac{a_n}{b_n} = 0^{+}$ לכן לפי סעיף (א) של [](#box-prp-reciprocal-of-null)
+מכיוון ש-$\frac{a_n}{b_n} > 0$ לכל $,n$ גם $a_n \neq 0$ לכל $,n$ והנתון $\lim \frac{a_n}{b_n} = 0$ אומר ש-$.\lim \frac{a_n}{b_n} = 0^{+}$ לכן לפי סעיף (ח) של [](#box-thm-arithmetika-rachav)
 
 $$.\lim_{n\to\infty} \frac{b_n}{a_n} = \infty$$
 
@@ -1226,139 +1009,17 @@ $$.\lim_{n\to\infty} \left(n^{2} - 5n\right) = 1 \cdot \infty = \infty$$
 **סעיף (ב) בלי תנאי הסימן.** ניקח $a_n = n$ ו-$.b_n = \left(-1\right)^{n} n^{2}$ אז $\frac{a_n}{b_n} = \frac{\left(-1\right)^{n}}{n}$ שואפת ל-$,0$ וגם $,\lim a_n = \infty$ אבל איברי $(b_n)$ מחליפים סימן ואינם חסומים, ולכן היא אינה מתכנסת במובן הרחב.
 
 **סעיף (ג) כאשר $.B = 0$** ניקח $a_n = 1$ ו-$.b_n = \frac{1}{n}$ אז $\frac{a_n}{b_n} = n$ שואפת לאינסוף ו-$,\lim b_n = 0$ אבל $.\lim a_n = 1$ זוהי בדיוק הצורה $\infty \cdot 0$ שראינו שאין לה חוקיות.
-
-**הסימן של $L$ בסעיף (א).** ניקח $a_n = -2n + 1$ ו-$.b_n = n$ אז $,\frac{a_n}{b_n} = -2 + \frac{1}{n}$ ולכן $,L = -2$ ו-$.\lim b_n = \infty$ לפי סעיף (א) $,\lim a_n = \left(-2\right) \cdot \infty = -\infty$ כלומר שתי הסדרות שואפות לאינסופים **הפוכים**.
-:::
-
-::: {#box-warn-ratio-comparison-signs .thmwarn title="הסימנים בהשוואה בעזרת המנה"}
-במשפט הזה הסימנים מכריעים. בסעיף (א), כאשר $,L < 0$ הסדרות שואפות לאינסופים הפוכים. בסעיף (ב), בלי ש-$\frac{a_n}{b_n} > 0$ אין מסקנה כלל. ובסעיף (ג), הסימן של $B$ הוא שקובע אם הגבול הוא $\infty$ או $.-\infty$ לפני שמפעילים את המשפט, בדקו את הסימנים.
 :::
 
 המקרה $L = -\infty$ מתקבל מסעיף (ג) בהפעלה על $:\left(-a_n\right)$ אם $\lim \frac{a_n}{b_n} = -\infty$ ו-$\lim b_n = B \neq 0$ אז $\lim a_n = -\infty$ כאשר $,B > 0$ ו-$\lim a_n = \infty$ כאשר $.B < 0$
 
-### תרגילים {#sec-arithmetic-exercises}
-
-**תרגיל 1.** חשבו את הגבולות הבאים.
-
-(א) $\lim\limits_{n\to\infty} \left(n - \sqrt{n}\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ב) $\lim\limits_{n\to\infty} \dfrac{n^{2} + \sin n}{n}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ג) $\lim\limits_{n\to\infty} \left(\sqrt{n+1} - \sqrt{n}\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ד) $\lim\limits_{n\to\infty} \dfrac{3 + \sin n}{\sqrt{n+1} - \sqrt{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ד)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ה) $\lim\limits_{n\to\infty} \left(2n^{2} - n\sqrt{n}\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">(ה)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-::: {.thmsol .foldable}
-**סעיף (א).** הגבול הוא $.\infty$ זו צורה מן הסוג $,\infty - \infty$ ולכן נוציא גורם משותף: $.n - \sqrt{n} = \sqrt{n}\left(\sqrt{n} - 1\right)$ הגורם $\sqrt{n}$ שואף לאינסוף, והגורם $\sqrt{n} - 1$ מקיים $\sqrt{n} - 1 \geq 1$ לכל $.n \geq 4$ לפי סעיף (ב) של [](#box-thm-infinite-limits-general) ולפי [הכלל שלפיו די בתנאים החל ממקום מסוים](#box-key-infinite-arithmetic-eventually) המכפלה שואפת לאינסוף.
-
-**סעיף (ב).** הגבול הוא $.\infty$ נפצל את השבר:
-
-$$.\frac{n^{2} + \sin n}{n} = n + \frac{\sin n}{n}$$
-
-המחובר $\frac{\sin n}{n}$ שואף לאפס לפי סעיף (ד) של [](#box-thm-infinite-limits-general), ובפרט הוא חסום מלרע. לפי סעיף (א) של אותו משפט הסכום שואף לאינסוף.
-
-**סעיף (ג).** הגבול הוא $.0$ נכפול ונחלק בצמוד, כמו ב[](#box-exm-resolving-indeterminate):
-
-$$.\sqrt{n+1} - \sqrt{n} = \frac{\left(n+1\right) - n}{\sqrt{n+1} + \sqrt{n}} = \frac{1}{\sqrt{n+1} + \sqrt{n}}$$
-
-המכנה שואף לאינסוף לפי סעיף (א) של [](#box-thm-arithmetika-rachav), ולכן לפי סעיף (ו) שם המנה שואפת לאפס.
-
-**סעיף (ד).** הגבול הוא $.\infty$ לפי סעיף (ג), המכנה שואף לאפס, וכל איבריו חיוביים, ולכן הוא שואף ל-$.0^{+}$ המונה מקיים $3 + \sin n \geq 2$ לכל $,n$ ולכן לפי סעיף (ג) של [](#box-prp-reciprocal-of-null) המנה שואפת לאינסוף.
-
-**סעיף (ה).** הגבול הוא $.\infty$ נשווה בעזרת המנה ל-$:n^{2}$
-
-$$.\frac{2n^{2} - n\sqrt{n}}{n^{2}} = 2 - \frac{1}{\sqrt{n}}$$
-
-המנה שואפת ל-$,2$ שהוא מספר ממשי חיובי, ו-$,\lim n^{2} = \infty$ ולכן לפי סעיף (א) של [](#box-thm-ratio-comparison) הגבול הוא $.2 \cdot \infty = \infty$
-:::
-
-**תרגיל 2.** אם $\lim\limits_{n\to\infty} a_n = \infty$ ו-$,\lim\limits_{n\to\infty} b_n = -\infty$ אז לסדרה $a_n + b_n$ אין גבול.
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-::: {.thmsol .foldable}
-**לא נכון.** זו הצורה $,\infty - \infty$ והיא אינה מוגדרת: אי-אפשר לדעת מראש מה יקרה, אבל ייתכן בהחלט שיש גבול. למשל, עבור $a_n = n$ ו-$b_n = -n$ הסכום הוא $0$ לכל $,n$ ועבור $a_n = n + 1$ ו-$b_n = -n$ הסכום שואף ל-$.1$
-:::
-
-**תרגיל 3.** אם $\lim\limits_{n\to\infty} a_n = \infty$ ו-$(b_n)$ חסומה, אז $.\lim\limits_{n\to\infty} a_n b_n = \infty$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-::: {.thmsol .foldable}
-**לא נכון.** לסכום די בחסימוּת, אבל למכפלה דרוש ש-$b_n$ יהיה רחוק מאפס ובעל סימן קבוע, כמו בסעיפים (ב) ו-(ג) של [](#box-thm-infinite-limits-general). למשל עבור $a_n = n$ ו-$b_n = -1$ המכפלה שואפת למינוס אינסוף, ועבור $b_n = \left(-1\right)^{n}$ המכפלה היא $\left(-1\right)^{n} n$ ואין לה גבול כלל.
-:::
-
-**תרגיל 4.** האם קיים הגבול $?\lim\limits_{n\to\infty} \dfrac{n}{2 + \left(-1\right)^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="inf"><span class="seq-label">הגבול</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-::: {.thmsol .foldable}
-כן, והוא $.\infty$ המכנה אינו מתכנס, שכן הוא מתחלף בין $1$ ל-$,3$ אבל הוא חסום: $.1 \leq 2 + \left(-1\right)^{n} \leq 3$ לכן
-
-$$,\frac{n}{2 + \left(-1\right)^{n}} = n \cdot \frac{1}{2 + \left(-1\right)^{n}}$$
-
-והגורם השני מקיים $\frac{1}{2 + \left(-1\right)^{n}} \geq \frac{1}{3}$ לכל $.n$ לפי סעיף (ב) של [](#box-thm-infinite-limits-general) עם $c = \frac{1}{3}$ המכפלה שואפת לאינסוף.
-:::
-
-## מבחן המנה ומבחן השורש {#sec-ratio-root-tests}
+## מבחן המנה ומבחן השורש
 
 בפרק הקודם למדנו לזהות את התנהגותן של שתי משפחות סדרות: החזקות $r^{n}$ והשורשים $.\sqrt[n]{r}$ אבל מה נעשה עם סדרה כמו
 
-$$?a_n = \frac{n}{2^{n}}$$
+$$?a_n = \frac{2^{n}}{n^{2}}$$
 
-המונה גדל, המכנה גדל, והצורה היא $.\frac{\infty}{\infty}$ זו בדיוק הבעיה שב[](#box-qst-quotient-through-infinity), עם $2$ במקום $.1.01$ חלוקה ב-$n$ לא תועיל כאן, שכן $2^{n}$ אינו פולינום, ואריתמטיקת הגבולות אינה יודעת להשוות בין חזקה לפולינום.
+המונה גדל, המכנה גדל, והצורה היא $.\frac{\infty}{\infty}$ חלוקה ב-$n^{2}$ לא תועיל כאן, שכן $2^{n}$ אינו פולינום, ואריתמטיקת הגבולות אינה יודעת להשוות בין חזקה לפולינום.
 
 הרעיון שיחלץ אותנו הוא לשאול על הסדרה שאלה אחרת. לא ״לאן היא הולכת״, אלא **״באיזה קצב היא משתנה״**. בסדרה הגאומטרית $r^{n}$ היחס בין איבר לקודמו הוא בדיוק $,r$ והוא שקבע את התשובה. מתברר שאותו רעיון עובד באופן כללי: אם היחס בין איבר לקודמו מתכנס למספר קטן מ-$,1$ הסדרה מתנהגת כמו גאומטרית יורדת ושואפת לאפס, ואם הוא מתכנס למספר גדול מ-$,1$ היא מתנהגת כמו גאומטרית עולה וגדלה מעבר לכל חסם.
 
@@ -1378,8 +1039,8 @@ $$.L = \lim_{n\to\infty} \frac{a_{n+1}}{a_n}$$
 (ג) אם $,L = 1$ אין למבחן מסקנה, וכל אחת מן האפשרויות עשויה להתקיים.
 :::
 
-::: {.thmproof title="סעיף (א)"}
-נניח $.L < 1$ המטרה היא לתפוס את הסדרה בין $0$ לבין סדרה גאומטרית יורדת.
+::: thmproof
+**סעיף (א).** נניח $.L < 1$ המטרה היא לתפוס את הסדרה בין $0$ לבין סדרה גאומטרית יורדת.
 
 נבחר מספר $q$ המקיים $,L < q < 1$ למשל את הממוצע $.q = \frac{L+1}{2}$ מכיוון שהמנה מתכנסת ל-$L$ ומכיוון ש-$,q > L$ קיים $N$ שממנו והלאה
 
@@ -1398,10 +1059,8 @@ $$,a_n < q^{\,n-N} a_N = \underbrace{\frac{a_N}{q^{N}}}_{C} \cdot q^{\,n}$$
 $$.0 < a_n < C q^{\,n}$$
 
 מכיוון ש-$,0 < q < 1$ לפי סעיף (ב) של [](08-sequences-properties.qmd#box-thm-geometric-power) מתקיים $,\lim\limits_{n\to\infty} q^{n} = 0$ ולכן גם $.\lim\limits_{n\to\infty} C q^{n} = 0$ שתי הסדרות החוסמות שואפות לאפס, ולפי [](08-sequences-properties.qmd#box-thm-squeeze-sequences) גם $.\lim\limits_{n\to\infty} a_n = 0$
-:::
 
-::: {.thmproof title="סעיף (ב)"}
-נניח $.L > 1$ הפעם נבחר $q$ המקיים $,1 < q < L$ ומאותו שיקול קיים $N$ שממנו והלאה
+**סעיף (ב).** נניח $.L > 1$ הפעם נבחר $q$ המקיים $,1 < q < L$ ומאותו שיקול קיים $N$ שממנו והלאה
 
 $$.\frac{a_{n+1}}{a_n} > q$$
 
@@ -1410,10 +1069,8 @@ $$.\frac{a_{n+1}}{a_n} > q$$
 $$,a_n > C q^{\,n}$$
 
 עם אותו קבוע $.C = \frac{a_N}{q^{N}} > 0$ מכיוון ש-$,q > 1$ הסדרה $C q^{n}$ עולה ואינה חסומה, ולכן לפי [](#box-thm-monotone-wide-sense) היא שואפת לאינסוף. לפי [](#box-thm-piza-rachav) גם $.\lim\limits_{n\to\infty} a_n = \infty$
-:::
 
-::: {.thmproof title="סעיף (ג)"}
-די להציג שלוש סדרות שבכולן המנה שואפת ל-$,1$ ושהתוצאות שלהן שונות:
+**סעיף (ג).** די להציג שלוש סדרות שבכולן המנה שואפת ל-$,1$ ושהתוצאות שלהן שונות:
 
 | $a_n$ | $\dfrac{a_{n+1}}{a_n}$ | הגבול |
 |:---:|:---:|:---:|
@@ -1424,58 +1081,32 @@ $$,a_n > C q^{\,n}$$
 הידיעה $L = 1$ לבדה אינה מכריעה אפוא דבר.
 :::
 
-::: {#box-exm-mivchanim-1 .thmexr title="הסדרה $n/2^n$"}
+::: {#box-exm-mivchanim-1 .thmexr title="הסדרה $2^n/n^2$"}
 חשבו את הגבול
 
-$$.\lim_{n\to\infty} \frac{n}{2^{n}}$$
+$$.\lim_{n\to\infty} \frac{2^{n}}{n^{2}}$$
 :::
 
 ::: thmsol
-זו הסדרה שבה פתחנו את הסעיף. נסמן $a_n = \dfrac{n}{2^{n}}$ ונשים לב שכל איבריה חיוביים, ולכן מבחן המנה חל עליה.
+זו הסדרה שבה פתחנו את הסעיף. נסמן $a_n = \dfrac{2^{n}}{n^{2}}$ ונשים לב שכל איבריה חיוביים, ולכן מבחן המנה חל עליה.
 
 נחשב את המנה. חלוקת שבר בשבר היא כפל בהופכי:
 
-$$.\frac{a_{n+1}}{a_n} = \frac{n+1}{2^{n+1}} \cdot \frac{2^{n}}{n} = \underbrace{\frac{2^{n}}{2^{n+1}}}_{\frac{1}{2}} \cdot \frac{n+1}{n} = \frac{1}{2}\left(1 + \frac{1}{n}\right)$$
+$$.\frac{a_{n+1}}{a_n} = \frac{2^{n+1}}{\left(n+1\right)^{2}} \cdot \frac{n^{2}}{2^{n}} = \underbrace{\frac{2^{n+1}}{2^{n}}}_{2} \cdot \frac{n^{2}}{\left(n+1\right)^{2}}$$
 
-הגורם $1 + \frac{1}{n}$ שואף ל-$,1$ ולכן לפי אריתמטיקת הגבולות
+את הגורם השני נוח לכתוב כחזקה של שבר אחד:
 
-$$.\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = \frac{1}{2} \cdot 1 = \frac{1}{2}$$
+$$.\frac{n^{2}}{\left(n+1\right)^{2}} = \left(\frac{n}{n+1}\right)^{2} = \frac{1}{\left(1+\frac{1}{n}\right)^{2}}$$
 
-קיבלנו $,L = \frac{1}{2} < 1$ ולכן לפי סעיף (א) של [](#box-thm-ratio-test)
+המכנה שואף ל-$,1^{2} = 1$ ולכן הגורם השני שואף ל-$.1$ לפי אריתמטיקת הגבולות
 
-$$.\lim_{n\to\infty} \frac{n}{2^{n}} = 0$$
+$$.\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = 2 \cdot 1 = 2$$
 
-זו התשובה שחיפשנו: החזקה $2^{n}$ גדלה מהר יותר מ-$,n$ ומהר יותר בצורה כה מוחלטת שהמנה שואפת לאפס.
-:::
+קיבלנו $,L = 2 > 1$ ולכן לפי סעיף (ב) של [](#box-thm-ratio-test)
 
-שימו לב מה קבע את התשובה. המונה $n$ תרם למנה את הגורם $,\frac{n+1}{n}$ ששואף ל-$,1$ והמכנה $2^{n}$ תרם את הגורם הקבוע $.\frac{1}{2}$ אילו הייתה במונה חזקה אחרת של $,n$ היה משתנה רק הגורם הראשון, והוא היה עדיין שואף ל-$.1$
+$$.\lim_{n\to\infty} \frac{2^{n}}{n^{2}} = \infty$$
 
-::: {#box-exr-n2-over-2n .thmexr title="הסדרה $n^2/2^n$"}
-חשבו את הגבול
-
-$$.\lim_{n\to\infty} \frac{n^{2}}{2^{n}}$$
-:::
-
-::: thmsol
-נסמן $,a_n = \dfrac{n^{2}}{2^{n}}$ וכל איבריה חיוביים. בדיוק כמו ב[](#box-exm-mivchanim-1):
-
-$$.\frac{a_{n+1}}{a_n} = \frac{\left(n+1\right)^{2}}{2^{n+1}} \cdot \frac{2^{n}}{n^{2}} = \frac{1}{2} \cdot \left(\frac{n+1}{n}\right)^{2} = \frac{1}{2}\left(1 + \frac{1}{n}\right)^{2}$$
-
-הגורם $\left(1 + \frac{1}{n}\right)^{2}$ שואף ל-$,1^{2} = 1$ ולכן $.\lim\limits_{n\to\infty} \frac{a_{n+1}}{a_n} = \frac{1}{2} < 1$ לפי סעיף (א) של [](#box-thm-ratio-test)
-
-$$.\lim_{n\to\infty} \frac{n^{2}}{2^{n}} = 0$$
-
-החישוב כמעט זהה לקודמו: החזקה של $n$ במונה השפיעה רק על גורם השואף ל-$,1$ ולכן לא שינתה את התשובה. ב[סעיף על יחסי הגדילה](#sec-growth-orders) נראה שזה נכון לכל חזקה של $,n$ ולכל בסיס גדול מ-$.1$
-:::
-
-::: {#box-exm-n-over-1-01n .thmexm title="חזרה לשאלה על $n/1.01^n$"}
-עכשיו אפשר לענות על [](#box-qst-quotient-through-infinity). עבור $a_n = \dfrac{n}{1.01^{n}}$ אותו חישוב נותן
-
-$$,\frac{a_{n+1}}{a_n} = \frac{1}{1.01}\left(1 + \frac{1}{n}\right)$$
-
-והגבול של המנה הוא $.\frac{1}{1.01} < 1$ לכן $.\lim\limits_{n\to\infty} \dfrac{n}{1.01^{n}} = 0$
-
-התשובה אולי מפתיעה: $1.01^{n}$ גדלה לאט מאוד, ובמשך מאות צעדים היא קטנה בהרבה מ-$.n$ ובכל זאת, בסופו של דבר היא עוקפת את $n$ ומשאירה אותו הרחק מאחור. ב[סעיף על יחסי הגדילה](#sec-growth-orders) נחזור לנקודה הזאת.
+זו התשובה שחיפשנו: החזקה $2^{n}$ גדלה מהר יותר מן הפולינום $,n^{2}$ ומהר יותר בצורה כה מוחלטת שהמנה אינה נשארת חסומה.
 :::
 
 ### מבחן השורש
@@ -1496,26 +1127,22 @@ $$.L = \lim_{n\to\infty} \sqrt[n]{a_n}$$
 (ג) אם $,L = 1$ אין למבחן מסקנה.
 :::
 
+::: thmproof
 ההוכחה קצרה מקודמתה, ומאותה סיבה: כאן החסם הגאומטרי מתקבל בצעד אחד ולא באינדוקציה.
 
-::: {.thmproof title="סעיף (א)"}
-נבחר $q$ המקיים $,L < q < 1$ ושוב קיים $N$ שממנו והלאה $.\sqrt[n]{a_n} < q$ נעלה את שני האגפים בחזקת $n$ ונקבל
+**סעיף (א).** נבחר $q$ המקיים $,L < q < 1$ ושוב קיים $N$ שממנו והלאה $.\sqrt[n]{a_n} < q$ נעלה את שני האגפים בחזקת $n$ ונקבל
 
 $$,0 < a_n < q^{\,n}$$
 
 ומכיוון ש-$0 < q < 1$ מתקיים $,\lim\limits_{n\to\infty} q^{n} = 0$ ולכן לפי [כלל הסנדוויץ׳](08-sequences-properties.qmd#box-thm-squeeze-sequences) גם $.\lim\limits_{n\to\infty} a_n = 0$
-:::
 
-::: {.thmproof title="סעיף (ב)"}
-נבחר $q$ המקיים $,1 < q < L$ ואז החל ממקום מסוים $,\sqrt[n]{a_n} > q$ כלומר
+**סעיף (ב).** נבחר $q$ המקיים $,1 < q < L$ ואז החל ממקום מסוים $,\sqrt[n]{a_n} > q$ כלומר
 
 $$.a_n > q^{\,n}$$
 
 הסדרה $q^{n}$ שואפת לאינסוף, ולכן לפי [כלל הפיצה](#box-thm-piza-rachav) גם $.\lim\limits_{n\to\infty} a_n = \infty$
-:::
 
-::: {.thmproof title="סעיף (ג)"}
-שלוש הסדרות שבטבלה שלמעלה משמשות גם כאן: עבור $a_n = 1$ מתקיים $,\sqrt[n]{1} = 1$ ועבור $a_n = n$ ועבור $a_n = \frac{1}{n}$ מתקיים $\sqrt[n]{a_n} \to 1$ לפי [](08-sequences-properties.qmd#box-thm-nth-root-of-a) ואריתמטיקת הגבולות. שלוש תוצאות שונות, אותו $.L = 1$
+**סעיף (ג).** שלוש הסדרות שבטבלה שלמעלה משמשות גם כאן: עבור $a_n = 1$ מתקיים $,\sqrt[n]{1} = 1$ ועבור $a_n = n$ ועבור $a_n = \frac{1}{n}$ מתקיים $\sqrt[n]{a_n} \to 1$ לפי [](08-sequences-properties.qmd#box-thm-nth-root-of-a) ואריתמטיקת הגבולות. שלוש תוצאות שונות, אותו $.L = 1$
 :::
 
 ::: {#box-exm-mivchanim-2 .thmexr title="הסדרה $3^n$"}
@@ -1548,54 +1175,6 @@ $$\lim_{n\to\infty} q^{n} = \begin{cases} \infty & q > 1 \\ 1 & q = 1 \\ 0 & 0 <
 אם $q > 1$ אז $L > 1$ וסעיף (ב) נותן $;\lim\limits_{n\to\infty} q^{n} = \infty$ ואם $0 < q < 1$ אז $L < 1$ וסעיף (א) נותן $.\lim\limits_{n\to\infty} q^{n} = 0$
 
 שימו לב שהמקרה $q > 1$ הוא בדיוק החידוד שהובטח: בפרק הקודם ידענו שהסדרה אינה חסומה, וכאן קיבלנו שהיא שואפת לאינסוף.
-:::
-
-::: {#box-chk-which-test .thmchk}
-לכל אחת מן הסדרות הבאות, איזה מבחן נוח יותר לחישוב הגבול?
-
-(א) $\dfrac{n!}{5^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="a" data-reveal>
-<button class="tf-opt" data-val="a">מבחן המנה</button>
-<button class="tf-opt" data-val="b">מבחן השורש</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ב) $\left(\dfrac{n}{n+1}\right)^{n^{2}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="b" data-reveal>
-<button class="tf-opt" data-val="a">מבחן המנה</button>
-<button class="tf-opt" data-val="b">מבחן השורש</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ג) $\left(\dfrac{2n+1}{3n}\right)^{n}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="b" data-reveal>
-<button class="tf-opt" data-val="a">מבחן המנה</button>
-<button class="tf-opt" data-val="b">מבחן השורש</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-:::
-
-::: {.thmsol .foldable}
-**(א) מבחן המנה.** בעצרת המנה מתקצרת כמעט לגמרי: $.\frac{a_{n+1}}{a_n} = \frac{n+1}{5}$ המנה הזאת אינה מתכנסת למספר, אבל לכל $n \geq 10$ היא גדולה מ-$,2$ והוכחת סעיף (ב) של [](#box-thm-ratio-test) עובדת כלשונה עם $.q = 2$ לכן הסדרה שואפת לאינסוף. השורש ה-$n$-י של $n!$ לעומת זאת קשה לחישוב.
-
-**(ב) מבחן השורש.** הסדרה היא חזקה $n$-ית: $,\sqrt[n]{a_n} = \left(\frac{n}{n+1}\right)^{n} = \frac{1}{\left(1+\frac{1}{n}\right)^{n}}$ והגבול הוא $.\frac{1}{e} < 1$ לכן הסדרה שואפת לאפס.
-
-**(ג) מבחן השורש.** $,\sqrt[n]{a_n} = \frac{2n+1}{3n} = \frac{2}{3} + \frac{1}{3n}$ והגבול הוא $.\frac{2}{3} < 1$ לכן הסדרה שואפת לאפס.
 :::
 
 <!-- מקור: הרצאה 8 -->
@@ -1642,58 +1221,30 @@ $$.L - 2\varepsilon < \sqrt[n]{a_n} < L + 2\varepsilon$$
 בשני המקרים $\left|\sqrt[n]{a_n} - L\right| < 2\varepsilon$ החל ממקום מסוים, ולכן $.\lim\limits_{n\to\infty} \sqrt[n]{a_n} = L$
 ::::::::::
 
-הכיוון ההפוך של המשפט אינו נכון, והדוגמה הבאה מראה זאת.
-
-::: {#box-exm-dalembert-converse-fails .thmexm title="השורש מתכנס, המנה אינה מתכנסת"}
-נתבונן בסדרה $,a_n = 3 + \left(-1\right)^{n}$ שאיבריה
-
-$$.2,\ 4,\ 2,\ 4,\ 2,\ \dots$$
-
-**המנה אינה מתכנסת.** המנה $\frac{a_{n+1}}{a_n}$ היא $\frac{4}{2} = 2$ כאשר $n$ אי-זוגי, ו-$\frac{2}{4} = \frac{1}{2}$ כאשר $n$ זוגי. היא קופצת בין שני ערכים ואין לה גבול.
-
-**השורש מתכנס.** לכל $n$ מתקיים $,2 \leq a_n \leq 4$ ולכן
-
-$$.\sqrt[n]{2} \leq \sqrt[n]{a_n} \leq \sqrt[n]{4}$$
-
-לפי [](08-sequences-properties.qmd#box-thm-nth-root-of-a) שני החסמים שואפים ל-$,1$ ולפי [כלל הסנדוויץ׳](08-sequences-properties.qmd#box-thm-squeeze-sequences) גם $.\lim\limits_{n\to\infty} \sqrt[n]{a_n} = 1$
+::: {.thmrem numbered="false"}
+הכיוון ההפוך של המשפט **אינו נכון**: יש סדרות שעבורן השורש ה-$n$-י מתכנס ואילו המנה אינה מתכנסת כלל, ולכן מבחן השורש הוא למעשה החזק מבין השניים. בפועל בוחרים בכל מקרה את המבחן שהחישוב בו נוח יותר.
 :::
 
-::: {#box-warn-dalembert-one-way .thmwarn title="משפט דלאמבר פועל בכיוון אחד"}
-אם גבול המנה קיים, גם גבול השורש קיים ושווה לו. ההפך אינו נכון: גבול השורש עשוי להתקיים גם כאשר המנה אינה מתכנסת כלל. לכן, אם מבחן המנה אינו נותן תשובה משום שלמנה אין גבול, כדאי לנסות את מבחן השורש.
+התועלת המעשית של המשפט היא שלפעמים המנה נוחה לחישוב בהרבה מן השורש, וזו בדיוק ההזדמנות להשתמש בו.
+
+::: {#box-exm-dalembert-root-n .thmexr title="שורש מסדר $n$ של $n$"}
+חשבו את הגבול של הסדרה
+
+$$.\sqrt[n]{n} \;=\; 1,\ \sqrt{2},\ \sqrt[3]{3},\ \sqrt[4]{4},\ \dots$$
 :::
 
-### השורש ה-$n$-י של $n$
+::: thmsol
+לכאורה זו סדרה קשה: הבסיס גדל וגם סדר השורש גדל, ו[](08-sequences-properties.qmd#box-thm-nth-root-of-a) אינו חל, שכן שם הבסיס היה **קבוע**.
 
-ב[](08-sequences-properties.qmd#box-thm-nth-root-of-a) ראינו ש-$\sqrt[n]{r} \to 1$ לכל $r > 0$ קבוע. מה קורה כאשר גם הבסיס גדל? בסדרה $\sqrt[n]{n}$ יש שני כוחות הפועלים זה נגד זה: הבסיס $n$ גדל ללא הגבלה, וסדר השורש גדל גם הוא ומקטין את התוצאה. מי מנצח?
-
-::: {#box-thm-nth-root-of-n .thmthm title="השורש ה-$n$-י של $n$"}
-$$.\lim_{n\to\infty} \sqrt[n]{n} = 1$$
-:::
-
-::: thmproof
-נפעיל את [](#box-thm-dalembert) על הסדרה $,a_n = n$ שהיא חיובית. המנה שלה היא
+כאן נכנס משפט דלאמבר. הסדרה שתחת השורש היא $,a_n = n$ והיא חיובית. המנה שלה פשוטה מאוד:
 
 $$,\frac{a_{n+1}}{a_n} = \frac{n+1}{n} = 1 + \frac{1}{n}$$
 
-ולכן $.\lim\limits_{n\to\infty} \frac{a_{n+1}}{a_n} = 1$ לפי משפט דלאמבר גם השורש ה-$n$-י מתכנס, ואל אותו גבול:
+ולכן $.\lim\limits_{n\to\infty} \frac{a_{n+1}}{a_n} = 1$ לפי [](#box-thm-dalembert) גם השורש ה-$n$-י מתכנס, ואל אותו גבול:
 
 $$.\lim_{n\to\infty} \sqrt[n]{n} = 1$$
-:::
 
-שימו לב מה עשה משפט דלאמבר: החלפנו שאלה על שורשים, שקשה לטפל בה ישירות, בשאלה על מנה שהיא כמעט מיידית. השורש מנצח את הבסיס, אבל רק בדוחק: הגבול הוא $,1$ בדיוק כמו עבור בסיס קבוע.
-
-::: {#box-exm-nth-root-of-n .thmexm title="שימושים בשורש ה-$n$-י של $n$"}
-**(א) הסדרה $.\sqrt[n]{n^{2}}$**
-
-מתקיים $,\sqrt[n]{n^{2}} = \left(\sqrt[n]{n}\right)^{2}$ ולכן לפי [](08-sequences-properties.qmd#box-cor-limit-power) הגבול הוא $.1^{2} = 1$
-
-**(ב) הסדרה $.\sqrt[n]{5n}$**
-
-מתקיים $,\sqrt[n]{5n} = \sqrt[n]{5} \cdot \sqrt[n]{n}$ ושני הגורמים שואפים ל-$,1$ הראשון לפי [](08-sequences-properties.qmd#box-thm-nth-root-of-a) והשני לפי [](#box-thm-nth-root-of-n). לכן הגבול הוא $.1$
-
-**(ג) הסדרה $.\sqrt[n]{\dfrac{1}{n}}$**
-
-מתקיים $,\sqrt[n]{\frac{1}{n}} = \frac{1}{\sqrt[n]{n}}$ ולפי סעיף המנה של אריתמטיקת הגבולות הגבול הוא $.\frac{1}{1} = 1$
+שימו לב מה עשה המשפט בשבילנו: החלפנו שאלה על שורשים, שקשה לטפל בה ישירות, בשאלה על מנה שהיא כמעט מיידית.
 :::
 
 ### תרגילים {#sec-tests-exercises}
@@ -1765,7 +1316,7 @@ $$.n^{2} \leq n^{2} + n \leq n^{3}$$
 
 $$.\left(\sqrt[n]{n}\right)^{2} \leq \sqrt[n]{n^{2}+n} \leq \left(\sqrt[n]{n}\right)^{3}$$
 
-לפי [](#box-thm-nth-root-of-n) מתקיים $,\lim\limits_{n\to\infty} \sqrt[n]{n} = 1$ ולכן לפי [](08-sequences-properties.qmd#box-cor-limit-power) שתי הסדרות החוסמות שואפות ל-$1^{2} = 1$ ול-$,1^{3} = 1$ ולפי [כלל הסנדוויץ׳](08-sequences-properties.qmd#box-thm-squeeze-sequences)
+ראינו ב[](#box-exm-dalembert-root-n) ש-$,\lim\limits_{n\to\infty} \sqrt[n]{n} = 1$ ולכן לפי [](08-sequences-properties.qmd#box-cor-limit-power) שתי הסדרות החוסמות שואפות ל-$1^{2} = 1$ ול-$,1^{3} = 1$ ולפי [כלל הסנדוויץ׳](08-sequences-properties.qmd#box-thm-squeeze-sequences)
 
 $$.\lim_{n\to\infty} \sqrt[n]{n^{2}+n} = 1$$
 :::
@@ -1936,7 +1487,7 @@ $$,m_n \leq \frac{1}{a_n} < m_n + 1$$
 
 כלומר $.\frac{1}{m_n+1} < a_n \leq \frac{1}{m_n}$
 
-ראשית, $.\lim\limits_{n\to\infty} m_n = \infty$ אכן, $,\lim\limits_{n\to\infty} a_n = 0^{+}$ ולכן לפי סעיף (א) של [](#box-prp-reciprocal-of-null) מתקיים $.\lim\limits_{n\to\infty} \frac{1}{a_n} = \infty$ מכאן, לפי סעיף (ג) של אותו משפט, גם $,\lim\limits_{n\to\infty} \left(\frac{1}{a_n} - 1\right) = \infty$ ומכיוון ש-$,m_n > \frac{1}{a_n} - 1$ לפי [כלל הפיצה](#box-thm-piza-rachav) גם $.\lim\limits_{n\to\infty} m_n = \infty$
+ראשית, $.\lim\limits_{n\to\infty} m_n = \infty$ אכן, $,\lim\limits_{n\to\infty} a_n = 0^{+}$ ולכן לפי סעיף (ח) של [](#box-thm-arithmetika-rachav) מתקיים $.\lim\limits_{n\to\infty} \frac{1}{a_n} = \infty$ מכאן, לפי סעיף (ג) של אותו משפט, גם $,\lim\limits_{n\to\infty} \left(\frac{1}{a_n} - 1\right) = \infty$ ומכיוון ש-$,m_n > \frac{1}{a_n} - 1$ לפי [כלל הפיצה](#box-thm-piza-rachav) גם $.\lim\limits_{n\to\infty} m_n = \infty$
 
 שנית, נחסום את $\left(1+a_n\right)^{\frac{1}{a_n}}$ משני הצדדים. הבסיס $1 + a_n$ גדול מ-$,1$ ולכן לפי תכונת הסדר הגדלת המעריך אינה מקטינה את החזקה. מ-$m_n \leq \frac{1}{a_n} < m_n + 1$ נקבל
 
@@ -2010,7 +1561,7 @@ $$.\lim_{n\to\infty} \left(1 - \frac{1}{n}\right)^{n} = \lim_{n\to\infty} \frac{
      הפוך (המסקנה לפני ההצבה) ובלי הנימוק למעבר להופכי. -->
 ```
 
-## יחסי הגדילה הבסיסיים: $n^x \ll q^n \ll n! \ll n^n$ {#sec-growth-orders}
+## יחסי הגדילה הבסיסיים: $n^x \ll q^n \ll n! \ll n^n$
 
 בפתיחת הפרק אמרנו שכאשר סדרה אינה מתכנסת עדיין נרצה לדעת **כמה מהר** היא גדלה, ולהשוות בין סדרות לפי הקצב. עכשיו יש בידינו הכלים לעשות זאת, והסעיף הזה עונה על השאלה עבור ארבע המשפחות הנפוצות ביותר.
 
@@ -2019,8 +1570,6 @@ $$.\lim_{n\to\infty} \left(1 - \frac{1}{n}\right)^{n} = \lim_{n\to\infty} \frac{
 $$,a_n \ll b_n$$
 
 ונאמר ש-$b_n$ **מסדר גדילה גבוה יותר** מ-$.a_n$
-
-שתי משפחות של סדרות חוזרות שוב ושוב. על סדרות מן הצורה $n^{x}$ עם $x > 0$ נאמר שהן בעלות **גדילה פולינומית**, ועל סדרות מן הצורה $q^{n}$ עם $q > 1$ נאמר שהן בעלות **גדילה מעריכית**. בניתוח אלגוריתמים, למשל, זה ההבדל בין אלגוריתם שאפשר להריץ על קלט גדול לבין אלגוריתם שאי-אפשר. הגבול הראשון במשפט הבא אומר שגדילה מעריכית מנצחת תמיד גדילה פולינומית, יהיו $x$ ו-$q$ אשר יהיו.
 
 ::: {#box-thm-growth-orders .thmthm title="יחסי הגדילה הבסיסיים"}
 לכל $x > 0$ ולכל $q > 1$ מתקיים
@@ -2032,9 +1581,11 @@ $$.\lim_{n\to\infty} \frac{n^{x}}{q^{n}} = 0 \qquad,\qquad \lim_{n\to\infty} \fr
 $$.n^{x} \ll q^{n} \ll n! \ll n^{n}$$
 :::
 
+::: thmproof
 שלושת הגבולות נובעים מ[](#box-thm-ratio-test), וכל אחד מהם בחישוב מנה אחד. בכל שלושת המקרים הסדרה חיובית, ולכן המבחן חל.
 
-::: {.thmproof title="הגבול הראשון"}
+**הגבול $.\lim\limits_{n\to\infty} \frac{n^{x}}{q^{n}} = 0$**
+
 נסמן $,a_n = \frac{n^{x}}{q^{n}}$ ונחשב:
 
 $$.\frac{a_{n+1}}{a_n} = \frac{\left(n+1\right)^{x}}{q^{\,n+1}} \cdot \frac{q^{n}}{n^{x}} = \frac{1}{q} \cdot \left(\frac{n+1}{n}\right)^{x} = \frac{1}{q}\left(1+\frac{1}{n}\right)^{x}$$
@@ -2044,17 +1595,17 @@ $$.\frac{a_{n+1}}{a_n} = \frac{\left(n+1\right)^{x}}{q^{\,n+1}} \cdot \frac{q^{n
 $$.\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = \frac{1}{q} < 1$$
 
 גבול המנה קטן מ-$,1$ ולכן לפי סעיף (א) של [](#box-thm-ratio-test) מתקיים $.\lim\limits_{n\to\infty} a_n = 0$
-:::
 
-::: {.thmproof title="הגבול השני"}
+**הגבול $.\lim\limits_{n\to\infty} \frac{q^{n}}{n!} = 0$**
+
 כאן החישוב קצר עוד יותר:
 
 $$.\frac{a_{n+1}}{a_n} = \frac{q^{\,n+1}}{\left(n+1\right)!}\cdot\frac{n!}{q^{n}} = \frac{q}{n+1}$$
 
 ולכן $.\lim\limits_{n\to\infty} \frac{a_{n+1}}{a_n} = 0$ הגבול הוא $,0$ שקטן מ-$,1$ ולכן $.\lim\limits_{n\to\infty} a_n = 0$ שימו לב שכאן אין שום תלות ב-$:q$ העצרת מנצחת כל חזקה, גדולה כרצוננו.
-:::
 
-::: {.thmproof title="הגבול השלישי"}
+**הגבול $.\lim\limits_{n\to\infty} \frac{n!}{n^{n}} = 0$**
+
 נחשב:
 
 $$.\frac{a_{n+1}}{a_n} = \frac{\left(n+1\right)!}{\left(n+1\right)^{\,n+1}} \cdot \frac{n^{n}}{n!} = \frac{n+1}{\left(n+1\right)^{\,n+1}} \cdot n^{n} = \frac{n^{n}}{\left(n+1\right)^{n}} = \left(\frac{n}{n+1}\right)^{n}$$
@@ -2077,7 +1628,7 @@ $$.\left(\frac{n}{n+1}\right)^{n} = \frac{1}{\left(\frac{n+1}{n}\right)^{n}} = \
 
 **(ב) הסדרה $.\dfrac{n!}{2^{n}}$**
 
-זו ההופכית של $,\frac{2^{n}}{n!}$ ולפי המשפט המנה הזאת שואפת לאפס. איבריה חיוביים, כלומר היא שואפת ל-$,0^{+}$ ולכן לפי סעיף (א) של [](#box-prp-reciprocal-of-null) ההופכית שואפת לאינסוף.
+זו ההופכית של $,\frac{2^{n}}{n!}$ ולפי המשפט המנה הזאת שואפת לאפס. איבריה חיוביים, כלומר היא שואפת ל-$,0^{+}$ ולכן לפי סעיף (ח) של [](#box-thm-arithmetika-rachav) ההופכית שואפת לאינסוף.
 
 **(ג) הסדרה $.\dfrac{n^{n}}{n!}$**
 
@@ -2087,318 +1638,6 @@ $$.\left(\frac{n}{n+1}\right)^{n} = \frac{1}{\left(\frac{n+1}{n}\right)^{n}} = \
 שלוש המנות ההפוכות, אפוא, שואפות כולן לאינסוף:
 
 $$.\lim_{n\to\infty} \frac{n^{n}}{n!} = \lim_{n\to\infty} \frac{n!}{2^{n}} = \lim_{n\to\infty} \frac{2^{n}}{n^{2}} = \infty$$
-
-### יחסי גדילה הם תכונה אסימפטוטית
-
-היחס $n^{x} \ll q^{n}$ מדבר על מה שקורה **בסופו של דבר**, ולא על ערכים מסוימים של $.n$ כשהבסיס $q$ קרוב ל-$1$ והחזקה $x$ גדולה, הגדילה המעריכית עשויה להיות איטית מאוד לאורך זמן רב.
-
-::: {#box-exm-growth-asymptotic .thmexm title="מתי $1.1^n$ עוקפת את $n^{10}$"}
-לפי המשפט $,\lim\limits_{n\to\infty} \frac{n^{10}}{1.1^{n}} = 0$ כלומר $.n^{10} \ll 1.1^{n}$ נבדוק כמה ערכים, בעיגול:
-
-| $n$ | $n^{10}$ | $1.1^{n}$ |
-|:---:|:---:|:---:|
-| $10$ | $10^{10}$ | $2.6$ |
-| $100$ | $10^{20}$ | $1.4 \cdot 10^{4}$ |
-| $500$ | $9.8 \cdot 10^{26}$ | $5.0 \cdot 10^{20}$ |
-| $700$ | $2.8 \cdot 10^{28}$ | $9.4 \cdot 10^{28}$ |
-| $1000$ | $10^{30}$ | $2.5 \cdot 10^{41}$ |
-
-עד $n = 685$ בערך הסדרה הפולינומית גדולה יותר, ולעיתים בהפרש עצום. רק משם והלאה הסדרה המעריכית עוקפת אותה, ואז היא משאירה אותה הרחק מאחור. באותו אופן, $1.01^{n}$ עוקפת את $n^{2}$ לתמיד רק אחרי $.n = 1465$
-:::
-
-::: {#box-warn-growth-asymptotic .thmwarn title="יחס גדילה אינו השוואה של ערכים"}
-הכתיב $a_n \ll b_n$ **אינו** אומר ש-$a_n < b_n$ לכל $,n$ ואף לא לרוב הערכים שנפגוש בפועל. הוא אומר רק שהמנה $\frac{a_n}{b_n}$ שואפת לאפס. סדרה מעריכית עם בסיס קרוב ל-$1$ עשויה להיות קטנה מסדרה פולינומית לאורך טווח ארוך מאוד.
-:::
-
-### שימוש ביחסי הגדילה בחישוב גבולות
-
-השיטה הכללית לחישוב גבול של מנה שבה מופיעות כמה משפחות היא לזהות את האיבר **החזק ביותר** ולחלק בו את המונה ואת המכנה. כל שאר האיברים הופכים אז למנות השואפות לאפס.
-
-::: {#box-exr-growth-divide-by-strongest .thmexr title="חלוקה באיבר החזק ביותר"}
-חשבו את $.\lim\limits_{n\to\infty} \dfrac{2^{n} + n^{5}}{3^{n} - n^{2}}$
-:::
-
-::: thmsol
-הגבול הוא $.0$
-
-האיבר החזק ביותר בביטוי הוא $,3^{n}$ שכן $n^{5} \ll 3^{n}$ ו-$n^{2} \ll 3^{n}$ לפי [](#box-thm-growth-orders), ו-$2^{n}$ קטן מ-$3^{n}$ פי גורם $\left(\frac{3}{2}\right)^{n}$ השואף לאינסוף. המכנה חיובי לכל $,n$ שכן $.3^{n} > n^{2}$ נחלק את המונה ואת המכנה ב-$:3^{n}$
-
-$$.\frac{2^{n} + n^{5}}{3^{n} - n^{2}} = \frac{\left(\frac{2}{3}\right)^{n} + \frac{n^{5}}{3^{n}}}{1 - \frac{n^{2}}{3^{n}}}$$
-
-לפי [](#box-cor-geometric-limit) מתקיים $,\lim\limits_{n\to\infty} \left(\frac{2}{3}\right)^{n} = 0$ ולפי [](#box-thm-growth-orders) גם $\frac{n^{5}}{3^{n}}$ ו-$\frac{n^{2}}{3^{n}}$ שואפות לאפס. לפי אריתמטיקת הגבולות
-
-$$.\lim_{n\to\infty} \frac{2^{n} + n^{5}}{3^{n} - n^{2}} = \frac{0 + 0}{1 - 0} = 0$$
-:::
-
-::: {#box-exr-growth-factorial .thmexr title="עצרת מול חזקות"}
-חשבו את $.\lim\limits_{n\to\infty} \dfrac{n! + 2^{n}}{n! + n^{3}}$
-:::
-
-::: thmsol
-הגבול הוא $.1$
-
-כאן האיבר החזק ביותר הוא $,n!$ ונחלק בו:
-
-$$.\frac{n! + 2^{n}}{n! + n^{3}} = \frac{1 + \frac{2^{n}}{n!}}{1 + \frac{n^{3}}{n!}}$$
-
-לפי [](#box-thm-growth-orders) מתקיים $.\lim\limits_{n\to\infty} \frac{2^{n}}{n!} = 0$ את $\frac{n^{3}}{n!}$ נכתוב כמכפלה של שתי מנות שכבר ידוע שהן שואפות לאפס:
-
-$$,\frac{n^{3}}{n!} = \frac{n^{3}}{2^{n}} \cdot \frac{2^{n}}{n!}$$
-
-ולכן גם היא שואפת לאפס. לפי אריתמטיקת הגבולות הגבול הוא $.\frac{1 + 0}{1 + 0} = 1$ שימו לב לתכונת המעבר של $\ll$ שהשתמשנו בה: מ-$n^{3} \ll 2^{n}$ ו-$2^{n} \ll n!$ נובע $.n^{3} \ll n!$
-:::
-
-::: {#box-chk-growth .thmchk}
-הכריעו אם הטענה נכונה.
-
-(א) $n^{50} \ll 1.001^{n}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="true" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ב) $2^{n} \ll n^{1000}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ג) $n! \ll 10^{n}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ד) $5^{n} \ll n!$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="true" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-:::
-
-::: {.thmsol .foldable}
-**(א) נכון.** זה המקרה $x = 50$ ו-$q = 1.001$ של [](#box-thm-growth-orders), ואין חשיבות לכך שהבסיס קרוב מאוד ל-$.1$
-
-**(ב) לא נכון.** להפך, $,n^{1000} \ll 2^{n}$ ולכן המנה $\frac{2^{n}}{n^{1000}}$ שואפת לאינסוף ולא לאפס.
-
-**(ג) לא נכון.** להפך, $,10^{n} \ll n!$ העצרת מנצחת כל חזקה.
-
-**(ד) נכון.** זה המקרה $q = 5$ של אותו משפט.
-:::
-
-### תרגילים {#sec-growth-exercises}
-
-**תרגיל 1.** חשבו את הגבולות הבאים.
-
-(א) $\lim\limits_{n\to\infty} \dfrac{n^{20}}{1.05^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(א)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ב) $\lim\limits_{n\to\infty} \dfrac{3^{n} - n^{3}}{3^{n} + n^{3}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1"><span class="seq-label">(ב)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ג) $\lim\limits_{n\to\infty} \dfrac{5^{n} + n!}{n! + n^{5}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1"><span class="seq-label">(ג)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ד) $\lim\limits_{n\to\infty} \dfrac{n^{2} + 2^{n}}{n^{3} + 3^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0"><span class="seq-label">(ד)</span><input class="seq-input" type="text" placeholder="לדוגמה: 3/2 או inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-::: {.thmsol .foldable}
-**סעיף (א).** הגבול הוא $,0$ לפי [](#box-thm-growth-orders) עם $x = 20$ ו-$.q = 1.05$
-
-**סעיף (ב).** הגבול הוא $.1$ נחלק ב-$:3^{n}$ מתקבל $,\dfrac{1 - \frac{n^{3}}{3^{n}}}{1 + \frac{n^{3}}{3^{n}}}$ ו-$\frac{n^{3}}{3^{n}}$ שואפת לאפס.
-
-**סעיף (ג).** הגבול הוא $.1$ נחלק ב-$:n!$ מתקבל $,\dfrac{\frac{5^{n}}{n!} + 1}{1 + \frac{n^{5}}{n!}}$ ושתי המנות הקטנות שואפות לאפס. את $\frac{n^{5}}{n!}$ מטפלים כמו ב[](#box-exr-growth-factorial).
-
-**סעיף (ד).** הגבול הוא $.0$ האיבר החזק ביותר הוא $,3^{n}$ ונחלק בו:
-
-$$.\frac{n^{2} + 2^{n}}{n^{3} + 3^{n}} = \frac{\frac{n^{2}}{3^{n}} + \left(\frac{2}{3}\right)^{n}}{\frac{n^{3}}{3^{n}} + 1}$$
-
-המונה שואף ל-$0$ והמכנה ל-$,1$ ולכן הגבול הוא $.0$
-:::
-
-**תרגיל 2.** אם $,a_n \ll b_n$ אז $a_n < b_n$ לכל $n$ גדול מ-$.100$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-::: {.thmsol .foldable}
-**לא נכון.** לפי [](#box-exm-growth-asymptotic), $n^{10} \ll 1.1^{n}$ ובכל זאת $n^{10} > 1.1^{n}$ לכל $.2 \leq n \leq 685$ היחס $\ll$ מבטיח ש-$a_n < b_n$ **החל ממקום מסוים**, שכן המנה שואפת לאפס ובפרט קטנה מ-$1$ לבסוף, אבל אינו אומר דבר על המקום הזה.
-:::
-
-**תרגיל 3.** חשבו את $\lim\limits_{n\to\infty} \dfrac{2^{n}\, n!}{n^{n}}$ ואת $.\lim\limits_{n\to\infty} \dfrac{3^{n}\, n!}{n^{n}}$ מה מבדיל בין שני המקרים?
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="0, inf"><span class="seq-label">שני הגבולות, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 1/2, inf"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-::: {.thmsol .foldable}
-נפעיל את מבחן המנה על $,a_n = \frac{q^{n}\, n!}{n^{n}}$ עם $q = 2$ או $.q = 3$ כמו בהוכחת [](#box-thm-growth-orders):
-
-$$.\frac{a_{n+1}}{a_n} = q \cdot \frac{\left(n+1\right)!}{n!} \cdot \frac{n^{n}}{\left(n+1\right)^{n+1}} = q \cdot \left(\frac{n}{n+1}\right)^{n}$$
-
-הגורם $\left(\frac{n}{n+1}\right)^{n}$ שואף ל-$,\frac{1}{e}$ ולכן גבול המנה הוא $.\frac{q}{e}$
-
-עבור $q = 2$ מתקיים $,\frac{2}{e} < 1$ שכן $,e > 2$ ולכן הגבול הוא $.0$ עבור $q = 3$ מתקיים $,\frac{3}{e} > 1$ שכן $,e < 3$ ולכן הגבול הוא $.\infty$
-
-המבדיל הוא היחס בין $q$ לבין $.e$ המספר $e$ הוא בדיוק הקו המפריד: $n!$ דומה בגודלו ל-$,\left(\frac{n}{e}\right)^{n}$ ולכן $\frac{q^{n}\, n!}{n^{n}}$ מתנהגת בערך כמו $.\left(\frac{q}{e}\right)^{n}$
-:::
-
-:::::::::: {.extra title="חיפוש בינארי: מדוע סדר גדילה חשוב"}
-בפתיחת הסעיף הזכרנו את ניתוח האלגוריתמים. הנה דוגמה קטנה שבה ההבדל בין שני סדרי גדילה הוא ההבדל בין שנייה לבין שעות.
-
-**הבעיה.** נתונה רשימה של $n$ מספרים, **ממוינים** מן הקטן לגדול, ורוצים לדעת היכן נמצא בה מספר מסוים. הפעולה שאנחנו סופרים היא **השוואה**: בדיקה של איבר אחד ברשימה מול המספר המבוקש.
-
-**חיפוש לינארי.** עוברים על הרשימה מתחילתה, איבר אחר איבר, עד שמוצאים את המספר. במקרה הגרוע ביותר, כשהמספר נמצא בסוף, נדרשות $n$ השוואות.
-
-**חיפוש בינארי.** משווים את המספר המבוקש לאיבר **האמצעי** של הרשימה. אם הם שווים, סיימנו. אם המספר המבוקש גדול יותר, הוא אינו יכול להימצא במחצית השמאלית, שכן הרשימה ממוינת, ולכן ממשיכים רק במחצית הימנית. אחרת ממשיכים רק במחצית השמאלית. כל השוואה מקטינה את התחום שנותר לחפש בו בערך פי $.2$
-
-אחרי $k$ השוואות נותרו לכל היותר כ-$\frac{n}{2^{k}}$ אפשרויות, והחיפוש מסתיים כשנותרה אפשרות אחת. לכן במקרה הגרוע ביותר נדרשות בערך $k$ השוואות, כאשר $,2^{k} = n$ כלומר $.k = \log_{2} n$ במדויק, ברשימה של $n$ מספרים דרושות לכל היותר $\left\lceil \log_{2}\left(n+1\right) \right\rceil$ השוואות. עבור מיליון מספרים זה $20$ השוואות, לעומת מיליון בחיפוש הלינארי.
-
-:::::: {#box-sim-binary-search .thmsim title="חיפוש לינארי מול חיפוש בינארי"}
-::: {.content-visible when-format="html"}
-```{=html}
-<iframe class="widget-frame" src="widgets/ch09/binary-search.html" loading="lazy" title="סימולציה: חיפוש לינארי מול חיפוש בינארי"></iframe>
-```
-:::
-
-בחלק הראשון של הסימולציה בוחרים מספר ברשימה של $63$ מספרים ממוינים, ומריצים את שני החיפושים צעד אחר צעד. האיבר שנבדק כעת מסומן בכחול, והאיברים שכבר נפסלו באפור. החיפוש הבינארי מסתיים תמיד אחרי $6$ השוואות לכל היותר, שכן $.2^{6} - 1 = 63$ בחלק השני משנים את מספר האיברים, ומשווים את מספר ההשוואות במקרה הגרוע ביותר.
-
-::: {.content-visible when-format="pdf"}
-*הסימולציה עצמה זמינה בגרסה המקוונת של הספר.*
-:::
-::::::
-
-**סדרי הגדילה.** החיפוש הלינארי דורש כ-$n$ השוואות והחיפוש הבינארי כ-$.\log_{2} n$ שתי הסדרות שואפות לאינסוף, אבל השנייה מסדר גדילה נמוך בהרבה:
-
-::: {#box-prp-log-over-n .thmprp}
-$$.\lim_{n\to\infty} \frac{\log_{2} n}{n} = 0$$
-:::
-
-::: thmproof
-נשתמש בתכונות של הלוגריתם המוכרות מבית הספר התיכון: $\log_{2} x$ הוא המעריך שבו יש להעלות את $2$ כדי לקבל את $,x$ הוא עולה ממש, ו-$.\log_{2}\left(x^{y}\right) = y \log_{2} x$ לפי הכלל האחרון
-
-$$.\frac{\log_{2} n}{n} = \frac{1}{n} \log_{2} n = \log_{2}\left(n^{\frac{1}{n}}\right) = \log_{2} \sqrt[n]{n}$$
-
-לפי [](#box-thm-nth-root-of-n) מתקיים $,\lim\limits_{n\to\infty} \sqrt[n]{n} = 1$ ו-$.\log_{2} 1 = 0$ נותר להראות שהלוגריתם של סדרה השואפת ל-$1$ שואף ל-$.0$
-
-יהי $.\varepsilon > 0$ מכיוון ש-$\log_{2}$ עולה ממש, לכל $x > 0$ מתקיים
-
-$$.\left|\log_{2} x\right| < \varepsilon \quad\Longleftrightarrow\quad 2^{-\varepsilon} < x < 2^{\varepsilon}$$
-
-לפי תכונת הסדר של חזקות $,2^{-\varepsilon} < 2^{0} = 1 < 2^{\varepsilon}$ ולכן לפי [](07-sequences-limit.qmd#box-thm-limit-window) החל ממקום מסוים מתקיים $.2^{-\varepsilon} < \sqrt[n]{n} < 2^{\varepsilon}$ שם $,\left|\log_{2} \sqrt[n]{n}\right| < \varepsilon$ כלומר $.\left|\frac{\log_{2} n}{n}\right| < \varepsilon$ זו בדיוק הגדרת הגבול.
-:::
-
-במילים של הסעיף הזה: $,\log_{2} n \ll n$ ולכן כשהרשימה גדלה, החיפוש הבינארי משאיר את הלינארי הרחק מאחור. אותו טיעון עובד לכל בסיס של לוגריתם, שכן לוגריתמים בבסיסים שונים נבדלים זה מזה רק בכפל בקבוע. וכמו ב[](#box-exm-growth-asymptotic), גם כאן היחס אסימפטוטי: ברשימה של עשרה מספרים ההבדל זניח, והוא נעשה מכריע רק כשהרשימה ארוכה.
-::::::::::
-
-:::::::::: {.extra title="נוסחת סטירלינג, בגרסה קלה"}
-בתרגיל 3 שלמעלה ראינו רמז לכך ש-$n!$ דומה בגודלו ל-$.\left(\frac{n}{e}\right)^{n}$ בהעשרה הזאת נהפוך את הרמז לטענה מדויקת, בכלים שכבר בידינו.
-
-**שלב א: שתי סדרות סביב $.e$** לפי [](#box-thm-e-sequence-monotone-bounded) הסדרה $\left(1+\frac{1}{n}\right)^{n}$ עולה ממש ומתכנסת ל-$,e$ ולכן
-
-$$.\left(1+\frac{1}{n}\right)^{n} < e$$
-
-נראה שהסדרה $c_n = \left(1+\frac{1}{n}\right)^{n+1}$ **יורדת** ממש. לכל $n \geq 2$ מתקיים
-
-$$,\frac{c_{n-1}}{c_n} = \left(\frac{n}{n-1}\right)^{n} \cdot \left(\frac{n}{n+1}\right)^{n+1} = \left(\frac{n^{2}}{n^{2}-1}\right)^{n} \cdot \frac{n}{n+1} = \left(1 + \frac{1}{n^{2}-1}\right)^{n} \cdot \frac{n}{n+1}$$
-
-ולפי [אי-שוויון ברנולי](05-induction.qmd#box-lem-bernoulli)
-
-$$.\frac{c_{n-1}}{c_n} \geq \left(1 + \frac{n}{n^{2}-1}\right) \cdot \frac{n}{n+1} > \left(1 + \frac{1}{n}\right) \cdot \frac{n}{n+1} = 1$$
-
-במעבר השני השתמשנו ב-$,\frac{n}{n^{2}-1} > \frac{1}{n}$ השקול ל-$.n^{2} > n^{2} - 1$ הסדרה $(c_n)$ יורדת ממש, וגבולה $e \cdot 1 = e$ לפי אריתמטיקת הגבולות, ולכן כל איבריה גדולים מ-$:e$
-
-$$.\left(1+\frac{1}{n}\right)^{n+1} > e$$
-
-**שלב ב: חסמים ל-$.n!$** נתבונן בשתי הסדרות
-
-$$.d_n = \frac{n!\, e^{n}}{n^{n}} \qquad,\qquad f_n = \frac{n!\, e^{n}}{n^{n+1}}$$
-
-חישוב ישיר של המנות נותן
-
-$$,\frac{d_{n+1}}{d_n} = e\left(\frac{n}{n+1}\right)^{n} = \frac{e}{\left(1+\frac{1}{n}\right)^{n}} > 1 \qquad,\qquad \frac{f_{n+1}}{f_n} = e\left(\frac{n}{n+1}\right)^{n+1} = \frac{e}{\left(1+\frac{1}{n}\right)^{n+1}} < 1$$
-
-לפי שלב א. לכן $(d_n)$ עולה ו-$(f_n)$ יורדת. מכיוון ש-$,d_1 = f_1 = e$ לכל $n$ מתקיים $d_n \geq e$ ו-$,f_n \leq e$ ואחרי כפל ב-$\frac{n^{n}}{e^{n}}$ מתקבל
-
-$$.e\left(\frac{n}{e}\right)^{n} \leq n! \leq e\, n \left(\frac{n}{e}\right)^{n}$$
-
-**שלב ג: השורש ה-$n$-י של $.n!$** נוציא שורש $n$-י מן החסמים ונחלק ב-$:n$
-
-$$.\frac{\sqrt[n]{e}}{e} \leq \frac{\sqrt[n]{n!}}{n} \leq \frac{\sqrt[n]{e} \cdot \sqrt[n]{n}}{e}$$
-
-לפי [](08-sequences-properties.qmd#box-thm-nth-root-of-a) ו-[](#box-thm-nth-root-of-n) שני החסמים שואפים ל-$,\frac{1}{e}$ ולפי כלל הסנדוויץ׳
-
-$$.\lim_{n\to\infty} \frac{\sqrt[n]{n!}}{n} = \frac{1}{e}$$
-
-אפשר להגיע לאותה תוצאה גם ישירות מ[](#box-thm-dalembert): המנה של הסדרה $\frac{n!}{n^{n}}$ היא $,\left(\frac{n}{n+1}\right)^{n}$ והיא שואפת ל-$.\frac{1}{e}$
-
-**הנוסחה המלאה.** החסמים של שלב ב אומרים שהמנה $\frac{n!}{\left(n/e\right)^{n}}$ נמצאת בין $e$ לבין $.e\,n$ **נוסחת סטירלינג** קובעת את ערכה בדיוק:
-
-$$.\lim_{n\to\infty} \frac{n!}{\sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}} = 1$$
-
-כלומר המנה $\frac{n!}{\left(n/e\right)^{n}}$ מתנהגת כמו $,\sqrt{2\pi n}$ שנמצא אכן בין $e$ לבין $e\,n$ עבור $n$ גדול. הקירוב מדויק להפליא כבר עבור ערכים קטנים:
-
-| $n$ | $n!$ | $\sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}$ | המנה |
-|:---:|:---:|:---:|:---:|
-| $5$ | $120$ | $118.0$ | $1.017$ |
-| $10$ | $3{,}628{,}800$ | $3{,}598{,}696$ | $1.008$ |
-| $20$ | $2.433 \cdot 10^{18}$ | $2.423 \cdot 10^{18}$ | $1.004$ |
-
-את הנוסחה המלאה לא נוכיח כאן. הוכחת קיומו של הגבול דורשת הערכה מדויקת של $\left(1+\frac{1}{n}\right)^{n+\frac{1}{2}}$ בעזרת לוגריתמים וטורי טיילור, והקבוע $\sqrt{2\pi}$ מתקבל מחישוב של אינטגרלים. שני הכלים יופיעו בהמשך הספר.
-::::::::::
 
 <!-- תוקן ב-2026-09-11: בתמלול נכתב כאן $n^2/n!$, והוא שואף ל-0 ולא לאינסוף. אותה
      טעות הופיעה גם בדוגמה של כלל הפיצה בסעיף 9.1, ושם החישוב שבפתרון מראה במפורש
@@ -2448,71 +1687,17 @@ $$.-1,\ 1,\ -1,\ 1,\ \dots$$
 לסדרה יש אפוא שני גבולות חלקיים, $1$ ו-$,-1$ והיא עצמה אינה מתכנסת. מיד נראה שאין בכך מקרה.
 :::
 
-::: {#box-exm-partial-limits-unbounded .thmexm title="גבול חלקי יחיד, וסדרה שאינה מתכנסת"}
-נחזור אל הסדרה $0,\ 1,\ 0,\ 2,\ 0,\ 3,\ \dots$ מ[](#box-exm-unbounded-no-limit), שבה $a_{2k-1} = 0$ ו-$.a_{2k} = k$
-
-תת-הסדרה שבמקומות האי-זוגיים קבועה ושווה ל-$,0$ ולכן $0$ הוא גבול חלקי. תת-הסדרה שבמקומות הזוגיים שואפת לאינסוף, ואינה תורמת גבול חלקי, שכן גבול חלקי הוא לפי ההגדרה מספר ממשי.
-
-האם יש גבולות חלקיים נוספים? כל תת-סדרה מתכנסת חייבת להיות חסומה, ולכן יכולים להופיע בה רק מספר סופי של איברים מן המקומות הזוגיים. החל ממקום מסוים כל איבריה שווים ל-$,0$ וגבולה $.0$ לכן $0$ הוא הגבול החלקי **היחיד**.
-
-ובכל זאת הסדרה אינה מתכנסת, שכן אינה חסומה. גבול חלקי יחיד אינו מבטיח התכנסות, ובהמשך נראה שהחסימוּת היא שחסרה כאן.
-:::
-
 ::: {#box-thm-subsequences-same-limit .thmthm}
 תהי $(a_n)_{n=1}^{\infty}$ סדרה ויהי $.L \in \mathbb{R}$ אז $\lim\limits_{n\to\infty} a_n = L$ אם ורק אם כל תת-סדרה של $(a_n)$ מתכנסת ל-$.L$
 
 בפרט, אם הסדרה מתכנסת ל-$,L$ אז $L$ הוא הגבול החלקי **היחיד** שלה.
 :::
 
-:::::::::: {.optional title="הוכחת המשפט"}
-נשתמש בעובדה פשוטה על האינדקסים: אם $n_1 < n_2 < n_3 < \cdots$ מספרים טבעיים, אז $n_k \geq k$ לכל $.k$ אכן, $,n_1 \geq 1$ ואם $n_k \geq k$ אז $,n_{k+1} > n_k \geq k$ ומכיוון ש-$n_{k+1}$ שלם, $.n_{k+1} \geq k+1$ זו הוכחה באינדוקציה.
-
-**הכיוון הראשון.**
-
-נניח ש-$\lim\limits_{n\to\infty} a_n = L$ ותהי $\left(a_{n_k}\right)$ תת-סדרה. יהי $.\varepsilon > 0$ לפי הגדרת הגבול קיים $N$ כך שלכל $n \geq N$ מתקיים $.\left|a_n - L\right| < \varepsilon$ לכל $k \geq N$ מתקיים $,n_k \geq k \geq N$ ולכן
-
-$$.\left|a_{n_k} - L\right| < \varepsilon$$
-
-מצאנו מקום מתאים לכל $,\varepsilon > 0$ ולכן $.\lim\limits_{k\to\infty} a_{n_k} = L$
-
-**הכיוון השני.**
-
-הסדרה $(a_n)$ היא תת-סדרה של עצמה, עם $.n_k = k$ לכן אם כל תת-סדרה מתכנסת ל-$,L$ בפרט $.\lim\limits_{n\to\infty} a_n = L$
-
-**הגבול החלקי היחיד.** כל גבול חלקי הוא גבול של תת-סדרה כלשהי, ולפי הכיוון הראשון גבול כזה שווה ל-$.L$
-::::::::::
-
 ::: {#box-cor-two-partial-limits-diverge .thmcor}
 אם לסדרה $(a_n)_{n=1}^{\infty}$ יש שתי תת-סדרות המתכנסות לגבולות שונים, אז הסדרה אינה מתכנסת.
 :::
 
-::: thmproof
-אילו הסדרה הייתה מתכנסת לגבול $,L$ אז לפי [](#box-thm-subsequences-same-limit) כל תת-סדרה שלה הייתה מתכנסת ל-$,L$ ובפרט שתי תת-הסדרות היו מתכנסות לאותו גבול. זו סתירה להנחה שגבולותיהן שונים.
-:::
-
 המסקנה הזאת היא הכלי הנוח ביותר להוכחת אי-התכנסות, והיא מסבירה למפרע את כל הדוגמאות מן הסוג של $:\left(-1\right)^{n}$ די להצביע על שתי תת-סדרות עם גבולות שונים, ואין צורך לחזור להגדרת הגבול.
-
-::: {#box-exr-two-subsequences-diverge .thmexr title="אי-התכנסות בעזרת שתי תת-סדרות"}
-הראו שהסדרה $a_n = \left(-1\right)^{n} \dfrac{n}{n+1}$ אינה מתכנסת.
-:::
-
-::: thmsol
-נבחר את תת-הסדרה שבמקומות הזוגיים ואת זו שבמקומות האי-זוגיים.
-
-במקומות הזוגיים $,\left(-1\right)^{2k} = 1$ ולכן
-
-$$.a_{2k} = \frac{2k}{2k+1} = \frac{1}{1 + \frac{1}{2k}}$$
-
-המכנה שואף ל-$,1$ ולכן $.\lim\limits_{k\to\infty} a_{2k} = 1$
-
-במקומות האי-זוגיים $,\left(-1\right)^{2k-1} = -1$ ולכן
-
-$$.a_{2k-1} = -\frac{2k-1}{2k} = -\left(1 - \frac{1}{2k}\right)$$
-
-ולכן $.\lim\limits_{k\to\infty} a_{2k-1} = -1$
-
-מצאנו שתי תת-סדרות המתכנסות לגבולות שונים, $1$ ו-$,-1$ ולכן לפי [](#box-cor-two-partial-limits-diverge) הסדרה אינה מתכנסת.
-:::
 
 <!-- מקור: הרצאה 9 -->
 
@@ -2523,16 +1708,6 @@ $$.a_{2k-1} = -\frac{2k-1}{2k} = -\left(1 - \frac{1}{2k}\right)$$
 
 בפרט, אם כולן מתכנסות לאותו גבול, הסדרה כולה מתכנסת אליו.
 :::
-
-:::::::::: {.optional title="הוכחת הטענה"}
-נסמן את תת-הסדרות $,S_1, \dots, S_m$ ואת גבולותיהן $.L_1, \dots, L_m$ עלינו להראות ששני האוספים שווים.
-
-**כל $L_i$ הוא גבול חלקי.** זו בדיוק [](#box-def-partial-limit), שכן $S_i$ היא תת-סדרה המתכנסת ל-$.L_i$
-
-**כל גבול חלקי הוא אחד מן ה-$L_i$.** תהי $\left(a_{n_k}\right)$ תת-סדרה המתכנסת לגבול $.L$ כל אחד מן האינדקסים $n_k$ שייך לאחת מתת-הסדרות $,S_1, \dots, S_m$ ויש אינסוף אינדקסים כאלה אבל רק מספר סופי של תת-סדרות. לכן לפחות אחת מהן, נאמר $,S_i$ מכילה אינסוף מן האינדקסים $.n_k$ האיברים המתאימים, לפי סדרם, יוצרים סדרה שהיא בו-זמנית תת-סדרה של $\left(a_{n_k}\right)$ ותת-סדרה של $.S_i$ לפי [](#box-thm-subsequences-same-limit) היא מתכנסת גם ל-$L$ וגם ל-$,L_i$ ומיחידות הגבול $.L = L_i$
-
-**המקרה של גבול משותף.** נניח ש-$L_1 = \dots = L_m = L$ ויהי $.\varepsilon > 0$ לכל $i$ קיים מקום $N_i$ כך שכל איבר של $S_i$ שהאינדקס שלו לפחות $N_i$ מקיים $.\left|a_n - L\right| < \varepsilon$ נבחר $.N = \max\left\{N_1, \dots, N_m\right\}$ לכל $n \geq N$ האינדקס $n$ שייך לאחת מתת-הסדרות, נאמר $,S_i$ ומכיוון ש-$n \geq N_i$ מתקיים $.\left|a_n - L\right| < \varepsilon$ לכן $.\lim\limits_{n\to\infty} a_n = L$ כאן חיוני שמספר תת-הסדרות סופי, אחרת ייתכן שאין מקסימום ל-$.N_i$
-::::::::::
 
 ::: {#box-exm-gvulot-chelkiim .thmexr title="מציאת כל הגבולות החלקיים"}
 מצאו את כל הגבולות החלקיים של הסדרה
@@ -2632,54 +1807,6 @@ $$.\lim_{k\to\infty} \left(d_k - c_k\right) = \lim_{k\to\infty} \left(d_1 - c_1\
 שימו לב מה המשפט **אינו** אומר: הוא אינו מבטיח שהסדרה עצמה מתכנסת, ואף לא שהגבול החלקי יחיד. הסדרה $\left(-1\right)^{n}$ חסומה, יש לה שני גבולות חלקיים, והיא אינה מתכנסת.
 :::
 
-::: {#box-chk-partial-limits .thmchk}
-הכריעו אם הטענה נכונה.
-
-(א) לכל סדרה יש לפחות גבול חלקי אחד.
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ב) סדרה שיש לה גבול חלקי יחיד מתכנסת.
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-(ג) אם $\lim\limits_{k\to\infty} a_{2k} = L$ וגם $,\lim\limits_{k\to\infty} a_{2k-1} = L$ אז $.\lim\limits_{n\to\infty} a_n = L$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="true" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-:::
-
-::: {.thmsol .foldable}
-**(א) לא נכון.** לסדרה $a_n = n$ אין תת-סדרה מתכנסת, שכן כל תת-סדרה שלה שואפת לאינסוף. בולצאנו–ויירשטראס דורש שהסדרה תהיה **חסומה**.
-
-**(ב) לא נכון.** ב[](#box-exm-partial-limits-unbounded) ראינו סדרה שהגבול החלקי היחיד שלה הוא $,0$ והיא אינה מתכנסת. עבור סדרות **חסומות** הטענה כן נכונה, וזה תוכנו של [](#box-thm-limsup-eq-liminf).
-
-**(ג) נכון.** שתי תת-הסדרות מכסות יחד את כל האינדקסים, ולכן לפי [](#box-prp-covering-subsequences) הסדרה כולה מתכנסת ל-$.L$
-:::
-
 ### הגבול העליון והגבול התחתון
 
 ::: {#box-def-limsup-liminf .thmdef}
@@ -2704,102 +1831,6 @@ $$.\limsup_{n\to\infty} a_n = 1 \qquad,\qquad \liminf_{n\to\infty} a_n = -1$$
 $$,\limsup_{n\to\infty} a_n = \liminf_{n\to\infty} a_n$$
 
 ובמקרה זה שלושת הגבולות שווים זה לזה.
-:::
-
-:::::::::: {.optional title="הוכחת המשפט"}
-**הכיוון הראשון.**
-
-נניח ש-$.\lim\limits_{n\to\infty} a_n = L$ לפי [](#box-thm-subsequences-same-limit) הגבול החלקי היחיד של הסדרה הוא $,L$ ולכן הגדול שבגבולות החלקיים והקטן שבהם שווים שניהם ל-$.L$
-
-**הכיוון השני.**
-
-נניח ש-$,\limsup\limits_{n\to\infty} a_n = \liminf\limits_{n\to\infty} a_n = L$ כלומר $L$ הוא הגבול החלקי היחיד של הסדרה. נניח בשלילה שהסדרה אינה מתכנסת ל-$.L$ אז קיים $\varepsilon > 0$ כך שאחרי כל מקום יש איבר המקיים $.\left|a_n - L\right| \geq \varepsilon$ יש אפוא אינסוף איברים כאלה, והם יוצרים תת-סדרה $.\left(a_{n_k}\right)$
-
-תת-הסדרה הזאת חסומה, שכן הסדרה כולה חסומה. לפי [](#box-thm-bolzano-weierstrass) יש לה תת-סדרה מתכנסת, ונסמן את גבולה $.L'$ זו גם תת-סדרה של $,(a_n)$ ולכן $L'$ הוא גבול חלקי של $.(a_n)$ מצד שני, כל איבריה מקיימים $,\left|a_n - L\right| \geq \varepsilon$ ולפי [](07-sequences-limit.qmd#box-thm-limit-preserves-order) גם $.\left|L' - L\right| \geq \varepsilon$ מצאנו גבול חלקי השונה מ-$,L$ בסתירה לכך ש-$L$ הוא היחיד. לכן $.\lim\limits_{n\to\infty} a_n = L$
-::::::::::
-
-::: {#box-exm-limsup-liminf-2 .thmexm title="חישוב הגבול העליון והתחתון"}
-**(א) הסדרה $.a_n = \left(-1\right)^{n} + \dfrac{1}{n}$**
-
-במקומות הזוגיים $a_{2k} = 1 + \frac{1}{2k}$ ובמקומות האי-זוגיים $.a_{2k-1} = -1 + \frac{1}{2k-1}$ תת-הסדרות האלה מתכנסות ל-$1$ ול-$,-1$ והן מכסות את כל האינדקסים, ולכן לפי [](#box-prp-covering-subsequences) אלה כל הגבולות החלקיים. לכן
-
-$$.\limsup_{n\to\infty} a_n = 1 \qquad,\qquad \liminf_{n\to\infty} a_n = -1$$
-
-שימו לב שהגבול העליון $1$ אינו איבר של הסדרה, ושאיבריה במקומות הזוגיים כולם **גדולים** ממנו. הגבול העליון אינו האיבר הגדול ביותר, אלא הגבול החלקי הגדול ביותר.
-
-**(ב) הסדרה $.a_n = \sin\left(\dfrac{\pi}{2} n\right)$**
-
-ערכי הסדרה חוזרים במחזור של ארבעה: $.1,\ 0,\ -1,\ 0,\ 1,\ 0,\ -1,\ 0,\ \dots$ לפי שארית החלוקה של $n$ ב-$4$ מתקבלות ארבע תת-סדרות קבועות, המכסות את כל האינדקסים, ולכן הגבולות החלקיים הם $,1$ $0$ ו-$.-1$ לכן $\limsup a_n = 1$ ו-$,\liminf a_n = -1$ והסדרה אינה מתכנסת.
-:::
-
-### תרגילים {#sec-subsequences-exercises}
-
-**תרגיל 1.** מצאו את כל הגבולות החלקיים של הסדרות הבאות. עבור הסדרות החסומות מצאו גם את הגבול העליון ואת הגבול התחתון.
-
-(א) $a_n = \left(-1\right)^{n}\left(1 + \dfrac{1}{n}\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="1, -1"><span class="set-label">(א) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1, -1"><span class="seq-label">(א) הגבול העליון והתחתון, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 2, -1"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ב) $a_n = \cos\left(\dfrac{\pi}{3} n\right)$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="1/2, -1/2, -1, 1"><span class="set-label">(ב) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="seq-quiz" data-answer="1, -1"><span class="seq-label">(ב) הגבול העליון והתחתון, לפי הסדר</span><input class="seq-input" type="text" placeholder="לדוגמה: 2, -1"><button class="seq-check">בדיקה</button><span class="seq-feedback"></span></div>
-```
-:::
-
-(ג) $a_n = n^{\left(-1\right)^{n}}$
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="set-quiz" data-answer="0"><span class="set-label">(ג) הגבולות החלקיים</span><input class="set-input" type="text" placeholder="לדוגמה: 1/2, -1, inf"><button class="set-check">בדיקה</button><span class="set-feedback"></span></div>
-```
-:::
-
-::: {.thmsol .foldable}
-**סעיף (א).** במקומות הזוגיים $a_{2k} = 1 + \frac{1}{2k} \to 1$ ובמקומות האי-זוגיים $.a_{2k-1} = -\left(1 + \frac{1}{2k-1}\right) \to -1$ הגבולות החלקיים הם $1$ ו-$,-1$ ולכן $\limsup = 1$ ו-$.\liminf = -1$
-
-**סעיף (ב).** ערכי הסדרה חוזרים במחזור של שישה: $.\frac{1}{2},\ -\frac{1}{2},\ -1,\ -\frac{1}{2},\ \frac{1}{2},\ 1$ שש תת-הסדרות לפי שארית החלוקה ב-$6$ קבועות ומכסות את כל האינדקסים, ולכן הגבולות החלקיים הם $,\frac{1}{2}$ $,-\frac{1}{2}$ $-1$ ו-$.1$ לכן $\limsup = 1$ ו-$.\liminf = -1$
-
-**סעיף (ג).** במקומות הזוגיים $,a_{2k} = 2k$ ותת-הסדרה הזאת שואפת לאינסוף. במקומות האי-זוגיים $,a_{2k-1} = \frac{1}{2k-1} \to 0$ ולכן $0$ הוא גבול חלקי. בדיוק כמו ב[](#box-exm-partial-limits-unbounded), זהו הגבול החלקי היחיד. הסדרה אינה חסומה, ולכן הגבול העליון אינו מוגדר לפי [](#box-def-limsup-liminf).
-:::
-
-**תרגיל 2.** אם תת-הסדרה $\left(a_{2k}\right)$ מתכנסת, אז גם $(a_n)$ מתכנסת.
-
-::: {.content-visible when-format="html"}
-```{=html}
-<div class="tf-quiz" data-correct="false" data-reveal>
-<button class="tf-opt" data-val="true">נכון</button>
-<button class="tf-opt" data-val="false">לא נכון</button>
-<div class="tf-feedback"></div>
-</div>
-```
-:::
-
-::: {.thmsol .foldable}
-**לא נכון.** עבור $a_n = \left(-1\right)^{n}$ תת-הסדרה שבמקומות הזוגיים קבועה ושווה ל-$,1$ ובכל זאת הסדרה אינה מתכנסת. תת-סדרה אחת אינה מספיקה, אלא אם כן תת-הסדרות **מכסות** את כל האינדקסים ומתכנסות כולן לאותו גבול, כמו ב[](#box-prp-covering-subsequences).
-:::
-
-**תרגיל 3.** הראו שהסדרה $a_n = \dfrac{n + \left(-1\right)^{n} n}{n + 1}$ אינה מתכנסת.
-
-::: {.thmsol .foldable}
-במקומות הזוגיים $,a_{2k} = \frac{4k}{2k+1} = \frac{2}{1 + \frac{1}{2k}}$ ולכן $.\lim\limits_{k\to\infty} a_{2k} = 2$ במקומות האי-זוגיים המונה מתאפס, $,a_{2k-1} = 0$ ולכן $.\lim\limits_{k\to\infty} a_{2k-1} = 0$ שתי תת-סדרות עם גבולות שונים, ולכן לפי [](#box-cor-two-partial-limits-diverge) הסדרה אינה מתכנסת.
 :::
 
 ```{=html}
