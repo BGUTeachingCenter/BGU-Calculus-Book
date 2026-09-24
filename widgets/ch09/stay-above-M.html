@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>חורגת מכל תחום לעומת נשארת מעל M</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+<style>
+/* Widget-specific bits only; the rest comes from seq-limit.css (same artwork as the
+   chapter-7 widgets, in particular window-m-M, which this one is modelled on). */
+.axis{stroke:#1f2937;stroke-width:1.4}
+.pt{stroke:#fff;stroke-width:1.2}
+.lbl{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:16px}
+.axlbl{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:13px;
+       text-anchor:middle;fill:#1f2937}
+.ytick{font-family:"Times New Roman",Times,serif;font-size:12px;text-anchor:end;direction:ltr}
+/* direction:ltr — in an RTL page SVG reads text-anchor:end as the LEFT edge, which
+   pushed the numbers rightwards into the axis ticks. */
+.expr{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:1.05rem;
+      direction:ltr;unicode-bidi:isolate}
+.panel-title{text-align:center;margin:.6rem 0 .1rem}
+.verdict{text-align:center;font-weight:700;color:var(--key);margin:.1rem 0 .5rem}
+</style>
+</head>
+<body>
+<div class="demo">
+
+<div class="row">
+  <span class="key">הקו <span class="expr">M</span></span>
+  <input id="Mr" type="range" min="1" max="19" step="1" value="9"
+         aria-label="הזזת הקו M">
+  <span class="expr" id="Mout"></span>
+</div>
+
+<div class="panel-title">שואפת לאינסוף: <span class="expr">a<sub>n</sub> = n + (−1)<sup>n</sup></span></div>
+<svg id="top" viewBox="0 0 640 290" role="img"
+     aria-label="איברי הסדרה n ועוד מינוס אחת בחזקת n, והקו M. החל מאינדקס N כל האיברים מעל הקו"></svg>
+<div class="verdict" id="vtop"></div>
+
+<div class="panel-title">אינה חסומה, ואינה שואפת לאינסוף: <span class="expr">0, 1, 0, 2, 0, 3, …</span></div>
+<svg id="bot" viewBox="0 0 640 290" role="img"
+     aria-label="איברי הסדרה אפס, אחת, אפס, שתיים וכן הלאה, והקו M. יש איברים מעל הקו, אבל כל איבר במקום אי-זוגי שווה לאפס ונמצא מתחתיו"></svg>
+<div class="verdict" id="vbot"></div>
+
+</div>
+
+<script>
+(function (global) {
+  "use strict";
+
+  // Palette read once as literal strings: var() does NOT resolve inside SVG
+  // presentation attributes set via setAttribute (it silently renders black).
+  var css = getComputedStyle(document.documentElement);
+  function cssvar(name, fallback) {
+    var s = css.getPropertyValue(name).trim();
+    return s || fallback;
+  }
+  var INK = cssvar("--ink", "#1f2937");
+  var RED = cssvar("--red", "#c0392b");
+  var BLUE = cssvar("--blue", "#1f4e79");
+  var GREEN = "#2e7d32";
+
+  // Both panels share ONE vertical scale, so the same M sits at the same height in both
+  // and the reader compares like with like.
+  // 20 terms, so every n gets its own tick and label, and every integer value its own
+  // tick on the vertical axis: with numbers this small the reader should be able to read
+  // off each term, not estimate it between ticks at 0, 5, 10.
+  var NMAX = 20;
+  var VX0 = 0.3, VX1 = NMAX + 0.7, VY0 = -0.8, VY1 = 22;
+  var PX0 = 52, PX1 = 596, PY0 = 22, PY1 = 246, GUT = 8;
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function sx(v) { return PX0 + (v - VX0) * (PX1 - PX0) / (VX1 - VX0); }
+  function sy(v) { return PY1 - (v - VY0) * (PY1 - PY0) / (VY1 - VY0); }
+
+  // M moves in half-steps (slider value / 2), so it never coincides with a term:
+  // every term of both sequences is an integer, and "above M" is never a tie.
+  function readM(el) { return el.value / 2 + 0.25; }
+
+  function up(n) { return n + (n % 2 === 0 ? 1 : -1); }      // n + (-1)^n
+  function jump(n) { return n % 2 === 0 ? n / 2 : 0; }        // 0, 1, 0, 2, ...
+
+  function make(parent, name, attrs, text) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) { if (attrs[k] !== undefined) e.setAttribute(k, attrs[k]); }
+    if (text !== undefined) e.textContent = text;
+    parent.appendChild(e);
+    return e;
+  }
+
+  function axes(svg) {
+    make(svg, "line", { x1: PX0 - 12, y1: sy(0), x2: PX1, y2: sy(0), "class": "axis" });
+    make(svg, "line", { x1: PX0 - 12, y1: PY0 - 6, x2: PX0 - 12, y2: sy(VY0), "class": "axis" });
+    for (var t = 1; t <= NMAX; t++) {
+      make(svg, "line", { x1: sx(t), y1: sy(0), x2: sx(t), y2: sy(0) + 5, "class": "axis" });
+      make(svg, "text", { x: sx(t), y: sy(0) + 19, "class": "axlbl" }, String(t));
+    }
+    make(svg, "text", { x: PX1 + GUT, y: sy(0) + 5, "class": "axlbl" }, "n");
+    // vertical axis: a tick at every integer, a number and a faint grid line at every even one
+    for (var y = 0; y <= 21; y++) {
+      make(svg, "line", { x1: PX0 - 16, y1: sy(y), x2: PX0 - 12, y2: sy(y), "class": "axis" });
+      if (y % 2 === 0) {
+        make(svg, "text", { x: PX0 - 20, y: sy(y) + 4, fill: INK, "class": "ytick" }, String(y));
+        if (y > 0) {
+          make(svg, "line", { x1: PX0 - 12, y1: sy(y), x2: PX1, y2: sy(y),
+                              stroke: INK, "stroke-width": 0.5, opacity: 0.15 });
+        }
+      }
+    }
+    var g = document.createElementNS(SVGNS, "g");
+    svg.appendChild(g);
+    return g;                                    // dynamic layer, rebuilt on update
+  }
+
+  var top = axes(document.getElementById("top"));
+  var bot = axes(document.getElementById("bot"));
+  var sl = document.getElementById("Mr");
+  var mOut = document.getElementById("Mout");
+  var vTop = document.getElementById("vtop");
+  var vBot = document.getElementById("vbot");
+
+  function drawM(g, M) {
+    make(g, "line", { x1: PX0 - 12, y1: sy(M), x2: PX1, y2: sy(M),
+                      stroke: BLUE, "stroke-width": 1.5, "stroke-dasharray": "6 4" });
+    make(g, "text", { x: PX1 + GUT, y: sy(M) + 5, fill: BLUE, "class": "lbl" }, "M");
+  }
+
+  function drawPoints(g, f, M) {
+    for (var n = 1; n <= NMAX; n++) {
+      var v = f(n);
+      make(g, "circle", { cx: sx(n), cy: sy(v), r: 3.6,
+                          fill: v > M ? GREEN : RED, "class": "pt" });
+    }
+  }
+
+  // First index from which the WHOLE tail of n + (-1)^n is above M. Its terms satisfy
+  // n - 1 <= a_n, so nothing past M + 2 can fall below M and the scan is exact.
+  function tailIndex(M) {
+    var last = 0;
+    for (var n = 1; n <= Math.ceil(M) + 2; n++) { if (up(n) <= M) { last = n; } }
+    return last + 1;
+  }
+
+  function reportHeight() {
+    requestAnimationFrame(function () {
+      if (global.parent && global.parent !== global) {
+        global.parent.postMessage({
+          type: "widget-height",
+          height: Math.ceil(document.documentElement.scrollHeight)
+        }, "*");
+      }
+    });
+  }
+
+  function update() {
+    var M = readM(sl);
+    mOut.textContent = "M = " + M.toFixed(2);
+    [top, bot].forEach(function (g) { while (g.firstChild) { g.removeChild(g.firstChild); } });
+
+    // top panel: there IS an N
+    var N = tailIndex(M);
+    drawM(top, M);
+    make(top, "rect", { x: sx(N - 0.5), y: PY0 - 6, width: PX1 - sx(N - 0.5),
+                        height: sy(VY0) - PY0 + 6, fill: GREEN, opacity: 0.08 });
+    make(top, "line", { x1: sx(N - 0.5), y1: PY0 - 6, x2: sx(N - 0.5), y2: sy(VY0),
+                        stroke: INK, "stroke-width": 1.2, "stroke-dasharray": "4 3" });
+    make(top, "text", { x: sx(N - 0.5), y: PY0 - 9, fill: INK, "class": "axlbl" }, "N = " + N);
+    drawPoints(top, up, M);
+    vTop.innerHTML = 'החל מ-<span class="expr">N = ' + N + '</span> כל האיברים מעל <span class="expr">M</span>, ונשארים שם';
+
+    // bottom panel: terms above M appear, but no N works
+    drawM(bot, M);
+    drawPoints(bot, jump, M);
+    var first = 2 * (Math.floor(M) + 1);
+    var m_ = '<span class="expr">M</span>', n_ = '<span class="expr">N</span>';
+    vBot.innerHTML = (first <= NMAX
+      ? "האיבר במקום " + first + " כבר מעל " + m_ + ", אבל אחריו שוב ושוב מופיעים אפסים מתחת ל-" + m_
+      : "גם כאן יופיעו בהמשך איברים מעל " + m_ + ", אבל אחריהם שוב ושוב אפסים מתחת ל-" + m_)
+      + ", ולכן אין " + n_ + " מתאים";
+
+    reportHeight();
+  }
+
+  sl.addEventListener("input", update);
+  global.addEventListener("resize", reportHeight);
+  update();
+})(window);
+</script>
+</body>
+</html>

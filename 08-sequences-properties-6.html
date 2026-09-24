@@ -390,26 +390,37 @@ iframe.widget-frame {
    full-weight label keeps it clear of a definition box at a glance. */
 .thmbox-key-point   { border-color: #0284c7; border-inline-start-width: 6px; background: #f0f9ff; }
 .thmbox-key-point > p:first-child > strong { font-weight: 700; color: #0369a1; }
-/* Optional box (.optional): foldable, collapsed by default; same gray look as .extra,
-   but the gray bar is the clickable <summary>. */
-details.thmoptional {
+/* העמקה (.optional): theory beyond the core course. Folded by default; the bar is the
+   clickable <summary> and doubles as the skip banner. GREY (swapped with העשרה on
+   2026-09-24: enrichment is the orange one). */
+details.thmcollapse.thmoptional {
   border: 1px solid #9ca3af;
   border-radius: 0;
   margin: 1.5rem 0;
   background: #ffffff;
   overflow: hidden;
 }
-details.thmoptional > summary {
+details.thmcollapse.thmoptional > summary {
   background: #d1d5db;
   color: #374151;
   font-weight: 700;
   padding: 0.45rem 0.8rem;
   cursor: pointer;
 }
-details.thmoptional[open] > summary { border-bottom: 1px solid #9ca3af; }
-details.thmoptional > .optional { padding: 0.7rem 0.9rem; }
-details.thmoptional > .optional > :first-child { margin-top: 0; }
-details.thmoptional > .optional > :last-child { margin-bottom: 0; }
+details.thmcollapse.thmoptional[open] > summary { border-bottom: 1px solid #9ca3af; }
+details.thmcollapse.thmoptional > .optional { padding: 0.7rem 0.9rem; }
+details.thmcollapse.thmoptional > .optional > :first-child { margin-top: 0; }
+details.thmcollapse.thmoptional > .optional > :last-child { margin-bottom: 0; }
+details.thmcollapse.thmoptional .skip-note { font-weight: 400; }
+/* Icons in the העמקה / העשרה bars. The shovel ("את חפירה" — an in-joke about חפירות) is a
+   drawn SVG rather than the 🪏 emoji, which is Unicode 16 and renders as an empty box on
+   Windows 10, older Android and macOS < 15.4. */
+summary .ico { display: inline-block; margin-inline-end: 0.4em; vertical-align: -0.2em; }
+summary .ico-gem { font-size: 1.2em; line-height: 1; vertical-align: -0.1em; }
+summary .ico-shovel {
+  width: 1.5em; height: 1.5em;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(35 12 12)' stroke='%237c2d12' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 2h7' fill='none'/%3E%3Cpath d='M12 2v10.5' fill='none'/%3E%3Cpath d='M7.5 12.5h9v3.5L12 22l-4.5-6z' fill='%23c2410c'/%3E%3C/g%3E%3C/svg%3E");
+}
 /* .foldable: hidden calculations / derivations. Distinct from .optional (which is a
    whole gray-boxed aside) — this is a light inline disclosure inside the running text. */
 details.thmfoldable {
@@ -431,25 +442,30 @@ details.thmcollapse > summary {
   padding: 0.2rem 0;
 }
 details.thmcollapse[open] > summary { margin-bottom: 0.4rem; }
-/* Enrichment box (.extra): non-foldable, gray box; the section heading becomes a gray
-   header bar. Quarto merges the div into <section class="... extra">, so we style .extra. */
-.extra {
-  border: 1px solid #9ca3af;
+/* העשרה (.extra): enrichment. Foldable but OPEN by default — the reader may fold it away.
+   ORANGE (the teaching team asked for a colour for non-core material; 2026-09-24 it moved
+   here from העמקה). The bar is the <summary>, whose hint flips with the state. */
+details.thmcollapse.thmextra {
+  border: 1px solid #fb923c;
   border-radius: 0;
   margin: 1.5rem 0;
-  background: #ffffff;
-  padding: 0.7rem 0.9rem;
+  background: #fff7ed;
+  overflow: hidden;
 }
-.extra > h2, .extra > h3, .extra > .extra-title {
-  background: #d1d5db;
-  color: #374151;
-  font-size: 1.25rem;
+details.thmcollapse.thmextra > summary {
+  background: #fed7aa;
+  color: #7c2d12;
   font-weight: 700;
-  margin: -0.7rem -0.9rem 0.8rem;
   padding: 0.45rem 0.8rem;
-  border-bottom: 1px solid #9ca3af;
+  cursor: pointer;
 }
-.extra > :last-child { margin-bottom: 0; }
+details.thmcollapse.thmextra[open] > summary { border-bottom: 1px solid #fb923c; }
+details.thmcollapse.thmextra > .extra { padding: 0.7rem 0.9rem; }
+details.thmcollapse.thmextra > .extra > :first-child { margin-top: 0; }
+details.thmcollapse.thmextra > .extra > :last-child { margin-bottom: 0; }
+summary .fold-hint { font-weight: 400; }
+details[open] > summary .when-closed,
+details:not([open]) > summary .when-open { display: none; }
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -535,16 +551,58 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
+/* Shared answer evaluator for .seq-quiz and .set-quiz (2026-09-24).
+   Accepts arithmetic (digits and + - * / ^ ( ) . only, e.g. "3/2", "2^10") and infinity:
+   the primary form is "inf" / "-inf" (easy on any keyboard, phones included); also
+   accepted are the symbol ∞, "oo", "infinity", and the Hebrew words אינסוף / מינוס אינסוף.
+   U+2212 (the typographic minus) counts as "-". Returns a number (±Infinity for the
+   infinite answers) or null when the input is not a valid answer. */
+window.bookEvalAnswer = function (s) {
+  s = String(s == null ? "" : s).trim().replace(/−/g, "-");
+  if (!s) return null;
+  var t = s.toLowerCase().replace(/\s+/g, "");
+  var INF = /^(inf|infinity|oo|∞|אינסוף)$/;
+  var m = t.match(/^([+-]?)(.*)$/);
+  if (INF.test(m[2])) return m[1] === "-" ? -Infinity : Infinity;
+  if (/^מינוס(אינסוף|∞)$/.test(t)) return -Infinity;
+  if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;
+  try {
+    var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
+    return (typeof v === "number" && isFinite(v)) ? v : null;
+  } catch (e) { return null; }
+};
+/* equality of two evaluated answers: infinities exactly, finite values up to rounding */
+window.bookSameAnswer = function (a, b) {
+  if (a == null || b == null) return false;
+  if (!isFinite(a) || !isFinite(b)) return a === b;
+  return Math.abs(a - b) <= 1e-9;
+};
+</script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
+  // Elements may be separated by commas/semicolons or by spaces ("1 2 3"); a space inside
+  // the Hebrew "מינוס אינסוף" is not a separator. Each element goes through the shared
+  // evaluator, so "1/2" and "inf" work. Returns null if any element is invalid.
   function normSet(str) {
     if (!str) return [];
-    return Array.from(new Set(
-      str.split(/[\s,;]+/).filter(function (s) { return s.length; }).map(Number)
-    )).filter(function (n) { return !Number.isNaN(n); }).sort(function (a, b) { return a - b; });
+    var parts = [];
+    String(str).split(/[,;]+/).forEach(function (tok) {
+      tok = tok.trim();
+      if (!tok) return;
+      if (/\s/.test(tok) && !/אינסוף/.test(tok)) parts = parts.concat(tok.split(/\s+/));
+      else parts.push(tok);
+    });
+    var vals = [];
+    for (var i = 0; i < parts.length; i++) {
+      var v = window.bookEvalAnswer(parts[i]);
+      if (v === null) return null;
+      if (!vals.some(function (w) { return window.bookSameAnswer(v, w); })) vals.push(v);
+    }
+    return vals.sort(function (a, b) { return a - b; });
   }
   function eqSet(a, b) {
-    if (a.length !== b.length) return false;
-    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
+    if (a === null || b === null || a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (!window.bookSameAnswer(a[i], b[i])) return false; }
     return true;
   }
   document.querySelectorAll(".set-quiz").forEach(function (q) {
@@ -569,21 +627,13 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Evaluate one entered term as arithmetic (whitelisted chars only: digits + - * / ^ ( ) . )
-  function evalTerm(s) {
-    s = String(s).trim();
-    if (!s) return null;
-    if (!/^[0-9+\-*/^().\s]+$/.test(s)) return null;
-    try {
-      var v = Function('"use strict"; return (' + s.replace(/\^/g, "**") + ');')();
-      return (typeof v === "number" && isFinite(v)) ? v : null;
-    } catch (e) { return null; }
-  }
+  // One entered term: arithmetic or ±infinity, via the shared evaluator above.
+  function evalTerm(s) { return window.bookEvalAnswer(s); }
   function parseSeq(str) { return String(str || "").split(",").map(evalTerm); }
   function eqSeq(a, b) {
     if (a.length !== b.length) return false;
     for (var i = 0; i < a.length; i++) {
-      if (a[i] == null || b[i] == null || Math.abs(a[i] - b[i]) > 1e-9) return false;
+      if (!window.bookSameAnswer(a[i], b[i])) return false;
     }
     return true;
   }
@@ -724,6 +774,204 @@ window.addEventListener("message", function (e) {
   }
 });
 </script>
+<style>
+/* Click-to-expand cross-references (2026-09-24). A panel opens below the paragraph
+   holding the link and shows a copy of the cited box; see the script below. */
+.xref-panel {
+  border: 1px solid #cbd5e1;
+  border-inline-start: 4px solid #1f4e79;
+  background: #f8fafc;
+  margin: 0.4rem 0 1rem;
+  padding: 0.45rem 0.8rem 0.6rem;
+}
+.xref-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 0.8rem;
+  font-size: 0.85rem; color: #475569; margin-bottom: 0.35rem;
+}
+.xref-head .xref-jump { font-weight: 600; }
+.xref-head .xref-close {
+  border: 0; background: transparent; color: #475569; cursor: pointer;
+  font-size: 1.1rem; line-height: 1; padding: 0 0.2rem;
+}
+.xref-panel > .thmbox { margin: 0; }
+.xref-note { color: #64748b; font-style: italic; }
+a.xref-open { background: #e0ecf7; border-radius: 2px; }
+</style>
+<script>
+/* Links in the book's CONTENT open in a new tab (author's hard rule, 2026-09-24): cross-
+   references, section references, links between chapters, external links, and the
+   "מעבר לתיבה" link of the preview panels. Navigation keeps the same window: the sidebar,
+   the previous/next buttons and the in-page table of contents all live OUTSIDE the
+   page's main content element (#quarto-document-content), so scoping to it leaves them
+   alone. (Never write that element's literal opening tag in this file: split-sections.py
+   locates the page body by it, and a copy in a comment here once broke every page.) Also left
+   alone: Quarto's heading-anchor icons and footnote links, which point within the page.
+   A plain click on a box reference still opens the in-place preview (script below). */
+window.bookMarkNewTab = function (root) {
+  if (!root) return;
+  root.querySelectorAll("a[href]").forEach(function (a) {
+    var h = a.getAttribute("href") || "";
+    if (!h || h === "#" || /^javascript:/i.test(h)) return;
+    if (a.classList.contains("anchorjs-link") || a.classList.contains("footnote-ref") ||
+        a.classList.contains("footnote-back")) return;
+    a.setAttribute("target", "_blank");
+    a.setAttribute("rel", "noopener");
+  });
+};
+document.addEventListener("DOMContentLoaded", function () {
+  window.bookMarkNewTab(document.getElementById("quarto-document-content"));
+});
+</script>
+<script>
+/* Click-to-expand cross-references (2026-09-24).
+   A click on a link to a box (#box-…) opens a panel below the paragraph that holds
+   the link, showing a COPY of that box, instead of navigating away. A second click on
+   the same link closes it. The panel has a "מעבר לתיבה" link for readers who want the
+   box in its context (its proof, the text around it).
+   - Where the boxes come from: _book/box-index.js, written by split-sections.py, holds
+     every box's HTML and page. It is loaded with a <script> tag on the FIRST click only.
+     A script and not fetch(): browsers refuse fetch() on file:// pages, and the book is
+     often opened straight from _book/. Boxes on the current page are copied from the
+     page itself, where their math is already typeset.
+   - The copy loses its ids (no duplicate ids on the page), its iframes (replaced by a
+     note) and its quizzes, and is then typeset (see typeset() below).
+   - Links inside a panel expand too, up to three levels deep. Esc closes the panel
+     opened last.
+   - If the index cannot be loaded or the box is missing, the link navigates as before.
+     Ctrl/Cmd/Shift-click and middle-click always navigate. */
+(function () {
+  "use strict";
+  var MAX_DEPTH = 3;
+  var indexPromise = null, open = [];
+
+  function loadIndex() {
+    if (!indexPromise) {
+      indexPromise = new Promise(function (resolve, reject) {
+        if (window.BOX_INDEX) { resolve(window.BOX_INDEX); return; }
+        var sc = document.createElement("script");
+        sc.src = "box-index.js";
+        sc.onload = function () { window.BOX_INDEX ? resolve(window.BOX_INDEX) : reject(); };
+        sc.onerror = function () { indexPromise = null; reject(); };
+        document.head.appendChild(sc);
+      });
+    }
+    return indexPromise;
+  }
+
+  // Synchronous typesetting, the way Quarto's own window.Quarto.typesetMath does it.
+  // MathJax.typesetPromise queues behind MathJax.startup.promise, which was seen to stay
+  // pending (headless Chrome), leaving raw TeX. If the synchronous call throws — MathJax 4
+  // does that when it must first load a font file — fall back to the promise version.
+  function typeset(el) {
+    if (!window.MathJax) return;
+    try {
+      if (window.Quarto && window.Quarto.typesetMath) window.Quarto.typesetMath(el);
+      else window.MathJax.typeset([el]);
+    } catch (e) {
+      if (window.MathJax.typesetPromise) window.MathJax.typesetPromise([el]);
+    }
+  }
+
+  function cleanCopy(box) {
+    var c = box.cloneNode(true);
+    c.removeAttribute("title");
+    c.querySelectorAll("iframe").forEach(function (f) {
+      var p = document.createElement("p");
+      p.className = "xref-note";
+      p.textContent = "הסימולציה זמינה בעמוד עצמו.";
+      f.replaceWith(p);
+    });
+    c.querySelectorAll(".tf-quiz, .seq-quiz, .set-quiz, .formula-quiz, .bound-quiz")
+      .forEach(function (q) { q.remove(); });
+    if (c.id) c.removeAttribute("id");
+    c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); });
+    return c;
+  }
+
+  function closePanel(entry) {
+    entry.panel.remove();
+    entry.link.classList.remove("xref-open");
+    entry.link.setAttribute("aria-expanded", "false");
+    open = open.filter(function (e) { return e !== entry; });
+  }
+
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest && ev.target.closest("a[href*='#box-']");
+    if (!a) return;
+    if (ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+    if (a.classList.contains("xref-jump")) return;
+    var depth = 0, n = a;
+    while ((n = n.parentElement && n.parentElement.closest(".xref-panel"))) depth++;
+    if (depth >= MAX_DEPTH) return;
+
+    var href = a.getAttribute("href"), id = href.split("#")[1];
+    var already = open.filter(function (e) { return e.link === a; })[0];
+    ev.preventDefault();
+    if (already) { closePanel(already); return; }
+
+    var here = location.pathname.split("/").pop() || "index.html";
+    var panel = document.createElement("div");
+    panel.className = "xref-panel";
+    var head = document.createElement("div");
+    head.className = "xref-head";
+    var jump = document.createElement("a");
+    jump.className = "xref-jump"; jump.href = href; jump.textContent = "מעבר לתיבה ←";
+    jump.target = "_blank"; jump.rel = "noopener";
+    var close = document.createElement("button");
+    close.className = "xref-close"; close.type = "button";
+    close.setAttribute("aria-label", "סגירה"); close.textContent = "×";
+    head.appendChild(jump); head.appendChild(close);
+    var body = document.createElement("div");
+    body.textContent = "טוען…";
+    panel.appendChild(head); panel.appendChild(body);
+
+    var block = a.closest("p, li, td, th, dd, figcaption, .thmbox") || a.parentElement;
+    if (block.tagName === "TD" || block.tagName === "TH") block = block.closest("table");
+    block.after(panel);
+    var entry = { link: a, panel: panel };
+    open.push(entry);
+    a.classList.add("xref-open");
+    a.setAttribute("aria-expanded", "true");
+    close.addEventListener("click", function () { closePanel(entry); a.focus(); });
+
+    // Could not preview: open the box in a new tab (the content-links rule). This runs
+    // after an asynchronous load, so a pop-up blocker may refuse window.open; in that
+    // case navigate in place rather than do nothing.
+    function fail() {
+      closePanel(entry);
+      var w = window.open(href, "_blank");
+      if (!w) location.href = href;
+    }
+
+    var local = document.getElementById(id);
+    if (local && !local.closest(".xref-panel")) {
+      body.replaceWith(cleanCopy(local));
+      window.bookMarkNewTab(panel);
+      return;
+    }
+    loadIndex().then(function (idx) {
+      var rec = idx[id];
+      if (!rec) { fail(); return; }
+      jump.href = (rec.p === here ? "" : "./" + rec.p) + "#" + id;
+      var t = document.createElement("template");
+      t.innerHTML = rec.h;
+      var box = t.content.firstElementChild;
+      if (!box) { fail(); return; }
+      body.replaceWith(cleanCopy(box));
+      window.bookMarkNewTab(panel);
+      typeset(panel);
+    }).catch(fail);
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && open.length) {
+      var last = open[open.length - 1];
+      closePanel(last);
+      last.link.focus();
+    }
+  });
+})();
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -842,13 +1090,11 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.5 פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">גבול של סדרה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-07-sequences-limit" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-07-sequences-limit" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.1 הגדרה ודרכי תיאור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.2 גבול של סדרה: מוטיבציה ואינטואיציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.3 גבול של סדרה: הגדרה פורמלית ודוגמאות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">7.4 מסקנות מיידיות מהגדרת הגבול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./07-sequences-limit-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">פיתוח עשרוני כסדרה (העשרה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">כלים לחישוב גבולות ולהוכחת התכנסות</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-08-sequences-properties" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-08-sequences-properties" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.1 הקדמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.2 חסימוּת של סדרה מתכנסת (וההיפך השגוי)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.4 משפט הסנדוויץ׳; כפל אפסה בחסומה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.5 מונוטוניות של סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-6.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">8.6 סדרה חסומה ומונוטונית מתכנסת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./08-sequences-properties-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">8.7 חישוב גבולות סדרות עם גבול בחזקה</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים וסדרי גודל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^k \ll k^n \ll n! \ll n^n\)</span></a></div></li></ul></li>
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">תת-סדרות וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-sequences-subsequences" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-sequences-subsequences" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 תת-סדרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 משפט בולצאנו–ויירשטראס (ללא הוכחה)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-sequences-subsequences-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 הגבול העליון והגבול התחתון (ללא הוכחות)</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">גבולות אינסופיים, סדרי גודל וגבולות חלקיים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-09-sequences-infinity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-09-sequences-infinity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.1 מוטיבציה והגדרה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.2 אריתמטיקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.3 מבחן המנה ומבחן השורש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.4 המספר \(e\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.5 יחסי הגדילה הבסיסיים: \(n^x \ll q^n \ll n! \ll n^n\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./09-sequences-infinity-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">9.6 תת-סדרות וגבולות חלקיים</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -860,8 +1106,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./11-functions-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">מבוא לפונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-11-functions-intro" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-11-functions-intro" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.1 מושג הפונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.2 תחום, טווח ותמונה של פונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.3 גרפים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.4 תכונות של פונקציות: מונוטוניות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.5 פונקציות זוגיות ואי-זוגיות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.6 פונקציות מחזוריות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.7 הרכבת פונקציות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-functions-intro-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.8 פונקציות הפוכות</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./10-functions-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">מבוא לפונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-10-functions-intro" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-10-functions-intro" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.1 מושג הפונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.2 תחום, טווח ותמונה של פונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.3 גרפים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.4 תכונות של פונקציות: מונוטוניות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.5 פונקציות זוגיות ואי-זוגיות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.6 פונקציות מחזוריות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.7 הרכבת פונקציות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./10-functions-intro-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">10.8 פונקציות הפוכות</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -873,8 +1119,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./12-function-limits.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">גבולות של פונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-12-function-limits" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-12-function-limits" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.1 הגדרת הגבול של פונקציה + דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.2 משפט היינה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.4 משפט הסנדוויץ׳</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.5 גבולות חד-צדדיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.6 הגבולות ה״מופלאים״: \(\frac{\sin x}{x}\), \(\frac{1-\cos x}{x^2}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.7 גבולות מופלאים נוספים: \((1+x)^{1/x}\), \(\frac{\ln(1+x)}{x}\), \(\frac{e^x-1}{x}\), \(\frac{(1+x)^a-1}{x}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-function-limits-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.8 אינסוף כגבול וגבול באינסוף</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./11-function-limits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">גבולות של פונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-11-function-limits" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-11-function-limits" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.1 הגדרת הגבול של פונקציה + דוגמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.2 משפט היינה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.3 אריתמטיקה של גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.4 משפט הסנדוויץ׳</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.5 גבולות חד-צדדיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.6 הגבולות ה״מופלאים״: \(\frac{\sin x}{x}\), \(\frac{1-\cos x}{x^2}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.7 גבולות מופלאים נוספים: \((1+x)^{1/x}\), \(\frac{\ln(1+x)}{x}\), \(\frac{e^x-1}{x}\), \(\frac{(1+x)^a-1}{x}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./11-function-limits-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">11.8 אינסוף כגבול וגבול באינסוף</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -886,8 +1132,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./13-continuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">רציפות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-13-continuity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-13-continuity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.1 הגדרת רציפות בנקודה ובקטע</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.2 דוגמה: פונקציה מפוצלת עם גבולות מופלאים ופרמטר</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.3 דוגמה: פונקציית דיריכלה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.4 דוגמה: פונקציית הערך השלם</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.5 אריתמטיקה של פונקציות רציפות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.6 פונקציות אלמנטריות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.7 משפט ערך הביניים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.8 דוגמה: חוסר רציפות בנקודה אחת הורס את המסקנה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.9 דוגמה: קיום פתרון של משוואה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.10 דוגמה: קיום מספר פתרונות של משוואה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.11 משפט ויירשטראס</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-continuity-12.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.12 נקודות אי-רציפות: סליקה, קפיצה ועיקרית</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./12-continuity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">רציפות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-12-continuity" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-12-continuity" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.1 הגדרת רציפות בנקודה ובקטע</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.2 דוגמה: פונקציה מפוצלת עם גבולות מופלאים ופרמטר</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.3 דוגמה: פונקציית דיריכלה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.4 דוגמה: פונקציית הערך השלם</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.5 אריתמטיקה של פונקציות רציפות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.6 פונקציות אלמנטריות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.7 משפט ערך הביניים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.8 דוגמה: חוסר רציפות בנקודה אחת הורס את המסקנה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.9 דוגמה: קיום פתרון של משוואה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.10 דוגמה: קיום מספר פתרונות של משוואה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.11 משפט ויירשטראס</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./12-continuity-12.html" class="sidebar-item-text sidebar-link"><span class="menu-text">12.12 נקודות אי-רציפות: סליקה, קפיצה ועיקרית</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -899,8 +1145,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./14-derivative.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">הנגזרת</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-14-derivative" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-14-derivative" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.1 אינטואיציה גיאומטרית ופיזיקלית למושג הנגזרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.2 הגדרת הנגזרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.3 חישובי נגזרת לפונקציות בסיסיות: \(C,\ x^a,\ \sin x,\ \cos x,\ e^x,\ \ln x,\ |x|\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.4 הקשר בין גזירוּת לרציפות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.5 אריתמטיקה של נגזרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.6 כלל השרשרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.7 נגזרת של פונקציה הפוכה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.8 נגזרות של \(\sqrt{x}\), \(\log_a x\), \(\arctan x\), \(\arccos x\), \(\arcsin x\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.9 נוסחת המשיק והקירוב הלינארי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.10 נגזרת חד-צדדית</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./13-derivative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">הנגזרת</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-13-derivative" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-13-derivative" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.1 אינטואיציה גיאומטרית ופיזיקלית למושג הנגזרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.2 הגדרת הנגזרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.3 חישובי נגזרת לפונקציות בסיסיות: \(C,\ x^a,\ \sin x,\ \cos x,\ e^x,\ \ln x,\ |x|\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.4 הקשר בין גזירוּת לרציפות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.5 אריתמטיקה של נגזרות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.6 כלל השרשרת</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.7 נגזרת של פונקציה הפוכה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.8 נגזרות של \(\sqrt{x}\), \(\log_a x\), \(\arctan x\), \(\arccos x\), \(\arcsin x\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.9 נוסחת המשיק והקירוב הלינארי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./13-derivative-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">13.10 נגזרת חד-צדדית</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -912,8 +1158,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./15-derivative-applications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">שימושים של הנגזרת</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-15-derivative-applications" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-15-derivative-applications" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.1 קיצון מקומי ומשפט פרמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.2 מציאת קיצון של פונקציה רציפה בקטע סגור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.3 משפט רול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.4 משפט לגראנז’</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.5 מסקנות ממשפט לגראנז’ — מונוטוניות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.6 משפט קושי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.7 כלל לופיטל (\(0/0\))</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-derivative-applications-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.8 כלל לופיטל (\(\infty/\infty\))</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./14-derivative-applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">שימושים של הנגזרת</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-14-derivative-applications" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-14-derivative-applications" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.1 קיצון מקומי ומשפט פרמה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.2 מציאת קיצון של פונקציה רציפה בקטע סגור</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.3 משפט רול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.4 משפט לגראנז’</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.5 מסקנות ממשפט לגראנז’ — מונוטוניות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.6 משפט קושי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.7 כלל לופיטל (\(0/0\))</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./14-derivative-applications-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">14.8 כלל לופיטל (\(\infty/\infty\))</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -925,8 +1171,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./16-higher-derivatives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">נגזרות מסדר גבוה וחקירת פונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-16-higher-derivatives" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-16-higher-derivatives" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.1 הגדרת הנגזרת מסדר גבוה וסימונים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.2 דוגמאות לנגזרת מסדר גבוה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.3 פולינום טיילור ומקלורן</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.4 מציאת פולינום מקלורן מסדר \(n\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.5 סימון \(o(x^n)\) של פיאנו והשימוש בו לחישוב גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.6 משפט לגראנז’ על השארית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.7 מבחן הנגזרת השנייה לנקודות קיצון מקומי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.8 קמירות וקעירות של פונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.9 נקודת פיתול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.10 אסימפטוטות — אנכיות ומשופעות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-higher-derivatives-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.11 שרטוט גרף של פונקציה</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./15-higher-derivatives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">נגזרות מסדר גבוה וחקירת פונקציות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-15-higher-derivatives" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-15-higher-derivatives" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.1 הגדרת הנגזרת מסדר גבוה וסימונים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.2 דוגמאות לנגזרת מסדר גבוה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.3 פולינום טיילור ומקלורן</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.4 מציאת פולינום מקלורן מסדר \(n\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.5 סימון \(o(x^n)\) של פיאנו והשימוש בו לחישוב גבולות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.6 משפט לגראנז’ על השארית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.7 מבחן הנגזרת השנייה לנקודות קיצון מקומי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.8 קמירות וקעירות של פונקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.9 נקודת פיתול</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.10 אסימפטוטות — אנכיות ומשופעות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./15-higher-derivatives-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">15.11 שרטוט גרף של פונקציה</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -938,8 +1184,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./17-indefinite-integral.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">האינטגרל הלא-מסוים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-17-indefinite-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-17-indefinite-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.1 הגדרת האינטגרל הלא-מסוים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.2 אינטגרלים מיידיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.3 אינטגרציה בחלקים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.4 החלפת משתנה אינטגרציה — שיטת ההצבה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.5 הצבות חשובות: \(a\sin x\) באינטגרל של \(\sqrt{a^2-x^2}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.6 הצבת ויירשטראס (ההצבה האוניברסלית \(t=\tan(x/2)\))</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-indefinite-integral-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.7 אינטגרציה של פונקציות רציונליות</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./16-indefinite-integral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">האינטגרל הלא-מסוים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-16-indefinite-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-16-indefinite-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.1 הגדרת האינטגרל הלא-מסוים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.2 אינטגרלים מיידיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.3 אינטגרציה בחלקים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.4 החלפת משתנה אינטגרציה — שיטת ההצבה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.5 הצבות חשובות: \(a\sin x\) באינטגרל של \(\sqrt{a^2-x^2}\)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.6 הצבת ויירשטראס (ההצבה האוניברסלית \(t=\tan(x/2)\))</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./16-indefinite-integral-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">16.7 אינטגרציה של פונקציות רציונליות</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -951,8 +1197,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./18-definite-integral.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">האינטגרל המסוים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-18-definite-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-18-definite-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.1 חלוקה של קטע, עובי החלוקה ובחירת נקודות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.2 סכום רימן</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.3 פונקציה אינטגרבילית בקטע</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.4 פונקציית דיריכלה כפונקציה שאינה אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.5 משפט: כל פונקציה רציפה בקטע סגור אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.6 משפט: כל פונקציה מונוטונית בקטע סגור אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.7 משפט: פונקציה חסומה עם מספר סופי של נקודות אי-רציפות אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.8 המשפט היסודי של החשבון האינפיניטסימלי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.9 נוסחת ניוטון-לייבניץ ומסקנות לגבי נגזרת של אינטגרל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.10 דוגמה: גבול עם אינטגרל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-definite-integral-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.11 שימושים: שטח, נפח גוף סיבוב ואורך עקומה</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./17-definite-integral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">האינטגרל המסוים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-17-definite-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-17-definite-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.1 חלוקה של קטע, עובי החלוקה ובחירת נקודות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.2 סכום רימן</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.3 פונקציה אינטגרבילית בקטע</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.4 פונקציית דיריכלה כפונקציה שאינה אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.5 משפט: כל פונקציה רציפה בקטע סגור אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.6 משפט: כל פונקציה מונוטונית בקטע סגור אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.7 משפט: פונקציה חסומה עם מספר סופי של נקודות אי-רציפות אינטגרבילית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.8 המשפט היסודי של החשבון האינפיניטסימלי</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-9.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.9 נוסחת ניוטון-לייבניץ ומסקנות לגבי נגזרת של אינטגרל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-10.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.10 דוגמה: גבול עם אינטגרל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./17-definite-integral-11.html" class="sidebar-item-text sidebar-link"><span class="menu-text">17.11 שימושים: שטח, נפח גוף סיבוב ואורך עקומה</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -964,8 +1210,8 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./19-improper-integral.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">האינטגרל המוכלל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-19-improper-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-19-improper-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./19-improper-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">19.1 הגדרת האינטגרל המוכלל (מהסוג הראשון — בקרן)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./19-improper-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">19.2 דוגמאות לחישוב אינטגרל מוכלל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./19-improper-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">19.3 מבחן ההשוואה לפונקציות אי-שליליות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./19-improper-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">19.4 מבחן ההשוואה הגבולית לפונקציות אי-שליליות</span></a></div></li></ul></li>
+          <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./18-improper-integral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">האינטגרל המוכלל</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-18-improper-integral" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-18-improper-integral" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-improper-integral.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.1 הגדרת האינטגרל המוכלל (מהסוג הראשון — בקרן)</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-improper-integral-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.2 דוגמאות לחישוב אינטגרל מוכלל</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-improper-integral-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.3 מבחן ההשוואה לפונקציות אי-שליליות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./18-improper-integral-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">18.4 מבחן ההשוואה הגבולית לפונקציות אי-שליליות</span></a></div></li></ul></li>
       </ul>
   </li>
     </ul>
@@ -1020,7 +1266,7 @@ window.Quarto = {
 <p>עכשיו שימו לב לדבר הבא: כל אחת משתי התכונות אוסרת בדיוק את מה שהשנייה מתירה. סדרה מונוטונית אינה יכולה לרקוד, שהרי ריקוד פירושו לחזור אחורה; וסדרה חסומה אינה יכולה לברוח, שהרי בריחה פירושה לצאת מכל תחום. אפשר אפוא להגיע לאותה שאלה עצמה משני הכיוונים — לא לתת לסדרה המונוטונית לברוח, או לא לתת לסדרה החסומה לרקוד — ובשני המקרים מגיעים לאותה דרישה: <strong>לזוז לכיוון אחד בלבד, ולא לצאת מתחום קבוע.</strong></p>
 <p>נוח לראות את שלושת המצבים האלה בתמונה אחת. נחשוב על האיבר <span class="math inline">\(a_n\)</span> כאילו הוא <strong>זבוב</strong>, שבשנייה ה-<span class="math inline">\(n\)</span> נמצא במקום מסוים בתוך מכונית סגורה.</p>
 <p>הזבוב עף אל החלון הימני, נתקע בזכוכית ועף לצד השני; מגיע לחלון השמאלי, נתקע שוב וחוזר. מצד אחד הוא אינו יכול לצאת מן המכונית, ויש גבול למרחק שאליו יגיע. מצד שני יש לו הרבה מקום, ואין שום נקודה שבה הוא נעצר. זו בדיוק סדרה חסומה שאינה מתכנסת.</p>
-<p>נניח עכשיו שהזבוב עף בכיוון אחד בלבד, שאחד החלונות פתוח ושאין מכשולים בדרך. תחת ההנחות הנדיבות שכדור הארץ שטוח ואין לו קצה, ושהזבוב חי לנצח, הוא ימשיך לעוף ושום דבר לא יעצור אותו. הוא עובר על פני כל המרחקים שעל הציר, בלי להתקרב לאף אחד מהם. זו סדרה מונוטונית שאינה חסומה, ולכן אינה מתכנסת.</p>
+<p>נניח עכשיו שהזבוב עף בכיוון אחד בלבד, שאחד החלונות פתוח ושאין מכשולים בדרך. כאן נרשה לעצמנו שתי הנחות <strong>דמיוניות לחלוטין</strong>, שכל תפקידן הוא להמחיש את הרעיון ואין להן שום קשר למציאות: שכדור הארץ שטוח ואין לו קצה, ושהזבוב חי לנצח. תחת ההנחות האלה הוא ימשיך לעוף ושום דבר לא יעצור אותו. הוא עובר על פני כל המרחקים שעל הציר, בלי להתקרב לאף אחד מהם. זו סדרה מונוטונית שאינה חסומה, ולכן אינה מתכנסת.</p>
 <p>ומה יקרה אם נשלב את שני הדברים? נניח שהזבוב נכנס לחדר, ובכניסה מוצב מאוורר חזק שאינו מאפשר לו לנוע לכיוון הדלת, אלא מעיף אותו לכיוון השני בלבד. מצד שני, בקצה החדר יש קיר שאינו מאפשר לו לצאת מן התחום. גם אם הזבוב ינסה בכל כוחו להתקדם, אחת משתיים: או שתהיה נקודה שבה ייעצר באוויר, או שיידחק אל הקיר בסופו של דבר.</p>
 <div id="box-sim-fly" class="thmbox thmbox-simulation" title="שלושת מצבי הזבוב">
 <p><strong>סימולציה 8.6.3 — שלושת מצבי הזבוב.</strong></p>
@@ -1053,7 +1299,7 @@ window.Quarto = {
 </div>
 <!-- בהרצאה של דניס המשפט מופיע בשם ״משפט בולצאנו״. כאן הוא נשאר ללא שם, כדי שלא
      יתנגש עם ״משפט התכנסות הסדרות המונוטוניות״ שבפרק 11. -->
-<details class="thmcollapse thmoptional"><summary>קריאה לא הכרחית — אפשר לדלג · הוכחת המשפט</summary>
+<details class="thmcollapse thmoptional"><summary><span class="ico ico-shovel" aria-hidden="true"></span>העמקה · הוכחת המשפט<span class="skip-note"> — קריאה לא הכרחית, אפשר לדלג</span></summary>
 <div class="optional" title="הוכחת המשפט">
 <p>ההוכחה נשענת על מושג שאינו חלק מן הקורס, <strong>החסם העליון</strong>, ולכן היא מובאת כאן כקריאת רשות. אפשר לדלג עליה ולהשתמש במשפט כפי שהוא.</p>
 <div id="box-def-supremum" class="thmbox thmbox-definition" title="חסם עליון">
@@ -1087,7 +1333,12 @@ window.Quarto = {
 <p>שימו לב מה בדיוק הראינו במקרה העולה: הגבול אינו סתם חסם מלעיל כלשהו של הסדרה, אלא <strong>הקטן ביותר</strong> מבין חסמי המלעיל שלה. זה מסביר מדוע דווקא החסם העליון הוא הכלי המתאים כאן.</p>
 </div>
 </details>
-<p>נראה עכשיו את המשפט בפעולה על שתי סדרות פשוטות, אחת עולה ואחת יורדת.</p>
+<p>במשפט דרשנו שהסדרה תהיה מונוטונית לכל אורכה. אם היא מונוטונית רק החל מ-<span class="math inline">\(,N_0\)</span> הזנב שלה, כלומר הסדרה <span class="math inline">\(,a_{N_0}, a_{N_0+1}, \dots\)</span> מונוטוני וחסום, ולכן מתכנס לפי המשפט. לזנב ולסדרה כולה אותו גבול, שכן <a href="./07-sequences-limit-3.html#box-def-convergence-strict">הגבול אינו תלוי באיברים הראשונים של הסדרה</a>, ולכן גם הסדרה עצמה מתכנסת.</p>
+<div id="box-key-monotone-eventually" class="thmbox thmbox-key-point thmicon-rule" data-icon="rule" title="די במונוטוניות החל ממקום מסוים">
+<p><strong>כלל — די במונוטוניות החל ממקום מסוים.</strong></p>
+<p>סדרה חסומה שהיא מונוטונית <strong>החל ממקום מסוים</strong> מתכנסת. את ההתכנסות קובע רק <strong>זנב</strong> הסדרה.</p>
+</div>
+<p>נראה עכשיו את המשפט בפעולה על שתי סדרות פשוטות, אחת עולה ואחת יורדת. נקדים ונאמר מה מטרתן: בשתי הדוגמאות האלה אפשר לחשב את הגבול גם ישירות, באמצעות אריתמטיקת הגבולות, וזו אף הדרך הקצרה מן השתיים. הן מובאות כאן כדי <strong>להדגים את המשפט</strong> על מקרים שקל לעקוב אחריהם, ולא כדי להציע את הדרך המועדפת לפתור אותם. את כוחו האמיתי של המשפט נראה בדוגמה שאחריהן.</p>
 <div id="box-exm-monotone-bounded-simple" class="thmbox thmbox-example" title="הסדרה $a_n = \frac{n}{n+1}$">
 <p><strong>דוגמה 8.6.5 — הסדרה <span class="math inline">\(a_n = \frac{n}{n+1}\)</span>.</strong></p>
 <p>נוח לכתוב את הסדרה בצורה</p>
@@ -1119,20 +1370,31 @@ window.Quarto = {
 <p>בסדרה מונוטונית <strong>יורדת</strong> מתקיים <span class="math inline">\(a_n \leq a_1\)</span> לכל <span class="math inline">\(,n\)</span> ולכן היא חסומה מלעיל תמיד, ודי להראות שהיא חסומה <strong>מלרע</strong>.</p>
 <p>בקיצור: בסדרה עולה מחפשים חסם מלעיל, ובסדרה יורדת מחפשים חסם מלרע. ואכן, בהוכחת המקרה העולה שלמעלה נעשה שימוש בחסם מלעיל בלבד.</p>
 </div>
-<p>בשתי הדוגמאות שראינו אפשר היה לחשב את הגבול גם ישירות, באמצעות אריתמטיקת הגבולות, ולכן המשפט לא חסך שם עבודה. הדוגמה הבאה היא סיפור אחר.</p>
+<p>הדוגמה הבאה היא המקרה שהבטחנו: כאן אין בידינו נוסחה לגבול כלל, ובלי המשפט לא היינו יודעים אפילו אם הוא קיים.</p>
 <div id="box-exm-monotone-bounded-sum" class="thmbox thmbox-example" title="סכום ההופכיים של הריבועים">
 <p><strong>דוגמה 8.6.7 — סכום ההופכיים של הריבועים.</strong></p>
 <p>נגדיר</p>
 <p><span class="math display">\[.a_n = 1 + \frac{1}{2^{2}} + \frac{1}{3^{2}} + \dots + \frac{1}{n^{2}}\]</span></p>
-<p><strong>עולה.</strong> המעבר מ-<span class="math inline">\(a_n\)</span> ל-<span class="math inline">\(a_{n+1}\)</span> הוא הוספת המחובר <span class="math inline">\(,\frac{1}{\left(n+1\right)^{2}}\)</span> שהוא חיובי, ולכן <span class="math inline">\(.a_{n+1} &gt; a_n\)</span></p>
-<p><strong>חסומה מלעיל.</strong> לכל <span class="math inline">\(k \geq 2\)</span> מתקיים <span class="math inline">\(,k^{2} &gt; k\left(k-1\right)\)</span> ולכן</p>
+<p><strong>הסדרה עולה.</strong> המעבר מ-<span class="math inline">\(a_n\)</span> ל-<span class="math inline">\(a_{n+1}\)</span> הוא הוספת המחובר <span class="math inline">\(,\frac{1}{\left(n+1\right)^{2}}\)</span> שהוא חיובי, ולכן <span class="math inline">\(.a_{n+1} &gt; a_n\)</span></p>
+<p><strong>הסדרה חסומה מלעיל.</strong> לכל <span class="math inline">\(k \geq 2\)</span> מתקיים <span class="math inline">\(,k^{2} &gt; k\left(k-1\right)\)</span> ולכן</p>
 <p><span class="math display">\[.\frac{1}{k^{2}} &lt; \frac{1}{k\left(k-1\right)} = \frac{1}{k-1} - \frac{1}{k}\]</span></p>
-<p>נסכום את האי-שוויון הזה עבור <span class="math inline">\(k\)</span> הרץ מ-<span class="math inline">\(2\)</span> עד <span class="math inline">\(.n\)</span> באגף ימין כל מחובר שלילי מבטל את החיובי שאחריו, ונשארים רק שני הקצוות:</p>
-<p><span class="math display">\[.\frac{1}{2^{2}} + \dots + \frac{1}{n^{2}} &lt; \left(\frac{1}{1} - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \dots + \left(\frac{1}{n-1} - \frac{1}{n}\right) = 1 - \frac{1}{n}\]</span></p>
+<p>נסכום את האי-שוויון הזה עבור <span class="math inline">\(k\)</span> הרץ מ-<span class="math inline">\(2\)</span> עד <span class="math inline">\(:n\)</span></p>
+<p><span class="math display">\[\frac{1}{2^{2}} + \frac{1}{3^{2}} + \frac{1}{4^{2}} + \dots + \frac{1}{n^{2}} &lt; \left(\frac{1}{1} - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \left(\frac{1}{3} - \frac{1}{4}\right) + \dots + \left(\frac{1}{n-1} - \frac{1}{n}\right)\]</span></p>
+<p>עכשיו נחשב את אגף ימין. בכל זוג סוגריים, המחובר המוחסר שווה למחובר המתווסף בזוג הסוגריים הבא. בתצוגה שלהלן כל שני מחוברים כאלה צבועים באותו צבע:</p>
+<p><span class="math display">\[\left(\frac{1}{1} - \textcolor[RGB]{0,114,178}{\frac{1}{2}}\right) + \left(\textcolor[RGB]{0,114,178}{\frac{1}{2}} - \textcolor[RGB]{213,94,0}{\frac{1}{3}}\right) + \left(\textcolor[RGB]{213,94,0}{\frac{1}{3}} - \textcolor[RGB]{0,158,115}{\frac{1}{4}}\right) + \dots + \left(\frac{1}{n-2} - \textcolor[RGB]{204,121,167}{\frac{1}{n-1}}\right) + \left(\textcolor[RGB]{204,121,167}{\frac{1}{n-1}} - \frac{1}{n}\right)\]</span></p>
+<p>נפתח את הסוגריים, ונקבץ מחדש כל מחובר מוחסר יחד עם המחובר השווה לו, שבא מיד אחריו:</p>
+<p><span class="math display">\[\frac{1}{1} + \left(-\textcolor[RGB]{0,114,178}{\frac{1}{2}} + \textcolor[RGB]{0,114,178}{\frac{1}{2}}\right) + \left(-\textcolor[RGB]{213,94,0}{\frac{1}{3}} + \textcolor[RGB]{213,94,0}{\frac{1}{3}}\right) + \dots + \left(-\textcolor[RGB]{204,121,167}{\frac{1}{n-1}} + \textcolor[RGB]{204,121,167}{\frac{1}{n-1}}\right) - \frac{1}{n}\]</span></p>
+<p>כל זוג סוגריים שווה לאפס, וכך נמחק הכול מלבד שני הקצוות. אגף ימין שווה אפוא ל-<span class="math inline">\(.1 - \frac{1}{n}\)</span></p>
+<p>התופעה הזאת נקראת <strong>צמצום טלסקופי</strong>: הסכום מתקפל לשני איברים בלבד, הראשון והאחרון.</p>
 <p>נוסיף לשני האגפים את המחובר הראשון <span class="math inline">\(,1\)</span> ונקבל</p>
 <p><span class="math display">\[.a_n &lt; 1 + \left(1 - \frac{1}{n}\right) = 2 - \frac{1}{n} &lt; 2\]</span></p>
 <p>הסדרה עולה וחסומה מלעיל על ידי <span class="math inline">\(,2\)</span> ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת.</p>
 <p>שימו לב מה קרה כאן: הוכחנו שהגבול <strong>קיים</strong>, ואין בידינו שום נוסחה עבורו. אריתמטיקת הגבולות אינה יכולה לעזור, שכן מספר המחוברים עצמו גדל עם <span class="math inline">\(,n\)</span> ואיננו סכום קבוע של סדרות מתכנסות. זהו המצב שבו המשפט באמת עובד בשבילנו. (למתעניינים: הגבול הוא <span class="math inline">\(,\frac{\pi^{2}}{6}\)</span> תוצאה מפורסמת שהוכחתה חורגת הרבה מעבר לקורס הזה.)</p>
+</div>
+<div id="box-warn-bound-is-not-limit" class="thmbox thmbox-warning" title="חסם אינו גבול">
+<p><strong>שימו לב — חסם אינו גבול.</strong></p>
+<p>בדוגמה שלמעלה מצאנו שהסדרה חסומה מלעיל על ידי <span class="math inline">\(,2\)</span> והסקנו שהיא מתכנסת. אבל <span class="math inline">\(2\)</span> <strong>אינו</strong> הגבול: הגבול הוא <span class="math inline">\(,\frac{\pi^{2}}{6}\)</span> כלומר בערך <span class="math inline">\(,1.645\)</span> ורחוק מ-<span class="math inline">\(2\)</span> למרחק ניכר.</p>
+<p>זו טעות נפוצה. החסם שמצאנו בדרך אינו הגבול, אלא רק ערובה לכך שהגבול קיים. כפי שראינו ב<a href="./08-sequences-properties-2.html#box-key-any-bound-will-do">כל חסם טוב, לא רק הטוב ביותר</a>, מותר לבחור כל חסם נוח, וכל בחירה תיתן מספר אחר — ורק אחד מכל אלה, הקטן שבחסמי המלעיל, שווה לגבול.</p>
 </div>
 <p>המשפט שימושי במיוחד בסדרות המוגדרות ברקורסיה, שבהן אין בידינו נוסחה לאיבר הכללי כלל.</p>
 <div id="box-q-recursive-sequence" class="thmbox thmbox-question" title="סדרה רקורסיבית">
@@ -1144,35 +1406,34 @@ window.Quarto = {
 </div>
 <div class="thmbox thmbox-solution">
 <p><strong>פתרון.</strong></p>
-<p>ננסה להראות שהיא חסומה ומונוטונית, ולכן תתכנס.</p>
-<p>חושדים שהיא עולה, כי <span class="math inline">\(a_3 &gt; a_2 &gt; a_1\)</span> אז ננסה להראות ש <span class="math inline">\(a_n \le a_{n+1}\)</span> , לכל <span class="math inline">\(n \ge 1\)</span></p>
-<p>ננסה בעזרת אינדוקציה:</p>
-<p>בסיס: נציב <span class="math inline">\(n=1\)</span> ונבדוק: <span class="math inline">\(a_1 = 1 \le a_2 = \dfrac{3}{2}\)</span></p>
-<p>כעת נניח כי <span class="math inline">\(a_n \le a_{n+1}\)</span> , ונראה כי <span class="math inline">\(a_{n+1} \le a_{n+2}\)</span> :</p>
-<p><span class="math display">\[a_{n+1} = \dfrac{a_n + 2}{2} \le \dfrac{a_{n+1} + 2}{2} = a_{n+2}\]</span></p>
-<!-- הערה: חץ המצביע על אי-השוויון, מסומן "מהנחת האינדוקציה" -->
-<p>ולכן <span class="math inline">\(a_n\)</span> עולה.</p>
-<p>מכך שהיא עולה: <span class="math inline">\(1 = a_1 \le a_n\)</span> , לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p>אבל עדיין חסר: <span class="math inline">\(a_n \le M\)</span></p>
-<p>נקבע מהו M בהמשך, אבל בינתיים ננסה להראות באינדוקציה כי: <span class="math inline">\(a_n \le M\)</span> לכל <span class="math inline">\(n \ge 1\)</span>.</p>
-<p>בסיס: עבור n=1: <span class="math inline">\(a_1 = 1 \le M\)</span></p>
-<p><span class="math display">\[\downarrow\]</span></p>
-<p>נדרוש <span class="math inline">\(M \ge 1\)</span></p>
-<p>נניח כי <span class="math inline">\(a_n \le M\)</span> , ונראה כי <span class="math inline">\(a_{n+1} \le M\)</span> : <span class="math inline">\(a_{n+1} = \dfrac{a_n + 2}{2} \le \dfrac{M + 2}{2}\)</span></p>
-<!-- הערה: חץ המצביע על אי-השוויון, מסומן "מהנחת האינדוקציה" -->
-<p>לכן נדרוש ש: <span class="math inline">\(\dfrac{M + 2}{2} \le M\)</span></p>
-<p><span class="math display">\[M + 2 \le 2M\]</span></p>
-<p><span class="math display">\[2 \le M\]</span></p>
-<p><span class="math display">\[\downarrow\]</span></p>
-<p><span class="math display">\[a_{n+1} \le \dfrac{M + 2}{2} \le M\]</span></p>
-<p>הראנו כי <span class="math inline">\(a_n\)</span> עולה וחסומה, ולכן מתכנסת.</p>
-<p>נסמן: <span class="math inline">\(a_n \to L\)</span></p>
-<p>ואז: <span class="math inline">\(\dfrac{a_n + 2}{2} \to \dfrac{L + 2}{2}\)</span></p>
-<!-- הערה: מסומן "כל ארתמטיקה" ליד הביטוי -->
-<p>מצד שני, מתקיים <span class="math inline">\(a_n \to L\)</span> כי <span class="math inline">\(a_{n+1} \to L\)</span> אבל <span class="math inline">\(a_{n+1} = \dfrac{a_n + 2}{2}\)</span></p>
-<p>לכן מיחידות הגבול מתקיים <span class="math inline">\(,L = \dfrac{L + 2}{2}\)</span> כלומר <span class="math inline">\(,2L = L + 2\)</span> ומכאן <span class="math inline">\(.L = 2\)</span></p>
+<p>התוכנית היא להפעיל את <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a>: נראה שהסדרה עולה ושהיא חסומה מלעיל, ומכאן שהגבול קיים. רק אחרי שנדע זאת נחשב אותו.</p>
+<p>נוח לתת שם לכלל המעבר. נסמן</p>
+<p><span class="math display">\[,f(x) = \frac{x+2}{2}\]</span></p>
+<p>וכך הרקורסיה נכתבת בקצרה <span class="math inline">\(.a_{n+1} = f(a_n)\)</span></p>
+<p><strong>שלב א: הסדרה עולה.</strong> שלושת האיברים הראשונים הם <span class="math inline">\(,1\)</span> <span class="math inline">\(\frac{3}{2}\)</span> ו-<span class="math inline">\(,\frac{7}{4}\)</span> ולכן סביר לנחש שהסדרה עולה. נוכיח באינדוקציה ש-<span class="math inline">\(a_n \leq a_{n+1}\)</span> לכל <span class="math inline">\(.n \geq 1\)</span></p>
+<p><em>בסיס.</em> עבור <span class="math inline">\(n = 1\)</span> מתקיים <span class="math inline">\(a_1 = 1\)</span> ו-<span class="math inline">\(,a_2 = \frac{3}{2}\)</span> ואכן <span class="math inline">\(.1 \leq \frac{3}{2}\)</span></p>
+<p><em>צעד.</em> נניח <span class="math inline">\(,a_n \leq a_{n+1}\)</span> ונראה <span class="math inline">\(.a_{n+1} \leq a_{n+2}\)</span> הוספת <span class="math inline">\(2\)</span> וחלוקה ב-<span class="math inline">\(2\)</span> שומרות על כיוון האי-שוויון, ולכן מהנחת האינדוקציה נובע</p>
+<p><span class="math display">\[.a_{n+1} = \frac{a_n + 2}{2} \leq \frac{a_{n+1} + 2}{2} = a_{n+2}\]</span></p>
+<p>בזה הושלמה האינדוקציה, והסדרה עולה.</p>
+<p><strong>שלב ב: הסדרה חסומה מלעיל.</strong> מכיוון שהסדרה עולה, לפי <a href="#box-key-one-sided-bound">די בחסם בכיוון אחד</a> די לחפש חסם <strong>מלעיל</strong> בלבד.</p>
+<p>איננו יודעים מראש מהו החסם, ולכן נעבוד אחורה: נבצע את האינדוקציה עבור <span class="math inline">\(M\)</span> כללי, ונראה אילו דרישות היא מכתיבה עליו.</p>
+<p><em>בסיס.</em> דרוש <span class="math inline">\(,a_1 = 1 \leq M\)</span> כלומר <span class="math inline">\(.M \geq 1\)</span></p>
+<p><em>צעד.</em> נניח <span class="math inline">\(,a_n \leq M\)</span> ואז מאותו שיקול כמו בשלב א</p>
+<p><span class="math display">\[.a_{n+1} = \frac{a_n + 2}{2} \leq \frac{M + 2}{2}\]</span></p>
+<p>כדי שהאינדוקציה תיסגר דרוש שהאגף הימני לא יעלה על <span class="math inline">\(,M\)</span> כלומר <span class="math inline">\(,\frac{M+2}{2} \leq M\)</span> ובכפל ב-<span class="math inline">\(2\)</span> נקבל <span class="math inline">\(,M + 2 \leq 2M\)</span> כלומר <span class="math inline">\(.M \geq 2\)</span></p>
+<p>שתי הדרישות, <span class="math inline">\(M \geq 1\)</span> ו-<span class="math inline">\(,M \geq 2\)</span> מתקיימות יחד עבור <span class="math inline">\(.M = 2\)</span> עם הבחירה הזאת האינדוקציה שלמה, ולכן <span class="math inline">\(a_n \leq 2\)</span> לכל <span class="math inline">\(.n\)</span></p>
+<p><strong>שלב ג: הגבול קיים.</strong> הסדרה עולה לפי שלב א וחסומה מלעיל לפי שלב ב, ולכן לפי <a href="#box-thm-monotone-bounded-converges">משפט 8.6.4</a> היא מתכנסת. נסמן את גבולה <span class="math inline">\(.L\)</span></p>
+<p><strong>שלב ד: חישוב הגבול.</strong> עכשיו, ורק עכשיו, אפשר לחשב אותו. נתבונן בסדרה <span class="math inline">\(,(a_{n+1})\)</span> ונחשב את גבולה בשתי דרכים.</p>
+<p>מצד אחד היא מתכנסת ל-<span class="math inline">\(L\)</span> עצמו, שכן היא אותה סדרה בלי האיבר הראשון. מצד שני <span class="math inline">\(,a_{n+1} = f(a_n) = \frac{a_n+2}{2}\)</span> ולפי אריתמטיקת הגבולות</p>
+<p><span class="math display">\[.\frac{a_n + 2}{2} \longrightarrow \frac{L + 2}{2}\]</span></p>
+<p>לאותה סדרה יש גבול אחד בלבד, ולכן שני הביטויים שווים:</p>
+<p><span class="math display">\[,L = \frac{L+2}{2}\]</span></p>
+<p>כלומר <span class="math inline">\(,2L = L + 2\)</span> ומכאן <span class="math inline">\(.L = 2\)</span></p>
 </div>
 <p>הצעד האחרון בפתרון הזה אינו מקרי, והוא עובד עבור כל סדרה רקורסיבית. כדאי לבודד אותו.</p>
+<p>לשם כך נחזור לסימון שהשתמשנו בו בשלב ד. כלל מעבר רקורסיבי הוא בסך הכול <strong>פונקציה</strong> המופעלת על האיבר הקודם: אם הכלל הוא ״הוסף <span class="math inline">\(2\)</span> וחלק ב-<span class="math inline">\(2\)</span>״ אז <span class="math inline">\(,f(x) = \frac{x+2}{2}\)</span> ואם הכלל הוא ״הוצא שורש״ אז <span class="math inline">\(.f(x) = \sqrt{x}\)</span> בכל המקרים האלה הרקורסיה נכתבת באותה צורה אחת,</p>
+<p><span class="math display">\[,a_{n+1} = f(a_n)\]</span></p>
+<p>וזה הניסוח שבו נשתמש מכאן ואילך.</p>
 <div id="box-key-recursive-fixed-point" class="thmbox thmbox-key-point thmicon-calc" data-numbered="true" data-icon="calc" title="גבול של סדרה רקורסיבית פותר משוואה">
 <p><strong>שיטת חישוב 8.6.9 — גבול של סדרה רקורסיבית פותר משוואה.</strong></p>
 <p>תהי <span class="math inline">\((a_n)_{n=1}^{\infty}\)</span> סדרה המוגדרת ברקורסיה <span class="math inline">\(,a_{n+1} = f(a_n)\)</span> ונניח כי <strong>ידוע שהיא מתכנסת</strong>, ונסמן <span class="math inline">\(.\lim\limits_{n\to\infty} a_n = L\)</span></p>
@@ -1182,8 +1443,8 @@ window.Quarto = {
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>נשים לב תחילה שגם הסדרה ה״מוזזת״ <span class="math inline">\((a_{n+1})\)</span> מתכנסת ל-<span class="math inline">\(.L\)</span> ואכן, יהי <span class="math inline">\(;\varepsilon &gt; 0\)</span> לפי הגדרת הגבול קיים <span class="math inline">\(N\)</span> כך שלכל <span class="math inline">\(n \geq N\)</span> מתקיים <span class="math inline">\(.\left|a_n - L\right| &lt; \varepsilon\)</span> אבל אם <span class="math inline">\(n \geq N\)</span> אז גם <span class="math inline">\(,n + 1 \geq N\)</span> ולכן <span class="math inline">\(\left|a_{n+1} - L\right| &lt; \varepsilon\)</span> לכל <span class="math inline">\(.n \geq N\)</span></p>
-<p>עכשיו נחשב את הגבול של אותה סדרה בשתי דרכים. מצד אחד היא <span class="math inline">\(,(a_{n+1})\)</span> שגבולה <span class="math inline">\(.L\)</span> מצד שני, לפי הרקורסיה, היא הסדרה <span class="math inline">\(,\left(f(a_n)\right)\)</span> שגבולה <span class="math inline">\(f(L)\)</span> לפי ההנחה. מיחידות הגבול נובע <span class="math inline">\(.f(L) = L\)</span></p>
+<p>נשים לב תחילה שגם הסדרה ה״מוזזת״ <span class="math inline">\((a_{n+1})\)</span> מתכנסת ל-<span class="math inline">\(.L\)</span> הסיבה פשוטה: זו אותה סדרה בדיוק, פרט לכך שהאיבר הראשון הושמט. הגדרת הגבול מדברת רק על מה שקורה <strong>החל ממקום מסוים</strong>, ולכן השמטת מספר סופי של איברים מתחילת הסדרה אינה משנה את הגבול כלל.</p>
+<p>עכשיו נחשב את הגבול של הסדרה הזאת בשתי דרכים. מצד אחד היא <span class="math inline">\(,(a_{n+1})\)</span> שגבולה <span class="math inline">\(.L\)</span> מצד שני, לפי הרקורסיה, היא הסדרה <span class="math inline">\(,\left(f(a_n)\right)\)</span> שגבולה <span class="math inline">\(f(L)\)</span> לפי ההנחה. לסדרה אחת יש גבול אחד בלבד, ולכן <span class="math inline">\(.f(L) = L\)</span></p>
 </div>
 <div id="box-exm-sqrt-recursion" class="thmbox thmbox-example" title="הסדרה $a_{n+1} = \sqrt{a_n}$">
 <p><strong>דוגמה 8.6.10 — הסדרה <span class="math inline">\(a_{n+1} = \sqrt{a_n}\)</span>.</strong></p>
@@ -1220,7 +1481,7 @@ window.Quarto = {
 <p><strong>שימו לב — פתרון למשוואה אינו מבטיח שהגבול קיים.</strong></p>
 <p>סדר הפעולות חשוב: קודם מוכיחים שהסדרה מתכנסת, ורק אחר כך פותרים את המשוואה.</p>
 </div>
-<details class="thmcollapse thmoptional"><summary>קריאה לא הכרחית — אפשר לדלג · שתי סדרות מונוטוניות המתקרבות זו לזו</summary>
+<details class="thmcollapse thmoptional"><summary><span class="ico ico-shovel" aria-hidden="true"></span>העמקה · שתי סדרות מונוטוניות המתקרבות זו לזו<span class="skip-note"> — קריאה לא הכרחית, אפשר לדלג</span></summary>
 <div class="optional" title="שתי סדרות מונוטוניות המתקרבות זו לזו">
 <p>הטענה הבאה נובעת ישירות מן המשפט על סדרה מונוטונית וחסומה, ואינה נדרשת להמשך הסעיפים שראינו. היא מובאת כאן משום שהיא הכלי שבו משתמשים בהמשך הקורס להוכחת משפט בולצאנו־ויירשטראס.</p>
 <div id="box-thm-two-monotone-sequences" class="thmbox thmbox-theorem">

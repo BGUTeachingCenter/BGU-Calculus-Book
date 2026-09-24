@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>חיפוש לינארי מול חיפוש בינארי</title>
+<link rel="stylesheet" href="../shared/seq-limit.css">
+<style>
+/* Widget-specific bits only; frame, buttons and palette come from seq-limit.css. */
+.panel-title{text-align:center;font-weight:700;color:var(--key);margin:.7rem 0 .3rem}
+/* The array reads left to right, smallest first, as sorted data is normally drawn —
+   so it is LTR even inside the RTL page. */
+.arr{direction:ltr;display:grid;grid-template-columns:repeat(21,1fr);gap:3px;
+     max-width:40rem;margin:0 auto}
+.cell{font-family:ui-monospace,"Courier New",monospace;font-size:12px;text-align:center;
+      padding:3px 0;border:1px solid var(--soft);border-radius:3px;background:#fff;
+      cursor:pointer;user-select:none}
+.cell.out{background:#f1f5f9;color:#b6c0cc;border-color:#e2e8f0}   /* ruled out */
+.cell.cur{background:#1f4e79;color:#fff;border-color:#1f4e79}      /* checked now */
+.cell.found{background:#2e7d32;color:#fff;border-color:#2e7d32}
+.cell.target{outline:2px solid #c0392b;outline-offset:-2px}
+.algo-head{display:flex;justify-content:space-between;align-items:baseline;
+           max-width:40rem;margin:.6rem auto .2rem}
+.algo-name{font-weight:700}
+.count{color:var(--key)}
+.note{text-align:center;color:var(--key);font-size:13px;margin-top:.35rem}
+.scale{max-width:34rem;margin:.4rem auto 0}
+.bar-row{display:flex;align-items:center;gap:.5rem;margin:.3rem 0}
+.bar-label{width:7.5rem;flex:none;color:var(--key)}
+.bar-track{flex:1;height:14px;background:#f1f5f9;border-radius:3px;overflow:hidden;direction:ltr}
+.bar{height:100%}
+hr.sep{border:0;border-top:1px solid var(--soft);margin:1rem 0 .4rem}
+</style>
+</head>
+<body>
+<div class="demo">
+
+<div class="panel-title">(א) חיפוש צעד אחר צעד</div>
+<div class="note">לחצו על מספר כדי לבחור אותו כמספר המבוקש, או בחרו מספר אקראי. אחר כך התקדמו בצעדים.</div>
+
+<div class="row" style="margin-top:.5rem">
+  <button class="btn" id="rand">מספר אקראי</button>
+  <button class="btn" id="step">צעד</button>
+  <button class="btn" id="run">עד הסוף</button>
+  <button class="btn" id="reset">איפוס</button>
+  <span class="key">המספר המבוקש: <span class="val" id="tval"></span></span>
+</div>
+
+<div class="algo-head"><span class="algo-name">חיפוש לינארי</span><span class="count">השוואות: <span class="val" id="lc">0</span></span></div>
+<div class="arr" id="linArr" dir="ltr"></div>
+
+<div class="algo-head"><span class="algo-name">חיפוש בינארי</span><span class="count">השוואות: <span class="val" id="bc">0</span></span></div>
+<div class="arr" id="binArr" dir="ltr"></div>
+
+<div class="note" id="status"></div>
+
+<hr class="sep">
+
+<div class="panel-title">(ב) המקרה הגרוע ביותר, כאשר מספר האיברים גדל</div>
+<div class="row">
+  <span class="key">מספר האיברים <span class="val" id="nval"></span></span>
+  <input id="nr" type="range" min="1" max="6" step="0.05" value="3" aria-label="מספר האיברים">
+</div>
+<div class="scale">
+  <div class="bar-row"><span class="bar-label">חיפוש לינארי</span>
+    <div class="bar-track"><div class="bar" id="lbar" style="background:#c0392b"></div></div>
+    <span class="val" id="lnum"></span></div>
+  <div class="bar-row"><span class="bar-label">חיפוש בינארי</span>
+    <div class="bar-track"><div class="bar" id="bbar" style="background:#1f4e79"></div></div>
+    <span class="val" id="bnum"></span></div>
+</div>
+<div class="note" id="ratio"></div>
+
+</div>
+
+<script>
+(function (global) {
+  "use strict";
+
+  // 63 = 2^6 - 1 values: binary search needs at most 6 comparisons, linear up to 63.
+  // v[i] = 3i + r_i with r_i in {0,1,2} is strictly increasing and looks irregular enough.
+  var N = 63, v = [];
+  for (var i = 0; i < N; i++) { v.push(3 * i + ((i * 5) % 3) + 2); }
+
+  var linArr = document.getElementById("linArr"), binArr = document.getElementById("binArr");
+  var linCells = [], binCells = [];
+  function build(container, store) {
+    for (var i = 0; i < N; i++) {
+      var d = document.createElement("div");
+      d.className = "cell"; d.textContent = v[i]; d.dataset.i = i;
+      d.addEventListener("click", function () { setTarget(+this.dataset.i); });
+      container.appendChild(d); store.push(d);
+    }
+  }
+  build(linArr, linCells); build(binArr, binCells);
+
+  var target, lin, bin;   // lin = {i, count, done}; bin = {lo, hi, mid, count, done}
+
+  function setTarget(t) {
+    target = t;
+    lin = { i: -1, count: 0, done: false };
+    bin = { lo: 0, hi: N - 1, mid: -1, count: 0, done: false };
+    render();
+  }
+
+  function stepLinear() {
+    if (lin.done) return;
+    lin.i += 1; lin.count += 1;
+    if (v[lin.i] === v[target]) lin.done = true;
+  }
+  function stepBinary() {
+    if (bin.done) return;
+    // narrow the range according to the previous comparison, then compare the middle
+    if (bin.mid >= 0) {
+      if (v[bin.mid] < v[target]) bin.lo = bin.mid + 1; else bin.hi = bin.mid - 1;
+    }
+    bin.mid = Math.floor((bin.lo + bin.hi) / 2); bin.count += 1;
+    if (v[bin.mid] === v[target]) bin.done = true;
+  }
+
+  function render() {
+    document.getElementById("tval").textContent = v[target];
+    for (var i = 0; i < N; i++) {
+      var c = linCells[i]; c.className = "cell";
+      if (i === target) c.classList.add("target");
+      if (i < lin.i) c.classList.add("out");
+      if (i === lin.i) c.classList.add(lin.done ? "found" : "cur");
+
+      var b = binCells[i]; b.className = "cell";
+      if (i === target) b.classList.add("target");
+      var inRange = i >= bin.lo && i <= bin.hi;
+      // after a failed comparison, the half that cannot hold the target is ruled out
+      if (bin.mid >= 0 && !bin.done) {
+        var lo = bin.lo, hi = bin.hi;
+        if (v[bin.mid] < v[target]) lo = bin.mid + 1; else hi = bin.mid - 1;
+        inRange = i >= lo && i <= hi;
+      }
+      if (!inRange && !(bin.done && i === bin.mid)) b.classList.add("out");
+      if (i === bin.mid) { b.classList.remove("out"); b.classList.add(bin.done ? "found" : "cur"); }
+    }
+    document.getElementById("lc").textContent = lin.count;
+    document.getElementById("bc").textContent = bin.count;
+    var st = document.getElementById("status");
+    if (lin.done && bin.done) st.textContent = "שני החיפושים הסתיימו: לינארי אחרי " + lin.count + " השוואות, בינארי אחרי " + bin.count + ".";
+    else if (bin.done) st.textContent = "החיפוש הבינארי מצא את המספר אחרי " + bin.count + " השוואות. החיפוש הלינארי עדיין ממשיך.";
+    else st.textContent = "";
+    reportHeight();
+  }
+
+  document.getElementById("step").addEventListener("click", function () { stepLinear(); stepBinary(); render(); });
+  document.getElementById("run").addEventListener("click", function () {
+    while (!lin.done || !bin.done) { stepLinear(); stepBinary(); } render();
+  });
+  document.getElementById("reset").addEventListener("click", function () { setTarget(target); });
+  document.getElementById("rand").addEventListener("click", function () { setTarget(Math.floor(Math.random() * N)); });
+
+  // ---------- part (b): worst case as n grows ----------
+  var nr = document.getElementById("nr");
+  function fmt(x) { return x.toLocaleString("en-US"); }
+  function updateScale() {
+    var n = Math.round(Math.pow(10, +nr.value));
+    var lw = n, bw = Math.ceil(Math.log2(n + 1));
+    document.getElementById("nval").textContent = fmt(n);
+    document.getElementById("lnum").textContent = fmt(lw);
+    document.getElementById("bnum").textContent = fmt(bw);
+    // both bars on the SAME linear scale, so the binary bar visibly shrinks to nothing
+    document.getElementById("lbar").style.width = "100%";
+    document.getElementById("bbar").style.width = Math.max(0.4, 100 * bw / lw) + "%";
+    document.getElementById("ratio").textContent =
+      "פי " + fmt(Math.round(lw / bw)) + " פחות השוואות בחיפוש הבינארי";
+    reportHeight();
+  }
+  nr.addEventListener("input", updateScale);
+
+  function reportHeight() {
+    requestAnimationFrame(function () {
+      if (global.parent && global.parent !== global) {
+        global.parent.postMessage({ type: "widget-height",
+          height: Math.ceil(document.documentElement.scrollHeight) }, "*");
+      }
+    });
+  }
+  global.addEventListener("resize", reportHeight);
+
+  setTarget(40);   // needs the full 6 comparisons: a representative first impression
+  updateScale();
+})(window);
+</script>
+</body>
+</html>
