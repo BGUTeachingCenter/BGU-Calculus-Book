@@ -68,10 +68,7 @@ def element_span(html, start, tag="section"):
 
 
 def main_span(html):
-    # The REAL content element, not the first "<main" string: _styles.html is pulled into
-    # every <head>, and text such as a comment mentioning <main …> there once made this
-    # match inside a script and cut every page at the wrong place (2026-09-24).
-    m = re.search(r'<main\b[^>]*\bid="quarto-document-content"[^>]*>', html)
+    m = re.search(r"<main\b[^>]*>", html)
     return m.end(), html.rindex("</main>")
 
 
@@ -340,26 +337,6 @@ def main():
     json.dump({"chapters": chapters, "boxes": boxes},
               open(MAP_FILE, "w", encoding="utf-8"), ensure_ascii=False)
     print("  box-pages.json written (%d chapters, %d boxes)" % (len(chapters), len(boxes)))
-
-    # ---- box-index.js: every box's final HTML, as a SCRIPT (2026-09-24). The
-    # click-to-expand previews in _styles.html load it on the first click. It is a .js
-    # file rather than JSON because browsers refuse fetch() on file:// pages but do load
-    # <script src>, so previews work when the book is opened straight from _book/ too.
-    index, pages_html = {}, {}
-    for bid, page in boxes.items():
-        html = pages_html.get(page)
-        if html is None:
-            html = pages_html[page] = open(os.path.join(BOOK, page), encoding="utf-8").read()
-        i = html.find('<div id="%s"' % bid)
-        if i < 0:
-            continue
-        a, b = element_span(html, i, "div")
-        index[bid] = {"p": page, "h": html[a:b]}
-    with open(os.path.join(BOOK, "box-index.js"), "w", encoding="utf-8") as f:
-        f.write("window.BOX_INDEX = ")
-        json.dump(index, f, ensure_ascii=False)
-        f.write(";\n")
-    print("  box-index.js written (%d boxes)" % len(index))
 
 
 if __name__ == "__main__":

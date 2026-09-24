@@ -721,78 +721,37 @@ window.addEventListener("message", function (e) {
 a.xref-open { background: #e0ecf7; border-radius: 2px; }
 </style>
 <script>
-/* Links in the book's CONTENT open in a new tab (author's hard rule, 2026-09-24): cross-
-   references, section references, links between chapters, external links, and the
-   "מעבר לתיבה" link of the preview panels. Navigation keeps the same window: the sidebar,
-   the previous/next buttons and the in-page table of contents all live OUTSIDE the
-   page's main content element (#quarto-document-content), so scoping to it leaves them
-   alone. (Never write that element's literal opening tag in this file: split-sections.py
-   locates the page body by it, and a copy in a comment here once broke every page.) Also left
-   alone: Quarto's heading-anchor icons and footnote links, which point within the page.
-   A plain click on a box reference still opens the in-place preview (script below). */
-window.bookMarkNewTab = function (root) {
-  if (!root) return;
-  root.querySelectorAll("a[href]").forEach(function (a) {
-    var h = a.getAttribute("href") || "";
-    if (!h || h === "#" || /^javascript:/i.test(h)) return;
-    if (a.classList.contains("anchorjs-link") || a.classList.contains("footnote-ref") ||
-        a.classList.contains("footnote-back")) return;
-    a.setAttribute("target", "_blank");
-    a.setAttribute("rel", "noopener");
-  });
-};
-document.addEventListener("DOMContentLoaded", function () {
-  window.bookMarkNewTab(document.getElementById("quarto-document-content"));
-});
-</script>
-<script>
 /* Click-to-expand cross-references (2026-09-24).
    A click on a link to a box (#box-…) opens a panel below the paragraph that holds
    the link, showing a COPY of that box, instead of navigating away. A second click on
    the same link closes it. The panel has a "מעבר לתיבה" link for readers who want the
    box in its context (its proof, the text around it).
-   - Where the boxes come from: _book/box-index.js, written by split-sections.py, holds
-     every box's HTML and page. It is loaded with a <script> tag on the FIRST click only.
-     A script and not fetch(): browsers refuse fetch() on file:// pages, and the book is
-     often opened straight from _book/. Boxes on the current page are copied from the
-     page itself, where their math is already typeset.
-   - The copy loses its ids (no duplicate ids on the page), its iframes (replaced by a
-     note) and its quizzes, and is then typeset (see typeset() below).
+   - Where the box lives: _book/box-pages.json, written by split-sections.py.
+   - Other pages are fetched once and cached; the copy loses its ids (no duplicate ids
+     on the page), its iframes (replaced by a note) and its quizzes.
+   - Fetched HTML carries raw TeX (MathJax renders in the browser), so the panel is
+     typeset after insertion (see typeset() below).
    - Links inside a panel expand too, up to three levels deep. Esc closes the panel
      opened last.
-   - If the index cannot be loaded or the box is missing, the link navigates as before.
-     Ctrl/Cmd/Shift-click and middle-click always navigate. */
+   - Anything that fails — no map, no server (file://), box not found — falls back to
+     ordinary navigation. Ctrl/Cmd/Shift-click and middle-click always navigate. */
 (function () {
   "use strict";
   var MAX_DEPTH = 3;
-  var indexPromise = null, open = [];
+  var boxes = null, pages = {}, open = [];
 
-  function loadIndex() {
-    if (!indexPromise) {
-      indexPromise = new Promise(function (resolve, reject) {
-        if (window.BOX_INDEX) { resolve(window.BOX_INDEX); return; }
-        var sc = document.createElement("script");
-        sc.src = "box-index.js";
-        sc.onload = function () { window.BOX_INDEX ? resolve(window.BOX_INDEX) : reject(); };
-        sc.onerror = function () { indexPromise = null; reject(); };
-        document.head.appendChild(sc);
-      });
-    }
-    return indexPromise;
-  }
+  fetch("box-pages.json").then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { boxes = j && j.boxes ? j.boxes : null; })
+    .catch(function () { boxes = null; });
 
-  // Synchronous typesetting, the way Quarto's own window.Quarto.typesetMath does it.
-  // MathJax.typesetPromise queues behind MathJax.startup.promise, which was seen to stay
-  // pending (headless Chrome), leaving raw TeX. If the synchronous call throws — MathJax 4
-  // does that when it must first load a font file — fall back to the promise version.
-  function typeset(el) {
-    if (!window.MathJax) return;
-    try {
-      if (window.Quarto && window.Quarto.typesetMath) window.Quarto.typesetMath(el);
-      else window.MathJax.typeset([el]);
-    } catch (e) {
-      if (window.MathJax.typesetPromise) window.MathJax.typesetPromise([el]);
+  function getPage(url) {
+    if (!pages[url]) {
+      pages[url] = fetch(url).then(function (r) {
+        if (!r.ok) throw new Error(url);
+        return r.text();
+      }).then(function (t) { return new DOMParser().parseFromString(t, "text/html"); });
     }
+    return pages[url];
   }
 
   function cleanCopy(box) {
@@ -811,6 +770,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return c;
   }
 
+  // Synchronous typesetting, the way Quarto's own window.Quarto.typesetMath does it.
+  // MathJax.typesetPromise queues behind MathJax.startup.promise, which was seen to stay
+  // pending (headless Chrome), leaving raw TeX in fetched panels. If the synchronous call
+  // throws — MathJax 4 does that when it must first load a font file — fall back to the
+  // promise version, which retries once the file has arrived.
+  function typeset(el) {
+    if (!window.MathJax) return;
+    try {
+      if (window.Quarto && window.Quarto.typesetMath) window.Quarto.typesetMath(el);
+      else window.MathJax.typeset([el]);
+    } catch (e) {
+      if (window.MathJax.typesetPromise) window.MathJax.typesetPromise([el]);
+    }
+  }
+
   function closePanel(entry) {
     entry.panel.remove();
     entry.link.classList.remove("xref-open");
@@ -820,7 +794,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (ev) {
     var a = ev.target.closest && ev.target.closest("a[href*='#box-']");
-    if (!a) return;
+    if (!a || !boxes) return;
     if (ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
     if (a.classList.contains("xref-jump")) return;
     var depth = 0, n = a;
@@ -832,14 +806,16 @@ document.addEventListener("DOMContentLoaded", function () {
     ev.preventDefault();
     if (already) { closePanel(already); return; }
 
+    var page = boxes[id] || href.split("#")[0] || location.pathname.split("/").pop();
     var here = location.pathname.split("/").pop() || "index.html";
+    var jumpHref = (page === here ? "" : "./" + page) + "#" + id;
+
     var panel = document.createElement("div");
     panel.className = "xref-panel";
     var head = document.createElement("div");
     head.className = "xref-head";
     var jump = document.createElement("a");
-    jump.className = "xref-jump"; jump.href = href; jump.textContent = "מעבר לתיבה ←";
-    jump.target = "_blank"; jump.rel = "noopener";
+    jump.className = "xref-jump"; jump.href = jumpHref; jump.textContent = "מעבר לתיבה ←";
     var close = document.createElement("button");
     close.className = "xref-close"; close.type = "button";
     close.setAttribute("aria-label", "סגירה"); close.textContent = "×";
@@ -857,33 +833,18 @@ document.addEventListener("DOMContentLoaded", function () {
     a.setAttribute("aria-expanded", "true");
     close.addEventListener("click", function () { closePanel(entry); a.focus(); });
 
-    // Could not preview: open the box in a new tab (the content-links rule). This runs
-    // after an asynchronous load, so a pop-up blocker may refuse window.open; in that
-    // case navigate in place rather than do nothing.
-    function fail() {
-      closePanel(entry);
-      var w = window.open(href, "_blank");
-      if (!w) location.href = href;
-    }
-
-    var local = document.getElementById(id);
-    if (local && !local.closest(".xref-panel")) {
-      body.replaceWith(cleanCopy(local));
-      window.bookMarkNewTab(panel);
-      return;
-    }
-    loadIndex().then(function (idx) {
-      var rec = idx[id];
-      if (!rec) { fail(); return; }
-      jump.href = (rec.p === here ? "" : "./" + rec.p) + "#" + id;
-      var t = document.createElement("template");
-      t.innerHTML = rec.h;
-      var box = t.content.firstElementChild;
-      if (!box) { fail(); return; }
+    var source = (page === here)
+      ? Promise.resolve(document)
+      : getPage(page);
+    source.then(function (doc) {
+      var box = doc.getElementById(id);
+      if (!box) throw new Error(id);
       body.replaceWith(cleanCopy(box));
-      window.bookMarkNewTab(panel);
       typeset(panel);
-    }).catch(fail);
+    }).catch(function () {
+      closePanel(entry);
+      location.href = jumpHref;           // could not preview: navigate as before
+    });
   });
 
   document.addEventListener("keydown", function (ev) {

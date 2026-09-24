@@ -27,15 +27,6 @@ import sys
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_book")
 
-# Which page holds which anchor, per chapter, persisted between runs (2026-09-24).
-# A partial render (`quarto render 09-….qmd`) only re-splits the chapters it rendered;
-# already-split chapters look like single-section pages and are skipped. Without a
-# stored map, links INTO those chapters were left pointing at their first page (the
-# box was on page 7, the link landed on page 1) and their sidebar entries lost the
-# nested section list. The file also carries a flat {box-id: page} index, which the
-# click-to-expand cross-reference script in _styles.html reads.
-MAP_FILE = os.path.join(BOOK, "box-pages.json")
-
 # Every rendered chapter page — the NN-slug.html files. index.html and the part
 # landing pages are not chapters and are left alone; so is anything with fewer
 # than two sections, which has nothing to split.
@@ -68,10 +59,7 @@ def element_span(html, start, tag="section"):
 
 
 def main_span(html):
-    # The REAL content element, not the first "<main" string: _styles.html is pulled into
-    # every <head>, and text such as a comment mentioning <main …> there once made this
-    # match inside a script and cut every page at the wrong place (2026-09-24).
-    m = re.search(r'<main\b[^>]*\bid="quarto-document-content"[^>]*>', html)
+    m = re.search(r"<main\b[^>]*>", html)
     return m.end(), html.rindex("</main>")
 
 
@@ -239,10 +227,6 @@ def main():
         sys.exit("no _book/ — render first")
 
     all_pages, id_home, retarget = {}, {}, {}
-    try:
-        stored = json.load(open(MAP_FILE, encoding="utf-8")).get("chapters", {})
-    except (OSError, ValueError):
-        stored = {}
 
     for chapter in chapters_to_split(BOOK):
         path = os.path.join(BOOK, chapter)
@@ -258,20 +242,7 @@ def main():
         retarget[chapter] = pages[0]["file"]
         print("  %-34s %d pages" % (chapter, len(pages)))
 
-    # Chapters split on an EARLIER run: take their layout from the stored map, as long
-    # as the pages it names still exist. They are not re-emitted, only linked into.
-    known_pages = {c: [{"file": p["file"], "title": p["title"]} for p in ps]
-                   for c, ps in all_pages.items()}
-    for chapter, info in stored.items():
-        if chapter in all_pages:
-            continue
-        if not all(os.path.exists(os.path.join(BOOK, p["file"])) for p in info["pages"]):
-            continue
-        known_pages[chapter] = info["pages"]
-        id_home[chapter] = info["ids"]
-        retarget[chapter] = info["pages"][0]["file"]
-
-    if not known_pages:
+    if not all_pages:
         return
 
     # ---- emit the section pages
@@ -298,7 +269,7 @@ def main():
         owner = next((c for c, ps in all_pages.items()
                       if name in [p["file"] for p in ps]), None)
 
-        for chapter, pages in known_pages.items():
+        for chapter, pages in all_pages.items():
             home = id_home[chapter]
             # Cross-chapter anchors. Quarto writes these WITHOUT a "./" prefix in
             # body text but WITH one in the sidebar, so the prefix is optional and
@@ -327,39 +298,11 @@ def main():
         for entry in data:
             href = entry.get("href", "")
             base, _, anchor = href.partition("#")
-            if base in id_home and anchor:
+            if base in all_pages and anchor:
                 entry["href"] = "%s#%s" % (
                     id_home[base].get(anchor, retarget[base]), anchor)
         json.dump(data, open(sj, "w", encoding="utf-8"), ensure_ascii=False)
         print("  search.json repointed (%d entries)" % len(data))
-
-    # ---- persist the layout for the next (possibly partial) run
-    chapters = {c: {"pages": known_pages[c], "ids": id_home[c]} for c in known_pages}
-    boxes = {i: f for c in chapters for i, f in chapters[c]["ids"].items()
-             if i.startswith("box-")}
-    json.dump({"chapters": chapters, "boxes": boxes},
-              open(MAP_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-    print("  box-pages.json written (%d chapters, %d boxes)" % (len(chapters), len(boxes)))
-
-    # ---- box-index.js: every box's final HTML, as a SCRIPT (2026-09-24). The
-    # click-to-expand previews in _styles.html load it on the first click. It is a .js
-    # file rather than JSON because browsers refuse fetch() on file:// pages but do load
-    # <script src>, so previews work when the book is opened straight from _book/ too.
-    index, pages_html = {}, {}
-    for bid, page in boxes.items():
-        html = pages_html.get(page)
-        if html is None:
-            html = pages_html[page] = open(os.path.join(BOOK, page), encoding="utf-8").read()
-        i = html.find('<div id="%s"' % bid)
-        if i < 0:
-            continue
-        a, b = element_span(html, i, "div")
-        index[bid] = {"p": page, "h": html[a:b]}
-    with open(os.path.join(BOOK, "box-index.js"), "w", encoding="utf-8") as f:
-        f.write("window.BOX_INDEX = ")
-        json.dump(index, f, ensure_ascii=False)
-        f.write(";\n")
-    print("  box-index.js written (%d boxes)" % len(index))
 
 
 if __name__ == "__main__":

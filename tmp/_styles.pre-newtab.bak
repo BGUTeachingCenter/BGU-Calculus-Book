@@ -721,31 +721,6 @@ window.addEventListener("message", function (e) {
 a.xref-open { background: #e0ecf7; border-radius: 2px; }
 </style>
 <script>
-/* Links in the book's CONTENT open in a new tab (author's hard rule, 2026-09-24): cross-
-   references, section references, links between chapters, external links, and the
-   "מעבר לתיבה" link of the preview panels. Navigation keeps the same window: the sidebar,
-   the previous/next buttons and the in-page table of contents all live OUTSIDE the
-   page's main content element (#quarto-document-content), so scoping to it leaves them
-   alone. (Never write that element's literal opening tag in this file: split-sections.py
-   locates the page body by it, and a copy in a comment here once broke every page.) Also left
-   alone: Quarto's heading-anchor icons and footnote links, which point within the page.
-   A plain click on a box reference still opens the in-place preview (script below). */
-window.bookMarkNewTab = function (root) {
-  if (!root) return;
-  root.querySelectorAll("a[href]").forEach(function (a) {
-    var h = a.getAttribute("href") || "";
-    if (!h || h === "#" || /^javascript:/i.test(h)) return;
-    if (a.classList.contains("anchorjs-link") || a.classList.contains("footnote-ref") ||
-        a.classList.contains("footnote-back")) return;
-    a.setAttribute("target", "_blank");
-    a.setAttribute("rel", "noopener");
-  });
-};
-document.addEventListener("DOMContentLoaded", function () {
-  window.bookMarkNewTab(document.getElementById("quarto-document-content"));
-});
-</script>
-<script>
 /* Click-to-expand cross-references (2026-09-24).
    A click on a link to a box (#box-…) opens a panel below the paragraph that holds
    the link, showing a COPY of that box, instead of navigating away. A second click on
@@ -839,7 +814,6 @@ document.addEventListener("DOMContentLoaded", function () {
     head.className = "xref-head";
     var jump = document.createElement("a");
     jump.className = "xref-jump"; jump.href = href; jump.textContent = "מעבר לתיבה ←";
-    jump.target = "_blank"; jump.rel = "noopener";
     var close = document.createElement("button");
     close.className = "xref-close"; close.type = "button";
     close.setAttribute("aria-label", "סגירה"); close.textContent = "×";
@@ -857,19 +831,11 @@ document.addEventListener("DOMContentLoaded", function () {
     a.setAttribute("aria-expanded", "true");
     close.addEventListener("click", function () { closePanel(entry); a.focus(); });
 
-    // Could not preview: open the box in a new tab (the content-links rule). This runs
-    // after an asynchronous load, so a pop-up blocker may refuse window.open; in that
-    // case navigate in place rather than do nothing.
-    function fail() {
-      closePanel(entry);
-      var w = window.open(href, "_blank");
-      if (!w) location.href = href;
-    }
+    function fail() { closePanel(entry); location.href = href; }   // navigate as before
 
     var local = document.getElementById(id);
     if (local && !local.closest(".xref-panel")) {
       body.replaceWith(cleanCopy(local));
-      window.bookMarkNewTab(panel);
       return;
     }
     loadIndex().then(function (idx) {
@@ -881,7 +847,6 @@ document.addEventListener("DOMContentLoaded", function () {
       var box = t.content.firstElementChild;
       if (!box) { fail(); return; }
       body.replaceWith(cleanCopy(box));
-      window.bookMarkNewTab(panel);
       typeset(panel);
     }).catch(fail);
   });
