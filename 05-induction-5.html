@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; מערכות מספרים: \mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R} – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
+<title>5&nbsp; אינדוקציה – חשבון דיפרנציאלי ואינטגרלי 1 להנדסה</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04-abs-value.html" rel="next">
-<link href="./02-sets.html" rel="prev">
+<link href="./06-sequences-intro.html" rel="next">
+<link href="./04-abs-value.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -1014,7 +1014,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./03-number-systems.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./05-induction.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="הצג/הסתר את סרגל הניווט" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="חפש" onclick="window.quartoOpenSearch();">
@@ -1067,11 +1067,11 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./02-sets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">קבוצות</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-02-sets" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-02-sets" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.1 איברים והכלה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.2 הכמתים בשפה של תורת הקבוצות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.3 הקבוצה הריקה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.4 פעולות על קבוצות: איחוד, חיתוך והפרש</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.5 עוצמה של קבוצה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./02-sets-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">2.6 פונקציות</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./03-number-systems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-03-number-systems" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-03-number-systems" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.1 המספרים הטבעיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.2 המספרים השלמים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.3 המספרים הרציונליים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-4.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">3.4 המספרים הממשיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.5 המספרים המרוכבים</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-03-number-systems" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-03-number-systems" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.1 הטבעיים, השלמים והרציונליים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">3.2 המספרים הממשיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./03-number-systems-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">נספח: הבנייה הפורמלית של הסדר על המספרים (העמקה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-04-abs-value" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-04-abs-value" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.1 קטעים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.2 ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.3 סביבת-\(\varepsilon\) של נקודה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.4 פתרון אי-שוויונות עם ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.5 קבוצות חסומות</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ערך מוחלט וקטעים</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-04-abs-value" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-04-abs-value" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.1 קטעים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.2 ערך מוחלט</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.3 סביבת-\(\varepsilon\) של נקודה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.4 פתרון אי-שוויונות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-5.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.5 הערכות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.6 קבוצות חסומות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">4.7 תרגילים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./04-abs-value-8.html" class="sidebar-item-text sidebar-link"><span class="menu-text">נספח: חסם עליון ושלמות הממשיים (העמקה)</span></a></div></li></ul></li>
           <li class="sidebar-item sidebar-item-section"><div class="sidebar-item-container"><a href="./05-induction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></span></a><a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-05-induction" role="navigation" aria-expanded="false" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-05-induction" class="collapse list-unstyled sidebar-section depth2"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.1 עקרון האינדוקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.2 שלבי האינדוקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.3 הגדרה רקורסיבית</span></a></div></li></ul></li>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></span></a><a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-sub-05-induction" role="navigation" aria-expanded="true" aria-label="הצג/הסתר מקטע"><i class="bi bi-chevron-right ms-2"></i></a></div><ul id="quarto-sidebar-sub-05-induction" class="collapse list-unstyled sidebar-section depth2 show"><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.1 עקרון האינדוקציה</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-2.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.2 סימון סכום</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-3.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.3 דוגמאות פתורות</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-4.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.4 הגדרה רקורסיבית</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-5.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">5.5 אי-שוויונות וזהויות אלגבריות שימושיים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-6.html" class="sidebar-item-text sidebar-link"><span class="menu-text">5.6 תרגילים</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="./05-induction-7.html" class="sidebar-item-text sidebar-link"><span class="menu-text">נספח: הוכחת עקרון האינדוקציה (העמקה)</span></a></div></li></ul></li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1220,12 +1220,12 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#המספרים-הממשיים" class="nav-link">3.4 המספרים הממשיים</a></li><li class="toc-indent"><a href="#אי-רציונליות-sqrt2-כדוגמה" class="nav-link">אי-רציונליות; \(\sqrt{2}\) כדוגמה</a></li><li class="toc-indent"><a href="#תכונות-הסדר-על-הממשיים" class="nav-link">תכונות הסדר על הממשיים</a></li><li class="toc-indent"><a href="#sec-floor" class="nav-link">הערך השלם</a></li><li class="toc-indent"><a href="#sec-archimedes" class="nav-link">תכונת ארכימדס</a></li><li class="toc-indent"><a href="#sec-density" class="nav-link">צפיפות</a></li></ul></nav>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">תוכן העניינים</h2><ul class="nav nav-pills flex-column"><li><a href="#sec-useful-identities" class="nav-link">5.5 אי-שוויונות וזהויות אלגבריות שימושיים</a></li><li class="toc-indent"><a href="#הפרש-חזקות" class="nav-link">הפרש חזקות</a></li><li class="toc-indent"><a href="#אי-שוויון-ברנולי" class="nav-link">אי-שוויון ברנולי</a></li><li class="toc-indent"><a href="#מקדמי-הבינום-ונוסחת-הבינום" class="nav-link">מקדמי הבינום ונוסחת הבינום</a></li></ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./03-number-systems.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></a></li></ol></nav>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part-1-foundations.html">חלק 1: מושגי יסוד</a></li><li class="breadcrumb-item"><a href="./05-induction.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-number-systems" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">מערכות מספרים: <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}\)</span></span></span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">אינדוקציה</span></h1>
 </div>
 
 
@@ -1241,114 +1241,132 @@ window.Quarto = {
 
 </header>
 
-<section id="המספרים-הממשיים" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="המספרים-הממשיים"><span class="header-section-number">3.4</span> המספרים הממשיים</h2>
-<div class="todo">
-<p>תוכן בהכנה — להשלמה.</p>
+<section id="sec-useful-identities" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-useful-identities"><span class="header-section-number">5.5</span> אי-שוויונות וזהויות אלגבריות שימושיים</h2>
+<p>בסעיף הזה נוכיח באינדוקציה כמה זהויות ואי-שוויונות שנשתמש בהם שוב ושוב בהמשך הספר. הם משמשים גם תרגול לשיטה, וגם מקום שאפשר לחזור אליו כשצריך אותם.</p>
+<section id="הפרש-חזקות" class="level3">
+<h3 class="anchored" data-anchor-id="הפרש-חזקות">הפרש חזקות</h3>
+<div id="box-prp-power-difference" class="thmbox thmbox-proposition" title="הפרש חזקות">
+<p><strong>טענה 5.5.1 — הפרש חזקות.</strong></p>
+<p>לכל <span class="math inline">\(x, y \in \mathbb{R}\)</span> ולכל <span class="math inline">\(k \in \mathbb{N}\)</span> מתקיים</p>
+<p><span class="math display">\[.x^{k} - y^{k} = \left(x - y\right) \sum_{i=1}^{k} x^{k-i} y^{i-1} = \left(x - y\right)\left(x^{k-1} + x^{k-2}y + \dots + xy^{k-2} + y^{k-1}\right)\]</span></p>
 </div>
-<section id="אי-רציונליות-sqrt2-כדוגמה" class="level3">
-<h3 class="anchored" data-anchor-id="אי-רציונליות-sqrt2-כדוגמה">אי-רציונליות; <span class="math inline">\(\sqrt{2}\)</span> כדוגמה</h3>
-<section id="הוכחות" class="level4">
-<h4 class="anchored" data-anchor-id="הוכחות">הוכחות</h4>
-<div id="box-prp-sqrt2-irrational" class="thmbox thmbox-proposition">
-<p><strong>טענה 3.4.1.</strong></p>
-<p><span class="math display">\[.\sqrt{2} \notin \mathbb{Q}\]</span></p>
+<p>לפני ההוכחה, כדאי לראות מה הנוסחה אומרת עבור <span class="math inline">\(k\)</span> קטנים. עבור <span class="math inline">\(k = 2\)</span> היא הנוסחה המוכרת <span class="math inline">\(,x^{2} - y^{2} = (x-y)(x+y)\)</span> ועבור <span class="math inline">\(k = 3\)</span> היא <span class="math inline">\(.x^{3} - y^{3} = (x-y)\left(x^{2} + xy + y^{2}\right)\)</span> בכל מחובר בסכום סכום החזקות הוא <span class="math inline">\(,k-1\)</span> החזקה של <span class="math inline">\(x\)</span> יורדת והחזקה של <span class="math inline">\(y\)</span> עולה.</p>
+<div class="thmbox thmbox-proof">
+<p><strong>הוכחה.</strong></p>
+<p>נוכיח באינדוקציה על <span class="math inline">\(,k\)</span> כאשר <span class="math inline">\(x\)</span> ו-<span class="math inline">\(y\)</span> קבועים ושרירותיים.</p>
+<p><strong>בסיס האינדוקציה.</strong> עבור <span class="math inline">\(k = 1\)</span> אגף שמאל הוא <span class="math inline">\(.x - y\)</span> בסכום יש מחובר אחד, <span class="math inline">\(,i = 1\)</span> והוא <span class="math inline">\(,x^{0}y^{0} = 1\)</span> ולכן גם אגף ימין הוא <span class="math inline">\(.(x-y) \cdot 1 = x - y\)</span></p>
+<p><strong>צעד האינדוקציה.</strong> נניח ש-</p>
+<p><span class="math display">\[x^{n} - y^{n} = \left(x - y\right) \sum_{i=1}^{n} x^{n-i} y^{i-1} \qquad \text{(הנחת האינדוקציה)}\]</span></p>
+<p>ונוכיח ש-</p>
+<p><span class="math display">\[.x^{n+1} - y^{n+1} = \left(x - y\right) \sum_{i=1}^{n+1} x^{n+1-i} y^{i-1}\]</span></p>
+<p>הפעם נעבוד על <strong>אגף ימין</strong>, כי בו מופיע סכום שאפשר לפרק. לפי כלל (ג) של <a href="./05-induction-2.html#box-key-sigma-rules">כללי החישוב לסכומים</a> נפריד את המחובר האחרון, <span class="math inline">\(,i = n+1\)</span> שהוא <span class="math inline">\(:x^{0} y^{n} = y^{n}\)</span></p>
+<p><span class="math display">\[.\left(x - y\right) \sum_{i=1}^{n+1} x^{n+1-i} y^{i-1} = \left(x - y\right) \sum_{i=1}^{n} x^{n+1-i} y^{i-1} + \left(x - y\right) y^{n}\]</span></p>
+<p>בסכום שנשאר, <span class="math inline">\(,x^{n+1-i} = x \cdot x^{n-i}\)</span> ולפי כלל (א) אפשר להוציא את <span class="math inline">\(x\)</span> מן הסכום. נקבל בדיוק את אגף ימין של הנחת האינדוקציה, כפול <span class="math inline">\(:x\)</span></p>
+<p><span class="math display">\[.\left(x - y\right) \sum_{i=1}^{n} x^{n+1-i} y^{i-1} = x \cdot \left(x - y\right) \sum_{i=1}^{n} x^{n-i} y^{i-1} = x\left(x^{n} - y^{n}\right)\]</span></p>
+<p>המעבר האחרון הוא הנחת האינדוקציה. נחבר את הכול:</p>
+<p><span class="math display">\[.x\left(x^{n} - y^{n}\right) + \left(x - y\right)y^{n} = x^{n+1} - xy^{n} + xy^{n} - y^{n+1} = x^{n+1} - y^{n+1}\]</span></p>
+<p>וזה אגף שמאל של היעד.</p>
+<p><strong>מסקנה.</strong> לפי עקרון האינדוקציה הזהות נכונה לכל <span class="math inline">\(.k \in \mathbb{N}\)</span></p>
+</div>
+<p>מקרה פרטי חשוב מתקבל עבור <span class="math inline">\(:y = 1\)</span> <span class="math inline">\(,x^{k} - 1 = (x-1)\left(1 + x + \dots + x^{k-1}\right)\)</span> ומכאן, כאשר <span class="math inline">\(,x \neq 1\)</span> נוסחת הסכום של <strong>סדרה הנדסית</strong>:</p>
+<p><span class="math display">\[.1 + x + x^{2} + \dots + x^{k-1} = \frac{x^{k} - 1}{x - 1}\]</span></p>
+</section>
+<section id="אי-שוויון-ברנולי" class="level3">
+<h3 class="anchored" data-anchor-id="אי-שוויון-ברנולי">אי-שוויון ברנולי</h3>
+<div id="box-lem-bernoulli" class="thmbox thmbox-lemma" title="אי-שוויון ברנולי">
+<p><strong>למה 5.5.2 — אי-שוויון ברנולי.</strong></p>
+<p>לכל <span class="math inline">\(n \in \mathbb{N}\)</span> ולכל <span class="math inline">\(x &gt; -1\)</span> מתקיים</p>
+<p><span class="math display">\[.\left(1+x\right)^{n} \geq 1 + nx\]</span></p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>נניח בשלילה כי <span class="math inline">\(\sqrt{2} \in \mathbb{Q}\)</span>.</p>
-<p>הסכם נסכום מהגדרת המספרים הרציונליים. <!-- בדיקה: שורה בכתב יד, קריאה משוערת --></p>
-<p>לכן קיימים <span class="math inline">\(m,n \in \mathbb{Z}\)</span>, <span class="math inline">\(n \neq 0\)</span> עבורם <span class="math display">\[.\sqrt{2} = \frac{m}{n}\]</span></p>
-<p>(מבלי הגבלת הכלליות נצמצם את השבר) <!-- בדיקה: הערה בכתב יד "ללא הגבלת..." --></p>
-<p>נעלה בריבוע את שני האגפים: <span class="math display">\[.2 = \frac{m^2}{n^2}\]</span></p>
-<p>נכפול ב-<span class="math inline">\(n^2\)</span>: <span class="math display">\[2 \cdot n^2 = m^2 \quad (*)\]</span></p>
-<p>האגף השמאלי שלם וזוגי.</p>
-<p>לכן גם <span class="math inline">\(m^2\)</span> זוגי, ולכן <span class="math inline">\(m\)</span> זוגי.</p>
-<p>לכן קיים <span class="math inline">\(k \in \mathbb{Z}\)</span> עבורו: <span class="math display">\[.m = 2 \cdot k\]</span></p>
-<p>נציב חזרה ב-<span class="math inline">\((*)\)</span>: <span class="math display">\[2 \cdot n^2 = (2 \cdot k)^2\]</span> <span class="math display">\[2 \cdot n^2 = 4k^2\]</span> <span class="math display">\[.n^2 = 2 \cdot k^2\]</span></p>
-<p>לכן <span class="math inline">\(n^2\)</span> זוגי ואז <span class="math inline">\(n\)</span> זוגי.</p>
-<p>קיבלנו כי <span class="math inline">\(m,n\)</span> זוגיים, בסתירה לכך ש-<span class="math inline">\(\frac{m}{n}\)</span> הוא שבר מצומצם.</p>
-<p>ולכן הראנו: <span class="math inline">\(\sqrt{2} \notin \mathbb{Q}\)</span>.</p>
+<p>נקבע <span class="math inline">\(x &gt; -1\)</span> ונוכיח באינדוקציה על <span class="math inline">\(.n\)</span></p>
+<p><strong>בסיס האינדוקציה.</strong> עבור <span class="math inline">\(n = 1\)</span> שני האגפים שווים ל-<span class="math inline">\(,1 + x\)</span> ולכן אי-השוויון (החלש) מתקיים.</p>
+<p><strong>צעד האינדוקציה.</strong> נניח ש-</p>
+<p><span class="math display">\[\left(1+x\right)^{n} \geq 1 + nx \qquad \text{(הנחת האינדוקציה)}\]</span></p>
+<p>ונוכיח ש-<span class="math inline">\(.\left(1+x\right)^{n+1} \geq 1 + (n+1)x\)</span></p>
+<p>כמו ב<a href="./05-induction-3.html#box-key-induction-inequality">צעד אינדוקציה באי-שוויון</a>, נפרק את אגף שמאל כך שתופיע בו ההנחה: <span class="math inline">\(.\left(1+x\right)^{n+1} = \left(1+x\right)^{n} \cdot \left(1+x\right)\)</span> עכשיו נכפול את הנחת האינדוקציה ב-<span class="math inline">\(.1 + x\)</span> <strong>כאן בדיוק נחוץ התנאי <span class="math inline">\(:x &gt; -1\)</span></strong> הוא אומר ש-<span class="math inline">\(,1 + x &gt; 0\)</span> וכפל במספר חיובי שומר על כיוון אי-השוויון. לכן</p>
+<p><span class="math display">\[.\left(1+x\right)^{n+1} = \left(1+x\right)^{n}\left(1+x\right) \geq \left(1 + nx\right)\left(1 + x\right)\]</span></p>
+<p>נפתח סוגריים באגף ימין:</p>
+<p><span class="math display">\[.\left(1 + nx\right)\left(1 + x\right) = 1 + x + nx + nx^{2} = 1 + (n+1)x + nx^{2}\]</span></p>
+<p>המחובר <span class="math inline">\(nx^{2}\)</span> אי-שלילי, כי <span class="math inline">\(n &gt; 0\)</span> ו-<span class="math inline">\(,x^{2} \geq 0\)</span> ולכן השמטתו רק מקטינה את הביטוי:</p>
+<p><span class="math display">\[.1 + (n+1)x + nx^{2} \geq 1 + (n+1)x\]</span></p>
+<p>נשרשר את שלושת השלבים ונקבל <span class="math inline">\(,\left(1+x\right)^{n+1} \geq 1 + (n+1)x\)</span> כנדרש.</p>
+<p><strong>מסקנה.</strong> לפי עקרון האינדוקציה אי-השוויון נכון לכל <span class="math inline">\(.n \in \mathbb{N}\)</span></p>
 </div>
+<p>התנאי <span class="math inline">\(x &gt; -1\)</span> אינו קישוט. למשל, עבור <span class="math inline">\(x = -3\)</span> ו-<span class="math inline">\(n = 5\)</span> אגף שמאל הוא <span class="math inline">\(\left(-2\right)^{5} = -32\)</span> ואגף ימין הוא <span class="math inline">\(,1 - 15 = -14\)</span> ואי-השוויון נכשל.</p>
+<div id="box-warn-bernoulli-condition" class="thmbox thmbox-warning" title="בודקים את הסימן לפני שכופלים">
+<p><strong>שימו לב — בודקים את הסימן לפני שכופלים.</strong></p>
+<p>כופלים אי-שוויון בביטוי רק אחרי שבודקים את הסימן שלו. בהוכחת אי-שוויון ברנולי הכפל ב-<span class="math inline">\(1 + x\)</span> שומר על הכיוון רק משום ש-<span class="math inline">\(.1 + x &gt; 0\)</span></p>
+</div>
+<p>אי-שוויון ברנולי אומר, במילים, ש<strong>חזקות גדלות לפחות כמו פונקציה ליניארית</strong>. למשל, עם <span class="math inline">\(x = 1\)</span> מתקבל <span class="math inline">\(.2^{n} = \left(1+1\right)^{n} \geq 1 + n\)</span></p>
 </section>
-</section>
-<section id="תכונות-הסדר-על-הממשיים" class="level3">
-<h3 class="anchored" data-anchor-id="תכונות-הסדר-על-הממשיים">תכונות הסדר על הממשיים</h3>
-<div class="todo">
-<p>תוכן בהכנה — להשלמה.</p>
+<section id="מקדמי-הבינום-ונוסחת-הבינום" class="level3">
+<h3 class="anchored" data-anchor-id="מקדמי-הבינום-ונוסחת-הבינום">מקדמי הבינום ונוסחת הבינום</h3>
+<p>נרצה נוסחה ל-<span class="math inline">\(\left(a+b\right)^{n}\)</span> לכל <span class="math inline">\(n\)</span> טבעי. המקדמים שיופיעו בה הם המספרים הבאים.</p>
+<div id="box-def-binomial-coefficient" class="thmbox thmbox-definition" title="מקדם בינום">
+<p><strong>הגדרה 5.5.3 — מקדם בינום.</strong></p>
+<p>לכל <span class="math inline">\(n \in \mathbb{N}\)</span> ולכל <span class="math inline">\(k\)</span> שלם המקיים <span class="math inline">\(0 \leq k \leq n\)</span> מגדירים</p>
+<p><span class="math display">\[.\binom{n}{k} = \frac{n!}{k!\,\left(n-k\right)!}\]</span></p>
+<p>קוראים ״<span class="math inline">\(n\)</span> מעל <span class="math inline">\(k\)</span>״. (כאן <span class="math inline">\(0! = 1\)</span>, כפי שהוסכם ב<a href="./05-induction-4.html#box-exm-factorial">דוגמה 5.4.2</a>.)</p>
 </div>
-</section>
-<section id="sec-floor" class="level3">
-<h3 class="anchored" data-anchor-id="sec-floor">הערך השלם</h3>
-<div id="box-def-floor" class="thmbox thmbox-definition">
-<p><strong>הגדרה 3.4.2.</strong></p>
-<p>יהי <span class="math inline">\(x \in \mathbb{R}\)</span>. ה<strong>ערך השלם</strong> של <span class="math inline">\(x\)</span>, המסומן <span class="math inline">\(\left\lfloor x \right\rfloor\)</span>, הוא השלם הגדול ביותר שאינו גדול מ-<span class="math inline">\(:x\)</span> <span class="math display">\[.\left\lfloor x \right\rfloor = \max\left\{m \in \mathbb{Z} \mid m \leq x\right\}\]</span></p>
+<div id="box-exm-binomial-coefficient" class="thmbox thmbox-example">
+<p><strong>דוגמה 5.5.4.</strong></p>
+<p><span class="math inline">\(\binom{4}{2} = \frac{4!}{2!\,2!} = \frac{24}{4} = 6\)</span> ו-<span class="math inline">\(.\binom{5}{1} = \frac{5!}{1!\,4!} = 5\)</span> באופן כללי, לכל <span class="math inline">\(:n\)</span></p>
+<p><span class="math display">\[.\binom{n}{0} = \binom{n}{n} = 1 \qquad,\qquad \binom{n}{1} = n \qquad,\qquad \binom{n}{k} = \frac{n\left(n-1\right)\cdots\left(n-k+1\right)}{k!}\]</span></p>
+<p>(את הנוסחה האחרונה מקבלים מן ההגדרה על ידי צמצום <span class="math inline">\(\left(n-k\right)!\)</span> במונה ובמכנה.)</p>
 </div>
-<div id="box-exm-floor" class="thmbox thmbox-example">
-<p><strong>דוגמה 3.4.3.</strong></p>
-<p><span class="math display">\[\left\lfloor 2\tfrac{2}{3} \right\rfloor = 2
-\qquad,\qquad
-\left\lfloor -3\tfrac{1}{8} \right\rfloor = -4
-\qquad,\qquad
-\left\lfloor -7 \right\rfloor = -7\]</span></p>
-<p>שימו לב למקרה השני: הערך השלם מעגל <strong>כלפי מטה</strong>, ולא לכיוון האפס.</p>
-</div>
-<p>התכונה שנשתמש בה שוב ושוב היא זו:</p>
-<div id="box-prp-floor-bounds" class="thmbox thmbox-proposition">
-<p><strong>טענה 3.4.4.</strong></p>
-<p>לכל <span class="math inline">\(x \in \mathbb{R}\)</span> מתקיים <span class="math display">\[.\left\lfloor x \right\rfloor \leq x &lt; \left\lfloor x \right\rfloor + 1\]</span></p>
+<div id="box-prp-pascal" class="thmbox thmbox-proposition" title="זהות פסקל">
+<p><strong>טענה 5.5.5 — זהות פסקל.</strong></p>
+<p>לכל <span class="math inline">\(n \in \mathbb{N}\)</span> ולכל <span class="math inline">\(k\)</span> שלם המקיים <span class="math inline">\(0 \leq k \leq n - 1\)</span> מתקיים</p>
+<p><span class="math display">\[.\binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}\]</span></p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p>אי-השוויון השמאלי הוא חלק מהגדרת <span class="math inline">\(\left\lfloor x \right\rfloor\)</span> כאיבר של הקבוצה <span class="math inline">\(.\left\{m \in \mathbb{Z} \mid m \leq x\right\}\)</span></p>
-<p>לגבי האי-השוויון הימני: אילו היה <span class="math inline">\(,\left\lfloor x \right\rfloor + 1 \leq x\)</span> אז <span class="math inline">\(\left\lfloor x \right\rfloor + 1\)</span> היה אף הוא איבר של אותה קבוצה, והוא גדול מן המקסימום שלה — סתירה.</p>
+<p>זו טענה על מספרים קבועים, ולכן אין צורך באינדוקציה: נחשב ישירות. לפי ההגדרה,</p>
+<p><span class="math display">\[.\binom{n}{k} + \binom{n}{k+1} = \frac{n!}{k!\,\left(n-k\right)!} + \frac{n!}{\left(k+1\right)!\,\left(n-k-1\right)!}\]</span></p>
+<p>כדי לחבר את השברים נביא אותם למכנה משותף. לפי כלל המעבר של העצרת, <span class="math inline">\(\left(k+1\right)! = \left(k+1\right) k!\)</span> ו-<span class="math inline">\(,\left(n-k\right)! = \left(n-k\right)\left(n-k-1\right)!\)</span> ולכן המכנה המשותף הוא <span class="math inline">\(:\left(k+1\right)!\,\left(n-k\right)!\)</span></p>
+<p><span class="math display">\[.= \frac{n!\,\left(k+1\right)}{\left(k+1\right)!\,\left(n-k\right)!} + \frac{n!\,\left(n-k\right)}{\left(k+1\right)!\,\left(n-k\right)!} = \frac{n!\,\left(n+1\right)}{\left(k+1\right)!\,\left(n-k\right)!}\]</span></p>
+<p>במונה <span class="math inline">\(,n!\left(n+1\right) = \left(n+1\right)!\)</span> ובמכנה <span class="math inline">\(,n - k = \left(n+1\right) - \left(k+1\right)\)</span> ולכן זה בדיוק <span class="math inline">\(.\binom{n+1}{k+1}\)</span></p>
 </div>
-</section>
-<section id="sec-archimedes" class="level3">
-<h3 class="anchored" data-anchor-id="sec-archimedes">תכונת ארכימדס</h3>
-<div id="box-thm-archimedes" class="thmbox thmbox-theorem">
-<p><strong>משפט 3.4.5.</strong></p>
-<p><strong>(תכונת ארכימדס)</strong> לכל מספר ממשי <span class="math inline">\(x\)</span> קיים מספר טבעי <span class="math inline">\(n\)</span> כך ש-<span class="math inline">\(n &gt; x\)</span>. באופן שקול, לכל <span class="math inline">\(\varepsilon &gt; 0\)</span> קיים מספר טבעי <span class="math inline">\(n\)</span> כך ש-<span class="math inline">\(\dfrac{1}{n} &lt; \varepsilon\)</span>.</p>
-</div>
-<div class="thmbox thmbox-proof">
-<p><strong>הוכחה.</strong></p>
-<p>לניסוח הראשון: ניקח <span class="math inline">\(.n = \left\lfloor x \right\rfloor + 1\)</span> לפי <a href="#box-prp-floor-bounds">הטענה הקודמת</a> מתקיים <span class="math inline">\(,x &lt; \left\lfloor x \right\rfloor + 1 = n\)</span> כנדרש. (אם <span class="math inline">\(n\)</span> אינו חיובי, אפשר להחליפו בכל טבעי גדול ממנו.)</p>
-<p>לשקילות שבין שני הניסוחים: מכיוון ש-<span class="math inline">\(n &gt; 0\)</span> וש-<span class="math inline">\(,\varepsilon &gt; 0\)</span> מותר לכפול ולחלק בהם בלי לשנות את כיוון אי-השוויון, ולכן</p>
-<p><span class="math display">\[.\frac{1}{n} &lt; \varepsilon \iff \frac{1}{\varepsilon} &lt; n\]</span></p>
-<p>הניסוח השני הוא אפוא הניסוח הראשון עבור <span class="math inline">\(,x = \dfrac{1}{\varepsilon}\)</span> ומתקבל מהבחירה <span class="math inline">\(.n = \left\lfloor \dfrac{1}{\varepsilon} \right\rfloor + 1\)</span></p>
-</div>
-</section>
-<section id="sec-density" class="level3">
-<h3 class="anchored" data-anchor-id="sec-density">צפיפות</h3>
-<p>בין כל שני מספרים ממשיים שונים — קרובים ככל שיהיו — נמצא תמיד מספר רציונלי, וגם מספר אי-רציונלי. תכונה זו נקראת <strong>צפיפות</strong>.</p>
-<div id="box-thm-rationals-dense" class="thmbox thmbox-theorem">
-<p><strong>משפט 3.4.6.</strong></p>
-<p>לכל <span class="math inline">\(x, y \in \mathbb{R}\)</span> המקיימים <span class="math inline">\(x &lt; y\)</span> קיים <span class="math inline">\(q \in \mathbb{Q}\)</span> כך ש-<span class="math inline">\(.x &lt; q &lt; y\)</span></p>
+<div id="box-thm-binomial" class="thmbox thmbox-theorem" title="נוסחת הבינום">
+<p><strong>משפט 5.5.6 — נוסחת הבינום.</strong></p>
+<p>לכל <span class="math inline">\(a, b \in \mathbb{R}\)</span> ולכל <span class="math inline">\(n \in \mathbb{N}\)</span> מתקיים</p>
+<p><span class="math display">\[.\left(a+b\right)^{n} = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k}\]</span></p>
+<p>(כאן <span class="math inline">\(x^{0} = 1\)</span> לכל <span class="math inline">\(,x\)</span> גם עבור <span class="math inline">\(.x = 0\)</span>)</p>
 </div>
 <div class="thmbox thmbox-proof">
 <p><strong>הוכחה.</strong></p>
-<p><strong>המקרה הראשון: <span class="math inline">\(.y - x &gt; 1\)</span></strong> נראה שיש כאן אפילו מספר <strong>שלם</strong>. ניקח <span class="math inline">\(.m = \left\lfloor x \right\rfloor + 1\)</span> לפי <a href="#box-prp-floor-bounds">תכונת הערך השלם</a> מתקיים <span class="math inline">\(,x &lt; m\)</span> ומצד שני</p>
-<p><span class="math display">\[,m = \left\lfloor x \right\rfloor + 1 \leq x + 1 &lt; y\]</span></p>
-<p>כאשר האי-שוויון האחרון הוא בדיוק ההנחה <span class="math inline">\(.y - x &gt; 1\)</span> לכן <span class="math inline">\(,x &lt; m &lt; y\)</span> ובפרט <span class="math inline">\(m \in \mathbb{Q}\)</span> כמבוקש.</p>
-<p><strong>המקרה השני: <span class="math inline">\(.0 &lt; y - x \leq 1\)</span></strong> הרעיון הוא ״למתוח״ את הקטע עד שאורכו יעלה על <span class="math inline">\(,1\)</span> ואז לחזור למקרה הראשון. לפי <a href="#box-thm-archimedes">תכונת ארכימדס</a> קיים <span class="math inline">\(n \in \mathbb{N}\)</span> המקיים <span class="math inline">\(,n &gt; \dfrac{1}{y-x}\)</span> ומכאן</p>
-<p><span class="math display">\[,ny - nx = n\left(y - x\right) &gt; 1\]</span></p>
-<p>כלומר המספרים <span class="math inline">\(nx\)</span> ו-<span class="math inline">\(ny\)</span> רחוקים זה מזה יותר מ-<span class="math inline">\(.1\)</span> לפי המקרה הראשון קיים שלם <span class="math inline">\(m\)</span> כך ש-<span class="math inline">\(,nx &lt; m &lt; ny\)</span> ולאחר חלוקה ב-<span class="math inline">\(n\)</span> (שהוא חיובי, ולכן כיוון אי-השוויון נשמר)</p>
-<p><span class="math display">\[.x &lt; \frac{m}{n} &lt; y\]</span></p>
-<p>המספר <span class="math inline">\(q = \dfrac{m}{n}\)</span> הוא רציונלי, כנדרש.</p>
+<p>נקבע <span class="math inline">\(a, b\)</span> ונוכיח באינדוקציה על <span class="math inline">\(.n\)</span></p>
+<p><strong>בסיס האינדוקציה.</strong> עבור <span class="math inline">\(n = 1\)</span> אגף ימין הוא <span class="math inline">\(,\binom{1}{0} a^{1} b^{0} + \binom{1}{1} a^{0} b^{1} = a + b\)</span> וזה אגף שמאל.</p>
+<p><strong>צעד האינדוקציה.</strong> נניח ש-</p>
+<p><span class="math display">\[\left(a+b\right)^{n} = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k} \qquad \text{(הנחת האינדוקציה)}\]</span></p>
+<p>ונוכיח ש-<span class="math inline">\(.\left(a+b\right)^{n+1} = \sum_{k=0}^{n+1} \binom{n+1}{k} a^{n+1-k} b^{k}\)</span></p>
+<p><strong>שלב 1: שימוש בהנחה.</strong> <span class="math inline">\(,\left(a+b\right)^{n+1} = \left(a+b\right)\left(a+b\right)^{n}\)</span> ולפי ההנחה ולפי כללי החישוב לסכומים,</p>
+<p><span class="math display">\[.\left(a+b\right)^{n+1} = \sum_{k=0}^{n} \binom{n}{k} a^{n+1-k} b^{k} + \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k+1}\]</span></p>
+<p>(את הסכום הראשון קיבלנו מכפל ב-<span class="math inline">\(,a\)</span> ואת השני מכפל ב-<span class="math inline">\(.b\)</span>)</p>
+<p><strong>שלב 2: יישור החזקות.</strong> ביעד, במחובר שמספרו <span class="math inline">\(k\)</span> החזקה של <span class="math inline">\(b\)</span> היא <span class="math inline">\(.k\)</span> בסכום הראשון זה כבר כך. בסכום השני החזקה של <span class="math inline">\(b\)</span> היא <span class="math inline">\(,k+1\)</span> ולכן נחליף בו את שם האינדקס: נסמן <span class="math inline">\(,j = k + 1\)</span> וכש-<span class="math inline">\(k\)</span> רץ מ-<span class="math inline">\(0\)</span> עד <span class="math inline">\(n\)</span> האינדקס <span class="math inline">\(j\)</span> רץ מ-<span class="math inline">\(1\)</span> עד <span class="math inline">\(:n+1\)</span></p>
+<p><span class="math display">\[.\sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k+1} = \sum_{j=1}^{n+1} \binom{n}{j-1} a^{n+1-j} b^{j}\]</span></p>
+<p>שם האינדקס אינו חשוב, ולכן נחזור לקרוא לו <span class="math inline">\(.k\)</span></p>
+<p><strong>שלב 3: איסוף המחוברים.</strong> נפריד מן הסכום הראשון את המחובר <span class="math inline">\(k = 0\)</span> ומן השני את המחובר <span class="math inline">\(.k = n+1\)</span> עבור <span class="math inline">\(1 \leq k \leq n\)</span> נשארים בשני הסכומים מחוברים עם אותה חזקה <span class="math inline">\(,a^{n+1-k} b^{k}\)</span> ונאסוף אותם:</p>
+<p><span class="math display">\[.\left(a+b\right)^{n+1} = a^{n+1} + \sum_{k=1}^{n} \left[\binom{n}{k} + \binom{n}{k-1}\right] a^{n+1-k} b^{k} + b^{n+1}\]</span></p>
+<p><strong>שלב 4: זהות פסקל.</strong> לפי <a href="#box-prp-pascal">טענה 5.5.5</a> (עם <span class="math inline">\(k-1\)</span> במקום <span class="math inline">\(,k\)</span>) הסוגריים המרובעים שווים ל-<span class="math inline">\(.\binom{n+1}{k}\)</span> נוסף על כך, <span class="math inline">\(a^{n+1} = \binom{n+1}{0} a^{n+1} b^{0}\)</span> ו-<span class="math inline">\(,b^{n+1} = \binom{n+1}{n+1} a^{0} b^{n+1}\)</span> ולכן אלה בדיוק המחוברים <span class="math inline">\(k = 0\)</span> ו-<span class="math inline">\(k = n+1\)</span> של היעד. יחד:</p>
+<p><span class="math display">\[.\left(a+b\right)^{n+1} = \sum_{k=0}^{n+1} \binom{n+1}{k} a^{n+1-k} b^{k}\]</span></p>
+<p><strong>מסקנה.</strong> לפי עקרון האינדוקציה הנוסחה נכונה לכל <span class="math inline">\(.n \in \mathbb{N}\)</span></p>
 </div>
-<div id="box-thm-irrationals-dense" class="thmbox thmbox-theorem">
-<p><strong>משפט 3.4.7.</strong></p>
-<p>לכל <span class="math inline">\(x, y \in \mathbb{R}\)</span> המקיימים <span class="math inline">\(x &lt; y\)</span> קיים מספר אי-רציונלי <span class="math inline">\(r\)</span> כך ש-<span class="math inline">\(.x &lt; r &lt; y\)</span></p>
+<div id="box-exm-binomial" class="thmbox thmbox-example">
+<p><strong>דוגמה 5.5.7.</strong></p>
+<p>עבור <span class="math inline">\(n = 2\)</span> הנוסחה נותנת <span class="math inline">\(,\left(a+b\right)^{2} = a^{2} + 2ab + b^{2}\)</span> ועבור <span class="math inline">\(n = 3\)</span> היא נותנת, לפי <span class="math inline">\(\binom{3}{0} = \binom{3}{3} = 1\)</span> ו-<span class="math inline">\(:\binom{3}{1} = \binom{3}{2} = 3\)</span></p>
+<p><span class="math display">\[.\left(a+b\right)^{3} = a^{3} + 3a^{2}b + 3ab^{2} + b^{3}\]</span></p>
 </div>
-<div class="thmbox thmbox-proof">
-<p><strong>הוכחה.</strong></p>
-<p>לפי <a href="#box-thm-rationals-dense">המשפט הקודם</a> קיים רציונלי <span class="math inline">\(a\)</span> המקיים <span class="math inline">\(,x &lt; a &lt; y\)</span> ובהפעלה נוספת שלו על הקטע <span class="math inline">\(\left(a,\ y\right)\)</span> קיים רציונלי <span class="math inline">\(b\)</span> המקיים <span class="math inline">\(.a &lt; b &lt; y\)</span> נגדיר</p>
-<p><span class="math display">\[.r = a + \frac{b - a}{\sqrt{2}}\]</span></p>
-<p>תחילה נראה ש-<span class="math inline">\(r\)</span> אכן נמצא בין <span class="math inline">\(x\)</span> ל-<span class="math inline">\(.y\)</span> מכיוון ש-<span class="math inline">\(,b - a &gt; 0\)</span> גם <span class="math inline">\(,\dfrac{b-a}{\sqrt{2}} &gt; 0\)</span> ולכן <span class="math inline">\(.r &gt; a\)</span> ומכיוון ש-<span class="math inline">\(,\sqrt{2} &gt; 1\)</span> מתקיים <span class="math inline">\(,\dfrac{b-a}{\sqrt{2}} &lt; b - a\)</span> ולכן <span class="math inline">\(.r &lt; a + \left(b-a\right) = b\)</span> יחד: <span class="math inline">\(,x &lt; a &lt; r &lt; b &lt; y\)</span> כנדרש.</p>
-<p>נותר להראות ש-<span class="math inline">\(r\)</span> אינו רציונלי. נניח בשלילה שהוא כן. אז גם <span class="math inline">\(r - a\)</span> רציונלי, כהפרש של שני רציונליים, והוא שונה מאפס. אבל מהגדרת <span class="math inline">\(r\)</span> נובע <span class="math inline">\(,r - a = \dfrac{b-a}{\sqrt{2}}\)</span> ולכן</p>
-<p><span class="math display">\[,\sqrt{2} = \frac{b-a}{r-a}\]</span></p>
-<p>וזוהי מנה של שני רציונליים — כלומר מספר רציונלי, בסתירה לכך <a href="#box-prp-sqrt2-irrational">ש-<span class="math inline">\(\sqrt{2}\)</span> אינו רציונלי</a>.</p>
+<div id="box-key-index-shift" class="thmbox thmbox-key-point thmicon-calc" data-icon="calc" title="הזזת אינדקס">
+<p><strong>שיטת חישוב — הזזת אינדקס.</strong></p>
+<p>בסכום אפשר להחליף את האינדקס <span class="math inline">\(k\)</span> ב-<span class="math inline">\(,j = k + 1\)</span> ובלבד שמעדכנים גם את הגבולות (מ-<span class="math inline">\(k = 0, \dots, n\)</span> ל-<span class="math inline">\(j = 1, \dots, n+1\)</span>) וגם את כל המופעים של <span class="math inline">\(k\)</span> בתוך הסכום <span class="math inline">\(.(k = j - 1)\)</span></p>
 </div>
+<p>כשכל המחוברים אי-שליליים, השמטת חלק מהם מקטינה את הסכום. כך נוסחת הבינום נותנת אי-שוויונות: למשל, עבור <span class="math inline">\(x \geq 0\)</span> ו-<span class="math inline">\(,n \geq 2\)</span> אם שומרים רק את שלושת המחוברים הראשונים,</p>
+<p><span class="math display">\[.\left(1+x\right)^{n} \geq 1 + nx + \frac{n\left(n-1\right)}{2}x^{2}\]</span></p>
+<p>זהו חיזוק של אי-שוויון ברנולי (עבור <span class="math inline">\(x \geq 0\)</span>), והוא שימושי כשפונקציה ליניארית ב-<span class="math inline">\(n\)</span> אינה מספיקה.</p>
 </section>
 </section></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1751,7 +1769,7 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./03-number-systems-3.html" class="pagination-link" aria-label="3.3 המספרים הרציונליים"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3.3 המספרים הרציונליים</span></a></div><div class="nav-page nav-page-next"><a href="./03-number-systems-5.html" class="pagination-link" aria-label="3.5 המספרים המרוכבים"><span class="nav-page-text">3.5 המספרים המרוכבים</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
+<nav class="page-navigation"><div class="nav-page nav-page-previous"><a href="./05-induction-4.html" class="pagination-link" aria-label="5.4 הגדרה רקורסיבית"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">5.4 הגדרה רקורסיבית</span></a></div><div class="nav-page nav-page-next"><a href="./05-induction-6.html" class="pagination-link" aria-label="5.6 תרגילים"><span class="nav-page-text">5.6 תרגילים</span> <i class="bi bi-arrow-right-short"></i></a></div></nav>
 </div> <!-- /content -->
 
 
