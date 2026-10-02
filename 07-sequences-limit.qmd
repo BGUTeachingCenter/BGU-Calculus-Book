@@ -1820,7 +1820,7 @@ $$,\left|\frac{5n-12}{2n+3}-\frac{3}{2}\right| \geq \frac{1}{2} = \varepsilon$$
 כלומר אין $N$ המתאים ל-$\varepsilon = \frac{1}{2}$. מכאן שהגבול אינו $\frac{3}{2}$.
 :::
 
-**תרגיל 8.** ידוע כי $2^{n} \geq n$ לכל $n\in\mathbb{N}$ (טענה שמוכיחים באינדוקציה — ראו [את השאלה בפרק האינדוקציה](05-induction.qmd#box-qst-induction-2n-geq-n)). הוכיחו כי $\lim\limits_{n\to\infty} \dfrac{1}{2^{n}} = 0$.
+**תרגיל 8.** ידוע כי $2^{n} \geq n$ לכל $n\in\mathbb{N}$ (זה נובע מן הטענה $,2^{n} > n$ שהוכחנו באינדוקציה ב[](05-induction.qmd#box-qst-induction-2n-gt-n)). הוכיחו כי $\lim\limits_{n\to\infty} \dfrac{1}{2^{n}} = 0$.
 
 ::: {.thmsol .foldable}
 יהי $\varepsilon>0$. לכל $n\in\mathbb{N}$ מתקיים $2^{n} \geq n > 0$, ולכן $\frac{1}{2^{n}} \leq \frac{1}{n}$, ומכאן
